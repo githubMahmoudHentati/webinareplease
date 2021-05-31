@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="78f1d22b-06c3-4c37-8dac-3b8fbe8b84e5" name="webinarplease">
+        <fileTransfer accessType="SFTP" host="mhentati-cloud-sandbox.webtv-solution.dev" port="22" sshConfigId="9d96dee8-991d-4483-be29-eb07fdb355d6" sshConfig="mhentati@mhentati-cloud-sandbox.webtv-solution.dev:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
