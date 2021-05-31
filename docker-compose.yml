@@ -1,0 +1,13 @@
+version: "3"
+services:
+  tousmedia:
+    build: .
+    stdin_open: true
+#    image: tousMedia-dev-img
+#    container_name: tousmEDIA-dev-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - .env
