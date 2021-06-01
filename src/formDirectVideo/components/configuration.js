@@ -3,8 +3,14 @@ import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox,Sel
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+import {Hooks} from '../utils/hooks'
+import {ModalSpeaker} from './modalspeacker'
 
 export const Configuration =()=>{
+
+    const {onChangeSwitch,handleOk,values,handleCancel}= Hooks()
+    console.log("values",values)
+
     const CheckboxGroup = Checkbox.Group;
     const { Option } = Select;
     const children = [];
@@ -40,7 +46,10 @@ export const Configuration =()=>{
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
-                                <Switch/>
+                                <Switch onChange={onChangeSwitch}/>
+                                {values.modalSpeaker&&
+                                    <ModalSpeaker onOk={handleOk} onCancel={handleCancel} isVisible={values.modalSpeaker} />
+                                }
                             </Col>
                         </Row>
                     </Col>
