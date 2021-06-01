@@ -64,7 +64,7 @@ export const Generals =()=>{
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Row  justify={"space-between"} style={{width:'100%'}}gutter={[0, 0]} >
-                            <Col span={22}>
+                            <Col xxl={22} xl={21} lg={20} md={19} sm={17} xs={14}>
                                 <Input placeholder={'www.empreinte.com/titrelive'}></Input>
                             </Col>
                             <Col >
@@ -91,12 +91,12 @@ export const Generals =()=>{
                         <span style={{fontSize:"14px",fontWeight: "bold"}}>Modes d'accès ay direct</span>
                     </Col>
                     <Col span={24} >
-                        <Row>
-                            <Col style={{alignItems:"flex-start"}}span={4} className={"col-forms"}>
+                        <Row >
+                            <Col lg={3} xs={10} style={{alignItems:"flex-start"}} className={"col-forms"}>
                                 <Radio>Acccès libre</Radio>
                             </Col>
-                            <Col span={20}>
-                                <Row gutter={[0, 10]}>
+                            <Col  lg={21} xs={14} >
+                                <Row gutter={[0, 20]}>
                                     <Col span={24} className={"col-forms"}>
                                         <Radio>Accès sécurisé</Radio>
                                     </Col>
@@ -104,7 +104,7 @@ export const Generals =()=>{
                                         <Input placeholder={'Taper votre mot de passe'}></Input>
                                     </Col>
                                     <Col span={24} className={"col-forms"}>
-                                        <Checkbox >Checkbox</Checkbox>
+                                        <Checkbox >Générer un mot de passe sécurisé</Checkbox>
                                     </Col>
                                 </Row>
                             </Col>
