@@ -3,8 +3,9 @@ import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
 import './formDirectVideo.scss'
 import {ArrowLeftOutlined} from '@ant-design/icons';
 import history from '../router/history';
-import {Forms} from './components/forms'
+import {MenuForms} from './components/menuforms'
 import {Generals} from "./components/general";
+import {Configuration} from "./components/configuration"
 
 
 export const FormDirectVideo =()=>{
@@ -38,10 +39,10 @@ export const FormDirectVideo =()=>{
                     <Col span={24}>
                         <Row gutter={[30, 20]}>
                             <Col span={4}>
-                                <Forms />
+                                <MenuForms />
                             </Col>
                             <Col span={16}>
-                                <Generals />
+                                <Configuration />
                             </Col>
                         </Row>
                     </Col>
