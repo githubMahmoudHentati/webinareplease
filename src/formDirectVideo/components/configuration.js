@@ -1,5 +1,5 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox,Select} from 'antd'
+import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox,Select,Space} from 'antd'
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
@@ -85,16 +85,34 @@ export const Configuration =()=>{
                         <span style={{textAlign: 'left', fontSize: "20px", fontFamily: "system-ui"}}>Configuration vidéo</span>
                     </Col>
                     <Col span={24}>
-                        <Row gutter={[10, 0]}>
-                            <Col className={"col-forms"}>
+                        <Row gutter={[0, 10]} >
+                            <Col span={24}>
+                                <Row gutter={[10, 0]}>
+                                    <Col className={"col-forms"}>
                                 <span style={{
                                     fontSize: "15px",
                                     fontFamily: "system-ui",
                                     fontWeight: "bold"
                                 }}>Archivage automatique du direct</span>
+                                    </Col>
+                                    <Col>
+                                        <Switch/>
+                                    </Col>
+                                </Row>
                             </Col>
-                            <Col>
-                                <Switch/>
+                            <Col span={24}>
+                                <Radio.Group >
+                                    <Space direction="vertical">
+                                        <Radio value={1}>Vidéo non visible</Radio>
+                                        <Radio value={2}>Vidéo visible</Radio>
+                                    </Space>
+                                </Radio.Group>
+                            </Col>
+                            <Col span={24}>
+                                Thèmes
+                            </Col>
+                            <Col offset={1} span={23}>
+                                <Input placeholder={'www.empreinte.com/titrelive'}></Input>
                             </Col>
                         </Row>
                     </Col>
