@@ -4,7 +4,6 @@ import history from './router/history';
 import { BrowserRouter, Switch , Route , Redirect} from 'react-router-dom';
 import ShowVideos from "./showVideos/showVideos";
 import  {FormDirectVideo} from "./formDirectVideo/formDirectVideo";
-import  {FormDirectVideo} from "./formDirectVideo/formDirectVideo";
 import PackagePayement from "./PackagePayement/PackagePayement";
 import {Connexion} from "./connexion/connexion";
 
