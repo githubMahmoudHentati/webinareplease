@@ -485,3 +485,111 @@ input:checked + .slider:before {
 }
 
 /*WebinairePlease*/
+
+/*ChoicePackage*/
+
+.ChoicePackage{
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+}
+.steps-content {
+   min-height: 700px;
+}
+.steps-action {
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.choix_Forfait{
+    width: 100%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.header_Forfait{
+    width: 100%;
+    height: 39px;
+    background-color: #f5f5f5;
+    padding: 2% 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: normal;
+    color: #383838;
+}
+.card_Forfait{
+    width: 100%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.Card1_Forfait , .Card2_Forfait{
+    width: 340px;
+    height: 400px;
+    border-radius: 5px;
+    border: solid 2px #e2e0e0;
+    padding: 15.1px 16px 66px 45px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+.btn_Radio{
+    position: absolute;
+    top: 30px;
+    left: 16px;
+}
+#activeCard{
+    border: solid 1px #007fcb;
+}
+
+.Card1_Forfait h3, .Card2_Forfait h3{
+    font-size: 31.1px;
+    font-weight: 600;
+    letter-spacing: normal;
+    font-stretch: normal;
+    font-style: normal;
+    color: #007fcb;
+}
+.Card1_Forfait p, .Card2_Forfait p{
+   font-size: 16px;
+    font-weight: normal;
+    color: #4a4a4a;
+}
+.Card1_Forfait h2, .Card2_Forfait h2{
+    font-size: 31.1px;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 10%;
+}
+.Card1_Forfait li{
+    font-size: 14px;
+    font-weight: 400;
+    color: #4a4a4a;
+}
+.Card2_Forfait{
+    margin-left: 4%;
+}
+.Card2_Forfait div{
+    margin-bottom: 2%;
+}
+.Card2_Forfait div h5{
+    font-size: 15.6px;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+.Card2_Forfait .ant-select{
+    width: 100% !important;
+}
+/*ChoicePackage*/
