@@ -113,6 +113,7 @@ export const Configuration =()=>{
                                     <Checkbox>Mention j'aime</Checkbox>
                                 </CheckboxGroup>
                             </Col>
+                            }
                         </Row>
                     </Col>
                     <Col span={24}>
