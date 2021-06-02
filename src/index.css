@@ -468,6 +468,7 @@ input:checked + .slider:before {
 .empty_div{
     width: 67%;
     height: 100%;
+    position: relative;
 }
 .icon1_webinaire{
     font-size: 100px;

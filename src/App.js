@@ -5,6 +5,7 @@ import { BrowserRouter, Switch , Route , Redirect} from 'react-router-dom';
 import ShowVideos from "./showVideos/showVideos";
 import  {FormDirectVideo} from "./formDirectVideo/formDirectVideo";
 import PackagePayement from "./PackagePayement/PackagePayement";
+import {Connexion} from "./connexion/connexion";
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
               <Route exact path='/showVideos' component={ShowVideos} />
               <Route exact path='/FormDirectVideo' component={FormDirectVideo} />
               <Route exact path='/PackagePayement' component={PackagePayement}/>
+              <Route exact path='/connexion' component={Connexion}/>
+
           </Switch>
         </BrowserRouter>
       </div>
