@@ -1,8 +1,10 @@
 import React,{useState , useEffect} from 'react';
 import UseDataTableVideos from "./components/ListVideos";
 import HeaderVideos from "./components/headerVideos";
+import GlobalHeader from "../utils/components/header"
 import { Card } from "antd";
 import * as constantMedia from './utils/data';
+
 
 function ShowVideos() {
 
@@ -28,9 +30,12 @@ function ShowVideos() {
 
     return(
         <div className="showVideosDiv">
-            <Card>
-             <HeaderVideos selectedRow={selectedRow}/>
-             <DataTable/>
+            <GlobalHeader/>
+            <Card className={"card"}>
+                <Card>
+                <HeaderVideos selectedRow={selectedRow}/>
+                <DataTable/>
+                </Card>
             </Card>
         </div>
     );
