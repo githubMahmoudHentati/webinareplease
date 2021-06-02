@@ -7,14 +7,15 @@ export const FormConnexion =()=>{
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
-                <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>Connexion</span>
+                <span style={{textAlign: 'left', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold"}}>Connexion</span>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 20]} >
 
                     <Col span={24}>
                         <Input placeholder="default size" prefix={<UserOutlined/>}/>
-                    </Col>
+                    </Col>+-
+
                     <Col span={24}>
                         <Input.Password
                             placeholder="input password"
