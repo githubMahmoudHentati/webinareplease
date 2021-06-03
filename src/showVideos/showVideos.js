@@ -4,7 +4,7 @@ import HeaderVideos from "./components/headerVideos";
 import GlobalHeader from "../utils/components/header"
 import { Card } from "antd";
 import * as constantMedia from './utils/data';
-
+import{PrincipalPage} from "../utils/components/principalPage";
 
 function ShowVideos() {
 
@@ -29,15 +29,10 @@ function ShowVideos() {
     },fetch_element_selected);
 
     return(
-        <div className="showVideosDiv">
-            <GlobalHeader/>
-            <Card className={"card"}>
-                <Card>
-                <HeaderVideos selectedRow={selectedRow}/>
-                <DataTable/>
-                </Card>
-            </Card>
-        </div>
+       <PrincipalPage>
+           <HeaderVideos selectedRow={selectedRow}/>
+           <DataTable/>
+       </PrincipalPage>
     );
 }
 
