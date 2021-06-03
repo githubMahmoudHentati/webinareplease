@@ -4,10 +4,12 @@ import './connexion.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import WebinairePlease from "../utils/components/WebinairePlease";
 import {FormConnexion} from "./components/formConnexion";
+import logo from "../assets/logoWebinaireplease.svg"
+
 
 export const Connexion =()=>{
     return(
-        <WebinairePlease>
+        <WebinairePlease logo={logo}>
             <FormConnexion/>
         </WebinairePlease>
     )

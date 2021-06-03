@@ -7,6 +7,7 @@ import  {FormDirectVideo} from "./formDirectVideo/formDirectVideo";
 import PackagePayement from "./PackagePayement/PackagePayement";
 import {Connexion} from "./connexion/connexion";
 import {SignUp} from "./signUp/signUp";
+import {ContactClient} from "./contactClient/contactClient";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route exact path='/PackagePayement' component={PackagePayement}/>
               <Route exact path='/connexion' component={Connexion}/>
               <Route exact path='/signUp' component={SignUp}/>
+              <Route exact path='/contactClient' component={ContactClient}/>
           </Switch>
         </BrowserRouter>
       </div>
