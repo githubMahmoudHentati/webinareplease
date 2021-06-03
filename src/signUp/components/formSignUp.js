@@ -2,11 +2,12 @@ import React ,{Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox} from 'an
 import '../signUp.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 
-export const FormSignUp =()=>{
+export const FormSignUp =({child1,child2})=>{
     return(
         <Row gutter={[0, 40]} className={'col-signUp'}>
-            <Col style={{textAlign: 'center', fontSize: "20px", fontFamily: "system-ui", fontWeight: "bold"}} span={24}>
-                <span>Créez votre compte gratuitement</span>
+
+            <Col style={{textAlign: 'center', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold"}} span={24}>
+                {child1}
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 30]}>
@@ -143,14 +144,7 @@ export const FormSignUp =()=>{
                         </Row>
                     </Col>
                     <Col span={24}>
-                        <Row justify={"end"} gutter={[10, 0]}>
-                            <Col>
-                                <Button>Annuler</Button>
-                            </Col>
-                            <Col>
-                                <Button type="primary">Inscrivez-vous maintenant</Button>
-                            </Col>
-                        </Row>
+                        {child2}
                     </Col>
                 </Row>
             </Col>

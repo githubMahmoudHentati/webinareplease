@@ -496,7 +496,7 @@ input:checked + .slider:before {
     transform: translate(-50% , -50%);
 }
 .steps-content {
-   min-height: 700px;
+   min-height: 760px;
 }
 .steps-action {
     margin-top: 5%;
@@ -645,6 +645,8 @@ input:checked + .slider:before {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+
 }
 .div2_champsPayement Button{
     width: 60%;
@@ -662,4 +664,36 @@ input:checked + .slider:before {
     color: white !important;
     border: 1px solid black !important;
 }
+.divpayerparcarte{
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+.form_Input{
+    width: 60%;
+    margin-top: 2%;
+}
+.formItem{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.ant-form-item-required{
+    float: left !important;
+}
 /*PayementWebinaire*/
+
+/*form_signup*/
+.form_signup{
+    width: 100%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+/*form_signup*/
+
