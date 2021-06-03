@@ -1,11 +1,9 @@
 import React,{useState , useEffect} from 'react';
 import { Card } from 'antd';
 
-import logo from "../../assets/logoWebinaireplease.svg"
 
 
 function WebinairePlease(props){
-
 
     return(
         <div className="WebinairePlease">
@@ -21,7 +19,7 @@ function WebinairePlease(props){
                   </div>
 
                   <div className="div_image">
-                      <img src={logo}/>
+                      <img src={props.logo}/>
                     </div>
 
               </div>

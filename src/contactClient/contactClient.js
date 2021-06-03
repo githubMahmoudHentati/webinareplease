@@ -1,16 +1,17 @@
 import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox} from 'antd'
-import './signUp.scss'
+import './contactClient.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import WebinairePlease from "../utils/components/WebinairePlease";
-import {FormSignUp} from './components/formSignUp'
-import logo from "../assets/logoWebinaireplease.svg"
+import {FormContactClient} from "./components/formContactClient";
+import logo from "../assets/contactClient.svg"
 
 
-export const SignUp =()=>{
+
+export const ContactClient =()=>{
     return(
         <WebinairePlease logo={logo}>
-            <FormSignUp/>
+            <FormContactClient />
         </WebinairePlease>
     )
 }
