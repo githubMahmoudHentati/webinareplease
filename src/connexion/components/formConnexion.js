@@ -14,7 +14,7 @@ export const FormConnexion =()=>{
 
                     <Col span={24}>
                         <Input placeholder="default size" prefix={<UserOutlined/>}/>
-                    </Col>+-
+                    </Col>
 
                     <Col span={24}>
                         <Input.Password

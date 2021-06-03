@@ -4,6 +4,7 @@ import {Breadcrumb, Card, Col, Row} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 import history from "../router/history";
 import {Configuration} from "../formDirectVideo/components/configuration";
+import {CompteGeneralInformation} from "./components/CompteGeneralInformation";
 
 export const CompteSettings=()=>{
     return(
@@ -38,7 +39,7 @@ export const CompteSettings=()=>{
                                 <MenuForms />
                             </Col>
                             <Col span={16}>
-
+                                <CompteGeneralInformation />
                             </Col>
                         </Row>
                     </Col>
