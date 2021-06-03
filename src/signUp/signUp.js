@@ -4,10 +4,12 @@ import './signUp.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import WebinairePlease from "../utils/components/WebinairePlease";
 import {FormSignUp} from './components/formSignUp'
+import logo from "../assets/logoWebinaireplease.svg"
+
 
 export const SignUp =()=>{
     return(
-        <WebinairePlease>
+        <WebinairePlease logo={logo}>
             <FormSignUp/>
         </WebinairePlease>
     )
