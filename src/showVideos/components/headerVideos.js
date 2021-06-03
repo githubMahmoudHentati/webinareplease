@@ -2,7 +2,7 @@ import React , {useState,useEffect} from 'react';
 import { Breadcrumb,Button, Tooltip , Select , Input  , Checkbox , DatePicker, Space} from "antd";
 import {  HourglassOutlined ,DownloadOutlined ,PlayCircleOutlined ,ImportOutlined ,BorderInnerOutlined , CalendarOutlined , DeleteOutlined , DownOutlined ,RightOutlined ,HomeOutlined , PlusSquareOutlined , MenuOutlined , TableOutlined  ,AppstoreOutlined , FilterOutlined , FolderOutlined , FolderOpenOutlined , SearchOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
-import '../../assets/icomoon/style.css'
+import '../../assets/icomoon/style.css';
 const { Option } = Select;
 let clicked = false;
 
@@ -10,6 +10,7 @@ function HeaderVideos({selectedRow}) {
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
+    const history = useHistory();
 
 
     useEffect(() => {
@@ -51,6 +52,10 @@ function HeaderVideos({selectedRow}) {
         }
 
     }
+    // handle click calendar
+    const handleClickCalendar = () =>{
+        history.push("/calendar")
+    }
 
     return(
       <div className="HeaderVideo">
@@ -90,7 +95,7 @@ function HeaderVideos({selectedRow}) {
                           </div>
                   }
 
-                  <div className="Calendrier">
+                  <div className="Calendrier" onClick={()=>handleClickCalendar()}>
                       <Tooltip className="tooltip_calendrier" title="Afficher Calendrier">
                       <CalendarOutlined  className="IconCalendrier"/>
                       <span>Calendrier</span>
