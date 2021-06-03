@@ -9,8 +9,23 @@ import logo from "../assets/logoWebinaireplease.svg"
 
 export const SignUp =()=>{
     return(
+
         <WebinairePlease logo={logo}>
-            <FormSignUp/>
+                    <FormSignUp
+                        child1={
+                            <span>Créez votre compte gratuitement</span>
+                        }
+                      child2={
+                        <Row className={"text-form"} gutter={[10,0]}>
+                            <Col>
+                                <Button>Annuler</Button>
+                            </Col>
+                            <Col>
+                                <Button type="primary">Inscrivez-vous maintenant</Button>
+                            </Col>
+                        </Row>
+                       }
+                    />
         </WebinairePlease>
     )
 }

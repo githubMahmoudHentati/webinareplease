@@ -1,6 +1,10 @@
-import React,{useState , useEffect} from 'react';
-import { Steps, Button, message , Select , Radio  } from 'antd';
+
+import React,{useState , useEffect , useMemo} from 'react';
+import { Steps, Button, message , Select , Radio  , Form, Input} from 'antd';
 import {AppleFilled } from '@ant-design/icons';
+import {FormSignUp} from "../../signUp/components/formSignUp";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+
 const { Step } = Steps;
 const { Option } = Select;
 
@@ -19,16 +23,30 @@ const steps = [
     },
 ];
 
+
 function ChoicePackage(){
+
+    const stripe = useStripe();
+    const elements = useElements();
+
     const [current, setCurrent] = useState(0);
     const [activeCard , SetActiveCard] = useState(0);
     const [checkedRadioButtonOne , SetCheckedRadioButtonOne] = useState(false)
     const [checkedRadioButtonTwo , SetCheckedRadioButtonTwo] = useState(false)
-    const [nextPage , SetNextPage] = useState(0)
+    const [packPro , SetPackPro] = useState('99€');
+    const [packASYouGo , SetPackASYouGo] = useState('12€')
+    const [packStripe , SetPackStripe] = useState('')
 
 
     const next = () => {
         setCurrent(current + 1);
+
+        if(activeCard===1){
+            SetPackStripe(packPro)
+        }else if(activeCard===2){
+            SetPackStripe(packASYouGo)
+        }
+
     };
 
     const prev = () => {
@@ -68,7 +86,7 @@ function ChoicePackage(){
                               <Radio className="btn_Radio" checked={checkedRadioButtonOne}></Radio>
                               <h3 >Pro</h3>
                               <p >Idéal pour les équipes</p>
-                              <h2 >99€</h2>
+                              <h2 >{packPro}</h2>
                               <li >Accueille jusqu’à 100 participants</li>
                               <li > Réunions en groupe illimitées</li>
                               <li >1 Go d’enregistrement sur le cloud</li>
@@ -77,7 +95,7 @@ function ChoicePackage(){
                               <Radio className="btn_Radio" checked={checkedRadioButtonTwo}></Radio>
                               <h3 >Pay As You Go</h3>
                               <p >Payer à votre utilisation</p>
-                              <h2 >12€</h2>
+                              <h2 >{packASYouGo}</h2>
                               <div>
                                   <h5 >Durée de la réunion</h5>
                                   <Select defaultValue="1 Heure" >
@@ -97,8 +115,11 @@ function ChoicePackage(){
                   :
                   steps[current].content === 'Second-content'
                       ?
-                      <div>
-                          Hello from second Div
+                      <div className="form_signup">
+                          <div className="header_Forfait">
+                              Inscrivez-vous
+                          </div>{/*./header_Forfait*/}
+                          <div className={"form"}><FormSignUp className={"vh"}/></div>
                       </div>
                       :
                       steps[current].content === 'Last-content'
@@ -114,13 +135,62 @@ function ChoicePackage(){
                                   <div className="div1_champsPayement">
                                       <div className="texte_div1_champsPayement">
                                       <span>Payer Webinar please Pro</span>
-                                      <h3>99,10 EUR</h3>
+                                      <h3>{packStripe}</h3>
                                       </div>
                                       <div className="icon_div1_champsPayement"><span className="icon-logo-webinar"></span></div>
                                   </div>
 
                                   <div className="div2_champsPayement">
                                       <Button><AppleFilled />Pay</Button>
+                                      <div className={"divpayerparcarte"}>Ou payer par carte bancaire</div>
+                                      <div className={"form_Input"}>
+
+                                          <Form>
+
+
+                                              <Form.Item
+                                                  className={"formItem"}
+                                                  label="Email"
+                                                  name="email"
+                                                  rules={[{ required: true, message: 'Please input your email!' }]}
+                                              >
+                                                  <Input  className={"input"}/>
+                                              </Form.Item>
+
+
+                                              <Form.Item
+                                                  className={"formItem"}
+                                                  label="Card details"
+                                                  name="carddetails"
+                                                  rules={[{ required: true, message: 'Please input your adress!' }]}
+                                              >
+                                                 <CardElement  className={"input"}/>
+                                              </Form.Item>
+
+                                              <Form.Item
+                                                  className={"formItem"}
+                                                  label="Nom du titulaire de la carte"
+                                                  name="nom"
+                                                  rules={[{ required: true, message: 'Please input your username!' }]}
+                                              >
+                                                  <Input  className={"input"}/>
+                                              </Form.Item>
+
+                                              <Form.Item
+                                                  className={"formItem"}
+                                                  label="Nom du titulaire de la carte"
+                                                  name="nom"
+                                                  rules={[{ required: true, message: 'Please input your username!' }]}
+                                              >
+                                                  <Select defaultValue="France" >
+                                                      <Option value="France">France</Option>
+                                                  </Select>
+                                                  <Input placeholder={"Code postal"}  className={"input"}/>
+                                              </Form.Item>
+
+                                          </Form>
+
+                                      </div>
                                   </div>
 
                               </div>
@@ -134,13 +204,18 @@ function ChoicePackage(){
 
           </div>{/*./steps-content*/}
           <div className="steps-action">
-              {current >= 0 && (
-                  <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+              {current === 0 && (
+                  <Button style={{ margin: '0 8px' }} >
                       Annuler
                   </Button>
               )}
+              {current > 0 && (
+                  <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+                      Retour
+                  </Button>
+              )}
               {current < steps.length - 1 && (
-                  <Button type="primary" onClick={() => next()}>
+                  <Button type="primary" onClick={() => next()} disabled={activeCard===0}>
                       Enregistrer et continuer
                   </Button>
               )}
