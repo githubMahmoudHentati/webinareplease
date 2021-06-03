@@ -13,7 +13,7 @@ export const MenuForms =()=>{
                     defaultOpenKeys={['sub1']}
                 >
                     <Menu.Item key="1">
-                        Géneral
+                        Compte
                     </Menu.Item>
                     <Menu.Item key="2">
                         Securité
