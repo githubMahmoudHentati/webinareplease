@@ -1,5 +1,6 @@
 import React,{useState , useEffect} from 'react';
-import { Steps, Button, message , Select , Radio } from 'antd';
+import { Steps, Button, message , Select , Radio  } from 'antd';
+import {AppleFilled } from '@ant-design/icons';
 const { Step } = Steps;
 const { Option } = Select;
 
@@ -23,6 +24,9 @@ function ChoicePackage(){
     const [activeCard , SetActiveCard] = useState(0);
     const [checkedRadioButtonOne , SetCheckedRadioButtonOne] = useState(false)
     const [checkedRadioButtonTwo , SetCheckedRadioButtonTwo] = useState(false)
+    const [nextPage , SetNextPage] = useState(0)
+
+
     const next = () => {
         setCurrent(current + 1);
     };
@@ -52,43 +56,81 @@ function ChoicePackage(){
               ))}
           </Steps>
           <div className="steps-content">
+              {steps[current].content === 'First-content'
+                  ?
+                  <div className="choix_Forfait">
+                      <div className="header_Forfait">
+                          Choisissez votre forfait
+                      </div>{/*./header_Forfait*/}
 
-              <div className="choix_Forfait">
-                  <div className="header_Forfait">
-                     Choisissez votre forfait
-                  </div>{/*./header_Forfait*/}
+                      <div className="card_Forfait">
+                          <div id={activeCard===1?"activeCard":""} className="Card1_Forfait" onClick={()=>handleClickCardOne()}>
+                              <Radio className="btn_Radio" checked={checkedRadioButtonOne}></Radio>
+                              <h3 >Pro</h3>
+                              <p >Idéal pour les équipes</p>
+                              <h2 >99€</h2>
+                              <li >Accueille jusqu’à 100 participants</li>
+                              <li > Réunions en groupe illimitées</li>
+                              <li >1 Go d’enregistrement sur le cloud</li>
+                          </div>{/*./Card1_Forfai*/}
+                          <div id={activeCard===2?"activeCard":""} className="Card2_Forfait" onClick={()=>handleClickCardTwo()}>
+                              <Radio className="btn_Radio" checked={checkedRadioButtonTwo}></Radio>
+                              <h3 >Pay As You Go</h3>
+                              <p >Payer à votre utilisation</p>
+                              <h2 >12€</h2>
+                              <div>
+                                  <h5 >Durée de la réunion</h5>
+                                  <Select defaultValue="1 Heure" >
+                                      <Option value="1 Heure">1 Heure</Option>
+                                  </Select>
+                              </div>
+                              <div>
+                                  <h5 >Nombre de participants</h5>
+                                  <Select defaultValue="20 Participants" >
+                                      <Option value="20 Participants">20 Participants</Option>
+                                  </Select>
+                              </div>
 
-                  <div className="card_Forfait">
-                       <div id={activeCard===1?"activeCard":""} className="Card1_Forfait" onClick={()=>handleClickCardOne()}>
-                           <Radio className="btn_Radio" checked={checkedRadioButtonOne}></Radio>
-                           <h3 >Pro</h3>
-                           <p >Idéal pour les équipes</p>
-                           <h2 >99€</h2>
-                               <li >Accueille jusqu’à 100 participants</li>
-                               <li > Réunions en groupe illimitées</li>
-                               <li >1 Go d’enregistrement sur le cloud</li>
-                       </div>{/*./Card1_Forfai*/}
-                      <div id={activeCard===2?"activeCard":""} className="Card2_Forfait" onClick={()=>handleClickCardTwo()}>
-                          <Radio className="btn_Radio" checked={checkedRadioButtonTwo}></Radio>
-                          <h3 >Pay As You Go</h3>
-                          <p >Payer à votre utilisation</p>
-                          <h2 >12€</h2>
-                          <div>
-                              <h5 >Durée de la réunion</h5>
-                              <Select defaultValue="1 Heure" >
-                                  <Option value="1 Heure">1 Heure</Option>
-                              </Select>
+                          </div>{/*./Card2_Forfait*/}
+                      </div>{/*./card_Forfait*/}
+                  </div>
+                  :
+                  steps[current].content === 'Second-content'
+                      ?
+                      <div>
+                          Hello from second Div
+                      </div>
+                      :
+                      steps[current].content === 'Last-content'
+                          ?
+                          <div className="PayementDiv">
+
+                              <div className="header_Forfait">
+                                  Payez votre forfait
+                              </div>{/*./header_Forfait*/}
+
+                              <div className="champsPayement">
+
+                                  <div className="div1_champsPayement">
+                                      <div className="texte_div1_champsPayement">
+                                      <span>Payer Webinar please Pro</span>
+                                      <h3>99,10 EUR</h3>
+                                      </div>
+                                      <div className="icon_div1_champsPayement"><span className="icon-logo-webinar"></span></div>
+                                  </div>
+
+                                  <div className="div2_champsPayement">
+                                      <Button><AppleFilled />Pay</Button>
+                                  </div>
+
+                              </div>
+
                           </div>
-                          <div>
-                              <h5 >Nombre de participants</h5>
-                              <Select defaultValue="20 Participants" >
-                                  <Option value="20 Participants">20 Participants</Option>
-                              </Select>
-                          </div>
+                          :
+                          null
 
-                      </div>{/*./Card2_Forfait*/}
-                  </div>{/*./card_Forfait*/}
-              </div>{/*./choix_Forfait*/}
+              }
+
 
           </div>{/*./steps-content*/}
           <div className="steps-action">
@@ -104,7 +146,7 @@ function ChoicePackage(){
               )}
               {current === steps.length - 1 && (
                   <Button type="primary" onClick={() => message.success('Processing complete!')}>
-                      Enregistrer
+                      Payer
                   </Button>
               )}
 
