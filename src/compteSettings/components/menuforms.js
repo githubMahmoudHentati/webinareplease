@@ -3,7 +3,7 @@ import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
 import '../compteSettings.scss'
 import {MailOutlined} from '@ant-design/icons';
 import {useDispatch} from "react-redux";
-import {setAccountSecurity} from "../../utils/redux/actions";
+import {setAccountSetting} from "../../utils/redux/actions";
 
 export const MenuForms =()=>{
     const dispatch = useDispatch()
@@ -16,13 +16,13 @@ export const MenuForms =()=>{
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                 >
-                    <Menu.Item key="1" onClick={()=>{dispatch(setAccountSecurity(0))}}>
+                    <Menu.Item key="1" onClick={()=>{dispatch(setAccountSetting(0))}}>
                         Compte
                     </Menu.Item>
-                    <Menu.Item key="2" onClick={()=>{dispatch(setAccountSecurity(1))}}>
+                    <Menu.Item key="2" onClick={()=>{dispatch(setAccountSetting(1))}}>
                         Securité
                     </Menu.Item>
-                    <Menu.Item key="5" onClick={()=>{dispatch(setAccountSecurity(2))}}>
+                    <Menu.Item key="5" onClick={()=>{dispatch(setAccountSetting(3))}}>
                         Abonnement
                     </Menu.Item>
                 </Menu>
