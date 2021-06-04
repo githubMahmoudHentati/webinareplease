@@ -1,32 +1,39 @@
 import React,{useState , useEffect} from 'react';
 import "../Calendar.scss";
-import {Calendar, Badge, Button , Modal} from 'antd';
-import {CalendarOutlined , ClockCircleOutlined  } from "@ant-design/icons";
+import {Calendar, Badge, Button , Modal , Tag} from 'antd';
+import {CalendarOutlined , ClockCircleOutlined , DeleteOutlined  } from "@ant-design/icons";
 
 function getListData(value) {
     let listData;
     switch (value.date()) {
+        case 2:
+            listData = [
+                { type: 'Archivé', content: "Titre webinar fini…" },
+            ];
+            break;
+        case 4:
+            listData = [
+                { type: 'En cours', content: 'Titre webinar en cours…' },
+            ];
+            break;
+        case 6:
+            listData = [
+                { type: 'A venir', content: 'Titre webinar à venir…' },
+            ];
+            break;
         case 8:
             listData = [
-                { type: 'warning', content: `${"This is usual event."}` },
-                { type: 'success', content: 'This is usual event.' },
+                { type: 'Archivé', content: "Titre webinar fini…" },
             ];
             break;
         case 9:
             listData = [
-                { type: 'warning', content: 'This is warning event.' },
-                { type: 'success', content: 'This is usual event.' },
-                { type: 'error', content: 'This is error event.' },
+                { type: 'En cours', content: 'Titre webinar en cours…' },
             ];
             break;
         case 10:
             listData = [
-                { type: 'warning', content: 'This is warning event' },
-                { type: 'success', content: 'This is very long usual event。。....' },
-                { type: 'error', content: 'This is error event 1.' },
-                { type: 'error', content: 'This is error event 2.' },
-                { type: 'error', content: 'This is error event 3.' },
-                { type: 'error', content: 'This is error event 4.' },
+                { type: 'A venir', content: 'Titre webinar à venir…' },
             ];
             break;
         default:
@@ -36,43 +43,70 @@ function getListData(value) {
 
 
 function DateCellRender(value) {
-    const [visible , SetVisible] = useState(false)
+    const [visibleAVenir , SetVisibleAVenir] = useState(false);
+    const [visibleEnCours , SetVisibleEnCours] = useState(false);
+    const [visibleArchivé ,  SetVisibleArchivé] = useState(false)
     const listData = getListData(value);
+    //show Modal A venir
     const onShowModal=()=>{
-        SetVisible(true)
+        SetVisibleAVenir(true)
     }
+    // Cancel modal A venir
     const handleCancel = () => {
-       SetVisible(false)
+        SetVisibleAVenir(false)
     };
+    // show Modal En cours
+    const onShowModalEnCours = () =>{
+        SetVisibleEnCours(true)
+    }
+    //Cancel modal En cours
+    const handleCancelEnCours = () =>{
+        SetVisibleEnCours(false)
+    }
+    //show modal Archivé
+    const onShowModalArchivé = () =>{
+        SetVisibleArchivé(true)
+    }
+    // Cancel modal Archivé
+    const handleCancelArchivé = () =>{
+        SetVisibleArchivé(false)
+    }
 
     return (
         <div className="events">
             {listData.map(item => {
 
-                if(item.type==='error'){
+                if(item.type==='A venir'){
                    return(
                        <div>
-                       <Button className={"btn_error"} onClick={()=>onShowModal()}>
-                           <Badge color={'red'} text={item.content} />
-                       </Button>
+                       <Tag className={"btn_error"} color="blue" onClick={()=>onShowModal()}>
+                           <Badge color={'#007fcb'} text={item.content} style={{color:"#007fcb" , borderRadius:"2px"}}/>
+                       </Tag>
 
                     <Modal
-                        visible={visible}
-                        title={<Badge className={"badge_modal"} color={'red'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                        visible={visibleAVenir}
+                        title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'#007fcb'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
                         onCancel={handleCancel}
                         footer={[
+                            <div className={"footer_modal_Avenir"}>
+                                <div><Button><DeleteOutlined /> Supprimer</Button></div>
+
+                                <div>
                             <Button key="back" onClick={handleCancel}>
                                 Annuler
                             </Button>,
                             <Button key="submit" type="primary"  >
                                 Visualiser
                             </Button>,
+                                </div>
+
+                            </div>
                         ]}
                     >
                        <div className={"body_Modal"}>
-                           <div className={"div_image_modal"}><img src={"https://miro.medium.com/max/8480/0*DoOXAwICXS_IILB8"}/></div>
+                           <div className={"div_image_modal"}><img src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/></div>
                            <div className={"div_time_calendar"}>
-                               <div className={"type_btn"}><span>Archivé</span></div>
+                               <div className={"type_btn"}><Tag color="blue">A venir</Tag></div>
                                <div className={"div2_time_calendar"}>
                                    <p><CalendarOutlined /> 13-05-2121</p>
                                    <p><ClockCircleOutlined /> 16:30:00</p>
@@ -82,17 +116,75 @@ function DateCellRender(value) {
                     </Modal>
                        </div>
                    )
-                }else if(item.type==='success'){
+                }else if(item.type==='En cours'){
                     return (
-                        <Button>
-                            <Badge color={'green'} text={item.content} />
-                        </Button>
+                        <div>
+                            <Tag className={"btn_error"} color="green" onClick={()=>onShowModalEnCours()}>
+                                <Badge color={'#52c41a'} text={item.content} style={{color:"#52c41a" , borderRadius:"2px"}}/>
+                            </Tag>
+
+                            <Modal
+                                visible={visibleEnCours}
+                                title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'#52c41a'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                                onCancel={handleCancelEnCours}
+                                footer={[
+                                    <div className={"modal_footer_EnCours"}>
+                                    <Button key="back" onClick={handleCancelEnCours}>
+                                        Annuler
+                                    </Button>,
+                                    <Button key="submit" type="primary"  >
+                                        Visualiser
+                                    </Button>,
+                                    </div>
+                                ]}
+                            >
+                                <div className={"body_Modal"}>
+                                    <div className={"div_image_modal"}><img src={"https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9uZG9ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"}/></div>
+                                    <div className={"div_time_calendar"}>
+                                        <div className={"type_btn"}><Tag color="green">En cours</Tag></div>
+                                        <div className={"div2_time_calendar"}>
+                                            <p><CalendarOutlined /> 28-05-2121</p>
+                                            <p><ClockCircleOutlined /> 12:30:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Modal>
+                        </div>
                     )
-                }else if(item.type==='warning'){
+                }else if(item.type==='Archivé'){
                     return (
-                        <Button>
-                            <Badge color={'orange'} text={item.content} />
-                        </Button>
+                        <div>
+                            <Tag style={{border:"1px solid rgba(0,0,0,0.15)"}} color="#F5F5F5" onClick={()=>onShowModalArchivé()}>
+                                <Badge color={'rgba(0,0,0,0.65)'} text={item.content} style={{color:"rgba(0,0,0,0.65)" , borderRadius:"2px"}}/>
+                            </Tag>
+
+                            <Modal
+                                visible={visibleArchivé}
+                                title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'rgba(0,0,0,0.65)'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                                onCancel={handleCancelArchivé}
+                                footer={[
+                                    <div className={"modal_footer_Archivé"}>
+                                    <Button key="back" onClick={handleCancelArchivé}>
+                                        Annuler
+                                    </Button>,
+                                    <Button key="submit" type="primary"  >
+                                        Visualiser
+                                    </Button>,
+                                    </div>
+                                ]}
+                            >
+                                <div className={"body_Modal"}>
+                                    <div className={"div_image_modal"}><img src={"https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29yb25hdmlydXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}/></div>
+                                    <div className={"div_time_calendar"}>
+                                        <div className={"type_btn"}><Tag color="gray">Archivé</Tag></div>
+                                        <div className={"div2_time_calendar"}>
+                                            <p><CalendarOutlined /> 28-05-2121</p>
+                                            <p><ClockCircleOutlined /> 12:30:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Modal>
+                        </div>
                     )
                 }
             })}

@@ -75,7 +75,7 @@ function HeaderVideos({selectedRow}) {
 
           <div className="MesDirects">
               <h4>Mes Directs</h4>
-              <Button className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
+              <Button onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
           </div>{/*./TousMedia*/}
 
           <div className="Filter">

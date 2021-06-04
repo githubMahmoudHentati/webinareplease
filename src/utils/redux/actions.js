@@ -7,3 +7,13 @@ export function setAccountSetting(e){
     }
 
 }
+
+export function setDirectSetting(e){
+
+    return{
+        type: "SET_DirectMenu",
+        payload:e,
+    }
+
+}
+

@@ -10,8 +10,10 @@ import {PrincipalPage} from "../utils/components/principalPage";
 import {useSelector} from "react-redux";
 import {PasswordEdit} from "./components/passwordEdit";
 import {AccountSubscription} from './components/accountSubscription'
+import {useHistory} from "react-router-dom";
 
 export const CompteSettings=()=>{
+    const history = useHistory()
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     console.log("accountMenu",accountMenu)
 
@@ -48,7 +50,7 @@ export const CompteSettings=()=>{
                     <Col span={24} className={"title-col"}>
                         <ArrowLeftOutlined
                             style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium'}}
-                            onClick={() => history.push("/")}/>
+                            onClick={() => history.push("/showVideos")}/>
                         <span style={{
                             fontSize: "medium",
                             fontFamily: "Arial, Helvetica, sans-serif;",
