@@ -5,8 +5,7 @@ import {ArrowLeftOutlined} from '@ant-design/icons';
 import history from '../router/history';
 import {MenuForms} from './components/menuforms'
 import {Generals} from "./components/general";
-import {Configuration} from "./components/configuration";
-import Invitation from "./components/Invitation";
+import {Configuration} from "./components/configuration"
 
 
 export const FormDirectVideo =()=>{
@@ -43,7 +42,7 @@ export const FormDirectVideo =()=>{
                                 <MenuForms />
                             </Col>
                             <Col span={16}>
-                               <Invitation/>
+                                <Configuration />
                             </Col>
                         </Row>
                     </Col>
