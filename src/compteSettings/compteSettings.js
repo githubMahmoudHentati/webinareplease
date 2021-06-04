@@ -8,6 +8,7 @@ import {CompteGeneralInformation} from "./components/CompteGeneralInformation";
 import {SecurityAccount} from "./components/securityAccount"
 import {PrincipalPage} from "../utils/components/principalPage";
 import {useSelector} from "react-redux";
+import {PasswordEdit} from "./components/passwordEdit";
 
 export const CompteSettings=()=>{
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
@@ -19,9 +20,10 @@ export const CompteSettings=()=>{
                 return <CompteGeneralInformation/>
             case 1:
             return <SecurityAccount/>
+            case 2:
+                return <PasswordEdit/>
             default:
                 return <CompteGeneralInformation/>
-
         }
     }
 
