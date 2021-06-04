@@ -1,4 +1,6 @@
 import React,{useState , useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
@@ -17,7 +19,7 @@ import { Badge , Menu, Dropdown , Avatar} from 'antd';
 let clicked = false;
 
 function GlobalHeader() {
-
+    const history = useHistory()
     const [BackgroundHeader , SetBackgroundHeader] = useState(false);
 
     //fonction checkbox
@@ -37,7 +39,7 @@ function GlobalHeader() {
 
     const MenuHeader = (
         <Menu className="menu">
-            <Menu.Item ><UserOutlined />Compte</Menu.Item>
+            <Menu.Item onClick={()=>{history.push("/compteSettings")}} ><UserOutlined />Compte</Menu.Item>
             <Menu.Item><UnlockOutlined />Sécurité</Menu.Item>
             <Menu.Item ><PieChartOutlined />Abonnement</Menu.Item>
             <Menu.Item><LogoutOutlined />Déconnection</Menu.Item>

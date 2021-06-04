@@ -1,8 +1,12 @@
 import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col} from 'antd'
 import '../compteSettings.scss'
+import {useDispatch} from "react-redux";
+import {setAccountSecurity} from "../../utils/redux/actions";
 
  export const SecurityAccount  =() =>{
+     const dispatch = useDispatch()
+
      return(
         <Row  gutter={[0, 25]}>
             <Col span={24}>
@@ -21,7 +25,7 @@ import '../compteSettings.scss'
                         </Row>
                     </Col>
                     <Col style={{display:"flex ",alignItems:"center"}}span={2}>
-                        <a>Modifier</a>
+                        <a onClick={()=>dispatch(setAccountSecurity(2))}>Modifier</a>
                     </Col>
                 </Row>
             </Col>
