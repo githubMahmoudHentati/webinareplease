@@ -144,4 +144,202 @@
       }
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+.Invitation{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.title_invitation{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.title_invitation h3{
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.85);
+}
+.groupEmail{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.groupEmail span{
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 6px;
+}
+.infosIcon{
+  font-size: 14px !important;
+  color: rgba(0, 0, 0, 0.15) !important;
+  margin-left: 9px;
+}
+.selectGroupGmail{
+  width: 65% !important;
+}
+.div2{
+  margin-top: 2%;
+}
+.AddTags{
+  width: 65%;
+  min-height: 72px;
+  padding: 0.5% 0.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 2px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+
+}
+.div_Email_accée{
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+.div_Email_accée p{
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.65);
+}
+.infos_ajout_régle{
+  width: 100%;
+  height: 65px;
+  padding: 15px 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.title_ajout_régle{
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.p_ajout_régle{
+  width: 55%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.div_icon_ajout_régle{
+  width: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.title_ajout_régle span{
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.85);
+}
+.icon_ajout_régle{
+margin-right: 10px ;
+  font-size: 38px !important;
+  color: #DDDDDD !important;
+}
+.p_ajout_régle{
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.65);
+
+}
+.icon2_ajout_régle{
+  font-size: 21px !important;
+  color: rgba(0, 0, 0, 0.25) !important;
+}
+.btn_ajout_régle{
+  width: 100%;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.btn_ajout{
+  width: 20%;
+  height: 32px;
+  padding: 2%;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 2px;
+
+}
+.btn_ajout span{
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.85);
+  margin-top: 5px;
+}
+.icon_btn_ajout{
+  font-size: 14px;
+  color:  rgba(0, 0, 0, 0.65) !important;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.list2{
+  margin-top: 2%;
+}
+.popover{
+  margin-top: 2%;
+}
+.popoverCheckbox{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.chbx1{
+  margin-left: 8px !important;
+  margin-bottom: 10px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: RGBA(0, 0, 0, 0.65) !important;
+}
+.chbox2{
+  margin-bottom: 10px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: RGBA(0, 0, 0, 0.65) !important;
+}
+>>>>>>> origin/master
