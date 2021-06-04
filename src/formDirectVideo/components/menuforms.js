@@ -2,9 +2,12 @@ import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
 import '../formDirectVideo.scss'
 import {MailOutlined} from '@ant-design/icons';
+import {setAccountSetting} from "../../utils/redux/actions";
+import {useDispatch} from "react-redux";
 
 export const MenuForms =()=>{
-    const { TabPane } = Tabs;
+    const dispatch = useDispatch()
+
     return (
         <Row>
             <Col span={24}>
@@ -28,7 +31,7 @@ export const MenuForms =()=>{
 
                     </div>
 
-                    <Menu.Item key="1">
+                    <Menu.Item onClick={()=>{dispatch(setAccountSetting(0))}} key="1">
                         Géneral
                     </Menu.Item>
                     <div className={"titre-menu"}>
@@ -40,19 +43,19 @@ export const MenuForms =()=>{
                         fontWeight: "bold"
                     }}>Paramètres généraux</span>
                     </div>
-                    <Menu.Item key="2">
+                    <Menu.Item onClick={()=>{dispatch(setAccountSetting(1))}} key="2">
                         Configuration
                     </Menu.Item>
 
-                    <Menu.Item key="3">
+                    <Menu.Item onClick={()=>{dispatch(setAccountSetting(2))}}key="3">
                         Invitations
                     </Menu.Item>
 
-                    <Menu.Item key="4">
+                    <Menu.Item onClick={()=>{dispatch(setAccountSetting(3))}} key="4">
                         Outils social
                     </Menu.Item>
 
-                    <Menu.Item key="5">
+                    <Menu.Item onClick={()=>{dispatch(setAccountSetting(4))}} key="5">
                         Ttemplates
                     </Menu.Item>
                 </Menu>
