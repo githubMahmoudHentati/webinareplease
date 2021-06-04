@@ -5,11 +5,31 @@ import {ArrowLeftOutlined} from "@ant-design/icons";
 import history from "../router/history";
 import {Configuration} from "../formDirectVideo/components/configuration";
 import {CompteGeneralInformation} from "./components/CompteGeneralInformation";
+import {SecurityAccount} from "./components/securityAccount"
+import {PrincipalPage} from "../utils/components/principalPage";
+import {useSelector} from "react-redux";
+import {PasswordEdit} from "./components/passwordEdit";
 
 export const CompteSettings=()=>{
+    const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
+    console.log("accountMenu",accountMenu)
+
+    const SelectMenu = ()=>{
+        switch(accountMenu){
+            case 0:
+                return <CompteGeneralInformation/>
+            case 1:
+            return <SecurityAccount/>
+            case 2:
+                return <PasswordEdit/>
+            default:
+                return <CompteGeneralInformation/>
+        }
+    }
+
     return(
         <div>
-            <Card style={{width: "100%"}}>
+            <PrincipalPage >
                 <Row gutter={[0, 40]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px"}}>
@@ -39,12 +59,12 @@ export const CompteSettings=()=>{
                                 <MenuForms />
                             </Col>
                             <Col span={16}>
-                                <CompteGeneralInformation />
+                                <SelectMenu />
                             </Col>
                         </Row>
                     </Col>
                 </Row>
-            </Card>
+            </PrincipalPage>
         </div>
     )
 }
