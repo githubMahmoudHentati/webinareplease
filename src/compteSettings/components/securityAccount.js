@@ -2,7 +2,7 @@ import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col} from 'antd'
 import '../compteSettings.scss'
 import {useDispatch} from "react-redux";
-import {setAccountSecurity} from "../../utils/redux/actions";
+import {setAccountSetting} from "../../utils/redux/actions";
 
  export const SecurityAccount  =() =>{
      const dispatch = useDispatch()
@@ -25,7 +25,7 @@ import {setAccountSecurity} from "../../utils/redux/actions";
                         </Row>
                     </Col>
                     <Col style={{display:"flex ",alignItems:"center"}}span={2}>
-                        <a onClick={()=>dispatch(setAccountSecurity(2))}>Modifier</a>
+                        <a onClick={()=>dispatch(setAccountSetting(2))}>Modifier</a>
                     </Col>
                 </Row>
             </Col>

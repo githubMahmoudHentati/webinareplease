@@ -1,5 +1,5 @@
 
-export function setAccountSecurity(e){
+export function setAccountSetting(e){
 
     return{
         type: "SET_AccountMenu",
