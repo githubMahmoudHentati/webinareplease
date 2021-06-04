@@ -64,6 +64,10 @@
 .body_Modal{
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .div_image_modal{
   width: 454px;
@@ -74,13 +78,13 @@
   height: 100%;
 }
 .div_time_calendar{
-  width: 100%;
+  width: 454px;
   margin-top: 1%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 1% 3.5%;
+  padding: 0.2% 0;
 }
 .div2_time_calendar{
   width: 45%;
@@ -100,19 +104,21 @@
   letter-spacing: normal;
   color: rgba(0, 0, 0, 0.85);
 }
-.type_btn span{
-  padding: 2px 8px;
-  border-radius: 2px;
-  border: solid 1px rgba(0, 0, 0, 0.15);
-  background-color: rgba(0, 0, 0, 0.04);
-  color: rgba(0, 0, 0, 0.65);
+.footer_modal_Avenir{
+  width: 454px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+ justify-content: space-between;
+  align-items: center;
+}
+.modal_footer_EnCours , .modal_footer_Archivé{
+  width: 454px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
 
-}
-.badge_modal{
-  font-size: 16px !important;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  color: rgba(0, 0, 0, 0.85);
-}
+
 
