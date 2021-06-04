@@ -696,4 +696,13 @@ input:checked + .slider:before {
     align-items: flex-start;
 }
 /*form_signup*/
+.showVideosDiv{
+    height: 100vh;
+}
+/*.showVideosDiv .ant-card-body:nth-of-type(1){*/
+/*    height: 100% !important;*/
+/*}*/
 
+.ant-card-body{
+    height: 100%;
+}
