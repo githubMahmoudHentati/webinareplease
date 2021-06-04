@@ -13,7 +13,17 @@ function Invitation(){
     const [name , SetName] = useState('')
     const [items , SetItems] = useState(['Groupe 01' , 'Groupe 02' , 'Groupe 03' , 'Groupe 04'])
     const [visible , SetVisible] = useState(false)
-    const [visbleRegle , SetVisibleRegle] = useState(false)
+    const [visbleRegle , SetVisibleRegle] = useState(false);
+    const [visibleInscription , SetVisibleInscription] = useState(false)
+    const [visibleRappelJ7 , SetVisibleRappelJ7 ] = useState(false)
+    const [visibleRappelJ1 , SetVisibleRappelJ1 ] = useState(false)
+    const [visibleRappelH1 , SetVisibleRappelH1 ] = useState(false)
+
+    const [visibleInscription2 , SetVisibleInscription2] = useState(false)
+    const [visibleRappelJ72 , SetVisibleRappelJ72 ] = useState(false)
+    const [visibleRappelJ12 , SetVisibleRappelJ12 ] = useState(false)
+    const [visibleRappelH12 , SetVisibleRappelH12 ] = useState(false)
+
 
     // take value of option select
     const onNameChange = event => {
@@ -26,21 +36,46 @@ function Invitation(){
             SetName('')
     };
 
-    const hide = () => {
-        SetVisible(false)
-    };
-
+     // handle visible popover one
    const handleVisibleChange = visible => {
         SetVisible(visible)
     };
-
-    const hideRgle = () => {
-        SetVisibleRegle(false)
-    };
-
+    // handle visible popover two
     const handleVisibleChangeRegle = visible => {
         SetVisibleRegle(visible)
     };
+    //handle Click checkbox invitation popover one
+    const onChangeInscription = (e) =>{
+        SetVisibleInscription(e.target.checked)
+    }
+    // handle click checkbox rappel j7
+    const onChangeRappelJ7 = (e) =>{
+        SetVisibleRappelJ7(e.target.checked)
+    }
+    //handle click checkbox rappel j1
+    const onChangeRappelJ1 = (e) =>{
+        SetVisibleRappelJ1(e.target.checked)
+    }
+    // handle click checkbox rappel h1
+    const onChangeRappelH1 = (e) =>{
+        SetVisibleRappelH1(e.target.checked)
+    }
+    //handle Click checkbox invitation popover two
+    const onChangeInscription2 = (e) =>{
+        SetVisibleInscription2(e.target.checked)
+    }
+    // handle click checkbox rappel j7
+    const onChangeRappelJ72 = (e) =>{
+        SetVisibleRappelJ72(e.target.checked)
+    }
+    //handle click checkbox rappel j1
+    const onChangeRappelJ12 = (e) =>{
+        SetVisibleRappelJ12(e.target.checked)
+    }
+    // handle click checkbox rappel h1
+    const onChangeRappelH12 = (e) =>{
+        SetVisibleRappelH12(e.target.checked)
+    }
 
 
 
@@ -91,27 +126,60 @@ function Invitation(){
                      <p>Emails d'inscription et d'accès</p>
                     <div className={"div_ajout_régle"}>
 
-                        <div className={"infos_ajout_régle"}>
-                            <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span>Inscription</span></div>
-                            <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Dès la programmation du webinar</p></div>
-                           <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
-                        </div>
-                        <div className={"infos_ajout_régle"}>
-                            <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Rappel J-7</span></div>
-                            <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>7 jours avant le début</p></div>
-                            <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
-                        </div>
-                        <div className={"infos_ajout_régle"}>
-                            <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Rappel J-1</span></div>
-                            <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>1 jour avant le début</p></div>
-                            <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
-                        </div>
+                        {visibleInscription === false
+                            ?
+                            <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span>Inscription</span></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Dès la programmation du webinar</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                            </div>
+                            :
+                            null
+                        }
 
+                        {visibleRappelJ7 === false
+                            ?
+                            <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Rappel J-7</span></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>7 jours avant le début</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                            </div>
+                            :
+                            null
+                        }
+
+                        {visibleRappelJ1 === false
+                            ?
+                            <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Rappel J-1</span></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>1 jour avant le début</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                            </div>
+                            :
+                            null
+                        }
+
+                        {visibleRappelH1 === false
+                            ?
+                            <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Rappel H-1</span></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>1 jour avant le début</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                            </div>
+                            :
+                            null
+                        }
                         <Tooltip placement="bottom" title={" Ajouter une règle"}>
                         <Popover
                             className={"popover"}
-                            content={<a onClick={hide}>Close</a>}
-                            title="Title"
+                            content={
+                                <div className={"popoverCheckbox"}>
+                                    <Checkbox className={"chbx1"} onChange={onChangeInscription}>Invitation pour inscription</Checkbox>
+                                    <Checkbox className={"chbox2"} onChange={onChangeRappelJ7}>Rappel J-7</Checkbox>
+                                    <Checkbox className={"chbox2"} onChange={onChangeRappelJ1}>Rappel J-1</Checkbox>
+                                    <Checkbox className={"chbox2"} onChange={onChangeRappelH1}>Rappel H-1</Checkbox>
+                                </div>
+                            }
                             trigger="click"
                             visible={visible}
                             onVisibleChange={handleVisibleChange}
@@ -128,34 +196,64 @@ function Invitation(){
                     <p>Emails pour les inscrits</p>
                     <div className={"div_ajout_régle"}>
 
-                        <div className={"infos_ajout_régle"}>
-                            <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span>Confirmation d'inscription</span></div>
-                            <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Juste après l'inscription</p></div>
-                            <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
-                        </div>
-                        <div className={"infos_ajout_régle"}>
-                            <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>A participé</span></div>
-                            <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Juste après la fin</p></div>
-                            <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
-                        </div>
-                        <div className={"infos_ajout_régle"}>
-                            <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Non venu</span></div>
-                            <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Juste après la fin</p></div>
-                            <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
-                        </div>
+                        {visibleInscription2 === false
+                            ?
+                            <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span>Confirmation d'inscription</span></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Juste après l'inscription</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                            </div>
+                            :
+                            null
+                        }
+                        {
+                            visibleRappelJ72 === false
+                                ?
+                                <div className={"infos_ajout_régle"}>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>A participé</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Juste après la fin</p></div>
+                                    <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                                </div>
+                                :
+                                null
+                        }
+
+                        {
+                            visibleRappelJ12 === false
+                                ?
+                                <div className={"infos_ajout_régle"}>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Non venu</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Juste après la fin</p></div>
+                                    <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                                </div>
+                                :
+                                null
+                        }
+
+                        {
+                            visibleRappelH12 === false
+                                ?
+                                <div className={"infos_ajout_régle"}>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span>Non venu</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"}>Juste après la fin</p></div>
+                                    <div className={"div_icon_ajout_régle"}><MinusCircleOutlined className={"icon2_ajout_régle"}/></div>
+                                </div>
+                                :
+                                null
+                        }
+
 
                         <Tooltip placement="bottom" title={" Ajouter une règle"}>
                         <Popover
                             className={"popover"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox className={"chbx1"}>Invitation pour inscription</Checkbox>
-                                    <Checkbox className={"chbox2"}>Rappel J-7</Checkbox>
-                                    <Checkbox className={"chbox2"}>Rappel J-1</Checkbox>
-                                    <Checkbox className={"chbox2"}>Rappel H-1</Checkbox>
+                                    <Checkbox className={"chbx1"} onChange={onChangeInscription2}>Invitation pour inscription</Checkbox>
+                                    <Checkbox className={"chbox2"} onChange={onChangeRappelJ72}>Rappel J-7</Checkbox>
+                                    <Checkbox className={"chbox2"} onChange={onChangeRappelJ12}>Rappel J-1</Checkbox>
+                                    <Checkbox className={"chbox2"} onChange={onChangeRappelH12}>Rappel H-1</Checkbox>
                                 </div>
                             }
-                            title="Title"
                             trigger="click"
                             visible={visbleRegle}
                             onVisibleChange={handleVisibleChangeRegle}
