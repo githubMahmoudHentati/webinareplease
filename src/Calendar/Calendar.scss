@@ -1,0 +1,118 @@
+.HeaderCalendar{
+  width: 100%;
+}
+.BreadcrumbDivHeaderCalendrier{
+  width: 100%;
+}
+.MesDirectsHeaderCalendrier{
+  width: 100%;
+  height: 58px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: RGBA(0, 0, 0, 0.04);
+  margin-top: 0.5%;
+  padding: 0 2em;
+}
+.div_retour{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.arrow{
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.85);
+  margin-right: 0.5%;
+  cursor: pointer;
+}
+.h4{
+  font-size: 20px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.85);
+  margin-top: 10px;
+}
+
+
+.CalendarFile{
+  width: 100%;
+  margin-top: 2%;
+}
+.events {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.events .ant-badge-status {
+  width: 100%;
+  overflow: hidden;
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.notes-month {
+  font-size: 28px;
+  text-align: center;
+}
+.notes-month section {
+  font-size: 28px;
+}
+.body_Modal{
+  width: 100%;
+  overflow: hidden;
+}
+.div_image_modal{
+  width: 454px;
+  height: 264px;
+}
+.div_image_modal img{
+  width: 100%;
+  height: 100%;
+}
+.div_time_calendar{
+  width: 100%;
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1% 3.5%;
+}
+.div2_time_calendar{
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.div2_time_calendar p{
+  margin-right: 0.2%;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.85);
+}
+.type_btn span{
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: solid 1px rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.65);
+
+}
+.badge_modal{
+  font-size: 16px !important;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.85);
+}
+
