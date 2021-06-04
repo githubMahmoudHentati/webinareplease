@@ -13,12 +13,15 @@ export const CompteSettings=()=>{
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     console.log("accountMenu",accountMenu)
 
-    const selectMenu = ()=>{
+    const SelectMenu = ()=>{
         switch(accountMenu){
             case 0:
                 return <CompteGeneralInformation/>
             case 1:
             return <SecurityAccount/>
+            default:
+                return <CompteGeneralInformation/>
+
         }
     }
 
@@ -54,7 +57,7 @@ export const CompteSettings=()=>{
                                 <MenuForms />
                             </Col>
                             <Col span={16}>
-                                {selectMenu}
+                                <SelectMenu />
                             </Col>
                         </Row>
                     </Col>
