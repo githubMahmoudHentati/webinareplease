@@ -1,5 +1,7 @@
 import React,{useState , useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
+import {useDispatch} from "react-redux";
+
 
 import {
     MenuUnfoldOutlined,
@@ -15,10 +17,12 @@ import {
      GlobalOutlined
 } from '@ant-design/icons';
 import { Badge , Menu, Dropdown , Avatar} from 'antd';
+import {setAccountSetting} from "../redux/actions";
 
 let clicked = false;
 
 function GlobalHeader() {
+    const dispatch = useDispatch()
     const history = useHistory()
     const [BackgroundHeader , SetBackgroundHeader] = useState(false);
 
@@ -39,10 +43,10 @@ function GlobalHeader() {
 
     const MenuHeader = (
         <Menu className="menu">
-            <Menu.Item onClick={()=>{history.push("/compteSettings")}} ><UserOutlined />Compte</Menu.Item>
-            <Menu.Item><UnlockOutlined />Sécurité</Menu.Item>
-            <Menu.Item ><PieChartOutlined />Abonnement</Menu.Item>
-            <Menu.Item><LogoutOutlined />Déconnection</Menu.Item>
+            <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(0)))}} ><UserOutlined />Compte</Menu.Item>
+            <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(1)))}}><UnlockOutlined />Sécurité</Menu.Item>
+            <Menu.Item  onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(2)))}}><PieChartOutlined />Abonnement</Menu.Item>
+            <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(3)))}}><LogoutOutlined />Déconnection</Menu.Item>
         </Menu>
     );
     const Menulang = (

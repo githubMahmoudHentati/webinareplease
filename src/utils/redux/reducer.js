@@ -1,7 +1,7 @@
 
 const INITIAL_STATE = {
     accountMenu : 0,
-
+    directMenu : 0,
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
@@ -12,7 +12,11 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 ...INITIAL_STATE,
                 accountMenu: action.payload
             }
-
+        case "SET_DirectMenu":
+            return{
+                ...INITIAL_STATE,
+                accountMenu: action.payload
+            }
         default:{
             return INITIAL_STATE
         }

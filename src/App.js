@@ -17,7 +17,7 @@ function App() {
 
         <BrowserRouter history={history}>
           <Switch>
-            <Redirect exact from="/" to="/" />
+            <Redirect exact from="/" to="/showVideos" />
               <Route exact path='/showVideos' component={ShowVideos} />
               <Route exact path='/FormDirectVideo' component={FormDirectVideo} />
               <Route exact path='/PackagePayement' component={PackagePayement}/>
