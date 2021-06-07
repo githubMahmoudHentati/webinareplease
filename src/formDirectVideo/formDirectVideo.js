@@ -9,7 +9,7 @@ import {Configuration} from "./components/configuration";
 import Invitation from "./components/Invitation";
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {setAccountSetting} from "../utils/redux/actions";
+import {SocialTools} from "./components/socialTools";
 
 
 export const FormDirectVideo =()=>{
@@ -25,7 +25,7 @@ export const FormDirectVideo =()=>{
             case 2:
                 return <Invitation/>
             case 3:
-                return <Generals/>
+                return <SocialTools/>
             case 4:
                 return <Generals/>
             default:
@@ -64,7 +64,7 @@ export const FormDirectVideo =()=>{
                             <Col span={4}>
                                 <MenuForms />
                             </Col>
-                            <Col span={16}>
+                            <Col span={12}>
                                 <SelectMenu />
                             </Col>
                         </Row>
