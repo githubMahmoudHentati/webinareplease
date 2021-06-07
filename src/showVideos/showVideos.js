@@ -5,12 +5,14 @@ import GlobalHeader from "../utils/components/header"
 import { Card } from "antd";
 import * as constantMedia from './utils/data';
 import{PrincipalPage} from "../utils/components/principalPage";
+import {useSelector} from "react-redux";
 
 function ShowVideos() {
 
     const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
 
-
+    // use Selector redux
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
     // fonction pour compter les lignes sélectionnées de tableau
     const fetch_element_selected = (selected) => {
@@ -32,7 +34,7 @@ function ShowVideos() {
     return(
        <PrincipalPage>
            <HeaderVideos selectedRow={selectedRow}/>
-           <DataTable/>
+           <DataTable />
        </PrincipalPage>
     );
 }

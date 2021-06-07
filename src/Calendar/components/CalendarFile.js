@@ -219,7 +219,7 @@ function CalendarFile() {
     return(
         <div className={"CalendarFile"}>
 
-            <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender} />
+            <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  />
 
         </div>
     );

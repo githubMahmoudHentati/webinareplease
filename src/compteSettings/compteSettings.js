@@ -12,10 +12,13 @@ import {PasswordEdit} from "./components/passwordEdit";
 import {AccountSubscription} from './components/accountSubscription'
 import {useHistory} from "react-router-dom";
 
+
 export const CompteSettings=()=>{
     const history = useHistory()
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     console.log("accountMenu",accountMenu)
+    // use Selector redux
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
     const SelectMenu = ()=>{
         switch(accountMenu){
@@ -37,24 +40,25 @@ export const CompteSettings=()=>{
             <PrincipalPage >
                 <Row gutter={[0, 40]}>
                     <Col span={24} className={"header-col"}>
-                        <Breadcrumb style={{fontSize:"14px"}}>
-                            <Breadcrumb.Item href="">
+                        <Breadcrumb style={{fontSize:"14px"}} style={{color:darkMode===false?"":"#ffffff"}}>
+                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
                                 <span >Accueil</span>
-                            </Breadcrumb.Item>
-                            <Breadcrumb.Item href="">
+                            </Breadcrumb.Item >
+                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
                                 <span>Compte</span>
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item>Mon Compte</Breadcrumb.Item>
+                            <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>Mon Compte</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
-                    <Col span={24} className={"title-col"}>
+                    <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#141414"}}>
                         <ArrowLeftOutlined
-                            style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium'}}
+                            style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium' , color:darkMode===false?"":"white"}}
                             onClick={() => history.push("/showVideos")}/>
                         <span style={{
                             fontSize: "medium",
                             fontFamily: "Arial, Helvetica, sans-serif;",
-                            marginLeft: "1%"
+                            marginLeft: "1%",
+                            color:darkMode===false?"":"white"
                         }}> Mon Compte
                                         </span>
                     </Col>
