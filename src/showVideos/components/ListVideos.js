@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import {useHistory} from "react-router-dom";
 import UseActionMenu from './ActionMenuVideosTable';
+import {useSelector} from "react-redux";
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_NUMBER = 0;
 
 function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_elments_selected) {
+
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+
+    console.log("azsqdcwxvcbnhgfdter",darkMode)
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [record ,  setRecord] = useState([]);
@@ -61,8 +66,9 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
     };
 
     const DataTable = () => (
-        <div className="DataTable">
+        <div className="DataTable" style={{backgroundColor:darkMode===false?"#ffffff":"#011529"}}>
             <Table
+                style={{backgroundColor:darkMode===false?"#ffffff":"#011529"}}
                 rowKey={record => record.id}
                 rowSelection={rowSelection}
                 columns={updatedColumns}

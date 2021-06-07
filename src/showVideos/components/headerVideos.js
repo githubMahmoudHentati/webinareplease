@@ -2,6 +2,7 @@ import React , {useState,useEffect} from 'react';
 import { Breadcrumb,Button, Tooltip , Select , Input  , Checkbox , DatePicker, Space} from "antd";
 import {  HourglassOutlined ,DownloadOutlined ,PlayCircleOutlined ,ImportOutlined ,BorderInnerOutlined , CalendarOutlined , DeleteOutlined , DownOutlined ,RightOutlined ,HomeOutlined , PlusSquareOutlined , MenuOutlined , TableOutlined  ,AppstoreOutlined , FilterOutlined , FolderOutlined , FolderOpenOutlined , SearchOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
+import {useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
 const { Option } = Select;
 let clicked = false;
@@ -11,6 +12,9 @@ function HeaderVideos({selectedRow}) {
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const history = useHistory();
+
+    // use Selector redux
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
 
     useEffect(() => {
@@ -61,20 +65,20 @@ function HeaderVideos({selectedRow}) {
       <div className="HeaderVideo">
 
           <div className="BreadcrumbDiv">
-              <Breadcrumb>
-                  <Breadcrumb.Item href="">
-                      <span>Accueil</span>
+              <Breadcrumb style={{color:darkMode===false?"":"#ffffff"}}>
+                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
+                      <span >Accueil</span>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item href="">
+                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
                       <span>Direct</span>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item>Tous</Breadcrumb.Item>
+                  <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>Tous</Breadcrumb.Item>
               </Breadcrumb>
 
           </div>{/*./Breadcrumb*/}
 
-          <div className="MesDirects">
-              <h4>Mes Directs</h4>
+          <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#171717"}}>
+              <h4 style={{color:darkMode===false?"":"white"}}>Mes Directs</h4>
               <Button onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
           </div>{/*./TousMedia*/}
 
@@ -89,15 +93,15 @@ function HeaderVideos({selectedRow}) {
                           :
                           <div className="delete_number">
                               <Tooltip title="Supprimer">
-                                  <Button  icon={<DeleteOutlined />} />
+                                  <Button style={{backgroundColor:darkMode===false?"":"#141414"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} />
                               </Tooltip>
-                              <p><span>{selectedRow}</span> <span>élément(s) sélectionné(s)</span></p>
+                              <p style={{color:darkMode===false?"":"white"}}><span>{selectedRow}</span> <span>élément(s) sélectionné(s)</span></p>
                           </div>
                   }
 
-                  <div className="Calendrier" onClick={()=>handleClickCalendar()}>
+                  <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"RGB(20, 20, 20)" , color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
                       <Tooltip className="tooltip_calendrier" title="Afficher Calendrier">
-                      <CalendarOutlined  className="IconCalendrier"/>
+                      <CalendarOutlined  className="IconCalendrier" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)"}}/>
                       <span>Calendrier</span>
                       </Tooltip>
                   </div>
@@ -124,16 +128,24 @@ function HeaderVideos({selectedRow}) {
               <div className="div_filter">
 
                   <Input
+                      style={{backgroundColor:darkMode===false?"":"#141414"}}
                       className="inputFilter"
                       placeholder="Rechercher…"
-                      prefix={<SearchOutlined style={{color: "rgba(0, 0, 0, 0.25)", marginLeft: "10px"}}/>}
+                      prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "RGBA(255, 255, 255, 0.15)", marginLeft: "10px" }}/>}
                       suffix={
                           <Tooltip title="Filtrer">
                           <div
                               onClick={handlClickSuffix}
                               className="filter_icon"
                           >
-                             <FilterOutlined id={activeIcon===true?"activeIcon":""} className="class_icon_filter"/>
+                              {darkMode===false
+
+                              ?
+                                  <FilterOutlined id={darkMode&&activeIcon===true?"activeIcon":""} className="class_icon_filter"/>
+                              :
+                                  <FilterOutlined style={{color:"RGBA(255, 255, 255, 0.15)"}} className="class_icon_filter"/>
+                              }
+
                           </div>
                           </Tooltip>
                       }
@@ -147,7 +159,7 @@ function HeaderVideos({selectedRow}) {
               ?
               <div className="div_Filter_global">
 
-                  <div className="div_Filter">
+                  <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#141414"}}>
 
                       <div className="div1_div_Filter">
                           <Select defaultValue="Profile" className="select_div1_div_Filter">
