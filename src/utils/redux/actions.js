@@ -17,3 +17,10 @@ export function setDirectSetting(e){
 
 }
 
+export function setDarkMode(e){
+    return{
+        type:"SET_DarkMode",
+        payload:e
+    }
+}
+

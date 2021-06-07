@@ -20,20 +20,20 @@ export const columns = [
     {
         title: 'Aperçu',
         dataIndex: 'aperçu',
-        key:0,
+        key:1,
         render: image => <img  src={image} className={"img_aperçu"}/>,
     },
     {
         title: 'Titre',
         dataIndex: 'titre',
-        key: 0,
+        key: 2,
         sorter: (a, b) => a.id - b.id,
         sortDirections: ['descend', 'ascend'],
     },
     {
         title: 'Date',
         dataIndex: 'date',
-        key: 0,
+        key: 3,
         sorter: (a, b) => a.id - b.id,
         sortDirections: ['descend', 'ascend'],
     },
