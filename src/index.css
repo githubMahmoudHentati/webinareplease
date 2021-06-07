@@ -8,8 +8,137 @@ body{
     padding: 0% ;
     font-family: SFPro !important;
 }
+:root {
+    --breadcrumb-color: "#CCCCCC";
+    --table-color:"RGB(20, 20, 20)";
+    --table-color2:"RGBA(255, 255, 255, 0.85)";
+    --table-tbody-hover:"RGB(20, 20, 20)";
+    --table_cell_color:"RGB(20, 20, 20)";
+    --select_color:"RGB(20, 20, 20)";
+    --select_color2:"RGBA(255, 255, 255, 0.65)";
+    --input_background:"RGB(20, 20, 20)";
+    --input_color:"RGBA(255, 255, 255, 0.85)";
+    --pagination-item-link:"RGB(20, 20, 20)";
+    --pagination-item-link-color:"RGBA(255, 255, 255, 0.85)";
+    --pagination-item-background:"RGB(20, 20, 20)";
+    --pagination-item-color:"RGBA(255, 255, 255, 0.85)";
+    --table-wrapper:"RGB(20, 20, 20)";
+    --ant-selector_background:"RGB(20, 20, 20)";
+    --ant-selector_color:"RGBA(255, 255, 255, 0.85)";
+    --pagination-jumper-color:"RGBA(255, 255, 255, 0.85)";
+    --pagination_jumper-background:"RGB(20, 20, 20)";
+    --pagination-item-color2:"RGBA(255, 255, 255, 0.85)" ;
+    --table-cell:"#171717";
 
-/* HeaderVideos */
+    --table-cell-border:"#262626";
+    --table-cell_hover:"RGBA(255, 255, 255, 0.85)";
+
+    --ant-calendar-days:"RGB(20, 20, 20)";
+    --ant-calendar-days-color:"RGBA(255, 255, 255, 0.85)";
+
+    --ant-card-border:"RGB(20, 20, 20)";
+    --table_row:"#0C0C0C"
+}
+
+
+.ant-breadcrumb-separator{
+    color: var(--breadcrumb-color);
+}
+.ant-table-tbody{
+    background-color: var(--table-color);
+    color: var(--table-color2);
+}
+.ant-table-thead tr th{
+    background-color: var(--table_cell_color);
+    color: var(--table-color2);
+}
+.selectFilter .ant-select-selector{
+    background-color: var(--select_color) !important;
+    color: var(--select_color2) !important;
+}
+.ant-input{
+    background-color: var(--input_background);
+    color: var(--input_color);
+}
+.ant-table-wrapper {
+    background-color: var(--table-wrapper) !important;
+}
+.ant-pagination-item-link{
+    background-color: var(--pagination-item-link) !important;
+    color:var(--pagination-item-link-color) !important;
+}
+.ant-pagination-item a{
+    background-color: var(--pagination-item-background) !important;
+    color: var(--pagination-item-color) !important;
+}
+.ant-select-selector{
+    background-color: var(--select_color) !important;
+    color: var( --select_color2) !important;
+}
+.ant-pagination-options-quick-jumper{
+    color: var(--pagination-jumper-color) !important;
+}
+.ant-pagination-options-quick-jumper input{
+    background-color: var(--pagination_jumper-background) !important;
+    color: var(--pagination-item-color2);
+}
+.ant-table-cell{
+    background-color: var(--table-cell) !important;
+    border-bottom: 1px solid var(--table-cell-border) !important;
+}
+.ant-table-row .ant-table-cell{
+    background-color: var(--table_row) !important;
+}
+.ant-table-row:hover .ant-table-cell{
+    color: var(--table-cell_hover) !important;
+}
+.ant-picker-content thead tr th{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-picker-cell{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-picker-cell-inner:hover{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-picker-calendar-header{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-picker-body{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-picker{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-picker-input input{
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-picker-suffix{
+    color: var(--ant-calendar-days-color) !important;
+}
+.ant-select-dropdown{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+    z-index: 999999 !important;
+}
+.ant-select-item-option{
+    background-color: var(--ant-calendar-days) !important;
+    color: var(--ant-calendar-days-color) !important;
+    z-index: 999999 !important;
+}
+.ant-select-arrow{
+    color: var(--ant-calendar-days-color) !important;
+}
+
+
+
+    /* HeaderVideos */
 .HeaderVideo{
     width: 100%;
     height: auto;
@@ -26,14 +155,12 @@ body{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: RGBA(0, 0, 0, 0.04);
     margin-top: 0.5%;
     padding: 0 2em;
 }
 .MesDirects h4{
     font-size: 20px;
     font-weight: 500;
-    color: RGBA(0, 0, 0, 0.85);
 }
 .Filter{
     width: 100%;
@@ -306,9 +433,7 @@ margin-top: 2%;
 /*Modals*/
 
 /*Header*/
-.card{
-    background-color: #F1F2F5 !important;
-}
+
 .Header{
     width: 100%;
     padding: 0.5% 0;
