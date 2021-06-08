@@ -65,19 +65,19 @@ function HeaderVideos({selectedRow}) {
 
           <div className="BreadcrumbDiv">
               <Breadcrumb style={{color:darkMode===false?"":"#ffffff"}}>
-                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
+                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                       <span >Accueil</span>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
+                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                       <span>Direct</span>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>Tous</Breadcrumb.Item>
+                  <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Tous</Breadcrumb.Item>
               </Breadcrumb>
 
           </div>{/*./Breadcrumb*/}
 
           <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
-              <h4 style={{color:darkMode===false?"":"white"}}>Mes Directs</h4>
+              <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Mes Directs</h4>
               <Button onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
           </div>{/*./TousMedia*/}
 
