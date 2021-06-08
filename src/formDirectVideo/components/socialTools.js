@@ -1,8 +1,13 @@
 import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col,Switch,List,DatePicker,Button} from 'antd'
-import {DownOutlined,CloseOutlined,PlusOutlined,FacebookFilled,GatewayOutlined} from '@ant-design/icons';
+import {DownOutlined,CloseOutlined,PlusOutlined,TwitterOutlined,InstagramOutlined} from '@ant-design/icons';
 import empreint from "../../assets/logo-empreinte.svg"
 import fb from "../../assets/fb.svg"
+import fbPost from  "../../assets/facebookPost.svg"
+import linkedinPost from  "../../assets/linkedinPost.svg"
+import youtubePost from  "../../assets/youtubePost.svg"
+
+
 
 
 export const SocialTools=()=>{
@@ -11,55 +16,65 @@ export const SocialTools=()=>{
             id:0,
             type:"Facebook post",
             switch :true,
-            logo:"",
+            logo:<img src={fbPost} style={{width:"24px",height:"24px"}} />,
             plan:[{active:true,startDate:"",endDate:""}]
         },
         {
             id:1,
             type:"Youtube post",
             switch :false,
-            logo:"",
+            logo:<img src={youtubePost} style={{width:"24px",height:"24px"}}/>,
             plan:[{active:true,startDate:"",endDate:""}]
         },
         {
             id:2,
             type:"Linkedlin post",
             switch :false,
-            logo:"",
+            logo:<img src={linkedinPost} style={{width:"24px",height:"24px"}}/>,
             plan:[{active:true,startDate:"",endDate:""}]
         },
-        {
-            id:3,
-            type:"Twitter post",
-            switch :false,
-            logo:"",
-            plan:[{active:true,startDate:"",endDate:""}]
-        },
-        {
-            id:4,
-            type:"Instagram post",
-            switch :false,
-            logo:"",
-            plan:[{active:true,startDate:"",endDate:""}]
-        }
+        // {
+        //     id:3,
+        //     type:"Twitter post",
+        //     switch :false,
+        //     logo:<TwitterOutlined style={{width:"24px",height:"24px"}}/>,
+        //     plan:[{active:true,startDate:"",endDate:""}]
+        // },
+        // {
+        //     id:4,
+        //     type:"Instagram post",
+        //     switch :false,
+        //     logo:<InstagramOutlined style={{width:"24px",height:"24px"}}/>,
+        //     plan:[{active:true,startDate:"",endDate:""}]
+        // }
     ]);
-    const addPlan =(index)=>{
-        setTypePost(typePost.map(el => (el.id === index ? {...el,
-            plan: [...el.plan,{active:true,startDate:"",endDate:""}]
-         } : el)))
+    const addPlan =async (index)=>{
+
+        let newArr=typePost[index].plan.map((el,i) => ({...el,active:false})).concat({active:true,startDate:"",endDate:""})
+        await setTypePost(typePost.map(el => (index===el.id? {...el,
+            plan: newArr
+        }:el)))
     }
     const activePost=(checked,index)=>{
         setTypePost(typePost.map(el => (el.id === index ? {...el, switch:checked} : el)))
     }
 
     const activePlan=(indexPost,indexPlan)=>{
-        const x=(typePost.map((element,index)=>{index===indexPost&&element.plan.map((e,i)=>({...element,
-            plan: {...e,active:true}}
-        ))
-    }))
-        console.log("x",x)
+        let newArr=typePost[indexPost].plan.map((el,i) => (i === indexPlan ? {...el,active:!el.active}:{...el,active:false}))
+        console.log("newArr",newArr)
+        setTypePost(typePost.map(el => (el.id === indexPost ? {...el,
+            plan: newArr
+        } : el)))
     }
     console.log("typePost",typePost)
+
+    const closePlan =(indexPost,indexPlan)=>{
+        typePost[indexPost].plan.map((el,i) => (i === indexPlan ? typePost[indexPost].plan.splice(indexPlan,1):typePost[indexPost].plan))
+        console.log("newArr",typePost)
+        setTypePost(typePost.map(el => (el.id === indexPost ? {...el,
+            plan: typePost[indexPost].plan
+        } : el)))
+    }
 
     return(
         <Row  gutter={[0, 25]}>
@@ -72,15 +87,17 @@ export const SocialTools=()=>{
                     dataSource={typePost}
                     renderItem={(item,index) => (
                         <List.Item style={{width: "100%", display: "flex", flexDirection: "row"}}>
-                            <Row gutter={[0, 20]} style={{borderBottom: '1px solid RGBA(0, 0, 0, 0.15)',width:"100%",marginBottom: "2%"}}>
+                            <Row gutter={[0, 20]} style={{width:"100%"}}>
                                 <Col span={24}>
                                     <Row justify={"space-between"}>
-                                        <Col>
+                                        <Col span={12}>
+                                            {item.logo}
                                             <span style={{
                                                 textAlign: 'left',
                                                 fontSize: "14px",
                                                 fontFamily: "system-ui",
-                                                fontWeight: "500"
+                                                fontWeight: "500",
+                                                marginLeft:"3%"
                                             }}>{item.type}</span>
                                         </Col>
                                         <Col>
@@ -94,7 +111,7 @@ export const SocialTools=()=>{
                                         <Col span={8}>
                                             <Row gutter={[0, 20]}>
                                                 <Col span={24}>
-                                                    <span style={{fontWeight: "400"}}>Planifier  la publication</span>
+                                                    <span style={{fontWeight: "600"}}>Planifier  la publication</span>
                                                 </Col>
                                                 {typePost[index].plan.map((element, indexPlan) => {
                                                         return (
@@ -113,7 +130,7 @@ export const SocialTools=()=>{
                                                                                 </Row>
                                                                             </Col>
                                                                             <Col>
-                                                                                <CloseOutlined/>
+                                                                                <CloseOutlined onClick={()=>closePlan(index,indexPlan)}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -181,7 +198,7 @@ export const SocialTools=()=>{
                                                             </Row>
                                                         </Col>
                                                         <Col>
-                                                            <img style={{height: "20px", width: "20px"}} src={fb}/>
+                                                            {item.logo}
                                                         </Col>
                                                     </Row>
                                                 </Col>
