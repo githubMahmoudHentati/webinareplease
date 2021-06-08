@@ -44,11 +44,7 @@ export const SocialTools=()=>{
         }
     ]);
     const addPlan =(index)=>{
-        setTypePost(typePost.map(el => (el.id === index ? {...el.plan,
-            id:index,
-            type:el.type,
-            switch :el.switch,
-            logo:el.logo,
+        setTypePost(typePost.map(el => (el.id === index ? {...el,
             plan: [...el.plan,{active:true,startDate:"",endDate:""}]
          } : el)))
     }
@@ -57,17 +53,11 @@ export const SocialTools=()=>{
     }
 
     const activePlan=(indexPost,indexPlan)=>{
-        (typePost.map((element,index)=>{index===indexPost&&element[index].map((e,i)=>{
-            indexPlan===i?
-            setTypePost({...e,
-                id:index,
-                type:element.type,
-                switch :element.switch,
-                logo:element.logo,
-            }):
-                setTypePost({...e,active:false,startDate:"",endDate:""})
-        })
+        const x=(typePost.map((element,index)=>{index===indexPost&&element.plan.map((e,i)=>({...element,
+            plan: {...e,active:true}}
+        ))
     }))
+        console.log("x",x)
     }
     console.log("typePost",typePost)
 
@@ -202,7 +192,7 @@ export const SocialTools=()=>{
                                                 <Col span={24} style={{display: "flex", justifyContent: "center"}}>
                                                     <img
                                                         src={"//test-tv.webtv-solution.com/web/data/vignettes/logoSAB2NjY3ZTg5MmItNGI0MS00YjIyLTgwZGYtNmNkY2NjZTRhZTVishutterstock562442005.jpg"}
-                                                        style={{height: "198px", width: "412.79"}}/>
+                                                        style={{height: "100%", width: "100%"}}/>
                                                 </Col>
                                                 <Col span={24}>
                                                     <span style={{
