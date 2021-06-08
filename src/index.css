@@ -9,132 +9,187 @@ body{
     font-family: SFPro !important;
 }
 :root {
-    --breadcrumb-color: "#CCCCCC";
-    --table-color:"RGB(20, 20, 20)";
-    --table-color2:"RGBA(255, 255, 255, 0.85)";
-    --table-tbody-hover:"RGB(20, 20, 20)";
-    --table_cell_color:"RGB(20, 20, 20)";
-    --select_color:"RGB(20, 20, 20)";
-    --select_color2:"RGBA(255, 255, 255, 0.65)";
-    --input_background:"RGB(20, 20, 20)";
-    --input_color:"RGBA(255, 255, 255, 0.85)";
-    --pagination-item-link:"RGB(20, 20, 20)";
-    --pagination-item-link-color:"RGBA(255, 255, 255, 0.85)";
-    --pagination-item-background:"RGB(20, 20, 20)";
-    --pagination-item-color:"RGBA(255, 255, 255, 0.85)";
-    --table-wrapper:"RGB(20, 20, 20)";
-    --ant-selector_background:"RGB(20, 20, 20)";
-    --ant-selector_color:"RGBA(255, 255, 255, 0.85)";
-    --pagination-jumper-color:"RGBA(255, 255, 255, 0.85)";
-    --pagination_jumper-background:"RGB(20, 20, 20)";
-    --pagination-item-color2:"RGBA(255, 255, 255, 0.85)" ;
-    --table-cell:"#171717";
+    --white_color:"rgba(255, 255, 255, 0.85)";
+    --dark_color:"rgba(255, 255, 255, 0.04) ";
+    --border_color:"rgba(255, 255, 255, 0.15) ";
+    --card_color:"#141414 ";
+    --cell-color:"white";
+    --option-background:"#111d2c";
+    --option_select:"#1D1D1D";
 
-    --table-cell-border:"#262626";
-    --table-cell_hover:"RGBA(255, 255, 255, 0.85)";
+    --modal_background:"white";
 
-    --ant-calendar-days:"RGB(20, 20, 20)";
-    --ant-calendar-days-color:"RGBA(255, 255, 255, 0.85)";
-
-    --ant-card-border:"RGB(20, 20, 20)";
-    --table_row:"#0C0C0C"
 }
 
 
 .ant-breadcrumb-separator{
-    color: var(--breadcrumb-color);
-}
-.ant-table-tbody{
-    background-color: var(--table-color);
-    color: var(--table-color2);
-}
-.ant-table-thead tr th{
-    background-color: var(--table_cell_color);
-    color: var(--table-color2);
+    color: var(--white_color) !important;
 }
 .selectFilter .ant-select-selector{
-    background-color: var(--select_color) !important;
-    color: var(--select_color2) !important;
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-input{
-    background-color: var(--input_background);
-    color: var(--input_color);
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-table-wrapper {
-    background-color: var(--table-wrapper) !important;
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-pagination-item-link{
-    background-color: var(--pagination-item-link) !important;
-    color:var(--pagination-item-link-color) !important;
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-pagination-item a{
-    background-color: var(--pagination-item-background) !important;
-    color: var(--pagination-item-color) !important;
-}
-.ant-select-selector{
-    background-color: var(--select_color) !important;
-    color: var( --select_color2) !important;
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-pagination-options-quick-jumper{
-    color: var(--pagination-jumper-color) !important;
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-pagination-options-quick-jumper input{
-    background-color: var(--pagination_jumper-background) !important;
-    color: var(--pagination-item-color2);
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+.ant-table-tbody{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+}
+.ant-table-thead tr th{
+    background-color: var(--cell-color) !important;
+    color: var(--white_color) !important;
+    border-bottom: 1px solid var(--border_color);
 }
 .ant-table-cell{
-    background-color: var(--table-cell) !important;
-    border-bottom: 1px solid var(--table-cell-border) !important;
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-table-row .ant-table-cell{
-    background-color: var(--table_row) !important;
+   border-bottom: 1px solid var(--border_color);
 }
-.ant-table-row:hover .ant-table-cell{
-    color: var(--table-cell_hover) !important;
-}
-.ant-picker-content thead tr th{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-picker-cell{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-picker-cell-inner:hover{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-picker-calendar-header{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-picker-body{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-picker{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-picker-input input{
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-picker-suffix{
-    color: var(--ant-calendar-days-color) !important;
-}
-.ant-select-dropdown{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-    z-index: 999999 !important;
-}
-.ant-select-item-option{
-    background-color: var(--ant-calendar-days) !important;
-    color: var(--ant-calendar-days-color) !important;
-    z-index: 999999 !important;
+.ant-select-selector{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
 }
 .ant-select-arrow{
-    color: var(--ant-calendar-days-color) !important;
+    color: var(--white_color) !important;
 }
+.ant-select-dropdown{
+    background-color: var(--option_select) !important;
+    color: var(--white_color) !important;
+}
+.ant-select-item-option:hover{
+    background-color: var(--option-background) !important;
+}
+
+.ant-select-dropdown:focus .ant-select-item-option{
+    background-color: var(--option-background) !important;
+}
+.ant-picker{
+    background-color: var(--cell-color) !important;
+    color: var(--white_color) !important;
+}
+.ant-picker-input input{
+    color: var(--white_color) !important;
+}
+.ant-picker-suffix{
+    color: var(--white_color) !important;
+}
+.ant-picker-panel{
+    background-color: var(--cell-color) !important;
+    color: var(--white_color) !important;
+}
+.ant-picker-header{
+    color: var(--white_color) !important;
+    border-bottom: 1px solid var(--border_color);
+}
+.ant-picker-header button{
+    color: var(--white_color) !important;
+}
+.ant-picker-content thead tr th{
+    color: var(--white_color) !important;
+}
+.ant-picker-content tbody tr td{
+    color: var(--white_color) !important;
+}
+.ant-picker-cell-inner:hover{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.CalendarFile .ant-picker-calendar .ant-picker-calendar-header{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+}
+.CalendarFile .ant-picker-calendar .ant-picker-panel{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+}
+.CalendarFile .ant-picker-calendar .ant-picker-content thead tbody tr td:hover{
+    background-color: var(--option-background) !important;
+}
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date{
+ border-top: 1px solid var(--border_color);
+}
+.ant-radio-button-wrapper{
+    background-color: var(--card_color) !important;
+    color: var(--white_color);
+}
+/*Modal Dark light*/
+.ant-modal-content{
+    background: var(--modal_background) !important;
+    color: var(--white_color) !important;
+}
+.ant-modal-header{
+    background-color: var(--modal_background) !important;
+    color: var(--white_color) !important;
+    border-bottom: 1px solid var(--border_color) !important;
+}
+.ant-modal-footer{
+ border-top: 1px solid var(--border_color) !important;
+}
+.ant-modal-footer Button{
+    background-color: var(--modal_background) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+.ant-modal-footer Button:hover{
+    background-color: var(--modal_background) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color);
+}
+.ant-modal-footer Button:focus{
+    background-color: var(--modal_background) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+.ant-modal-body Input{
+    background-color: var(--modal_background) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color);
+}
+.ant-modal-body TextArea{
+    background-color: var(--modal_background) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color);
+}
+.ant-modal-title{
+    color: var(--white_color) !important;
+}
+.anticon-close svg{
+    color: var(--white_color) !important;
+}
+.div_Url_diffusion .div_Copier Button{
+    background-color: var(--modal_background) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+
+
+
+
 
 
 
@@ -267,7 +322,7 @@ body{
     justify-content: center;
     align-items: center;
     color: rgba(0, 0, 0, 0.25);
-    border-left: 1px solid #d9d9d9 !important;
+    border-left: 1px solid var(--border_color) !important;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
@@ -439,7 +494,6 @@ margin-top: 2%;
     padding: 0.5% 0;
     height: 64px;
     padding: 0 24px;
-    border: 1px solid #f1f2f5;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
