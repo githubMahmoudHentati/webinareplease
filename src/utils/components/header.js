@@ -21,92 +21,58 @@ import {setDarkMode} from "../redux/actions";
 
 
 function GlobalHeader() {
+
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+
+    const [back , Setback]=useState(false)
 
     console.log("darkModeHeader",darkMode)
 
 
     //fonction checkbox
     const onChange = (e) =>{
-        
+
+        back&&Setback(false)
+        !back&&Setback(true)
+
         //dispatch redux
-        dispatch(setDarkMode(!darkMode))
+        dispatch(setDarkMode(!darkMode));
 
-        // dark mode Breadcrumb
-        darkMode&&document.documentElement.style.setProperty('--breadcrumb-color', "#CCCCCC");
-        !darkMode&&document.documentElement.style.setProperty('--breadcrumb-color', "#ffffff");
+        // White Color
+        darkMode&&document.documentElement.style.setProperty('--white_color', "");
+        !darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(255, 255, 255, 0.85)");
 
-        // darkMode table
-        darkMode&&document.documentElement.style.setProperty('--table-color', "");
-        !darkMode&&document.documentElement.style.setProperty('--table-color', "#141414");
+        //Dark Color
+        darkMode&&document.documentElement.style.setProperty('--dark_color', "");
+        !darkMode&&document.documentElement.style.setProperty('--dark_color', "rgba(255, 255, 255, 0.04)");
 
-        // darkMode table cell
-        darkMode&&document.documentElement.style.setProperty('--table_cell_color', "");
-        !darkMode&&document.documentElement.style.setProperty('--table_cell_color', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--table-color2', "");
-        !darkMode&&document.documentElement.style.setProperty('--table-color2', "white");
-        darkMode&&document.documentElement.style.setProperty('--table-tbody-hover', "");
-        !darkMode&&document.documentElement.style.setProperty('--table-tbody-hover', "#141414");
+        //border Color
+        darkMode&&document.documentElement.style.setProperty('--border_color', "rgba(0, 0, 0, 0.15)");
+        !darkMode&&document.documentElement.style.setProperty('--border_color', "rgba(255, 255, 255, 0.15)");
 
-        // darkMode select
-        darkMode&&document.documentElement.style.setProperty('--select_color', "");
-        !darkMode&&document.documentElement.style.setProperty('--select_color', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--select_color2', "");
-        !darkMode&&document.documentElement.style.setProperty('--select_color2', "white");
+        //Card Color
+        darkMode&&document.documentElement.style.setProperty('--card_color', "");
+        !darkMode&&document.documentElement.style.setProperty('--card_color', "#141414");
 
-        // darkMode Input
-        darkMode&&document.documentElement.style.setProperty('--input_background', "");
-        !darkMode&&document.documentElement.style.setProperty('--input_background', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--input_color', "");
-        !darkMode&&document.documentElement.style.setProperty('--input_color', "white");
+        //Cell Color
+        darkMode&&document.documentElement.style.setProperty('--cell-color', "white");
+        !darkMode&&document.documentElement.style.setProperty('--cell-color', "#1D1D1D");
 
-        // pagination Next Prev
-        darkMode&&document.documentElement.style.setProperty('--ant-pagination-item-link', "");
-        !darkMode&&document.documentElement.style.setProperty('--ant-pagination-item-link', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--pagination-item-link-color', "");
-        !darkMode&&document.documentElement.style.setProperty('--pagination-item-link-color', "white");
+        //option background
+        darkMode&&document.documentElement.style.setProperty('--option-background', "#ffffff");
+        !darkMode&&document.documentElement.style.setProperty('--option-background', "#111d2c");
 
-        // pagination Item
-        darkMode&&document.documentElement.style.setProperty('--pagination-item-background', "");
-        !darkMode&&document.documentElement.style.setProperty('--pagination-item-background', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--pagination-item-color', "");
-        !darkMode&&document.documentElement.style.setProperty('--pagination-item-color', "white");
+        //option background
+        darkMode&&document.documentElement.style.setProperty('--option_select', "#ffffff");
+        !darkMode&&document.documentElement.style.setProperty('--option_select', "#1D1D1D");
 
-        // table wrapper
-        darkMode&&document.documentElement.style.setProperty('--table-wrapper', "");
-        !darkMode&&document.documentElement.style.setProperty('--table-wrapper', "#141414");
+        // Modal Dark Light
+        darkMode&&document.documentElement.style.setProperty('--modal_background', "white");
+        !darkMode&&document.documentElement.style.setProperty('--modal_background', "#1D1D1D");
 
-        // Selector pagination
-        darkMode&&document.documentElement.style.setProperty('--ant-selector_background', "");
-        !darkMode&&document.documentElement.style.setProperty('--ant-selector_background', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--ant-selector_color', "");
-        !darkMode&&document.documentElement.style.setProperty('--ant-selector_color', "white");
 
-        // Input Pagination
-        darkMode&&document.documentElement.style.setProperty('--pagination-jumper-color', "");
-        !darkMode&&document.documentElement.style.setProperty('--pagination-jumper-color', "white");
-        darkMode&&document.documentElement.style.setProperty('--pagination_jumper-background', "");
-        !darkMode&&document.documentElement.style.setProperty('--pagination_jumper-background', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--pagination-item-color2', "");
-        !darkMode&&document.documentElement.style.setProperty('--pagination-item-color2', "white");
-
-        // Table Cell
-        darkMode&&document.documentElement.style.setProperty('--table-cell', "");
-        !darkMode&&document.documentElement.style.setProperty('--table-cell', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--table-cell-border', "#F5F5F5");
-        !darkMode&&document.documentElement.style.setProperty('--table-cell-border', "#262626");
-
-        // calendrier
-        darkMode&&document.documentElement.style.setProperty('--ant-calendar-days', "");
-        !darkMode&&document.documentElement.style.setProperty('--ant-calendar-days', "#141414");
-        darkMode&&document.documentElement.style.setProperty('--ant-calendar-days-color', "");
-        !darkMode&&document.documentElement.style.setProperty('--ant-calendar-days-color', "white");
-
-        // calendrier
-        darkMode&&document.documentElement.style.setProperty('--table_row', "");
-        !darkMode&&document.documentElement.style.setProperty('--table_row', "#0C0C0C");
 
 
     }
@@ -133,7 +99,7 @@ function GlobalHeader() {
 
             <div className="div_home_logo">
                <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg" style={{color:darkMode===false?"":"white"}}></span></div>
-                <HomeOutlined className={"Home_Icon"} style={{color:darkMode===false?"":"white"}}/>
+                <HomeOutlined className={"Home_Icon"} style={{color:darkMode===false?"":"#007fcb"}}/>
             </div>{/*./div_home_logo*/}
 
             <div className="div_Notification_user_dar">

@@ -17,8 +17,8 @@ export const PrincipalPage =(props)=>{
     return(
         <div className="showVideosDiv" style={{height:accountMenu===2||accountMenu===1?"100vh":"100%"}}>
             <GlobalHeader/>
-            <Card  style={{height:"93%" , backgroundColor:darkMode===false?"#F0F1F4":"#000000"}} className={"card"} >
-                <Card style={{height:"100%" , backgroundColor:darkMode===false?"#FFFFFF":"#0C0C0C" , border:darkMode===false? "1px solid white": "1px solid #141414" }}>
+            <Card  style={{height:"93%" , backgroundColor:darkMode===false?"#F0F1F4":"#000000" , border:darkMode===false? "1px solid white": "1px solid #141414" }} className={"card"} >
+                <Card style={{height:"100%" , backgroundColor:darkMode===false?"#FFFFFF":"#141414" , border:darkMode===false? "1px solid white": "1px solid #141414" }}>
                     {props.children}
                 </Card>
             </Card>
