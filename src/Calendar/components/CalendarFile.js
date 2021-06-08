@@ -2,9 +2,11 @@ import React,{useState , useEffect} from 'react';
 import "../Calendar.scss";
 import {Calendar, Badge, Button , Modal , Tag} from 'antd';
 import {CalendarOutlined , ClockCircleOutlined , DeleteOutlined  } from "@ant-design/icons";
+import {useSelector} from "react-redux";
 
 function getListData(value) {
     let listData;
+
     switch (value.date()) {
         case 2:
             listData = [
@@ -46,7 +48,12 @@ function DateCellRender(value) {
     const [visibleAVenir , SetVisibleAVenir] = useState(false);
     const [visibleEnCours , SetVisibleEnCours] = useState(false);
     const [visibleArchivé ,  SetVisibleArchivé] = useState(false)
+    // use Selector redux
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
     const listData = getListData(value);
+    let styles = getComputedStyle(document.documentElement);
+
     //show Modal A venir
     const onShowModal=()=>{
         SetVisibleAVenir(true)
@@ -94,10 +101,10 @@ function DateCellRender(value) {
                                 <div>
                             <Button key="back" onClick={handleCancel}>
                                 Annuler
-                            </Button>,
+                            </Button>
                             <Button key="submit" type="primary"  >
                                 Visualiser
-                            </Button>,
+                            </Button>
                                 </div>
 
                             </div>
@@ -131,10 +138,10 @@ function DateCellRender(value) {
                                     <div className={"modal_footer_EnCours"}>
                                     <Button key="back" onClick={handleCancelEnCours}>
                                         Annuler
-                                    </Button>,
+                                    </Button>
                                     <Button key="submit" type="primary"  >
                                         Visualiser
-                                    </Button>,
+                                    </Button>
                                     </div>
                                 ]}
                             >

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="webinarplease" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="webinarplease">
     <serverData>
       <paths name="webinarplease">
         <serverdata>
           <mappings>
-<<<<<<< HEAD
-            <mapping deploy="/home/mhentati/webinarplease/webinarplease/" local="$PROJECT_DIR$" web="/" />
-=======
-            <mapping deploy="/home/mhentati/webinaireplease/webinaireplease" local="$PROJECT_DIR$" web="/" />
->>>>>>> 7152ebf96bde17118934fb865c95452ef6696370
+            <mapping deploy="/home/tamaidi/webinaireplease" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

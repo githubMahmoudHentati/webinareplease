@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {InfoCircleOutlined,DownloadOutlined,EditOutlined,LinkOutlined,FilePdfOutlined,PictureOutlined,DeleteOutlined , EyeOutlined , InsertRowLeftOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import {Tooltip, Dropdown, Menu, Popconfirm, Button , Modal , Input , message} from 'antd';
+import {useSelector} from "react-redux";
 
 const { SubMenu } = Menu;
 const { TextArea } = Input;
@@ -11,6 +12,9 @@ function useActionMenu({record}) {
     const [visible , SetVisible] = useState(false)
     const [visibleModalExport , SetVisibleModalExport] = useState(false)
 
+    // use Selector redux
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
     const history = useHistory();
 
     // handle Click Menu
@@ -79,12 +83,12 @@ function useActionMenu({record}) {
         <div className="action">
 
             <Tooltip title={"Visualiser"}>
-            <Button className={"btn_Visualiser_diffuser"}><EyeOutlined /> Visualiser</Button>
+            <Button className={"btn_Visualiser_diffuser"} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}><EyeOutlined /> Visualiser</Button>
             </Tooltip>
 
         <span className="span_action">
       <Dropdown overlay={actionMenu} trigger={['click']} onClick={()=>handleClickDropdowMenu()}>
-        <a className="linkid" href="#" style={{fontSize:"30px" }}>
+        <a className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }}>
           ...
         </a>
       </Dropdown>

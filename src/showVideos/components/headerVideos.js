@@ -16,7 +16,6 @@ function HeaderVideos({selectedRow}) {
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
-
     useEffect(() => {
         function goto(event) {
 
@@ -77,7 +76,7 @@ function HeaderVideos({selectedRow}) {
 
           </div>{/*./Breadcrumb*/}
 
-          <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#171717"}}>
+          <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
               <h4 style={{color:darkMode===false?"":"white"}}>Mes Directs</h4>
               <Button onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
           </div>{/*./TousMedia*/}
@@ -99,7 +98,7 @@ function HeaderVideos({selectedRow}) {
                           </div>
                   }
 
-                  <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"RGB(20, 20, 20)" , color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
+                  <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"#141414", color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
                       <Tooltip className="tooltip_calendrier" title="Afficher Calendrier">
                       <CalendarOutlined  className="IconCalendrier" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)"}}/>
                       <span>Calendrier</span>
@@ -128,7 +127,7 @@ function HeaderVideos({selectedRow}) {
               <div className="div_filter">
 
                   <Input
-                      style={{backgroundColor:darkMode===false?"":"#141414"}}
+                      style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}
                       className="inputFilter"
                       placeholder="Rechercher…"
                       prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "RGBA(255, 255, 255, 0.15)", marginLeft: "10px" }}/>}
@@ -159,7 +158,7 @@ function HeaderVideos({selectedRow}) {
               ?
               <div className="div_Filter_global">
 
-                  <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#141414"}}>
+                  <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
 
                       <div className="div1_div_Filter">
                           <Select defaultValue="Profile" className="select_div1_div_Filter">
@@ -181,7 +180,7 @@ function HeaderVideos({selectedRow}) {
                       </div>{/*./div2_div_Filter*/}
 
                       <div className="div_button_filter">
-                          <Tooltip title="Rénitialiser médias"><Button className="btn_1">Réinitialiser</Button></Tooltip>
+                          <Tooltip title="Rénitialiser médias"><Button style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">Réinitialiser</Button></Tooltip>
                           <Tooltip title="Filtrer médias"><Button type="primary" className="btn_2">Filtrer</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
