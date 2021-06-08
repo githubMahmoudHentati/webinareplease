@@ -28,18 +28,18 @@ function GlobalHeader() {
 
     const [back , Setback]=useState(false)
 
-    console.log("darkModeHeader",darkMode)
+
 
 
     //fonction checkbox
     const onChange = (e) =>{
 
-        back&&Setback(false)
-        !back&&Setback(true)
-
         //dispatch redux
         dispatch(setDarkMode(!darkMode));
+        ColorComposnat()
+    }
 
+    const ColorComposnat=()=>{
         // White Color
         darkMode&&document.documentElement.style.setProperty('--white_color', "");
         !darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(255, 255, 255, 0.85)");
@@ -71,9 +71,6 @@ function GlobalHeader() {
         // Modal Dark Light
         darkMode&&document.documentElement.style.setProperty('--modal_background', "white");
         !darkMode&&document.documentElement.style.setProperty('--modal_background', "#1D1D1D");
-
-
-
 
     }
 

@@ -3,6 +3,7 @@ import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox} fr
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
+import {useSelector} from "react-redux";
 
 export const Generals =()=>{
     const { Dragger } = Upload;
@@ -12,24 +13,26 @@ export const Generals =()=>{
         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
 
     };
+    // use Selector redux
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
     return(
         <Row gutter={[0, 30]}>
             <Col span={24} className={"col-forms"}>
-                <span style={{textAlign:'left',fontSize:"20px",fontWeight: "bold"}}>Paramètres généraux</span>
+                <span style={{textAlign:'left',fontSize:"20px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Paramètres généraux</span>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}}>Ajouter une vignette</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Ajouter une vignette</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                        <Dragger {...props}>
+                        <Dragger {...props} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}>
                             <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
+                                <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
                             </p>
-                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                            <p className="ant-upload-hint">
+                            <p className="ant-upload-text" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Click or drag file to this area to upload</p>
+                            <p className="ant-upload-hint" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 Support for a single or bulk upload. Strictly prohibit from uploading company data or other
                                 band files
                             </p>
@@ -40,17 +43,17 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}}>Titre du direct</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Titre du direct</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                       <Input placeholder={"Titre du vidéo"}></Input>
+                       <Input placeholder={"Titre du vidéo"} ></Input>
                     </Col>
                 </Row>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}}>Titre du direct</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Titre du direct</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Input.TextArea placeholder={"Description du vidéo"}></Input.TextArea>
@@ -60,7 +63,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}}>Lien de partage du direct</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Lien de partage du direct</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Row  justify={"space-between"} style={{width:'100%'}}gutter={[0, 0]} >
@@ -68,7 +71,7 @@ export const Generals =()=>{
                                 <Input placeholder={'www.empreinte.com/titrelive'}></Input>
                             </Col>
                             <Col >
-                                <Button>Copier</Button>
+                                <Button style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Copier</Button>
                             </Col>
                         </Row>
 
@@ -78,7 +81,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[10, 0]}>
                     <Col className={"col-forms"} >
-                        <span style={{fontSize: "14px", fontWeight: "bold"}}>Planifier le direct</span>
+                        <span style={{fontSize: "14px", fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
                         <Switch/>
@@ -88,23 +91,23 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}}>Modes d'accès ay direct</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Modes d'accès ay direct</span>
                     </Col>
                     <Col span={24} >
                         <Row >
                             <Col lg={3} xs={10} style={{alignItems:"flex-start"}} className={"col-forms"}>
-                                <Radio>Acccès libre</Radio>
+                                <Radio style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Acccès libre</Radio>
                             </Col>
                             <Col  lg={21} xs={14} >
                                 <Row gutter={[0, 20]}>
                                     <Col span={24} className={"col-forms"}>
-                                        <Radio>Accès sécurisé</Radio>
+                                        <Radio style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Accès sécurisé</Radio>
                                     </Col>
                                     <Col span={24} className={"col-forms"}>
                                         <Input placeholder={'Taper votre mot de passe'}></Input>
                                     </Col>
                                     <Col span={24} className={"col-forms"}>
-                                        <Checkbox >Générer un mot de passe sécurisé</Checkbox>
+                                        <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Générer un mot de passe sécurisé</Checkbox>
                                     </Col>
                                 </Row>
                             </Col>
