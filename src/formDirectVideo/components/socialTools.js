@@ -192,7 +192,7 @@ export const SocialTools=()=>{
                                                 <Col span={24} style={{display: "flex", justifyContent: "center"}}>
                                                     <img
                                                         src={"//test-tv.webtv-solution.com/web/data/vignettes/logoSAB2NjY3ZTg5MmItNGI0MS00YjIyLTgwZGYtNmNkY2NjZTRhZTVishutterstock562442005.jpg"}
-                                                        style={{height: "198px", width: "412.79"}}/>
+                                                        style={{height: "100%", width: "100%"}}/>
                                                 </Col>
                                                 <Col span={24}>
                                                     <span style={{
