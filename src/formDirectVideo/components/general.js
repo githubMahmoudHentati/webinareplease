@@ -1,9 +1,11 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox} from 'antd'
+import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox,DatePicker} from 'antd'
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import {useSelector} from "react-redux";
+import {Hooks} from "../utils/hooks";
+
 
 export const Generals =()=>{
     const { Dragger } = Upload;
@@ -15,6 +17,9 @@ export const Generals =()=>{
     };
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+
+    const {onChangeSwitch,values}= Hooks()
+    console.log("values",values)
 
     return(
         <Row gutter={[0, 30]}>
@@ -84,10 +89,46 @@ export const Generals =()=>{
                         <span style={{fontSize: "14px", fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
-                        <Switch/>
+                        <Switch name="directPlan" onChange={(checked,event)=>{onChangeSwitch(checked,event,"directPlan")}}/>
                     </Col>
                 </Row>
             </Col>
+            {values.directPlan &&
+            <Col span={24}>
+                <Row gutter={[20, 10]}>
+                    <Col span={8}>
+                        <span style={{
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
+                        }}>Date de début</span>
+                    </Col>
+                    <Col span={8}>
+                        <span style={{
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
+                        }}>Heure de début</span>
+                    </Col>
+                    <Col span={8}>
+                        <span style={{
+                            fontSize: "14px",
+                            fontWeight: "bold",
+                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
+                        }}>Durée</span>
+                    </Col>
+                    <Col span={8}>
+                        <DatePicker style={{width: "100%"}}></DatePicker>
+                    </Col>
+                    <Col span={8}>
+                        <DatePicker style={{width: "100%"}}></DatePicker>
+                    </Col>
+                    <Col span={8}>
+                        <DatePicker style={{width: "100%"}}></DatePicker>
+                    </Col>
+                </Row>
+            </Col>
+            }
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>

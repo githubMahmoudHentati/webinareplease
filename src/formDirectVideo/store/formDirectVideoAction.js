@@ -7,10 +7,10 @@ export function setModalSpeaker(e){
 
 }
 
-export function setSwitchSpeaker(e){
+export function setOnchange(e){
 
     return{
-        type: "SET_switchSpeaker",
+        type: "SET_Onchange",
         payload:e,
     }
 
@@ -50,5 +50,6 @@ export function setDeleteSpeaker(e){
         payload:e,
     }
 }
+
 
 

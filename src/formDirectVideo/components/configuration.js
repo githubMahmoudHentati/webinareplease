@@ -6,7 +6,7 @@ import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined } from '@ant-design
 import {Hooks} from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
-import {setModalSpeaker, setSwitchSpeaker} from "../store/formDirectVideoAction";
+import {setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
 
 
 export const Configuration =()=>{
@@ -37,7 +37,7 @@ export const Configuration =()=>{
 
     useEffect(async () => {
         console.log("testswitch",values.SpeakerList.length>0)
-        values.SpeakerList.length>1&&dispatch(setSwitchSpeaker(true));
+        values.SpeakerList.length>1&&dispatch(setOnchange({nameChange:"switchSpeaker",valueChange:true}));
     }, []);
         console.log("testxxx",values.switchSpeaker)
 
