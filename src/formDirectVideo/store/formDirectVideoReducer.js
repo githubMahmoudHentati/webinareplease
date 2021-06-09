@@ -3,7 +3,8 @@ const INITIAL_STATE = {
     switchSpeaker:false,
     directAutomaticArchiving:false,
     SpeakerList:[{id:0,name: "Nom ",lastName:'Prénom', title:"Titre",email:""}],
-    speaker :{id:null,name: "",lastName:"", title:"",email:""}
+    speaker :{id:null,name: "",lastName:"", title:"",email:""},
+    videoMode:""
 }
 
 export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{

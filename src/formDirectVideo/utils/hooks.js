@@ -15,12 +15,16 @@ export  const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
 
-    const onChangeSwitch =(checked,event)=>{
-        const valueSwitch = event.target.value
-        console.log("name",event.target.value)
+    const onChangeSwitch =(checked,event,valueSwitch)=>{
         dispatch(setSwitchSpeaker({valueSwitch:valueSwitch, checkedSwitch:checked}));
         values.SpeakerList.length < 2 &&valueSwitch==="switchSpeaker" &&dispatch(setModalSpeaker(checked));
     }
+
+    const onChangeCheckbox = (event) => {
+        console.log("event",event.target.value,event.target.name)
+        dispatch(setSwitchSpeaker({valueSwitch:event.target.name, checkedSwitch:event.target.value}));
+    };
+
 
     const onChange=(event,nameSpeaker)=>{
         const value=event.target.value
@@ -62,6 +66,7 @@ export  const Hooks=()=>{
         editSpeaker,
         deleteSpeaker,
         onChange,
+        onChangeCheckbox,
         values
     })
 }
