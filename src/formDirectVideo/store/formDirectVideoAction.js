@@ -50,3 +50,4 @@ export function setDeleteSpeaker(e){
         payload:e,
     }
 }
+

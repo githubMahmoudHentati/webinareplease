@@ -16,7 +16,7 @@ export const Configuration =()=>{
 
 
     const itemListRef   = useRef(null);
-    const {onChangeSwitch,addSpeaker,editSpeaker,deleteSpeaker}= Hooks()
+    const {onChangeSwitch,addSpeaker,editSpeaker,deleteSpeaker,onChangeCheckbox}= Hooks()
 
     console.log("values",values)
     // use Selector redux
@@ -73,7 +73,7 @@ export const Configuration =()=>{
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
-                                <Switch name="switchSpeaker" defaultChecked={values.switchSpeaker} onChange={onChangeSwitch}/>
+                                <Switch name="switchSpeaker" defaultChecked={values.switchSpeaker} onChange={(checked,event)=>onChangeSwitch(checked,event,"switchSpeaker")}/>
                             </Col>
                             {values.SpeakerList.length>1&&values.switchSpeaker &&
                              <Col span={24}>
@@ -99,6 +99,7 @@ export const Configuration =()=>{
                                                         <div ref = { itemListRef }>
                                                             <Row >
                                                                 <Col xl={8}lg={10}md={14}sm={16} xs={17}>
+                                                                    <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
                                                                     <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
                                                                 </Col>
                                                                 <Col offset={1} >
@@ -180,24 +181,31 @@ export const Configuration =()=>{
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
-                                        <Switch/>
+                                        <Switch name="directAutomaticArchiving"onChange={(checked,event)=>onChangeSwitch(checked,event,"directAutomaticArchiving")}
+                                        />
                                     </Col>
                                 </Row>
                             </Col>
+                            {values.directAutomaticArchiving&&
                             <Col span={24}>
-                                <Radio.Group>
+                                <Radio.Group name="videoMode"onChange={onChangeCheckbox}>
                                     <Space direction="vertical">
-                                        <Radio value={1}><span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo non visible</span></Radio>
-                                        <Radio value={2}><span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo visible</span></Radio>
+                                        <Radio value="vidéo non visible"><span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo non visible</span></Radio>
+                                        <Radio value="vidéo visible"><span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo visible</span></Radio>
                                     </Space>
                                 </Radio.Group>
                             </Col>
-                            <Col span={24} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>
+                                }
+                            {values.directAutomaticArchiving && values.videoMode==="vidéo visible"&&
+                            <Col span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
                                 Thèmes
                             </Col>
-                            <Col offset={1} span={23}>
+                            }
+                            {values.directAutomaticArchiving && values.videoMode==="vidéo visible"&&
+                                <Col offset={1} span={23}>
                                 <Input placeholder={'www.empreinte.com/titrelive'}></Input>
-                            </Col>
+                                </Col>
+                            }
                         </Row>
                     </Col>
                     <Col span={24}>
