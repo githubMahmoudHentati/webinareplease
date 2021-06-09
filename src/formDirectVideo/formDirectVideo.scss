@@ -348,3 +348,13 @@ margin-right: 10px ;
 .ant-list-split .ant-list-item {
   border-bottom: 1px solid RGBA(0, 0, 0, 0.15)!important;
 }
+
+.list-speaker{
+  max-height: 172px;
+}
+
+@media (max-width: 1161.1px) {
+  .list-speaker{
+    max-height: 257.33px !important;
+  }
+}

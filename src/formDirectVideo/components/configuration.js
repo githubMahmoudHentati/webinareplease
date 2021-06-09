@@ -5,13 +5,17 @@ import { Upload, message } from 'antd';
 import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined } from '@ant-design/icons';
 import {Hooks} from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
+import {useDispatch, useSelector} from "react-redux";
+import {setModalSpeaker, setSwitchSpeaker} from "../store/formDirectVideoAction";
 
 export const Configuration =()=>{
-    const [SpeakerList, setSpeakerList] = useState([{Psuedo: "Nom et Prénom", title:"Titre"},{Psuedo: "Mahmoud Hentati", title:"Développeur"},{Psuedo: "Taha aizedine", title:"Développeur"},{Psuedo: "Ahmed Berriche", title:"Développeur"}]);
+    const dispatch = useDispatch()
     const [itemListHeight, setItemListHeight] = useState(null);
+    const values = useSelector((state)=> state.FormDirectVideoReducer)
+
 
     const itemListRef   = useRef(null);
-    const {onChangeSwitch,handleOk,handleCancel,values}= Hooks()
+    const {onChangeSwitch,addSpeaker,editSpeaker,deleteSpeaker}= Hooks()
 
     console.log("values",values)
 
@@ -25,9 +29,15 @@ export const Configuration =()=>{
 
     useEffect ( () => {
         console.log("itemListRef",itemListHeight)
-        setItemListHeight(itemListRef.current.offsetHeight)
-
+        itemListRef.current&&setItemListHeight(itemListRef.current.offsetHeight)
     }, [itemListRef]);
+
+    useEffect(async () => {
+        console.log("testswitch",values.SpeakerList.length>0)
+        dispatch(setSwitchSpeaker(true));
+    }, []);
+        console.log("testxxx",values.switchSpeaker)
+
 
     return(
         <Row gutter={[0, 50]}>
@@ -57,27 +67,35 @@ export const Configuration =()=>{
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
-                                <Switch onChange={onChangeSwitch}/>
+                                <Switch defaultChecked={values.SpeakerList.length>1} onChange={onChangeSwitch}/>
                             </Col>
-                            {SpeakerList &&
+                            {values.SpeakerList.length>1&&values.switchSpeaker &&
                              <Col span={24}>
                                 <Row>
                                     <List
-                                        style={{height:`172px`}}
-                                        className={`list-speaker ${SpeakerList.length>3?"scrolling":""}`}
+                                        className="list-speaker"
+                                        className={`list-speaker ${values.SpeakerList.length>3?"scrolling":""}`}
                                         itemLayout="horizontal"
-                                        dataSource={SpeakerList}
-                                        renderItem={item => (
-                                            <List.Item   actions={[<span key="list-loadmore-edit"><EditOutlined /></span>, <span key="list-loadmore-more"><MinusCircleOutlined /></span>]} >
+                                        dataSource={values.SpeakerList}
+                                        renderItem={(item,indexItem) => (
+                                            <List.Item   actions={indexItem != 0?[
+                                                <span key="list-loadmore-edit"><EditOutlined
+                                                    onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, indexItem)}
+                                                    style={{fontSize: "21px"}}/></span>,
+                                                <span key="list-loadmore-more"><MinusCircleOutlined
+                                                    style={{fontSize: "21px"}}
+                                                    onClick={() => deleteSpeaker(indexItem)}/></span>
+                                            ]:
+                                            [<span style={{marginLeft:"48px"}}/>]} >
                                                 <List.Item.Meta
                                                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                                     title={
                                                         <div ref = { itemListRef }>
                                                             <Row >
-                                                                <Col span={6}>
-                                                                    <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.Psuedo}</span>
+                                                                <Col xl={8}lg={10}md={14}sm={16} xs={17}>
+                                                                    <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
                                                                 </Col>
-                                                                <Col >
+                                                                <Col offset={1} >
                                                                     <span style={{textAlign: 'left', fontSize: "15px", fontFamily: "system-ui",fontWeight:"lighter"}}>{item.title}</span>
                                                                 </Col>
                                                             </Row>
@@ -90,12 +108,15 @@ export const Configuration =()=>{
                                 </Row>
                              </Col>
                             }
-                            {values.modalSpeaker &&
                             <Col className={"button-SpeackAadd"} span={24}>
-                                <ModalSpeaker handleOk={handleOk} handleCancel={handleCancel} isVisible={values.modalSpeaker}/>
-                                <Button icon={<PlusSquareOutlined/>}>Ajouter un intervenant</Button>
+                                {values.modalSpeaker &&
+                                <ModalSpeaker isVisible={values.modalSpeaker}/>
+                                }
+                                {values.switchSpeaker &&
+                                <Button onClick={addSpeaker} icon={<PlusSquareOutlined/>}>Ajouter un
+                                    intervenant</Button>
+                                }
                             </Col>
-                            }
                         </Row>
                     </Col>
                     <Col span={24}>

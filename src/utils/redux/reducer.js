@@ -10,21 +10,21 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
     switch (action.type){
         case "SET_AccountMenu":
             return{
-                ...INITIAL_STATE,
+                ...state,
                 accountMenu: action.payload
             }
         case "SET_DirectMenu":
             return{
-                ...INITIAL_STATE,
+                ...state,
                 accountMenu: action.payload
             }
         case "SET_DarkMode":
             return {
-                ...INITIAL_STATE,
+                ...state,
                 DarkMode: action.payload
             }
         default:{
-            return INITIAL_STATE
+            return state
         }
 
 
