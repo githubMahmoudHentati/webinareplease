@@ -10,6 +10,7 @@ import Invitation from "./Invitation";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {SocialTools} from "./socialTools";
+import {Templetes} from "./Templetes";
 import {setDarkMode} from "../../utils/redux/actions";
 
 
@@ -34,7 +35,7 @@ export const IframeDirectVideo =()=>{
             case 3:
                 return <SocialTools/>
             case 4:
-                return <Generals/>
+                return <Templetes/>
             default:
                 return <Generals/>
         }
