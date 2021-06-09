@@ -41,11 +41,11 @@ function GlobalHeader() {
 
     const ColorComposnat=()=>{
         // White Color
-        darkMode&&document.documentElement.style.setProperty('--white_color', "");
+        darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(0, 0, 0, 0.85)");
         !darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(255, 255, 255, 0.85)");
 
         //Dark Color
-        darkMode&&document.documentElement.style.setProperty('--dark_color', "");
+        darkMode&&document.documentElement.style.setProperty('--dark_color', "rgba(0, 0, 0, 0.04)");
         !darkMode&&document.documentElement.style.setProperty('--dark_color', "rgba(255, 255, 255, 0.04)");
 
         //border Color
@@ -53,19 +53,19 @@ function GlobalHeader() {
         !darkMode&&document.documentElement.style.setProperty('--border_color', "rgba(255, 255, 255, 0.15)");
 
         //Card Color
-        darkMode&&document.documentElement.style.setProperty('--card_color', "");
+        darkMode&&document.documentElement.style.setProperty('--card_color', "#FFFFFF");
         !darkMode&&document.documentElement.style.setProperty('--card_color', "#141414");
 
         //Cell Color
-        darkMode&&document.documentElement.style.setProperty('--cell-color', "white");
+        darkMode&&document.documentElement.style.setProperty('--cell-color', "#FFFFFF");
         !darkMode&&document.documentElement.style.setProperty('--cell-color', "#1D1D1D");
 
         //option background
-        darkMode&&document.documentElement.style.setProperty('--option-background', "#ffffff");
+        darkMode&&document.documentElement.style.setProperty('--option-background', "#FFFFFF");
         !darkMode&&document.documentElement.style.setProperty('--option-background', "#111d2c");
 
         //option background
-        darkMode&&document.documentElement.style.setProperty('--option_select', "#ffffff");
+        darkMode&&document.documentElement.style.setProperty('--option_select', "#FFFFFF");
         !darkMode&&document.documentElement.style.setProperty('--option_select', "#1D1D1D");
 
         // Modal Dark Light
