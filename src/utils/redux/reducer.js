@@ -16,7 +16,7 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
         case "SET_DirectMenu":
             return{
                 ...state,
-                accountMenu: action.payload
+                directMenu: action.payload
             }
         case "SET_DarkMode":
             return {

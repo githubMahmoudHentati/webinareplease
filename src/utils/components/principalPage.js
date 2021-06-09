@@ -13,8 +13,10 @@ export const PrincipalPage =(props)=>{
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    console.log("darmode principalpage",darkMode)
 
     return(
+
         <div className="showVideosDiv" style={{height:accountMenu===2||accountMenu===1?"100vh":"100%"}}>
             <GlobalHeader/>
             <Card  style={{height:"93%" , backgroundColor:darkMode===false?"#F0F1F4":"#000000" , border:darkMode===false? "1px solid white": "1px solid #141414" }} className={"card"} >

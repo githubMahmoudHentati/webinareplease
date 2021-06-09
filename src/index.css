@@ -16,12 +16,12 @@ body{
     --cell-color:"white";
     --option-background:"#111d2c";
     --option_select:"#1D1D1D";
-
     --modal_background:"white";
 
 }
-
-
+.ant-popover-inner-content{
+    background-color: var(--option_select) !important;
+}
 .ant-breadcrumb-separator{
     color: var(--white_color) !important;
 }
@@ -30,8 +30,9 @@ body{
     color: var(--white_color) !important;
 }
 .ant-input{
-    background-color: var(--card_color) !important;
-    color: var(--white_color) !important;
+    background-color: var(--card_color);
+    color: var(--white_color) ;
+    border: 1px solid var(--border_color) ;
 }
 .ant-table-wrapper {
     background-color: var(--card_color) !important;
@@ -77,6 +78,13 @@ body{
 .ant-select-arrow{
     color: var(--white_color) !important;
 }
+.ant-select-selection-placeholder{
+    color: var(--white_color) !important;
+}
+.ant-select-suffix{
+    color: var(--white_color) !important;
+}
+
 .ant-select-dropdown{
     background-color: var(--option_select) !important;
     color: var(--white_color) !important;
@@ -185,6 +193,18 @@ body{
     background-color: var(--modal_background) !important;
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
+}
+
+.menuItem{
+    color: var(--white_color);
+}
+.menuItem:hover{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.menuItem:focus{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
 }
 
 

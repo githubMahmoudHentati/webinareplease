@@ -37,9 +37,10 @@ export  const Hooks=()=>{
         console.log("azaez")
     };
 
-    const deleteSpeaker = (id) => {
-        dispatch(setDeleteSpeaker({id}))
-        console.log("azaez")
+    const deleteSpeaker = async (id) => {
+        await dispatch(setDeleteSpeaker({id}))
+        console.log("enteeeer",values.SpeakerList.length<2)
+        values.SpeakerList.length<2&&dispatch(setSwitchSpeaker(false))
     };
 
     const handleOk = () => {
