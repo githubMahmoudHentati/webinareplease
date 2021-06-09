@@ -9,14 +9,14 @@ body{
     font-family: SFPro !important;
 }
 :root {
-    --white_color:"rgba(255, 255, 255, 0.85)";
-    --dark_color:"rgba(255, 255, 255, 0.04) ";
-    --border_color:"rgba(255, 255, 255, 0.15) ";
-    --card_color:"#141414 ";
-    --cell-color:"white";
-    --option-background:"#111d2c";
-    --option_select:"#1D1D1D";
-    --modal_background:"white";
+    --white_color:rgba(0, 0, 0, 0.85);
+    --dark_color:rgba(0, 0, 0, 0.04);
+    --border_color:rgba(0 , 0 , 0 , 0.15);
+    --card_color:#FFFFFF;
+    --cell-color:#FFFFFF;
+    --option-background:#FFFFFF;
+    --option_select:#FFFFFF;
+    --modal_background:#FFFFFF;
 
 }
 .ant-popover-inner-content{
@@ -74,6 +74,7 @@ body{
 .ant-select-selector{
     background-color: var(--card_color) !important;
     color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
 }
 .ant-select-arrow{
     color: var(--white_color) !important;
@@ -89,6 +90,13 @@ body{
     background-color: var(--option_select) !important;
     color: var(--white_color) !important;
 }
+.ant-select-item-option-content{
+    color: var(--white_color) !important;
+}
+.ant-select-item-option-selected{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
 .ant-select-item-option:hover{
     background-color: var(--option-background) !important;
 }
@@ -97,8 +105,9 @@ body{
     background-color: var(--option-background) !important;
 }
 .ant-picker{
-    background-color: var(--cell-color) !important;
+    background-color: var(--card_color) !important;
     color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
 }
 .ant-picker-input input{
     color: var(--white_color) !important;
@@ -205,6 +214,9 @@ body{
 .menuItem:focus{
     background-color: var(--option-background) !important;
     color: var(--white_color) !important;
+}
+.ant-picker-cell-selected{
+    background-color: var(--option_select) !important;
 }
 
 
