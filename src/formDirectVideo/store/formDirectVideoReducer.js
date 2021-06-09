@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     modalSpeaker:false,
     switchSpeaker:false,
+    directAutomaticArchiving:false,
     SpeakerList:[{id:0,name: "Nom ",lastName:'Prénom', title:"Titre",email:""}],
     speaker :{id:null,name: "",lastName:"", title:"",email:""}
 }
@@ -14,9 +15,10 @@ export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
                 modalSpeaker: action.payload
             }
         case "SET_switchSpeaker":
+            const {valueSwitch,checkedSwitch}=action.payload
             return{
                 ...state,
-                switchSpeaker: action.payload
+                [valueSwitch]: checkedSwitch
             }
         case "SET_Speaker":
             const {nameSpeaker,value}=action.payload

@@ -15,14 +15,15 @@ export  const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
 
-    const onChangeSwitch =(checked)=>{
-        dispatch(setSwitchSpeaker(checked));
-        values.SpeakerList.length<2&&dispatch(setModalSpeaker(checked));
+    const onChangeSwitch =(checked,event)=>{
+        const valueSwitch = event.target.value
+        console.log("name",event.target.value)
+        dispatch(setSwitchSpeaker({valueSwitch:valueSwitch, checkedSwitch:checked}));
+        values.SpeakerList.length < 2 &&valueSwitch==="switchSpeaker" &&dispatch(setModalSpeaker(checked));
     }
 
     const onChange=(event,nameSpeaker)=>{
         const value=event.target.value
-        console.log("name",{[nameSpeaker]:event.target.value})
         dispatch(setSpeaker({nameSpeaker,value}));
     }
 

@@ -100,6 +100,7 @@ export const Configuration =()=>{
                                                             <Row >
                                                                 <Col xl={8}lg={10}md={14}sm={16} xs={17}>
                                                                     <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
+                                                                    <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
                                                                 </Col>
                                                                 <Col offset={1} >
                                                                     <span style={{textAlign: 'left', fontSize: "15px", fontFamily: "system-ui",fontWeight:"lighter"}}>{item.title}</span>
@@ -180,7 +181,8 @@ export const Configuration =()=>{
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
-                                        <Switch/>
+                                        <Switch name="directAutomaticArchiving"onChange={onChangeSwitch}
+                                        />
                                     </Col>
                                 </Row>
                             </Col>
