@@ -98,7 +98,7 @@ class EditableTagGroup extends React.Component {
                 )}
                 {!inputVisible && (
                     <Tag onClick={this.showInput} className="site-tag-plus">
-                        <PlusOutlined /> Ajouter un email
+                        <PlusOutlined />
                     </Tag>
                 )}
             </>
