@@ -18,6 +18,34 @@ body{
     --option_select:#FFFFFF;
     --modal_background:#FFFFFF;
 
+    --menu-background:#E6F7FF;
+    --menu-color:#2B96FF;
+    --menu-border:#2090FF
+
+}
+.ant-badge-status-text{
+    color: var(--white_color) !important;
+}
+.ant-input-password{
+    background-color: var(--card_color) !important;
+}
+.anticon-eye-invisible{
+    color: var(--white_color) !important;
+}
+.ant-menu-item-selected{
+    background-color: var(--menu-background) !important;
+    color: var(--menu-color) !important;
+    border-right:3px solid var(--menu-border) !important;
+}
+.ant-dropdown-menu{
+    background-color: var(--card_color) !important;
+    margin-top: 12px;
+}
+.ant-dropdown-menu-item{
+    color: var(--white_color) !important;
+}
+.ant-dropdown-menu-item:hover{
+    background-color: var(--option-background) !important;
 }
 .ant-popover-inner-content{
     background-color: var(--option_select) !important;
@@ -95,6 +123,13 @@ body{
 }
 .ant-select-item-option-selected{
     background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.ant-select-item-option-active{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.ant-empty-description{
     color: var(--white_color) !important;
 }
 .ant-select-item-option:hover{
@@ -216,7 +251,10 @@ body{
     color: var(--white_color) !important;
 }
 .ant-picker-cell-selected{
-    background-color: var(--option_select) !important;
+    background-color: var(--option-background) !important;
+}
+.ant-picker-calendar-date-today{
+    background-color: var(--option-background) !important;
 }
 
 
