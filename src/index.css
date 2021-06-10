@@ -18,6 +18,77 @@ body{
     --option_select:#FFFFFF;
     --modal_background:#FFFFFF;
 
+    --menu-background:#E6F7FF;
+    --menu-color:#2B96FF;
+    --menu-border:#2090FF;
+
+    --Switch-Color:#BFBFBF;
+
+}
+.rc-virtual-list-scrollbar-thumb{
+    background-color: var(--border_color) !important;
+}
+.ant-upload-list-text-container{
+    color: var(--white_color) !important;
+}
+.anticon-paper-clip{
+    color: var(--white_color) !important;
+}
+.ant-btn-icon-only .anticon-delete{
+    color: var(--white_color) !important;
+}
+.ant-upload-list-item , .ant-upload-list-item-done{
+    background-color: var(--option-background) !important;
+}
+.ant-upload-list-item-info:hover , .ant-upload-list-item-done:hover{
+    background-color: var(--option-background) !important;
+    cursor: pointer;
+}
+.ant-switch{
+  background-color: var(--Switch-Color) !important;
+}
+.ant-switch-checked{
+   background-color: #419BF9 !important;
+}
+.ant-select-selection-item{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+.site-tag-plus *{
+    color: var(--white_color) !important;
+}
+.ant-tag{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+.ant-select-selection-item-content{
+    color: var(--white_color) !important;
+}
+.ant-badge-status-text{
+    color: var(--white_color) !important;
+}
+.ant-input-password{
+    background-color: var(--card_color) !important;
+}
+.anticon-eye-invisible{
+    color: var(--white_color) !important;
+}
+.ant-menu-item-selected{
+    background-color: var(--menu-background) !important;
+    color: var(--menu-color) !important;
+    border-right:3px solid var(--menu-border) !important;
+}
+.ant-dropdown-menu{
+    background-color: var(--card_color) !important;
+    margin-top: 12px;
+}
+.ant-dropdown-menu-item{
+    color: var(--white_color) !important;
+}
+.ant-dropdown-menu-item:hover{
+    background-color: var(--option-background) !important;
 }
 .ant-popover-inner-content{
     background-color: var(--option_select) !important;
@@ -95,6 +166,13 @@ body{
 }
 .ant-select-item-option-selected{
     background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.ant-select-item-option-active{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.ant-empty-description{
     color: var(--white_color) !important;
 }
 .ant-select-item-option:hover{
@@ -216,7 +294,10 @@ body{
     color: var(--white_color) !important;
 }
 .ant-picker-cell-selected{
-    background-color: var(--option_select) !important;
+    background-color: var(--option-background) !important;
+}
+.ant-picker-calendar-date-today{
+    background-color: var(--option-background) !important;
 }
 
 

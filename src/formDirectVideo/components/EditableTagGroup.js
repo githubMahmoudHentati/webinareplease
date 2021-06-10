@@ -6,7 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 
 class EditableTagGroup extends React.Component {
     state = {
-        tags: ['nom@email.com', 'nom@email.com'],
+        tags: [],
         inputVisible: false,
         inputValue: '',
     };
@@ -98,7 +98,7 @@ class EditableTagGroup extends React.Component {
                 )}
                 {!inputVisible && (
                     <Tag onClick={this.showInput} className="site-tag-plus">
-                        <PlusOutlined />
+                        <PlusOutlined /> Ajouter un email
                     </Tag>
                 )}
             </>

@@ -1,8 +1,26 @@
-import React ,{Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox} from 'antd'
+import React ,{Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox , Select} from 'antd'
 import '../signUp.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
+const { Option } = Select;
 
 export const FormSignUp =({child1,child2})=>{
+
+    function onChange(value) {
+        console.log(`selected ${value}`);
+    }
+
+    function onBlur() {
+        console.log('blur');
+    }
+
+    function onFocus() {
+        console.log('focus');
+    }
+
+    function onSearch(val) {
+        console.log('search:', val);
+    }
+
     return(
         <Row gutter={[0, 40]} className={'col-signUp'}>
 
@@ -49,7 +67,7 @@ export const FormSignUp =({child1,child2})=>{
                                         <span>Téléphone :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input placeholder={"Mot de passe"}></Input>
+                                        <Input placeholder={"Numéro de téléphone"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
@@ -120,7 +138,23 @@ export const FormSignUp =({child1,child2})=>{
                                         <span>Nombre d'employé :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input placeholder={"Entre 5 -10 emploé(e)s"}></Input>
+                                        <Select
+                                            showSearch
+                                            style={{ width: "100%" }}
+                                            placeholder="Entre 5 - 10 employé(e)s"
+                                            optionFilterProp="children"
+                                            onChange={onChange}
+                                            onFocus={onFocus}
+                                            onBlur={onBlur}
+                                            onSearch={onSearch}
+                                            filterOption={(input, option) =>
+                                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                            }
+                                        >
+                                            <Option value="5">5</Option>
+                                            <Option value="10">10</Option>
+                                            <Option value="20">20</Option>
+                                        </Select>
                                     </Col>
                                 </Row>
                             </Col>

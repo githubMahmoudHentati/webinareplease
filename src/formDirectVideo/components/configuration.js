@@ -1,8 +1,26 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox,Select,Space,List, Avatar,Form} from 'antd'
+import {
+    Row,
+    Col,
+    Input,
+    Button,
+    Card,
+    Tabs,
+    Breadcrumb,
+    Menu,
+    Switch,
+    Radio,
+    Checkbox,
+    Select,
+    Space,
+    List,
+    Avatar,
+    Form,
+    Tooltip
+} from 'antd'
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
-import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined } from '@ant-design/icons';
+import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled } from '@ant-design/icons';
 import {Hooks} from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
@@ -155,8 +173,10 @@ export const Configuration =()=>{
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <CheckboxGroup>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Diffusion Richmedia</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Fichiers joints</Checkbox>
+                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Diffusion Richmedia <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></Checkbox>
+                                    <br/>
+                                    <br/>
+                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Fichiers joints <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></Checkbox>
                                 </CheckboxGroup>
                             </Col>
                         </Row>
@@ -183,6 +203,9 @@ export const Configuration =()=>{
                                     <Col>
                                         <Switch name="directAutomaticArchiving"onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
                                         />
+                                        <Tooltip placement="right" title={"Votre direct sera automatiquement archivé et disponible visualisation vidéo à la demande"}>
+                                        <InfoCircleFilled style={{cursor:"pointer" , color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/>
+                                        </Tooltip>
                                     </Col>
                                 </Row>
                             </Col>

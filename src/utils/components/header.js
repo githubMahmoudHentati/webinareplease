@@ -72,6 +72,17 @@ function GlobalHeader() {
         darkMode&&document.documentElement.style.setProperty('--modal_background', "white");
         !darkMode&&document.documentElement.style.setProperty('--modal_background', "#1D1D1D");
 
+        // Menu Color
+        darkMode&&document.documentElement.style.setProperty('--menu-background', "#E6F7FF");
+        !darkMode&&document.documentElement.style.setProperty('--menu-background', "#111d2c");
+        darkMode&&document.documentElement.style.setProperty('--menu-color', "#2B96FF");
+        !darkMode&&document.documentElement.style.setProperty('--menu-color', "#2B96FF");
+        darkMode&&document.documentElement.style.setProperty('--menu-border', "#2090FF");
+        !darkMode&&document.documentElement.style.setProperty('--menu-border', "#2090FF");
+
+        // Switch Color
+        darkMode&&document.documentElement.style.setProperty('--Switch-Color', "#BFBFBF");
+        !darkMode&&document.documentElement.style.setProperty('--Switch-Color', "#4E4E4E");
     }
 
 
@@ -80,14 +91,27 @@ function GlobalHeader() {
         <Menu className="menu">
             <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(0)))}} ><UserOutlined />Compte</Menu.Item>
             <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(1)))}}><UnlockOutlined />Sécurité</Menu.Item>
-            <Menu.Item  onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(2)))}}><PieChartOutlined />Abonnement</Menu.Item>
+            <Menu.Item  onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(3)))}}><PieChartOutlined />Abonnement</Menu.Item>
             <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(3)))}}><LogoutOutlined />Déconnection</Menu.Item>
         </Menu>
     );
     const Menulang = (
         <Menu className="menu">
-            <Menu.Item ><UserOutlined />Français</Menu.Item>
-            <Menu.Item><UnlockOutlined />Anglais</Menu.Item>
+            <Menu.Item >
+                 <span className="icon-fr">
+                     <span className="path1"></span>
+                     <span className="path2"></span>
+                     <span className="path3"></span><span className="path4"></span>
+                 </span>  Français
+            </Menu.Item>
+            <Menu.Item>
+                <span className="icon-ang">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                    <span className="path3"></span><span className="path4"></span>
+                    <span className="path5"></span>
+                </span>   Anglais
+            </Menu.Item>
         </Menu>
     );
 
