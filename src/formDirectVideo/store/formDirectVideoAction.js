@@ -1,55 +1,68 @@
-export function setModalSpeaker(e){
+//*********************Genral actions *****************//
+
+export function setGeneralOnchange(e){
 
     return{
-        type: "SET_ModalSpeaker",
+        type: "SET_GeneralOnchange",
+        payload:e,
+    }
+}
+
+//***************Conficguration actions***************//
+
+export function setConfigurationModalSpeaker(e){
+
+    return{
+        type: "SET_ConfigurationModalSpeaker",
+        payload:e,
+    }
+}
+
+export function setConfigurationOnchange(e){
+
+    return{
+        type: "SET_ConfigurationOnchange",
+        payload:e,
+    }
+}
+
+export function setConfigurationSpeaker(e){
+
+    return{
+        type: "SET_ConfigurationSpeaker",
         payload:e,
     }
 
 }
 
-export function setOnchange(e){
+export function setConfigurationInitialSpeaker(e){
 
     return{
-        type: "SET_Onchange",
+        type: "SET_ConfigurationInitialSpeaker",
+        payload:e,
+    }
+}
+
+export function setConfigurationDeleteSpeaker(e){
+
+    return{
+        type: "SET_ConfigurationDeleteSpeaker",
+        payload:e,
+    }
+}
+
+export function setConfigurationSpeakerList(e){
+
+    return{
+        type: "SET_ConfigurationSpeakerList",
         payload:e,
     }
 
 }
 
-export function setSpeaker(e){
 
-    return{
-        type: "SET_Speaker",
-        payload:e,
-    }
 
-}
 
-export function setEditSpeaker(e){
-
-    return{
-        type: "SET_EditSpeaker",
-        payload:e,
-    }
-
-}
-
-export function setSpeakerList(e){
-
-    return{
-        type: "SET_SpeakerList",
-        payload:e,
-    }
-
-}
-
-export function setDeleteSpeaker(e){
-
-    return{
-        type: "SET_DeleteSpeaker",
-        payload:e,
-    }
-}
 
 
 
