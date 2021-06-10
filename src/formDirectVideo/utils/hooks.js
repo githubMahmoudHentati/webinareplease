@@ -18,6 +18,15 @@ export  const Hooks=()=>{
     const generalOnChangeSwitch =(checked,event,valueSwitch)=>{
         dispatch(setGeneralOnchange({generalNameChange:valueSwitch, generalValueChange:checked}));
     }
+    const generalOnChange = (event) => {
+        console.log("event",event.target.value,event.target.name)
+        dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}));
+    };
+
+    const generalOnChangeButton = (event) => {
+        dispatch(setGeneralOnchange({generalNameChange:event.target.value, generalValueChange:event.target.checked}));
+    };
+
 
     //**************Configuration************//
     const configurationOnChangeSwitch =(checked,event,valueSwitch)=>{
@@ -65,6 +74,8 @@ export  const Hooks=()=>{
 
     return({
         generalOnChangeSwitch,
+        generalOnChange,
+        generalOnChangeButton,
         configurationOnChangeSwitch,
         handleOk,
         handleCancel,

@@ -16,7 +16,6 @@ export function setConfigurationModalSpeaker(e){
         type: "SET_ConfigurationModalSpeaker",
         payload:e,
     }
-
 }
 
 export function setConfigurationOnchange(e){
@@ -42,7 +41,6 @@ export function setConfigurationInitialSpeaker(e){
         type: "SET_ConfigurationInitialSpeaker",
         payload:e,
     }
-
 }
 
 export function setConfigurationDeleteSpeaker(e){
@@ -61,6 +59,8 @@ export function setConfigurationSpeakerList(e){
     }
 
 }
+
+
 
 
 

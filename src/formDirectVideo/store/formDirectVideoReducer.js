@@ -1,7 +1,11 @@
 const INITIAL_STATE = {
     general:{
         directPlan:false,
+        directAccessMode:"",
+        freeAccess:false,
+        securedAccess:false,
     },
+
     configuration:{
         modalSpeaker:false,
         switchSpeaker:false,
