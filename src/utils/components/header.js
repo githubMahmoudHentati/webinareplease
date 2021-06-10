@@ -80,7 +80,9 @@ function GlobalHeader() {
         darkMode&&document.documentElement.style.setProperty('--menu-border', "#2090FF");
         !darkMode&&document.documentElement.style.setProperty('--menu-border', "#2090FF");
 
-
+        // Switch Color
+        darkMode&&document.documentElement.style.setProperty('--Switch-Color', "#BFBFBF");
+        !darkMode&&document.documentElement.style.setProperty('--Switch-Color', "#4E4E4E");
     }
 
 

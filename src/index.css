@@ -20,8 +20,51 @@ body{
 
     --menu-background:#E6F7FF;
     --menu-color:#2B96FF;
-    --menu-border:#2090FF
+    --menu-border:#2090FF;
 
+    --Switch-Color:#BFBFBF;
+
+}
+.rc-virtual-list-scrollbar-thumb{
+    background-color: var(--border_color) !important;
+}
+.ant-upload-list-text-container{
+    color: var(--white_color) !important;
+}
+.anticon-paper-clip{
+    color: var(--white_color) !important;
+}
+.ant-btn-icon-only .anticon-delete{
+    color: var(--white_color) !important;
+}
+.ant-upload-list-item , .ant-upload-list-item-done{
+    background-color: var(--option-background) !important;
+}
+.ant-upload-list-item-info:hover , .ant-upload-list-item-done:hover{
+    background-color: var(--option-background) !important;
+    cursor: pointer;
+}
+.ant-switch{
+  background-color: var(--Switch-Color) !important;
+}
+.ant-switch-checked{
+   background-color: #419BF9 !important;
+}
+.ant-select-selection-item{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+.site-tag-plus *{
+    color: var(--white_color) !important;
+}
+.ant-tag{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
+.ant-select-selection-item-content{
+    color: var(--white_color) !important;
 }
 .ant-badge-status-text{
     color: var(--white_color) !important;

@@ -67,7 +67,7 @@ export const FormSignUp =({child1,child2})=>{
                                         <span>Téléphone :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input placeholder={"Mot de passe"}></Input>
+                                        <Input placeholder={"Numéro de téléphone"}></Input>
                                     </Col>
                                 </Row>
                             </Col>

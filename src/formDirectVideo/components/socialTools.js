@@ -6,11 +6,14 @@ import fb from "../../assets/fb.svg"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
-
+import {useSelector} from "react-redux";
 
 
 
 export const SocialTools=()=>{
+    // use Selector redux
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+
     const [typePost, setTypePost] = useState([
         {
             id:0,
@@ -77,11 +80,17 @@ export const SocialTools=()=>{
     }
 
     return(
-        <Row  gutter={[0, 25]}>
+        <Row  gutter={[0, 0]}>
             <Col span={24}>
             </Col>
             <Col span={24}>
-
+                <p style={{fontSize: "20px",
+                    fontFamily: "system-ui",
+                    fontWeight: "500",
+                    color:darkMode===false?"":"rgba(255, 255, 255, 0.85"
+                }}>
+                    Envoi des publications sur les réseaux sociaux
+                </p>
                 <List
 
                     dataSource={typePost}
@@ -97,7 +106,8 @@ export const SocialTools=()=>{
                                                 fontSize: "14px",
                                                 fontFamily: "system-ui",
                                                 fontWeight: "500",
-                                                marginLeft:"3%"
+                                                marginLeft:"3%",
+                                                color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                             }}>{item.type}</span>
                                         </Col>
                                         <Col>
@@ -111,21 +121,21 @@ export const SocialTools=()=>{
                                         <Col span={8}>
                                             <Row gutter={[0, 20]}>
                                                 <Col span={24}>
-                                                    <span style={{fontWeight: "600"}}>Planifier  la publication</span>
+                                                    <span style={{fontWeight: "600" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier  la publication</span>
                                                 </Col>
                                                 {typePost[index].plan.map((element, indexPlan) => {
                                                         return (
-                                                            <Col className={"col-planification"} span={24}>
+                                                            <Col className={"col-planification"} span={24} style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
                                                                 <Row gutter={[0, 20]}>
                                                                     <Col span={24}>
                                                                         <Row justify={"space-between"}>
                                                                             <Col span={12}>
                                                                                 <Row>
                                                                                     <Col>
-                                                                                        <DownOutlined onClick={()=>{activePlan(index,indexPlan)}}/>
+                                                                                        <DownOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{activePlan(index,indexPlan)}}/>
                                                                                     </Col>
                                                                                     <Col offset={2}>
-                                                                                        <span> Planification {indexPlan +1}</span>
+                                                                                        <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> Planification {indexPlan +1}</span>
                                                                                     </Col>
                                                                                 </Row>
                                                                             </Col>
@@ -138,7 +148,7 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span>Date de début</span>
+                                                                                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de début</span>
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker style={{width: "100%"}}/>
@@ -150,7 +160,7 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span>Date de fin</span>
+                                                                                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de fin</span>
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker style={{width: "100%"}}/>
@@ -169,19 +179,20 @@ export const SocialTools=()=>{
                                                     alignItems: "center",
                                                     justifyContent: "center"
                                                 }} span={24}>
-                                                    <Button  style={{width:"100%"}}onClick={() => addPlan(index)} icon={<PlusOutlined/>}>Ajouter une
-                                                        planification</Button>
+                                                    <Button  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
+                                                        Ajouter une planification
+                                                    </Button>
                                                 </Col>
                                             </Row>
                                         </Col>
-                                        <Col span={14} >
+                                        <Col span={14}  style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
                                             <Row gutter={[0, 10]} style={{border: "1px solid RGBA(0, 0, 0, 0.15)", padding: "2%"}}>
                                                 <Col span={24}>
                                                     <Row justify={"space-between"}>
                                                         <Col span={12}>
                                                             <Row justify={"start"}
                                                                  style={{display: "flex", alignItems: "center"}}>
-                                                                <Col>
+                                                                <Col style={{background:darkMode===false?"":"rgba(255, 255, 255, 0.85)",padding:"5px",border:darkMode===false?" solid 1px rgba(0, 0, 0, 0.15)":" solid 1px rgba(255, 255, 255, 0.15)"}}>
                                                                     <img style={{width: "24px", height: "24px"}}
                                                                          src={empreint}/>
                                                                 </Col>
@@ -189,10 +200,11 @@ export const SocialTools=()=>{
                                                                     <span style={{
                                                                         textAlign: 'left',
                                                                         fontSize: "13px",
-                                                                        fontFamily: "system-ui"
+                                                                        fontFamily: "system-ui",
+                                                                        color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                                                     }}>Empreinte</span><br/><span style={{
-                                                                    color: "RGBA(0, 0, 0, 0.25)",
-                                                                    fontSize: "11px"
+                                                                    fontSize: "11px",
+                                                                    color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
                                                                 }}>Environ 1mn</span>
                                                                 </Col>
                                                             </Row>
@@ -202,7 +214,7 @@ export const SocialTools=()=>{
                                                         </Col>
                                                     </Row>
                                                 </Col>
-                                                <Col span={24}>
+                                                <Col span={24} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                                     Torquem detrexit hosti exercirlus quid ex ea voluptate et accurate
                                                     disseredum.
                                                 </Col>
@@ -215,11 +227,12 @@ export const SocialTools=()=>{
                                                     <span style={{
                                                         textAlign: 'left',
                                                         fontSize: "13px",
-                                                        fontFamily: "system-ui"
+                                                        fontFamily: "system-ui",
+                                                        color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                                     }}>Fundamentals of Webinar</span><br/>
                                                     <span style={{
-                                                        color: "RGBA(0, 0, 0, 0.25)",
-                                                        fontSize: "11px"
+                                                        fontSize: "11px",
+                                                        color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
                                                     }}>Empriente.com</span>
                                                 </Col>
                                             </Row>
