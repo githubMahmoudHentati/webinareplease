@@ -6,17 +6,17 @@ import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined } from '@ant-design
 import {Hooks} from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
-import {setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
+import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
 
 
 export const Configuration =()=>{
     const dispatch = useDispatch()
     const [itemListHeight, setItemListHeight] = useState(null);
     const values = useSelector((state)=> state.FormDirectVideoReducer)
-
-
+    
     const itemListRef   = useRef(null);
-    const {onChangeSwitch,addSpeaker,editSpeaker,deleteSpeaker,onChangeCheckbox}= Hooks()
+    
+    const {configurationOnChangeSwitch,addSpeaker,editSpeaker,deleteSpeaker,onChangeCheckbox}= Hooks()
 
     console.log("values",values)
     // use Selector redux
@@ -28,18 +28,18 @@ export const Configuration =()=>{
     for (let i = 10; i < 36; i++) {
         children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
     }
-    console.log("itemListRef",itemListHeight)
+    
 
     useEffect ( () => {
-        console.log("itemListRef",itemListHeight)
         itemListRef.current&&setItemListHeight(itemListRef.current.offsetHeight)
     }, [itemListRef]);
 
     useEffect(async () => {
-        console.log("testswitch",values.SpeakerList.length>0)
-        values.SpeakerList.length>1&&dispatch(setOnchange({nameChange:"switchSpeaker",valueChange:true}));
+        console.log("testswitch",values.configuration.SpeakerList.length>0)
+        values.configuration.SpeakerList.length>1&&
+        dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:true}));
     }, []);
-        console.log("testxxx",values.switchSpeaker)
+        console.log("testxxx",values.configuration.switchSpeaker)
 
 
     return(
@@ -73,16 +73,16 @@ export const Configuration =()=>{
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
-                                <Switch name="switchSpeaker" defaultChecked={values.switchSpeaker} onChange={(checked,event)=>onChangeSwitch(checked,event,"switchSpeaker")}/>
+                                <Switch name="switchSpeaker" defaultChecked={values.configuration.switchSpeaker} onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"switchSpeaker")}/>
                             </Col>
-                            {values.SpeakerList.length>1&&values.switchSpeaker &&
+                            {values.configuration.SpeakerList.length>1&&values.configuration.switchSpeaker &&
                              <Col span={24}>
                                 <Row>
                                     <List
                                         className="list-speaker"
-                                        className={`list-speaker ${values.SpeakerList.length>3?"scrolling":""}`}
+                                        className={`list-speaker ${values.configuration.SpeakerList.length>3?"scrolling":""}`}
                                         itemLayout="horizontal"
-                                        dataSource={values.SpeakerList}
+                                        dataSource={values.configuration.SpeakerList}
                                         renderItem={(item,indexItem) => (
                                             <List.Item   actions={indexItem != 0?[
                                                 <span key="list-loadmore-edit"><EditOutlined
@@ -116,10 +116,10 @@ export const Configuration =()=>{
                              </Col>
                             }
                             <Col className={"button-SpeackAadd"} span={24}>
-                                {values.modalSpeaker &&
-                                <ModalSpeaker isVisible={values.modalSpeaker}/>
+                                {values.configuration.modalSpeaker &&
+                                <ModalSpeaker isVisible={values.configuration.modalSpeaker}/>
                                 }
-                                {values.switchSpeaker&&values.SpeakerList.length>1&&
+                                {values.configuration.switchSpeaker&&values.configuration.SpeakerList.length>1&&
                                 <Button onClick={addSpeaker} icon={<PlusSquareOutlined/>}>Ajouter un
                                     intervenant</Button>
                                 }
@@ -181,12 +181,12 @@ export const Configuration =()=>{
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
-                                        <Switch name="directAutomaticArchiving"onChange={(checked,event)=>onChangeSwitch(checked,event,"directAutomaticArchiving")}
+                                        <Switch name="directAutomaticArchiving"onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
                                         />
                                     </Col>
                                 </Row>
                             </Col>
-                            {values.directAutomaticArchiving&&
+                            {values.configuration.directAutomaticArchiving&&
                             <Col span={24}>
                                 <Radio.Group name="videoMode"onChange={onChangeCheckbox}>
                                     <Space direction="vertical">
@@ -196,12 +196,12 @@ export const Configuration =()=>{
                                 </Radio.Group>
                             </Col>
                                 }
-                            {values.directAutomaticArchiving && values.videoMode==="vidéo visible"&&
+                            {values.configuration.directAutomaticArchiving && values.configuration.videoMode==="vidéo visible"&&
                             <Col span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
                                 Thèmes
                             </Col>
                             }
-                            {values.directAutomaticArchiving && values.videoMode==="vidéo visible"&&
+                            {values.configuration.directAutomaticArchiving && values.configuration.videoMode==="vidéo visible"&&
                                 <Col offset={1} span={23}>
                                 <Input placeholder={'www.empreinte.com/titrelive'}></Input>
                                 </Col>

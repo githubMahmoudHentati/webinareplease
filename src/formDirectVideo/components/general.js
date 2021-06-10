@@ -18,7 +18,7 @@ export const Generals =()=>{
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
-    const {onChangeSwitch,values}= Hooks()
+    const {generalOnChangeSwitch,values}= Hooks()
     console.log("values",values)
 
     return(
@@ -65,6 +65,7 @@ export const Generals =()=>{
                     </Col>
                 </Row>
             </Col>
+            }
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
@@ -89,11 +90,11 @@ export const Generals =()=>{
                         <span style={{fontSize: "14px", fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
-                        <Switch name="directPlan" onChange={(checked,event)=>{onChangeSwitch(checked,event,"directPlan")}}/>
+                        <Switch name="directPlan" onChange={(checked,event)=>{generalOnChangeSwitch(checked,event,"directPlan")}}/>
                     </Col>
                 </Row>
             </Col>
-            {values.directPlan &&
+            {values.general.directPlan &&
             <Col span={24}>
                 <Row gutter={[20, 10]}>
                     <Col span={8}>
