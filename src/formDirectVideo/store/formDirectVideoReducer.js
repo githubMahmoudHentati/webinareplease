@@ -1,40 +1,70 @@
 const INITIAL_STATE = {
-    modalSpeaker:false,
-    switchSpeaker:false,
-    directAutomaticArchiving:false,
-    SpeakerList:[{id:0,name: "Nom ",lastName:'Prénom', title:"Titre",email:""}],
-    speaker :{id:null,name: "",lastName:"", title:"",email:""},
-    videoMode:"",
-    directPlan:false
+    general:{
+        directPlan:false,
+        directAccessMode:"",
+        freeAccess:false,
+        securedAccess:false,
+    },
+
+    configuration:{
+        modalSpeaker:false,
+        switchSpeaker:false,
+        directAutomaticArchiving:false,
+        SpeakerList:[{id:0,name: "Nom ",lastName:'Prénom', title:"Titre",email:""}],
+        speaker :{id:null,name: "",lastName:"", title:"",email:""},
+        videoMode:"",
+    },
 }
 
 export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
 
     switch (action.type){
-        case "SET_ModalSpeaker":
+
+        //******** general reducer case************//
+
+        case "SET_GeneralOnchange":
+            const {generalNameChange,generalValueChange}=action.payload
+            const generalOnOnchangeObj = {...state.general,[generalNameChange]: generalValueChange}
             return{
                 ...state,
-                modalSpeaker: action.payload
-            }
-        case "SET_Onchange":
-            const {nameChange,valueChange}=action.payload
-            return{
-                ...state,
-                [nameChange]: valueChange
-            }
-        case "SET_Speaker":
-            const {nameSpeaker,value}=action.payload
-            return(
-                {...state, speaker:{...state.speaker, [nameSpeaker]:value}}
-            )
-        case "SET_EditSpeaker":
-            return {...state,
-                speaker: action.payload
+                general:generalOnOnchangeObj
             }
 
-        case "SET_SpeakerList":
+        //******** configuration reducer case************//
+
+        case "SET_ConfigurationModalSpeaker":
+            const modalSpeakerObj={...state.configuration ,modalSpeaker: action.payload }
+            return{
+                ...state,
+                configuration: modalSpeakerObj
+            }
+
+        case "SET_ConfigurationOnchange":
+            const {configurationNameChange,configurationValueChange}=action.payload
+            const configurationOnOnchangeObj = {...state.configuration,[configurationNameChange]: configurationValueChange}
+            return{
+                ...state,
+                configuration:configurationOnOnchangeObj
+            }
+
+        case "SET_ConfigurationSpeaker":
+            const {nameSpeaker,valueSpeaker}=action.payload
+            const configurationSpeakerObj = {...state.configuration,speaker:{...state.configuration.speaker, [nameSpeaker]:valueSpeaker}}
+
+            return(
+                {...state, configuration:configurationSpeakerObj}
+            )
+
+        case "SET_ConfigurationInitialSpeaker":
+            const initialSpeakerObj={...state.configuration ,speaker: action.payload }
+
+            return {...state,
+                configuration: initialSpeakerObj
+            }
+
+        case "SET_ConfigurationSpeakerList":
             const {id, name, lastName, title, email} = action.payload
-            let newArr = state.SpeakerList.map((item, index) => (action.payload.id === index ? {
+            let newArr = state.configuration.SpeakerList.map((item, index) => (action.payload.id === index ? {
                     ...item,
                     id: id,
                     name: name,
@@ -43,21 +73,20 @@ export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
                     email: email
                 } : item
             ))
+            const configurationSpeakerListObj=!action.payload.id ?{...state.configuration,SpeakerList: [...state.configuration.SpeakerList, action.payload]}:{...state.configuration,SpeakerList:newArr}
+
             return (
-                !action.payload.id ? {
+                {
                         ...state,
-                        SpeakerList: [...state.SpeakerList, action.payload]
-                    } :
-                    {
-                        ...state,
-                        SpeakerList: newArr
+                        configuration: configurationSpeakerListObj
                     }
             )
 
-        case "SET_DeleteSpeaker":
-            state.SpeakerList.map((el,i) => (i === action.payload.id ? state.SpeakerList.splice(i,1):state.SpeakerList))
+        case "SET_ConfigurationDeleteSpeaker":
+            state.configuration.SpeakerList.map((el,i) => (i === action.payload.id ? state.configuration.SpeakerList.splice(i,1):state.configuration.SpeakerList))
+            const configurationDeleteSpeakerObj = {...state.configuration , SpeakerList: state.configuration.SpeakerList}
             return {...state,
-                speaker: state.SpeakerList
+                configuration: configurationDeleteSpeakerObj
             }
 
         default:{

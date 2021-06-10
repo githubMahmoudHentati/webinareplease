@@ -18,8 +18,9 @@ export const Generals =()=>{
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
-    const {onChangeSwitch,values}= Hooks()
+    const {generalOnChangeSwitch,generalOnChange,generalOnChangeButton,values}= Hooks()
     console.log("values",values)
+
 
     return(
         <Row gutter={[0, 30]}>
@@ -89,11 +90,11 @@ export const Generals =()=>{
                         <span style={{fontSize: "14px", fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
-                        <Switch name="directPlan" onChange={(checked,event)=>{onChangeSwitch(checked,event,"directPlan")}}/>
+                        <Switch name="directPlan" onChange={(checked,event)=>{generalOnChangeSwitch(checked,event,"directPlan")}}/>
                     </Col>
                 </Row>
             </Col>
-            {values.directPlan &&
+            {values.general.directPlan &&
             <Col span={24}>
                 <Row gutter={[20, 10]}>
                     <Col span={8}>
@@ -132,26 +133,27 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Modes d'accès ay direct</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Modes d'accès au direct</span>
                     </Col>
                     <Col span={24} >
-                        <Row >
-                            <Col lg={3} xs={10} style={{alignItems:"flex-start"}} className={"col-forms"}>
-                                <Radio style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Acccès libre</Radio>
+                        <Row gutter={[0, 10]} >
+                            <Col span={24}>
+                                <Radio.Group name="directAccessMode" onChange={generalOnChange} defaultValue={values.general.directAccessMode} >
+                                    <Radio onChange={generalOnChangeButton} name="freeAccess"  value="freeAccess"  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Acccès libre</Radio>
+                                    <Radio onChange={generalOnChangeButton} name="securedAccess" value="securedAccess" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Accès sécurisé</Radio>
+                                </Radio.Group>
                             </Col>
-                            <Col  lg={21} xs={14} >
-                                <Row gutter={[0, 20]}>
-                                    <Col span={24} className={"col-forms"}>
-                                        <Radio style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Accès sécurisé</Radio>
-                                    </Col>
-                                    <Col span={24} className={"col-forms"}>
-                                        <Input placeholder={'Taper votre mot de passe'}></Input>
-                                    </Col>
-                                    <Col span={24} className={"col-forms"}>
-                                        <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Générer un mot de passe sécurisé</Checkbox>
-                                    </Col>
-                                </Row>
+                            {values.general.directAccessMode === "securedAccess" &&
+                            <Col offset={3} span={21}>
+                                <Input placeholder={'Taper votre mot de passe'}></Input>
                             </Col>
+                            }
+                            {values.general.directAccessMode === "securedAccess" &&
+                            <Col offset={3} span={21}>
+                                <Checkbox style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>Générer
+                                    un mot de passe sécurisé</Checkbox>
+                            </Col>
+                            }
                         </Row>
 
                     </Col>
