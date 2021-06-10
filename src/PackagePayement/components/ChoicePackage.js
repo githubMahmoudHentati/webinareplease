@@ -68,7 +68,7 @@ function ChoicePackage(){
 
     return(
       <div className="ChoicePackage">
-          <Steps current={current}>
+          <Steps current={current} style={{ height:"5%"}}>
               {steps.map(item => (
                   <Step key={item.title} title={item.title} />
               ))}

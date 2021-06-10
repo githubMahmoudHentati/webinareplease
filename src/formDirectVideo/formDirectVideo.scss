@@ -189,13 +189,13 @@
   margin-left: 9px;
 }
 .selectGroupGmail{
-  width: 65% !important;
+  width: 100% !important;
 }
 .div2{
   margin-top: 2%;
 }
 .AddTags{
-  width: 65%;
+  width: 100%;
   min-height: 72px;
   padding: 0.5% 0.5%;
   display: flex;
@@ -203,8 +203,16 @@
   justify-content: flex-start;
   align-items: flex-start;
   border-radius: 2px;
-
-
+}
+.AddTagsConfiguration{
+  width: 100%;
+  min-height: 32px;
+  padding: 0.5% 0.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 2px;
 }
 .div_Email_accée{
   width: 65%;
