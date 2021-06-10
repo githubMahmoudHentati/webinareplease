@@ -50,7 +50,7 @@ body{
 .ant-switch-checked{
    background-color: #419BF9 !important;
 }
-.ant-select-selection-item{
+.groupEmail .ant-select-selection-item{
     background-color: var(--card_color) !important;
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
@@ -782,16 +782,18 @@ input:checked + .slider:before {
 
 .ChoicePackage{
     width: 90%;
+    height: 900px;
     position: absolute;
-    top: 50%;
+    top: 47%;
     left: 50%;
     transform: translate(-50% , -50%);
 }
 .steps-content {
-   min-height: 760px;
+   height: 90%;
 }
 .steps-action {
-    margin-top: 5%;
+   height: 5%;
+    margin-top: 1%;
     width: 100%;
     display: flex;
     flex-direction: row;
