@@ -91,7 +91,7 @@ export const Configuration =()=>{
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
-                                <Switch name="switchSpeaker" defaultChecked={values.configuration.switchSpeaker} onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"switchSpeaker")}/>
+                                <Switch checked={values.configuration.switchSpeaker} name="switchSpeaker"  onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"switchSpeaker")}/>
                             </Col>
                             {values.configuration.SpeakerList.length>1&&values.configuration.switchSpeaker &&
                              <Col span={24}>
