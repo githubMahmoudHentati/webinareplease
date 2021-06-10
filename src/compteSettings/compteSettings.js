@@ -37,7 +37,7 @@ export const CompteSettings=()=>{
 
     return(
         <div>
-            <PrincipalPage >
+            <PrincipalPage menuType={"accountSetting"}>
                 <Row gutter={[0, 40]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px"}} style={{color:darkMode===false?"":"#ffffff"}}>
