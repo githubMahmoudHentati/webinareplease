@@ -59,7 +59,8 @@ export  const Hooks=()=>{
     const deleteSpeaker = async (id) => {
         await dispatch(setConfigurationDeleteSpeaker({id}))
         console.log("enteeeer",values.configuration.SpeakerList.length<2)
-        values.configuration.SpeakerList.length<2&&dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
+        values.configuration.SpeakerList.length===1&&dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
+        values.configuration.SpeakerList.length===1&&dispatch(setConfigurationInitialSpeaker({id:null,name:"",lastName:"",title:"",email:""}))
     };
 
     const handleOk = () => {
@@ -69,6 +70,7 @@ export  const Hooks=()=>{
 
     const handleCancel = () => {
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
+        values.configuration.SpeakerList.length===1&&dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
         console.log("enteeeeeeeeeer")
     };
 
