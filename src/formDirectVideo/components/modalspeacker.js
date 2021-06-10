@@ -13,7 +13,7 @@ import {Hooks} from "../utils/hooks";
     authorization: 'authorization-text',
    },
   }
-  const {handleOk,handleCancel,onChange,values}= Hooks()
+  const {handleOk,handleCancel,onChangeSpeaker,values}= Hooks()
 
   return(
       <Modal className="modal-speaker" title="Ajouter un intervenant" visible={isVisible} onOk={handleOk} onCancel={handleCancel}
@@ -49,10 +49,10 @@ import {Hooks} from "../utils/hooks";
         <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Prénom</span>
        </Col>
          <Col span={12}>
-          <Input defaultValue={values.speaker.name} onChange={(event)=>onChange(event,"name")}placeholder={"Nom"}></Input>
+          <Input defaultValue={values.configuration.speaker.name} onChange={(event)=>onChangeSpeaker(event,"name")}placeholder={"Nom"}></Input>
          </Col>
          <Col  span={12}>
-          <Input defaultValue={values.speaker.lastName} onChange={(event)=>onChange(event,"lastName")} placeholder={"Prenom"}></Input>
+          <Input defaultValue={values.configuration.speaker.lastName} onChange={(event)=>onChangeSpeaker(event,"lastName")} placeholder={"Prenom"}></Input>
          </Col>
         </Row>
        </Col>
@@ -63,7 +63,7 @@ import {Hooks} from "../utils/hooks";
           <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Fonction</span>
          </Col>
          <Col span={24}>
-          <Input defaultValue={values.speaker.title} onChange={(event)=>onChange(event,"title")} placeholder={"Fonction"}></Input>
+          <Input defaultValue={values.configuration.speaker.title} onChange={(event)=>onChangeSpeaker(event,"title")} placeholder={"Fonction"}></Input>
          </Col>
         </Row>
        </Col>
@@ -74,7 +74,7 @@ import {Hooks} from "../utils/hooks";
           <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Email</span>
          </Col>
          <Col span={24}>
-          <Input defaultValue={values.speaker.email} onChange={(event)=>onChange(event,"email")} placeholder={"Email"}></Input>
+          <Input defaultValue={values.configuration.speaker.email} onChange={(event)=>onChangeSpeaker(event,"email")} placeholder={"Email"}></Input>
          </Col>
         </Row>
        </Col>
