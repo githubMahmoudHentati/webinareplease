@@ -112,12 +112,11 @@ export const Configuration =()=>{
                                             ]:
                                             [<span style={{marginLeft:"48px"}}/>]} >
                                                 <List.Item.Meta
-                                                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                                                    avatar={<Avatar src={item.logoSpeaker.thumbUrl} />}
                                                     title={
                                                         <div ref = { itemListRef }>
                                                             <Row >
                                                                 <Col xl={8}lg={10}md={14}sm={16} xs={17}>
-                                                                    <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
                                                                     <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
                                                                 </Col>
                                                                 <Col offset={1} >
