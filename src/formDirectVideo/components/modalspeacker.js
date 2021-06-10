@@ -3,6 +3,7 @@ import {Row,Col,Input,Button,Modal,Upload} from 'antd'
 import '../formDirectVideo.scss'
 import {UploadOutlined} from '@ant-design/icons';
 import {Hooks} from "../utils/hooks";
+import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
 
  export const ModalSpeaker =({isVisible})=>{
  console.log("isModalVisible",isVisible)
@@ -14,6 +15,7 @@ import {Hooks} from "../utils/hooks";
    },
   }
   const {handleOk,handleCancel,onChangeSpeaker,values}= Hooks()
+  let {onChangeFile,beforeUpload,fileList} = UploadLogoSpeaker()
 
   return(
       <Modal className="modal-speaker" title="Ajouter un intervenant" visible={isVisible} onOk={handleOk} onCancel={handleCancel}
@@ -33,7 +35,12 @@ import {Hooks} from "../utils/hooks";
           <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Photo</span>
          </Col>
          <Col span={24}>
-          <Upload {...props} listType="picture">
+          <Upload
+              name="fileList"
+              fileList={[...fileList]}
+              onChange={onChangeFile}
+              beforeUpload={{beforeUpload}}
+              {...props} listType="picture">
            <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
          </Col>

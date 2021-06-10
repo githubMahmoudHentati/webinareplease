@@ -10,8 +10,8 @@ const INITIAL_STATE = {
         modalSpeaker:false,
         switchSpeaker:false,
         directAutomaticArchiving:false,
-        SpeakerList:[{id:0,name: "Nom ",lastName:'Prénom', title:"Titre",email:""}],
-        speaker :{id:null,name: "",lastName:"", title:"",email:""},
+        SpeakerList:[{id:0,name: "Nom ",lastName:'Prénom', title:"Titre",email:"",logoSpeaker:{thumbUrl:"https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"}}],
+        speaker :{id:null,name: "",lastName:"", title:"",email:"",logoSpeaker:{}},
         videoMode:"",
     },
 }
