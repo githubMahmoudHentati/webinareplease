@@ -34,6 +34,10 @@ export  const Hooks=()=>{
         values.configuration.SpeakerList.length < 2 &&valueSwitch==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:checked}));
     }
 
+    const configurationOnChangeButton = (event) => {
+        dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
+    };
+
     const onChangeCheckbox = (event) => {
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
@@ -86,6 +90,7 @@ export  const Hooks=()=>{
         deleteSpeaker,
         onChangeSpeaker,
         onChangeCheckbox,
+        configurationOnChangeButton,
         values
     })
 }
