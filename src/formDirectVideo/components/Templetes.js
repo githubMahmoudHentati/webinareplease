@@ -5,6 +5,7 @@ export const Templetes=()=>{
     return(
         <div className={"Templetes"}>
             <iframe id="inlineFrameExample"
+                    frameBorder="0"
                     title="Inline Frame Example"
                     width="1400px"
                     height="1008px"
