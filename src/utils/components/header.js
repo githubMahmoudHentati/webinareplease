@@ -83,6 +83,37 @@ function GlobalHeader() {
         // Switch Color
         darkMode&&document.documentElement.style.setProperty('--Switch-Color', "#BFBFBF");
         !darkMode&&document.documentElement.style.setProperty('--Switch-Color', "#4E4E4E");
+
+
+        // Tag Green dark light mode
+        darkMode&&document.documentElement.style.setProperty('--tag-green-background', "#f6ffed");
+        !darkMode&&document.documentElement.style.setProperty('--tag-green-background', "#162312");
+        darkMode&&document.documentElement.style.setProperty('--tag-green-border', "#b7eb8f");
+        !darkMode&&document.documentElement.style.setProperty('--tag-green-border', "#274916");
+
+        // Tag Blue dark light mode
+        darkMode&&document.documentElement.style.setProperty('--tag-blue-background', "#e6f7ff");
+        !darkMode&&document.documentElement.style.setProperty('--tag-blue-background', "#111d2c");
+        darkMode&&document.documentElement.style.setProperty('--tag-blue-border', "#91d5ff");
+        !darkMode&&document.documentElement.style.setProperty('--tag-blue-border', "#15395b");
+
+        // Tag Geekblue dark light mode
+        darkMode&&document.documentElement.style.setProperty('--tag-Geekblue-background', "rgba(0, 0, 0, 0.04)");
+        !darkMode&&document.documentElement.style.setProperty('--tag-Geekblue-background', "rgba(255, 255, 255, 0.04)");
+        darkMode&&document.documentElement.style.setProperty('--tag-Geekblue-border', "rgba(0, 0, 0, 0.15)");
+        !darkMode&&document.documentElement.style.setProperty('--tag-Geekblue-border', "rgba(255, 255, 255, 0.2)");
+        darkMode&&document.documentElement.style.setProperty('--tag-Geekblue-color', "rgba(0, 0, 0, 0.65)");
+        !darkMode&&document.documentElement.style.setProperty('--tag-Geekblue-color', "rgba(255, 255, 255, 0.65)");
+
+
+        // Tag Geekblue dark light mode
+        darkMode&&document.documentElement.style.setProperty('--color-tag-text-blue', "#007fcb");
+        !darkMode&&document.documentElement.style.setProperty('--color-tag-text-blue', "rgba(255, 255, 255, 0.85)");
+        darkMode&&document.documentElement.style.setProperty('--color-tag-text-green', "#52c41a");
+        !darkMode&&document.documentElement.style.setProperty('--color-tag-text-green', "#52c41a");
+        darkMode&&document.documentElement.style.setProperty('--color-tag-text-gray', "rgba(0, 0, 0, 0.65)");
+        !darkMode&&document.documentElement.style.setProperty('--color-tag-text-gray', "rgba(255, 255, 255, 0.65)");
+
     }
 
 

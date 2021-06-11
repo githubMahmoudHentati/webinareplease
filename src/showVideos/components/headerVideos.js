@@ -78,7 +78,7 @@ function HeaderVideos({selectedRow}) {
 
           <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
               <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Mes Directs</h4>
-              <Button onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
+              <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
           </div>{/*./TousMedia*/}
 
           <div className="Filter">

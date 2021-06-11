@@ -1,5 +1,5 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Avatar,Upload , Select} from 'antd'
+import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Avatar,Upload , Select , message} from 'antd'
 import '../compteSettings.scss'
 import {UserOutlined,UploadOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
@@ -18,7 +18,9 @@ const { Option } = Select;
          },
      };
 
-     function onChange(value) {
+
+
+function onChange(value) {
          console.log(`selected ${value}`);
      }
 

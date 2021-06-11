@@ -22,7 +22,6 @@ export const IframeDirectVideo =()=>{
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    let {values}=Hooks()
 
 
     const SelectMenu = ()=>{
