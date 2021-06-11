@@ -92,6 +92,13 @@ body{
 }
 .ant-list-split , .ant-list-item{
     border-bottom: 1px solid var(--border_color) !important;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: padding 2s !important;
+    padding-left: 5px;
+}
+.ant-list-item:hover{
+    -webkit-transition: border-radius 2s !important;
+    background-color: var(--dark_color) !important;
 }
 .ant-list-items .ant-list-item{
     border-bottom: 1px solid var(--border_color) !important;
