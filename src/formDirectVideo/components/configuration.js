@@ -204,7 +204,8 @@ export const Configuration =()=>{
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
-                                        <Switch name="directAutomaticArchiving"onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
+                                        <Switch checked={values.configuration.directAutomaticArchiving} name="directAutomaticArchiving"
+                                                onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
                                         />
                                         <Tooltip placement="right" title={"Votre direct sera automatiquement archivé et disponible visualisation vidéo à la demande"}>
                                         <InfoCircleFilled style={{cursor:"pointer" , color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/>

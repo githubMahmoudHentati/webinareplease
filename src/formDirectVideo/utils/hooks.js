@@ -16,6 +16,7 @@ export  const Hooks=()=>{
 
     //***************General************************//
     const generalOnChangeSwitch =(checked,event,valueSwitch)=>{
+        console.log("a",event.target.value,checked)
         dispatch(setGeneralOnchange({generalNameChange:valueSwitch, generalValueChange:checked}));
     }
     const generalOnChange = (event) => {
