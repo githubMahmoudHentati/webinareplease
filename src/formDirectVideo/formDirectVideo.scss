@@ -371,3 +371,14 @@ margin-right: 10px ;
     max-height: 257.33px !important;
   }
 }
+
+.col-item-list{
+  -webkit-transition: padding 2s !important;
+  &:hover{
+    cursor: pointer !important;
+    -webkit-transition: border-radius 2s !important;
+    //background-color: grey !important;
+    box-shadow: none;
+    color: whitesmoke !important;
+  }
+}

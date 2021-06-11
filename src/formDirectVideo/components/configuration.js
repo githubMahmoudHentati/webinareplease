@@ -114,15 +114,19 @@ export const Configuration =()=>{
                                             ]:
                                             [<span style={{marginLeft:"48px"}}/>]} >
                                                 <List.Item.Meta
-                                                    avatar={<Avatar src={item.logoSpeaker.thumbUrl} />}
+                                                    className={indexItem!=0&&"col-item-list"}
+                                                    avatar={<Avatar src={item.logoSpeaker.thumbUrl?item.logoSpeaker.thumbUrl:
+                                                        "https://www.trustedclothes.com/blog/wp-content/uploads/2019/02/anonymous-person-221117.jpg"} />}
                                                     title={
                                                         <div ref = { itemListRef }>
                                                             <Row >
                                                                 <Col xl={8}lg={10}md={14}sm={16} xs={17}>
-                                                                    <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>{item.name}  {item.lastName}</span>
+                                                                    <span style={{textAlign: 'left', fontSize: "17px", fontFamily: "system-ui"}}>
+                                                                        {item.name}  {item.lastName}</span>
                                                                 </Col>
                                                                 <Col offset={1} >
-                                                                    <span style={{textAlign: 'left', fontSize: "15px", fontFamily: "system-ui",fontWeight:"lighter"}}>{item.title}</span>
+                                                                    <span style={{textAlign: 'left', fontSize: "15px", fontFamily: "system-ui",
+                                                                        fontWeight:"lighter"}}>{item.title}</span>
                                                                 </Col>
                                                             </Row>
                                                         </div>
