@@ -32,15 +32,14 @@ export const Generals =()=>{
                     <Col className={"col-forms"} span={24}>
                         <span style={{fontSize:"14px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Ajouter une vignette</span>
                     </Col>
-                    <Col span={24} className={"col-forms"}>
-                        <Dragger {...props} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}>
+                    <Col span={24} className={"col-forms-upload"}>
+                        <Dragger {...props} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}>
                             <p className="ant-upload-drag-icon">
                                 <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
                             </p>
-                            <p className="ant-upload-text" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Click or drag file to this area to upload</p>
+                            <p className="ant-upload-text" style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Cliquer ou faites glisser le fichier</p>
                             <p className="ant-upload-hint" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                                Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                                band files
+                                Un seul fichier peut etre selectionné
                             </p>
                         </Dragger>
                     </Col>
@@ -59,7 +58,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Titre du direct</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Description du direct</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Input.TextArea placeholder={"Description du vidéo"}></Input.TextArea>
@@ -90,7 +89,7 @@ export const Generals =()=>{
                         <span style={{fontSize: "14px", fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
-                        <Switch name="directPlan" onChange={(checked,event)=>{generalOnChangeSwitch(checked,event,"directPlan")}}/>
+                        <Switch  checked={values.general.directPlan} name="directPlan" value="directPlan" onChange={(checked,event)=>{generalOnChangeSwitch(checked,event,"directPlan")}}/>
                     </Col>
                 </Row>
             </Col>
