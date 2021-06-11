@@ -1,7 +1,7 @@
 import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
 import '../formDirectVideo.scss'
-import {ArrowLeftOutlined} from '@ant-design/icons';
+import {ArrowLeftOutlined,CloseOutlined,CheckOutlined,VideoCameraOutlined} from '@ant-design/icons';
 import history from '../../router/history';
 import {MenuForms} from './menuforms'
 import {Generals} from "./general";
@@ -12,6 +12,7 @@ import {useHistory} from "react-router-dom";
 import {SocialTools} from "./socialTools";
 import {Templetes} from "./Templetes";
 import {setDarkMode} from "../../utils/redux/actions";
+import {Hooks} from "../utils/hooks";
 
 
 export const IframeDirectVideo =()=>{
@@ -21,6 +22,7 @@ export const IframeDirectVideo =()=>{
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    let {values}=Hooks()
 
 
     const SelectMenu = ()=>{
@@ -55,17 +57,36 @@ export const IframeDirectVideo =()=>{
                         </Breadcrumb>
                     </Col>
                     <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
-                        <ArrowLeftOutlined
-                            onClick={()=>{history.push("/showVideos")}}
-                            style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium' , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}
-                            />
-                        <span style={{
-                            color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",
-                            fontSize: "medium",
-                            fontFamily: "Arial, Helvetica, sans-serif;",
-                            marginLeft: "1%"
-                        }}> Ajouter un direct
+                        <Row style={{width:"100%"}}justify={"space-between"}>
+                            <Col span={8}>
+                                <Row gutter={[15, 0]}>
+                                    <Col style={{display: "flex", alignItems: "center", }}>
+                                        <ArrowLeftOutlined
+                                            onClick={()=>{history.push("/showVideos")}}
+                                            style={{fontSize: 'medium', cursor: 'medium' , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}
+                                        />
+                                    </Col>
+                                    <Col>
+                                        <span style={{
+                                            color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",
+                                            fontSize: "medium",
+                                            fontFamily: "Arial, Helvetica, sans-serif;",
+                                        }}> Ajouter un direct
                                         </span>
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col >
+                                <Row gutter={[15, 0]}>
+                                    <Col>
+                                        <Button icon={<CloseOutlined />}> annuler</Button>
+                                    </Col>
+                                    <Col>
+                                        <Button icon={values.general.directPlan?<VideoCameraOutlined />:<CheckOutlined />} type={"primary"}>{values.general.directPlan?<span>Diffuser</span>:<span>Valider</span>}</Button>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
                     </Col>
                     <Col span={24}>
                         <Row gutter={[30, 20]}>

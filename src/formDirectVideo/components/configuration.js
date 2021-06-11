@@ -154,9 +154,9 @@ export const Configuration =()=>{
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <CheckboxGroup>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Chat(nom modéré)</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Commentaires (modérés)</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Mention j'aime</Checkbox>
+                                    <Checkbox value="chat" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Chat (nom modéré)</Checkbox>
+                                    <Checkbox value="comments" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Commentaires (modérés)</Checkbox>
+                                    <Checkbox value="likeMention"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Mention j'aime</Checkbox>
                                 </CheckboxGroup>
                             </Col>
                         </Row>
@@ -172,10 +172,14 @@ export const Configuration =()=>{
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <CheckboxGroup>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Diffusion Richmedia <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></Checkbox>
+                                    <Checkbox value="richeMediaDiffusion" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Diffusion Richmedia <InfoCircleFilled
+                                        style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}
+                                    /></Checkbox>
                                     <br/>
                                     <br/>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Fichiers joints <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></Checkbox>
+                                    <Checkbox  value="attachments" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Fichiers joints <InfoCircleFilled
+                                        style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}
+                                   /></Checkbox>
                                 </CheckboxGroup>
                             </Col>
                         </Row>
@@ -200,7 +204,8 @@ export const Configuration =()=>{
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
-                                        <Switch name="directAutomaticArchiving"onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
+                                        <Switch checked={values.configuration.directAutomaticArchiving} name="directAutomaticArchiving"
+                                                onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
                                         />
                                         <Tooltip placement="right" title={"Votre direct sera automatiquement archivé et disponible visualisation vidéo à la demande"}>
                                         <InfoCircleFilled style={{cursor:"pointer" , color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/>
@@ -210,10 +215,12 @@ export const Configuration =()=>{
                             </Col>
                             {values.configuration.directAutomaticArchiving&&
                             <Col span={24}>
-                                <Radio.Group name="videoMode"onChange={onChangeCheckbox}>
+                                <Radio.Group value={values.configuration.videoMode} name="videoMode"onChange={onChangeCheckbox}>
                                     <Space direction="vertical">
-                                        <Radio value="vidéo non visible"><span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo non visible</span></Radio>
-                                        <Radio value="vidéo visible"><span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo visible</span></Radio>
+                                        <Radio value="vidéo non visible"><span
+                                            style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo non visible</span></Radio>
+                                        <Radio value="vidéo visible"><span
+                                            style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo visible</span></Radio>
                                     </Space>
                                 </Radio.Group>
                             </Col>
