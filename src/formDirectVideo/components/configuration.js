@@ -25,6 +25,8 @@ import {Hooks} from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
 import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
+import EditableTagGroupConfiguration from "./EditableTagGroupConfiguration";
+
 
 
 export const Configuration =()=>{
@@ -243,9 +245,9 @@ export const Configuration =()=>{
                                 <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Tags</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <Select mode="tags" style={{ width: '100%' }} placeholder="Choisir des Tags" >
-                                    {children}
-                                </Select>
+                                <div className={"AddTagsConfiguration"} style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"solid 1px rgba(0, 0, 0, 0.15)":"1px solid rgba(255, 255, 255, 0.15)"}}>
+                                    <EditableTagGroupConfiguration/>
+                                </div>
                             </Col>
                         </Row>
                     </Col>
