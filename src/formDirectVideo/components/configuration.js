@@ -204,8 +204,7 @@ export const Configuration =()=>{
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
-                                        <Switch checked={values.configuration.directAutomaticArchiving} name="directAutomaticArchiving"
-                                                onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
+                                        <Switch name="directAutomaticArchiving"onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
                                         />
                                         <Tooltip placement="right" title={"Votre direct sera automatiquement archivé et disponible visualisation vidéo à la demande"}>
                                         <InfoCircleFilled style={{cursor:"pointer" , color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/>
@@ -243,7 +242,8 @@ export const Configuration =()=>{
                                 <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Tags</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <div className={"AddTagsConfiguration"} style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"solid 1px rgba(0, 0, 0, 0.15)":"1px solid rgba(255, 255, 255, 0.15)"}}>
+                                <div className={"AddTagsConfiguration"}
+                                     style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"solid 1px rgba(0, 0, 0, 0.15)":"1px solid rgba(255, 255, 255, 0.15)"}}>
                                     <EditableTagGroupConfiguration/>
                                 </div>
                             </Col>
