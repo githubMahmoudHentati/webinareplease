@@ -7,6 +7,8 @@ const INITIAL_STATE = {
     },
 
     configuration:{
+        notVisibleVideo:false,
+        visibleVideo:false,
         modalSpeaker:false,
         switchSpeaker:false,
         directAutomaticArchiving:false,
