@@ -150,8 +150,8 @@ function DateCellRender(value) {
                                     <div className={"div_time_calendar"}>
                                         <div className={"type_btn"}><Tag color="green">En cours</Tag></div>
                                         <div className={"div2_time_calendar"}>
-                                            <p><CalendarOutlined /> 28-05-2121</p>
-                                            <p><ClockCircleOutlined /> 12:30:00</p>
+                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><CalendarOutlined /> 28-05-2121</p>
+                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><ClockCircleOutlined /> 12:30:00</p>
                                         </div>
                                     </div>
                                 </div>
@@ -161,13 +161,13 @@ function DateCellRender(value) {
                 }else if(item.type==='Archivé'){
                     return (
                         <div>
-                            <Tag style={{border:"1px solid rgba(0,0,0,0.15)"}} color="#F5F5F5" onClick={()=>onShowModalArchivé()}>
-                                <Badge color={'rgba(0,0,0,0.65)'} text={item.content} style={{color:"rgba(0,0,0,0.65)" , borderRadius:"2px"}}/>
+                            <Tag  color="red" onClick={()=>onShowModalArchivé()}>
+                                <Badge color={"#B7B7B7"} text={item.content} style={{color:"rgba(0,0,0,0.65)" , borderRadius:"2px"}}/>
                             </Tag>
 
                             <Modal
                                 visible={visibleArchivé}
-                                title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'rgba(0,0,0,0.65)'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                                title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'#B7B7B7'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
                                 onCancel={handleCancelArchivé}
                                 footer={[
                                     <div className={"modal_footer_Archivé"}>

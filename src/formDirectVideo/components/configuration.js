@@ -63,7 +63,7 @@ export const Configuration =()=>{
 
 
     return(
-        <Row gutter={[0, 50]}>
+        <Row gutter={[0, 50]} className={"Configuration"}>
             <Col span={24}>
                 <Row gutter={[0, 25]}>
                     <Col span={24} className={"col-forms"}>

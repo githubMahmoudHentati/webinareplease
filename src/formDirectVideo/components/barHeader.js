@@ -40,10 +40,10 @@ export const BarHeader =()=>{
             <Col>
                 <Row gutter={[15, 0]}>
                     <Col>
-                        <Button icon={<CloseOutlined/>}>Annuler</Button>
+                        <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseOutlined />}> annuler</Button>
                     </Col>
                     <Col>
-                        <Button icon={values.general.directPlan?<VideoCameraOutlined />:<CheckOutlined/>} type={"primary"}>{values.general.directPlan?<span>Diffuser</span>:<span>Valider</span>}</Button>
+                        <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={values.general.directPlan?<VideoCameraOutlined />:<CheckOutlined />} type={"primary"}>{values.general.directPlan?<span>Diffuser</span>:<span>Valider</span>}</Button>
                     </Col>
                 </Row>
             </Col>
