@@ -72,7 +72,8 @@ export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
                     name: name,
                     lastName: lastName,
                     title: title,
-                    email: email
+                    email: email,
+                    logoSpeaker:{}
                 } : item
             ))
             const configurationSpeakerListObj=!action.payload.id ?{...state.configuration,SpeakerList: [...state.configuration.SpeakerList, action.payload]}:{...state.configuration,SpeakerList:newArr}
