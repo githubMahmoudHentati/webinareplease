@@ -115,8 +115,8 @@ function DateCellRender(value) {
                            <div className={"div_time_calendar"}>
                                <div className={"type_btn"}><Tag color="blue">A venir</Tag></div>
                                <div className={"div2_time_calendar"}>
-                                   <p><CalendarOutlined /> 13-05-2121</p>
-                                   <p><ClockCircleOutlined /> 16:30:00</p>
+                                   <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><CalendarOutlined /> 13-05-2121</p>
+                                   <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><ClockCircleOutlined /> 16:30:00</p>
                                </div>
                            </div>
                        </div>
@@ -185,8 +185,8 @@ function DateCellRender(value) {
                                     <div className={"div_time_calendar"}>
                                         <div className={"type_btn"}><Tag color="gray">Archivé</Tag></div>
                                         <div className={"div2_time_calendar"}>
-                                            <p><CalendarOutlined /> 28-05-2121</p>
-                                            <p><ClockCircleOutlined /> 12:30:00</p>
+                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><CalendarOutlined /> 28-05-2121</p>
+                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><ClockCircleOutlined /> 12:30:00</p>
                                         </div>
                                     </div>
                                 </div>

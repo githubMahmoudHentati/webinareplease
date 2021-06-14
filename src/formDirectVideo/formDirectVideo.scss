@@ -1,3 +1,6 @@
+:root{
+  --display-emails: none;
+}
 .title-col{
   background: RGBA(0, 0, 0, 0.04);
   text-align: left;
@@ -363,6 +366,22 @@ margin-right: 10px ;
 
 .list-speaker{
   max-height: 172px;
+}
+/*EmailsInvitations*/
+.custom-dropdown {
+  display: var(--display-emails) !important;
+}
+.custom-select{
+  min-height: 32px !important;
+}
+.form_Invitation{
+  width: 100% !important;
+}
+.form_Invitation .ant-select-selector{
+  width: 100% !important;
+}
+.ant-select-multiple .ant-select-selection-item{
+  height: 28px !important;
 }
 
 
