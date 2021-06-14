@@ -92,7 +92,7 @@ function Invitation(){
 
             });
             if(isValid.includes(false)){
-                callback('Cet email n\'est pas valide')
+                callback('Veuillez entrer une adresse email valide')
             }
         }
         else {
