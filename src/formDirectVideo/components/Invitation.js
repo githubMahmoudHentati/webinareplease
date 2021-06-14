@@ -1,5 +1,5 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu , Select , Divider , Tag , Tooltip , Popover , Checkbox } from 'antd'
+import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu , Select , Divider , Tag , Tooltip , Popover , Checkbox , Form} from 'antd'
 import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , ExportOutlined , DiffOutlined , PlusSquareOutlined  } from '@ant-design/icons';
 import EditableTagGroup from "./EditableTagGroup";
 import '../formDirectVideo.scss'
@@ -24,6 +24,8 @@ function Invitation(){
     const [visibleRappelJ72 , SetVisibleRappelJ72 ] = useState(false)
     const [visibleRappelJ12 , SetVisibleRappelJ12 ] = useState(false)
     const [visibleRappelH12 , SetVisibleRappelH12 ] = useState(false)
+
+    const [emails , SetEmails] = useState(false);
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -81,6 +83,36 @@ function Invitation(){
         SetVisibleRappelH12(e.target.checked)
     }
 
+    // Validation des emails
+    const checkEmail = (rule, value, callback) => {
+        let isValid = []
+        if (emails.length) {
+            emails.forEach(ele => {
+                isValid.push(isValidEmail(ele))
+
+            });
+            if(isValid.includes(false)){
+                callback('Cet email n\'est pas valide')
+            }
+        }
+        else {
+            callback();
+        }
+    }
+    const selectProps = {
+        mode:"tags",
+        placeholder: "someone@example.com",
+        dropdownClassName:`custom-dropdown`,
+        className:`custom-select`
+    };
+    const isValidEmail = function(mail){
+        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+((?:\.[a-zA-Z0-9-]+)(?:\.[a-zA-Z0-9-]+)*)+(?:[a-zA-Z0-9-]+)*$/.test(mail)
+    }
+    const handleChangeEmailsInvitation = (value) =>{
+        SetEmails(value);
+    }
+    // Validation des emails
+
 
 
     return(
@@ -119,12 +151,25 @@ function Invitation(){
 
             <div className={"groupEmail div2"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>E-mails   <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
-                <div className={"AddTags"} style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"solid 1px rgba(0, 0, 0, 0.15)":"1px solid rgba(255, 255, 255, 0.15)"}}>
-                <EditableTagGroup />
-                </div>
+                   <Form className={"form_Invitation"}>
+
+                       <Form.Item
+                           name="Email"
+                           rules={[
+                               {validator: checkEmail} ,
+                               {
+                                   required: true,
+                                   message: 'Ce champ est requis!',
+                               },]}
+                       >
+                           <Select value={[]} onChange={handleChangeEmailsInvitation} {...selectProps} />
+                       </Form.Item>
+
+                   </Form>
+
             </div>{/*./groupEmail*/}
 
-            <div className={"groupEmail div2"}>
+            <div className={"groupEmail div3"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Régles d'envoi </span>
                 <div className={"div_Email_accée"}>
                      <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Emails d'inscription et d'accès</p>

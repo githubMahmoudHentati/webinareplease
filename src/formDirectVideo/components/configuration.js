@@ -27,7 +27,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
 import EditableTagGroupConfiguration from "./EditableTagGroupConfiguration";
 
-
+const { Option } = Select;
 
 export const Configuration =()=>{
     const dispatch = useDispatch()
@@ -48,6 +48,15 @@ export const Configuration =()=>{
     for (let i = 10; i < 36; i++) {
         children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
     }
+    const handleChangeTags = (value) =>{
+        console.log(`selected ${value}`);
+    }
+    const selectProps = {
+        mode:"tags",
+        placeholder: "Tags Mode",
+        dropdownClassName:`custom-dropdown`,
+        className:`custom-select`
+    };
     
 
     useEffect ( () => {
@@ -246,10 +255,7 @@ export const Configuration =()=>{
                                 <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Tags</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <div className={"AddTagsConfiguration"}
-                                     style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"solid 1px rgba(0, 0, 0, 0.15)":"1px solid rgba(255, 255, 255, 0.15)"}}>
-                                    <EditableTagGroupConfiguration/>
-                                </div>
+                                    <Select className={"selectTags"} mode="tags" style={{ width: '100%' , minHeight:"32px" }} placeholder="Tags Mode" onChange={handleChangeTags}  {...selectProps} />
                             </Col>
                         </Row>
                     </Col>

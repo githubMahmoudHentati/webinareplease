@@ -40,6 +40,14 @@ body{
 
 
 }
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-cell-selected .ant-picker-calendar-date  {
+    background-color: var(--option-background) !important;
+}
+.custom-select .ant-select-selection-item{
+    background-color: var(--card_color) !important;
+    color: var(--white_color) !important;
+    border: 1px solid var(--border_color) !important;
+}
 .ant-picker-calendar-date-content .ant-tag-red .ant-badge-status-text{
     color: var(--color-tag-text-gray) !important;
 }
@@ -1103,4 +1111,7 @@ input:checked + .slider:before {
 
 .ant-card-body{
     height: 100%;
+}
+.ant-select-selection-placeholder{
+    color: #bfbfbf !important;
 }
