@@ -2,7 +2,8 @@
 const INITIAL_STATE = {
     accountMenu : 0,
     directMenu : 0,
-    DarkMode : false
+    DarkMode : false,
+    iframeStyle:{height:"20%"}
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{

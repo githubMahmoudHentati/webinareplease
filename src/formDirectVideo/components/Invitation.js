@@ -4,6 +4,8 @@ import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , ExportOutlined
 import EditableTagGroup from "./EditableTagGroup";
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
+import {setConfigurationOnchange} from "../store/formDirectVideoAction";
+import {Hooks} from "../utils/hooks";
 const { Option } = Select;
 let index = 0;
 
@@ -15,18 +17,11 @@ function Invitation(){
     const [items , SetItems] = useState(['Groupe 01' , 'Groupe 02' , 'Groupe 03' , 'Groupe 04'])
     const [visible , SetVisible] = useState(false)
     const [visbleRegle , SetVisibleRegle] = useState(false);
-    const [visibleInscription , SetVisibleInscription] = useState(false)
-    const [visibleRappelJ7 , SetVisibleRappelJ7 ] = useState(false)
-    const [visibleRappelJ1 , SetVisibleRappelJ1 ] = useState(false)
-    const [visibleRappelH1 , SetVisibleRappelH1 ] = useState(false)
-
-    const [visibleInscription2 , SetVisibleInscription2] = useState(false)
-    const [visibleRappelJ72 , SetVisibleRappelJ72 ] = useState(false)
-    const [visibleRappelJ12 , SetVisibleRappelJ12 ] = useState(false)
-    const [visibleRappelH12 , SetVisibleRappelH12 ] = useState(false)
 
     const [emails , SetEmails] = useState(false);
 
+    const {values,InvitationOnChangeChecked}=Hooks()
+    console.log("invitation",values)
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
@@ -50,38 +45,6 @@ function Invitation(){
     const handleVisibleChangeRegle = visible => {
         SetVisibleRegle(visible)
     };
-    //handle Click checkbox invitation popover one
-    const onChangeInscription = (e) =>{
-        SetVisibleInscription(e.target.checked)
-    }
-    // handle click checkbox rappel j7
-    const onChangeRappelJ7 = (e) =>{
-        SetVisibleRappelJ7(e.target.checked)
-    }
-    //handle click checkbox rappel j1
-    const onChangeRappelJ1 = (e) =>{
-        SetVisibleRappelJ1(e.target.checked)
-    }
-    // handle click checkbox rappel h1
-    const onChangeRappelH1 = (e) =>{
-        SetVisibleRappelH1(e.target.checked)
-    }
-    //handle Click checkbox invitation popover two
-    const onChangeInscription2 = (e) =>{
-        SetVisibleInscription2(e.target.checked)
-    }
-    // handle click checkbox rappel j7
-    const onChangeRappelJ72 = (e) =>{
-        SetVisibleRappelJ72(e.target.checked)
-    }
-    //handle click checkbox rappel j1
-    const onChangeRappelJ12 = (e) =>{
-        SetVisibleRappelJ12(e.target.checked)
-    }
-    // handle click checkbox rappel h1
-    const onChangeRappelH12 = (e) =>{
-        SetVisibleRappelH12(e.target.checked)
-    }
 
     // Validation des emails
     const checkEmail = (rule, value, callback) => {
@@ -175,7 +138,7 @@ function Invitation(){
                      <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Emails d'inscription et d'accès</p>
                     <div className={"div_ajout_régle"}>
 
-                        {visibleInscription === true
+                        {values.invitation.addRules.visibleInscription === true
                             ?
                             <div className={"infos_ajout_régle"}>
                                 <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Inscription</span></div>
@@ -186,7 +149,7 @@ function Invitation(){
                             null
                         }
 
-                        {visibleRappelJ7 === true
+                        {values.invitation.addRules.visibleRappelJ7 === true
                             ?
                             <div className={"infos_ajout_régle"}>
                                 <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Rappel J-7</span></div>
@@ -197,7 +160,7 @@ function Invitation(){
                             null
                         }
 
-                        {visibleRappelJ1 === true
+                        {values.invitation.addRules.visibleRappelJ1 === true
                             ?
                             <div className={"infos_ajout_régle"}>
                                 <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Rappel J-1</span></div>
@@ -208,7 +171,7 @@ function Invitation(){
                             null
                         }
 
-                        {visibleRappelH1 === true
+                        {values.invitation.addRules.visibleRappelH1 === true
                             ?
                             <div className={"infos_ajout_régle"}>
                                 <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Rappel H-1</span></div>
@@ -224,10 +187,10 @@ function Invitation(){
                             className={"popover"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={onChangeInscription}>Invitation pour inscription</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={onChangeRappelJ7}>Rappel J-7</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={onChangeRappelJ1}>Rappel J-1</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={onChangeRappelH1}>Rappel H-1</Checkbox>
+                                    <Checkbox value="visibleInscription"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>Invitation pour inscription</Checkbox>
+                                    <Checkbox value="visibleRappelJ7"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>Rappel J-7</Checkbox>
+                                    <Checkbox value="visibleRappelJ1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>Rappel J-1</Checkbox>
+                                    <Checkbox value="visibleRappelH1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>Rappel H-1</Checkbox>
                                 </div>
                             }
                             trigger="click"
@@ -246,7 +209,7 @@ function Invitation(){
                     <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Emails pour les inscrits</p>
                     <div className={"div_ajout_régle"}>
 
-                        {visibleInscription2 === true
+                        {values.invitation.addRules.visibleInscription2 === true
                             ?
                             <div className={"infos_ajout_régle"}>
                                 <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Confirmation d'inscription</span></div>
@@ -257,7 +220,7 @@ function Invitation(){
                             null
                         }
                         {
-                            visibleRappelJ72 === true
+                            values.invitation.addRules.visibleRappelJ72 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
                                     <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>A participé</span></div>
@@ -269,7 +232,7 @@ function Invitation(){
                         }
 
                         {
-                            visibleRappelJ12 === true
+                            values.invitation.addRules.visibleRappelJ12 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
                                     <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Non venu</span></div>
@@ -281,7 +244,7 @@ function Invitation(){
                         }
 
                         {
-                            visibleRappelH12 === true
+                            values.invitation.addRules.visibleRappelH12 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
                                     <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Non venu</span></div>
@@ -298,10 +261,10 @@ function Invitation(){
                             className={"popover"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={onChangeInscription2}>Invitation pour inscription</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={onChangeRappelJ72}>Rappel J-7</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={onChangeRappelJ12}>Rappel J-1</Checkbox>
-                                    <Checkbox style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={onChangeRappelH12}>Rappel H-1</Checkbox>
+                                    <Checkbox value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>Invitation pour inscription</Checkbox>
+                                    <Checkbox value = "visibleRappelJ72" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>Rappel J-7</Checkbox>
+                                    <Checkbox value = "visibleRappelJ12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>Rappel J-1</Checkbox>
+                                    <Checkbox value = "visibleRappelH12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>Rappel H-1</Checkbox>
                                 </div>
                             }
                             trigger="click"

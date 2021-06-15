@@ -1,4 +1,4 @@
-//*********************Genral actions *****************//
+//********************* General actions *****************//
 
 export function setGeneralOnchange(e){
 
@@ -8,7 +8,7 @@ export function setGeneralOnchange(e){
     }
 }
 
-//*******************Configuration actions***************//
+//******************** Configuration actions***************//
 
         export function setConfigurationModalSpeaker(e){
 
@@ -58,6 +58,14 @@ export function setGeneralOnchange(e){
                 payload:e,
             }
 
+        }
+//*******************Invitations actions*******************//
+
+        export function setInvitationOnchange(e){
+            return{
+                type:"SET_InvitationOnchange",
+                payload:e
+            }
         }
 
 //*******************SocialTool actions*******************//
