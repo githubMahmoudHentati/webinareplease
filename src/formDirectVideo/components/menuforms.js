@@ -43,7 +43,7 @@ export const MenuForms =()=>{
                         textAlign: "left",
                         fontFamily: "Ping Fang SC",
                         fontWeight: "bold"
-                    }}>Paramètres généraux</span>
+                    }}>Paramètres optionnels</span>
                     </div>
                     <Menu.Item className={"menuItem"} onClick={()=>{dispatch(setDirectSetting(1))}} key="2">
                         Configuration
