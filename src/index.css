@@ -17,6 +17,8 @@ body{
     --option-background:#FFFFFF;
     --option_select:#FFFFFF;
     --modal_background:#FFFFFF;
+    --item-menu-background:#e7f7ff;
+    --item-menu-color : rgba(0, 0, 0, 0.65);
 
     --menu-background:#E6F7FF;
     --menu-color:#2B96FF;
@@ -40,6 +42,7 @@ body{
 
 
 }
+
 .ant-picker-calendar-full .ant-picker-panel .ant-picker-cell-selected .ant-picker-calendar-date  {
     background-color: var(--option-background) !important;
 }
@@ -199,10 +202,13 @@ body{
     margin-top: 12px;
 }
 .ant-dropdown-menu-item{
-    color: var(--white_color) !important;
+    color: var(--item-menu-color) !important;
 }
 .ant-dropdown-menu-item:hover{
     background-color: var(--option-background) !important;
+}
+.ant-dropdown-menu-item:hover .ant-dropdown-menu-title-content{
+    color: #1890ff !important;
 }
 .ant-popover-inner-content{
     background-color: var(--option_select) !important;
@@ -397,15 +403,17 @@ body{
 }
 
 .menuItem{
-    color: var(--white_color);
+    color: var(--item-menu-color) !important;
 }
 .menuItem:hover{
     background-color: var(--option-background) !important;
     color: var(--white_color) !important;
 }
 .menuItem:focus{
-    background-color: var(--option-background) !important;
-    color: var(--white_color) !important;
+    background-color: var(--item-menu-background) !important;
+}
+.menuItem:focus .ant-menu-title-content{
+    color: #007fcb  !important;
 }
 .ant-picker-cell-selected{
     background-color: var(--option-background) !important;
@@ -872,7 +880,7 @@ input:checked + .slider:before {
     text-align: center;
 }
 .empty_div{
-    width: 67%;
+    width: 75%;
     height: 100%;
     position: relative;
 }
@@ -894,10 +902,10 @@ input:checked + .slider:before {
 
 /*ChoicePackage*/
 .ChoicePackage{
-    width: 90%;
-    height: 900px;
+    width: 75%;
+    height: 790px;
     position: absolute;
-    top: 47%;
+    top: 45%;
     left: 50%;
     transform: translate(-50% , -50%);
 }
@@ -905,8 +913,8 @@ input:checked + .slider:before {
    height: 90%;
 }
 .steps-action {
-   height: 5%;
-    margin-top: 1%;
+    height: 5%;
+    margin-top: 2%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -914,7 +922,7 @@ input:checked + .slider:before {
 }
 .choix_Forfait{
     width: 100%;
-    margin-top: 5%;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1003,7 +1011,7 @@ input:checked + .slider:before {
 /*PayementWebinaire*/
 .PayementDiv{
     width: 100%;
-    margin-top: 5%;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1095,7 +1103,7 @@ input:checked + .slider:before {
 /*form_signup*/
 .form_signup{
     width: 100%;
-    margin-top: 5%;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -1109,6 +1117,12 @@ input:checked + .slider:before {
 /*    height: 100% !important;*/
 /*}*/
 
+.showVideosDiv .card .ant-card-body{
+    padding: 16px !important;
+}
+.showVideosDiv .card2 .ant-card-body{
+    padding: 24px !important;
+}
 .ant-card-body{
     height: 100%;
 }
