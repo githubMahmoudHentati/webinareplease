@@ -4,10 +4,10 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  top:50%;
-  left: 57%;
-  transform: translate(-80%,-50%);
-  margin-top: 2%;
+  top:50% !important;
+  left: 50% !important;
+  transform: translate(-50%,-50%) !important;
+  margin-top: 4%;
 }
 
 .text-form{
