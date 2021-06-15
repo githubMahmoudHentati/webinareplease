@@ -68,7 +68,7 @@ function ChoicePackage(){
 
     return(
       <div className="ChoicePackage">
-          <Steps current={current} style={{ height:"5%" , display:"flex", alignItems:'center'}}>
+          <Steps current={current} style={{ height:"5%" , display:"flex", alignItems:'center' }}>
               {steps.map(item => (
                   <Step key={item.title} title={item.title} />
               ))}

@@ -47,10 +47,10 @@ export const PasswordEdit =()=>{
                     <Col span={24}>
                         <Row gutter={[10, 0]} justify={"end"}>
                             <Col>
-                                <Button style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseCircleOutlined />} onClick={()=>dispatch(setAccountSetting(1))} >Annuler</Button>
+                                <Button style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>dispatch(setAccountSetting(1))} >Annuler</Button>
                             </Col>
                             <Col>
-                                <Button style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"}icon={<CheckCircleOutlined />}>Enregistrer</Button>
+                                <Button style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"}>Enregistrer</Button>
                             </Col>
                         </Row>
                     </Col>

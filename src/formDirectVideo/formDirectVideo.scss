@@ -227,7 +227,7 @@
   border-radius: 2px;
 }
 .div_Email_accée{
-  width: 65%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -262,6 +262,11 @@
   justify-content: center;
   align-items: center;
 }
+.p_ajout_régle p{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 .div_icon_ajout_régle{
   width: 15%;
   display: flex;
@@ -278,8 +283,8 @@
   color: rgba(0, 0, 0, 0.85);
 }
 .icon_ajout_régle{
-margin-right: 10px ;
-  font-size: 38px !important;
+  margin-right: 10px ;
+  font-size: 28px !important;
   color: #DDDDDD !important;
 }
 .p_ajout_régle{
