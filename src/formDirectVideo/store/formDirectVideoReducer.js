@@ -1,3 +1,6 @@
+import {FormDirectConstraints} from "../utils/formDirectConstraints";
+const {generals,configuration,socialTools} = FormDirectConstraints()
+
 const INITIAL_STATE = {
     general:{
         directPlan:false,
@@ -16,6 +19,7 @@ const INITIAL_STATE = {
         speaker :{id:null,name: "",lastName:"", title:"",email:"",logoSpeaker:{}},
         videoMode:"",
     },
+    socialTools: socialTools(),
 }
 
 export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
@@ -92,8 +96,52 @@ export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
                 configuration: configurationDeleteSpeakerObj
             }
 
+        //************** SocialTools reducer case************//
+
+        case  'SET_ActivePost':
+            const {activePostChecked,activePostIndex}=action.payload
+            const socialToolsActivePost = state.socialTools.map(el => (el.id === activePostIndex ? {...el, switch:activePostChecked} : el))
+            return{
+                ...state,
+                socialTools: socialToolsActivePost
+            }
+
+        case 'SET_AddPlan':
+            const {addPlanIndex} =action.payload
+            let addPlanNewArr=state.socialTools[addPlanIndex].plan.map((el,i) => ({...el,active:false})).concat({active:true,startDate:"",endDate:""})
+            const socialToolsAddPlan = state.socialTools.map(el => (addPlanIndex===el.id? {...el,
+                plan: addPlanNewArr
+            }:el))
+            return{
+                ...state,
+                socialTools: socialToolsAddPlan
+            }
+
+        case 'SET_ActivePlan':
+            const {indexPost,indexPlan}=action.payload
+            let activePlanNewArr=state.socialTools[indexPost].plan.map((el,i) => (i === indexPlan ? {...el,active:!el.active}:{...el,active:false}))
+            const socialToolsActivePlan =state.socialTools.map(el => (el.id === indexPost ? {...el,
+                plan: activePlanNewArr
+            } : el))
+            return{
+                ...state,
+                socialTools: socialToolsActivePlan
+            }
+
+        case 'SET_ClosePlan':
+            const{closePlanIndexPost,closePlanIndexPlan}=action.payload
+            state.socialTools[closePlanIndexPost].plan.map((el,i) => (i === closePlanIndexPlan ? state.socialTools[closePlanIndexPost].plan.splice(closePlanIndexPlan,1):state.socialTools[closePlanIndexPost].plan))
+            const socialToolsClosePlan =state.socialTools.map(el => (el.id === closePlanIndexPost ? {...el,
+                plan: state.socialTools[closePlanIndexPost].plan
+            } : el))
+            return{
+                ...state,
+                socialTools: socialToolsClosePlan
+            }
+
         default:{
             return state
         }
+
     }
 }

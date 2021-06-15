@@ -6,77 +6,31 @@ import fb from "../../assets/fb.svg"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
-import {useSelector} from "react-redux";
-
+import {useDispatch, useSelector} from "react-redux";
+import{Hooks} from "../utils/hooks";
+import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/formDirectVideoAction";
 
 
 export const SocialTools=()=>{
-    // use Selector redux
+    const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const {values}=Hooks()
+    console.log("socialTools",values.socialTools)
 
-    const [typePost, setTypePost] = useState([
-        {
-            id:0,
-            type:"Facebook post",
-            switch :true,
-            logo:<img src={fbPost} style={{width:"24px",height:"24px"}} />,
-            plan:[{active:true,startDate:"",endDate:""}]
-        },
-        {
-            id:1,
-            type:"Youtube post",
-            switch :false,
-            logo:<img src={youtubePost} style={{width:"24px",height:"24px"}}/>,
-            plan:[{active:true,startDate:"",endDate:""}]
-        },
-        {
-            id:2,
-            type:"Linkedlin post",
-            switch :false,
-            logo:<img src={linkedinPost} style={{width:"24px",height:"24px"}}/>,
-            plan:[{active:true,startDate:"",endDate:""}]
-        },
-        // {
-        //     id:3,
-        //     type:"Twitter post",
-        //     switch :false,
-        //     logo:<TwitterOutlined style={{width:"24px",height:"24px"}}/>,
-        //     plan:[{active:true,startDate:"",endDate:""}]
-        // },
-        // {
-        //     id:4,
-        //     type:"Instagram post",
-        //     switch :false,
-        //     logo:<InstagramOutlined style={{width:"24px",height:"24px"}}/>,
-        //     plan:[{active:true,startDate:"",endDate:""}]
-        // }
-    ]);
     const addPlan =async (index)=>{
-
-        let newArr=typePost[index].plan.map((el,i) => ({...el,active:false})).concat({active:true,startDate:"",endDate:""})
-        await setTypePost(typePost.map(el => (index===el.id? {...el,
-            plan: newArr
-        }:el)))
+        dispatch(setAddPlan({addPlanIndex:index}))
     }
     const activePost=(checked,index)=>{
-        setTypePost(typePost.map(el => (el.id === index ? {...el, switch:checked} : el)))
+        dispatch(setActivePost({activePostChecked:checked,activePostIndex:index}))
     }
 
     const activePlan=(indexPost,indexPlan)=>{
-        let newArr=typePost[indexPost].plan.map((el,i) => (i === indexPlan ? {...el,active:!el.active}:{...el,active:false}))
-        console.log("newArr",newArr)
-        setTypePost(typePost.map(el => (el.id === indexPost ? {...el,
-            plan: newArr
-        } : el)))
+        dispatch(setActivePlan({indexPost,indexPlan}))
     }
-    console.log("typePost",typePost)
+
 
     const closePlan =(indexPost,indexPlan)=>{
-        typePost[indexPost].plan.map((el,i) => (i === indexPlan ? typePost[indexPost].plan.splice(indexPlan,1):typePost[indexPost].plan))
-        console.log("newArr",typePost)
-        setTypePost(typePost.map(el => (el.id === indexPost ? {...el,
-            plan: typePost[indexPost].plan
-        } : el)))
+        dispatch(setClosePlan({closePlanIndexPost:indexPost,closePlanIndexPlan:indexPlan}))
     }
 
     return(
@@ -93,7 +47,7 @@ export const SocialTools=()=>{
                 </p>
                 <List
 
-                    dataSource={typePost}
+                    dataSource={values.socialTools}
                     renderItem={(item,index) => (
                         <List.Item style={{width: "100%", display: "flex", flexDirection: "row"}}>
                             <Row gutter={[0, 20]} style={{width:"100%"}}>
@@ -123,7 +77,7 @@ export const SocialTools=()=>{
                                                 <Col span={24}>
                                                     <span style={{fontWeight: "600" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier  la publication</span>
                                                 </Col>
-                                                {typePost[index].plan.map((element, indexPlan) => {
+                                                {values.socialTools[index].plan.map((element, indexPlan) => {
                                                         return (
                                                             <Col className={"col-planification"} span={24} style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
                                                                 <Row gutter={[0, 20]}>
