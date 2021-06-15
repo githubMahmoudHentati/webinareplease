@@ -1,7 +1,5 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {FormDirectVideoReducer} from "../store/formDirectVideoReducer";
-import {setDarkMode} from "../../utils/redux/actions";
 import {
     setConfigurationInitialSpeaker,
     setConfigurationOnchange,
