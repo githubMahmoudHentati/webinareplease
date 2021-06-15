@@ -38,7 +38,7 @@ export const CompteSettings=()=>{
     return(
         <div>
             <PrincipalPage menuType={"accountSetting"}>
-                <Row gutter={[0, 40]}>
+                <Row gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px"}} style={{color:darkMode===false?"":"#ffffff"}}>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>

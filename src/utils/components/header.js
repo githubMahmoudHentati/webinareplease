@@ -64,6 +64,12 @@ function GlobalHeader() {
         darkMode&&document.documentElement.style.setProperty('--option-background', "#FFFFFF");
         !darkMode&&document.documentElement.style.setProperty('--option-background', "#111d2c");
 
+        //item menu background
+        darkMode&&document.documentElement.style.setProperty('--item-menu-background', "#e7f7ff");
+        !darkMode&&document.documentElement.style.setProperty('--item-menu-background', "#111d2c");
+        darkMode&&document.documentElement.style.setProperty('--item-menu-color', "rgba(0, 0, 0, 0.65)");
+        !darkMode&&document.documentElement.style.setProperty('--item-menu-color', "rgba(255, 255, 255, 0.65)");
+
         //option background
         darkMode&&document.documentElement.style.setProperty('--option_select', "#FFFFFF");
         !darkMode&&document.documentElement.style.setProperty('--option_select', "#1D1D1D");
@@ -123,7 +129,7 @@ function GlobalHeader() {
             <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(0)))}} ><UserOutlined />Compte</Menu.Item>
             <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(1)))}}><UnlockOutlined />Sécurité</Menu.Item>
             <Menu.Item  onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(3)))}}><PieChartOutlined />Abonnement</Menu.Item>
-            <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(3)))}}><LogoutOutlined />Déconnection</Menu.Item>
+            <Menu.Item onClick={()=>{history.push("/connexion",dispatch(setAccountSetting(4)))}}><LogoutOutlined />Déconnection</Menu.Item>
         </Menu>
     );
     const Menulang = (

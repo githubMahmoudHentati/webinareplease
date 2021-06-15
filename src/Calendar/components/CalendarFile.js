@@ -173,10 +173,10 @@ function DateCellRender(value) {
                                     <div className={"modal_footer_Archivé"}>
                                     <Button key="back" onClick={handleCancelArchivé}>
                                         Annuler
-                                    </Button>,
+                                    </Button>
                                     <Button key="submit" type="primary"  >
                                         Visualiser
-                                    </Button>,
+                                    </Button>
                                     </div>
                                 ]}
                             >
