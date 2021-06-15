@@ -7,7 +7,7 @@ import {PrincipalPage} from "../utils/components/principalPage";
 function FormDirectVideo() {
 
     return(
-        <PrincipalPage>
+        <PrincipalPage  menuType={"formDirectVideo"}>
             <IframeDirectVideo/>
         </PrincipalPage>
     );
