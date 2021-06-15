@@ -5,9 +5,10 @@ import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-
 import WebinairePlease from "../utils/components/WebinairePlease";
 import {FormSignUp} from './components/formSignUp'
 import logo from "../assets/logoWebinaireplease.svg"
-
+import {useHistory} from 'react-router-dom';
 
 export const SignUp =()=>{
+    const history = useHistory()
     return(
 
         <WebinairePlease logo={logo}>
@@ -18,7 +19,7 @@ export const SignUp =()=>{
                       child2={
                         <Row className={"text-form"} gutter={[10,0]}>
                             <Col>
-                                <Button>Annuler</Button>
+                                <Button onClick={()=>{history.push("/connexion")}}>Annuler</Button>
                             </Col>
                             <Col>
                                 <Button type="primary">Inscrivez-vous maintenant</Button>

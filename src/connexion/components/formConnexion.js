@@ -2,8 +2,10 @@ import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox} from 'antd'
 import '../connexion.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
+import {useHistory} from 'react-router-dom';
 
 export const FormConnexion =()=>{
+    const history = useHistory()
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
@@ -43,7 +45,7 @@ export const FormConnexion =()=>{
                     <Col >
                         <span>Pas encore membre?</span>
                     </Col>
-                    <Col >
+                    <Col onClick={()=>{history.push("/signUp")}}>
                         <a>Inscrivez-vous</a>
                     </Col>
                 </Row>
