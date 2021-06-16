@@ -6,9 +6,11 @@ import WebinairePlease from "../utils/components/WebinairePlease";
 import {FormSignUp} from './components/formSignUp'
 import logo from "../assets/logoWebinaireplease.svg"
 import {useHistory} from 'react-router-dom';
+import {Hooks} from "./utils/hooks";
 
 export const SignUp =()=>{
     const history = useHistory()
+    const {handleSubmit}=Hooks()
     return(
 
         <WebinairePlease logo={logo}>
@@ -22,7 +24,7 @@ export const SignUp =()=>{
                                 <Button onClick={()=>{history.push("/connexion")}}>Annuler</Button>
                             </Col>
                             <Col>
-                                <Button type="primary">Inscrivez-vous maintenant</Button>
+                                <Button onClick={handleSubmit} type="primary">Inscrivez-vous maintenant</Button>
                             </Col>
                         </Row>
                        }
