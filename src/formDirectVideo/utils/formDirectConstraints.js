@@ -64,10 +64,31 @@ export const FormDirectConstraints = ()=>{
         ]
     }
 
+     const invitation =()=>{
+
+        return (
+            {
+                addRules: {
+                    visibleInscription: false,
+                    visibleRappelJ7: false,
+                    visibleRappelJ1: false,
+                    visibleRappelH1: false,
+                    visibleInscription2: false,
+                    visibleRappelJ72: false,
+                    visibleRappelJ12: false,
+                    visibleRappelH12: false
+                },
+                emails:[],
+                emailsGroup:[]
+            }
+        )
+    }
+
     return({
         generals,
         configuration,
-        socialTools
+        socialTools,
+        invitation
     })
 
 }

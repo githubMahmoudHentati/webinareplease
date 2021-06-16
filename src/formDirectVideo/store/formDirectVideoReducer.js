@@ -1,24 +1,14 @@
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
-const {generals,configuration,socialTools} = FormDirectConstraints()
+const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 
 const INITIAL_STATE = {
-    general:{
-        directPlan:false,
-        directAccessMode:"",
-        freeAccess:false,
-        securedAccess:false,
-    },
 
-    configuration:{
-        notVisibleVideo:false,
-        visibleVideo:false,
-        modalSpeaker:false,
-        switchSpeaker:false,
-        directAutomaticArchiving:false,
-        SpeakerList:[{id:0,name: "Nom ",lastName:'Prénom', title:"Titre",email:"",logoSpeaker:{thumbUrl:"https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"}}],
-        speaker :{id:null,name: "",lastName:"", title:"",email:"",logoSpeaker:{}},
-        videoMode:"",
-    },
+    general: generals(),
+
+    configuration: configuration(),
+
+    invitation:invitation(),
+
     socialTools: socialTools(),
 }
 
@@ -96,6 +86,13 @@ export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
                 configuration: configurationDeleteSpeakerObj
             }
 
+        //************** Invitation reducer case*************//
+        case 'SET_InvitationOnchange' :
+            const {invitationNameChange,invitationValueChange}=action.payload
+            const invitationOnOnchangeObj = {...state.invitation,addRules:{...state.invitation.addRules, [invitationNameChange]:invitationValueChange}}
+            return {...state,
+                invitation: invitationOnOnchangeObj
+            }
         //************** SocialTools reducer case************//
 
         case  'SET_ActivePost':

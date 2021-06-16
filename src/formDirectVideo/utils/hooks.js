@@ -4,7 +4,7 @@ import {
     setConfigurationInitialSpeaker,
     setConfigurationOnchange,
     setConfigurationSpeaker,
-    setConfigurationDeleteSpeaker, setConfigurationSpeakerList, setGeneralOnchange
+    setConfigurationDeleteSpeaker, setConfigurationSpeakerList, setGeneralOnchange, setInvitationOnchange
 } from "../store/formDirectVideoAction";
 
 export  const Hooks=()=>{
@@ -77,6 +77,12 @@ export  const Hooks=()=>{
         console.log("enteeeeeeeeeer")
     };
 
+    //**************Invitation************//
+
+    const InvitationOnChangeChecked = (event) => {
+        dispatch(setInvitationOnchange({invitationNameChange:event.target.value, invitationValueChange:event.target.checked}));
+    };
+
     return({
         generalOnChangeSwitch,
         generalOnChange,
@@ -90,6 +96,7 @@ export  const Hooks=()=>{
         onChangeSpeaker,
         onChangeCheckbox,
         configurationOnChangeButton,
+        InvitationOnChangeChecked,
         values
     })
 }
