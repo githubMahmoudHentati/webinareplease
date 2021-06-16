@@ -1,12 +1,49 @@
 @import '~antd/dist/antd.css';
 @font-face {
-    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff);
+    src: url(assets/fonts/transfonter.org-20210601-105009/SFProText-Medium.eot);
     font-family: SFPro;
+}
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Heavy.eot) format('embedded-opentype'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff2'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.eot) format('embedded-opentype'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff2'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff) format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.eot) format('embedded-opentype'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.woff2) format('woff2'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.woff) format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-SemiboldItalic.eot) format('embedded-opentype'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-SemiboldItalic.woff2) format('woff2'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-SemiboldItalic.woff) format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
 }
 body{
     margin: 0px;
     padding: 0% ;
-    font-family: SFPro !important;
+    font-family: 'SF Pro Display';
+    font-weight: normal;
 }
 :root {
     --white_color:rgba(0, 0, 0, 0.85);
@@ -437,6 +474,9 @@ body{
 }
 .BreadcrumbDiv{
     width: 100%;
+    font-family: 'SF Pro Display';
+    font-size: 14px;
+    font-weight: normal;
 }
 .MesDirects{
     width: 100%;
@@ -449,8 +489,13 @@ body{
     padding: 0 2em;
 }
 .MesDirects h4{
+    font-family: 'SF Pro Display';
     font-size: 20px;
     font-weight: 500;
+}
+.btn_add_media{
+    font-family: 'SF Pro Display';
+    font-weight: normal;
 }
 .Filter{
     width: 100%;
@@ -485,6 +530,7 @@ body{
 .delete_number p {
    margin-top: 6.5%;
     margin-left: 4%;
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -503,6 +549,7 @@ body{
     align-items: center;
     cursor: pointer;
     margin-right: 3%;
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
@@ -530,6 +577,7 @@ body{
     align-items: center !important;
 }
 .selectFilter{
+    font-family: 'SF Pro Display';
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -675,11 +723,13 @@ margin-top: 2%;
     margin-bottom: 4%;
 }
 .div_Url_diffusion span{
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 1%;
 }
 .div_Url_diffusion Input{
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.25);
@@ -693,11 +743,13 @@ margin-top: 2%;
     margin-bottom: 4%;
 }
 .div_Nom_de_flux span{
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 1%;
 }
 .div_Nom_de_flux Input{
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.25);
@@ -715,6 +767,7 @@ margin-top: 2%;
     border-radius: 2px !important;
     border: 1px solid  rgba(0, 0, 0, 0.15) !important;
     background-color: #ffffff !important;
+    font-family: 'SF Pro Display';
     font-size: 12px;
     font-weight: 400;
     letter-spacing: normal;
@@ -793,12 +846,14 @@ margin-top: 2%;
     margin-right: 24px;
 }
 .link_drp{
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: normal;
     letter-spacing: normal;
     color: rgba(0, 0, 0, 0.65);
 }
 .link_drp:hover{
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: normal;
     letter-spacing: normal;
@@ -970,6 +1025,7 @@ input:checked + .slider:before {
 }
 
 .Card1_Forfait h3, .Card2_Forfait h3{
+    font-family: 'SF Pro Display';
     font-size: 31.1px;
     font-weight: 600;
     letter-spacing: normal;
@@ -978,17 +1034,20 @@ input:checked + .slider:before {
     color: #007fcb;
 }
 .Card1_Forfait p, .Card2_Forfait p{
+    font-family: 'SF Pro Display';
    font-size: 16px;
     font-weight: normal;
     color: #4a4a4a;
 }
 .Card1_Forfait h2, .Card2_Forfait h2{
+    font-family: 'SF Pro Display';
     font-size: 31.1px;
     font-weight: 600;
     color: #4a4a4a;
     margin-bottom: 10%;
 }
 .Card1_Forfait li{
+    font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: 400;
     color: #4a4a4a;
@@ -1000,6 +1059,7 @@ input:checked + .slider:before {
     margin-bottom: 2%;
 }
 .Card2_Forfait div h5{
+    font-family: 'SF Pro Display';
     font-size: 15.6px;
     font-weight: 600;
     color: #4a4a4a;
@@ -1037,12 +1097,14 @@ input:checked + .slider:before {
     margin-bottom: 66px;
 }
 .texte_div1_champsPayement span{
+    font-family: 'SF Pro Display';
     font-size: 11.6px;
     font-weight: bold;
     letter-spacing: -0.01px;
     color: #444444;
 }
 .texte_div1_champsPayement h3{
+    font-family: 'SF Pro Display';
     font-size: 27px;
     font-weight: bold;
     letter-spacing: -0.01px;
@@ -1128,4 +1190,8 @@ input:checked + .slider:before {
 }
 .ant-select-selection-placeholder{
     color: #bfbfbf !important;
+}
+.Paramétres{
+    font-family: 'SF Pro Display' !important;
+    font-weight: 900 !important;
 }
