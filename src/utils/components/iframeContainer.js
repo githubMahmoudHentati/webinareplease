@@ -4,7 +4,7 @@ import {Card} from "antd";
 import {useSelector} from "react-redux";
 import {Reducer} from "../redux/reducer";
 import {useDispatch} from "react-redux";
-import {CompteGeneralInformation} from "../../compteSettings/components/CompteGeneralInformation";
+import {AccountGeneralInformation} from "../../compteSettings/components/accountGeneralInformation";
 import {SecurityAccount} from "../../compteSettings/components/securityAccount";
 import {PasswordEdit} from "../../compteSettings/components/passwordEdit";
 import {Hooks} from "../../formDirectVideo/utils/hooks";
