@@ -4,10 +4,13 @@ import '../compteSettings.scss'
 import { EyeInvisibleOutlined, EyeTwoTone,CloseCircleOutlined,CheckCircleOutlined } from '@ant-design/icons';
 import {setAccountSetting} from "../../utils/redux/actions";
 import {useDispatch , useSelector} from "react-redux";
+import {Hooks} from "../utils/hooks";
 
 export const PasswordEdit =()=>{
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const {values}= Hooks()
+    const {generalInformationOnChange}=Hooks()
     return(
         <Row  gutter={[0, 30]}>
             <Col span={24}>
@@ -25,6 +28,9 @@ export const PasswordEdit =()=>{
                             </Col>
                             <Col span={24}>
                                 <Input.Password
+                                    value={values.generalInformation.previousPassword}
+                                    name="previousPassword"
+                                    onChange={generalInformationOnChange}
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                     placeholder={"Ancien mot de passe"}>
                                 </Input.Password>
@@ -38,8 +44,10 @@ export const PasswordEdit =()=>{
                             </Col>
                             <Col span={24}>
                                 <Input.Password
+                                    name="newPassword"
+                                    onChange={generalInformationOnChange}
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                    placeholder={"Mot de passe"}>
+                                    placeholder={"Nouveau Mot de passe"}>
                                 </Input.Password>
                             </Col>
                         </Row>

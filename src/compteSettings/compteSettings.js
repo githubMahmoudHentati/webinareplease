@@ -4,7 +4,7 @@ import {Breadcrumb, Card, Col, Row} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 import history from "../router/history";
 import {Configuration} from "../formDirectVideo/components/configuration";
-import {CompteGeneralInformation} from "./components/CompteGeneralInformation";
+import {AccountGeneralInformation} from "./components/accountGeneralInformation";
 import {SecurityAccount} from "./components/securityAccount"
 import {PrincipalPage} from "../utils/components/principalPage";
 import {useSelector} from "react-redux";
@@ -23,7 +23,7 @@ export const CompteSettings=()=>{
     const SelectMenu = ()=>{
         switch(accountMenu){
             case 0:
-                return <CompteGeneralInformation/>
+                return <AccountGeneralInformation/>
             case 1:
             return <SecurityAccount/>
             case 2:
@@ -31,7 +31,7 @@ export const CompteSettings=()=>{
             case 3:
                 return <AccountSubscription/>
             default:
-                return <CompteGeneralInformation/>
+                return <AccountGeneralInformation/>
         }
     }
 
