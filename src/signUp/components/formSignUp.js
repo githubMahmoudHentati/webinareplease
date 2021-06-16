@@ -11,7 +11,7 @@ export const FormSignUp =({child1,child2})=>{
     return(
         <Row gutter={[0, 40]} className={'col-signUp'}>
 
-            <Col style={{textAlign: 'center', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold"}} span={24}>
+            <Col className={"spn1"} style={{textAlign: 'center'}} span={24}>
                 {child1}
             </Col>
             <Col span={24}>
@@ -21,40 +21,40 @@ export const FormSignUp =({child1,child2})=>{
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Nom :</span>
+                                        <span className={"spn2"}>Nom :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="name" onChange={signUpOnChange} name="name"  placeholder={"Nom"}></Input>
+                                        <Input className={"spn2"} name="name" onChange={signUpOnChange} name="name"  placeholder={"Nom"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Prénom :</span>
+                                        <span className={"spn2"}>Prénom :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="lastName" onChange={signUpOnChange} placeholder={"Prénom"}></Input>
+                                        <Input className={"spn2"} name="lastName" onChange={signUpOnChange} placeholder={"Prénom"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>E-mail :</span>
+                                        <span className={"spn2"}>E-mail :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="email" onChange={signUpOnChange} placeholder={"E-mail"}></Input>
+                                        <Input className={"spn2"} name="email" onChange={signUpOnChange} placeholder={"E-mail"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Téléphone :</span>
+                                        <span className={"spn2"}>Téléphone :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="phone" onChange={signUpOnChange} placeholder={"Numéro de téléphone"}></Input>
+                                        <Input className={"spn2"} name="phone" onChange={signUpOnChange} placeholder={"Numéro de téléphone"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
@@ -63,10 +63,11 @@ export const FormSignUp =({child1,child2})=>{
                     <Col span={24}>
                         <Row gutter={[10, 0]}>
                             <Col className={"text-form"} span={5}>
-                                <span>Mot de passe :</span>
+                                <span className={"spn2"}>Mot de passe :</span>
                             </Col>
                             <Col span={19}>
                                 <Input.Password
+                                    className={"spn2"}
                                     name="password" onChange={signUpOnChange}
                                     placeholder="input password"
                                     iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
@@ -79,30 +80,30 @@ export const FormSignUp =({child1,child2})=>{
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Adresse :</span>
+                                        <span className={"spn2"}>Adresse :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="address" onChange={signUpOnChange} placeholder={"Adresse"}></Input>
+                                        <Input className={"spn2"} name="address" onChange={signUpOnChange} placeholder={"Adresse"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Ville :</span>
+                                        <span className={"spn2"}>Ville :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="city" onChange={signUpOnChange} placeholder={"Ville"}></Input>
+                                        <Input className={"spn2"} name="city" onChange={signUpOnChange} placeholder={"Ville"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Code postal :</span>
+                                        <span className={"spn2"}>Code postal :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="zipCode" onChange={signUpOnChange} placeholder={"Code postal"}></Input>
+                                        <Input className={"spn2"} name="zipCode" onChange={signUpOnChange} placeholder={"Code postal"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
@@ -113,20 +114,21 @@ export const FormSignUp =({child1,child2})=>{
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Société :</span>
+                                        <span className={"spn2"}>Société :</span>
                                     </Col>
                                     <Col span={19}>
-                                        <Input name="society" onChange={signUpOnChange} placeholder={"Société"}></Input>
+                                        <Input className={"spn2"} name="society" onChange={signUpOnChange} placeholder={"Société"}></Input>
                                     </Col>
                                 </Row>
                             </Col>
                             <Col span={24}>
                                 <Row gutter={[10, 0]}>
                                     <Col className={"text-form"} span={5}>
-                                        <span>Nombre d'employé :</span>
+                                        <span className={"spn2"}>Nombre d'employé :</span>
                                     </Col>
                                     <Col span={19}>
                                         <Select
+                                            className={"spn2"}
                                             name="employeeNumberID" onChange={signUpOnChangeSelect}
                                             showSearch
                                             style={{ width: "100%" }}
@@ -151,7 +153,7 @@ export const FormSignUp =({child1,child2})=>{
                                 <Checkbox></Checkbox>
                             </Col>
                             <Col style={{color: "RGB(185, 185, 185)"}} span={18}>
-                                <span>Webinar please doit traiter vos donnèes conformément a la</span> <a> Politique de
+                                <span className={"spn2"} >Webinar please doit traiter vos donnèes conformément a la</span> <a> Politique de
                                 confidentialité. </a>
                                 <span>En cliquant sur le bouton d'activation ci dessous j'accepte</span><a> Condition de
                                 service, </a>

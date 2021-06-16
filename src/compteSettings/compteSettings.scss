@@ -1,3 +1,30 @@
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Heavy.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff) format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 .img-strip{
   width: 46px;
   height: 18px;
@@ -11,4 +38,53 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.spn_CompteSettings{
+  font-family: "SF Pro Display";
+  font-weight: normal;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+}
+.spn1_securité{
+  font-family: "SF Pro Display" !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  text-align: left !important;
+}
+.spn2_motDePasse{
+  font-family: "SF Pro Display";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+}
+.mdp{
+  font-size: 14px;
+  font-family: "SF Pro Display";
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+}
+.spn_abonnement{
+  font-size: 20px;
+  font-family: "SF Pro Display";
+  font-weight: 500;
+}
+.parag_abonnement{
+  font-size: 14px;
+  font-family: "SF Pro Display";
+  font-weight: normal;
+}
+.parag_abonnement_gras{
+  font-size: 14px;
+  font-family: "SF Pro Display";
+  font-weight: 500;
+}
+.spn_limite{
+  font-size: 13px;
+  font-family: "SF Pro Display";
+  font-weight: 500;
 }

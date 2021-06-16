@@ -44,6 +44,10 @@ function GlobalHeader() {
         darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(0, 0, 0, 0.85)");
         !darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(255, 255, 255, 0.85)");
 
+        // White Color
+        darkMode&&document.documentElement.style.setProperty('--separator-color', "rgba(0, 0, 0, 0.45)");
+        !darkMode&&document.documentElement.style.setProperty('--separator-color', "rgba(255, 255, 255, 0.85)");
+
         //Dark Color
         darkMode&&document.documentElement.style.setProperty('--dark_color', "rgba(0, 0, 0, 0.04)");
         !darkMode&&document.documentElement.style.setProperty('--dark_color', "rgba(255, 255, 255, 0.04)");
@@ -61,7 +65,7 @@ function GlobalHeader() {
         !darkMode&&document.documentElement.style.setProperty('--cell-color', "#1D1D1D");
 
         //option background
-        darkMode&&document.documentElement.style.setProperty('--option-background', "#FFFFFF");
+        darkMode&&document.documentElement.style.setProperty('--option-background', "#F5F5F5");
         !darkMode&&document.documentElement.style.setProperty('--option-background', "#111d2c");
 
         //item menu background

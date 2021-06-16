@@ -25,8 +25,8 @@ export const MenuForms =()=>{
                                 color:darkMode===false?"RGBA(0, 0, 0, 0.85)":"rgba(255, 255, 255, 0.85)",
                                 fontSize: "14px",
                                 textAlign: "left",
-                                fontFamily: "Ping Fang SC",
-                                fontWeight: "bold"
+                                fontFamily: "SF Pro Display",
+                                fontWeight: "500"
                             }}>
                             Paramètres généraux
                         </span>
@@ -41,8 +41,8 @@ export const MenuForms =()=>{
                         color:darkMode===false?"RGBA(0, 0, 0, 0.85)":"rgba(255, 255, 255, 0.85)",
                         fontSize: "14px",
                         textAlign: "left",
-                        fontFamily: "Ping Fang SC",
-                        fontWeight: "bold"
+                        fontFamily: "SF Pro Display",
+                        fontWeight: "500"
                     }}>Paramètres optionnels</span>
                     </div>
                     <Menu.Item className={"menuItem"} onClick={()=>{dispatch(setDirectSetting(1))}} key="2">
