@@ -1,7 +1,7 @@
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 
-const INITIAL_STATE = {
+const formDirectInitialState = {
 
     general: generals(),
 
@@ -12,7 +12,7 @@ const INITIAL_STATE = {
     socialTools: socialTools(),
 }
 
-export const  FormDirectVideoReducer=(state=INITIAL_STATE , action)=>{
+export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
 
     switch (action.type){
 

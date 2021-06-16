@@ -2,15 +2,17 @@ import {Table, Tag, Space, Badge, Button} from 'antd';
 import React, { useState,useEffect,useRef } from 'react';
 import '../compteSettings.scss'
 import {EyeOutlined,DownloadOutlined} from '@ant-design/icons';
+import {Hooks} from "../utils/hooks";
 
 
 export const SubscriptionTable=()=>{
 
+const  {values} = Hooks()
 const columns = [
     {
         title: 'Facture',
-        dataIndex: 'charge',
-        key: 'charge',
+        dataIndex: 'bill',
+        key: 'bill',
     },
     {
         title: 'Emise le',
@@ -52,37 +54,8 @@ const columns = [
     },
 ];
 
-const data = [
-    {
-        key: '1',
-        charge: '102402',
-        issuedTime: '01/01/2021',
-        entitled: 'Forfait pro',
-        amount: "99$",
-        status: "Nom Non  traité",
-        payment:""
-    },
-    {
-        key: '1',
-        charge: '102402',
-        issuedTime: '01/01/2021',
-        entitled: 'Forfait pro',
-        amount: "99$",
-        status: "Nom Non  traité",
-        payment:""
-    },
-    {
-        key: '1',
-        charge: '102402',
-        issuedTime: '01/01/2021',
-        entitled: 'Forfait pro',
-        amount: "99$",
-        status: "Nom Non  traité",
-        payment:""
-    },
-];
 
     return(
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={values.subscription.subscriptionBillList} />
     )
 }

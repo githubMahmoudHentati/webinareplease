@@ -3,12 +3,15 @@ import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Avatar,Upload , Select , 
 import '../compteSettings.scss'
 import {UserOutlined,UploadOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
+import {Hooks} from "../utils/hooks";
 const { Option } = Select;
 
- export const CompteGeneralInformation =()=>{
+ export const AccountGeneralInformation =()=>{
 
      // dark mode from redux
      const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+     const {generalInformationOnChange,generalInformationOnChangeSelect,values}=Hooks()
+     console.log("generalInformation",values)
 
      const props = {
          name: 'file',
@@ -70,7 +73,7 @@ function onChange(value) {
                                   }}>Nom </span>
                                      </Col>
                                      <Col span={24}>
-                                         <Input placeholder={"Nom"}></Input>
+                                         <Input value={values.generalInformation.name}name="name" placeholder={"Nom"} onChange={generalInformationOnChange}></Input>
                                      </Col>
                                  </Row>
                              </Col>
@@ -84,7 +87,7 @@ function onChange(value) {
                                   }}>Prénom </span>
                                      </Col>
                                      <Col span={24}>
-                                         <Input placeholder={"Prénom"}></Input>
+                                         <Input value={values.generalInformation.lastName} name="lastName" placeholder={"Prénom"} onChange={generalInformationOnChange}></Input>
                                      </Col>
                                  </Row>
                              </Col>
@@ -98,7 +101,7 @@ function onChange(value) {
                                   }}>Email </span>
                                      </Col>
                                      <Col span={24}>
-                                         <Input placeholder={"Email"}></Input>
+                                         <Input value={values.generalInformation.email}  name="email" placeholder={"Email"} onChange={generalInformationOnChange}></Input>
                                      </Col>
                                  </Row>
                              </Col>
@@ -112,7 +115,7 @@ function onChange(value) {
                                   }}>Ville </span>
                                      </Col>
                                      <Col span={24}>
-                                         <Input placeholder={"Ville"}></Input>
+                                         <Input value={values.generalInformation.city}  name="city" placeholder={"Ville"} onChange={generalInformationOnChange}></Input>
                                      </Col>
                                  </Row>
                              </Col>
@@ -126,7 +129,7 @@ function onChange(value) {
                                   }}>Adresse </span>
                                      </Col>
                                      <Col span={24}>
-                                         <Input placeholder={"Adresse"}></Input>
+                                         <Input value={values.generalInformation.address} name= 'address' placeholder={"Adresse"} onChange={generalInformationOnChange}></Input>
                                      </Col>
                                  </Row>
                              </Col>
@@ -145,17 +148,16 @@ function onChange(value) {
                                              style={{ width: "100%" }}
                                              placeholder="Entre 5 - 10 employé(e)s"
                                              optionFilterProp="children"
-                                             onChange={onChange}
-                                             onFocus={onFocus}
-                                             onBlur={onBlur}
-                                             onSearch={onSearch}
+                                             onChange={generalInformationOnChangeSelect}
+                                             name="employeeNumberID"
+                                             value={values.generalInformation.employeeNumberID}
                                              filterOption={(input, option) =>
                                                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                              }
                                          >
-                                             <Option value="5">5</Option>
-                                             <Option value="10">10</Option>
-                                             <Option value="20">20</Option>
+                                             <Option name="employeeNumberID" key ={1} value="1">entre 5-10 employé(e)s</Option>
+                                             <Option name="employeeNumberID" key ={2} value="2">entre 10-20 employé(e)s</Option>
+                                             <Option name="employeeNumberID"  key ={3}  value="3">entre 20-30 employé(e)s</Option>
                                          </Select>
                                      </Col>
                                  </Row>
@@ -170,7 +172,7 @@ function onChange(value) {
                                   }}>Code postale </span>
                                      </Col>
                                      <Col span={24}>
-                                         <Input placeholder={"Code postale"}></Input>
+                                         <Input value={values.generalInformation.zipCode}  name="zipCode" placeholder={"Code postale"} onChange={generalInformationOnChange}></Input>
                                      </Col>
                                  </Row>
                              </Col>
@@ -184,7 +186,7 @@ function onChange(value) {
                                   }}>Téléphone </span>
                                      </Col>
                                      <Col span={24}>
-                                         <Input placeholder={"Téléphone"}></Input>
+                                         <Input value={values.generalInformation.phone} name='phone' placeholder={"Téléphone"}></Input>
                                      </Col>
                                  </Row>
                              </Col>
