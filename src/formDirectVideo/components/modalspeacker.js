@@ -20,10 +20,10 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
   return(
       <Modal className="modal-speaker" title="Ajouter un intervenant" visible={isVisible} onOk={handleOk} onCancel={handleCancel}
              footer={[
-              <Button onClick={handleCancel} key="back" >
+              <Button className={"input_modal"} onClick={handleCancel} key="back" >
                Annuler
               </Button>,
-              <Button onClick={handleOk} key="submit" type="primary" >
+              <Button className={"input_modal"} onClick={handleOk} key="submit" type="primary" >
                Ajouter
               </Button>,
              ]}>
@@ -32,7 +32,7 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
        <Col span={24}>
         <Row gutter={[0, 8]}>
          <Col span={24}>
-          <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Photo</span>
+          <span className={"span_modal"}>Photo</span>
          </Col>
          <Col span={24}>
           <Upload
@@ -41,7 +41,7 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
               onChange={onChangeFile}
               beforeUpload={{beforeUpload}}
               {...props} listType="picture">
-           <Button icon={<UploadOutlined />}>Click to Upload</Button>
+           <Button className={"btn_upload_pic"} icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
          </Col>
         </Row>
@@ -50,16 +50,16 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
        <Col span={24}>
         <Row gutter={[10, 8]}>
        <Col span={12}>
-        <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Nom</span>
+        <span className={"span_modal"}>Nom</span>
        </Col>
        <Col  span={12}>
-        <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Prénom</span>
+        <span className={"span_modal"}>Prénom</span>
        </Col>
          <Col span={12}>
-          <Input defaultValue={values.configuration.speaker.name} onChange={(event)=>onChangeSpeaker(event,"name")}placeholder={"Nom"}></Input>
+          <Input className={"input_modal"} defaultValue={values.configuration.speaker.name} onChange={(event)=>onChangeSpeaker(event,"name")}placeholder={"Nom"}></Input>
          </Col>
          <Col  span={12}>
-          <Input defaultValue={values.configuration.speaker.lastName} onChange={(event)=>onChangeSpeaker(event,"lastName")} placeholder={"Prenom"}></Input>
+          <Input className={"input_modal"} defaultValue={values.configuration.speaker.lastName} onChange={(event)=>onChangeSpeaker(event,"lastName")} placeholder={"Prenom"}></Input>
          </Col>
         </Row>
        </Col>
@@ -67,10 +67,10 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
        <Col span={24}>
         <Row gutter={[0, 8]}>
          <Col span={24}>
-          <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Fonction</span>
+          <span className={"span_modal"}>Fonction</span>
          </Col>
          <Col span={24}>
-          <Input defaultValue={values.configuration.speaker.title} onChange={(event)=>onChangeSpeaker(event,"title")} placeholder={"Fonction"}></Input>
+          <Input className={"input_modal"} defaultValue={values.configuration.speaker.title} onChange={(event)=>onChangeSpeaker(event,"title")} placeholder={"Fonction"}></Input>
          </Col>
         </Row>
        </Col>
@@ -78,10 +78,10 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
        <Col span={24}>
         <Row gutter={[0, 8]}>
          <Col span={24}>
-          <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui"}}>Email</span>
+          <span className={"span_modal"}>Email</span>
          </Col>
          <Col span={24}>
-          <Input defaultValue={values.configuration.speaker.email} onChange={(event)=>onChangeSpeaker(event,"email")} placeholder={"Email"}></Input>
+          <Input className={"input_modal"} defaultValue={values.configuration.speaker.email} onChange={(event)=>onChangeSpeaker(event,"email")} placeholder={"Email"}></Input>
          </Col>
         </Row>
        </Col>

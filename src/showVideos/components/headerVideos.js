@@ -64,7 +64,7 @@ function HeaderVideos({selectedRow}) {
       <div className="HeaderVideo">
 
           <div className="BreadcrumbDiv">
-              <Breadcrumb style={{color:darkMode===false?"":"#ffffff"}}>
+              <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
                   <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                       <span >Accueil</span>
                   </Breadcrumb.Item>

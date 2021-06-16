@@ -76,12 +76,12 @@ export const Configuration =()=>{
             <Col span={24}>
                 <Row gutter={[0, 25]}>
                     <Col span={24} className={"col-forms"}>
-                        <span style={{textAlign: 'left', fontSize: "20px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Configuration de la page du direct</span>
+                        <span className={"config_direct"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Configuration de la page du direct</span>
                     </Col>
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col className={"col-forms"} span={24}>
-                                <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Programme du direct</span>
+                                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Programme du direct</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <Input.TextArea Rows={5}
@@ -95,10 +95,7 @@ export const Configuration =()=>{
                         <Row gutter={[10, 15]}>
                             <Col className={"col-forms"}>
                                 <span style={{
-                                    color:darkMode===false?"":"rgba(255, 255, 255, 0.85",
-                                    fontSize: "15px",
-                                    fontFamily: "system-ui",
-                                    fontWeight: "bold"
+                                    color:darkMode===false?"":"rgba(255, 255, 255, 0.85"
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
@@ -163,15 +160,13 @@ export const Configuration =()=>{
                             <Col className={"col-forms"} span={24}>
                                 <span style={{
                                     color:darkMode===false?"":"rgba(255, 255, 255, 0.85",
-                                    fontSize: "16px",
-                                    fontFamily: "system-ui"
                                 }}>Option Interactives du direct</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <CheckboxGroup>
-                                    <Checkbox value="chat"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Chat(nom modéré)</Checkbox>
-                                    <Checkbox value="comments" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Commentaires (modérés)</Checkbox>
-                                    <Checkbox value="likeMention" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Mention j'aime</Checkbox>
+                                    <Checkbox value="chat"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Chat(nom modéré)</p></Checkbox>
+                                    <Checkbox value="comments" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Commentaires (modérés)</p></Checkbox>
+                                    <Checkbox value="likeMention" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Mention j'aime</p></Checkbox>
                                 </CheckboxGroup>
                             </Col>
                         </Row>
@@ -181,18 +176,16 @@ export const Configuration =()=>{
                             <Col className={"col-forms"} span={24}>
                                 <span style={{
                                     color:darkMode===false?"":"rgba(255, 255, 255, 0.85",
-                                    fontSize: "16px",
-                                    fontFamily: "system-ui"
                                 }}>Options multimédia du direct </span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <CheckboxGroup>
-                                    <Checkbox value="richeMediaDiffusion"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Diffusion Richmedia
-                                        <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></Checkbox>
+                                    <Checkbox  value="richeMediaDiffusion"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Diffusion Richmedia
+                                        <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></p></Checkbox>
                                     <br/>
                                     <br/>
-                                    <Checkbox value="attachments"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Fichiers joints
-                                        <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></Checkbox>
+                                    <Checkbox  value="attachments"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Fichiers joints
+                                        <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></p></Checkbox>
                                 </CheckboxGroup>
                             </Col>
                         </Row>
@@ -202,7 +195,7 @@ export const Configuration =()=>{
             <Col span={24}>
                 <Row gutter={[0, 25]}>
                     <Col span={24} className={"col-forms"}>
-                        <span style={{textAlign: 'left', fontSize: "20px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Configuration vidéo</span>
+                        <span className={"config_direct"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Configuration vidéo</span>
                     </Col>
                     <Col span={24}>
                         <Row gutter={[0, 15]}>
@@ -211,9 +204,6 @@ export const Configuration =()=>{
                                     <Col className={"col-forms"}>
                                         <span style={{
                                                 color:darkMode===false?"":"rgba(255, 255, 255, 0.85",
-                                                fontSize: "15px",
-                                                fontFamily: "system-ui",
-                                                fontWeight: "bold"
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
@@ -226,24 +216,24 @@ export const Configuration =()=>{
                                 </Row>
                             </Col>
                             {values.configuration.directAutomaticArchiving&&
-                            <Col span={24}>
+                            <Col span={24} className={"col-forms"}>
                                 <Radio.Group value={values.configuration.videoMode}name="videoMode"onChange={onChangeCheckbox}>
                                     <Space direction="vertical">
                                         <Radio  onChange={configurationOnChangeButton} value="notVisibleVideo">
-                                            <span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo non visible</span></Radio>
+                                            <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Vidéo non visible</p></span></Radio>
                                         <Radio checked={values.configuration.visibleVideo} onChange={configurationOnChangeButton} value="visibleVideo">
-                                            <span style={{textAlign: 'left', fontSize: "13px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Vidéo visible</span></Radio>
+                                            <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Vidéo visible</p></span></Radio>
                                     </Space>
                                 </Radio.Group>
                             </Col>
                                 }
                             {values.configuration.directAutomaticArchiving && values.configuration.videoMode==="visibleVideo"&&
-                            <Col span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                Thèmes
+                            <Col span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}} className={"col-forms"}>
+                                <span>Thèmes</span>
                             </Col>
                             }
                             {values.configuration.directAutomaticArchiving && values.configuration.videoMode==="visibleVideo"&&
-                                <Col offset={1} span={23}>
+                                <Col offset={1} span={23} >
                                 <Input placeholder={'www.empreinte.com/titrelive'}></Input>
                                 </Col>
                             }
@@ -252,7 +242,7 @@ export const Configuration =()=>{
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col className={"col-forms"} span={24}>
-                                <span style={{fontSize: "15px", fontWeight: "bold", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Tags</span>
+                                <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Tags</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                     <Select className={"selectTags"} mode="tags" style={{ width: '100%' , minHeight:"32px" }} placeholder="Tags Mode" onChange={handleChangeTags}  {...selectProps} />

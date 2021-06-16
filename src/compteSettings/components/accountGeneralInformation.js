@@ -44,7 +44,7 @@ function onChange(value) {
              <Col span={5}>
                  <Row justify={"space-between"} gutter={[0, 15]}>
                      <Col offset={2} span={22}>
-                         <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Avatar</span>
+                         <span className={"spn_CompteSettings"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Avatar</span>
                      </Col>
                      <Col span={24}>
                          <Avatar style={{background:darkMode===false?"RGB(231, 247, 255)":"#141414",border:darkMode===false?"1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)", color:darkMode===false?"RGB(0, 127, 203)":"rgba(255, 255, 255, 0.85)"}}size={150} icon={<UserOutlined />} />
@@ -59,16 +59,14 @@ function onChange(value) {
              <Col span={12}>
                  <Row gutter={[0, 30]}>
                      <Col span={24} className={"col-forms"}>
-                         <span style={{textAlign: 'left', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Informations générales</span>
+                         <span style={{textAlign: 'left', fontSize:"20px", fontWeight:"500", fontFamily:"SF Pro Display" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Informations générales</span>
                      </Col>
                      <Col span={24}>
                          <Row gutter={[0, 20]}>
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Nom </span>
                                      </Col>
@@ -80,9 +78,7 @@ function onChange(value) {
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Prénom </span>
                                      </Col>
@@ -94,9 +90,7 @@ function onChange(value) {
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Email </span>
                                      </Col>
@@ -108,9 +102,7 @@ function onChange(value) {
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Ville </span>
                                      </Col>
@@ -122,9 +114,7 @@ function onChange(value) {
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Adresse </span>
                                      </Col>
@@ -136,9 +126,7 @@ function onChange(value) {
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Nombre d'employées </span>
                                      </Col>
@@ -165,9 +153,7 @@ function onChange(value) {
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Code postale </span>
                                      </Col>
@@ -179,9 +165,7 @@ function onChange(value) {
                              <Col span={24}>
                                  <Row gutter={[0, 10]}>
                                      <Col span={24}>
-                                  <span style={{
-                                      fontSize: "16px",
-                                      fontFamily: "system-ui",
+                                  <span className={"spn_CompteSettings"} style={{
                                       color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                   }}>Téléphone </span>
                                      </Col>
@@ -193,10 +177,10 @@ function onChange(value) {
                              <Col span={24}>
                               <Row justify={"end"}gutter={[10, 0]}>
                                   <Col>
-                                      <Button style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>Annuler</Button>
+                                      <Button className={"spn_CompteSettings"}  style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>Annuler</Button>
                                   </Col>
                                   <Col >
-                                      <Button type={"primary"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>Mettre a jour</Button>
+                                      <Button className={"spn_CompteSettings"} type={"primary"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>Mettre a jour</Button>
                                   </Col>
                               </Row>
                              </Col>

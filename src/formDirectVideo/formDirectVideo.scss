@@ -9,11 +9,20 @@
 }
 @font-face {
   font-family: 'SF Pro Display';
-  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.eot) format('embedded-opentype'),
-  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.woff2) format('woff2'),
-  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.woff) format('woff');
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff) format('woff');
   font-weight: 500;
-  font-style: italic;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
 }
 :root{
@@ -41,11 +50,34 @@
   border-bottom: 1px solid RGBA(0, 0, 0, 0.06);
   margin-bottom: 5%;
 }
+.config_direct{
+  font-family: "SF Pro Display" !important;
+  font-size: 20px !important;
+  font-weight: normal !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  letter-spacing: normal !important;
+}
 
 .col-forms{
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+.col-forms span{
+  font-size: 14px;
+  font-family: "SF Pro Display";
+  font-weight: 500;
+}
+.col-forms p {
+  font-size: 14px !important;
+  font-family: "SF Pro Display" !important;
+  font-weight: normal !important;
+}
+.col_planification span{
+  font-size: 14px;
+  font-family: "SF Pro Display";
+  font-weight: 500;
 }
 
 .col-forms-upload{
@@ -252,6 +284,7 @@
   flex-direction: column;
 }
 .div_Email_accée p{
+  font-family: "SF Pro Display";
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -412,7 +445,68 @@
   font-family: 'SF Pro Display';
   font-weight: 900 ;
 }
-
+.col_socialMedia p{
+  font-size: 20px;
+  font-weight: normal;
+  font-family: "SF Pro Display";
+}
+.col-name-socialMedia span{
+  font-family: "SF Pro Display";
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+}
+.spn_planification{
+  font-family: "SF Pro Display" !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+.col-planification Button{
+  font-family: "SF Pro Display" !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+.col_Empreinte .spn1{
+  font-family: "SF Pro Display" !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+.col_Empreinte .spn1{
+  font-family: "SF Pro Display" !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+}
+.col_texte_empreinte{
+  font-family: "SF Pro Display" !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+}
+.FundamentalsofWebinar{
+  font-family: "SF Pro Display" !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+.Empriente.com{
+  font-family: "SF Pro Display" !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+.span_modal{
+  font-family: "SF Pro Display";
+  font-weight: 500;
+  font-size: 14px;
+}
+.btn_upload_pic{
+  font-family: "SF Pro Display" !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+}
+.input_modal{
+  font-family: "SF Pro Display" !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+}
 
 @media (max-width: 1161.1px) {
   .list-speaker{

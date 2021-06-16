@@ -9,16 +9,16 @@ export const FormConnexion =()=>{
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
-                <span style={{textAlign: 'left', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold"}}>Connexion</span>
+                <span className={"span_connexion"}>Connexion</span>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 20]} >
 
-                    <Col span={24}>
+                    <Col span={24} className={"col_input"}>
                         <Input placeholder="default size" prefix={<UserOutlined/>}/>
                     </Col>
 
-                    <Col span={24}>
+                    <Col span={24} className={"col_input"}>
                         <Input.Password
                             placeholder="input password"
                             iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
@@ -28,10 +28,10 @@ export const FormConnexion =()=>{
                     <Col span={24}>
                         <Row justify="space-between">
                             <Col>
-                                <Checkbox>Se souvenir de moi</Checkbox>
+                                <Checkbox><span className={"spn_chbx"}>Se souvenir de moi</span></Checkbox>
                             </Col>
                             <Col>
-                                <a> Mot de passe oublié</a>
+                                <a className={"spn_chbx"}> Mot de passe oublié</a>
                             </Col>
                         </Row>
                     </Col>
@@ -40,13 +40,13 @@ export const FormConnexion =()=>{
             <Col span={24}>
                 <Row gutter={[20, 20]} >
                     <Col span={24}>
-                        <Button style={{width:"100%"}}type="primary">Connexion</Button>
+                        <Button className={"spn_chbx"} style={{width:"100%"}}type="primary">Connexion</Button>
                     </Col>
                     <Col >
-                        <span>Pas encore membre?</span>
+                        <span className={"spn_chbx"}>Pas encore membre?</span>
                     </Col>
                     <Col onClick={()=>{history.push("/signUp")}}>
-                        <a>Inscrivez-vous</a>
+                        <a className={"spn_chbx"}>Inscrivez-vous</a>
                     </Col>
                 </Row>
             </Col>
