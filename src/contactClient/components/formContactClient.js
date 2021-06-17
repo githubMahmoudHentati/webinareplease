@@ -1,13 +1,15 @@
 import React ,{Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox} from 'antd'
 import '../contactClient.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
-
+import {Hooks} from "../utils/hooks";
 
 export const FormContactClient =()=> {
+    const {ContactClientOnChange , handleSubmitContactClient}= Hooks()
+
     return (
         <Row gutter={[0, 40]} className={'col-signUp'}>
             <Col style={{textAlign: 'center'}} span={24}>
-                <span className={"spn1"}>Créez votre compte gratuitement</span>
+                <span className={"spn1"}>Contactez-nous et présicez vos besions</span>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 10]}>
@@ -17,7 +19,7 @@ export const FormContactClient =()=> {
                                 <span className={"spn2"}>Nom :</span>
                             </Col>
                             <Col span={19}>
-                                <Input className={"spn2"} placeholder={"Nom"}></Input>
+                                <Input className={"spn2"} placeholder={"Nom"} name="name" onChange={ContactClientOnChange}></Input>
                             </Col>
                         </Row>
                     </Col>
@@ -27,7 +29,7 @@ export const FormContactClient =()=> {
                                 <span className={"spn2"}>Prénom :</span>
                             </Col>
                             <Col span={19}>
-                                <Input className={"spn2"} placeholder={"Prénom"}></Input>
+                                <Input className={"spn2"} placeholder={"Prénom"} name="lastName" onChange={ContactClientOnChange} ></Input>
                             </Col>
                         </Row>
                     </Col>
@@ -37,7 +39,7 @@ export const FormContactClient =()=> {
                                 <span className={"spn2"} >E-mail :</span>
                             </Col>
                             <Col span={19}>
-                                <Input className={"spn2"} placeholder={"E-mail"}></Input>
+                                <Input className={"spn2"} placeholder={"E-mail"} name="email" onChange={ContactClientOnChange}></Input>
                             </Col>
                         </Row>
                     </Col>
@@ -47,7 +49,7 @@ export const FormContactClient =()=> {
                                 <span className={"spn2"}>Votre message :</span>
                             </Col>
                             <Col span={19}>
-                                <Input.TextArea className={"spn2"} placeholder={"Votre message"}></Input.TextArea>
+                                <Input.TextArea className={"spn2"} placeholder={"Votre message"} name="message" onChange={ContactClientOnChange}></Input.TextArea>
                             </Col>
                         </Row>
                     </Col>
@@ -59,7 +61,7 @@ export const FormContactClient =()=> {
                         <Button className={"spn2"}> Annuler</Button>
                     </Col>
                     <Col>
-                        <Button type={"primary"} className={"spn2"}>Envoyer</Button>
+                        <Button type={"primary"} className={"spn2"} onClick={handleSubmitContactClient}>Envoyer</Button>
                     </Col>
                 </Row>
             </Col>
