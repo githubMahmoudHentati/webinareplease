@@ -17,9 +17,9 @@ export const AccountSubscription=()=>{
                     <Col span={24}>
                         <Row  gutter={[0, 5]}>
                             <Col span={24}>
-                                <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",textAlign: 'left', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold"}}>Abonement</span>
+                                <span className={"spn_abonnement"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Abonement</span>
                             </Col>
-                            <Col span={24} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                            <Col className={"parag_abonnement"} span={24} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 Votre abonnement est actuellement le suivant
                             </Col>
                         </Row>
@@ -27,49 +27,49 @@ export const AccountSubscription=()=>{
                     <Col span={24}>
                         <Row >
                             <Col span={6}>
-                                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",textAlign: 'left', fontSize: "14px", fontFamily: "system-ui",fontWeight:"500"}}>Abonnement :</span>
+                                <span className={"parag_abonnement_gras"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Abonnement :</span>
                             </Col>
                             <Col  >
-                                <span style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}> {values.subscription.subscriptionType} <br/> {values.subscription.subscriptionAmount}<br/>{values.subscription.subscriptionMode}</span>
+                                <span className={"parag_abonnement"} style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}> {values.subscription.subscriptionType} <br/> {values.subscription.subscriptionAmount}<br/>{values.subscription.subscriptionMode}</span>
                             </Col>
                         </Row>
                     </Col>
                     <Col span={24}>
                         <Row >
                             <Col span={6}>
-                                <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",textAlign: 'left', fontSize: "14px", fontFamily: "system-ui",fontWeight:"500"}}>Stockage utilisé :</span>
+                                <span className={"parag_abonnement_gras"}  style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Stockage utilisé :</span>
                             </Col>
                             <Col >
-                                <span style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}> {values.subscription.usedStorage}</span>
+                                <span className={"parag_abonnement"} style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}> {values.subscription.usedStorage}</span>
                             </Col>
                         </Row>
                     </Col>
                     <Col span={24}>
                         <Row >
                             <Col span={6}>
-                                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",textAlign: 'left', fontSize: "14px", fontFamily: "system-ui",fontWeight:"500"}}>Durée du diffusion :</span>
+                                <span className={"parag_abonnement_gras"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Durée du diffusion :</span>
                             </Col>
                             <Col >
-                                <span style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}>  {values.subscription.diffusionDuration}</span>
+                                <span className={"parag_abonnement"} style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}>  {values.subscription.diffusionDuration}</span>
                             </Col>
                         </Row>
                     </Col>
                     <Col span={24}>
-                        <span style={{textAlign: 'left', fontSize: "12px", fontFamily: "system-ui" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                        <span className={"spn_limite"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                             Vos quotes sont epuisés? vous souhaitez obtenir <br/> plus de limites?</span>
-                        <a> Contactez-nous</a>
+                        <a className={"spn_limite"}> Contactez-nous</a>
                     </Col>
                 </Row>
             </Col>
             <Col offset={1} span={11}>
                 <Row  gutter={[0, 25]}>
                     <Col span={24}>
-                        <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" ,textAlign: 'left', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold"}}>mode de paiement choisi</span>
+                        <span className={"spn_abonnement"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Mode de paiement choisi</span>
                     </Col>
                     <Col><img className={"img-strip"} src={strip}/></Col>
-                    <Col offset={1} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" }}> {values.subscription.paymentMode}</Col>
+                    <Col  className={"parag_abonnement"} offset={1} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" }}> {values.subscription.paymentMode}</Col>
                     <Col span={24}>
-                        <Button disabled style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}> Enregistrer un nouveau moyen de paiement</Button>
+                        <Button className={"parag_abonnement"} disabled style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}> Enregistrer un nouveau moyen de paiement</Button>
                     </Col>
                 </Row>
             </Col>
@@ -78,10 +78,10 @@ export const AccountSubscription=()=>{
                     <Col span={24}>
                         <Row justify={"space-between"}>
                             <Col>
-                                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",textAlign: 'left', fontSize: "20px", fontFamily: "system-ui",fontWeight:"bold"}}>Facture d'abonnement</span>
+                                <span className={"spn_abonnement"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Facture d'abonnement</span>
                             </Col>
                             <Col span={6}>
-                                <Button disabled style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}> Changer mes infos de facturation</Button>
+                                <Button className={"parag_abonnement"} disabled style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}> Changer mes infos de facturation</Button>
                             </Col>
                         </Row>
                     </Col>

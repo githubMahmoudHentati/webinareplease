@@ -23,13 +23,14 @@
 }
 @font-face {
     font-family: 'SF Pro Display';
-    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.eot) format('embedded-opentype'),
-    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.woff2) format('woff2'),
-    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-MediumItalic.woff) format('woff');
+    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.eot) format('embedded-opentype'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff2) format('woff2'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff) format('woff');
     font-weight: 500;
-    font-style: italic;
+    font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'SF Pro Display';
     src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-SemiboldItalic.eot) format('embedded-opentype'),
@@ -39,11 +40,22 @@
     font-style: italic;
     font-display: swap;
 }
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Bold.eot) format('embedded-opentype'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Bold.woff2) format('woff2'),
+    url(assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Bold.woff) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 body{
     margin: 0px;
     padding: 0% ;
     font-family: 'SF Pro Display';
     font-weight: normal;
+    height: 100vh !important;
 }
 :root {
     --white_color:rgba(0, 0, 0, 0.85);
@@ -51,7 +63,7 @@ body{
     --border_color:rgba(0 , 0 , 0 , 0.15);
     --card_color:#FFFFFF;
     --cell-color:#FFFFFF;
-    --option-background:#FFFFFF;
+    --option-background:#F5F5F5;
     --option_select:#FFFFFF;
     --modal_background:#FFFFFF;
     --item-menu-background:#e7f7ff;
@@ -77,9 +89,13 @@ body{
     --color-tag-text-green:#52c41a;
     --color-tag-text-gray:rgba(0, 0, 0, 0.65);
 
-
+    --separator-color:rgba(0, 0, 0, 0.45)
 }
-
+.ant-breadcrumb-link{
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-weight: normal;
+}
 .ant-picker-calendar-full .ant-picker-panel .ant-picker-cell-selected .ant-picker-calendar-date  {
     background-color: var(--option-background) !important;
 }
@@ -217,6 +233,10 @@ body{
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
 }
+.ant-select-selection-item{
+    font-family: 'SF Pro Display' !important;
+    font-weight: normal !important;
+}
 .ant-select-selection-item-content{
     color: var(--white_color) !important;
 }
@@ -240,6 +260,9 @@ body{
 }
 .ant-dropdown-menu-item{
     color: var(--item-menu-color) !important;
+    font-family: 'SF Pro Display';
+    font-size: 14px;
+    font-weight: normal;
 }
 .ant-dropdown-menu-item:hover{
     background-color: var(--option-background) !important;
@@ -251,7 +274,7 @@ body{
     background-color: var(--option_select) !important;
 }
 .ant-breadcrumb-separator{
-    color: var(--white_color) !important;
+    color: var(--separator-color) !important;
 }
 .selectFilter .ant-select-selector{
     background-color: var(--card_color) !important;
@@ -332,6 +355,9 @@ body{
 .ant-empty-description{
     color: var(--white_color) !important;
 }
+.ant-select-item-option:hover .ant-select-item-option-content{
+   color: #1890ff !important
+}
 .ant-select-item-option:hover{
     background-color: var(--option-background) !important;
 }
@@ -363,9 +389,15 @@ body{
 }
 .ant-picker-content thead tr th{
     color: var(--white_color) !important;
+    font-family: "SF Pro Display" !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 .ant-picker-content tbody tr td{
     color: var(--white_color) !important;
+    font-family: "SF Pro Display" !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 .ant-picker-cell-inner:hover{
     background-color: var(--option-background) !important;
@@ -388,6 +420,9 @@ body{
 .ant-radio-button-wrapper{
     background-color: var(--card_color) !important;
     color: var(--white_color);
+    font-family: "SF Pro Display";
+    font-weight: 500;
+    font-size: 14px;
 }
 /*Modal Dark light*/
 .ant-modal-content{
@@ -429,6 +464,9 @@ body{
 }
 .ant-modal-title{
     color: var(--white_color) !important;
+    font-family: 'SF Pro Display' !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
 }
 .anticon-close svg{
     color: var(--white_color) !important;
@@ -438,9 +476,13 @@ body{
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
 }
-
 .menuItem{
     color: var(--item-menu-color) !important;
+}
+.menuItem {
+    font-family: "SF Pro Display" !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
 }
 .menuItem:hover{
     background-color: var(--option-background) !important;
@@ -486,12 +528,18 @@ body{
     justify-content: space-between;
     align-items: center;
     margin-top: 0.5%;
-    padding: 0 2em;
+    padding: 1.8% 1.5%;
+}
+.h4{
+    font-family: 'SF Pro Display';
+    font-size: 20px;
+    font-weight: 500;
 }
 .MesDirects h4{
     font-family: 'SF Pro Display';
     font-size: 20px;
     font-weight: 500;
+    margin-top: 10px;
 }
 .btn_add_media{
     font-family: 'SF Pro Display';
@@ -731,7 +779,7 @@ margin-top: 2%;
 .div_Url_diffusion Input{
     font-family: 'SF Pro Display';
     font-size: 14px;
-    font-weight: 400;
+    font-weight: normal;
     color: rgba(0, 0, 0, 0.25);
     height: 32px !important;
 }
@@ -751,7 +799,7 @@ margin-top: 2%;
 .div_Nom_de_flux Input{
     font-family: 'SF Pro Display';
     font-size: 14px;
-    font-weight: 400;
+    font-weight: normal;
     color: rgba(0, 0, 0, 0.25);
     height: 32px !important;
     margin-bottom: 2%;
@@ -769,7 +817,7 @@ margin-top: 2%;
     background-color: #ffffff !important;
     font-family: 'SF Pro Display';
     font-size: 12px;
-    font-weight: 400;
+    font-weight: normal;
     letter-spacing: normal;
     color: rgba(0, 0, 0, 0.65);
 }
@@ -1173,20 +1221,15 @@ input:checked + .slider:before {
 }
 /*form_signup*/
 .showVideosDiv{
-    height: 100vh;
+    height: 100vh !important;
 }
-/*.showVideosDiv .ant-card-body:nth-of-type(1){*/
-/*    height: 100% !important;*/
-/*}*/
-
 .showVideosDiv .card .ant-card-body{
     padding: 16px !important;
+    min-height: 93vh !important;
 }
 .showVideosDiv .card2 .ant-card-body{
     padding: 24px !important;
-}
-.ant-card-body{
-    height: 100%;
+    min-height: 90.1vh !important;
 }
 .ant-select-selection-placeholder{
     color: #bfbfbf !important;

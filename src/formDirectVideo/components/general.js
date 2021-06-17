@@ -25,12 +25,12 @@ export const Generals =()=>{
     return(
         <Row gutter={[0, 30]}>
             <Col span={24} className={"col-forms"}>
-                <span style={{textAlign:'left',fontSize:"20px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Paramètres généraux</span>
+                <span style={{textAlign:'left',fontSize:"20px", fontFamily: "SF Pro Display",fontWeight: "normal" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Paramètres généraux</span>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Ajouter une vignette</span>
+                        <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Ajouter une vignette</span>
                     </Col>
                     <Col span={24} className={"col-forms-upload"}>
                         <Dragger {...props} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}>
@@ -86,7 +86,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[10, 0]}>
                     <Col className={"col-forms"} >
-                        <span style={{fontSize: "14px", fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
+                        <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
                         <Switch  checked={values.general.directPlan} name="directPlan" value="directPlan" onChange={(checked,event)=>{generalOnChangeSwitch(checked,event,"directPlan")}}/>
@@ -96,24 +96,18 @@ export const Generals =()=>{
             {values.general.directPlan &&
             <Col span={24}>
                 <Row gutter={[20, 10]}>
-                    <Col span={8}>
+                    <Col span={8} className={"col_planification"}>
                         <span style={{
-                            fontSize: "14px",
-                            fontWeight: "bold",
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                         }}>Date de début</span>
                     </Col>
-                    <Col span={8}>
+                    <Col span={8} className={"col_planification"}>
                         <span style={{
-                            fontSize: "14px",
-                            fontWeight: "bold",
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                         }}>Heure de début</span>
                     </Col>
-                    <Col span={8}>
+                    <Col span={8} className={"col_planification"}>
                         <span style={{
-                            fontSize: "14px",
-                            fontWeight: "bold",
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                         }}>Durée</span>
                     </Col>
@@ -132,7 +126,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Modes d'accès au direct</span>
+                        <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Modes d'accès au direct</span>
                     </Col>
                     <Col span={24} >
                         <Row gutter={[0, 10]} >

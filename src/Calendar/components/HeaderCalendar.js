@@ -19,7 +19,7 @@ function HeaderCalendar() {
         <div className={"HeaderCalendar"}>
 
             <div className="BreadcrumbDivHeaderCalendrier">
-                <Breadcrumb style={{color:darkMode===false?"":"#ffffff"}}>
+                <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
                     <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} >
                         <span>Accueil</span>
                     </Breadcrumb.Item>

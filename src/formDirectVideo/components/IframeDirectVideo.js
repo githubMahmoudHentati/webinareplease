@@ -45,7 +45,7 @@ export const IframeDirectVideo =()=>{
         <div>
                 <Row gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
-                        <Breadcrumb style={{fontSize:"14px"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                        <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 <span >Accueil</span>
                             </Breadcrumb.Item>

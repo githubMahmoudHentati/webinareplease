@@ -1,3 +1,30 @@
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Heavy.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Medium.woff) format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.eot) format('embedded-opentype'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff2) format('woff2'),
+  url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 .col-signUp{
   display: flex;
   justify-content: center;
@@ -12,4 +39,14 @@
   display:flex ;
   align-items:center ;
   justify-content:flex-end ;
+}
+.spn1{
+  font-family: "SF Pro Display";
+  font-size: 20px;
+  font-weight: normal;
+}
+.spn2{
+  font-family: "SF Pro Display";
+  font-size: 14px;
+  font-weight: normal;
 }
