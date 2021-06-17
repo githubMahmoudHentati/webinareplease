@@ -86,7 +86,7 @@ export const FormSignUp =({child1,child2})=>{
                                         },
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
-                                                    if (isValidPassword(values.passwordIntranet)) {
+                                                    if (isValidPassword(values.signUp.password)) {
                                                         return Promise.resolve('value');
                                                     }
                                                     return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
@@ -97,7 +97,7 @@ export const FormSignUp =({child1,child2})=>{
                                         <Input.Password
                                             className={"spn2"}
                                             name="password" onChange={signUpOnChange}
-                                            placeholder="input password"
+                                            placeholder="Mot de passe"
                                             iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                                         />
                                     </Form.Item>
