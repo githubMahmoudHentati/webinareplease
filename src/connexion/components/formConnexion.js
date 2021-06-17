@@ -14,7 +14,8 @@ export const FormConnexion =()=>{
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
-    const{handleSubmit,values}=Hooks()
+    const{handleSubmit,values,connexionOnChange}=Hooks()
+    console.log("conenxion",values.connexion)
 
     return(
         <Form
@@ -34,11 +35,12 @@ export const FormConnexion =()=>{
                         <Form.Item name="email" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                        <Input placeholder="default size" prefix={<UserOutlined/>}/>
+                        <Input name="name" onChange={connexionOnChange}  placeholder="default size" prefix={<UserOutlined/>}/>
                         </Form.Item>
                     </Col>
                     <Col span={24} className={"col_input"}>
                         <Form.Item
+                            onChange={connexionOnChange}
                             className={"form-item-style"}
                             name="password"
                             rules={[{
