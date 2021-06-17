@@ -109,6 +109,7 @@ function HeaderVideos({selectedRow}) {
                           showSearch
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
+                          defaultValue="tous"
                           optionFilterProp="children"
                           onChange={onChange}
                           onSearch={onSearch}
@@ -116,10 +117,10 @@ function HeaderVideos({selectedRow}) {
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option  value="jack"><span className="icon-select-all-line"></span> Tous </Option>
-                          <Option value="lucy"><span className="icon-Archive"></span>  Archivés</Option>
-                          <Option value="tom"><span className="icon-Current"></span>  En cours</Option>
-                          <Option value="hello"><HourglassOutlined />  A venir</Option>
+                          <Option  value="tous"><span className="icon-select-all-line"></span> Tous </Option>
+                          <Option value="archivés"><span className="icon-Archive"></span>  Archivés</Option>
+                          <Option value="encours"><span className="icon-Current"></span>  En cours</Option>
+                          <Option value="avenir"><HourglassOutlined />  A venir</Option>
                       </Select>
                   </div>
 
