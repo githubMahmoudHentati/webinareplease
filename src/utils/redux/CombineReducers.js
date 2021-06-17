@@ -6,6 +6,7 @@ import {ShowVideosReducerReducer} from "../../showVideos/store/showVideosReducer
 import {AccountSettingsReducer} from "../../compteSettings/store/accountSettingsReducer";
 import {SignUpReducer} from "../../signUp/store/signUpReducer";
 import {ContactClientReducer} from "../../contactClient/store/ContactClientReducer";
+import {ConnexionReducer} from "../../connexion/store/connexionReducer";
 
 
 export const rootReducer = combineReducers({
@@ -14,5 +15,6 @@ export const rootReducer = combineReducers({
     FormDirectVideoReducer,
     ShowVideosReducerReducer,
     SignUpReducer,
-    ContactClientReducer
+    ContactClientReducer,
+    ConnexionReducer
 })
