@@ -11,6 +11,11 @@ export const FormSignUp =({child1,child2})=>{
         wrapperCol: { span: 20 },
     };
 
+    const isValidEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email)
+    }
+
     const {signUpOnChange,signUpOnChangeSelect,values,handleSubmit}= Hooks()
 
     const isValidPassword = (password) => {
@@ -56,9 +61,20 @@ export const FormSignUp =({child1,child2})=>{
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
-                                    <Form.Item name="email" className={"form-item-style"}
-                                               rules={requiredFieldRule}
-                                               label={"E-mail"}
+                                    <Form.Item
+                                        className={"form-item-style"}
+                                        name="email"
+                                        label={"E-mail"}
+                                        rules={[
+                                            ({getFieldValue}) => ({
+                                                validator(_, value) {
+                                                    if (isValidEmail(value)) {
+                                                        return Promise.resolve('value');
+                                                    }
+                                                    return Promise.reject('Veuillez entrer un mail valide');
+                                                },
+                                            }),
+                                        ]}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
                                                name="email" placeholder={"E-mail"}></Input>
@@ -80,10 +96,7 @@ export const FormSignUp =({child1,child2})=>{
                                         className={"form-item-style"}
                                         name="password"
                                         label={"Mot de passe"}
-                                        rules={[{
-                                            required: true,
-                                            message: "S'il vous plaît saisissez votre mot de passe!"
-                                        },
+                                        rules={[
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
                                                     if (isValidPassword(values.signUp.password)) {
