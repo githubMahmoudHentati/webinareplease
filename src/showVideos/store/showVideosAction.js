@@ -6,3 +6,12 @@ export function setshowVideosActions(e){
     }
 
 }
+
+export function setFilterVideosActions(e){
+
+    return{
+        type:"SET_FilterVideos",
+        payload:e,
+    }
+
+}
