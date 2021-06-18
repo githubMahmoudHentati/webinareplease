@@ -3,6 +3,8 @@ import "../Calendar.scss";
 import {Calendar, Badge, Button , Modal , Tag} from 'antd';
 import {CalendarOutlined , ClockCircleOutlined , DeleteOutlined  } from "@ant-design/icons";
 import {useSelector} from "react-redux";
+import {useLazyQuery,useQuery} from "@apollo/react-hooks";
+import {graphQL_shema} from "../utils/graphql";
 
 function getListData(value) {
     let listData;
@@ -218,10 +220,15 @@ function getMonthData(value) {
 }
 
 
-
-
-
 function CalendarFile() {
+
+    const {loading:calendar_loadingNow, data: GetCalendarDataNow}
+        = useQuery(graphQL_shema().Get_Calendar_Data, {
+        fetchPolicy: "cache-first",
+        variables :{ "dates":["2021-04","2021-05"]},
+        context: { clientName: "first" }
+    })
+
 
     return(
         <div className={"CalendarFile"}>
