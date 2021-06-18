@@ -1,5 +1,5 @@
 import React,{useState , useEffect} from 'react';
-import CalendarFile from "./components/CalendarFile";
+import {CalendarFile} from "./components/CalendarFile";
 import HeaderCalendar from "./components/HeaderCalendar";
 import {PrincipalPage} from "../utils/components/principalPage"
 
