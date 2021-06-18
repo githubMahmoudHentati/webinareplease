@@ -1,12 +1,13 @@
 import React from 'react';
 import { Select } from 'antd';
 import { Tag } from 'antd';
+
+
 const { Option } = Select;
 
 function handleChange(value) {
     console.log(`selected ${value}`);
 }
-
 export const columns = [
 
     {
@@ -19,13 +20,13 @@ export const columns = [
     },
     {
         title: 'Aperçu',
-        dataIndex: 'aperçu',
+        dataIndex: 'logo',
         key:1,
         render: image => <img  src={image} className={"img_aperçu"}/>,
     },
     {
         title: 'Titre',
-        dataIndex: 'titre',
+        dataIndex: 'title',
         key: 2,
         sorter: (a, b) => a.id - b.id,
         sortDirections: ['descend', 'ascend'],
@@ -69,7 +70,7 @@ export const columns = [
 ];
 
 
-export const data = {
+export const Data = {
     totalElements:20,
     content:[
         {

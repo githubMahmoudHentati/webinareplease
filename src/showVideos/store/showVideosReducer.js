@@ -3,8 +3,9 @@ import {FilterVideosList} from "../utils/FilterVideosConstraints"
 const {FilterVideos}=FilterVideosList();
 
 const INITIAL_STATE = {
-    ListVideos : {},
-    FilterVideos:FilterVideos()
+    ListVideos : [],
+    FilterVideos:FilterVideos(),
+    PaginationProps:{}
 }
 
 export const ShowVideosReducerReducer = (state=INITIAL_STATE , action)=>{
@@ -22,6 +23,11 @@ export const ShowVideosReducerReducer = (state=INITIAL_STATE , action)=>{
             return {
                 ...state,
                 FilterVideos:FilterVideosOnOnchangeObj
+            }
+        case "SET_PaginationProps" :
+            return {
+                ...state,
+                PaginationProps:action.payload
             }
         default:{
             return state
