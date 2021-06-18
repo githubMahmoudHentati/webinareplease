@@ -15,3 +15,10 @@ export function setFilterVideosActions(e){
     }
 
 }
+
+export function setPaginationProps(e){
+    return{
+        type:"SET_PaginationProps",
+        payload:e,
+    }
+}
