@@ -5,237 +5,169 @@ import {CalendarOutlined , ClockCircleOutlined , DeleteOutlined  } from "@ant-de
 import {useSelector} from "react-redux";
 import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "../utils/graphql";
+import moment from 'moment'
 
-function getListData(value) {
-    let listData;
-
-    switch (value.date()) {
-        case 2:
-            listData = [
-                { type: 'Archivé', content: "Titre webinar fini…" },
-            ];
-            break;
-        case 4:
-            listData = [
-                { type: 'En cours', content: 'Titre webinar en cours…' },
-            ];
-            break;
-        case 6:
-            listData = [
-                { type: 'A venir', content: 'Titre webinar à venir…' },
-            ];
-            break;
-        case 8:
-            listData = [
-                { type: 'Archivé', content: "Titre webinar fini…" },
-            ];
-            break;
-        case 9:
-            listData = [
-                { type: 'En cours', content: 'Titre webinar en cours…' },
-            ];
-            break;
-        case 10:
-            listData = [
-                { type: 'A venir', content: 'Titre webinar à venir…' },
-            ];
-            break;
-        default:
-    }
-    return listData || [];
-}
-
-
-function DateCellRender(value) {
-    const [visibleAVenir , SetVisibleAVenir] = useState(false);
-    const [visibleEnCours , SetVisibleEnCours] = useState(false);
-    const [visibleArchivé ,  SetVisibleArchivé] = useState(false)
-    // use Selector redux
+export function CalendarFile() {
+    const [visible , SetVisible] = useState(false);
+    const [allow, setAllow] = useState(false);
+    const [calendarValues, setCalendarValues] = useState([]);
+    const [dateTime, setDateTime] = useState(moment());
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
-    const listData = getListData(value);
-    let styles = getComputedStyle(document.documentElement);
 
-    //show Modal A venir
+    //show Modal
     const onShowModal=()=>{
-        SetVisibleAVenir(true)
+        SetVisible(true)
     }
-    // Cancel modal A venir
+    // Cancel modal
     const handleCancel = () => {
-        SetVisibleAVenir(false)
-    };
-    // show Modal En cours
-    const onShowModalEnCours = () =>{
-        SetVisibleEnCours(true)
+        SetVisible(false)
     }
-    //Cancel modal En cours
-    const handleCancelEnCours = () =>{
-        SetVisibleEnCours(false)
-    }
-    //show modal Archivé
-    const onShowModalArchivé = () =>{
-        SetVisibleArchivé(true)
-    }
-    // Cancel modal Archivé
-    const handleCancelArchivé = () =>{
-        SetVisibleArchivé(false)
-    }
-
-    return (
-        <div className="events">
-            {listData.map(item => {
-
-                if(item.type==='A venir'){
-                   return(
-                       <div>
-                       <Tag className={"btn_error"} color="blue" onClick={()=>onShowModal()}>
-                           <Badge color={'#007fcb'} text={item.content} style={{color:"#007fcb" , borderRadius:"2px"}}/>
-                       </Tag>
-
-                    <Modal
-                        visible={visibleAVenir}
-                        title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'#007fcb'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
-                        onCancel={handleCancel}
-                        footer={[
-                            <div className={"footer_modal_Avenir"}>
-                                <div><Button><DeleteOutlined /> Supprimer</Button></div>
-
-                                <div>
-                            <Button key="back" onClick={handleCancel}>
-                                Annuler
-                            </Button>
-                            <Button key="submit" type="primary"  >
-                                Visualiser
-                            </Button>
-                                </div>
-
-                            </div>
-                        ]}
-                    >
-                       <div className={"body_Modal"}>
-                           <div className={"div_image_modal"}><img src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/></div>
-                           <div className={"div_time_calendar"}>
-                               <div className={"type_btn"}><Tag color="blue">A venir</Tag></div>
-                               <div className={"div2_time_calendar"}>
-                                   <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><CalendarOutlined /> 13-05-2121</p>
-                                   <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><ClockCircleOutlined /> 16:30:00</p>
-                               </div>
-                           </div>
-                       </div>
-                    </Modal>
-                       </div>
-                   )
-                }else if(item.type==='En cours'){
-                    return (
-                        <div>
-                            <Tag className={"btn_error"} color="green" onClick={()=>onShowModalEnCours()}>
-                                <Badge color={'#52c41a'} text={item.content} style={{color:"#52c41a" , borderRadius:"2px"}}/>
-                            </Tag>
-
-                            <Modal
-                                visible={visibleEnCours}
-                                title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'#52c41a'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
-                                onCancel={handleCancelEnCours}
-                                footer={[
-                                    <div className={"modal_footer_EnCours"}>
-                                    <Button key="back" onClick={handleCancelEnCours}>
-                                        Annuler
-                                    </Button>
-                                    <Button key="submit" type="primary"  >
-                                        Visualiser
-                                    </Button>
-                                    </div>
-                                ]}
-                            >
-                                <div className={"body_Modal"}>
-                                    <div className={"div_image_modal"}><img src={"https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bG9uZG9ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"}/></div>
-                                    <div className={"div_time_calendar"}>
-                                        <div className={"type_btn"}><Tag color="green">En cours</Tag></div>
-                                        <div className={"div2_time_calendar"}>
-                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><CalendarOutlined /> 28-05-2121</p>
-                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><ClockCircleOutlined /> 12:30:00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Modal>
-                        </div>
-                    )
-                }else if(item.type==='Archivé'){
-                    return (
-                        <div>
-                            <Tag  color="red" onClick={()=>onShowModalArchivé()}>
-                                <Badge color={"#B7B7B7"} text={item.content} style={{color:"rgba(0,0,0,0.65)" , borderRadius:"2px"}}/>
-                            </Tag>
-
-                            <Modal
-                                visible={visibleArchivé}
-                                title={<Badge style={{fontSize:"16px" , fontWeight:"500"}}  color={'#B7B7B7'} text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
-                                onCancel={handleCancelArchivé}
-                                footer={[
-                                    <div className={"modal_footer_Archivé"}>
-                                    <Button key="back" onClick={handleCancelArchivé}>
-                                        Annuler
-                                    </Button>
-                                    <Button key="submit" type="primary"  >
-                                        Visualiser
-                                    </Button>
-                                    </div>
-                                ]}
-                            >
-                                <div className={"body_Modal"}>
-                                    <div className={"div_image_modal"}><img src={"https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y29yb25hdmlydXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}/></div>
-                                    <div className={"div_time_calendar"}>
-                                        <div className={"type_btn"}><Tag color="gray">Archivé</Tag></div>
-                                        <div className={"div2_time_calendar"}>
-                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><CalendarOutlined /> 28-05-2121</p>
-                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><ClockCircleOutlined /> 12:30:00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Modal>
-                        </div>
-                    )
-                }
-            })}
-        </div>
-    );
-}
-
-
-function monthCellRender(value) {
-    const num = getMonthData(value);
-    return num ? (
-        <div className="notes-month">
-            <section>{num}</section>
-            <span>Backlog number</span>
-        </div>
-    ) : null;
-}
-
-
-function getMonthData(value) {
-    if (value.month() === 8) {
-        return 1394;
-    }
-}
-
-
-function CalendarFile() {
-
     const {loading:calendar_loadingNow, data: GetCalendarDataNow}
         = useQuery(graphQL_shema().Get_Calendar_Data, {
         fetchPolicy: "cache-first",
-        variables :{ "dates":["2021-04","2021-05"]},
-        context: { clientName: "first" }
+        variables :{ "dates":[moment().subtract(1, 'months').format("YYYY-MM"),moment().format("YYYY-MM"),moment().add(1, 'months').format("YYYY-MM")]},
+        onCompleted :(data)=>{
+
+            setCalendarValues(data.getCalendar)
+            setAllow(true)
+        }
     })
+
+    const [QueryCalendar,{loading:calendar_loading, data: GetCalendarData}]
+        = useLazyQuery(graphQL_shema().Get_Calendar_Data, {
+        fetchPolicy: "cache-first",
+        onCompleted :async (data )=>{
+            if (data.getCalendar) {
+                await data.getCalendar.map(element => {
+                    moment(element.date.date,).month() === dateTime.month() ? element.date.isAMomentObject = true : element.date.isAMomentObject = false
+                })
+                setCalendarValues(data.getCalendar)
+            }
+            setAllow(true)
+        }
+    })
+
+    const OnPanelChange=async (date,mode)=>{
+        let month_number=date.month()+1
+        let month_before =month_number===1?"12":(date.month() < 9) ?   "0" + (month_number-1).toString()  :  (month_number-1).toString();
+        let year_before = month_before==="12"?date.year()-1:date.year();
+        let month = (date.month() < 9) ? "0" + month_number.toString() : month_number.toString();
+        let year=date.year()
+        let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
+        let year_after = month_after=="01"?date.year()+1:date.year()
+        setAllow(false)
+        console.log("date",date,"mode",mode)
+        await setDateTime(date)
+        QueryCalendar({variables: {"dates": [year_before+ "-" + month_before, year+ "-" + month, year_after + "-" + month_after]}},date)
+    }
+
+    const getListData= (value)=>{
+        let listData =[];
+        let check = value.format('YYYY/MM/DD');
+        if (calendarValues) {
+
+            calendarValues.forEach((element) => {
+                switch ((value.month()+"-"+value.date())) {
+                    case (moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
+                        listData=[...listData,{id:(element.id),type:element.type , content:element.content,style:element.date.isAMomentObject}]
+                        break;
+                }
+            })
+        }
+        return listData || [];
+
+    }
+    console.log("datacalendar",calendarValues)
+
+    const DateCellRender=(value)=>{
+        const listData =    getListData(value);
+        return (
+            <div>
+                {
+                    allow &&
+                    <ul className="events">
+                {listData.map(item => {
+                    return (
+                        <div>
+                            <Tag className={"btn_error"}
+                                 color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
+                                 onClick={() => onShowModal()}>
+                                <Badge
+                                    color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
+                                    text={item.content} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
+                            </Tag>
+
+                            <Modal
+                                visible={visible}
+                                title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
+                                              text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                                onCancel={handleCancel}
+                                footer={[
+                                    <div className={"footer_modal_Avenir"}>
+                                        <div><Button><DeleteOutlined/> Supprimer</Button></div>
+
+                                        <div>
+                                            <Button key="back" onClick={handleCancel}>
+                                                Annuler
+                                            </Button>
+                                            <Button key="submit" type="primary">
+                                                Visualiser
+                                            </Button>
+                                        </div>
+
+                                    </div>
+                                ]}
+                            >
+                                <div className={"body_Modal"}>
+                                    <div className={"div_image_modal"}><img
+                                        src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
+                                    </div>
+                                    <div className={"div_time_calendar"}>
+                                        <div className={"type_btn"}><Tag
+                                            color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
+                                        </div>
+                                        <div className={"div2_time_calendar"}>
+                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                <CalendarOutlined/> 13-05-2121</p>
+                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                <ClockCircleOutlined/> 16:30:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Modal>
+                        </div>
+                    )
+                })}
+                    </ul>
+                }
+            </div>
+        );
+    }
+
+    function monthCellRender(value) {
+        const num = getMonthData(value);
+        return num ? (
+            <div className="notes-month">
+                <section>{num}</section>
+                <span>Backlog number</span>
+            </div>
+        ) : null;
+    }
+
+
+    function getMonthData(value) {
+        if (value.month() === 8) {
+            return 1394;
+        }
+    }
 
 
     return(
         <div className={"CalendarFile"}>
 
-            <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  />
+            <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange}/>
 
         </div>
     );
 }
-export default CalendarFile;
