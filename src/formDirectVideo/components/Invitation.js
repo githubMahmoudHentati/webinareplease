@@ -20,7 +20,7 @@ function Invitation(){
 
     const [emails , SetEmails] = useState(false);
 
-    const {values,InvitationOnChangeChecked}=Hooks()
+    const {values,InvitationOnChangeChecked,invitationOnChangeSelect}=Hooks()
     console.log("invitation",values)
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -49,17 +49,12 @@ function Invitation(){
     // Validation des emails
     const checkEmail = (rule, value, callback) => {
         let isValid = []
-        if (emails.length) {
-            emails.forEach(ele => {
-                isValid.push(isValidEmail(ele))
-
-            });
-            if(isValid.includes(false)){
-                callback('Veuillez entrer une adresse email valide')
-            }
-        }
-        else {
-            callback();
+        if (value.length) {
+            value.map(ele => {
+                console.log("isValidEmail(ele)",isValidEmail(ele))
+                isValidEmail(ele) === false &&
+                    callback('Veuillez entrer une adresse email valide');
+            })
         }
     }
     const selectProps = {
@@ -84,40 +79,46 @@ function Invitation(){
 
             <div className={"groupEmail"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Groupe d'emails   <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
-                <Select
-                    showArrow
-                    className={"selectGroupGmail"}
-                    mode="multiple"
-                    style={{ width: 240 }}
-                    placeholder="Choisir un groupe"
-                    dropdownRender={menu => (
-                        <div>
-                            {menu}
-                            <Divider style={{ margin: '4px 0' }} />
-                            <div style={{ display: 'flex', flexWrap: 'nowrap', padding: 8 }}>
-                                <Input style={{ flex: 'auto' }} value={name} onChange={onNameChange} />
-                                <a
-                                    style={{ flex: 'none', padding: '8px', display: 'block', cursor: 'pointer' }}
-                                    onClick={addItem}
-                                >
-                                    <PlusOutlined /> Ajouter
-                                </a>
-                            </div>
-                        </div>
-                    )}
+                <Form.Item name="emailsGroup" className={"form-item-style"}
                 >
-                    {items.map(item => (
-                        <Option key={item}>{item}</Option>
-                    ))}
-                </Select>
+                    <Select
+                        name="emailsGroup"
+                        onChange={(value, event) => {
+                            invitationOnChangeSelect(value, event, "emailsGroup")
+                        }}
+                        showArrow
+                        className={"selectGroupGmail"}
+                        mode="multiple"
+                        style={{width: 240}}
+                        placeholder="Choisir un groupe"
+                        dropdownRender={menu => (
+                            <div>
+                                {menu}
+                                <Divider style={{margin: '4px 0'}}/>
+                                <div style={{display: 'flex', flexWrap: 'nowrap', padding: 8}}>
+                                    <Input style={{flex: 'auto'}} value={name} onChange={onNameChange}/>
+                                    <a
+                                        style={{flex: 'none', padding: '8px', display: 'block', cursor: 'pointer'}}
+                                        onClick={addItem}
+                                    >
+                                        <PlusOutlined/> Ajouter
+                                    </a>
+                                </div>
+                            </div>
+                        )}
+                    >
+                        {items.map(item => (
+                            <Option key={item}>{item}</Option>
+                        ))}
+                    </Select>
+                </Form.Item>
             </div>{/*./groupEmail*/}
 
             <div className={"groupEmail div2"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>E-mails   <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
-                   <Form className={"form_Invitation"}>
-
                        <Form.Item
-                           name="Email"
+                           style={{width:"100%"}}
+                           name="emails"
                            rules={[
                                {validator: checkEmail} ,
                                {
@@ -125,11 +126,8 @@ function Invitation(){
                                    message: 'Ce champ est requis!',
                                },]}
                        >
-                           <Select value={[]} onChange={handleChangeEmailsInvitation} {...selectProps} />
+                           <Select value={[]} name="emails" onChange={(value,event)=>invitationOnChangeSelect(value, event, "emails")} {...selectProps} />
                        </Form.Item>
-
-                   </Form>
-
             </div>{/*./groupEmail*/}
 
             <div className={"groupEmail div3"}>

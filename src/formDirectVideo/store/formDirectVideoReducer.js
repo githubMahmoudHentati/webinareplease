@@ -87,11 +87,19 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             }
 
         //************** Invitation reducer case*************//
-        case 'SET_InvitationOnchange' :
-            const {invitationNameChange,invitationValueChange}=action.payload
-            const invitationOnOnchangeObj = {...state.invitation,addRules:{...state.invitation.addRules, [invitationNameChange]:invitationValueChange}}
+        case 'SET_InvitationOnchangeRules' :
+            const {invitationNameChangeRules,invitationValueChangeRules}=action.payload
+            const invitationOnchangeRulesObj = {...state.invitation,addRules:{...state.invitation.addRules, [invitationNameChangeRules]:invitationValueChangeRules}}
             return {...state,
-                invitation: invitationOnOnchangeObj
+                invitation: invitationOnchangeRulesObj
+            }
+
+        case "SET_InvitationOnchange":
+            const {invitationNameChange,invitationValueChange}=action.payload
+            const invitationOnOnchangeObj = {...state.invitation,[invitationNameChange]: invitationValueChange}
+            return{
+                ...state,
+                invitation:invitationOnOnchangeObj
             }
         //************** SocialTools reducer case************//
 

@@ -27,8 +27,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
 import EditableTagGroupConfiguration from "./EditableTagGroupConfiguration";
 
-const { Option } = Select;
-
 export const Configuration =()=>{
     const dispatch = useDispatch()
     const [itemListHeight, setItemListHeight] = useState(null);
@@ -36,7 +34,7 @@ export const Configuration =()=>{
     
     const itemListRef   = useRef(null);
     
-    const {configurationOnChangeSwitch,addSpeaker,editSpeaker,deleteSpeaker,onChangeCheckbox,configurationOnChangeButton}= Hooks()
+    const {configurationOnChangeByName,addSpeaker,editSpeaker,deleteSpeaker,configurationOnChange,configurationOnChangeButton}= Hooks()
 
     console.log("values",values)
     // use Selector redux
@@ -48,9 +46,7 @@ export const Configuration =()=>{
     for (let i = 10; i < 36; i++) {
         children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
     }
-    const handleChangeTags = (value) =>{
-        console.log(`selected ${value}`);
-    }
+
     const selectProps = {
         mode:"tags",
         placeholder: "Tags Mode",
@@ -72,7 +68,7 @@ export const Configuration =()=>{
 
 
     return(
-        <Row gutter={[0, 50]} className={"Configuration"}>
+        <Row gutter={[0, 40]} className={"Configuration"}>
             <Col span={24}>
                 <Row gutter={[0, 25]}>
                     <Col span={24} className={"col-forms"}>
@@ -81,7 +77,10 @@ export const Configuration =()=>{
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col className={"col-forms"} span={24}>
-                                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Programme du direct</span>
+                                <Form.Item name="directProgram" className={"form-item-style"}
+                                >
+                                <span onChange={configurationOnChange} name="directProgram" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Programme du direct</span>
+                                </Form.Item>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <Input.TextArea Rows={5}
@@ -99,7 +98,12 @@ export const Configuration =()=>{
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
-                                <Switch checked={values.configuration.switchSpeaker} name="switchSpeaker"  onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"switchSpeaker")}/>
+                                <Form.Item name="switchSpeaker" className={"form-item-style"}
+                                >
+                                    <Switch checked={values.configuration.switchSpeaker} name="switchSpeaker"
+                                            onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
+                                    />
+                                </Form.Item>
                             </Col>
                             {values.configuration.SpeakerList.length>1&&values.configuration.switchSpeaker &&
                              <Col span={24}>
@@ -163,11 +167,21 @@ export const Configuration =()=>{
                                 }}>Option Interactives du direct</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <CheckboxGroup>
-                                    <Checkbox value="chat"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Chat(nom modéré)</p></Checkbox>
-                                    <Checkbox value="comments" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Commentaires (modérés)</p></Checkbox>
-                                    <Checkbox value="likeMention" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Mention j'aime</p></Checkbox>
-                                </CheckboxGroup>
+                                <Form.Item name="LiveInteractiveOption" className={"form-item-style"}
+                                >
+                                    <CheckboxGroup onChange={(value)=>{configurationOnChangeByName(value,"LiveInteractiveOption")}} name="LiveInteractiveOption">
+                                        <Checkbox onChange={configurationOnChangeButton} value="chat"
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                            <p>Chat(nom modéré)</p></Checkbox>
+                                        <Checkbox  onChange={configurationOnChangeButton} value="comments"
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                            <p>Commentaires (modérés)</p></Checkbox>
+                                        <Checkbox onChange={configurationOnChangeButton} value="likeMention"
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                            <p>Mention j'aime</p>
+                                        </Checkbox>
+                                    </CheckboxGroup>
+                                </Form.Item>
                             </Col>
                         </Row>
                     </Col>
@@ -178,15 +192,30 @@ export const Configuration =()=>{
                                     color:darkMode===false?"":"rgba(255, 255, 255, 0.85",
                                 }}>Options multimédia du direct </span>
                             </Col>
-                            <Col span={24} className={"col-forms"}>
-                                <CheckboxGroup>
-                                    <Checkbox  value="richeMediaDiffusion"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Diffusion Richmedia
-                                        <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></p></Checkbox>
+                            <Col span={24}  className={"col-forms"}>
+                                <Form.Item name="liveMultimediaOptions" className={"form-item-style"}
+                                >
+                                <CheckboxGroup onChange={(value) => {
+                                    configurationOnChangeByName(value, "liveMultimediaOptions")
+                                }} name="liveMultimediaOptions">
+                                    <Checkbox onChange={configurationOnChangeButton}
+                                              value="richeMediaDiffusion"
+                                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                        <p>Diffusion Richmedia
+                                            <InfoCircleFilled
+                                                style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                className={"infosIcon"}/></p>
+                                    </Checkbox>
                                     <br/>
-                                    <br/>
-                                    <Checkbox  value="attachments"style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Fichiers joints
-                                        <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></p></Checkbox>
+                                    <Checkbox onChange={configurationOnChangeButton}
+                                              value="attachments"
+                                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                        <p>Fichiers joints
+                                            <InfoCircleFilled
+                                                style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                className={"infosIcon"}/></p></Checkbox>
                                 </CheckboxGroup>
+                                </Form.Item>
                             </Col>
                         </Row>
                     </Col>
@@ -207,35 +236,49 @@ export const Configuration =()=>{
                                         }}>Archivage automatique du direct</span>
                                     </Col>
                                     <Col>
-                                        <Switch name="directAutomaticArchiving"onChange={(checked,event)=>configurationOnChangeSwitch(checked,event,"directAutomaticArchiving")}
-                                        />
+                                        <Form.Item name="liveAutomaticArchiving" className={"form-item-style"}
+                                        >
+                                            <Switch name="liveAutomaticArchiving"
+                                                    onChange={(value) => configurationOnChangeByName(value, "liveAutomaticArchiving")}
+                                            />
                                         <Tooltip placement="right" title={"Votre direct sera automatiquement archivé et disponible visualisation vidéo à la demande"}>
                                         <InfoCircleFilled style={{cursor:"pointer" , color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/>
                                         </Tooltip>
+                                        </Form.Item>
                                     </Col>
                                 </Row>
                             </Col>
-                            {values.configuration.directAutomaticArchiving&&
+                            {values.configuration.liveAutomaticArchiving&&
                             <Col span={24} className={"col-forms"}>
-                                <Radio.Group value={values.configuration.videoMode}name="videoMode"onChange={onChangeCheckbox}>
-                                    <Space direction="vertical">
-                                        <Radio  onChange={configurationOnChangeButton} value="notVisibleVideo">
-                                            <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Vidéo non visible</p></span></Radio>
-                                        <Radio checked={values.configuration.visibleVideo} onChange={configurationOnChangeButton} value="visibleVideo">
-                                            <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}><p>Vidéo visible</p></span></Radio>
-                                    </Space>
-                                </Radio.Group>
+                                <Form.Item name="liveAutomaticArchiving" className={"form-item-style"}
+                                >
+                                    <Radio.Group value={values.configuration.videoMode} name="videoMode"
+                                                 onChange={configurationOnChange}>
+                                        <Space direction="vertical">
+                                            <Radio onChange={configurationOnChangeButton} value="notVisibleVideo">
+                                                <span
+                                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><p>Vidéo non visible</p></span></Radio>
+                                            <Radio checked={values.configuration.visibleVideo}
+                                                   onChange={configurationOnChangeButton} value="visibleVideo">
+                                                <span
+                                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><p>Vidéo visible</p></span></Radio>
+                                        </Space>
+                                    </Radio.Group>
+                                </Form.Item>
                             </Col>
                                 }
-                            {values.configuration.directAutomaticArchiving && values.configuration.videoMode==="visibleVideo"&&
+                            {values.configuration.liveAutomaticArchiving && values.configuration.videoMode==="visibleVideo"&&
                             <Col span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}} className={"col-forms"}>
                                 <span>Thèmes</span>
                             </Col>
                             }
-                            {values.configuration.directAutomaticArchiving && values.configuration.videoMode==="visibleVideo"&&
-                                <Col offset={1} span={23} >
-                                <Input placeholder={'www.empreinte.com/titrelive'}></Input>
-                                </Col>
+                            {values.configuration.liveAutomaticArchiving && values.configuration.videoMode==="visibleVideo"&&
+                            <Col offset={1} span={23}>
+                                <Form.Item name="theme" className={"form-item-style"}
+                                >
+                                    <Input name="theme" onChange={configurationOnChange} placeholder={'choisir un thème'}></Input>
+                                </Form.Item>
+                            </Col>
                             }
                         </Row>
                     </Col>
@@ -245,7 +288,12 @@ export const Configuration =()=>{
                                 <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Tags</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                    <Select className={"selectTags"} mode="tags" style={{ width: '100%' , minHeight:"32px" }} placeholder="Tags Mode" onChange={handleChangeTags}  {...selectProps} />
+                                <Form.Item name="tags" className={"form-item-style"}
+                                >
+                                    <Select  name="tags" className={"selectTags"} mode="tags"
+                                            style={{width: '100%', minHeight: "32px"}} placeholder="Tags Mode"
+                                             onChange={(value,event)=>{configurationOnChangeByName(value,"tags")}}  {...selectProps} />
+                                </Form.Item>
                             </Col>
                         </Row>
                     </Col>
