@@ -147,7 +147,7 @@ function HeaderVideos({selectedRow}) {
                           </Tooltip>
                       }
                       name="search"
-                      onChange={handleSearchRow}
+                      onKeyDown={handleSearchRow}
                   />
 
               </div>{/*./div_filter*/}

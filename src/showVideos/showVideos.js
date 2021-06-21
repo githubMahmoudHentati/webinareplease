@@ -11,36 +11,45 @@ import {setshowVideosActions} from "./store/showVideosAction";
 import {ShowVideosReducerReducer} from "./store/showVideosReducer";
 import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/graphQL";
+import {Hooks} from "./utils/hooks";
 
 function ShowVideos() {
+    //use Lazy Query
+    //query getVideosLinks for embed Code
+    const [GETDATEVIDEO ,{error,data: GetlIVES}]
+        = useLazyQuery(graphQL_shema().Get_Lives, {
+        onCompleted:(data)=>{
+        }
+    })
+    // Read Data from Hooks
+    const {DataVideos , paginationProps ,  values }=Hooks()
+
+    console.log("helooooooooooooooooooo",values)
 
     const dispatch = useDispatch()
     const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
-
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    //Data of Query
-    const DataVideos = useSelector((state)=> state.ShowVideosReducerReducer.ListVideos)
-    console.log("DataVideos" , DataVideos)
+
     // use Query to fetch Data
     const {loading:calendar_loadingNow, data: GetCalendarDataNow}
         = useQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
-                "limit": 10,
-                "offset": 0,
-                "order_dir": "ASC",
-                "order_column": 3,
-                "search_word":" ",
-                "status":"live"
+                "limit": paginationProps.pageSize,
+                "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                "order_dir": paginationProps.order,
+                "order_column": paginationProps.columnKey,
+                "search_word":values.search,
+                "date":values.date,
+                "status":""
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{
-
-            console.log("helloWorld :" , data.getLives.data)
-            dispatch(setshowVideosActions(data.getLives.data));
+            dispatch(setshowVideosActions(data.getLives));
         }
     })
+
 
     // fonction pour compter les lignes sélectionnées de tableau
     const fetch_element_selected = (selected) => {
@@ -52,7 +61,7 @@ function ShowVideos() {
 
         {
             title: 'Id',
-            dataIndex: "id",
+            dataIndex: "Id",
             key: 0,
             sorter: (a, b) => a.id - b.id,
             sortDirections: ['descend', 'ascend'],
@@ -60,30 +69,51 @@ function ShowVideos() {
         },
         {
             title: 'Aperçu',
-            dataIndex: 'logo',
+            dataIndex: 'Logo',
             key:1,
             render: image => <img  src={image} className={"img_aperçu"}/>,
         },
         {
             title: 'Titre',
-            dataIndex: 'title',
+            dataIndex: 'Title',
             key: 2,
             sorter: (a, b) => a.id - b.id,
             sortDirections: ['descend', 'ascend'],
         },
         {
             title: 'Date',
-            dataIndex: 'date',
+            dataIndex: 'liveDate',
             key: 3,
             sorter: (a, b) => a.id - b.id,
             sortDirections: ['descend', 'ascend'],
         },
         {
             title: 'Etat',
-            dataIndex: 'status',
-            key: 'tags',
+            dataIndex: 'Status',
+            key: 4,
             sorter: (a, b) => a.id - b.id,
             sortDirections: ['descend', 'ascend'],
+            render: Status => (
+                <>
+                    {
+                      Status === 1
+                          ?
+                          <Tag color={"green"}><span>En cours</span></Tag>
+                          :
+                          Status === 0
+                            ?
+                              <Tag color={"geekblue"}><span>Archivé</span></Tag>
+                              :
+                              Status === -1
+                                  ?
+                                  <Tag color={"blue"}><span>A venir</span></Tag>
+                                  :
+                                  null
+                    }
+
+                </>
+            ),
+
 
         },
 
@@ -91,8 +121,8 @@ function ShowVideos() {
 
 
      const data = {
-        totalElements:20,
-        content:DataVideos
+        totalElements:DataVideos.recordsFiltered,
+        content:DataVideos.data
     }
 
 
