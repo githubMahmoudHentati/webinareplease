@@ -4,8 +4,13 @@ import {
     setConfigurationInitialSpeaker,
     setConfigurationOnchange,
     setConfigurationSpeaker,
-    setConfigurationDeleteSpeaker, setConfigurationSpeakerList, setGeneralOnchange, setInvitationOnchange
+    setConfigurationDeleteSpeaker,
+    setConfigurationSpeakerList,
+    setGeneralOnchange,
+    setInvitationOnchange,
+    setInvitationOnchangeRules
 } from "../store/formDirectVideoAction";
+import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 
 export  const Hooks=()=>{
     const dispatch = useDispatch()
@@ -13,9 +18,9 @@ export  const Hooks=()=>{
 
 
     //***************General************************//
-    const generalOnChangeSwitch =(checked,event,valueSwitch)=>{
-        console.log("a",event.target.value,checked)
-        dispatch(setGeneralOnchange({generalNameChange:valueSwitch, generalValueChange:checked}));
+    const generalOnChangeByName =(value,event,name)=>{
+        console.log("a",name,value)
+        dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:value}));
     }
     const generalOnChange = (event) => {
         console.log("event",event.target.value,event.target.name)
@@ -28,19 +33,20 @@ export  const Hooks=()=>{
 
 
     //**************Configuration************//
-    const configurationOnChangeSwitch =(checked,event,valueSwitch)=>{
-        dispatch(setConfigurationOnchange({configurationNameChange:valueSwitch, configurationValueChange:checked}));
-        values.configuration.SpeakerList.length < 2 &&valueSwitch==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:checked}));
+    const configurationOnChangeByName =(value,name)=>{
+        dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
+        values.configuration.SpeakerList.length < 2 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
     }
 
     const configurationOnChangeButton = (event) => {
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
     };
 
-    const onChangeCheckbox = (event) => {
+    const configurationOnChange = (event) => {
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
     };
+
 
 
     const onChangeSpeaker=(event,nameSpeaker)=>{
@@ -80,23 +86,36 @@ export  const Hooks=()=>{
     //**************Invitation************//
 
     const InvitationOnChangeChecked = (event) => {
-        dispatch(setInvitationOnchange({invitationNameChange:event.target.value, invitationValueChange:event.target.checked}));
+        dispatch(setInvitationOnchangeRules({invitationNameChangeRules:event.target.value, invitationValueChangeRules:event.target.checked}));
     };
 
+    const invitationOnChangeSelect = (value,event,name) => {
+        console.log("event",value,name)
+        //let listTags= (...[],option)
+        dispatch(setInvitationOnchange({invitationNameChange:name, invitationValueChange:value}));
+    };
+
+
+    const handleSubmit =()=>{
+
+    }
+
     return({
-        generalOnChangeSwitch,
+        generalOnChangeByName,
         generalOnChange,
         generalOnChangeButton,
-        configurationOnChangeSwitch,
+        configurationOnChangeByName,
         handleOk,
         handleCancel,
         addSpeaker,
         editSpeaker,
         deleteSpeaker,
         onChangeSpeaker,
-        onChangeCheckbox,
+        configurationOnChange,
         configurationOnChangeButton,
         InvitationOnChangeChecked,
+        invitationOnChangeSelect,
+        handleSubmit,
         values
     })
 }

@@ -1,5 +1,5 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
+import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Form} from 'antd'
 import '../formDirectVideo.scss'
 import {ArrowLeftOutlined,CloseOutlined,CheckOutlined} from '@ant-design/icons';
 import history from '../../router/history';
@@ -13,15 +13,14 @@ import {SocialTools} from "./socialTools";
 import {Templetes} from "./Templetes";
 import {setDarkMode} from "../../utils/redux/actions";
 import {BarHeader} from "./barHeader";
+import {Hooks} from "../utils/hooks";
 
 
 export const IframeDirectVideo =()=>{
-    const directMenu = useSelector((state)=>state.Reducer.directMenu)
-    
-
-
-    // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const directMenu = useSelector((state)=>state.Reducer.directMenu)
+    const [form] = Form.useForm();
+    //const {handleSubmit}=Hooks()
 
 
     const SelectMenu = ()=>{
@@ -43,6 +42,12 @@ export const IframeDirectVideo =()=>{
     }
     return(
         <div>
+            <Form
+                form={form}
+                layout="horizontal"
+                name="product-form"
+                // onFinish={handleSubmit}
+            >
                 <Row gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
@@ -69,6 +74,7 @@ export const IframeDirectVideo =()=>{
                         </Row>
                     </Col>
                 </Row>
+            </Form>
         </div>
     )
 }

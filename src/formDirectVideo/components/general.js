@@ -1,8 +1,8 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Switch,Radio,Checkbox,DatePicker} from 'antd'
+import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Switch, Radio, Checkbox, DatePicker, Form} from 'antd'
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
+import {EyeInvisibleOutlined, EyeTwoTone, InboxOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
 import {Hooks} from "../utils/hooks";
 
@@ -15,10 +15,16 @@ export const Generals =()=>{
         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
 
     };
-    // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
-    const {generalOnChangeSwitch,generalOnChange,generalOnChangeButton,values}= Hooks()
+    const requiredFieldRule = [{required: true, message: 'Champs requis'}];
+
+    const isValidPassword = (password) => {
+
+        return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
+    }
+
+    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,values}= Hooks()
     console.log("values",values)
 
 
@@ -49,9 +55,14 @@ export const Generals =()=>{
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
                         <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Titre du direct</span>
+                        <span className="require">*</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                       <Input placeholder={"Titre du vidéo"} ></Input>
+                        <Form.Item name="directTitle" className={"form-item-style"}
+                                   rules={requiredFieldRule}
+                        >
+                            <Input name="directTitle" onChange={generalOnChange} placeholder={"Titre du vidéo"}></Input>
+                        </Form.Item>
                     </Col>
                 </Row>
             </Col>
@@ -61,7 +72,11 @@ export const Generals =()=>{
                         <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Description du direct</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                        <Input.TextArea placeholder={"Description du vidéo"}></Input.TextArea>
+                        <Form.Item name="directTitle" className={"form-item-style"}
+                        >
+                            <Input.TextArea name="directDescription" onChange={generalOnChange}
+                                            placeholder={"Description du vidéo"}></Input.TextArea>
+                        </Form.Item>
                     </Col>
                 </Row>
             </Col>
@@ -71,12 +86,20 @@ export const Generals =()=>{
                         <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Lien de partage du direct</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                        <Row  justify={"space-between"} style={{width:'100%'}}gutter={[0, 0]} >
+                        <Row justify={"space-between"} style={{width: '100%'}} gutter={[0, 0]}>
                             <Col xxl={22} xl={21} lg={20} md={19} sm={17} xs={14}>
-                                <Input placeholder={'www.empreinte.com/titrelive'}></Input>
+                                <Form.Item name="directTitle" className={"form-item-style"}
+                                >
+                                    <Input name="directSharedLink" onChange={generalOnChange}
+                                           placeholder={'www.empreinte.com/titrelive'}></Input>
+                                </Form.Item>
                             </Col>
-                            <Col >
-                                <Button style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Copier</Button>
+                            <Col>
+                                <Button style={{
+                                    backgroundColor: darkMode === false ? "" : "#141414",
+                                    border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)",
+                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
+                                }}>Copier</Button>
                             </Col>
                         </Row>
 
@@ -89,7 +112,13 @@ export const Generals =()=>{
                         <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
-                        <Switch  checked={values.general.directPlan} name="directPlan" value="directPlan" onChange={(checked,event)=>{generalOnChangeSwitch(checked,event,"directPlan")}}/>
+                        <Form.Item name="directPlan" className={"form-item-style"}
+                        >
+                            <Switch checked={values.general.directPlan} name="directPlan" value="directPlan"
+                                    onChange={(checked, event) => {
+                                        generalOnChangeByName(checked, event, "directPlan")
+                                    }}/>
+                        </Form.Item>
                     </Col>
                 </Row>
             </Col>
@@ -112,13 +141,22 @@ export const Generals =()=>{
                         }}>Durée</span>
                     </Col>
                     <Col span={8}>
-                        <DatePicker style={{width: "100%"}}></DatePicker>
+                        <Form.Item name="startDate" className={"form-item-style"}
+                        >
+                            <DatePicker onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                        </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <DatePicker style={{width: "100%"}}></DatePicker>
+                        <Form.Item name="startHour" className={"form-item-style"}
+                        >
+                            <DatePicker name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}></DatePicker>
+                        </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <DatePicker style={{width: "100%"}}></DatePicker>
+                        <Form.Item name="finalHour" className={"form-item-style"}
+                        >
+                            <DatePicker name="finalHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"finalHour")}}  style={{width: "100%"}}></DatePicker>
+                        </Form.Item>
                     </Col>
                 </Row>
             </Col>
@@ -138,13 +176,37 @@ export const Generals =()=>{
                             </Col>
                             {values.general.directAccessMode === "securedAccess" &&
                             <Col offset={3} span={21}>
-                                <Input placeholder={'Taper votre mot de passe'}></Input>
+                                <Form.Item
+                                    className={"form-item-style"}
+                                    name="password"
+                                    rules={[
+                                        ({getFieldValue}) => ({
+                                            validator(_, value) {
+                                                if (isValidPassword(value)) {
+                                                    return Promise.resolve('value');
+                                                }
+                                                return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
+                                            },
+                                        }),
+                                    ]}
+                                >
+                                    <Input.Password
+                                        onChange={generalOnChange}
+                                        className={"spn2"}
+                                        name="password"
+                                        placeholder="Mot de passe"
+                                        iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+                                    />
+                                </Form.Item>
                             </Col>
                             }
                             {values.general.directAccessMode === "securedAccess" &&
                             <Col offset={3} span={21}>
-                                <Checkbox style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>Générer
+                                <Form.Item name="securedPasswordOption"  className={"form-item-style"}
+                                >
+                                <Checkbox onChange={generalOnChangeButton} name="securedPasswordOption" style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>Générer
                                     un mot de passe sécurisé</Checkbox>
+                                </Form.Item>
                             </Col>
                             }
                         </Row>
@@ -152,7 +214,6 @@ export const Generals =()=>{
                     </Col>
                 </Row>
             </Col>
-
         </Row>
     )
 }
