@@ -22,3 +22,4 @@ export function setPaginationProps(e){
         payload:e,
     }
 }
+

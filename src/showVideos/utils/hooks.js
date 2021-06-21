@@ -6,17 +6,29 @@ import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 export  const Hooks=()=> {
 
     const dispatch = useDispatch()
+    //Filter Data
     const values = useSelector((state) => state.ShowVideosReducerReducer.FilterVideos)
-    //******************generalInformation************************//
+    //Data of Query
+    const DataVideos = useSelector((state)=> state.ShowVideosReducerReducer.ListVideos)
+    //Pagination Props
+    const paginationProps=useSelector((state)=> state.ShowVideosReducerReducer.paginationProps)
+    //Sorter Table Props
+    const sorterProps = useSelector((state)=> state.ShowVideosReducerReducer.sorterProps)
+
+
+
+
+    //******************Function Data Table************************//
 
     /*Function Input*/
     const handleSearchRow = (event) => {
-
-            console.log("handleSearchRow",event.target.value, event.target.name)
+        if(event.key === 'Enter') {
+            console.log("handleSearchRow", event.target.value, event.target.name)
             dispatch(setFilterVideosActions({
                 FilterVideosNameChange: event.target.name,
                 FilterVideosValueChange: event.target.value
             }));
+        }
 
     };
     /*Function Select*/
@@ -38,13 +50,18 @@ export  const Hooks=()=> {
     /*Filtrer Videos*/
     const handleFiltrerVideos = () =>{
      console.log("handleFiltrerVideos" , values)
+
     }
 
     return({
         handleSearchRow,
         handleHeaderSelect,
         handleChangeDatePicker,
-        handleFiltrerVideos
+        handleFiltrerVideos,
+        DataVideos,
+        paginationProps,
+        values,
+        sorterProps
     })
 
 

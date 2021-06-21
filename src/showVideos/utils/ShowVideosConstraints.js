@@ -1,6 +1,6 @@
 import React, { useState,useEffect,useRef } from 'react';
 
-export const FilterVideosList = ()=>{
+export const ShowVideosList = ()=>{
 
     const FilterVideos = () => {
         return (
@@ -13,9 +13,20 @@ export const FilterVideosList = ()=>{
             }
         )
     }
+    const paginationProps=()=>{
+        return(
+            {
+                pageSize:10,
+                order:"ascend",
+                columnKey:0,
+                current:1
+            }
+        )
+    }
 
     return({
         FilterVideos,
+        paginationProps
     })
 
 }
