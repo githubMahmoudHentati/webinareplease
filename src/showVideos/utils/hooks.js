@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setFilterVideosActions} from "../store/showVideosAction"
 import {ShowVideosReducerReducer} from "../store/showVideosReducer";
+import {useLazyQuery} from "@apollo/react-hooks";
+import {graphQL_shema} from "./graphQL";
 
 export  const Hooks=()=> {
 
@@ -16,7 +18,10 @@ export  const Hooks=()=> {
     const sorterProps = useSelector((state)=> state.ShowVideosReducerReducer.sorterProps)
 
 
-
+    //use Lazy Query
+    //query getVideosLinks for embed Code
+    const [GETDATEVIDEO ,{error,data: GetlIVES}]
+        = useLazyQuery(graphQL_shema().Get_Lives)
 
     //******************Function Data Table************************//
 
@@ -50,7 +55,19 @@ export  const Hooks=()=> {
     /*Filtrer Videos*/
     const handleFiltrerVideos = () =>{
      console.log("handleFiltrerVideos" , values)
-
+        GETDATEVIDEO({
+            variables:{
+                input : {
+                    "limit": paginationProps.pageSize,
+                    "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                    "order_dir": paginationProps.order,
+                    "order_column": paginationProps.columnKey,
+                    "search_word":values.search,
+                    "date":values.date,
+                    "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+                }
+            }
+        })
     }
 
     return({
