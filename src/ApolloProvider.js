@@ -8,6 +8,7 @@ import store from "./utils/redux/store";
 import {Provider} from "react-redux";
 import { ApolloLink } from "apollo-link";
 import { createHttpLink } from 'apollo-link-http';
+import { Spin } from 'antd';
 
 
 const httpLink = createHttpLink({
@@ -55,9 +56,11 @@ const client = new ApolloClient({
 });
 
 export default (
+    <Suspense fallback={(<Spin className="Spin"><div></div></Spin>)}>
     <ApolloProvider client={client}>
         <Provider store={store}>
             <App/>
         </Provider>
     </ApolloProvider>
+    </Suspense>
 );
