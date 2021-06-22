@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setFilterVideosActions} from "../store/showVideosAction"
+import {setFilterVideosActions, setshowVideosActions} from "../store/showVideosAction"
 import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 import {useLazyQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
@@ -21,7 +21,13 @@ export  const Hooks=()=> {
     //use Lazy Query
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
-        = useLazyQuery(graphQL_shema().Get_Lives)
+        = useLazyQuery(graphQL_shema().Get_Lives,{
+        onCompleted:(data)=>{
+            if(data.getLives.code === 200){
+                dispatch(setshowVideosActions(data.getLives));
+            }
+        }
+    })
 
     //******************Function Data Table************************//
 
