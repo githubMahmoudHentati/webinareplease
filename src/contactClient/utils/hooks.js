@@ -5,7 +5,7 @@ import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {setContactClientOnchange} from "../store/ContactClientAction";
 
 
-export  const Hooks=()=> {
+export  const Hooks=(ContactClientMutationAction)=> {
     const dispatch = useDispatch()
     const values = useSelector((state) => state.ContactClientReducer)
 
@@ -19,7 +19,7 @@ export  const Hooks=()=> {
     };
 
     const handleSubmitContactClient =()=>{
-        console.log("submitInscrisContact", values)
+        ContactClientMutationAction()
     }
 
     return({
