@@ -17,13 +17,6 @@ import { Spin } from 'antd';
 function ShowVideos() {
     const [Loading , setLoading]=useState(false)//State pour le chargement de la liste des Videos
 
-    //use Lazy Query
-    //query getVideosLinks for embed Code
-    const [GETDATEVIDEO ,{error,data: GetlIVES}]
-        = useLazyQuery(graphQL_shema().Get_Lives, {
-        onCompleted:(data)=>{
-        }
-    })
 
     // Read Data from Hooks
     const {DataVideos , paginationProps ,  values }=Hooks()
@@ -42,8 +35,8 @@ function ShowVideos() {
                 "order_dir": paginationProps.order,
                 "order_column": paginationProps.columnKey,
                 "search_word":values.search,
-                "date":values.date,
-                "status":""
+                "date":"",
+                "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{

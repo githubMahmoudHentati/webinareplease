@@ -30,7 +30,7 @@ const token = "eyJhbGciOiJSUzI1NiJ9.eyJ1c2VybmFtZSI6ImVtcGFkbWluIiwiaWQiOjc5LCJy
 // });
 const firstLink = new HttpLink({
 
-    uri: '//146.59.204.235:7002/query',
+    uri: 'https://ytimoumi-cloud-sandbox.webtv-solution.dev/query',
     headers: {
             Authorization: token?`Bearer ${token}`:"",
          }
@@ -39,7 +39,7 @@ const firstLink = new HttpLink({
 
 // Create Second Link
 const secondLink = new HttpLink({
-    uri: '//146.59.204.235:7002/query',
+    uri: 'https://ytimoumi-cloud-sandbox.webtv-solution.dev/query',
     headers: {
         Authorization: token?`Bearer ${token}`:"",
     }
