@@ -16,6 +16,7 @@ export const AccountSettingsConstraints = ()=>{
                 phone:"56249943",
                 previousPassword:"00001111",
                 newPassword:"00002222",
+                loading:false
             }
         )
     }

@@ -7,6 +7,7 @@ import {AccountSettingsReducer} from "../store/accountSettingsReducer";
 
 export  const Hooks=()=> {
     const dispatch = useDispatch()
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const values = useSelector((state) => state.AccountSettingsReducer)
 
 //******************generalInformation************************//
@@ -30,6 +31,7 @@ export  const Hooks=()=> {
         generalInformationOnChangeSelect,
         generalInformationOnChange,
         values,
+        darkMode
         //subscriptionOnChange
     })
 }
