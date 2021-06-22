@@ -12,8 +12,12 @@ import {ShowVideosReducerReducer} from "./store/showVideosReducer";
 import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/graphQL";
 import {Hooks} from "./utils/hooks";
+import { Spin } from 'antd';
 
 function ShowVideos() {
+
+    const [Loading , setLoading]=useState(false)//State pour le chargement de la liste des Videos
+
     //use Lazy Query
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
@@ -23,9 +27,6 @@ function ShowVideos() {
     })
     // Read Data from Hooks
     const {DataVideos , paginationProps ,  values }=Hooks()
-
-    console.log("helooooooooooooooooooo",values)
-
     const dispatch = useDispatch()
     const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
     // use Selector redux
@@ -47,6 +48,7 @@ function ShowVideos() {
         context: { clientName: "second" },
         onCompleted :(data)=>{
             dispatch(setshowVideosActions(data.getLives));
+            setLoading(true);
         }
     })
 
@@ -61,50 +63,49 @@ function ShowVideos() {
 
         {
             title: 'Id',
-            dataIndex: "Id",
+            dataIndex: "id",
             key: 0,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
-            width:'2%',
+            sorter: (a, b) => a.id.length - b.id.length,
+            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Aperçu',
-            dataIndex: 'Logo',
-            key:1,
+            dataIndex: 'logo',
+            key:0,
             render: image => <img  src={image} className={"img_aperçu"}/>,
         },
         {
             title: 'Titre',
-            dataIndex: 'Title',
-            key: 2,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
+            dataIndex: 'title',
+            key: 0,
+            sorter: (a, b) => a.title.length - b.title.length,
+            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Date',
             dataIndex: 'liveDate',
-            key: 3,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
+            key: 0,
+            sorter: (a, b) => a.date.length - b.date.length,
+            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Etat',
-            dataIndex: 'Status',
-            key: 4,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
-            render: Status => (
+            dataIndex: 'status',
+            key: 0,
+            sorter: (a, b) => a.status.length - b.status.length,
+            sortDirections: ['descend','ascend'],
+            render: status => (
                 <>
                     {
-                      Status === 1
+                        status === 1
                           ?
                           <Tag color={"green"}><span>En cours</span></Tag>
                           :
-                          Status === 0
+                            status === 0
                             ?
                               <Tag color={"geekblue"}><span>Archivé</span></Tag>
                               :
-                              Status === -1
+                                status === -1
                                   ?
                                   <Tag color={"blue"}><span>A venir</span></Tag>
                                   :
@@ -139,10 +140,12 @@ function ShowVideos() {
     },fetch_element_selected);
 
     return(
+        <Spin  size="middle"  spinning={!Loading}>
        <PrincipalPage>
            <HeaderVideos selectedRow={selectedRow}/>
            <DataTable />
        </PrincipalPage>
+        </Spin>
     );
 }
 

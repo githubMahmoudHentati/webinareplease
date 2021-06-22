@@ -17,7 +17,7 @@ export const ShowVideosList = ()=>{
         return(
             {
                 pageSize:10,
-                order:"ascend",
+                order:'ascend',
                 columnKey:0,
                 current:1
             }
