@@ -1,16 +1,16 @@
 import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Avatar,Upload , Select , message} from 'antd'
 import '../compteSettings.scss'
-import {UserOutlined,UploadOutlined} from '@ant-design/icons';
+import {UserOutlined, UploadOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
 import {Hooks} from "../utils/hooks";
+import {AvatarUpload} from "./avatarUpload"
 const { Option } = Select;
 
  export const AccountGeneralInformation =()=>{
 
      // dark mode from redux
-     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-     const {generalInformationOnChange,generalInformationOnChangeSelect,values}=Hooks()
+     const {generalInformationOnChange,generalInformationOnChangeSelect,values,darkMode}=Hooks()
      console.log("generalInformation",values)
 
      const props = {
@@ -47,12 +47,20 @@ function onChange(value) {
                          <span className={"spn_CompteSettings"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Avatar</span>
                      </Col>
                      <Col span={24}>
-                         <Avatar style={{background:darkMode===false?"RGB(231, 247, 255)":"#141414",border:darkMode===false?"1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)", color:darkMode===false?"RGB(0, 127, 203)":"rgba(255, 255, 255, 0.85)"}}size={150} icon={<UserOutlined />} />
+                         <Avatar style={{
+                             background: darkMode === false ? "RGB(231, 247, 255)" : "#141414",
+                             border: darkMode === false ? "1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)",
+                             color: darkMode === false ? "RGB(0, 127, 203)" : "rgba(255, 255, 255, 0.85)"
+                         }} size={150}
+                                 src={values.generalInformation.avatar}
+                                  icon={values.generalInformation.loading?<div>
+                                      <LoadingOutlined/>
+                                      <div style={{marginTop: 8}}>Upload</div>
+                                  </div>:!values.generalInformation.avatar?<UserOutlined />:""}
+                         />
                      </Col>
                      <Col>
-                         <Upload {...props}>
-                             <Button icon={<UploadOutlined />} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>Change l'avatar</Button>
-                         </Upload>
+                             <AvatarUpload />
                      </Col>
                  </Row>
              </Col>
