@@ -1,12 +1,29 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox} from 'antd'
+import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Checkbox, Form} from 'antd'
 import '../connexion.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import {useHistory} from 'react-router-dom';
+import {Hooks} from "../utils/hooks";
 
 export const FormConnexion =()=>{
+    const [form] = Form.useForm();
     const history = useHistory()
+
+    const isValidPassword = (password) => {
+
+        return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
+    }
+    const requiredFieldRule = [{required: true, message: 'Champs requis'}];
+    const{handleSubmit,values,connexionOnChange}=Hooks()
+    console.log("conenxion",values.connexion)
+
     return(
+        <Form
+            form={form}
+            layout="horizontal"
+            name="product-form"
+            onFinish={handleSubmit}
+        >
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
                 <span className={"span_connexion"}>Connexion</span>
@@ -15,15 +32,38 @@ export const FormConnexion =()=>{
                 <Row gutter={[0, 20]} >
 
                     <Col span={24} className={"col_input"}>
-                        <Input placeholder="default size" prefix={<UserOutlined/>}/>
+                        <Form.Item name="email" className={"form-item-style"}
+                                   rules={requiredFieldRule}
+                        >
+                        <Input name="name" onChange={connexionOnChange}  placeholder="default size" prefix={<UserOutlined/>}/>
+                        </Form.Item>
                     </Col>
-
                     <Col span={24} className={"col_input"}>
-                        <Input.Password
-                            placeholder="input password"
-                            iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
-                            prefix={<UnlockOutlined/>}
-                        />
+                        <Form.Item
+                            onChange={connexionOnChange}
+                            className={"form-item-style"}
+                            name="password"
+                            rules={[{
+                                required: true,
+                                message: "S'il vous plaît saisissez votre mot de passe!"
+                            },
+                                ({getFieldValue}) => ({
+                                    validator(_, value) {
+                                        if (isValidPassword(values.passwordIntranet)) {
+                                            return Promise.resolve('value');
+                                        }
+                                        return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
+                                    },
+                                }),
+                            ]}
+                        >
+                            <Input.Password
+                                className={"spn2"}
+                                name="password"
+                                placeholder="Mot de passe"
+                                iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+                            />
+                        </Form.Item>
                     </Col>
                     <Col span={24}>
                         <Row justify="space-between">
@@ -40,7 +80,7 @@ export const FormConnexion =()=>{
             <Col span={24}>
                 <Row gutter={[20, 20]} >
                     <Col span={24}>
-                        <Button className={"spn_chbx"} style={{width:"100%"}}type="primary">Connexion</Button>
+                        <Button className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">Connexion</Button>
                     </Col>
                     <Col >
                         <span className={"spn_chbx"}>Pas encore membre?</span>
@@ -51,5 +91,6 @@ export const FormConnexion =()=>{
                 </Row>
             </Col>
         </Row>
+        </Form>
     )
 }

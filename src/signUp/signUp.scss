@@ -41,6 +41,7 @@
   display:flex ;
   align-items:center ;
   justify-content:flex-end ;
+  margin-bottom: 2%;
 }
 .spn1{
   font-family: "SF Pro Display";
@@ -51,4 +52,15 @@
   font-family: "SF Pro Display";
   font-size: 14px;
   font-weight: normal;
+}
+.form-item-style{
+  margin-bottom: 0 !important;
+}
+.require{
+  color: #ff4d4f;
+  margin-right: 2px;
+}
+.ant-form-item-label{
+  display: flex;
+  justify-content: flex-end;
 }

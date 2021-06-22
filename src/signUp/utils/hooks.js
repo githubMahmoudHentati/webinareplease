@@ -22,7 +22,7 @@ export  const Hooks=()=> {
     };
 
     const handleSubmit =()=>{
-
+          console.log("submitInscris", values)
     }
 
     return({

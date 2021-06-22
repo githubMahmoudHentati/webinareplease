@@ -24,7 +24,7 @@ export const SignUp =()=>{
                                 <Button onClick={()=>{history.push("/connexion")}}>Annuler</Button>
                             </Col>
                             <Col>
-                                <Button onClick={handleSubmit} type="primary">Inscrivez-vous maintenant</Button>
+                                <Button onClick={handleSubmit} type="primary" htmlType="submit">Inscrivez-vous maintenant</Button>
                             </Col>
                         </Row>
                        }

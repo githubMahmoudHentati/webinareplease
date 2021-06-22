@@ -6,6 +6,7 @@ const SignUpInitialState = {
 
     signUp: signUp(),
 
+
 }
 
 export const  SignUpReducer=(state=SignUpInitialState , action)=>{

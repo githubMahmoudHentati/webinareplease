@@ -8,10 +8,18 @@ export const FormDirectConstraints = ()=>{
     const generals = () => {
         return (
             {
+                directTitle:"",
+                directDescription:"",
+                directSharedLink:"",
                 directPlan: false,
                 directAccessMode: "",
+                startDate:"",
+                startHour:"",
+                finalHour:"",
                 freeAccess: false,
                 securedAccess: false,
+                passwordAccess:"",
+                securedPasswordOption:""
             }
         )
     }
@@ -23,7 +31,7 @@ export const FormDirectConstraints = ()=>{
                 visibleVideo: false,
                 modalSpeaker: false,
                 switchSpeaker: false,
-                directAutomaticArchiving: false,
+                liveAutomaticArchiving: false,
                 SpeakerList: [{
                     id: 0,
                     name: "Nom ",
@@ -33,7 +41,13 @@ export const FormDirectConstraints = ()=>{
                     logoSpeaker: {thumbUrl: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"}
                 }],
                 speaker: {id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: {}},
+                LiveInteractiveOption:[],
+                chat:false,
+                comments:false,
+                likeMention:false,
                 videoMode: "",
+                theme:"",
+                tags:[]
             }
         )
     }

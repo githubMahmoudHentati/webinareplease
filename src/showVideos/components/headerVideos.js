@@ -4,10 +4,12 @@ import {  HourglassOutlined ,DownloadOutlined ,PlayCircleOutlined ,ImportOutline
 import {useHistory} from "react-router-dom";
 import {useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
+import {Hooks} from "../utils/hooks";
 const { Option } = Select;
 let clicked = false;
 
 function HeaderVideos({selectedRow}) {
+    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos}=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
@@ -34,10 +36,6 @@ function HeaderVideos({selectedRow}) {
     // fonction pour la selection des dossiers
     function onChange(value) {
         console.log(`selected ${value}`);
-    }
-    // fonction de recherche dans la selection des dossiers
-    function onSearch(val) {
-        console.log('search:', val);
     }
     // fonction de clique sur l'icone de filtrage
     const handlClickSuffix = () =>{
@@ -109,17 +107,17 @@ function HeaderVideos({selectedRow}) {
                           showSearch
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
+                          defaultValue="tous"
                           optionFilterProp="children"
-                          onChange={onChange}
-                          onSearch={onSearch}
+                          name="type" onChange={handleHeaderSelect}
                           filterOption={(input, option) =>
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option  value="jack"><span className="icon-select-all-line"></span> Tous </Option>
-                          <Option value="lucy"><span className="icon-Archive"></span>  Archivés</Option>
-                          <Option value="tom"><span className="icon-Current"></span>  En cours</Option>
-                          <Option value="hello"><HourglassOutlined />  A venir</Option>
+                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> Tous </Option>
+                          <Option name="type" value="archivés"><span className="icon-Archive"></span>  Archivés</Option>
+                          <Option name="type" value="encours"><span className="icon-Current"></span>  En cours</Option>
+                          <Option name="type" value="avenir"><HourglassOutlined />  A venir</Option>
                       </Select>
                   </div>
 
@@ -148,6 +146,8 @@ function HeaderVideos({selectedRow}) {
                           </div>
                           </Tooltip>
                       }
+                      name="search"
+                      onKeyDown={handleSearchRow}
                   />
 
               </div>{/*./div_filter*/}
@@ -161,27 +161,45 @@ function HeaderVideos({selectedRow}) {
                   <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
 
                       <div className="div1_div_Filter">
-                          <Select defaultValue="Profile" className="select_div1_div_Filter">
-                              <Option value="jacky">jacky</Option>
-                              <Option value="Profile">Profile</Option>
-                              <Option value="lucy">lucy</Option>
+                          <Select
+                              className="select_div1_div_Filter"
+                              name="periode" onChange={handleHeaderSelect}
+                              placeholder="Sélectionnez la période"
+                              optionFilterProp="children"
+                              filterOption={(input, option) =>
+                                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                              }
+                          >
+                              <Option name="periode" value="Semaine">Semaine</Option>
+                              <Option name="periode" value="Mois">Mois</Option>
+                              <Option name="periode" value="Trimestre">Trimestre</Option>
+                              <Option name="periode" value="Semestre">Semestre</Option>
+                              <Option name="periode" value="Année">Année</Option>
                           </Select>
-                          <DatePicker placeholder="Sélectionnez une date"  classNmae="datepicker_div1_div_Filter"/>
+                          <DatePicker placeholder="Sélectionnez une date"  classNmae="datepicker_div1_div_Filter"  onChange={(momentValue,stringDateValue)=>handleChangeDatePicker("date",momentValue,stringDateValue)}/>
                       </div>{/*./div1_div_Filter*/}
 
                       <div className="div2_div_Filter">
 
-                          <Select defaultValue="Departement" className="select1_div2_div_Filter">
-                              <Option value="Departement">Departement</Option>
-                              <Option value="Profile">Profile</Option>
-                              <Option value="lucy">lucy</Option>
+                          <Select
+                              className="select1_div2_div_Filter"
+                              name="contributeur" onChange={handleHeaderSelect}
+                              placeholder="Contributeur"
+                              optionFilterProp="children"
+                              filterOption={(input, option) =>
+                                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                              }
+                          >
+                              <Option name="contributeur" value="Departement">Departement</Option>
+                              <Option name="contributeur" value="Profile">Profile</Option>
+                              <Option name="contributeur" value="lucy">lucy</Option>
                           </Select>
 
                       </div>{/*./div2_div_Filter*/}
 
                       <div className="div_button_filter">
                           <Tooltip title="Rénitialiser médias"><Button style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">Réinitialiser</Button></Tooltip>
-                          <Tooltip title="Filtrer médias"><Button type="primary" className="btn_2">Filtrer</Button></Tooltip>
+                          <Tooltip title="Filtrer médias"><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>Filtrer</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
 

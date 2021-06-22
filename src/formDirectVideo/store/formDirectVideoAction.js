@@ -61,12 +61,19 @@ export function setGeneralOnchange(e){
         }
 //*******************Invitations actions*******************//
 
+        export function setInvitationOnchangeRules(e){
+            return{
+                type:"SET_InvitationOnchangeRules",
+                payload:e
+            }
+        }
         export function setInvitationOnchange(e){
             return{
                 type:"SET_InvitationOnchange",
                 payload:e
             }
         }
+
 
 //*******************SocialTool actions*******************//
 

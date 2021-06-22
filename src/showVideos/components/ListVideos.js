@@ -3,15 +3,26 @@ import { Table } from 'antd';
 import {useHistory} from "react-router-dom";
 import UseActionMenu from './ActionMenuVideosTable';
 import {useSelector} from "react-redux";
+import { useDispatch} from "react-redux";
+import {setPaginationProps} from "../store/showVideosAction";
+import * as constantMedia from "../utils/data";
+import {ShowVideosReducerReducer} from "../store/showVideosReducer";
+import {Hooks} from "../utils/hooks";
+
 
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_NUMBER = 0;
 
 function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_elments_selected) {
 
-    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    // Read Data from Hooks
+    const {DataVideos , paginationProps}=Hooks()
 
-    console.log("azsqdcwxvcbnhgfdter",darkMode)
+    const dispatch = useDispatch()
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const valuePagination = useSelector((state)=> state.ShowVideosReducerReducer.PaginationProps)
+
+    console.log("azsqdcwxvcbnhgfdter",valuePagination)
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [record ,  setRecord] = useState([]);
@@ -20,6 +31,9 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
     const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
     //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
     const history = useHistory();
+    // use Selector redux
+
+
 
     const  onSelectChange = (selectedRowKeys ,  record) => {
         setSelectedRowKeys(selectedRowKeys);
@@ -60,10 +74,15 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
         setCurrentPage(DEFAULT_PAGE_NUMBER);
     };
 
-    const handleTableChange = pagination => {
-        console.log('pagination:', pagination);
+    const handleTableChange = (pagination, filters, sorter, extra) => {
+        console.log('paginationLives:', pagination, filters, sorter, extra );
         setCurrentPage(pagination.current - 1);
+        dispatch(setPaginationProps({PaginationPropsNameChange:"pageSize",PaginationPropsValueChange:pagination.pageSize}));
+        dispatch(setPaginationProps({PaginationPropsNameChange:"order",PaginationPropsValueChange:sorter&&sorter.order}));
+        dispatch(setPaginationProps({PaginationPropsNameChange:"columnKey",PaginationPropsValueChange:sorter&&sorter.columnKey}));
+        dispatch(setPaginationProps({PaginationPropsNameChange:"current",PaginationPropsValueChange:sorter&&pagination.current}));
     };
+
 
     const DataTable = () => (
         <div className="DataTable" style={{backgroundColor:darkMode===false?"#ffffff":"#011529"}}>
@@ -75,6 +94,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
                 dataSource={dataSource.content}
                 onChange={handleTableChange}
                 pagination={{
+                    pageSize: paginationProps.pageSize,
                     current: currentPage + 1,
                     total: dataSource.totalElements,
                     showQuickJumper:true,
