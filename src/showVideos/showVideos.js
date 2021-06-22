@@ -61,50 +61,49 @@ function ShowVideos() {
 
         {
             title: 'Id',
-            dataIndex: "Id",
+            dataIndex: "id",
             key: 0,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
-            width:'2%',
+            sorter: (a, b) => a.id.length - b.id.length,
+            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Aperçu',
-            dataIndex: 'Logo',
-            key:1,
+            dataIndex: 'logo',
+            key:0,
             render: image => <img  src={image} className={"img_aperçu"}/>,
         },
         {
             title: 'Titre',
-            dataIndex: 'Title',
-            key: 2,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
+            dataIndex: 'title',
+            key: 0,
+            sorter: (a, b) => a.title.length - b.title.length,
+            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Date',
             dataIndex: 'liveDate',
-            key: 3,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
+            key: 0,
+            sorter: (a, b) => a.date.length - b.date.length,
+            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Etat',
-            dataIndex: 'Status',
-            key: 4,
-            sorter: (a, b) => a.id - b.id,
-            sortDirections: ['descend', 'ascend'],
-            render: Status => (
+            dataIndex: 'status',
+            key: 0,
+            sorter: (a, b) => a.status.length - b.status.length,
+            sortDirections: ['descend','ascend'],
+            render: status => (
                 <>
                     {
-                      Status === 1
+                        status === 1
                           ?
                           <Tag color={"green"}><span>En cours</span></Tag>
                           :
-                          Status === 0
+                            status === 0
                             ?
                               <Tag color={"geekblue"}><span>Archivé</span></Tag>
                               :
-                              Status === -1
+                                status === -1
                                   ?
                                   <Tag color={"blue"}><span>A venir</span></Tag>
                                   :
