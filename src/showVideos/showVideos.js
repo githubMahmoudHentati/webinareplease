@@ -12,8 +12,12 @@ import {ShowVideosReducerReducer} from "./store/showVideosReducer";
 import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/graphQL";
 import {Hooks} from "./utils/hooks";
+import { Spin } from 'antd';
 
 function ShowVideos() {
+
+    const [Loading , setLoading]=useState(false)//State pour le chargement de la liste des Videos
+
     //use Lazy Query
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
@@ -23,9 +27,6 @@ function ShowVideos() {
     })
     // Read Data from Hooks
     const {DataVideos , paginationProps ,  values }=Hooks()
-
-    console.log("helooooooooooooooooooo",values)
-
     const dispatch = useDispatch()
     const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
     // use Selector redux
@@ -47,6 +48,7 @@ function ShowVideos() {
         context: { clientName: "second" },
         onCompleted :(data)=>{
             dispatch(setshowVideosActions(data.getLives));
+            setLoading(true);
         }
     })
 
@@ -138,10 +140,12 @@ function ShowVideos() {
     },fetch_element_selected);
 
     return(
+        <Spin  size="middle"  spinning={!Loading}>
        <PrincipalPage>
            <HeaderVideos selectedRow={selectedRow}/>
            <DataTable />
        </PrincipalPage>
+        </Spin>
     );
 }
 
