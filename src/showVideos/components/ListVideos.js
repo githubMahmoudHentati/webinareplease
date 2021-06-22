@@ -22,7 +22,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const valuePagination = useSelector((state)=> state.ShowVideosReducerReducer.PaginationProps)
 
-    console.log("azsqdcwxvcbnhgfdter",valuePagination)
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [record ,  setRecord] = useState([]);
@@ -35,7 +34,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
 
 
 
-    const  onSelectChange = (selectedRowKeys ,  record) => {
+    const  onSelectChange = selectedRowKeys  => {
         setSelectedRowKeys(selectedRowKeys);
         console.log(`selected : ${selectedRowKeys}`);
         fetch_elments_selected(selectedRowKeys.length);
@@ -107,12 +106,11 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
 
     return{
         DataTable,
-
-            selectedRow,
-            selectedRowKeys,
-            currentPage,
-            pageSize,
-            resetPagination,
+        selectedRow,
+        selectedRowKeys,
+        currentPage,
+        pageSize,
+        resetPagination,
     };
 
 }
