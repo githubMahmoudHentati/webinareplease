@@ -4,30 +4,18 @@ import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-
 import {Hooks} from "../utils/hooks";
 import {useMutation } from '@apollo/react-hooks';
 import {graphQL_shema} from "../utils/graphQL";
+import {GraphQLFetchData} from "../utils/graphQLFetchData";
 
 export const FormContactClient =()=> {
     const [form] = Form.useForm();
+
+    const {ContactClientMutation}=GraphQLFetchData()
 
     function ContactClientMutationAction(){
         ContactClientMutation()
     }
 
     const {ContactClientOnChange , handleSubmitContactClient,values}= Hooks(ContactClientMutationAction)
-    // mutation delete lang from table of event
-    const [ContactClientMutation] = useMutation(graphQL_shema().CONTACT_CLIENT,{
-        variables : {input:
-                {
-                    fromFirstName: values.contactClient.name,
-                    fromLastName: values.contactClient.lastName,
-                    fromAddr: values.contactClient.email,
-                    content: values.contactClient.message
-                }
-        },
-        onCompleted: (data)=>{
-            console.log("DataMutation :",data.sendMail.Code)
-        }
-    })
-
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

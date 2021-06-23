@@ -51,12 +51,21 @@ export const AccountSettingsConstraints = ()=>{
             loadingGeneralInformation:true
         })
     }
+    const securityAccount = () => {
+        return (
+            {
+                oldPassWord: "",
+                newPassWord: "",
+            }
+        )
+    }
 
     return({
         generalInformation,
         subscription,
         bills,
-        constraintData
+        constraintData,
+        securityAccount
     })
 
 }

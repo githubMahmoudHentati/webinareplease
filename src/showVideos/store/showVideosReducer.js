@@ -1,11 +1,12 @@
 import {ShowVideosList} from "../utils/ShowVideosConstraints"
 
-const {paginationProps,FilterVideos}=ShowVideosList();
+const {paginationProps,FilterVideos,showVideoConstraintData}=ShowVideosList();
 
 const ShowVideosINITIALSTATE = {
     ListVideos : [],
     FilterVideos:FilterVideos(),
     paginationProps:paginationProps(),
+    constraintDataShowVideo: showVideoConstraintData()
 }
 
 export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=>{
@@ -29,6 +30,13 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
             return {
                 ...state,
                 paginationProps:{...state.paginationProps, [PaginationPropsNameChange]:PaginationPropsValueChange}
+            }
+        case "SET_ShowVideoConstraintDataOnchange":
+            const {constraintDataNameChange,constraintDataValueChange}=action.payload
+            const constraintDataOnOnchangeObj = {...state.constraintDataShowVideo,[constraintDataNameChange]: constraintDataValueChange}
+            return{
+                ...state,
+                constraintDataShowVideo:constraintDataOnOnchangeObj
             }
         default:{
             return state
