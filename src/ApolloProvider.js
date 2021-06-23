@@ -31,7 +31,7 @@ const token1="eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1PVVNTQUJFS
 // });
 const firstLink = new HttpLink({
 
-    uri: '//mbeji-cloud-sandbox.webtv-solution.dev:7007/query',
+    uri: 'https://mbeji-cloud-sandbox.webtv-solution.dev/query',
     headers: {
             Authorization: token1?`Bearer ${token1}`:"",
          }
@@ -53,7 +53,9 @@ const client = new ApolloClient({
         secondLink,
         firstLink
     ),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache({
+        addTypename: false
+    })
 });
 
 export default (
