@@ -27,6 +27,7 @@ export function CalendarFile() {
         = useQuery(graphQL_shema().Get_Calendar_Data, {
         fetchPolicy: "cache-first",
         variables :{ "dates":[moment().subtract(1, 'months').format("YYYY-MM"),moment().format("YYYY-MM"),moment().add(1, 'months').format("YYYY-MM")]},
+        context: { clientName: "second" },
         onCompleted :(data)=>{
 
             setCalendarValues(data.getCalendar)

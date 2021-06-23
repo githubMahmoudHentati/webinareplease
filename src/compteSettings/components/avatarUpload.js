@@ -2,7 +2,7 @@ import {Upload, message, Avatar, Button} from 'antd';
 import {LoadingOutlined, PlusOutlined, UploadOutlined, UserOutlined} from '@ant-design/icons';
 import React ,{useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setGeneralInformationOnchange} from "../store/accountSettingsAction";
+import {setConstraintDataOnchange, setGeneralInformationOnchange} from "../store/accountSettingsAction";
 import {Hooks} from "../utils/hooks";
 
 export const AvatarUpload = () => {
@@ -24,9 +24,9 @@ export const AvatarUpload = () => {
 
     const handleChange = async info => {
         if (info.file.status === 'uploading') {
-            await dispatch(setGeneralInformationOnchange({
-                generalInformationNameChange: "loading",
-                generalInformationValueChange: true
+            await dispatch(setConstraintDataOnchange({
+                constraintDataNameChange: "avatarLoading",
+                constraintDataValueChange: true
             }))
             dispatch(setGeneralInformationOnchange({
                 generalInformationNameChange: "avatar",
@@ -41,9 +41,9 @@ export const AvatarUpload = () => {
                     generalInformationNameChange: "avatar",
                     generalInformationValueChange: imageUrl
                 })),
-            dispatch(setGeneralInformationOnchange({
-                generalInformationNameChange: "loading",
-                generalInformationValueChange: false
+            dispatch(setConstraintDataOnchange({
+                constraintDataNameChange: "avatarLoading",
+                constraintDataValueChange: false
             })),
         );
 
