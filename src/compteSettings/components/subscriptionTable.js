@@ -56,6 +56,6 @@ const columns = [
 
 
     return(
-        <Table columns={columns} dataSource={values.subscription.subscriptionBillList} />
+        <Table columns={columns} dataSource={values.bills} />
     )
 }
