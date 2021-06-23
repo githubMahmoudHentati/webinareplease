@@ -23,3 +23,9 @@ export function setPaginationProps(e){
     }
 }
 
+export function setShowVideoConstraintDataOnchange(e){
+    return{
+        type:"SET_ShowVideoConstraintDataOnchange",
+        payload:e
+    }
+}

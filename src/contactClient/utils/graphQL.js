@@ -14,7 +14,8 @@ export const graphQL_shema = ()=> {
       }
     `;
 
+
     return({
-        CONTACT_CLIENT
+        CONTACT_CLIENT,
     })
 }

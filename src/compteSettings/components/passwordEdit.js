@@ -5,12 +5,21 @@ import { EyeInvisibleOutlined, EyeTwoTone,CloseCircleOutlined,CheckCircleOutline
 import {setAccountSetting} from "../../utils/redux/actions";
 import {useDispatch , useSelector} from "react-redux";
 import {Hooks} from "../utils/hooks";
+import {GraphQLFetchData} from "../utils/graphQLFetchData";
 
 export const PasswordEdit =()=>{
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const {values}= Hooks()
-    const {generalInformationOnChange}=Hooks()
+
+
+    const {UpdatePassword}=GraphQLFetchData()
+
+    function SecurityAccountUpdatePassword(){
+        UpdatePassword()
+    }
+
+    const { securityAccountPassword , handleSaveNewPassword , values}=Hooks(SecurityAccountUpdatePassword)
+
     return(
         <Row  gutter={[0, 30]}>
             <Col span={24}>
@@ -29,9 +38,9 @@ export const PasswordEdit =()=>{
                             <Col span={24}>
                                 <Input.Password
                                     className={"spn2_motDePasse"}
-                                    value={values.generalInformation.previousPassword}
-                                    name="previousPassword"
-                                    onChange={generalInformationOnChange}
+                                    value={values.securityAccount.oldPassWord}
+                                    name="oldPassWord"
+                                    onChange={securityAccountPassword}
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                     placeholder={"Ancien mot de passe"}>
                                 </Input.Password>
@@ -46,8 +55,9 @@ export const PasswordEdit =()=>{
                             <Col span={24}>
                                 <Input.Password
                                     className={"spn2_motDePasse"}
-                                    name="newPassword"
-                                    onChange={generalInformationOnChange}
+                                    value={values.securityAccount.newPassWord}
+                                    name="newPassWord"
+                                    onChange={securityAccountPassword}
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                                     placeholder={"Nouveau Mot de passe"}>
                                 </Input.Password>
@@ -60,7 +70,7 @@ export const PasswordEdit =()=>{
                                 <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>dispatch(setAccountSetting(1))} >Annuler</Button>
                             </Col>
                             <Col>
-                                <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"}>Enregistrer</Button>
+                                <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"} onClick={handleSaveNewPassword}>Enregistrer</Button>
                             </Col>
                         </Row>
                     </Col>

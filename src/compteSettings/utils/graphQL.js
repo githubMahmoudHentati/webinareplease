@@ -42,8 +42,20 @@ export const graphQL_shema = ()=> {
             }
         }
     `;
+    const UPDATE_PASSWORD = gql `
+    
+    mutation($input:PasswordChange!) {
+    changePassword(input:$input) {
+      Code
+      Message
+      
+      }
+     }
+    
+    `;
     return({
         Get_UserInfoData,
-        Update_AccountSetting
+        Update_AccountSetting,
+        UPDATE_PASSWORD
     })
 }
