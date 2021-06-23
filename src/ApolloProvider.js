@@ -56,11 +56,13 @@ const client = new ApolloClient({
 });
 
 export default (
-    <Suspense fallback={(<Spin className="Spin"><div></div></Spin>)}>
-    <ApolloProvider client={client}>
+    <Suspense fallback={(<Spin className="Spin">
+        <div></div>
+    </Spin>)}>
         <Provider store={store}>
-            <App/>
+            <ApolloProvider client={client}>
+                <App/>
+            </ApolloProvider>
         </Provider>
-    </ApolloProvider>
     </Suspense>
 );
