@@ -16,7 +16,8 @@ export  const Hooks=()=> {
     const paginationProps=useSelector((state)=> state.ShowVideosReducerReducer.paginationProps)
     //Sorter Table Props
     const sorterProps = useSelector((state)=> state.ShowVideosReducerReducer.sorterProps)
-
+    // loading
+    const loadingSpinner = useSelector((state)=> state.ShowVideosReducerReducer.constraintDataShowVideo)
 
     //use Lazy Query
     //query getVideosLinks for embed Code
@@ -72,7 +73,8 @@ export  const Hooks=()=> {
                     "date":values.date,
                     "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                 }
-            }
+            },
+            context: { clientName: "second" },
         })
     }
 
@@ -84,7 +86,8 @@ export  const Hooks=()=> {
         DataVideos,
         paginationProps,
         values,
-        sorterProps
+        sorterProps,
+        loadingSpinner
     })
 
 
