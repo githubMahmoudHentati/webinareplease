@@ -34,7 +34,16 @@ export const graphQL_shema = ()=> {
             }
         }
     `;
+    const Update_AccountSetting = gql`
+        mutation($input:UserInfos!) {
+            updateUser(input:$input) {
+                Code
+                Message
+            }
+        }
+    `;
     return({
-        Get_UserInfoData
+        Get_UserInfoData,
+        Update_AccountSetting
     })
 }

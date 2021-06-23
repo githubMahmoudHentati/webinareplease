@@ -12,10 +12,8 @@ const { Option } = Select;
  export const AccountGeneralInformation =()=>{
 
      const{loadingGeneralInformation}=GraphQLFetchData()
-
-     // dark mode from redux
-     console.log("GetUserInfoData_loading",loadingGeneralInformation)
-     const {generalInformationOnChange,generalInformationOnChangeSelect,values,darkMode}=Hooks()
+     const {UpdateAccountSetting}= GraphQLFetchData()
+     const {generalInformationOnChange,generalInformationOnChangeSelect,handleSubmit,values,darkMode}=Hooks(UpdateAccountSetting)
      console.log("generalInformation",values)
 
      return(
@@ -192,7 +190,7 @@ const { Option } = Select;
                                              }}>Annuler</Button>
                                          </Col>
                                          <Col>
-                                             <Button className={"spn_CompteSettings"} type={"primary"} style={{
+                                             <Button onClick={handleSubmit} className={"spn_CompteSettings"} type={"primary"} style={{
                                                  background: darkMode === false ? "" : "#141414",
                                                  color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                                  border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"

@@ -104,7 +104,6 @@ function HeaderVideos({selectedRow}) {
                   </div>
                   <div className="selectDiv">
                       <Select
-                          showSearch
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
                           defaultValue="tous"
@@ -114,7 +113,7 @@ function HeaderVideos({selectedRow}) {
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> Tous </Option>
+                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> Tout </Option>
                           <Option name="type" value="archivés"><span className="icon-Archive"></span>  Archivés</Option>
                           <Option name="type" value="encours"><span className="icon-Current"></span>  En cours</Option>
                           <Option name="type" value="avenir"><HourglassOutlined />  A venir</Option>

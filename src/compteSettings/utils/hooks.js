@@ -5,7 +5,7 @@ import {AccountSettingsReducer} from "../store/accountSettingsReducer";
 //import {setSubscriptionOnchange} from "../store/accountSettingsAction";
 
 
-export  const Hooks=()=> {
+export  const Hooks=(callback)=> {
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const values = useSelector((state) => state.AccountSettingsReducer)
@@ -27,9 +27,14 @@ export  const Hooks=()=> {
 //         dispatch(setSubscriptionOnchange({generalNameChange: event.target.name, generalValueChange: event.target.value}));
 //     };
 
+    const handleSubmit = ()=>{
+        callback()
+    }
+
     return({
         generalInformationOnChangeSelect,
         generalInformationOnChange,
+        handleSubmit,
         values,
         darkMode
         //subscriptionOnChange

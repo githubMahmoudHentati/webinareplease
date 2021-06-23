@@ -2,7 +2,7 @@ import React,{useState , useEffect} from 'react';
 import UseDataTableVideos from "./components/ListVideos";
 import HeaderVideos from "./components/headerVideos";
 import GlobalHeader from "../utils/components/header"
-import {Card, Tag} from "antd";
+import {Card, Tag , message} from "antd";
 import * as constantMedia from './utils/data';
 import{PrincipalPage} from "../utils/components/principalPage";
 import {useSelector , useDispatch} from "react-redux";
@@ -15,16 +15,9 @@ import {Hooks} from "./utils/hooks";
 import { Spin } from 'antd';
 
 function ShowVideos() {
-
     const [Loading , setLoading]=useState(false)//State pour le chargement de la liste des Videos
 
-    //use Lazy Query
-    //query getVideosLinks for embed Code
-    const [GETDATEVIDEO ,{error,data: GetlIVES}]
-        = useLazyQuery(graphQL_shema().Get_Lives, {
-        onCompleted:(data)=>{
-        }
-    })
+
     // Read Data from Hooks
     const {DataVideos , paginationProps ,  values }=Hooks()
     const dispatch = useDispatch()
@@ -42,16 +35,29 @@ function ShowVideos() {
                 "order_dir": paginationProps.order,
                 "order_column": paginationProps.columnKey,
                 "search_word":values.search,
-                "date":values.date,
-                "status":""
+                "date":"",
+                "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{
-            dispatch(setshowVideosActions(data.getLives));
+            if(data.getLives.code === 200){
+                dispatch(setshowVideosActions(data.getLives));
+            }else if(data.getLives.code === 400){
+                error_get_data()
+            }
             setLoading(true);
         }
     })
 
+    // error show list video
+    const error_get_data = () =>{
+        message.error(
+            {
+                content: "Oops!!! il y'a un erreur se produit",
+                duration:1.5
+            }
+        )
+    }
 
     // fonction pour compter les lignes sélectionnées de tableau
     const fetch_element_selected = (selected) => {
@@ -114,18 +120,14 @@ function ShowVideos() {
 
                 </>
             ),
-
-
         },
 
     ];
-
 
      const data = {
         totalElements:DataVideos.recordsFiltered,
         content:DataVideos.data
     }
-
 
     // fontion pour afficher le tableau de n'interface
     const {
