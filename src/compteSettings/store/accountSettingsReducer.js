@@ -55,7 +55,7 @@ export const  AccountSettingsReducer=(state=AccountSettingsInitialState , action
 
         case "SET_ConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
-            const constraintDataOnOnchangeObj = {...state.subscription,[constraintDataNameChange]: constraintDataValueChange}
+            const constraintDataOnOnchangeObj = {...state.constraintData,[constraintDataNameChange]: constraintDataValueChange}
             return{
                 ...state,
                 constraintData:constraintDataOnOnchangeObj
