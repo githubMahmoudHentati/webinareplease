@@ -5,14 +5,16 @@ import {useDispatch} from "react-redux";
 import {useState} from 'react'
 import {
     setAccountSetting,
-    setConstraintDataOnchange,
+    setConstraintDataOnchange, setEmptyPasswordInput,
     setGeneralInformationOnchange
 } from "../store/accountSettingsAction";
 import {Hooks} from "./hooks";
+import {AccountSettingsConstraints} from "./accountSettingsConstraints";
 
 export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
     const {values}=Hooks()
+    const {securityAccount}=AccountSettingsConstraints()
 
     const {loading: GetUserInfoData_loading, data: GetUserInfoData}
         = useQuery(graphQL_shema().Get_UserInfoData, {
@@ -39,9 +41,25 @@ export const GraphQLFetchData=()=> {
         }
     });
 
+    const [UpdatePassword, {
+        data: dataUpdatePassword,
+        loading: loading_UpdatePassword,
+        error: error_UpdatePassword,
+    }] = useMutation(graphQL_shema().UPDATE_PASSWORD, {
+        variables: {input:
+                values.securityAccount
+        },
+        onCompleted: async (data) => {
+            console.log("data",data)
+            dispatch(setEmptyPasswordInput(securityAccount()))
+            console.log("securityAccount",securityAccount())
+        }
+    });
+
     return({
         GetUserInfoData,
-        UpdateAccountSetting
+        UpdateAccountSetting,
+        UpdatePassword
     })
 }
 

@@ -45,7 +45,23 @@ export function setConstraintDataOnchange(e){
             }
         }
 
+//*******************Update Password Account*******************//
 
+export function setSecurityAccountPassword(e){
+    return{
+        type:"SET_SecurityAccountPassword",
+        payload:e
+    }
+}
+
+//*******************Empty Input Password*******************//
+
+export function setEmptyPasswordInput(e){
+    return{
+        type:"SET_EmptyPasswordInput",
+        payload:e
+    }
+}
 
 
 

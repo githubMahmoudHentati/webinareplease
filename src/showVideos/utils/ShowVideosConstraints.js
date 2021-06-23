@@ -23,10 +23,16 @@ export const ShowVideosList = ()=>{
             }
         )
     }
+    const showVideoConstraintData =()=>{
+        return({
+            loading:true
+        })
+    }
 
     return({
         FilterVideos,
-        paginationProps
+        paginationProps,
+        showVideoConstraintData
     })
 
 }

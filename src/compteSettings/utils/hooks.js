@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setGeneralInformationOnchange} from "../store/accountSettingsAction";
+import {setGeneralInformationOnchange, setSecurityAccountPassword} from "../store/accountSettingsAction";
 import {AccountSettingsReducer} from "../store/accountSettingsReducer";
 //import {setSubscriptionOnchange} from "../store/accountSettingsAction";
 
@@ -27,14 +27,25 @@ export  const Hooks=(callback)=> {
 //         dispatch(setSubscriptionOnchange({generalNameChange: event.target.name, generalValueChange: event.target.value}));
 //     };
 
+//*******************Password************************//
+    const securityAccountPassword = (event) => {
+        console.log("eventSecurityAccount", event.target.value, event.target.name)
+        dispatch(setSecurityAccountPassword({securityAccountNameChange: event.target.name, securityAccountValueChange: event.target.value}));
+    }
     const handleSubmit = ()=>{
         callback()
     }
-
+    //*******************Handle Save New Password**********//
+    const handleSaveNewPassword =()=>{
+        callback()
+    }
+    console.log("valuesPassword",values)
     return({
         generalInformationOnChangeSelect,
         generalInformationOnChange,
         handleSubmit,
+        securityAccountPassword,
+        handleSaveNewPassword,
         values,
         darkMode
         //subscriptionOnChange

@@ -1,6 +1,6 @@
 import {AccountSettingsConstraints} from "../utils/accountSettingsConstraints";
 
-const {generalInformation,subscription,bills,constraintData} = AccountSettingsConstraints()
+const {generalInformation,subscription,bills,constraintData,securityAccount} = AccountSettingsConstraints()
 
 const AccountSettingsInitialState = {
 
@@ -10,7 +10,9 @@ const AccountSettingsInitialState = {
 
     bills : bills(),
 
-    constraintData :constraintData()
+    constraintData :constraintData(),
+
+    securityAccount:securityAccount()
 
 }
 
@@ -55,10 +57,27 @@ export const  AccountSettingsReducer=(state=AccountSettingsInitialState , action
 
         case "SET_ConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
-            const constraintDataOnOnchangeObj = {...state.subscription,[constraintDataNameChange]: constraintDataValueChange}
+            const constraintDataOnOnchangeObj = {...state.constraintData,[constraintDataNameChange]: constraintDataValueChange}
             return{
                 ...state,
                 constraintData:constraintDataOnOnchangeObj
+            }
+
+        //******** Security Account************//
+
+        case "SET_SecurityAccountPassword":
+            const {securityAccountNameChange,securityAccountValueChange}=action.payload
+            const securityAccountOnchangeObj = {...state.securityAccount,[securityAccountNameChange]: securityAccountValueChange}
+            return{
+                ...state,
+                securityAccount:securityAccountOnchangeObj
+            }
+        //******** Empty Input Password ************//
+
+        case "SET_EmptyPasswordInput":
+            return{
+                ...state,
+                securityAccount:action.payload
             }
 
 

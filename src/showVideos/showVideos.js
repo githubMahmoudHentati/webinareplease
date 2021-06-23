@@ -1,4 +1,4 @@
-import React,{useState , useEffect} from 'react';
+import React,{useState } from 'react';
 import UseDataTableVideos from "./components/ListVideos";
 import HeaderVideos from "./components/headerVideos";
 import GlobalHeader from "../utils/components/header"
@@ -14,50 +14,16 @@ import {graphQL_shema} from "./utils/graphQL";
 import {Hooks} from "./utils/hooks";
 import { Spin } from 'antd';
 
-function ShowVideos() {
-    const [Loading , setLoading]=useState(false)//State pour le chargement de la liste des Videos
+import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
+function ShowVideos() {
+
+    const {loading}=GraphQLFetchData()
 
     // Read Data from Hooks
-    const {DataVideos , paginationProps ,  values }=Hooks()
+    const {DataVideos, loadingSpinner}=Hooks()
     const dispatch = useDispatch()
     const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
-    // use Selector redux
-    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-
-    // use Query to fetch Data
-    const {loading:calendar_loadingNow, data: GetCalendarDataNow}
-        = useQuery(graphQL_shema().Get_Lives, {
-        fetchPolicy:  "cache-and-network",
-        variables: { input : {
-                "limit": paginationProps.pageSize,
-                "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
-                "order_dir": paginationProps.order,
-                "order_column": paginationProps.columnKey,
-                "search_word":values.search,
-                "date":"",
-                "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
-            } },
-        context: { clientName: "second" },
-        onCompleted :(data)=>{
-            if(data.getLives.code === 200){
-                dispatch(setshowVideosActions(data.getLives));
-            }else if(data.getLives.code === 400){
-                error_get_data()
-            }
-            setLoading(true);
-        }
-    })
-
-    // error show list video
-    const error_get_data = () =>{
-        message.error(
-            {
-                content: "Oops!!! il y'a un erreur se produit",
-                duration:1.5
-            }
-        )
-    }
 
     // fonction pour compter les lignes sélectionnées de tableau
     const fetch_element_selected = (selected) => {
@@ -142,7 +108,7 @@ function ShowVideos() {
     },fetch_element_selected);
 
     return(
-        <Spin  size="middle"  spinning={!Loading}>
+        <Spin  size="middle"  spinning={loadingSpinner.loading}>
        <PrincipalPage>
            <HeaderVideos selectedRow={selectedRow}/>
            <DataTable />
