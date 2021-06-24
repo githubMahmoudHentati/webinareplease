@@ -1,11 +1,20 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setFilterVideosActions, setshowVideosActions} from "../store/showVideosAction"
+import {
+    setFilterVideosActions,
+    setPaginationProps,
+    setshowDivsConditions,
+    setshowVideosActions
+} from "../store/showVideosAction"
 import {ShowVideosReducerReducer} from "../store/showVideosReducer";
-import {useLazyQuery} from "@apollo/react-hooks";
+import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
+import {GraphQLFetchData} from "./graphQLFetchData";
+
+let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
+
 
     const dispatch = useDispatch()
     //Filter Data
@@ -18,6 +27,12 @@ export  const Hooks=()=> {
     const sorterProps = useSelector((state)=> state.ShowVideosReducerReducer.sorterProps)
     // loading
     const loadingSpinner = useSelector((state)=> state.ShowVideosReducerReducer.constraintDataShowVideo)
+   //condition
+    const conditions = useSelector((state)=> state.ShowVideosReducerReducer.showdivscondition)
+
+    console.log("conditionhello",conditions)
+
+    console.log("paginationPropsHeloo",paginationProps.id)
 
     //use Lazy Query
     //query getVideosLinks for embed Code
@@ -27,6 +42,14 @@ export  const Hooks=()=> {
             if(data.getLives.code === 200){
                 dispatch(setshowVideosActions(data.getLives));
             }
+        }
+    })
+    // mutation delete lang from table of event
+    const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
+        variables : {idLive:paginationProps.id},
+        context: { clientName: "second" },
+        onCompleted: (data)=>{
+            console.log("dataDelete",data)
         }
     })
 
@@ -77,17 +100,92 @@ export  const Hooks=()=> {
             context: { clientName: "second" },
         })
     }
+    /*Delete Rows*/
+    const handleClickDeleteIcon = () =>{
+        // dispatch show Alert
+        dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
+        setTimeout(()=>{
+            dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
+        },3000)
+        // Delete items from table
+         let items = DataVideos.data.filter(item => {
+            return !(paginationProps.id.includes(item.id))
+        })
+        // dispatch list Video
+        dispatch(setshowVideosActions({data:items}));
+
+        // liste des items supprimer
+         itemsDeleted = DataVideos.data.filter(item => {
+
+            return (paginationProps.id.includes(item.id))
+        })
+
+        // Time out to Run API Delete
+        itemsRunAPI = setTimeout(()=>{
+            DeleteItemsMutation()
+        },3000)
+
+    }
+
+    // Delete One Row
+    //fonction pour supprimer un live
+    const handleDeleteOneRow =  (e) =>{
+
+            // dispatch show Alert
+            dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
+            setTimeout(()=>{
+                dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
+            },3000)
+
+            // dispatch list Video
+            dispatch(setshowVideosActions({data:DataVideos.data.filter(item=>{return item.id !== e[0]})}))
+
+            // deleted row
+            itemsDeleted = DataVideos.data.filter(item => {
+                return item.id === e[0]
+            })
+
+        // Time out to Run API Delete
+        itemsRunAPI =  setTimeout(()=>{
+            DeleteItemsMutation()
+        },3000)
+
+    }
+    const handleClickDropdowMenu =(e)=>{
+        // dispatch id list Video
+        dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e}));
+    }
+
+    /* Click Annuler button Alert*/
+    const handleClickAnnulerAlert=()=>{
+        dispatch(setshowDivsConditions({showDivsConditionsName:"showElementSelected",showDivsConditionsValue:true}));
+        dispatch(setshowDivsConditions({showDivsConditionsName:"rubDeleteItems",showDivsConditionsValue:true}));
+        setTimeout(()=>{
+            dispatch(setshowDivsConditions({showDivsConditionsName:"rubDeleteItems",showDivsConditionsValue:false}));
+        },3000)
+        // recover items deleted
+
+        dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));
+
+        //ClearTimeOut to Run API Delete
+        clearTimeout(itemsRunAPI);
+    }
 
     return({
         handleSearchRow,
         handleHeaderSelect,
         handleChangeDatePicker,
         handleFiltrerVideos,
+        handleClickDeleteIcon,
+        handleClickAnnulerAlert,
+        handleDeleteOneRow,
+        handleClickDropdowMenu,
         DataVideos,
         paginationProps,
         values,
         sorterProps,
-        loadingSpinner
+        loadingSpinner,
+        conditions
     })
 
 

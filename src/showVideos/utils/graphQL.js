@@ -18,7 +18,17 @@ export const graphQL_shema = ()=> {
       }
      }
     `;
+    const Delete_Items = gql`
+    mutation($idLive:[Int!]!) {
+    deleteLive(idLive:$idLive){
+        deleteditems
+        undeleteditems
+        code
+       }
+     }
+    `;
     return({
-        Get_Lives
+        Get_Lives,
+        Delete_Items
     })
 }

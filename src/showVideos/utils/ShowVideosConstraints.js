@@ -19,7 +19,8 @@ export const ShowVideosList = ()=>{
                 pageSize:10,
                 order:'ascend',
                 columnKey:0,
-                current:1
+                current:1,
+                id:[0]
             }
         )
     }
@@ -28,11 +29,20 @@ export const ShowVideosList = ()=>{
             loading:true
         })
     }
+    const showDivsConditions = () =>{
+        return({
+            elementSelected: 0,
+            clickDeleteIcon:true,
+            showElementSelected:false,
+            rubDeleteItems:false
+        })
+    }
 
     return({
         FilterVideos,
         paginationProps,
-        showVideoConstraintData
+        showVideoConstraintData,
+        showDivsConditions
     })
 
 }

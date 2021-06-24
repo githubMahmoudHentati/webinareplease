@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import UseActionMenu from './ActionMenuVideosTable';
 import {useSelector} from "react-redux";
 import { useDispatch} from "react-redux";
-import {setPaginationProps} from "../store/showVideosAction";
+import {setPaginationProps , setshowDivsConditions} from "../store/showVideosAction";
 import * as constantMedia from "../utils/data";
 import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 import {Hooks} from "../utils/hooks";
@@ -13,7 +13,7 @@ import {Hooks} from "../utils/hooks";
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_NUMBER = 0;
 
-function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_elments_selected) {
+function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
 
     // Read Data from Hooks
     const {DataVideos , paginationProps}=Hooks()
@@ -36,8 +36,9 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , fetch_el
 
     const  onSelectChange = selectedRowKeys  => {
         setSelectedRowKeys(selectedRowKeys);
-        console.log(`selected : ${selectedRowKeys}`);
-        fetch_elments_selected(selectedRowKeys.length);
+        console.log(`selectedhgjhgjhgjhgjh : ${selectedRowKeys}`);
+        dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:selectedRowKeys}));
+        dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:selectedRowKeys.length}));
     };
     const rowSelection = {
         selectedRowKeys,
