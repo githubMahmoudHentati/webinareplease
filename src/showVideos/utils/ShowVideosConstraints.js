@@ -37,12 +37,18 @@ export const ShowVideosList = ()=>{
             rubDeleteItems:false
         })
     }
+    const loadingDeleteShowVideo =()=>{
+        return({
+            loadingDelete:false
+        })
+    }
 
     return({
         FilterVideos,
         paginationProps,
         showVideoConstraintData,
-        showDivsConditions
+        showDivsConditions,
+        loadingDeleteShowVideo
     })
 
 }

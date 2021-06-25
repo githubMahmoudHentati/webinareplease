@@ -1,6 +1,6 @@
 import {ShowVideosList} from "../utils/ShowVideosConstraints"
 
-const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions}=ShowVideosList();
+const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo}=ShowVideosList();
 
 const ShowVideosINITIALSTATE = {
     ListVideos : [],
@@ -8,6 +8,7 @@ const ShowVideosINITIALSTATE = {
     paginationProps:paginationProps(),
     constraintDataShowVideo: showVideoConstraintData(),
     showdivscondition:showDivsConditions(),
+    loadingDelete:loadingDeleteShowVideo()
 }
 
 export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=>{
@@ -45,6 +46,13 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
             return{
                 ...state,
                 showdivscondition:showDivsConditionsObj
+            }
+        case "SET_LoadingDeleteShowVideo":
+            const {LoadingDeleteName,LoadingDeleteValue}=action.payload
+            const LoadingDeleteObj = {...state.loadingDelete,[LoadingDeleteName]: LoadingDeleteValue}
+            return{
+                ...state,
+                loadingDelete:LoadingDeleteObj
             }
         default:{
             return state
