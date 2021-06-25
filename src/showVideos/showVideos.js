@@ -18,10 +18,14 @@ import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
 function ShowVideos() {
 
-    const {loading}=GraphQLFetchData()
+    const {DeleteItemsMutation}=GraphQLFetchData()
+
+    function DeleteItemsAPIFunction(){
+        DeleteItemsMutation()
+    }
 
     // Read Data from Hooks
-    const {DataVideos, loadingSpinner}=Hooks()
+    const {DataVideos, loadingSpinner}=Hooks(DeleteItemsAPIFunction)
     const dispatch = useDispatch()
     const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
 
@@ -30,6 +34,7 @@ function ShowVideos() {
         SetSelectedRow(selected);
     }
     console.log("valuesCredentiels-showVideos",localStorage.getItem('jwtToken'))
+
     // Column AND DATA Table
      const columns = [
 
@@ -105,12 +110,12 @@ function ShowVideos() {
         columns: columns,
         dataSource: data,
         updateEntityPath: 'update-product',
-    },fetch_element_selected);
+    });
 
     return(
         <Spin  size="middle"  spinning={loadingSpinner.loading}>
        <PrincipalPage>
-           <HeaderVideos selectedRow={selectedRow}/>
+           <HeaderVideos/>
            <DataTable />
        </PrincipalPage>
         </Spin>

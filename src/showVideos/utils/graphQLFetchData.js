@@ -1,4 +1,4 @@
-import {useQuery} from "@apollo/react-hooks";
+import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
@@ -33,7 +33,17 @@ export const GraphQLFetchData=()=> {
         }
     })
 
+    // mutation delete lang from table of event
+    const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
+        variables : {idLive:paginationProps.id},
+        context: { clientName: "second" },
+        onCompleted: (data)=>{
+           console.log("dataDelete",data)
+        }
+    })
+
     return({
-        GetCalendarDataNow
+        GetCalendarDataNow,
+        DeleteItemsMutation
     })
 }

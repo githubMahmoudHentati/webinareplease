@@ -15,25 +15,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/grapqhQL/shemaGraphQL";
 import {setAppSetLogin} from "./utils/redux/actions";
+import {GraphQLFetchData} from "./utils/grapqhQL/graphQLFetchData";
 
 function App() {
-  const [verificationToken, setVerificationToken] = useState(false);
-  const dispatch = useDispatch()
-  const token = localStorage.getItem('jwtToken')?localStorage.getItem('jwtToken'):'';
-  console.log("token",token)
-  const {loading:tokenVerification_loading, data: dataVerificationToken}
-      = useQuery(graphQL_shema().tokenVerification, {
-    fetchPolicy:  "cache-and-network",
-    variables: { token : `Bearer ${token}`},
-    onCompleted :async (data)=>{
-      if (data.tokenverification.Code===200)
-      {
-        await dispatch(setAppSetLogin(localStorage.getItem('jwtToken')));
-      }
-      setVerificationToken(true)
-    }
-  })
-  console.log("verificationToken",verificationToken)
+  const {verificationToken}= GraphQLFetchData()
   const credentialsValues = useSelector((state) => state.Reducer)
 
   return (

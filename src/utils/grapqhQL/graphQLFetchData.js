@@ -1,7 +1,8 @@
 import {useQuery} from "@apollo/react-hooks";
-import {graphQL_shema} from "./graphQL";
+import {graphQL_shema} from "./shemaGraphQL";
 import {useDispatch} from "react-redux";
 import {setAppSetLogin} from "../redux/actions";
+import {useState} from "react";
 
 
 export const GraphQLFetchData=()=> {
@@ -9,20 +10,21 @@ export const GraphQLFetchData=()=> {
     // Read Data from Hooks
 
     // use Query to fetch Data
-    const {loading:calendar_loadingNow, data: dataVerificationToken}
+    const [verificationToken, setVerificationToken] = useState(false);
+    const token = localStorage.getItem('jwtToken')?localStorage.getItem('jwtToken'):'';
+    const {loading:tokenVerification_loading, data: dataVerificationToken}
         = useQuery(graphQL_shema().tokenVerification, {
         fetchPolicy:  "cache-and-network",
-        variables: { token : `${localStorage.getItem('jwtToken')}`},
-        context: { clientName: "second" },
-        onCompleted :(data)=>{
-            if (data.login.Code===200)
+        variables: { token : `Bearer ${token}`},
+        onCompleted :async (data)=>{
+            if (data.tokenverification.Code===200)
             {
-                dispatch(setAppSetLogin(localStorage.getItem('jwtToken')));
+                await dispatch(setAppSetLogin(localStorage.getItem('jwtToken')));
             }
+            setVerificationToken(true)
         }
     })
-
     return({
-        dataVerificationToken
+        verificationToken
     })
 }

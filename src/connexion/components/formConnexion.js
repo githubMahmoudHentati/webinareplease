@@ -15,8 +15,6 @@ export const FormConnexion =()=>{
     }
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
     const{handleSubmit,values,connexionOnChange}=Hooks()
-    console.log("conenxion",values.connexion)
-    console.log("valuesCredentiels-connexion",localStorage.getItem('jwtToken'))
 
     return(
         <Form
@@ -40,20 +38,20 @@ export const FormConnexion =()=>{
                         </Form.Item>
                     </Col>
                     <Col span={24} className={"col_input"}>
-                        {/*<Form.Item*/}
-                        {/*    className={"form-item-style"}*/}
-                        {/*    name="password"*/}
-                        {/*    rules={[*/}
-                        {/*        ({getFieldValue}) => ({*/}
-                        {/*            validator(_, value) {*/}
-                        {/*                if (isValidPassword(values.connexion.password)) {*/}
-                        {/*                    return Promise.resolve('value');*/}
-                        {/*                }*/}
-                        {/*                return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');*/}
-                        {/*            },*/}
-                        {/*        }),*/}
-                        {/*    ]}*/}
-                        {/*>*/}
+                        <Form.Item
+                            className={"form-item-style"}
+                            name="password"
+                            rules={[
+                                ({getFieldValue}) => ({
+                                    validator(_, value) {
+                                        if (isValidPassword(values.connexion.password)) {
+                                            return Promise.resolve('value');
+                                        }
+                                        return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
+                                    },
+                                }),
+                            ]}
+                        >
                             <Input.Password
                                 onChange={connexionOnChange}
                                 className={"spn2"}
@@ -61,7 +59,7 @@ export const FormConnexion =()=>{
                                 placeholder="Mot de passe"
                                 iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                             />
-                        {/*</Form.Item>*/}
+                        </Form.Item>
                     </Col>
                     <Col span={24}>
                         <Row justify="space-between">

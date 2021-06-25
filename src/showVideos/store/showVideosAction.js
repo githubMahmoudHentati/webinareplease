@@ -29,3 +29,11 @@ export function setShowVideoConstraintDataOnchange(e){
         payload:e
     }
 }
+
+
+export function setshowDivsConditions(e){
+    return {
+        type : "SET_showDivsConditions",
+        payload:e
+    }
+}

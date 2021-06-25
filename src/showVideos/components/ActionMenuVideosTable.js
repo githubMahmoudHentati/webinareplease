@@ -3,11 +3,17 @@ import {InfoCircleOutlined,DownloadOutlined,EditOutlined,LinkOutlined,FilePdfOut
 import { useHistory } from 'react-router-dom';
 import {Tooltip, Dropdown, Menu, Popconfirm, Button , Modal , Input , message} from 'antd';
 import {useSelector} from "react-redux";
+import {setPaginationProps} from "../store/showVideosAction";
+import { useDispatch} from "react-redux";
+import {Hooks} from "../utils/hooks";
 
 const { SubMenu } = Menu;
 const { TextArea } = Input;
 
 function useActionMenu({record}) {
+
+    const dispatch = useDispatch()
+    const {handleDeleteOneRow , handleClickDropdowMenu}=Hooks()
 
     const [visible , SetVisible] = useState(false)
     const [visibleModalExport , SetVisibleModalExport] = useState(false)
@@ -17,12 +23,6 @@ function useActionMenu({record}) {
     !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
     const history = useHistory();
 
-    // handle Click Menu
-    const handleClickDropdowMenu = () =>{
-
-    }
-
-
 
     const actionMenu = (
         <Menu className="menu">
@@ -30,7 +30,7 @@ function useActionMenu({record}) {
             <Menu.Item><EditOutlined />Modifier</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> Templates</Menu.Item>
-            <Menu.Item><DeleteOutlined />Supprimer</Menu.Item>
+            <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />Supprimer</Menu.Item>
         </Menu>
     );
     //fonction handleExport and show modal infos
@@ -87,7 +87,7 @@ function useActionMenu({record}) {
             </Tooltip>
 
         <span className="span_action">
-      <Dropdown overlay={actionMenu} trigger={['click']} onClick={()=>handleClickDropdowMenu()}>
+      <Dropdown overlay={actionMenu} trigger={['click']} onMouseEnter={()=>handleClickDropdowMenu([record.id])}>
         <a className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }}>
           ...
         </a>

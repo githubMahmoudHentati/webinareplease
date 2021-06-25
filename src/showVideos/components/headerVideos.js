@@ -1,5 +1,5 @@
 import React , {useState,useEffect} from 'react';
-import { Breadcrumb,Button, Tooltip , Select , Input  , Checkbox , DatePicker, Space} from "antd";
+import { Breadcrumb,Button, Tooltip , Select , Input  , Checkbox , DatePicker, Space , Alert} from "antd";
 import {  HourglassOutlined ,DownloadOutlined ,PlayCircleOutlined ,ImportOutlined ,BorderInnerOutlined , CalendarOutlined , DeleteOutlined , DownOutlined ,RightOutlined ,HomeOutlined , PlusSquareOutlined , MenuOutlined , TableOutlined  ,AppstoreOutlined , FilterOutlined , FolderOutlined , FolderOpenOutlined , SearchOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
 import {useSelector} from "react-redux";
@@ -8,8 +8,8 @@ import {Hooks} from "../utils/hooks";
 const { Option } = Select;
 let clicked = false;
 
-function HeaderVideos({selectedRow}) {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos}=Hooks()
+function HeaderVideos() {
+    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert}=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
@@ -84,15 +84,15 @@ function HeaderVideos({selectedRow}) {
               <div className="div_delete_select">
 
                   {
-                      selectedRow === 0
+                      conditions.elementSelected === 0
                           ?
                           null
                           :
                           <div className="delete_number">
                               <Tooltip title="Supprimer">
-                                  <Button style={{backgroundColor:darkMode===false?"":"#141414"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} />
+                                  <Button style={{backgroundColor:darkMode===false?"":"#141414"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} onClick={()=>handleClickDeleteIcon()}/>
                               </Tooltip>
-                              <p style={{color:darkMode===false?"":"white"}}><span>{selectedRow}</span> <span>élément(s) sélectionné(s)</span></p>
+                              <p style={{color:darkMode===false?"":"white"}}><span>{conditions.elementSelected}</span> <span>élément(s) sélectionné(s)</span></p>
                           </div>
                   }
 
@@ -208,6 +208,25 @@ function HeaderVideos({selectedRow}) {
               </div>
               :
               null
+          }
+
+          {
+              conditions.clickDeleteIcon === false
+                  ?
+                  <div className="div_alert">
+                      <Alert
+                          id="ant-alert"
+                          message={conditions.elementSelected > 1 ? "les éléments sélectionnés seront supprimés" : "L'élément sélectionné sera supprimé"}
+                          banner
+                          action={
+                              <Button disabled={conditions.rubDeleteItems===true}  className="btn_annuler" size="small" type="text" onClick={handleClickAnnulerAlert}>
+                                  Annuler
+                              </Button>
+                          }
+                      />
+                  </div>
+                  :
+                  null
           }
 
 
