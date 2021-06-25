@@ -1239,5 +1239,16 @@ input:checked + .slider:before {
     font-weight: 900 !important;
 }
 
-
+.div_alert{
+    position: fixed;
+    top:15%;
+    left: 40%;
+    z-index: 2000;
+}
+.btn_annuler{
+    color: rgb(24, 144, 255) !important;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-weight: normal;
+}
 
