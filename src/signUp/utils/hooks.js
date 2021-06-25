@@ -2,11 +2,14 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setGeneralInformationOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {SignUpReducer} from "../store/signUpReducer";
-import {setSignUpOnchange} from "../store/signUpAction";
+import {setSignUpConstraintDataOnchange, setSignUpOnchange} from "../store/signUpAction";
+import {GraphQLFetchData} from "./graphQLFetchData";
+import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
 
 export  const Hooks=()=> {
     const dispatch = useDispatch()
     const values = useSelector((state) => state.SignUpReducer)
+    const {CreateAccount}=GraphQLFetchData(values)
 
 //******************generalInformation************************//
     const signUpOnChange = (event) => {
@@ -22,13 +25,14 @@ export  const Hooks=()=> {
     };
 
     const handleSubmit =()=>{
-          console.log("submitInscris", values)
+        dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:"loadingSignUp",constraintDataValueChange:true}))
+        CreateAccount()
     }
 
     return({
         signUpOnChange,
         signUpOnChangeSelect,
-        handleSubmit,
-        values
+        values,
+        handleSubmit
     })
 }

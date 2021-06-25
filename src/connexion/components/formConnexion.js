@@ -15,7 +15,6 @@ export const FormConnexion =()=>{
     }
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
     const{handleSubmit,values,connexionOnChange}=Hooks()
-    console.log("conenxion",values.connexion)
 
     return(
         <Form
@@ -32,24 +31,20 @@ export const FormConnexion =()=>{
                 <Row gutter={[0, 20]} >
 
                     <Col span={24} className={"col_input"}>
-                        <Form.Item name="email" className={"form-item-style"}
+                        <Form.Item name="username" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                        <Input name="name" onChange={connexionOnChange}  placeholder="default size" prefix={<UserOutlined/>}/>
+                        <Input name="username" onChange={connexionOnChange}  placeholder="default size" prefix={<UserOutlined/>}/>
                         </Form.Item>
                     </Col>
                     <Col span={24} className={"col_input"}>
                         <Form.Item
-                            onChange={connexionOnChange}
                             className={"form-item-style"}
                             name="password"
-                            rules={[{
-                                required: true,
-                                message: "S'il vous plaît saisissez votre mot de passe!"
-                            },
+                            rules={[
                                 ({getFieldValue}) => ({
                                     validator(_, value) {
-                                        if (isValidPassword(values.passwordIntranet)) {
+                                        if (isValidPassword(values.connexion.password)) {
                                             return Promise.resolve('value');
                                         }
                                         return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
@@ -58,6 +53,7 @@ export const FormConnexion =()=>{
                             ]}
                         >
                             <Input.Password
+                                onChange={connexionOnChange}
                                 className={"spn2"}
                                 name="password"
                                 placeholder="Mot de passe"
@@ -80,7 +76,7 @@ export const FormConnexion =()=>{
             <Col span={24}>
                 <Row gutter={[20, 20]} >
                     <Col span={24}>
-                        <Button className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">Connexion</Button>
+                        <Button loading={values.constraintData.loadingConnexion}  className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">Connexion</Button>
                     </Col>
                     <Col >
                         <span className={"spn_chbx"}>Pas encore membre?</span>

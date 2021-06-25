@@ -5,22 +5,29 @@ export const SignUpConstraints = ()=>{
     const signUp = () => {
         return (
             {
-                name: "",
+                firstName: "",
                 lastName: "",
+                username:"xxxxx",
                 email: "",
                 phone:"",
                 city: "",
                 password:"",
                 address:"",
-                employeeNumberID:"",
-                zipCode:"",
+                numberPerson:"",
+                postalCode:"",
                 society:"",
-                employeeNumber:"2"
             }
         )
     }
+    const constraintData =()=>{
+        return({
+            loadingSignUp:false
+        })
+    }
+
 
     return({
+        constraintData,
         signUp,
     })
 

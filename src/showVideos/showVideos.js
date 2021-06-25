@@ -27,6 +27,13 @@ function ShowVideos() {
     // Read Data from Hooks
     const {DataVideos, loadingSpinner}=Hooks(DeleteItemsAPIFunction)
     const dispatch = useDispatch()
+    const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
+
+    // fonction pour compter les lignes sélectionnées de tableau
+    const fetch_element_selected = (selected) => {
+        SetSelectedRow(selected);
+    }
+    console.log("valuesCredentiels-showVideos",localStorage.getItem('jwtToken'))
 
     // Column AND DATA Table
      const columns = [

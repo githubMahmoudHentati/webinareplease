@@ -1,10 +1,11 @@
 import {ConnexionConstraints} from "../utils/ConnexionConstraints";
 
-const {connexion} = ConnexionConstraints()
+const {connexion,constraintData} = ConnexionConstraints()
 
 const ConnexionInitialState = {
 
     connexion: connexion(),
+    constraintData: constraintData()
 
 
 }
@@ -21,6 +22,14 @@ export const  ConnexionReducer=(state=ConnexionInitialState , action)=>{
             return{
                 ...state,
                 connexion:ConnexionOnOnchangeObj
+            }
+
+        case "SET_ConnexionConstraintDataOnchange":
+            const {constraintDataNameChange,constraintDataValueChange}=action.payload
+            const constraintDataOnOnchangeObj = {...state.constraintData,[constraintDataNameChange]: constraintDataValueChange}
+            return{
+                ...state,
+                constraintData:constraintDataOnOnchangeObj
             }
 
         default:{

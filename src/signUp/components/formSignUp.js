@@ -2,6 +2,7 @@ import React ,{Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox , Select,
 import '../signUp.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import {Hooks} from "../utils/hooks";
+import {GraphQLFetchData} from "../utils/graphQLFetchData";
 const { Option } = Select;
 
 export const FormSignUp =({child1,child2})=>{
@@ -11,12 +12,13 @@ export const FormSignUp =({child1,child2})=>{
         wrapperCol: { span: 20 },
     };
 
+
+    const {signUpOnChange,signUpOnChangeSelect,values,handleSubmit}= Hooks()
+
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email)
     }
-
-    const {signUpOnChange,signUpOnChangeSelect,values,handleSubmit}= Hooks()
 
     const isValidPassword = (password) => {
 
@@ -26,14 +28,7 @@ export const FormSignUp =({child1,child2})=>{
 
     console.log("signUp",values)
     return(
-        <Form
-            form={form}
-            labelCol={{ span:4}}
-            wrapperCol={{ span: 16 }}
-            layout="horizontal"
-            name="product-form"
-            onFinish={handleSubmit}
-        >
+
             <Row gutter={[0, 40]} className={'col-signUp'}>
                 <Col className={"spn1"} style={{textAlign: 'center'}} span={24}>
                     {child1}
@@ -43,12 +38,12 @@ export const FormSignUp =({child1,child2})=>{
                         <Col span={24}>
                             <Row gutter={[0, 10]} justify={"end"}>
                                 <Col span={24}>
-                                    <Form.Item name="name" className={"form-item-style"}
+                                    <Form.Item name="firstName" className={"form-item-style"}
                                                rules={requiredFieldRule}
                                                label={"Nom"}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="name" placeholder={"Nom"}></Input>
+                                               name="firstName" placeholder={"Nom"}></Input>
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
@@ -134,11 +129,11 @@ export const FormSignUp =({child1,child2})=>{
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
-                                    <Form.Item name="zipCode" className={"form-item-style"}
+                                    <Form.Item name="postalCode" className={"form-item-style"}
                                                label={"Code postal"}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="ZipCode" placeholder={"Code postal"}></Input>
+                                               name="postalCode" placeholder={"Code postal"}></Input>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -154,12 +149,12 @@ export const FormSignUp =({child1,child2})=>{
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
-                                    <Form.Item name="employeeNumberID" className={"form-item-style"}
+                                    <Form.Item name="numberPerson" className={"form-item-style"}
                                                label={"Nombre d'employé"}
                                     >
                                             <Select
                                                 className={"spn2"}
-                                                name="employeeNumberID" onChange={signUpOnChangeSelect}
+                                                name="numberPerson" onChange={signUpOnChangeSelect}
                                                 showSearch
                                                 style={{width: "100%"}}
                                                 placeholder="Entre 5 - 10 employé(e)s"
@@ -168,11 +163,11 @@ export const FormSignUp =({child1,child2})=>{
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                 }
                                             >
-                                                <Option name="employeeNumberID" key={1} value="1">entre 5-10
+                                                <Option name="numberPerson" key={1} value="1">entre 5-10
                                                     employé(e)s</Option>
-                                                <Option name="employeeNumberID" key={2} value="2">entre 10-20
+                                                <Option name="numberPerson" key={2} value="2">entre 10-20
                                                     employé(e)s</Option>
-                                                <Option name="employeeNumberID" key={3} value="3">entre 20-30
+                                                <Option name="numberPerson" key={3} value="3">entre 20-30
                                                     employé(e)s</Option>
                                             </Select>
                                     </Form.Item>
@@ -205,6 +200,5 @@ export const FormSignUp =({child1,child2})=>{
                     </Row>
                 </Col>
             </Row>
-        </Form>
     )
 }

@@ -5,14 +5,20 @@ export const ConnexionConstraints = ()=>{
     const connexion = () => {
         return (
             {
-               name:"",
+               username:"",
                 password:""
             }
         )
     }
+    const constraintData =()=>{
+        return({
+            loadingConnexion:false
+        })
+    }
 
     return({
         connexion,
+        constraintData
     })
 
 }
