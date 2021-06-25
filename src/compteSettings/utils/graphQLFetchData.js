@@ -6,15 +6,17 @@ import {useState} from 'react'
 import {
     setAccountSetting,
     setConstraintDataOnchange, setEmptyPasswordInput,
-    setGeneralInformationOnchange
+    setGeneralInformationOnchange, setLoadingUpdatePassword
 } from "../store/accountSettingsAction";
 import {Hooks} from "./hooks";
 import {AccountSettingsConstraints} from "./accountSettingsConstraints";
+import {StatusMessages} from "./StatusMessages";
 
-export const GraphQLFetchData=()=> {
+export const GraphQLFetchData=(form)=> {
     const dispatch = useDispatch()
     const {values}=Hooks()
     const {securityAccount}=AccountSettingsConstraints()
+    const {success_message_update_password , error_message_update_password}=StatusMessages()
 
     const {loading: GetUserInfoData_loading, data: GetUserInfoData}
         = useQuery(graphQL_shema().Get_UserInfoData, {
@@ -50,9 +52,19 @@ export const GraphQLFetchData=()=> {
                 values.securityAccount
         },
         onCompleted: async (data) => {
-            console.log("data",data)
-            dispatch(setEmptyPasswordInput(securityAccount()))
-            console.log("securityAccount",securityAccount())
+            if(data.changePassword.Code === 200){
+                dispatch(setEmptyPasswordInput(securityAccount()));
+                dispatch(setLoadingUpdatePassword({
+                    LoadingUpdatePasswordNameChange: "loadingUpdatePassword",
+                    LoadingUpdatePasswordValueChange: false
+                }))
+                form.resetFields();
+                success_message_update_password()
+
+            }else if(data.changePassword.Code === 400){
+                error_message_update_password()
+            }
+
         }
     });
 

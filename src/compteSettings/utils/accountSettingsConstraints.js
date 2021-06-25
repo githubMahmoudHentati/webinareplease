@@ -59,13 +59,19 @@ export const AccountSettingsConstraints = ()=>{
             }
         )
     }
+    const loadingUpdatePassword = () => {
+        return ({
+            loadingUpdatePassword : false
+        })
+    }
 
     return({
         generalInformation,
         subscription,
         bills,
         constraintData,
-        securityAccount
+        securityAccount,
+        loadingUpdatePassword
     })
 
 }

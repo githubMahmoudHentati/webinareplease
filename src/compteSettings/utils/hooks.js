@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setGeneralInformationOnchange, setSecurityAccountPassword} from "../store/accountSettingsAction";
+import {
+    setGeneralInformationOnchange,
+    setLoadingUpdatePassword,
+    setSecurityAccountPassword
+} from "../store/accountSettingsAction";
 import {AccountSettingsReducer} from "../store/accountSettingsReducer";
 import {Reducer} from "../../utils/redux/reducer";
 //import {setSubscriptionOnchange} from "../store/accountSettingsAction";
@@ -11,6 +15,8 @@ export  const Hooks=(callback)=> {
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const values = useSelector((state) => state.AccountSettingsReducer)
     const valuesCredentiels = useSelector((state) => state.Reducer)
+
+    console.log("valuesssskjfdghkjfdghkhdfjs",values)
 
 //******************generalInformation************************//
     const generalInformationOnChange = (event) => {
@@ -40,6 +46,10 @@ export  const Hooks=(callback)=> {
     //*******************Handle Save New Password**********//
     const handleSaveNewPassword =()=>{
         callback()
+        dispatch(setLoadingUpdatePassword({
+            LoadingUpdatePasswordNameChange: "loadingUpdatePassword",
+            LoadingUpdatePasswordValueChange: true
+        }))
     }
     console.log("valuesPassword",values)
     return({
