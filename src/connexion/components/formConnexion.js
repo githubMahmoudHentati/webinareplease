@@ -15,8 +15,6 @@ export const FormConnexion =()=>{
     }
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
     const{handleSubmit,values,connexionOnChange}=Hooks()
-    console.log("conenxion",values.connexion)
-    console.log("valuesCredentiels-connexion",localStorage.getItem('jwtToken'))
 
     return(
         <Form
