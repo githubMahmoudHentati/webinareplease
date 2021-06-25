@@ -2,12 +2,13 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {ContactClientReducer} from "../store/ContactClientReducer";
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
-import {setContactClientOnchange} from "../store/ContactClientAction";
+import {setContactClientOnchange, setLoadingEnvoieMail} from "../store/ContactClientAction";
 
 
-export  const Hooks=(ContactClientMutationAction)=> {
+export  const Hooks=(ContactClientMutationAction , form)=> {
     const dispatch = useDispatch()
     const values = useSelector((state) => state.ContactClientReducer)
+     console.log("valuesContactReduce",values)
 
 //******************generalInformation************************//
     const ContactClientOnChange = (event) => {
@@ -18,8 +19,13 @@ export  const Hooks=(ContactClientMutationAction)=> {
         }));
     };
 
-    const handleSubmitContactClient =()=>{
-        ContactClientMutationAction()
+    const handleSubmitContactClient = async ()=>{
+        await ContactClientMutationAction()
+        //loading Button
+        dispatch(setLoadingEnvoieMail({
+            loadingEnvoiMailNameChange: "loading",
+            loadingEnvoiMailValueChange: true
+        }))
     }
 
     return({

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    setFilterVideosActions,
+    setFilterVideosActions, setLoadingDeleteShowVideo,
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions
@@ -10,11 +10,13 @@ import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {GraphQLFetchData} from "./graphQLFetchData";
+import {StatusMessage} from "./StatusMessage";
 
 let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
 
+    const {success_Delete , error_Delete , error_Filter}=StatusMessage()
 
     const dispatch = useDispatch()
     //Filter Data
@@ -29,8 +31,12 @@ export  const Hooks=()=> {
     const loadingSpinner = useSelector((state)=> state.ShowVideosReducerReducer.constraintDataShowVideo)
    //condition
     const conditions = useSelector((state)=> state.ShowVideosReducerReducer.showdivscondition)
+   //loading Delete Show Video
+    const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
 
-    console.log("conditionhello",conditions)
+
+
+    console.log("loadingDelete",loadingDelete)
 
     console.log("paginationPropsHeloo",paginationProps.id)
 
@@ -42,6 +48,9 @@ export  const Hooks=()=> {
             if(data.getLives.code === 200){
                 dispatch(setshowVideosActions(data.getLives));
             }
+            else if(data.getLives.code === 400){
+                error_Filter()
+            }
         }
     })
     // mutation delete lang from table of event
@@ -49,7 +58,18 @@ export  const Hooks=()=> {
         variables : {idLive:paginationProps.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
-            console.log("dataDelete",data)
+            if(data.deleteLive.code === 200){
+                // dispatch loading Delete Button
+                dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
+                // dispatch loading nombre des élements sélectionnés
+                dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:0}));
+                success_Delete()
+            }else if(data.deleteLive.code === 400){
+                error_Delete(400)
+            }else if(data.deleteLive.code === 404){
+                error_Delete(404)
+            }
+
         }
     })
 
@@ -125,11 +145,14 @@ export  const Hooks=()=> {
             DeleteItemsMutation()
         },3000)
 
+        dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
+
     }
 
     // Delete One Row
     //fonction pour supprimer un live
     const handleDeleteOneRow =  (e) =>{
+
 
             // dispatch show Alert
             dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
@@ -185,7 +208,8 @@ export  const Hooks=()=> {
         values,
         sorterProps,
         loadingSpinner,
-        conditions
+        conditions,
+        loadingDelete
     })
 
 

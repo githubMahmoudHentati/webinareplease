@@ -12,9 +12,15 @@ export const ContactClientConstraints = ()=>{
             }
         )
     }
+    const LoadingEnvoiMail = () => {
+        return ({
+            loading : false
+        })
+    }
 
     return({
         ContactClient,
+        LoadingEnvoiMail
     })
 
 }

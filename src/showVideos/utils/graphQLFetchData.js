@@ -3,12 +3,13 @@ import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
 import {setshowVideosActions , setShowVideoConstraintDataOnchange} from "../store/showVideosAction";
-
+import {StatusMessage} from "./StatusMessage";
 
 export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
     // Read Data from Hooks
     const {paginationProps ,  values }=Hooks()
+    const {error_getLives}=StatusMessage()
 
     // use Query to fetch Data
     const {loading:calendar_loadingNow, data: GetCalendarDataNow}
@@ -25,11 +26,16 @@ export const GraphQLFetchData=()=> {
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{
+            if(data.getLives.code === 200){
                 dispatch(setshowVideosActions(data.getLives));
                 dispatch(setShowVideoConstraintDataOnchange({
                     constraintDataNameChange: "loading",
                     constraintDataValueChange: false
                 }))
+            }else if(data.getLives.code === 400){
+                error_getLives()
+            }
+
         }
     })
 

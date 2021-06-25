@@ -1,11 +1,10 @@
 import {ContactClientConstraints} from "../utils/ContactClientConstraints";
 
-const {ContactClient} = ContactClientConstraints()
+const {ContactClient , LoadingEnvoiMail} = ContactClientConstraints()
 
 const ContactClientInitialState = {
-
     contactClient: ContactClient(),
-
+     loading : LoadingEnvoiMail(),
 }
 
 export const  ContactClientReducer=(state=ContactClientInitialState , action)=>{
@@ -20,6 +19,18 @@ export const  ContactClientReducer=(state=ContactClientInitialState , action)=>{
             return{
                 ...state,
                 contactClient:ContactClientOnOnchangeObj
+            }
+        case "SET_EmptyContactInput":
+            return{
+                ...state,
+                contactClient:action.payload
+            }
+        case "SET_LoadingEnvoieMail":
+            const {loadingEnvoiMailNameChange,loadingEnvoiMailValueChange}=action.payload
+            const loadingEnvoiMailOnOnchangeObj = {...state.loading,[loadingEnvoiMailNameChange]: loadingEnvoiMailValueChange}
+            return{
+                ...state,
+                loading:loadingEnvoiMailOnOnchangeObj
             }
 
         default:{
