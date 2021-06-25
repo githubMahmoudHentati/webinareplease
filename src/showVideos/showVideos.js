@@ -29,7 +29,7 @@ function ShowVideos() {
     const fetch_element_selected = (selected) => {
         SetSelectedRow(selected);
     }
-
+    console.log("valuesCredentiels-showVideos",localStorage.getItem('jwtToken'))
     // Column AND DATA Table
      const columns = [
 

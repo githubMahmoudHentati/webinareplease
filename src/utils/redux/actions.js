@@ -25,4 +25,18 @@ export function setDarkMode(e){
 }
 
 
+export function setAppSetLogin(e){
+    return{
+        type:"SET_AppSetLogin",
+        payload:e
+    }
+}
+
+export function setAppSetLogout(){
+    return{
+        type:"SET_AppSetLogout",
+    }
+}
+
+
 

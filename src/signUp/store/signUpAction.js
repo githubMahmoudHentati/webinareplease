@@ -10,6 +10,15 @@
             }
         }
 
+//*******************Constraint Data actions*******************//
+
+        export function setSignUpConstraintDataOnchange(e){
+            return{
+                type:"SET_SignUpConstraintDataOnchange",
+                payload:e
+            }
+        }
+
 
 
 

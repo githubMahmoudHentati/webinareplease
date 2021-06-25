@@ -16,7 +16,7 @@ import {
      GlobalOutlined
 } from '@ant-design/icons';
 import { Badge , Menu, Dropdown , Avatar} from 'antd';
-import {setAccountSetting} from "../redux/actions";
+import {setAccountSetting, setAppSetLogin, setAppSetLogout} from "../redux/actions";
 import {setDarkMode} from "../redux/actions";
 
 
@@ -127,13 +127,17 @@ function GlobalHeader() {
     }
 
 
-
+    const logOut=()=>{
+        history.push("/connexion",dispatch(setAccountSetting(4)))
+        dispatch(setAppSetLogout());
+        localStorage.removeItem('jwtToken');
+    }
     const MenuHeader = (
         <Menu className="menu">
             <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(0)))}} ><UserOutlined />Compte</Menu.Item>
             <Menu.Item onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(1)))}}><UnlockOutlined />Sécurité</Menu.Item>
             <Menu.Item  onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(3)))}}><PieChartOutlined />Abonnement</Menu.Item>
-            <Menu.Item onClick={()=>{history.push("/connexion",dispatch(setAccountSetting(4)))}}><LogoutOutlined />Déconnection</Menu.Item>
+            <Menu.Item onClick={logOut}><LogoutOutlined />Déconnection</Menu.Item>
         </Menu>
     );
     const Menulang = (

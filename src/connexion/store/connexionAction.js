@@ -10,7 +10,14 @@
             }
         }
 
+//*******************Constraint Data actions*******************//
 
+        export function setConnexionConstraintDataOnchange(e){
+            return{
+                type:"SET_ConnexionConstraintDataOnchange",
+                payload:e
+            }
+        }
 
 
 
