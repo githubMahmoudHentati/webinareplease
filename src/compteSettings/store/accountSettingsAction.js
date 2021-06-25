@@ -64,6 +64,17 @@ export function setEmptyPasswordInput(e){
 }
 
 
+//*********************Loading Button Update Password ********************//
+
+export function setLoadingUpdatePassword(e){
+
+    return{
+        type:"SET_LoadingUpdatePassword",
+        payload:e
+    }
+}
+
+
 
 
 
