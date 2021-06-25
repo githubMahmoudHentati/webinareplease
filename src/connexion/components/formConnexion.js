@@ -16,6 +16,7 @@ export const FormConnexion =()=>{
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
     const{handleSubmit,values,connexionOnChange}=Hooks()
     console.log("conenxion",values.connexion)
+    console.log("valuesCredentiels-connexion",localStorage.getItem('jwtToken'))
 
     return(
         <Form
@@ -32,38 +33,35 @@ export const FormConnexion =()=>{
                 <Row gutter={[0, 20]} >
 
                     <Col span={24} className={"col_input"}>
-                        <Form.Item name="email" className={"form-item-style"}
+                        <Form.Item name="username" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                        <Input name="name" onChange={connexionOnChange}  placeholder="default size" prefix={<UserOutlined/>}/>
+                        <Input name="username" onChange={connexionOnChange}  placeholder="default size" prefix={<UserOutlined/>}/>
                         </Form.Item>
                     </Col>
                     <Col span={24} className={"col_input"}>
-                        <Form.Item
-                            onChange={connexionOnChange}
-                            className={"form-item-style"}
-                            name="password"
-                            rules={[{
-                                required: true,
-                                message: "S'il vous plaît saisissez votre mot de passe!"
-                            },
-                                ({getFieldValue}) => ({
-                                    validator(_, value) {
-                                        if (isValidPassword(values.passwordIntranet)) {
-                                            return Promise.resolve('value');
-                                        }
-                                        return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
-                                    },
-                                }),
-                            ]}
-                        >
+                        {/*<Form.Item*/}
+                        {/*    className={"form-item-style"}*/}
+                        {/*    name="password"*/}
+                        {/*    rules={[*/}
+                        {/*        ({getFieldValue}) => ({*/}
+                        {/*            validator(_, value) {*/}
+                        {/*                if (isValidPassword(values.connexion.password)) {*/}
+                        {/*                    return Promise.resolve('value');*/}
+                        {/*                }*/}
+                        {/*                return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');*/}
+                        {/*            },*/}
+                        {/*        }),*/}
+                        {/*    ]}*/}
+                        {/*>*/}
                             <Input.Password
+                                onChange={connexionOnChange}
                                 className={"spn2"}
                                 name="password"
                                 placeholder="Mot de passe"
                                 iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                             />
-                        </Form.Item>
+                        {/*</Form.Item>*/}
                     </Col>
                     <Col span={24}>
                         <Row justify="space-between">
@@ -80,7 +78,7 @@ export const FormConnexion =()=>{
             <Col span={24}>
                 <Row gutter={[20, 20]} >
                     <Col span={24}>
-                        <Button className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">Connexion</Button>
+                        <Button loading={values.constraintData.loadingConnexion}  className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">Connexion</Button>
                     </Col>
                     <Col >
                         <span className={"spn_chbx"}>Pas encore membre?</span>

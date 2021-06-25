@@ -11,10 +11,11 @@ const { Option } = Select;
 
  export const AccountGeneralInformation =()=>{
 
-     const{loadingGeneralInformation}=GraphQLFetchData()
-     const {UpdateAccountSetting}= GraphQLFetchData()
-     const {generalInformationOnChange,generalInformationOnChangeSelect,handleSubmit,values,darkMode}=Hooks(UpdateAccountSetting)
+     const {loadingGeneralInformation,UpdateAccountSetting}= GraphQLFetchData()
+     const {generalInformationOnChange,generalInformationOnChangeSelect,handleSubmit,values,valuesCredentiels,darkMode}=Hooks(UpdateAccountSetting)
      console.log("generalInformation",values)
+     console.log("valuesCredentiels",localStorage.getItem('jwtToken'))
+
 
      return(
          <Spin spinning={values.constraintData.loadingGeneralInformation}>

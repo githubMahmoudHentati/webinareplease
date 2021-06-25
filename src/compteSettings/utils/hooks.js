@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setGeneralInformationOnchange, setSecurityAccountPassword} from "../store/accountSettingsAction";
 import {AccountSettingsReducer} from "../store/accountSettingsReducer";
+import {Reducer} from "../../utils/redux/reducer";
 //import {setSubscriptionOnchange} from "../store/accountSettingsAction";
 
 
@@ -9,6 +10,7 @@ export  const Hooks=(callback)=> {
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const values = useSelector((state) => state.AccountSettingsReducer)
+    const valuesCredentiels = useSelector((state) => state.Reducer)
 
 //******************generalInformation************************//
     const generalInformationOnChange = (event) => {
@@ -47,7 +49,8 @@ export  const Hooks=(callback)=> {
         securityAccountPassword,
         handleSaveNewPassword,
         values,
-        darkMode
+        darkMode,
+        valuesCredentiels
         //subscriptionOnChange
     })
 }

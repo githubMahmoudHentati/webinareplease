@@ -25,7 +25,7 @@ export const AvatarUpload = () => {
 
     const onSave =(file)=>{
          let url = "//mbeji-cloud-sandbox.webtv-solution.dev:7007/query"
-         let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1PVVNTQUJFSkkiLCJpZCI6MTAyLCJyb2xlIjpbIm5pbCJdLCJleHAiOjE2MjQ1MjI0Mjd9.qq72kEcYmbzqb04knNOIPgeLavUClb9DpHNVCrvYzuvgBRvD52OM347kH-ltJA5Wt1etPDm7DOF6Is01BYVStKG351MyHCjuupy5EZ4ygNUu8q8zOuQRIy3nO7qBGvihTNGfTptx0cn9elXA5n14nHBqTPL2Bl5BtMDnTUjXfqZmKwbdBpnf9ct-BHAlT_jyI4SL0PtiaLumVA26M97UaMQKaljJvVJzM2ezHWUeLZldpZO1gxKyC032GorGGHJY_uyRm9lLtI41p29fYk8bJiq3eL8L9JsJK9CuwOC3vmD5S3Xn67j3KpjeI11X_YBtTnfmWmVN3oOnxzRDJLbrEOkmTPWBlycl7euKU8m6mHL1uSFk5Y1Ixo8nrpT6WMZ1w05vr0HYMhy2PV1Z0PfXzGgcyMajVDdlWhxdr8oFaeI8AhyEMY33IqjYhLx5x8I3dSN8JjXOApv23rd7qT1rRWhl2BRUGQqgBgrfSBD6FT9rGqyzcaONBhonOKogqm2XKB8l4YnnvYAgo8DqZoY8h7ehF9nhKA-WWKYmrbuMa7e2NpDkwEo45n_8FX7MOBEjxs3ms6dEhW2VHqkG1hChJ9yITExdf6bToUZoQfN7le-Sj4rlP0V6lnhS8Q8ivrcTO4WfDu7TfaLgthyXsuOJQMb23sj_dozWGtQHLNhUtJE"
+         let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1PVVNTQUJFSkkiLCJpZCI6MTAyLCJyb2xlIjpbIm5pbCJdLCJleHAiOjE2MjQ2MTY3NDN9.m_cXU7WMgKHzyWfnNrkbztLKvNvSofyOdmlzm7VRpXlPytk1gfxebe2Bqj7VMoHKvNVu-d-I7Pi2ESbwk6w-zxqGcl-AOFa48R74YcV6KKhqHRHLxDqEQfkOb67SI-C13x9BA60K5rUQ1En7m5a4dl3EQHLNNan8vUSpWYHTnlqFjacVYis_YfTgWFFmvgrf18hqN7Zns6rTon4BjdWMdIcUVW4aGDev_lXwNBdiXkXbNlioyKJUFrIjx-jeSBoKA8PdYW-ywZ3qFWQGOXdVMXH3HbqdkGHq2gIWTDMVi_ObIBIaUL6F0m4uLvE89zxO7p7AAtQa8sIzJhEjZcMs3R-D3It8RQh2_LsD5phPue0CORot297eXICma9FZHRdlU-kI5ZUF-cZHj2bFwUUyAknc5AWY8xptR1m7A-oXuXPlnDbF0rYX2JlCneSn9TO526LQceLHY8b1S3_vkjxj88lAI7W-mRdVXgOa2Yx73qH9ljZmb8hOWuTu45umhM3hJjZNdQGS_FeBhtm_HRmk-8TSg1SAsxNCvsWgym40Hii854UApV9_WEqwFv34NYDwWAbfEZx0XViNAKB21TM07oDSemx1kFXh0OHAb2eZDsuOaf6zzpkjCVkfAL3sgjRIHOTGSd0tzngURuX2UUrxfeJqz8caaPIJSizCVGiomUo"
         axios({
             url: url,
             method: 'post',
@@ -86,14 +86,16 @@ export const AvatarUpload = () => {
             "0": ["variables.avatar"]
         };
         formData.append("map", JSON.stringify(map));
-        info.fileList.filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
+        let fileList = [...info.fileList];
+        fileList = fileList.slice(-1);
+        await fileList.filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
             const file = e.originFileObj;
             console.log("*******************", file);
             return formData.append("0", file);
         })
 
         for (let p of formData) {
-            console.log(p);
+            console.log("ppppppppppp",p);
         }
         onSave(formData)
     }
