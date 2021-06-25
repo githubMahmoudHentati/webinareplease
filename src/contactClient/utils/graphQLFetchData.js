@@ -2,12 +2,18 @@ import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
+import {setEmptyContactInput , setLoadingEnvoieMail} from "../store/ContactClientAction";
+import {ContactClientConstraints} from "./ContactClientConstraints";
+import {StatusMessages} from "./StatusMessages";
+import {setShowVideoConstraintDataOnchange} from "../../showVideos/store/showVideosAction";
 
-export const GraphQLFetchData=()=> {
+export const GraphQLFetchData=(form)=> {
     const dispatch = useDispatch()
     // Read Data from Hooks
     const {values }=Hooks()
-
+    const {ContactClient}=ContactClientConstraints()
+     // status message
+    const {success_message , error_message}=StatusMessages()
     // mutation delete lang from table of event
     const [ContactClientMutation] = useMutation(graphQL_shema().CONTACT_CLIENT,{
         variables : {input:
@@ -20,7 +26,19 @@ export const GraphQLFetchData=()=> {
         },
         context: { clientName: "first" },
         onCompleted: (data)=>{
-            console.log("DataMutation :",data.sendMail.Code)
+            if(data.sendMail.Code === 200){
+                dispatch(setEmptyContactInput(ContactClient()))
+                form.resetFields();
+                success_message();
+                //loading Button
+                dispatch(setLoadingEnvoieMail({
+                    loadingEnvoiMailNameChange: "loading",
+                    loadingEnvoiMailValueChange: false
+                }))
+            }else if(data.sendMail.Code === 400){
+                error_message()
+            }
+
         }
     })
 

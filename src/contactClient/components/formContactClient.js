@@ -9,13 +9,14 @@ import {GraphQLFetchData} from "../utils/graphQLFetchData";
 export const FormContactClient =()=> {
     const [form] = Form.useForm();
 
-    const {ContactClientMutation}=GraphQLFetchData()
+    const {ContactClientMutation}=GraphQLFetchData(form)
 
     function ContactClientMutationAction(){
         ContactClientMutation()
     }
 
-    const {ContactClientOnChange , handleSubmitContactClient,values}= Hooks(ContactClientMutationAction)
+    const {ContactClientOnChange , handleSubmitContactClient,values}= Hooks(ContactClientMutationAction , form)
+    console.log("helloooo", values)
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -47,7 +48,7 @@ export const FormContactClient =()=> {
                                    label={"Nom"}
                         >
                             <Input className={"spn2"} onChange={ContactClientOnChange}
-                                   name="name" placeholder={"Nom"}></Input>
+                                   name="name" placeholder={"Nom"} value={values.contactClient.name} />
                         </Form.Item>
                     </Col>
                     <Col span={24}>
@@ -56,7 +57,7 @@ export const FormContactClient =()=> {
                                    label={"Prenom"}
                         >
                             <Input className={"spn2"} onChange={ContactClientOnChange}
-                                   name="lastName" placeholder={"Prenom"}></Input>
+                                   name="lastName" placeholder={"Prenom"} value={values.contactClient.lastName} />
                         </Form.Item>
                     </Col>
                     <Col span={24}>
@@ -76,7 +77,7 @@ export const FormContactClient =()=> {
                             ]}
                         >
                             <Input className={"spn2"} onChange={ContactClientOnChange}
-                                   name="email" placeholder={"E-mail"}></Input>
+                                   name="email" placeholder={"E-mail"} value={values.contactClient.email} />
                         </Form.Item>
                     </Col>
                     <Col span={24}>
@@ -84,7 +85,7 @@ export const FormContactClient =()=> {
                                    rules={requiredFieldRule}
                                    label={"Votre message"}
                         >
-                            <Input.TextArea className={"spn2"} placeholder={"Votre message"} name="message" onChange={ContactClientOnChange}></Input.TextArea>
+                            <Input.TextArea className={"spn2"} placeholder={"Votre message"} name="message" onChange={ContactClientOnChange} value={values.contactClient.message} />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -95,7 +96,7 @@ export const FormContactClient =()=> {
                         <Button className={"spn2"}> Annuler</Button>
                     </Col>
                     <Col>
-                        <Button htmlType="submit" type={"primary"} className={"spn2"} onClick={handleSubmitContactClient}>Envoyer</Button>
+                        <Button htmlType="submit" type={"primary"} className={"spn2"} loading={values.loading.loading}>Envoyer</Button>
                     </Col>
                 </Row>
             </Col>

@@ -37,3 +37,10 @@ export function setshowDivsConditions(e){
         payload:e
     }
 }
+
+export function setLoadingDeleteShowVideo(e){
+    return{
+        type:"SET_LoadingDeleteShowVideo",
+        payload:e
+    }
+}
