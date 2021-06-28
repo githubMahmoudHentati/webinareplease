@@ -16,6 +16,7 @@ import {useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/grapqhQL/shemaGraphQL";
 import {setAppSetLogin} from "./utils/redux/actions";
 import {GraphQLFetchData} from "./utils/grapqhQL/graphQLFetchData";
+import {ForgetPassword} from "./forgetPassword/forgetPassword";
 
 function App() {
   const {verificationToken}= GraphQLFetchData()
@@ -32,6 +33,7 @@ function App() {
               <Route exact path='/PackagePayement' component={PackagePayement}/>
               <Route exact path='/connexion'  > {!credentialsValues.appState.loggedIn?<Connexion/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/signUp' > {!credentialsValues.appState.loggedIn?<SignUp/>:<Redirect exact  to="/showVideos" />}</Route>
+              <Route exact path='/forgot-password' > {!credentialsValues.appState.loggedIn?<ForgetPassword/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/contactClient' component={ContactClient}/>
               <Route exact path='/compteSettings' > {!credentialsValues.appState.loggedIn?<Redirect exact  to="/connexion" /> :<CompteSettings/>}</Route>
               <Route exact path='/calendar' component={Calendar} />
