@@ -1,6 +1,6 @@
 import {AccountSettingsConstraints} from "../utils/accountSettingsConstraints";
 
-const {generalInformation,subscription,bills,constraintData,securityAccount} = AccountSettingsConstraints()
+const {generalInformation,subscription,bills,constraintData,securityAccount , loadingUpdatePassword} = AccountSettingsConstraints()
 
 const AccountSettingsInitialState = {
 
@@ -12,7 +12,9 @@ const AccountSettingsInitialState = {
 
     constraintData :constraintData(),
 
-    securityAccount:securityAccount()
+    securityAccount:securityAccount(),
+
+    loadingUpdatePassword : loadingUpdatePassword()
 
 }
 
@@ -79,7 +81,14 @@ export const  AccountSettingsReducer=(state=AccountSettingsInitialState , action
                 ...state,
                 securityAccount:action.payload
             }
-
+            //*********************** Update Password ***********************//
+        case "SET_LoadingUpdatePassword":
+            const {LoadingUpdatePasswordNameChange,LoadingUpdatePasswordValueChange}=action.payload
+            const LoadingUpdatePasswordOnchangeObj = {...state.loadingUpdatePassword,[LoadingUpdatePasswordNameChange]: LoadingUpdatePasswordValueChange}
+            return{
+                ...state,
+                loadingUpdatePassword:LoadingUpdatePasswordOnchangeObj
+            }
 
 
         default:{
