@@ -8,6 +8,7 @@ export const FormDirectConstraints = ()=>{
     const generals = () => {
         return (
             {
+                fileList:"",
                 directTitle:"",
                 directDescription:"",
                 directSharedLink:"",

@@ -15,7 +15,7 @@ import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 export  const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
-
+console.log("valueFormDirectVideoReducer",values)
 
     //***************General************************//
     const generalOnChangeByName =(value,event,name)=>{
