@@ -7,6 +7,7 @@ import {AccountSettingsReducer} from "../../compteSettings/store/accountSettings
 import {SignUpReducer} from "../../signUp/store/signUpReducer";
 import {ContactClientReducer} from "../../contactClient/store/ContactClientReducer";
 import {ConnexionReducer} from "../../connexion/store/connexionReducer";
+import {ForgetPasswordReducer} from "../../forgetPassword/store/forgetPasswordReducer";
 
 
 export const rootReducer = combineReducers({
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     ShowVideosReducerReducer,
     SignUpReducer,
     ContactClientReducer,
-    ConnexionReducer
+    ConnexionReducer,
+    ForgetPasswordReducer
 })
