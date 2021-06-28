@@ -29,7 +29,6 @@ export const GraphQLFetchData=(form)=> {
             }))
         }
     })
-    console.log("test",values.generalInformation)
     const [UpdateAccountSetting, {
         data: dataUpdate,
         loading: loading_EventUpdated,
