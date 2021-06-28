@@ -533,3 +533,11 @@
   color: #ff4d4f;
   margin-left: 2px;
 }
+.col-forms-upload span{
+  width: 50% !important;
+}
+.ant-upload-list-item-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

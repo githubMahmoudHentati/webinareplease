@@ -34,11 +34,10 @@ export  const Hooks=()=> {
    //loading Delete Show Video
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
 
-
-
-    console.log("loadingDelete",loadingDelete)
-
-    console.log("paginationPropsHeloo",paginationProps.id)
+       console.log("loadingDelete",loadingDelete)
+    if(DataVideos.data){
+        console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
+    }
 
     //use Lazy Query
     //query getVideosLinks for embed Code
@@ -58,15 +57,15 @@ export  const Hooks=()=> {
         variables : {idLive:paginationProps.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
-            if(data.deleteLive.code === 200){
+            if(data.deleteLive.code === "200"){
                 // dispatch loading Delete Button
                 dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
                 // dispatch loading nombre des élements sélectionnés
                 dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:0}));
                 success_Delete()
-            }else if(data.deleteLive.code === 400){
+            }else if(data.deleteLive.code === "400"){
                 error_Delete(400)
-            }else if(data.deleteLive.code === 404){
+            }else if(data.deleteLive.code === "404"){
                 error_Delete(404)
             }
 

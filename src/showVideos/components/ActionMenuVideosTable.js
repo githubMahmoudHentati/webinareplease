@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {InfoCircleOutlined,DownloadOutlined,EditOutlined,LinkOutlined,FilePdfOutlined,PictureOutlined,DeleteOutlined , EyeOutlined , InsertRowLeftOutlined } from '@ant-design/icons';
+import {InfoCircleOutlined,DownloadOutlined,EditOutlined,LinkOutlined,FilePdfOutlined,PictureOutlined,DeleteOutlined , EyeOutlined , InsertRowLeftOutlined , VideoCameraOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import {Tooltip, Dropdown, Menu, Popconfirm, Button , Modal , Input , message} from 'antd';
 import {useSelector} from "react-redux";
@@ -13,7 +13,9 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu}=Hooks()
+    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos}=Hooks()
+
+    console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
 
     const [visible , SetVisible] = useState(false)
     const [visibleModalExport , SetVisibleModalExport] = useState(false)
@@ -81,10 +83,26 @@ function useActionMenu({record}) {
 
     const actionColumnView = (
         <div className="action">
+            {
+                record.status === -1
+                       ?
+                        <Tooltip title={"Diffuser"}>
+                            <Button className={"btn_Visualiser_diffuser"} style={{
+                                backgroundColor: darkMode === false ? "" : "#1D1D1D",
+                                color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
+                                border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
+                            }}><VideoCameraOutlined/> Diffuser</Button>
+                        </Tooltip>
+                        :
+                        <Tooltip title={"Visualiser"}>
+                            <Button className={"btn_Visualiser_diffuser"} style={{
+                                backgroundColor: darkMode === false ? "" : "#1D1D1D",
+                                color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
+                                border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
+                            }}><EyeOutlined/> Visualiser</Button>
+                        </Tooltip>
 
-            <Tooltip title={"Visualiser"}>
-            <Button className={"btn_Visualiser_diffuser"} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}><EyeOutlined /> Visualiser</Button>
-            </Tooltip>
+            }
 
         <span className="span_action">
       <Dropdown overlay={actionMenu} trigger={['click']} onMouseEnter={()=>handleClickDropdowMenu([record.id])}>
