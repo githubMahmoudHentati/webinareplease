@@ -5,16 +5,11 @@ import { Upload, message } from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone, InboxOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
 import {Hooks} from "../utils/hooks";
+import {DraggerUpload} from "./DraggerUpload";
 
 
 export const Generals =()=>{
-    const { Dragger } = Upload;
-    const props = {
-        name: 'file',
-        multiple: true,
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
 
-    };
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
@@ -39,15 +34,7 @@ export const Generals =()=>{
                         <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Ajouter une vignette</span>
                     </Col>
                     <Col span={24} className={"col-forms-upload"}>
-                        <Dragger {...props} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}>
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
-                            </p>
-                            <p className="ant-upload-text" style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Cliquer ou faites glisser le fichier</p>
-                            <p className="ant-upload-hint" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                                Un seul fichier peut etre selectionné
-                            </p>
-                        </Dragger>
+                        <DraggerUpload/>
                     </Col>
                 </Row>
             </Col>
