@@ -34,11 +34,10 @@ export  const Hooks=()=> {
    //loading Delete Show Video
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
 
-
-
-    console.log("loadingDelete",loadingDelete)
-
-    console.log("paginationPropsHeloo",paginationProps.id)
+       console.log("loadingDelete",loadingDelete)
+    if(DataVideos.data){
+        console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
+    }
 
     //use Lazy Query
     //query getVideosLinks for embed Code
