@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 export const graphQL_shema = ()=> {
 
     const Connexion = gql`
-        query($input:LoginInput!) {
+        mutation($input:LoginInput!) {
             login(input:$input) {
                 Code
                 Message
