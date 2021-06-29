@@ -24,8 +24,8 @@ export const AvatarUpload = () => {
     }
 
     const onSave =(file)=>{
-         let url = "//mbeji-cloud-sandbox.webtv-solution.dev:7007/query"
-         let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1PVVNTQUJFSkkiLCJpZCI6MTAyLCJyb2xlIjpbIm5pbCJdLCJleHAiOjE2MjQ2MTY3NDN9.m_cXU7WMgKHzyWfnNrkbztLKvNvSofyOdmlzm7VRpXlPytk1gfxebe2Bqj7VMoHKvNVu-d-I7Pi2ESbwk6w-zxqGcl-AOFa48R74YcV6KKhqHRHLxDqEQfkOb67SI-C13x9BA60K5rUQ1En7m5a4dl3EQHLNNan8vUSpWYHTnlqFjacVYis_YfTgWFFmvgrf18hqN7Zns6rTon4BjdWMdIcUVW4aGDev_lXwNBdiXkXbNlioyKJUFrIjx-jeSBoKA8PdYW-ywZ3qFWQGOXdVMXH3HbqdkGHq2gIWTDMVi_ObIBIaUL6F0m4uLvE89zxO7p7AAtQa8sIzJhEjZcMs3R-D3It8RQh2_LsD5phPue0CORot297eXICma9FZHRdlU-kI5ZUF-cZHj2bFwUUyAknc5AWY8xptR1m7A-oXuXPlnDbF0rYX2JlCneSn9TO526LQceLHY8b1S3_vkjxj88lAI7W-mRdVXgOa2Yx73qH9ljZmb8hOWuTu45umhM3hJjZNdQGS_FeBhtm_HRmk-8TSg1SAsxNCvsWgym40Hii854UApV9_WEqwFv34NYDwWAbfEZx0XViNAKB21TM07oDSemx1kFXh0OHAb2eZDsuOaf6zzpkjCVkfAL3sgjRIHOTGSd0tzngURuX2UUrxfeJqz8caaPIJSizCVGiomUo"
+         let url = "https://mbeji-cloud-sandbox.webtv-solution.dev/query"
+         let token = localStorage.getItem('jwtToken')
         axios({
             url: url,
             method: 'post',
