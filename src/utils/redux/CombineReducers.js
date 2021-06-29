@@ -9,6 +9,7 @@ import {ContactClientReducer} from "../../contactClient/store/ContactClientReduc
 import {ConnexionReducer} from "../../connexion/store/connexionReducer";
 import {ForgetPasswordReducer} from "../../forgetPassword/store/forgetPasswordReducer";
 import {ResetPasswordReducer} from "../../resetPassword/store/resetPasswordReducer";
+import {PackagePayementReducer} from "../../PackagePayement/store/PackagePayementReducer";
 
 
 export const rootReducer = combineReducers({
@@ -20,5 +21,6 @@ export const rootReducer = combineReducers({
     ContactClientReducer,
     ConnexionReducer,
     ForgetPasswordReducer,
-    ResetPasswordReducer
+    ResetPasswordReducer,
+    PackagePayementReducer
 })
