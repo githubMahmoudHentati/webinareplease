@@ -15,6 +15,7 @@ import {useSelector} from "react-redux";
 import {GraphQLFetchData} from "./utils/grapqhQL/graphQLFetchData";
 import {ForgetPassword} from "./forgetPassword/forgetPassword";
 import {ResetPassword} from "./resetPassword/resetPassword";
+import Error from "./utils/components/Error";
 
 function App() {
   const {verificationToken}= GraphQLFetchData()
@@ -36,6 +37,7 @@ function App() {
               <Route exact path='/contactClient' component={ContactClient}/>
               <Route exact path='/compteSettings' > {!credentialsValues.appState.loggedIn?<Redirect exact  to="/connexion" /> :<CompteSettings/>}</Route>
               <Route exact path='/calendar' component={Calendar} />
+              <Route path={"*"} component={Error}/>
           </Switch>
         </BrowserRouter>
         }
