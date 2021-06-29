@@ -20,14 +20,25 @@ export const FormConnexion =()=>{
         return !values.constraintData.connexionError
     }
 
+    useEffect(() => {
+        const isRememberMe = localStorage.getItem('isRememberMe')?localStorage.getItem('isRememberMe'):false;
+        if (isRememberMe){
+            form.setFieldsValue( {
+                username:localStorage.getItem('username'),
+                password:localStorage.getItem('password'),
+                isRememberMe:true
+            })
+        }
+        else{
+            form.resetFields();
+        }
+    }, []);
 
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
-    function connexionAction (){
-        Connexion()
-    }
+
     const {Connexion}=GraphQLFetchData(form)
 
-    const{handleSubmit,values,connexionOnChange}=Hooks(connexionAction)
+    const{handleSubmit,values,connexionOnChange,connexionOnChangeButton}=Hooks(Connexion)
 
     console.log(values)
 
@@ -97,7 +108,13 @@ export const FormConnexion =()=>{
                     <Col span={24}>
                         <Row justify="space-between">
                             <Col>
-                                <Checkbox><span className={"spn_chbx"}>Se souvenir de moi</span></Checkbox>
+                                <Form.Item
+                                    className={"form-item-style"}
+                                    name="isRememberMe"
+                                    valuePropName="checked"
+                                >
+                                <Checkbox value="isRememberMe" name="isRememberMe" onChange={connexionOnChangeButton} ><span className={"spn_chbx"}>Se souvenir de moi</span></Checkbox>
+                                </Form.Item>
                             </Col>
                             <Col>
                                 <a  onClick={()=>{toForgotPassword()}} className={"spn_chbx"}> Mot de passe oublié</a>

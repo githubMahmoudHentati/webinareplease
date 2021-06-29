@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setConnexionConstraintDataOnchange, setConnexionOnchange} from "../store/connexionAction";
 import {ConnexionReducer} from "../store/connexionReducer";
 import {GraphQLFetchData} from "./graphQLFetchData";
+import {setGeneralOnchange} from "../../formDirectVideo/store/formDirectVideoAction";
 
 
 export  const Hooks=(connexionAction)=> {
@@ -23,12 +24,18 @@ export  const Hooks=(connexionAction)=> {
         document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
     };
 
+    const connexionOnChangeButton = (event) => {
+        dispatch(setConnexionConstraintDataOnchange({constraintDataNameChange:event.target.value, constraintDataValueChange:event.target.checked}));
+    };
+
+
     const handleSubmit=async ()=>{
         await dispatch(setConnexionConstraintDataOnchange({constraintDataNameChange:"loadingConnexion",constraintDataValueChange:true}))
         connexionAction()
     }
 
     return({
+        connexionOnChangeButton,
         connexionOnChange,
         handleSubmit,
         values
