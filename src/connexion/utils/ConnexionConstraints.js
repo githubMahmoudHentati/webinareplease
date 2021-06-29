@@ -13,7 +13,8 @@ export const ConnexionConstraints = ()=>{
     const constraintData =()=>{
         return({
             loadingConnexion:false,
-            connexionError:false
+            connexionError:false,
+            isRememberMe:false
         })
     }
 

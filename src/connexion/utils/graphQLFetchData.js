@@ -27,6 +27,17 @@ export const GraphQLFetchData=(form)=> {
                 history.push("/")
                 dispatch(setAppSetLogin(data.login.Token));
                 localStorage.setItem('jwtToken', data.login.Token);
+                if (values.constraintData.isRememberMe){
+                    localStorage.setItem('username', values.connexion.username);
+                    localStorage.setItem('password', values.connexion.password);
+                    localStorage.setItem('isRememberMe', values.constraintData.isRememberMe);
+                }
+                else{
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+                    localStorage.removeItem('isRememberMe');
+                }
+
                 document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
                 document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
             } else if (data.login.Code === 500) {
