@@ -12,7 +12,8 @@ export const ConnexionConstraints = ()=>{
     }
     const constraintData =()=>{
         return({
-            loadingConnexion:false
+            loadingConnexion:false,
+            connexionError:false
         })
     }
 
