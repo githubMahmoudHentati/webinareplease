@@ -9,6 +9,15 @@
                 payload:e,
             }
         }
+//******************** connexion credential***************//
+
+        export function setConnexionCredential(e){
+
+            return{
+                type: "SET_ConnexionCredential",
+                payload:e,
+            }
+        }
 
 //*******************Constraint Data actions*******************//
 
@@ -18,6 +27,7 @@
                 payload:e
             }
         }
+
 
 
 

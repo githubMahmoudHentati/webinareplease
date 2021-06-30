@@ -5,12 +5,11 @@ import {
     setLoadingUpdatePassword,
     setSecurityAccountPassword
 } from "../store/accountSettingsAction";
-import {AccountSettingsReducer} from "../store/accountSettingsReducer";
-import {Reducer} from "../../utils/redux/reducer";
-//import {setSubscriptionOnchange} from "../store/accountSettingsAction";
+
 
 
 export  const Hooks=(callback)=> {
+
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const values = useSelector((state) => state.AccountSettingsReducer)
