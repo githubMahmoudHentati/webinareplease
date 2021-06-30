@@ -11,8 +11,10 @@ import {
 import {Hooks} from "./hooks";
 import {AccountSettingsConstraints} from "./accountSettingsConstraints";
 import {StatusMessages} from "./StatusMessages";
+import {useHistory} from "react-router-dom";
 
 export const GraphQLFetchData=(form)=> {
+    const history = useHistory()
     const dispatch = useDispatch()
     const {values}=Hooks()
     const {securityAccount}=AccountSettingsConstraints()
@@ -27,6 +29,7 @@ export const GraphQLFetchData=(form)=> {
                 constraintDataNameChange: "loadingGeneralInformation",
                 constraintDataValueChange: false
             }))
+            form.setFieldsValue(GetUserInfoData.getUserInfo.generalInformation)
         }
     })
     const [UpdateAccountSetting, {
@@ -38,7 +41,9 @@ export const GraphQLFetchData=(form)=> {
                 values.generalInformation
         },
         onCompleted: async (data) => {
-           console.log("data",data)
+            if (data.updateUser.Code === 200) {
+                history.push("/showVideos")
+            }
         }
     });
 

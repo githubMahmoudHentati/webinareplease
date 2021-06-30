@@ -7,7 +7,7 @@ import {Hooks} from "../utils/hooks";
 import {setForgetPasswordConstraintDataOnchange} from "../../forgetPassword/store/forgetPasswordAction";
 import {useDispatch} from "react-redux";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
-import {setConnexionConstraintDataOnchange} from "../store/connexionAction";
+import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../store/connexionAction";
 
 export const FormConnexion =()=>{
     const dispatch = useDispatch()
@@ -28,6 +28,13 @@ export const FormConnexion =()=>{
                 password:localStorage.getItem('password'),
                 isRememberMe:true
             })
+            dispatch(setConnexionCredential(
+                {
+                    username:localStorage.getItem('username'),
+                    password:localStorage.getItem('password'),
+                }
+            ))
+            dispatch(setConnexionConstraintDataOnchange({constraintDataNameChange:"isRememberMe", constraintDataValueChange:true}));
         }
         else{
             form.resetFields();

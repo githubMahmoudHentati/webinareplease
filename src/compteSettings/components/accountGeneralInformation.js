@@ -1,23 +1,32 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Avatar , Select,Spin} from 'antd'
+import {Row, Col, Input, Button, Avatar, Select, Spin, Form} from 'antd'
 import '../compteSettings.scss'
 import {UserOutlined, UploadOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
 import {Hooks} from "../utils/hooks";
 import {AvatarUpload} from "./avatarUpload"
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
+import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../../connexion/store/connexionAction";
 
 const { Option } = Select;
 
  export const AccountGeneralInformation =()=>{
+     const [form] = Form.useForm();
 
-     const {loadingGeneralInformation,UpdateAccountSetting}= GraphQLFetchData()
-     const {generalInformationOnChange,generalInformationOnChangeSelect,handleSubmit,values,valuesCredentiels,darkMode}=Hooks(UpdateAccountSetting)
+     const {UpdateAccountSetting}= GraphQLFetchData(form)
+     const {generalInformationOnChange,generalInformationOnChangeSelect,handleSubmit,values,darkMode}=Hooks(UpdateAccountSetting)
      console.log("generalInformation",values)
-     console.log("valuesCredentiels",localStorage.getItem('jwtToken'))
+
+     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
 
 
      return(
+         <Form
+             form={form}
+             layout="horizontal"
+             name="product-form"
+             onFinish={handleSubmit}
+         >
          <Spin spinning={values.constraintData.loadingGeneralInformation}>
              <Row gutter={[20, 0]}>
                  <Col span={5}>
@@ -62,11 +71,16 @@ const { Option } = Select;
                                          <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>Nom </span>
+                                  }}>Nom<span className="require">*</span></span>
                                          </Col>
                                          <Col span={24}>
+                                             <Form.Item name="firstName"
+                                                        rules={requiredFieldRule}
+                                                        style={{marginBottom:0}}
+                                             >
                                              <Input value={values.generalInformation.firstName} name="firstName"
                                                     placeholder={"Nom"} onChange={generalInformationOnChange}></Input>
+                                             </Form.Item>
                                          </Col>
                                      </Row>
                                  </Col>
@@ -75,12 +89,17 @@ const { Option } = Select;
                                          <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>Prénom </span>
+                                  }}>Prénom<span className="require">*</span> </span>
                                          </Col>
                                          <Col span={24}>
+                                             <Form.Item name="lastName"
+                                                        rules={requiredFieldRule}
+                                                        style={{marginBottom:0}}
+                                             >
                                              <Input value={values.generalInformation.lastName} name="lastName"
                                                     placeholder={"Prénom"}
                                                     onChange={generalInformationOnChange}></Input>
+                                             </Form.Item>
                                          </Col>
                                      </Row>
                                  </Col>
@@ -89,11 +108,16 @@ const { Option } = Select;
                                          <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>Email </span>
+                                  }}>Email<span className="require">*</span> </span>
                                          </Col>
                                          <Col span={24}>
+                                             <Form.Item name="email"
+                                                        rules={requiredFieldRule}
+                                                        style={{marginBottom:0}}
+                                             >
                                              <Input value={values.generalInformation.email} name="email"
                                                     placeholder={"Email"} onChange={generalInformationOnChange}></Input>
+                                             </Form.Item>
                                          </Col>
                                      </Row>
                                  </Col>
@@ -105,8 +129,12 @@ const { Option } = Select;
                                   }}>Ville </span>
                                          </Col>
                                          <Col span={24}>
+                                             <Form.Item name="city"
+                                                        style={{marginBottom:0}}
+                                             >
                                              <Input value={values.generalInformation.city} name="city"
                                                     placeholder={"Ville"} onChange={generalInformationOnChange}></Input>
+                                             </Form.Item>
                                          </Col>
                                      </Row>
                                  </Col>
@@ -118,9 +146,13 @@ const { Option } = Select;
                                   }}>Adresse </span>
                                          </Col>
                                          <Col span={24}>
+                                             <Form.Item name="address"
+                                                        style={{marginBottom:0}}
+                                             >
                                              <Input value={values.generalInformation.address} name='address'
                                                     placeholder={"Adresse"}
                                                     onChange={generalInformationOnChange}></Input>
+                                             </Form.Item>
                                          </Col>
                                      </Row>
                                  </Col>
@@ -162,9 +194,13 @@ const { Option } = Select;
                                   }}>Code postale </span>
                                          </Col>
                                          <Col span={24}>
+                                             <Form.Item name="postalCode"
+                                                        style={{marginBottom:0}}
+                                             >
                                              <Input value={values.generalInformation.postalCode} name="postalCode"
                                                     placeholder={"Code postale"}
                                                     onChange={generalInformationOnChange}></Input>
+                                             </Form.Item>
                                          </Col>
                                      </Row>
                                  </Col>
@@ -173,11 +209,16 @@ const { Option } = Select;
                                          <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>Téléphone </span>
+                                  }}>Téléphone<span className="require">*</span> </span>
                                          </Col>
                                          <Col span={24}>
+                                             <Form.Item name="phone"
+                                                        rules={requiredFieldRule}
+                                                        style={{marginBottom:0}}
+                                             >
                                              <Input value={values.generalInformation.phone} name='phone'
                                                     placeholder={"Téléphone"}></Input>
+                                             </Form.Item>
                                          </Col>
                                      </Row>
                                  </Col>
@@ -191,7 +232,7 @@ const { Option } = Select;
                                              }}>Annuler</Button>
                                          </Col>
                                          <Col>
-                                             <Button onClick={handleSubmit} className={"spn_CompteSettings"} type={"primary"} style={{
+                                             <Button htmlType="submit" className={"spn_CompteSettings"} type={"primary"} style={{
                                                  background: darkMode === false ? "" : "#141414",
                                                  color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                                  border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
@@ -206,5 +247,6 @@ const { Option } = Select;
                  </Col>
              </Row>
          </Spin>
+         </Form>
      )
  }
