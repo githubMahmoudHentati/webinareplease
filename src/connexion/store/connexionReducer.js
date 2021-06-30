@@ -24,6 +24,12 @@ export const  ConnexionReducer=(state=ConnexionInitialState , action)=>{
                 connexion:ConnexionOnOnchangeObj
             }
 
+        case "SET_ConnexionCredential":
+            return{
+                ...state,
+                connexion:action.payload
+            }
+
         case "SET_ConnexionConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
             const constraintDataOnOnchangeObj = {...state.constraintData,[constraintDataNameChange]: constraintDataValueChange}
