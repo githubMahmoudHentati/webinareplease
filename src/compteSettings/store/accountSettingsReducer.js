@@ -1,6 +1,6 @@
 import {AccountSettingsConstraints} from "../utils/accountSettingsConstraints";
 
-const {generalInformation,subscription,bills,constraintData,securityAccount , loadingUpdatePassword} = AccountSettingsConstraints()
+const {generalInformation,subscription,bills,billCount,constraintData,securityAccount , loadingUpdatePassword} = AccountSettingsConstraints()
 
 const AccountSettingsInitialState = {
 
@@ -9,6 +9,8 @@ const AccountSettingsInitialState = {
     subscription: subscription(),
 
     bills : bills(),
+
+    billsCount : billCount(),
 
     constraintData :constraintData(),
 
@@ -49,12 +51,19 @@ export const  AccountSettingsReducer=(state=AccountSettingsInitialState , action
                 ...state,
                 subscription:billsOnOnchangeObj
             }
-
-        case "SET_AccountSetting":
-            const {generalInformation,subscription,bills}=action.payload.dataUserInfo
+        case "SET_BillCountOnchange":
+            const {billCountNameChange,billCountValueChange}=action.payload
+            const billCountOnOnchangeObj = {...state.billsCount,[billCountNameChange]: billCountValueChange}
             return{
                 ...state,
-                generalInformation,subscription,bills
+                billsCount:billCountOnOnchangeObj
+            }
+
+        case "SET_AccountSetting":
+            const {generalInformation,subscription,bills,billCount}=action.payload.dataUserInfo
+            return{
+                ...state,
+                generalInformation,subscription,bills,billCount
             }
 
         case "SET_ConstraintDataOnchange":

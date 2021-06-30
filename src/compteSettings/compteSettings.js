@@ -67,7 +67,7 @@ export const CompteSettings=()=>{
                             <Col span={4}>
                                 <MenuForms />
                             </Col>
-                            <Col span={16}>
+                            <Col span={18}>
                                 <SelectMenu />
                             </Col>
                         </Row>
