@@ -35,11 +35,14 @@ function GlobalHeader() {
     const onChange = (e) =>{
 
         //dispatch redux
-        dispatch(setDarkMode(!darkMode));
-        ColorComposnat()
+       dispatch(setDarkMode(!darkMode));
+        //const dark = localStorage.getItem('darkMode')?localStorage.getItem('darkMode'):false;
+        ColorComposant();
+        // setter
+        localStorage.setItem('darkMode', darkMode);
     }
 
-    const ColorComposnat=()=>{
+    const ColorComposant=()=>{
         // White Color
         darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(0, 0, 0, 0.85)");
         !darkMode&&document.documentElement.style.setProperty('--white_color', "rgba(255, 255, 255, 0.85)");
