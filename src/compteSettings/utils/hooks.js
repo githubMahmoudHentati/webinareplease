@@ -28,8 +28,8 @@ export  const Hooks=(callback)=> {
             constraintDataNameChange: "updateAccountSettingError",
             constraintDataValueChange: false
         }))
-        document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
-        document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
+        document.documentElement.style.setProperty('--inputErrorForm', 'rgba(0 , 0 , 0 , 0.15)');
+        document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
     };
 
     const generalInformationOnChangeSelect = (value,action) => {

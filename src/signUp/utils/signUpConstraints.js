@@ -16,12 +16,16 @@ export const SignUpConstraints = ()=>{
                 numberPerson:"",
                 postalCode:"",
                 society:"",
+                subscriptionId:1
             }
         )
     }
     const constraintData =()=>{
         return({
-            loadingSignUp:false
+            loadingSignUp:false,
+            signUpError:false,
+            isMailValid:true,
+            current:0
         })
     }
 
