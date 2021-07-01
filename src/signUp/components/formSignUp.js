@@ -1,11 +1,15 @@
+import {useEffect} from 'react'
 import React ,{Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox , Select,Form} from 'antd'
 import '../signUp.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
-import {Hooks} from "../utils/hooks";
+import {HooksSignUp} from "../utils/hooks";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
+import {setSignUpConstraintDataOnchange} from "../store/signUpAction";
+import {useDispatch} from "react-redux";
 const { Option } = Select;
 
 export const FormSignUp =({child1,child2})=>{
+    const dispatch = useDispatch()
     const [form] = Form.useForm();
     const layout = {
         labelCol: { span: 2 },
@@ -13,12 +17,29 @@ export const FormSignUp =({child1,child2})=>{
     };
 
 
-    const {signUpOnChange,signUpOnChangeSelect,values,handleSubmit}= Hooks()
+    const {signUpOnChange,signUpOnChangeSelect,valuesSignUp,handleSubmitSignUp}= HooksSignUp()
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:"isMailValid",constraintDataValueChange:re.test(email)}))
         return re.test(email)
     }
+
+    useEffect(() => {
+        if (valuesSignUp.constraintData.isMailValid===true)
+        {
+            document.documentElement.style.setProperty('--inputErrorForm', 'rgba(0 , 0 , 0 , 0.15)');
+            document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
+        }
+        if (valuesSignUp.constraintData.isMailValid===false)
+        {
+            console.log(valuesSignUp.constraintData.isMailValid)
+
+            document.documentElement.style.setProperty('--inputErrorForm', "red");
+            document.documentElement.style.setProperty('--inputBorderErrorForm', "red");
+        }
+    }, [valuesSignUp.constraintData.isMailValid]);
+
 
     const isValidPassword = (password) => {
 
@@ -26,7 +47,7 @@ export const FormSignUp =({child1,child2})=>{
     }
     const requiredFieldRule = [{required: true, message: 'Champs requis'}];
 
-    console.log("signUp",values)
+    console.log("signUp",valuesSignUp)
     return(
 
             <Row gutter={[0, 40]} className={'col-signUp'}>
@@ -71,10 +92,15 @@ export const FormSignUp =({child1,child2})=>{
                                             }),
                                         ]}
                                     >
-                                        <Input className={"spn2"} onChange={signUpOnChange}
+                                        <Input  className={"spn2"} onChange={signUpOnChange}
                                                name="email" placeholder={"E-mail"}></Input>
                                     </Form.Item>
                                 </Col>
+                                {valuesSignUp.constraintData.signUpError &&
+                                <Col offset={4} span={20} className={"col_input"}>
+                                    <span style={{color: "red"}}>Oups, Cette adresse e-mail est déjà utilisée par un autre utilisateur</span>
+                                </Col>
+                                }
                                 <Col span={24}>
                                             <Form.Item name="phone" className={"form-item-style"}
                                                        label={"Téléphone "}
@@ -94,7 +120,7 @@ export const FormSignUp =({child1,child2})=>{
                                         rules={[
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
-                                                    if (isValidPassword(values.signUp.password)) {
+                                                    if (isValidPassword(valuesSignUp.signUp.password)) {
                                                         return Promise.resolve('value');
                                                     }
                                                     return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');

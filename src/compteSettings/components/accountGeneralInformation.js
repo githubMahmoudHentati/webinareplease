@@ -9,6 +9,7 @@ import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../../connexion/store/connexionAction";
 import {setConstraintDataOnchange} from "../store/accountSettingsAction";
 import {useHistory} from "react-router-dom";
+import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
 
 const { Option } = Select;
 
@@ -21,6 +22,27 @@ const { Option } = Select;
      console.log("generalInformation",values)
 
      const requiredFieldRule = [{required: true, message: 'Champs requis'}];
+
+     const isValidEmail = (email) => {
+         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+         dispatch(setConstraintDataOnchange({constraintDataNameChange:"isMailValid",constraintDataValueChange:re.test(email)}))
+         return re.test(email)
+     }
+
+     useEffect(() => {
+         if (values.constraintData.isMailValid===true)
+         {
+             document.documentElement.style.setProperty('--inputErrorForm', 'rgba(0 , 0 , 0 , 0.15)');
+             document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
+         }
+         if (values.constraintData.isMailValid===false)
+         {
+             console.log(values.constraintData.isMailValid)
+
+             document.documentElement.style.setProperty('--inputErrorForm', "red");
+             document.documentElement.style.setProperty('--inputBorderErrorForm', "red");
+         }
+     }, [values.constraintData.isMailValid]);
 
 
      return(
@@ -114,9 +136,19 @@ const { Option } = Select;
                                   }}>Email<span className="require">*</span> </span>
                                          </Col>
                                          <Col span={24}>
-                                             <Form.Item name="email"
-                                                        rules={requiredFieldRule}
-                                                        style={{marginBottom:0}}
+                                             <Form.Item
+                                             className={"form-item-style"}
+                                             name="email"
+                                             rules={[
+                                             ({getFieldValue}) => ({
+                                                 validator(_, value) {
+                                                     if (isValidEmail(value)) {
+                                                         return Promise.resolve('value');
+                                                     }
+                                                     return Promise.reject('Veuillez entrer un mail valide');
+                                                 },
+                                             }),
+                                         ]}
                                              >
                                              <Input value={values.generalInformation.email} name="email"
                                                     placeholder={"Email"} onChange={generalInformationOnChange}></Input>
@@ -125,7 +157,7 @@ const { Option } = Select;
                                      </Row>
                                  </Col>
                                  {values.constraintData.updateAccountSettingError &&
-                                 <Col span={24} className={"col_input"}>
+                                 <Col offset={4} span={20} className={"col_input"}>
                                      <span style={{color: "red"}}>Oups, Cette adresse e-mail est déjà utilisée par un autre utilisateur</span>
                                  </Col>
                                  }

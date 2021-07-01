@@ -1,6 +1,6 @@
 :root {
-  --errorForm: rgba(0 , 0 , 0 , 0.15);
-  --borderErrorForm: #40a9ff;
+  --inputErrorForm: rgba(0 , 0 , 0 , 0.15);
+  --inputBorderErrorForm: #40a9ff;
 }
 
 
@@ -97,16 +97,19 @@
 
 
 #product-form_email{
-  border-color: var(--errorForm) !important ;
+  border-color: var(--inputErrorForm) !important ;
   box-shadow :none;
   &:hover{
-    border-color: var(--borderErrorForm) !important;
+    border-color: var(--inputBorderErrorForm) !important;
     box-shadow :none;
+  }
+  &.ant-form-item-has-error .ant-input{
+    border-color: red !important;
   }
 }
 
 #product-form_email:focus{
-  border-color: var(--borderErrorForm) !important;
+  border-color: var(--inputBorderErrorForm) !important;
   border-right-width: 1px !important;
   box-shadow :none;
   outline: 0;
@@ -119,4 +122,11 @@
 .ant-form-item-has-error .ant-input, .ant-form-item-has-error .ant-input-affix-wrapper, .ant-form-item-has-error .ant-input:hover, .ant-form-item-has-error .ant-input-affix-wrapper:hover {
   background-color: #fff;
   border-color: #ff4d4f !important;
+}
+
+.ant-form-item-has-error .ant-input{
+  border-color: red !important;
+  &:focus{
+    border-color: red !important;
+  }
 }

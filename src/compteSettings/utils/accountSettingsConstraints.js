@@ -58,6 +58,7 @@ export const AccountSettingsConstraints = ()=>{
             loadingGeneralInformation:true,
             loadingUpdateAccountSetting:false,
             updateAccountSettingError:false,
+            isMailValid:true
         })
     }
     const securityAccount = () => {
@@ -70,7 +71,8 @@ export const AccountSettingsConstraints = ()=>{
     }
     const loadingUpdatePassword = () => {
         return ({
-            loadingUpdatePassword : false
+            loadingUpdatePassword : false,
+            isMailValid:false
         })
     }
     const paginationAbonnement=()=>{
