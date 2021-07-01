@@ -7,13 +7,15 @@ import {Configuration} from "../formDirectVideo/components/configuration";
 import {AccountGeneralInformation} from "./components/accountGeneralInformation";
 import {SecurityAccount} from "./components/securityAccount"
 import {PrincipalPage} from "../utils/components/principalPage";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {PasswordEdit} from "./components/passwordEdit";
 import {AccountSubscription} from './components/accountSubscription'
 import {useHistory} from "react-router-dom";
+import {setConstraintDataOnchange} from "./store/accountSettingsAction";
 
 
 export const CompteSettings=()=>{
+    const dispatch = useDispatch()
     const history = useHistory()
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     console.log("accountMenu",accountMenu)
@@ -42,7 +44,17 @@ export const CompteSettings=()=>{
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px"}} style={{color:darkMode===false?"":"#ffffff"}}>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
-                                <span >Accueil</span>
+                                <span
+                                    onClick={()=>{
+                                        dispatch(setConstraintDataOnchange({
+                                            constraintDataNameChange: "updateAccountSettingError",
+                                            constraintDataValueChange: false
+                                        }))
+                                        document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
+                                        document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
+                                        history.push("/")
+                                    }}
+                                >Accueil</span>
                             </Breadcrumb.Item >
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
                                 <span>Compte</span>
@@ -53,7 +65,16 @@ export const CompteSettings=()=>{
                     <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#141414"}}>
                         <ArrowLeftOutlined
                             style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium' , color:darkMode===false?"":"white"}}
-                            onClick={() => history.push("/showVideos")}/>
+                            onClick={()=>{
+                                dispatch(setConstraintDataOnchange({
+                                    constraintDataNameChange: "updateAccountSettingError",
+                                    constraintDataValueChange: false
+                                }))
+                                document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
+                                document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
+                                history.push("/")
+                            }}
+                        />
                         <span style={{
                             fontSize: "medium",
                             fontFamily: "Arial, Helvetica, sans-serif;",

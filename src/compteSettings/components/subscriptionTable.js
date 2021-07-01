@@ -3,13 +3,15 @@ import React, { useState,useEffect,useRef } from 'react';
 import '../compteSettings.scss'
 import {EyeOutlined,DownloadOutlined} from '@ant-design/icons';
 import {Hooks} from "../utils/hooks";
-
+import {setPaginationAbonnement} from "../store/accountSettingsAction";
+import { useDispatch} from "react-redux";
 
 const DEFAULT_PAGE_SIZE = 5;
 const DEFAULT_PAGE_NUMBER = 0;
 
 export const SubscriptionTable=()=>{
 
+    const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
     const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
 
@@ -68,8 +70,11 @@ export const SubscriptionTable=()=>{
 
 
     const handleTableChange = (pagination, filters, sorter, extra) => {
-        console.log('paginationLives:', pagination, filters, sorter, extra );
+        console.log('paginationCompteSetting:', pagination, filters, sorter, extra );
         setCurrentPage(pagination.current - 1);
+
+        dispatch(setPaginationAbonnement({PaginationAbonnementNameChange:"pageSize",PaginationAbonnementValueChange:pagination.pageSize}));
+        dispatch(setPaginationAbonnement({PaginationAbonnementNameChange:"current",PaginationAbonnementValueChange:sorter&&pagination.current}));
 
     };
 
@@ -81,7 +86,7 @@ export const SubscriptionTable=()=>{
             rowKey={record => record.id}
             onChange={handleTableChange}
             pagination={{
-                pageSize: 10,
+                pageSize: values.paginationAbonnement.pageSize,
                 current: currentPage + 1,
             }}
             scroll={{ y: 240 }}

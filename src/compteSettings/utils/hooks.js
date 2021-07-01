@@ -1,10 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
+    setConstraintDataOnchange,
     setGeneralInformationOnchange,
     setLoadingUpdatePassword,
     setSecurityAccountPassword
 } from "../store/accountSettingsAction";
+import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
 
 
 
@@ -21,6 +23,13 @@ export  const Hooks=(callback)=> {
     const generalInformationOnChange = (event) => {
         console.log("event", event.target.value, event.target.name)
         dispatch(setGeneralInformationOnchange({generalInformationNameChange: event.target.name, generalInformationValueChange: event.target.value}));
+
+        dispatch(setConstraintDataOnchange({
+            constraintDataNameChange: "updateAccountSettingError",
+            constraintDataValueChange: false
+        }))
+        document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
+        document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
     };
 
     const generalInformationOnChangeSelect = (value,action) => {
@@ -39,7 +48,8 @@ export  const Hooks=(callback)=> {
         console.log("eventSecurityAccount", event.target.value, event.target.name)
         dispatch(setSecurityAccountPassword({securityAccountNameChange: event.target.name, securityAccountValueChange: event.target.value}));
     }
-    const handleSubmit = ()=>{
+    const handleSubmit = async ()=>{
+        await dispatch(setConstraintDataOnchange({constraintDataNameChange:"loadingUpdateAccountSetting",constraintDataValueChange:true}))
         callback()
     }
     //*******************Handle Save New Password**********//

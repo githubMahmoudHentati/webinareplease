@@ -1,6 +1,6 @@
 import {AccountSettingsConstraints} from "../utils/accountSettingsConstraints";
 
-const {generalInformation,subscription,bills,billCount,constraintData,securityAccount , loadingUpdatePassword} = AccountSettingsConstraints()
+const {generalInformation,subscription,bills,billCount,constraintData,securityAccount , loadingUpdatePassword , paginationAbonnement} = AccountSettingsConstraints()
 
 const AccountSettingsInitialState = {
 
@@ -16,7 +16,9 @@ const AccountSettingsInitialState = {
 
     securityAccount:securityAccount(),
 
-    loadingUpdatePassword : loadingUpdatePassword()
+    loadingUpdatePassword : loadingUpdatePassword(),
+
+    paginationAbonnement : paginationAbonnement()
 
 }
 
@@ -97,6 +99,15 @@ export const  AccountSettingsReducer=(state=AccountSettingsInitialState , action
             return{
                 ...state,
                 loadingUpdatePassword:LoadingUpdatePasswordOnchangeObj
+            }
+
+        //*********************** Pagination P ***********************//
+        case "SET_PaginationAbonnement":
+            const {PaginationAbonnementNameChange,PaginationAbonnementValueChange}=action.payload
+            const PaginationAbonnementOnchangeObj = {...state.paginationAbonnement,[PaginationAbonnementNameChange]: PaginationAbonnementValueChange}
+            return{
+                ...state,
+                paginationAbonnement:PaginationAbonnementOnchangeObj
             }
 
 

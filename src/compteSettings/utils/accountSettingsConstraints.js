@@ -5,7 +5,7 @@ export const AccountSettingsConstraints = ()=>{
     const generalInformation = () => {
         return (
             {
-                avatar:"",
+                vignette:"",
                 firstName: "",
                 LastName: "",
                 email: "",
@@ -55,7 +55,9 @@ export const AccountSettingsConstraints = ()=>{
     const constraintData =()=>{
         return({
             avatarLoading :false,
-            loadingGeneralInformation:true
+            loadingGeneralInformation:true,
+            loadingUpdateAccountSetting:false,
+            updateAccountSettingError:false,
         })
     }
     const securityAccount = () => {
@@ -71,6 +73,14 @@ export const AccountSettingsConstraints = ()=>{
             loadingUpdatePassword : false
         })
     }
+    const paginationAbonnement=()=>{
+        return(
+            {
+                pageSize:10,
+                current:1,
+            }
+        )
+    }
 
     return({
         generalInformation,
@@ -80,6 +90,7 @@ export const AccountSettingsConstraints = ()=>{
         constraintData,
         securityAccount,
         loadingUpdatePassword,
+        paginationAbonnement
     })
 
 }

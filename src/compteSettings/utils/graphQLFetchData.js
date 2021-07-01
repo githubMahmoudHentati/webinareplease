@@ -12,6 +12,7 @@ import {Hooks} from "./hooks";
 import {AccountSettingsConstraints} from "./accountSettingsConstraints";
 import {StatusMessages} from "./StatusMessages";
 import {useHistory} from "react-router-dom";
+import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
 
 export const GraphQLFetchData=(form)=> {
     const history = useHistory()
@@ -24,8 +25,8 @@ export const GraphQLFetchData=(form)=> {
         = useQuery(graphQL_shema().Get_UserInfoData, {
         fetchPolicy: 'cache-and-network',
         variables: { pagination : {
-                "limit": 2,
-                "offset": 0,
+                "limit": values.paginationAbonnement.pageSize,
+                "offset": (values.paginationAbonnement.current-1)*10,
             } },
         onCompleted: async (data) => {
             await dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
@@ -38,7 +39,7 @@ export const GraphQLFetchData=(form)=> {
     })
     const [UpdateAccountSetting, {
         data: dataUpdate,
-        loading: loading_EventUpdated,
+        loading: loading_UpdateAccountSetting,
         error: error_EventUpdated,
     }] = useMutation(graphQL_shema().Update_AccountSetting, {
         variables: {input:
@@ -47,7 +48,21 @@ export const GraphQLFetchData=(form)=> {
         onCompleted: async (data) => {
             if (data.updateUser.Code === 200) {
                 history.push("/showVideos")
+
+                // document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
+                // document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
             }
+            else if (data.updateUser.Code === 400){
+                dispatch(setConstraintDataOnchange({
+                    constraintDataNameChange: "updateAccountSettingError",
+                    constraintDataValueChange: true
+                }))
+                document.documentElement.style.setProperty('--errorForm', "red");
+                document.documentElement.style.setProperty('--borderErrorForm', "red");
+            }
+
+            dispatch(setConstraintDataOnchange({constraintDataNameChange:"loadingUpdateAccountSetting",constraintDataValueChange:false}))
+
         }
     });
 
@@ -79,6 +94,7 @@ export const GraphQLFetchData=(form)=> {
     return({
         GetUserInfoData,
         UpdateAccountSetting,
+        loading_UpdateAccountSetting,
         UpdatePassword
     })
 }

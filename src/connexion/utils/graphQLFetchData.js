@@ -15,7 +15,7 @@ export const GraphQLFetchData=(form)=> {
 
     const [Connexion, {
         data: dataUpdate,
-        loading: loading_EventUpdated,
+        loading: loading_Connexion,
         error: error_EventUpdated,
     }] = useMutation(graphQL_shema().Connexion, {
         variables: {input:values.connexion,

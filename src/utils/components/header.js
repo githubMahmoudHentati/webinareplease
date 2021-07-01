@@ -18,6 +18,7 @@ import {
 import { Badge , Menu, Dropdown , Avatar} from 'antd';
 import {setAccountSetting, setAppSetLogin, setAppSetLogout} from "../redux/actions";
 import {setDarkMode} from "../redux/actions";
+import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 
 
 function GlobalHeader() {
@@ -134,6 +135,14 @@ function GlobalHeader() {
         history.push("/connexion",dispatch(setAccountSetting(4)))
         dispatch(setAppSetLogout());
         localStorage.removeItem('jwtToken');
+
+            dispatch(setConstraintDataOnchange({
+                constraintDataNameChange: "updateAccountSettingError",
+                constraintDataValueChange: false
+            }))
+            document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
+            document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
+            history.push("/")
     }
     const MenuHeader = (
         <Menu className="menu">
