@@ -73,6 +73,14 @@ export const AccountSettingsConstraints = ()=>{
             loadingUpdatePassword : false
         })
     }
+    const paginationAbonnement=()=>{
+        return(
+            {
+                pageSize:10,
+                current:1,
+            }
+        )
+    }
 
     return({
         generalInformation,
@@ -82,6 +90,7 @@ export const AccountSettingsConstraints = ()=>{
         constraintData,
         securityAccount,
         loadingUpdatePassword,
+        paginationAbonnement
     })
 
 }
