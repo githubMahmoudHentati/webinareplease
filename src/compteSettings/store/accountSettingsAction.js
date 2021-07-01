@@ -81,6 +81,15 @@ export function setLoadingUpdatePassword(e){
     }
 }
 
+//************************ Pagination Abonnement ******************//
+
+export function setPaginationAbonnement(e){
+    return{
+        type:"SET_PaginationAbonnement",
+        payload:e,
+    }
+}
+
 
 
 
