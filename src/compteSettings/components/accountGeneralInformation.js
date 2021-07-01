@@ -2,17 +2,20 @@ import React, { useState,useEffect,useRef } from 'react';
 import {Row, Col, Input, Button, Avatar, Select, Spin, Form} from 'antd'
 import '../compteSettings.scss'
 import {UserOutlined, UploadOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Hooks} from "../utils/hooks";
 import {AvatarUpload} from "./avatarUpload"
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../../connexion/store/connexionAction";
+import {setConstraintDataOnchange} from "../store/accountSettingsAction";
+import {useHistory} from "react-router-dom";
 
 const { Option } = Select;
 
  export const AccountGeneralInformation =()=>{
+     const history = useHistory()
      const [form] = Form.useForm();
-
+     const dispatch = useDispatch()
      const {UpdateAccountSetting}= GraphQLFetchData(form)
      const {generalInformationOnChange,generalInformationOnChangeSelect,handleSubmit,values,darkMode}=Hooks(UpdateAccountSetting)
      console.log("generalInformation",values)
@@ -41,11 +44,11 @@ const { Option } = Select;
                                  border: darkMode === false ? "1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)",
                                  color: darkMode === false ? "RGB(0, 127, 203)" : "rgba(255, 255, 255, 0.85)"
                              }} size={150}
-                                     src={values.generalInformation.avatar}
+                                     src={values.generalInformation.vignette}
                                      icon={values.constraintData.avatarLoading ? <div>
                                          <LoadingOutlined/>
                                          <div style={{marginTop: 8}}>Upload</div>
-                                     </div> : !values.generalInformation.avatar ? <UserOutlined/> : ""}
+                                     </div> : !values.generalInformation.vignette ? <UserOutlined/> : ""}
                              />
                          </Col>
                          <Col>
@@ -121,6 +124,11 @@ const { Option } = Select;
                                          </Col>
                                      </Row>
                                  </Col>
+                                 {values.constraintData.updateAccountSettingError &&
+                                 <Col span={24} className={"col_input"}>
+                                     <span style={{color: "red"}}>Oups, Cette adresse e-mail est déjà utilisée par un autre utilisateur</span>
+                                 </Col>
+                                 }
                                  <Col span={24}>
                                      <Row gutter={[0, 10]}>
                                          <Col span={24}>
@@ -225,14 +233,28 @@ const { Option } = Select;
                                  <Col span={24}>
                                      <Row justify={"end"} gutter={[10, 0]}>
                                          <Col>
-                                             <Button className={"spn_CompteSettings"} style={{
+                                             <Button onClick={()=>{
+                                                 dispatch(setConstraintDataOnchange({
+                                                     constraintDataNameChange: "updateAccountSettingError",
+                                                     constraintDataValueChange: false
+                                                 }))
+                                                 document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
+                                                 document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
+                                                 history.push("/")
+                                             }}
+                                                 className={"spn_CompteSettings"} style={{
                                                  background: darkMode === false ? "" : "#141414",
                                                  color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                                  border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                                              }}>Annuler</Button>
                                          </Col>
                                          <Col>
-                                             <Button htmlType="submit" className={"spn_CompteSettings"} type={"primary"} style={{
+                                             <Button loading={values.constraintData.loadingUpdateAccountSetting}
+                                                     onClick={()=>{dispatch(setConstraintDataOnchange({
+                                                         constraintDataNameChange: "updateAccountSettingError",
+                                                         constraintDataValueChange: false
+                                                     }))}}
+                                                     htmlType="submit" className={"spn_CompteSettings"} type={"primary"} style={{
                                                  background: darkMode === false ? "" : "#141414",
                                                  color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                                  border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"

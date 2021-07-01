@@ -1,3 +1,9 @@
+:root {
+  --errorForm: rgba(0 , 0 , 0 , 0.15);
+  --borderErrorForm: #40a9ff;
+}
+
+
 @font-face {
   font-family: 'SF Pro Display';
   src: url(../assets/fonts/transfonter.org-20210601-105009/SFProDisplay-Heavy.eot) format('embedded-opentype'),
@@ -87,4 +93,30 @@
   font-size: 13px;
   font-family: "SF Pro Display";
   font-weight: 500;
+}
+
+
+#product-form_email{
+  border-color: var(--errorForm) !important ;
+  box-shadow :none;
+  &:hover{
+    border-color: var(--borderErrorForm) !important;
+    box-shadow :none;
+  }
+}
+
+#product-form_email:focus{
+  border-color: var(--borderErrorForm) !important;
+  border-right-width: 1px !important;
+  box-shadow :none;
+  outline: 0;
+}
+
+.ant-form-item-has-error{
+  border-color: red !important;
+}
+
+.ant-form-item-has-error .ant-input, .ant-form-item-has-error .ant-input-affix-wrapper, .ant-form-item-has-error .ant-input:hover, .ant-form-item-has-error .ant-input-affix-wrapper:hover {
+  background-color: #fff;
+  border-color: #ff4d4f !important;
 }

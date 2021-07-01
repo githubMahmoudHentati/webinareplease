@@ -37,7 +37,7 @@ export const AvatarUpload = () => {
         }).then((result) => {
             console.log("result",result.data.data.uploadLogo);
             dispatch(setGeneralInformationOnchange({
-                generalInformationNameChange: "avatar",
+                generalInformationNameChange: "vignette",
                 generalInformationValueChange: result.data.data.uploadLogo
             }))
         }).catch(error => {
@@ -53,7 +53,7 @@ export const AvatarUpload = () => {
                 constraintDataValueChange: true
             }))
             dispatch(setGeneralInformationOnchange({
-                generalInformationNameChange: "avatar",
+                generalInformationNameChange: "vignette",
                 generalInformationValueChange: ""
             }))
             return;
@@ -62,7 +62,7 @@ export const AvatarUpload = () => {
         // Get this url from response in real world.
         GetBase64(info.file.originFileObj, imageUrl =>
                 dispatch(setGeneralInformationOnchange({
-                    generalInformationNameChange: "avatar",
+                    generalInformationNameChange: "vignette",
                     generalInformationValueChange: imageUrl
                 })),
             dispatch(setConstraintDataOnchange({
