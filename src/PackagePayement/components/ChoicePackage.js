@@ -62,6 +62,10 @@ function ChoicePackage(){
     // previous step
     const prev = () => {
         dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:"current",constraintDataValueChange:valuesSignUp.constraintData.current-1}))
+        valuesSignUp.constraintData.current===1&&dispatch(setSignUpConstraintDataOnchange({
+            constraintDataNameChange: "signUpError",
+            constraintDataValueChange: false
+        }))
     };
 
     const handlechange =(e)=>{
