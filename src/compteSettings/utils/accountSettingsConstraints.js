@@ -5,7 +5,7 @@ export const AccountSettingsConstraints = ()=>{
     const generalInformation = () => {
         return (
             {
-                avatar:"",
+                vignette:"",
                 firstName: "",
                 LastName: "",
                 email: "",
@@ -48,7 +48,9 @@ export const AccountSettingsConstraints = ()=>{
     const constraintData =()=>{
         return({
             avatarLoading :false,
-            loadingGeneralInformation:true
+            loadingGeneralInformation:true,
+            loadingUpdateAccountSetting:false,
+            updateAccountSettingError:false,
         })
     }
     const securityAccount = () => {

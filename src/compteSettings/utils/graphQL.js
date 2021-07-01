@@ -6,7 +6,7 @@ export const graphQL_shema = ()=> {
         query {
             getUserInfo{
                 generalInformation{
-                    avatar
+                    vignette
                     firstName
                     lastName
                     email
@@ -35,7 +35,7 @@ export const graphQL_shema = ()=> {
         }
     `;
     const Update_AccountSetting = gql`
-        mutation($input:UserInfos!) {
+        mutation($input:UpdateteUserInput!) {
             updateUser(input:$input) {
                 Code
                 Message
