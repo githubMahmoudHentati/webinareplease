@@ -201,21 +201,21 @@ export const FormSignUp =({child1,child2})=>{
                             </Row>
                         </Col>
                         <Col span={24}>
-                            <Row gutter={[10, 0]}>
+                            <Row className={"row_politique"} gutter={[10, 0]}>
                                 <Col offset={4} span={1}>
                                     <Checkbox></Checkbox>
                                 </Col>
-                                <Col style={{color: "RGB(185, 185, 185)"}} span={15}>
+                                <Col className={"col-politique"} style={{color: "RGB(185, 185, 185)"}} span={15}>
                                     <span
                                         className={"spn2"}>Webinar please doit traiter vos donnèes conformément a la</span>
                                     <a> Politique de
                                         confidentialité. </a>
-                                    <span>En cliquant sur le bouton d'activation ci dessous j'accepte</span><a> Condition
+                                    <span className={"pol"}>En cliquant sur le bouton d'activation ci dessous j'accepte</span><a className={"pol"}> Condition
                                     de
                                     service, </a>
-                                    <span>la</span><a> Politique de confidentialité </a><span>en</span><a> l'Accord de
+                                    <span className={"pol"}>la</span><a className={"pol"}> Politique de confidentialité </a><span className={"pol"}>en</span><a className={"pol"}> l'Accord de
                                     traitement des donnèes </a>
-                                    <span>et je confirme que je passe commande pour des services pour mon entreprise ou pour d'autre objectifs
+                                    <span className={"pol"}>et je confirme que je passe commande pour des services pour mon entreprise ou pour d'autre objectifs
                                 professionnels</span>
                                 </Col>
                             </Row>

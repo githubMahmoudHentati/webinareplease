@@ -64,3 +64,37 @@
   display: flex;
   justify-content: flex-end;
 }
+
+//********** Tablette *********************//
+@media (min-width:576px) and (max-width:768px) {
+.pol{
+  display: none !important;
+}
+}
+@media (max-width:576px) {
+  .col-signUp{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:620px !important;
+    left: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    margin-top: 4%;
+  }
+  .text-form{
+    display:flex ;
+    align-items:center ;
+    justify-content:flex-end ;
+  }
+  .ant-form-item-label{
+    display: flex;
+    justify-content: flex-start;
+  }
+  .pol{
+    display: none !important;
+  }
+
+
+}
