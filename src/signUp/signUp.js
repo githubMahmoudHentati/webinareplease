@@ -6,13 +6,13 @@ import WebinairePlease from "../utils/components/WebinairePlease";
 import {FormSignUp} from './components/formSignUp'
 import logo from "../assets/logoWebinaireplease.svg"
 import {useHistory} from 'react-router-dom';
-import {Hooks} from "./utils/hooks";
+import {HooksSignUp} from "./utils/hooks";
 
 export const SignUp =()=>{
     const [form] = Form.useForm();
 
     const history = useHistory()
-    const {handleSubmit,values}=Hooks()
+    const {handleSubmitSignUp,valuesSignUp}=HooksSignUp()
     return(
         <Form
             form={form}
@@ -20,7 +20,7 @@ export const SignUp =()=>{
             wrapperCol={{ span: 16 }}
             layout="horizontal"
             name="product-form"
-            onFinish={handleSubmit}
+            onFinish={handleSubmitSignUp}
         >
         <WebinairePlease logo={logo}>
                     <FormSignUp
@@ -33,7 +33,7 @@ export const SignUp =()=>{
                                 <Button onClick={()=>{history.push("/connexion")}}>Annuler</Button>
                             </Col>
                             <Col>
-                                <Button  loading={values.constraintData.loadingSignUp} type="primary" htmlType="submit">Inscrivez-vous maintenant</Button>
+                                <Button  loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">Inscrivez-vous maintenant</Button>
                             </Col>
                         </Row>
                        }

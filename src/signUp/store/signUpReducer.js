@@ -5,7 +5,7 @@ const {signUp,constraintData} = SignUpConstraints()
 const SignUpInitialState = {
 
     signUp: signUp(),
-    constraintData:constraintData
+    constraintData:constraintData()
 
 
 }
