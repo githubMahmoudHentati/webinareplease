@@ -970,7 +970,6 @@ input:checked + .slider:before {
     width: 100%;
     height: 100vh;
     position: relative;
-    border: 1px solid #e2e0e0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -978,14 +977,14 @@ input:checked + .slider:before {
 }
 .blue_div{
     width: 25%;
-    height: 100%;
+    height: 100vh;
     background-color: #f0f3f7;
     padding: 112px 115px 697px 116px;
     text-align: center;
 }
 .empty_div{
     width: 75%;
-    height: 100%;
+    height: 100vh;
     position: relative;
 }
 .icon1_webinaire{
@@ -1007,11 +1006,14 @@ input:checked + .slider:before {
 /*ChoicePackage*/
 .ChoicePackage{
     width: 75%;
-    height: 790px;
+    height: 80vh;
     position: absolute;
-    top: 45%;
+    top: 55%;
     left: 50%;
     transform: translate(-50% , -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .steps-content {
    height: 90%;
@@ -1026,11 +1028,11 @@ input:checked + .slider:before {
 }
 .choix_Forfait{
     width: 100%;
-    margin-top: 2%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: self-end;
 }
 .header_Forfait{
     width: 100%;
@@ -1048,13 +1050,14 @@ input:checked + .slider:before {
 }
 .card_Forfait{
     width: 100%;
-    margin-top: 10%;
+    height: 600px;
+    margin-top: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
-.Card1_Forfait , .Card2_Forfait{
+.Card1_Forfait , .Card2_Forfait , .Card0_Forfait{
     width: 340px;
     height: 400px;
     border-radius: 5px;
@@ -1073,7 +1076,7 @@ input:checked + .slider:before {
     border: solid 1px #007fcb;
 }
 
-.Card1_Forfait h3, .Card2_Forfait h3{
+.Card1_Forfait h3, .Card2_Forfait h3 , .Card0_Forfait h3{
     font-family: 'SF Pro Display';
     font-size: 31.1px;
     font-weight: 600;
@@ -1082,27 +1085,27 @@ input:checked + .slider:before {
     font-style: normal;
     color: #007fcb;
 }
-.Card1_Forfait p, .Card2_Forfait p{
+.Card1_Forfait p, .Card2_Forfait p , .Card0_Forfait p{
     font-family: 'SF Pro Display';
    font-size: 16px;
     font-weight: normal;
     color: #4a4a4a;
 }
-.Card1_Forfait h2, .Card2_Forfait h2{
+.Card1_Forfait h2, .Card2_Forfait h2 , .Card0_Forfait h2{
     font-family: 'SF Pro Display';
     font-size: 31.1px;
     font-weight: 600;
     color: #4a4a4a;
     margin-bottom: 10%;
 }
-.Card1_Forfait li{
+.Card1_Forfait li , .Card0_Forfait li{
     font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: 400;
     color: #4a4a4a;
 }
-.Card2_Forfait{
-    margin-left: 4%;
+.Card2_Forfait , .Card1_Forfait{
+    margin-left: 2.5%;
 }
 .Card2_Forfait div{
     margin-bottom: 2%;
@@ -1141,7 +1144,7 @@ input:checked + .slider:before {
     justify-content: center;
     align-items: center;
 }
-.texte_div1_champsPayement{
+.div2_champsPayement{
     text-align: center;
     margin-bottom: 66px;
 }
@@ -1304,3 +1307,247 @@ input:checked + .slider:before {
     color: #ffffff;
 }
 
+/************************** Media Query ***********************/
+
+/********** Smart Phone *********************/
+@media (max-width:575px) {
+    /***** Package Payement Tab *****/
+    .div1_WebinairePlease{
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        border: none;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+    }
+    .blue_div{
+        width: 100%;
+        height: 12vh !important;
+        background-color: #f0f3f7;
+        padding: 15px 25px !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-bottom: 2% !important;
+    }
+    .icon1_webinaire{
+        font-size: 40px;
+    }
+    .empty_div{
+        width: 100%;
+        height: 88vh !important;
+        position: relative !important;
+    }
+    .div_image{
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-right: 10%;
+    }
+    .div_image img{
+        width: 100px;
+        height: 110px;
+    }
+    .ChoicePackage{
+        width: 95%;
+        height: 80vh;
+        display: block !important;
+    }
+    .ant-steps-item-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 33.99% !important;
+    }
+    .ant-steps-item-title{
+        display: none !important;
+    }
+    .ant-steps{
+        margin-bottom: 5% !important;
+    }
+    .steps{
+        height: 5%;
+    }
+    .steps-action{
+        margin-bottom: 20px;
+        position: absolute;
+        top: 90px;
+    }
+    .card_Forfait{
+        width: 100%;
+        height: 60%;
+        margin-top: 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .Card1_Forfait , .Card2_Forfait , .Card0_Forfait{
+        width: 90%;
+        height: 300px;
+        border-radius: 5px;
+        border: solid 2px #e2e0e0;
+        padding: 15.1px 16px 66px 45px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        margin-bottom: 3%;
+
+    }
+    .Card0_Forfait{
+        margin-left: 15px;
+    }
+    .Card0_Forfait , .Card1_Forfait , .Card2_Forfait{
+        display: flex;
+        flex-direction: row;
+    }
+    .Card0_Forfait div , .Card1_Forfait  div{
+        width: 50%;
+    }
+    .Card2_Forfait_div1 , .Card2_Forfait_div2{
+        width: 50%;
+    }
+    .champsPayement{
+        width: 100%;
+        margin-top: 25%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .div1_champsPayement{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .div2_champsPayement{
+        width: 100% !important;
+    }
+    .div2_champsPayement Button{
+        width: 100% !important;
+    }
+    .form_Input{
+        width: 100%;
+    }
+    .icon_div1_champsPayement{
+        text-align: left;
+    }
+    .icon_div1_champsPayement span{
+        font-size: 50px;
+    }
+    /***** Package Payement Tab *****/
+
+}
+
+/********** Tablette *********************/
+@media (min-width:576px) and (max-width:800px) {
+    /***** Package Payement Tab *****/
+    .div1_WebinairePlease{
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        border: none;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+    }
+    .blue_div{
+        width: 100%;
+        height: 9vh !important;
+        background-color: #f0f3f7;
+        padding: 15px 25px !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        margin-bottom: 2% !important;
+    }
+    .icon1_webinaire{
+        font-size: 55px;
+    }
+    .empty_div{
+        width: 100%;
+        height: 90vh;
+        position: relative !important;
+    }
+    .div_image{
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding-right: 10%;
+    }
+    .div_image img{
+        width: 154px;
+        height: 168px;
+    }
+    .ChoicePackage{
+        width: 95%;
+        height: 80vh;
+
+        display: block !important;
+    }
+    .steps{
+        height: 5%;
+    }
+    .steps-action{
+        margin-bottom: 20px;
+        position: absolute;
+        top: 11%;
+    }
+    .div2_champsPayement{
+        width: 65%;
+    }
+    .div2_champsPayement Button{
+        width: 100% !important;
+    }
+    .card_Forfait{
+        width: 100%;
+        height: 60%;
+        margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .Card1_Forfait , .Card2_Forfait , .Card0_Forfait{
+        width: 90%;
+        height: 250px;
+        border-radius: 5px;
+        border: solid 2px #e2e0e0;
+        padding: 15.1px 16px 66px 45px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        margin-bottom: 3%;
+
+    }
+    .Card0_Forfait{
+        margin-left: 15px;
+    }
+    .Card0_Forfait , .Card1_Forfait , .Card2_Forfait{
+        display: flex;
+        flex-direction: row;
+    }
+    .Card0_Forfait div , .Card1_Forfait  div{
+        width: 50%;
+    }
+    .Card2_Forfait_div1 , .Card2_Forfait_div2{
+        width: 50%;
+    }
+    /***** Package Payement Tab *****/
+}

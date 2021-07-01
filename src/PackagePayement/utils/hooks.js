@@ -9,11 +9,39 @@ export  const Hooks=( )=> {
     const values = useSelector((state) => state.PackagePayementReducer)
     console.log("valuesPackageRducerReduce",values)
 
-    const handleClickCardOne = () =>{
+    const handleClickCardZero = () =>{
         // dispatch active card
         dispatch(setPackagePayementAction({
             PackagePayementName: "activeCard",
             PackagePayementValue: 1
+        }));
+        //dispatch 1ere button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonZero",
+            PackagePayementValue: true
+        }));
+        //dispatch 1ere button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonOne",
+            PackagePayementValue: false
+        }));
+        //dispatch 2eme button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonTwo",
+            PackagePayementValue: false
+        }));
+    }
+
+    const handleClickCardOne = () =>{
+        // dispatch active card
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "activeCard",
+            PackagePayementValue: 2
+        }));
+        //dispatch 1ere button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonZero",
+            PackagePayementValue: false
         }));
         //dispatch 1ere button radio
         dispatch(setPackagePayementAction({
@@ -31,7 +59,12 @@ export  const Hooks=( )=> {
         // dispatch active card
         dispatch(setPackagePayementAction({
             PackagePayementName: "activeCard",
-            PackagePayementValue: 2
+            PackagePayementValue: 3
+        }));
+        //dispatch 1ere button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonZero",
+            PackagePayementValue: false
         }));
         //dispatch 1ere button radio
         dispatch(setPackagePayementAction({
@@ -68,6 +101,7 @@ export  const Hooks=( )=> {
         handleClickCardTwo,
         handlePackagePayementInput,
         handlePackagePayementSelect,
+        handleClickCardZero,
         values,
     })
 }
