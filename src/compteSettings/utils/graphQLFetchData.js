@@ -23,6 +23,10 @@ export const GraphQLFetchData=(form)=> {
     const {loading: GetUserInfoData_loading, data: GetUserInfoData}
         = useQuery(graphQL_shema().Get_UserInfoData, {
         fetchPolicy: 'cache-and-network',
+        variables: { pagination : {
+                "limit": 2,
+                "offset": 0,
+            } },
         onCompleted: async (data) => {
             await dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
             await dispatch(setConstraintDataOnchange({

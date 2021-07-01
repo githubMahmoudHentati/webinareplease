@@ -26,6 +26,13 @@
                 payload:e
             }
         }
+//*******************BillCount actions*******************//
+export function setBillCountOnchange(e){
+    return{
+        type:"SET_BillCountOnchange",
+        payload:e
+    }
+}
 
 //*******************Fetching Data actions*******************//
 

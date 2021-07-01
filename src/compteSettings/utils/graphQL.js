@@ -6,7 +6,7 @@ export const graphQL_shema = ()=> {
         query {
             getUserInfo{
                 generalInformation{
-                    avatar
+                    vignette
                     firstName
                     lastName
                     email
@@ -31,6 +31,7 @@ export const graphQL_shema = ()=> {
                     amount
                     status
                 }
+                billCount
             }
         }
     `;
