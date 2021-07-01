@@ -31,6 +31,7 @@ export const graphQL_shema = ()=> {
                     amount
                     status
                 }
+                billCount
             }
         }
     `;

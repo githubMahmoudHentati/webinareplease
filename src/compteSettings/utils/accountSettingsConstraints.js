@@ -45,6 +45,13 @@ export const AccountSettingsConstraints = ()=>{
             ]
         )
     }
+    const billCount = () =>{
+        return(
+            {
+                billCount:""
+            }
+        )
+    }
     const constraintData =()=>{
         return({
             avatarLoading :false,
@@ -71,9 +78,10 @@ export const AccountSettingsConstraints = ()=>{
         generalInformation,
         subscription,
         bills,
+        billCount,
         constraintData,
         securityAccount,
-        loadingUpdatePassword
+        loadingUpdatePassword,
     })
 
 }
