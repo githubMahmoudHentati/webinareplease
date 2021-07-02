@@ -66,7 +66,7 @@ export const FormConnexion =()=>{
             constraintDataNameChange: "connexionError",
             constraintDataValueChange: false
         }))
-        history.push("/signUp")
+        history.push("/PackagePayement")
     }
 
     return(
