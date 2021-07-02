@@ -91,7 +91,7 @@ function useActionMenu({record}) {
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                            }}><VideoCameraOutlined/> Diffuser</Button>
+                            }}><VideoCameraOutlined id={"icon_vs"}/> <span id={"span_diffuser"}>Diffuser</span></Button>
                         </Tooltip>
                         :
                         <Tooltip title={"Visualiser"}>
@@ -99,7 +99,7 @@ function useActionMenu({record}) {
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                            }}><EyeOutlined/> Visualiser</Button>
+                            }}><EyeOutlined id={"icon_vs"}/> <span id={"span_diffuser"}>Visualiser</span></Button>
                         </Tooltip>
 
             }
