@@ -27,6 +27,7 @@
 }
 .col-signUp{
   width: 70%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,6 +36,7 @@
   left: 50% !important;
   transform: translate(-50%,-50%) !important;
   margin-top: 4%;
+
 }
 
 .text-form{
@@ -66,10 +68,37 @@
 }
 
 //********** Tablette *********************//
-@media (min-width:576px) and (max-width:768px) {
+@media  (max-height:1046px) {
+
+}
+@media  (max-height:1112px) {
+  .col-signUp{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:470px !important;
+    left: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    margin-top: 4%;
+  }
+}
+@media (min-width:576px) and (max-width:1250px) {
 .pol{
   display: none !important;
 }
+  .col-signUp{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:470px !important;
+    left: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    margin-top: 4%;
+  }
 }
 @media (max-width:576px) {
   .col-signUp{
@@ -78,7 +107,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top:620px !important;
+    top:660px !important;
     left: 50% !important;
     transform: translate(-50%,-50%) !important;
     margin-top: 4%;
@@ -97,4 +126,31 @@
   }
 
 
+}
+
+@media (max-width:320px) and (min-height: 320px) {
+  .col-signUp{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:700px !important;
+    left: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    margin-top: 4%;
+  }
+}
+@media (max-width:240px) and (max-height: 320px) {
+  .col-signUp{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:750px !important;
+    left: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    margin-top: 4%;
+  }
 }

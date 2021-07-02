@@ -36,11 +36,11 @@ export const FormContactClient =()=> {
             name="product-form"
             onFinish={handleSubmitContactClient}
         >
-        <Row gutter={[0, 40]} className={'col-signUp'}>
+        <Row gutter={[0, 40]} className={'col-contact'}>
             <Col style={{textAlign: 'center'}} span={24}>
                 <span className={"spn1"}>Contactez-nous et présicez vos besions</span>
             </Col>
-            <Col span={24}>
+            <Col span={24} >
                 <Row gutter={[0, 10]}>
                     <Col span={24}>
                         <Form.Item name="name" className={"form-item-style"}
@@ -80,7 +80,7 @@ export const FormContactClient =()=> {
                                    name="email" placeholder={"E-mail"} value={values.contactClient.email} />
                         </Form.Item>
                     </Col>
-                    <Col span={24}>
+                    <Col span={24} >
                         <Form.Item name="message" className={"form-item-style"}
                                    rules={requiredFieldRule}
                                    label={"Votre message"}
