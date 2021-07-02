@@ -16,6 +16,7 @@ import {GraphQLFetchData} from "./utils/grapqhQL/graphQLFetchData";
 import {ForgetPassword} from "./forgetPassword/forgetPassword";
 import {ResetPassword} from "./resetPassword/resetPassword";
 import Error from "./utils/components/Error";
+import {ConfirmAccount} from "./confirmAccount/confirmAccount";
 
 function App() {
   const {verificationToken}= GraphQLFetchData()
@@ -31,6 +32,7 @@ function App() {
               <Route exact path='/FormDirectVideo' component={FormDirectVideo} />
               <Route exact path='/PackagePayement' component={PackagePayement}/>
               <Route exact path='/connexion'  > {!credentialsValues.appState.loggedIn?<Connexion/>:<Redirect exact  to="/showVideos" />}</Route>
+              <Route exact path='/ConfirmAccount'  > {!credentialsValues.appState.loggedIn?<ConfirmAccount/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/signUp' > {!credentialsValues.appState.loggedIn?<SignUp/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/forgot-password' > {!credentialsValues.appState.loggedIn?<ForgetPassword/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/reset-password' > {!credentialsValues.appState.loggedIn?<ResetPassword/>:<Redirect exact  to="/showVideos" />}</Route>
