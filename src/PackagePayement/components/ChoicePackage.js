@@ -32,7 +32,7 @@ const steps = [
 function ChoicePackage(){
     const [form] = Form.useForm();
 
-    const {handleClickCardOne , handleClickCardTwo , values , handlePackagePayementInput , handlePackagePayementSelect} = Hooks()
+    const { handleClickCardZero, handleClickCardOne , handleClickCardTwo , values , handlePackagePayementInput , handlePackagePayementSelect} = Hooks()
     const dispatch = useDispatch()
 
     const stripe = useStripe();
@@ -97,40 +97,58 @@ function ChoicePackage(){
                             {/*./header_Forfait*/}
 
                             <div className="card_Forfait">
-                                <div id={values.packagePayement.activeCard === 1 ? "activeCard" : ""}
-                                     className="Card1_Forfait" onClick={() => handleClickCardOne()}>
-                                    <Radio className="btn_Radio"
-                                           checked={values.packagePayement.checkedRadioButtonOne}></Radio>
-                                    <h3>Pro</h3>
-                                    <p>Idéal pour les équipes</p>
-                                    <h2>{values.packagePayement.packPro}</h2>
-                                    <li>Accueille jusqu’à 100 participants</li>
-                                    <li> Réunions en groupe illimitées</li>
-                                    <li>1 Go d’enregistrement sur le cloud</li>
-                                </div>
-                                {/*./Card1_Forfai*/}
-                                <div id={values.packagePayement.activeCard === 2 ? "activeCard" : ""}
-                                     className="Card2_Forfait" onClick={() => handleClickCardTwo()}>
-                                    <Radio className="btn_Radio"
-                                           checked={values.packagePayement.checkedRadioButtonTwo}></Radio>
-                                    <h3>Pay As You Go</h3>
-                                    <p>Payer à votre utilisation</p>
-                                    <h2>{values.packagePayement.packASYouGo}</h2>
+                                <div id={values.packagePayement.activeCard===1?"activeCard":""} className="Card0_Forfait" onClick={()=>handleClickCardZero()}>
                                     <div>
-                                        <h5>Durée de la réunion</h5>
-                                        <Select defaultValue="1 Heure">
-                                            <Option value="1 Heure">1 Heure</Option>
-                                        </Select>
+                                        <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonZero}></Radio>
+                                        <h3 >Basic</h3>
+                                        <p >Idéal pour les équipes</p>
                                     </div>
                                     <div>
-                                        <h5>Nombre de participants</h5>
-                                        <Select defaultValue="20 Participants">
-                                            <Option value="20 Participants">20 Participants</Option>
-                                        </Select>
+                                        <h2 >{values.packagePayement.packFree}</h2>
+                                        <li >Accueille jusqu’à 5 participants</li>
+                                        <li >Réunions de 30 minutes maximum</li>
+                                        <li >Réunions en tête à tête jusqu’à 2 heures</li>
+                                    </div>
+                                </div>{/*./Card1_Forfai*/}
+
+                                <div id={values.packagePayement.activeCard===2?"activeCard":""} className="Card1_Forfait" onClick={()=>handleClickCardOne()}>
+                                    <div>
+                                        <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonOne}></Radio>
+                                        <h3 >Pro</h3>
+                                        <p >Idéal pour les équipes</p>
+                                    </div>
+                                    <div>
+                                        <h2 >{values.packagePayement.packPro}</h2>
+                                        <li >Accueille jusqu’à 100 participants</li>
+                                        <li > Réunions en groupe illimitées</li>
+                                        <li >1 Go d’enregistrement sur le cloud</li>
+                                    </div>
+                                </div>{/*./Card1_Forfai*/}
+
+                                {/*./Card1_Forfai*/}
+                                <div id={values.packagePayement.activeCard===3?"activeCard":""} className="Card2_Forfait" onClick={()=>handleClickCardTwo()}>
+                                    <div className={"Card2_Forfait_div1"}>
+                                        <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonTwo}></Radio>
+                                        <h3 >Pay As You Go</h3>
+                                        <p >Payer à votre utilisation</p>
+                                    </div>
+                                    <div className={"Card2_Forfait_div2"}>
+                                        <h2 >{values.packagePayement.packASYouGo}</h2>
+                                        <div>
+                                            <h5 >Durée de la réunion</h5>
+                                            <Select defaultValue="1 Heure" >
+                                                <Option value="1 Heure">1 Heure</Option>
+                                            </Select>
+                                        </div>
+                                        <div>
+                                            <h5 >Nombre de participants</h5>
+                                            <Select defaultValue="20 Participants" >
+                                                <Option value="20 Participants">20 Participants</Option>
+                                            </Select>
+                                        </div>
                                     </div>
 
-                                </div>
-                                {/*./Card2_Forfait*/}
+                                </div>{/*./Card2_Forfait*/}
                             </div>
                             {/*./card_Forfait*/}
                         </div>

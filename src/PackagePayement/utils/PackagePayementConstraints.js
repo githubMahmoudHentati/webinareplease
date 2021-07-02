@@ -6,8 +6,10 @@ export const PackagePayementConstraints = () =>{
         return(
             {
                 activeCard:0,
+                checkedRadioButtonZero:false,
                 checkedRadioButtonOne:false,
                 checkedRadioButtonTwo:false,
+                packFree:'Gratuit',
                 packPro:'99€',
                 packASYouGo:'12€',
                 packStripe:''
