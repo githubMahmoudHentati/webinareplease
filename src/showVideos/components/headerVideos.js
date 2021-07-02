@@ -92,14 +92,14 @@ function HeaderVideos() {
                               <Tooltip title="Supprimer">
                                   <Button style={{backgroundColor:darkMode===false?"":"#141414"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} onClick={()=>handleClickDeleteIcon()} loading={loadingDelete.loadingDelete}/>
                               </Tooltip>
-                              <p style={{color:darkMode===false?"":"white"}}><span>{conditions.elementSelected}</span> <span>élément(s) sélectionné(s)</span></p>
+                              <p style={{color:darkMode===false?"":"white"}}><span>{conditions.elementSelected}</span> <span id={"text_selection"}>élément(s) sélectionné(s)</span></p>
                           </div>
                   }
 
                   <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"#141414", color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
                       <Tooltip className="tooltip_calendrier" title="Afficher Calendrier">
                       <CalendarOutlined  className="IconCalendrier" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)"}}/>
-                      <span>Calendrier</span>
+                      <span id={"Text_Calendar"}>Calendrier</span>
                       </Tooltip>
                   </div>
                   <div className="selectDiv">
