@@ -160,7 +160,7 @@ function ChoicePackage(){
                                     Inscrivez-vous
                                 </div>
                                 {/*./header_Forfait*/}
-                                <div>
+                                <div className={"divsignup"}>
                                         <FormSignUp/>
                                 </div>
                             </div>
