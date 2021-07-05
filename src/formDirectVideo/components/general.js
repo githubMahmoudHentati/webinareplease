@@ -1,11 +1,12 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Switch, Radio, Checkbox, DatePicker, Form} from 'antd'
+import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Switch, Radio, Checkbox, DatePicker, Form,TimePicker} from 'antd'
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone, InboxOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
 import {Hooks} from "../utils/hooks";
 import {DraggerUpload} from "./DraggerUpload";
+import moment from "moment";
 
 
 export const Generals =()=>{
@@ -21,7 +22,6 @@ export const Generals =()=>{
 
     const {generalOnChangeByName,generalOnChange,generalOnChangeButton,values}= Hooks()
     console.log("values",values)
-
 
     return(
         <Row gutter={[0, 30]}>
@@ -45,10 +45,10 @@ export const Generals =()=>{
                         <span className="require">*</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                        <Form.Item name="directTitle" className={"form-item-style"}
+                        <Form.Item name="liveTitle" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input name="directTitle" onChange={generalOnChange} placeholder={"Titre du vidéo"}></Input>
+                            <Input name="liveTitle" onChange={generalOnChange} placeholder={"Titre du vidéo"}></Input>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -59,9 +59,9 @@ export const Generals =()=>{
                         <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Description du direct</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                        <Form.Item name="directTitle" className={"form-item-style"}
+                        <Form.Item name="liveDescription" className={"form-item-style"}
                         >
-                            <Input.TextArea name="directDescription" onChange={generalOnChange}
+                            <Input.TextArea name="liveDescription" onChange={generalOnChange}
                                             placeholder={"Description du vidéo"}></Input.TextArea>
                         </Form.Item>
                     </Col>
@@ -75,9 +75,9 @@ export const Generals =()=>{
                     <Col span={24} className={"col-forms"}>
                         <Row justify={"space-between"} style={{width: '100%'}} gutter={[0, 0]}>
                             <Col xxl={22} xl={21} lg={20} md={19} sm={17} xs={14}>
-                                <Form.Item name="directTitle" className={"form-item-style"}
+                                <Form.Item name="liveTitle" className={"form-item-style"}
                                 >
-                                    <Input name="directSharedLink" onChange={generalOnChange}
+                                    <Input name="liveTitle" onChange={generalOnChange}
                                            placeholder={'www.empreinte.com/titrelive'}></Input>
                                 </Form.Item>
                             </Col>
@@ -99,17 +99,17 @@ export const Generals =()=>{
                         <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier le direct</span>
                     </Col>
                     <Col >
-                        <Form.Item name="directPlan" className={"form-item-style"}
+                        <Form.Item name="liveAction" className={"form-item-style"}
                         >
-                            <Switch checked={values.general.directPlan} name="directPlan" value="directPlan"
+                            <Switch checked={values.general.liveAction} name="liveAction" value="liveAction"
                                     onChange={(checked, event) => {
-                                        generalOnChangeByName(checked, event, "directPlan")
+                                        generalOnChangeByName(checked, event, "liveAction")
                                     }}/>
                         </Form.Item>
                     </Col>
                 </Row>
             </Col>
-            {values.general.directPlan &&
+            {values.general.liveAction &&
             <Col span={24}>
                 <Row gutter={[20, 10]}>
                     <Col span={8} className={"col_planification"}>
@@ -136,7 +136,7 @@ export const Generals =()=>{
                     <Col span={8}>
                         <Form.Item name="startHour" className={"form-item-style"}
                         >
-                            <DatePicker name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}></DatePicker>
+                            <TimePicker name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}></TimePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
@@ -158,14 +158,14 @@ export const Generals =()=>{
                             <Col span={24}>
                                 <Radio.Group name="directAccessMode" onChange={generalOnChange} defaultValue={values.general.directAccessMode} >
                                     <Radio onChange={generalOnChangeButton} name="freeAccess"  value="freeAccess"  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Acccès libre</Radio>
-                                    <Radio onChange={generalOnChangeButton} name="securedAccess" value="securedAccess" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Accès sécurisé</Radio>
+                                    <Radio onChange={generalOnChangeButton} name="liveAccess" value="liveAccess" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Accès sécurisé</Radio>
                                 </Radio.Group>
                             </Col>
-                            {values.general.directAccessMode === "securedAccess" &&
+                            {values.general.directAccessMode === "liveAccess" &&
                             <Col offset={3} span={21}>
                                 <Form.Item
                                     className={"form-item-style"}
-                                    name="password"
+                                    name="pwd"
                                     rules={[
                                         ({getFieldValue}) => ({
                                             validator(_, value) {
@@ -180,14 +180,14 @@ export const Generals =()=>{
                                     <Input.Password
                                         onChange={generalOnChange}
                                         className={"spn2"}
-                                        name="password"
+                                        name="pwd"
                                         placeholder="Mot de passe"
                                         iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                                     />
                                 </Form.Item>
                             </Col>
                             }
-                            {values.general.directAccessMode === "securedAccess" &&
+                            {values.general.directAccessMode === "liveAccess" &&
                             <Col offset={3} span={21}>
                                 <Form.Item name="securedPasswordOption"  className={"form-item-style"}
                                 >
