@@ -160,7 +160,7 @@ function ChoicePackage(){
                                     Inscrivez-vous
                                 </div>
                                 {/*./header_Forfait*/}
-                                <div>
+                                <div className={"divsignup"}>
                                         <FormSignUp/>
                                 </div>
                             </div>
@@ -189,10 +189,7 @@ function ChoicePackage(){
                                             <Button><AppleFilled/>Pay</Button>
                                             <div className={"divpayerparcarte"}>Ou payer par carte bancaire</div>
                                             <div className={"form_Input"}>
-
                                                 <Form>
-
-
                                                     <Form.Item
                                                         className={"formItem"}
                                                         label="Email"

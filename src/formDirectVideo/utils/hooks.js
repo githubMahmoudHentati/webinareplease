@@ -11,11 +11,13 @@ import {
     setInvitationOnchangeRules
 } from "../store/formDirectVideoAction";
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
+import {GraphQLFetchData} from "./graphQLFetchData";
 
 export  const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
-console.log("valueFormDirectVideoReducer",values)
+    const {CreateLive} = GraphQLFetchData(values)
+
 
     //***************General************************//
     const generalOnChangeByName =(value,event,name)=>{
@@ -97,7 +99,7 @@ console.log("valueFormDirectVideoReducer",values)
 
 
     const handleSubmit =()=>{
-
+        CreateLive()
     }
 
     return({

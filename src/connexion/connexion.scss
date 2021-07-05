@@ -99,3 +99,62 @@
   background-color: #fff;
   border-color: #ff4d4f !important;
 }
+
+//*********** Media Query **************//
+
+//********** Smart Phone *********************//
+
+@media (max-width:575px) {
+
+  .col-connexion{
+    width: 70% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:50% !important;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+}
+@media (max-width:320px) and (min-height: 320px) {
+  .col-connexion{
+    width: 70% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:62% !important;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+}
+@media (max-width:240px) and (max-height: 320px) {
+  .col-connexion{
+    width: 70% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:110% !important;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+}
+
+//********** Tablette *********************//
+@media (min-width:576px) and (max-width:1250px) {
+  .col-connexion{
+    width: 70% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+}
+
+//*********** Media Query **************//

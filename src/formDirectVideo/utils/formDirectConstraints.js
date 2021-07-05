@@ -9,18 +9,21 @@ export const FormDirectConstraints = ()=>{
         return (
             {
                 fileList:"",
-                directTitle:"",
-                directDescription:"",
-                directSharedLink:"",
-                directPlan: false,
-                directAccessMode: "",
+                liveTitle:"",
+                liveDescription:"",
+                liveAction:false,
+                livePlan:{
+                    plan: false,
+                    startDate:"",
+                    duration:"",
+                },
                 startDate:"",
                 startHour:"",
-                finalHour:"",
-                freeAccess: false,
-                securedAccess: false,
-                passwordAccess:"",
-                securedPasswordOption:""
+                directAccessMode: "freeAccess",
+                liveAccess: false,
+                pwd:"",
+                liveSharedLink:"",
+                securedPasswordOption:false
             }
         )
     }
@@ -28,6 +31,7 @@ export const FormDirectConstraints = ()=>{
     const configuration = () => {
         return (
             {
+                directProgram:"",
                 notVisibleVideo: false,
                 visibleVideo: false,
                 modalSpeaker: false,
@@ -46,6 +50,8 @@ export const FormDirectConstraints = ()=>{
                 chat:false,
                 comments:false,
                 likeMention:false,
+                attachments:false,
+                richeMediaDiffusion:false,
                 videoMode: "",
                 theme:"",
                 tags:[]
