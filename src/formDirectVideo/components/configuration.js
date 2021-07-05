@@ -26,12 +26,13 @@ import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
 import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
 import EditableTagGroupConfiguration from "./EditableTagGroupConfiguration";
+import moment from "moment";
 
 export const Configuration =()=>{
     const dispatch = useDispatch()
     const [itemListHeight, setItemListHeight] = useState(null);
     const values = useSelector((state)=> state.FormDirectVideoReducer)
-    
+
     const itemListRef   = useRef(null);
     
     const {configurationOnChangeByName,addSpeaker,editSpeaker,deleteSpeaker,configurationOnChange,configurationOnChangeButton}= Hooks()
@@ -77,16 +78,19 @@ export const Configuration =()=>{
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col className={"col-forms"} span={24}>
-                                <Form.Item name="directProgram" className={"form-item-style"}
-                                >
-                                <span onChange={configurationOnChange} name="directProgram" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Programme du direct</span>
-                                </Form.Item>
+
+                                <span name="directProgram" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>Programme du direct</span>
+
                             </Col>
                             <Col span={24} className={"col-forms"}>
+                                <Form.Item name="directProgram" className={"form-item-style"}
+                                >
                                 <Input.TextArea Rows={5}
+                                                name="directProgram"
+                                                onChange={configurationOnChange}
                                                 placeholder={"hh:mm - hh:mm\nTitre et description du sujet"}>
-
                                 </Input.TextArea>
+                                </Form.Item>
                             </Col>
                         </Row>
                     </Col>

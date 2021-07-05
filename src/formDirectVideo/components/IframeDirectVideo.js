@@ -14,13 +14,14 @@ import {Templetes} from "./Templetes";
 import {setDarkMode} from "../../utils/redux/actions";
 import {BarHeader} from "./barHeader";
 import {Hooks} from "../utils/hooks";
+import {GraphQLFetchData} from "../utils/graphQLFetchData";
+import {LiveSubmit} from "./liveSubmit.js";
 
 
 export const IframeDirectVideo =()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
-    const [form] = Form.useForm();
-    //const {handleSubmit}=Hooks()
+
 
 
     const SelectMenu = ()=>{
@@ -41,13 +42,7 @@ export const IframeDirectVideo =()=>{
         }
     }
     return(
-        <div>
-            <Form
-                form={form}
-                layout="horizontal"
-                name="product-form"
-                // onFinish={handleSubmit}
-            >
+        <LiveSubmit >
                 <Row gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
@@ -74,7 +69,6 @@ export const IframeDirectVideo =()=>{
                         </Row>
                     </Col>
                 </Row>
-            </Form>
-        </div>
+        </LiveSubmit>
     )
 }
