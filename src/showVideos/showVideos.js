@@ -13,6 +13,7 @@ import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/graphQL";
 import {Hooks} from "./utils/hooks";
 import { Spin } from 'antd';
+import './showVideos.scss'
 
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
@@ -49,12 +50,20 @@ function ShowVideos() {
             title: 'Aperçu',
             dataIndex: 'logo',
             key:0,
-            render: image => <img  src={image} className={"img_aperçu"}/>,
+            render: image =>
+                <div className={"div_apercu"}>
+                <img  src={image} className={"img_aperçu"}/>
+                </div>,
         },
         {
             title: 'Titre',
             dataIndex: 'title',
             key: 0,
+            render:(titre , record) =>{
+                return(
+                    <div className="div_titre"><span>{record.title}</span></div>
+                )
+            },
             sorter: (a, b) => a.title.length - b.title.length,
             sortDirections: ['descend','ascend'],
         },
@@ -62,6 +71,11 @@ function ShowVideos() {
             title: 'Date',
             dataIndex: 'liveDate',
             key: 0,
+            render:(date , record) =>{
+                return(
+                    <div className="div_date">{record.liveDate}</div>
+                )
+            },
             sorter: (a, b) => a.date.length - b.date.length,
             sortDirections: ['descend','ascend'],
         },
@@ -72,7 +86,7 @@ function ShowVideos() {
             sorter: (a, b) => a.status.length - b.status.length,
             sortDirections: ['descend','ascend'],
             render: status => (
-                <>
+                <div className={"div-status"}>
                     {
                         status === 1
                           ?
@@ -89,7 +103,7 @@ function ShowVideos() {
                                   null
                     }
 
-                </>
+                </div>
             ),
         },
 
@@ -115,8 +129,14 @@ function ShowVideos() {
     return(
         <Spin  size="middle"  spinning={loadingSpinner.loading}>
        <PrincipalPage>
+           <div className={"showVideo"}>
+               <div className={"div1_showVideo"}>
            <HeaderVideos/>
+               </div>
+               <div className={"div2_showVideo"}>
            <DataTable />
+               </div>
+           </div>
        </PrincipalPage>
         </Spin>
     );
