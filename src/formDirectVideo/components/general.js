@@ -9,7 +9,7 @@ import {DraggerUpload} from "./DraggerUpload";
 import moment from "moment";
 
 
-export const Generals =()=>{
+export const Generals =({})=>{
 
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
@@ -19,7 +19,6 @@ export const Generals =()=>{
 
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
-
     const {generalOnChangeByName,generalOnChange,generalOnChangeButton,values}= Hooks()
     console.log("values",values)
 
@@ -191,7 +190,7 @@ export const Generals =()=>{
                             <Col offset={3} span={21}>
                                 <Form.Item name="securedPasswordOption"  className={"form-item-style"}
                                 >
-                                <Checkbox onChange={generalOnChangeButton} name="securedPasswordOption" style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>Générer
+                                <Checkbox onChange={generalOnChangeButton} value="securedPasswordOption" name="securedPasswordOption" style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>Générer
                                     un mot de passe sécurisé</Checkbox>
                                 </Form.Item>
                             </Col>

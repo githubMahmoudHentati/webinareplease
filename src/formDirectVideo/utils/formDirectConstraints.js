@@ -4,7 +4,6 @@ import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
 
 export const FormDirectConstraints = ()=>{
-
     const generals = () => {
         return (
             {
@@ -23,7 +22,8 @@ export const FormDirectConstraints = ()=>{
                 liveAccess: false,
                 pwd:"",
                 liveSharedLink:"",
-                securedPasswordOption:false
+                securedPasswordOption:false,
+                loadingSecuredPassword:false
             }
         )
     }
@@ -105,11 +105,18 @@ export const FormDirectConstraints = ()=>{
         )
     }
 
+    // const formLive =()=>{
+    //     return (
+    //             form
+    //     )
+    // }
+
     return({
         generals,
         configuration,
         socialTools,
-        invitation
+        invitation,
+        // formLive
     })
 
 }

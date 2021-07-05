@@ -10,7 +10,10 @@ const formDirectInitialState = {
     invitation:invitation(),
 
     socialTools: socialTools(),
+
+    form : [],
 }
+
 
 export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
 
@@ -142,6 +145,11 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             return{
                 ...state,
                 socialTools: socialToolsClosePlan
+            }
+
+        case 'SET_LiveForm' :
+            return {...state,
+                form: action.payload
             }
 
         default:{
