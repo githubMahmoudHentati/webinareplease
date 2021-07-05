@@ -37,7 +37,14 @@ export const SubscriptionTable=()=>{
         title: 'Statut',
         key: 'status',
         dataIndex: 'status',
-        render: text => <Badge color="#f50" text={text} />,
+        render: (text,record) =>{
+            return(
+            record.status === true ?
+                <Badge color="#4bca81" text={"Traitée"} />
+                :
+                <Badge color="#c23934" text={"Non traitée"} />
+            )
+        },
 
     },
     {
@@ -59,7 +66,16 @@ export const SubscriptionTable=()=>{
         title: '',
         dataIndex: 'payment',
         key: 'payment',
-        render: (text,record) => <Button  className={"button-payment"} disabled={record.status==="soldée"?true:false}> Payer</Button> ,
+        render: (text,record) =>
+        {
+            return(
+                record.status === false ?
+                 <Button  className={"button-payment"}> Payer</Button>
+                    :
+                    null
+              )
+        }
+
     },
 ];
 
