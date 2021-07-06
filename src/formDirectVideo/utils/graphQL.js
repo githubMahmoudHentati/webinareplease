@@ -12,7 +12,17 @@ export const graphQL_shema = ()=> {
         }
     `;
 
+    const generateSecuredPassword = gql`
+        mutation($input:GeneratePwd) {
+            generatePwd(input:$input) {
+                code
+                pwd
+            }
+        }
+    `;
+
     return({
         createLive,
+        generateSecuredPassword
     })
 }

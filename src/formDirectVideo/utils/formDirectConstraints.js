@@ -2,6 +2,7 @@ import React, { useState,useEffect,useRef } from 'react';
 import fbPost from "../../assets/facebookPost.svg";
 import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
+import {Form} from "antd";
 
 export const FormDirectConstraints = ()=>{
 
@@ -23,7 +24,8 @@ export const FormDirectConstraints = ()=>{
                 liveAccess: false,
                 pwd:"",
                 liveSharedLink:"",
-                securedPasswordOption:false
+                securedPasswordOption:false,
+                loadingSecuredPassword:false
             }
         )
     }
@@ -105,11 +107,18 @@ export const FormDirectConstraints = ()=>{
         )
     }
 
+    // const formLive =()=>{
+    //     return (
+    //             form
+    //     )
+    // }
+
     return({
         generals,
         configuration,
         socialTools,
-        invitation
+        invitation,
+        // formLive
     })
 
 }

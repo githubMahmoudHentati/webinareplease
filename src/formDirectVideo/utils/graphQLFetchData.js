@@ -5,6 +5,8 @@ import {useHistory} from "react-router-dom";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
 import {useDispatch} from "react-redux";
 import moment from "moment";
+import {setAppSetLogin} from "../../utils/redux/actions";
+import {setGeneralOnchange} from "../store/formDirectVideoAction";
 
 
 
@@ -14,6 +16,8 @@ export const GraphQLFetchData = (values) => {
     console.log("test",values)
     let startDate= values.general.startDate && values.general.startHour ? (values.general.startDate).format('YYYY-MM-DD') + "T" + (values.general.startHour).format('HH:mm:ss') + "Z" : ""
     console.log("startDate",startDate)
+
+
     const [CreateLive, {
         data: dataUpdate,
         loading: loading_EventUpdated,
@@ -64,8 +68,31 @@ export const GraphQLFetchData = (values) => {
             }
         }
     });
+
+    const [generateSecuredPassword,{loading:loading_securedPassword, data:data_securedPassword}]
+        = useMutation(graphQL_shema().generateSecuredPassword, {
+        skip:values.general.securedPasswordOption,
+        variables: {input:{autoGenerate:true}},
+        context: { clientName: "second" },
+        onCompleted :async (data)=>{
+            if (data.generatePwd.code===200)
+            {
+
+                await dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:data.generatePwd.pwd}));
+
+                await values.form.setFieldsValue({...values.form.getFieldValue(),securedPasswordOption:data.generatePwd.pwd})
+                console.log("form.getFieldsValue()",values.form.getFieldValue())
+                await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
+
+            }
+        }
+    })
+
     return ({
         CreateLive,
+        generateSecuredPassword,
+        loading_securedPassword,
+        data_securedPassword
     })
 }
 
