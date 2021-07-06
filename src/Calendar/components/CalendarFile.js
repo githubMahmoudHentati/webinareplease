@@ -6,12 +6,22 @@ import {useSelector} from "react-redux";
 import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "../utils/graphql";
 import moment from 'moment'
+import CalendarEvents from "./CalendarEvents";
+import {setCalendarOnchange} from "../store/calendarAction";
+
+import {useDispatch} from "react-redux";
+
+
+let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 export function CalendarFile() {
+    const dispatch = useDispatch()
     const [visible , SetVisible] = useState(false);
     const [allow, setAllow] = useState(false);
     const [calendarValues, setCalendarValues] = useState([]);
     const [dateTime, setDateTime] = useState(moment());
+    const [activeCalendarEvents , SetActiveCalendarEvents] = useState(false)
+    const [calendarEvent , SetCalendarEvents] = useState({})
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
 
@@ -79,7 +89,7 @@ export function CalendarFile() {
         return listData || [];
 
     }
-    console.log("datacalendar",calendarValues)
+    console.log("datacalendar",calendarValues.map(item=>item.date.date))
 
     const DateCellRender=(value)=>{
         const listData =    getListData(value);
@@ -162,12 +172,25 @@ export function CalendarFile() {
             return 1394;
         }
     }
+    const selectDate = (e) =>{
+        SetActiveCalendarEvents(true)
+        SetCalendarEvents(e)
+        dispatch(setCalendarOnchange({
+            CalendarNameChange: "activeCalendar",
+            CalendarValueChange: true
+        }))
 
+    }
 
     return(
         <div className={"CalendarFile"}>
-
-            <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange}/>
+            {
+                  x.matches && activeCalendarEvents === true
+                      ?
+                     <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues} GetCalendarDataNow={GetCalendarDataNow}/>
+                      :
+                     <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange} onSelect={selectDate}/>
+            }
 
         </div>
     );

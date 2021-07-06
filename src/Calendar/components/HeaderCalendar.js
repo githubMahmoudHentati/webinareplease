@@ -4,15 +4,29 @@ import {ArrowLeftOutlined } from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
 import {useSelector} from "react-redux";
 import "../Calendar.scss"
+import {CalendarReducer} from "../store/calendarReducer";
+import Calendar from "../Calendar";
+
+let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 function HeaderCalendar() {
     const history = useHistory();
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    // use Selector redux
+    const calendarProps = useSelector((state)=> state.CalendarReducer)
 
     // handle click arrow calendar
     const handleClickArrowCalendar = () =>{
-        history.push('/showVideos')
+        if(x.matches && calendarProps.calendar.activeCalendar === true){
+            return(
+                <Calendar/>
+            )
+        }
+        else {
+            history.push('/showVideos')
+        }
+
     }
 
     return(
