@@ -2,8 +2,10 @@ import React, { useState,useEffect,useRef } from 'react';
 import fbPost from "../../assets/facebookPost.svg";
 import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
+import {Form} from "antd";
 
 export const FormDirectConstraints = ()=>{
+
     const generals = () => {
         return (
             {

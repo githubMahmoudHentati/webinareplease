@@ -30,10 +30,14 @@ export  const Hooks=()=>{
         dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}));
     };
 
-    const generalOnChangeButton = (event) => {
+    const generalOnChangeButton = async (event) => {
         console.log("event",event.target)
-        dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.checked}));
-        event.target.name==="securedPasswordOption"&&generateSecuredPassword()
+        await dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.checked}));
+        if(event.target.name==="securedPasswordOption")
+        {
+            event.target.checked&&generateSecuredPassword()
+            !event.target.checked&&await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
+        }
     };
 
 

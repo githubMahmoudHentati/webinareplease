@@ -13,27 +13,15 @@ export const LiveSubmit=(props)=>{
     useEffect(() => {
         dispatch(setLiveForm(form));
     }, [form]);
-    console.log("load",values.general.loadingSecuredPassword)
 
-    useEffect(() => {
+    useEffect(async () => {
         if (values.general.loadingSecuredPassword)
         {
-            console.log("enteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeer-form")
-            console.log("dataaa", values.general.pwd)
-            form.setFieldsValue({securedPasswordOption: "azeazeazeazeaz"})
+            await form.setFieldsValue({...form.getFieldsValue(),pwd:values.general.pwd})
         }
+        else
+            await form.setFieldsValue({...form.getFieldsValue(),pwd:""})
     }, [values.general.loadingSecuredPassword]);
-    form.setFieldsValue({securedPasswordOption: "azeazeazeazeaz"})
-
-
-    console.log("values.forms",values.form)
-    useEffect(() => {
-        if (values.general.loadingSecuredPassword)
-        {
-            form.setFieldsValue(values.form.getFieldValue())
-
-        }
-    }, [values.form]);
 
 
 
