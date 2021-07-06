@@ -6,8 +6,8 @@ export const graphQL_shema = ()=> {
     const SignUp = gql`
         mutation($input:CreateUserInput!) {
             addUser(input:$input) {
-                Code
-                Message
+                code
+                message
             }
 
         }

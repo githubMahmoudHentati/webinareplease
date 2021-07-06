@@ -12,7 +12,7 @@ export const PackagePayementConstraints = () =>{
                 packFree:'Gratuit',
                 packPro:'99€',
                 packASYouGo:'12€',
-                packStripe:''
+                packStripe:'',
             }
         )
     }
