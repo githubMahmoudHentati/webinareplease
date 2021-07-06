@@ -10,6 +10,7 @@ import {ConnexionReducer} from "../../connexion/store/connexionReducer";
 import {ForgetPasswordReducer} from "../../forgetPassword/store/forgetPasswordReducer";
 import {ResetPasswordReducer} from "../../resetPassword/store/resetPasswordReducer";
 import {PackagePayementReducer} from "../../PackagePayement/store/PackagePayementReducer";
+import {CalendarReducer} from "../../Calendar/store/calendarReducer";
 
 
 export const rootReducer = combineReducers({
@@ -22,5 +23,6 @@ export const rootReducer = combineReducers({
     ConnexionReducer,
     ForgetPasswordReducer,
     ResetPasswordReducer,
-    PackagePayementReducer
+    PackagePayementReducer,
+    CalendarReducer
 })
