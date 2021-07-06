@@ -17,7 +17,7 @@ export const GraphQLFetchData=()=> {
         fetchPolicy:  "cache-and-network",
         variables: { token : `Bearer ${token}`},
         onCompleted :async (data)=>{
-            if (data.tokenverification.Code===200)
+            if (data.tokenverification.code===200)
             {
                 await dispatch(setAppSetLogin(localStorage.getItem('jwtToken')));
             }

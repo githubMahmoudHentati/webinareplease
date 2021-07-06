@@ -16,10 +16,11 @@ import {GraphQLFetchData} from "./graphQLFetchData";
 export  const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
-    const {CreateLive} = GraphQLFetchData(values)
+    // values.form&&console.log("hooks-form",values.form.getFieldValue())
+    const {CreateLive,generateSecuredPassword} = GraphQLFetchData(values)
 
 
-    //***************General************************//
+    //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
         console.log("a",name,value)
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:value}));
@@ -29,12 +30,18 @@ export  const Hooks=()=>{
         dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}));
     };
 
-    const generalOnChangeButton = (event) => {
-        dispatch(setGeneralOnchange({generalNameChange:event.target.value, generalValueChange:event.target.checked}));
+    const generalOnChangeButton = async (event) => {
+        console.log("event",event.target)
+        await dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.checked}));
+        if(event.target.name==="securedPasswordOption")
+        {
+            event.target.checked&&generateSecuredPassword()
+            !event.target.checked&&await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
+        }
     };
 
 
-    //**************Configuration************//
+    //*****************Configuration************//
     const configurationOnChangeByName =(value,name)=>{
         dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
         values.configuration.SpeakerList.length < 2 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));

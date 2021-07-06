@@ -76,7 +76,7 @@ function HeaderVideos() {
 
           <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
               <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Mes Directs</h4>
-              <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} >Ajouter</Button>
+              <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>{history.push("/FormDirectVideo")}} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>Ajouter</span></Button>
           </div>{/*./TousMedia*/}
 
           <div className="Filter">
@@ -113,10 +113,10 @@ function HeaderVideos() {
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> Tout </Option>
-                          <Option name="type" value="archivés"><span className="icon-Archive"></span>  Archivés</Option>
-                          <Option name="type" value="encours"><span className="icon-Current"></span>  En cours</Option>
-                          <Option name="type" value="avenir"><HourglassOutlined />  A venir</Option>
+                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> <span id={'spn_option'}>Tout</span> </Option>
+                          <Option name="type" value="archivés"><span className="icon-Archive"></span>  <span id={'spn_option'}>Archivés</span></Option>
+                          <Option name="type" value="encours"><span className="icon-Current"></span>  <span id={'spn_option'}>En cours</span></Option>
+                          <Option name="type" value="avenir"><HourglassOutlined />  <span id={'spn_option'}>A venir</span></Option>
                       </Select>
                   </div>
 

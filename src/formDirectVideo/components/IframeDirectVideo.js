@@ -22,8 +22,11 @@ export const IframeDirectVideo =()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
 
-
-
+    const [formLive, setFormLive] = useState([]);
+    const setFormLiveAction=(e)=>{
+        setFormLive(e)
+    }
+    console.log("formLive",formLive)
     const SelectMenu = ()=>{
         switch(directMenu){
             case 0:
@@ -42,7 +45,7 @@ export const IframeDirectVideo =()=>{
         }
     }
     return(
-        <LiveSubmit >
+        <LiveSubmit  setFormLiveAction={setFormLiveAction}>
                 <Row gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
@@ -64,7 +67,7 @@ export const IframeDirectVideo =()=>{
                                 <MenuForms />
                             </Col>
                             <Col span={12}>
-                                <SelectMenu />
+                                <SelectMenu formLive={formLive}/>
                             </Col>
                         </Row>
                     </Col>

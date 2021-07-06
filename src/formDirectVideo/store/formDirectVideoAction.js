@@ -106,6 +106,16 @@ export function setGeneralOnchange(e){
         }
 
 
+        export function setLiveForm(e){
+            return{
+                type:"SET_LiveForm",
+                payload:e
+            }
+        }
+
+
+
+
 
 
 

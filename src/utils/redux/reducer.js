@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     appState: { loggedIn: false },
     gqlError: { msg: '' },
     authToken : '',
+    activeSideMenu:false,
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
@@ -38,6 +39,11 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 ...state,
                 appState: { loggedIn: false },
                 authToken : ''
+            }
+        case "SET_SideMenu" :
+            return {
+                ...state,
+                activeSideMenu:action.payload
             }
 
         default:{

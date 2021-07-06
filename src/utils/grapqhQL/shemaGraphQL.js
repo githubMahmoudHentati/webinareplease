@@ -5,8 +5,8 @@ export const graphQL_shema = ()=> {
     const tokenVerification = gql`
         query ($token:String!) {
             tokenverification(token:$token) {
-                Code
-                Message
+                code
+                message
             }
         }
     `;
