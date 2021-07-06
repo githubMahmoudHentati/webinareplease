@@ -21,8 +21,8 @@ export const GraphQLFetchData = (valuesSignUp) => {
             input: valuesSignUp.signUp
         },
         onCompleted: async (data) => {
-            if (data.addUser.Code === 200) {
-                //history.push("/connexion")
+            if (data.addUser.code === 200) {
+
 
                 dispatch(setSignUpConstraintDataOnchange({
                     constraintDataNameChange: "signUpError",
@@ -33,12 +33,17 @@ export const GraphQLFetchData = (valuesSignUp) => {
                     constraintDataValueChange: true
                 }))
 
-                dispatch(setSignUpConstraintDataOnchange({
-                    constraintDataNameChange: "current",
-                    constraintDataValueChange: valuesSignUp.constraintData.current + 1
-                }))
+                if (valuesSignUp.signUp.subscriptionId === 0) {
+                    history.push("/connexion")
+                } else
+                    dispatch(setSignUpConstraintDataOnchange({
+                        constraintDataNameChange: "current",
+                        constraintDataValueChange: valuesSignUp.constraintData.current + 1
+                    }))
 
-            } else if (data.addUser.Code === 403) {
+                //valuesSignUp.signUp.subscriptionId===0&&history.push("/connexion")
+
+            } else if (data.addUser.code === 403) {
                 dispatch(setSignUpConstraintDataOnchange({
                     constraintDataNameChange: "signUpError",
                     constraintDataValueChange: true
