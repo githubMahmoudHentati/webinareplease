@@ -54,7 +54,7 @@ const { Option } = Select;
          >
          <Spin spinning={values.constraintData.loadingGeneralInformation}>
              <Row gutter={[20, 0]}>
-                 <Col span={5}>
+                 <Col className={"col_avatar"} xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:6}}>
                      <Row justify={"space-between"} gutter={[0, 15]}>
                          <Col offset={2} span={22}>
                              <span className={"spn_CompteSettings"}
@@ -73,14 +73,14 @@ const { Option } = Select;
                                      </div> : !values.generalInformation.vignette ? <UserOutlined/> : ""}
                              />
                          </Col>
-                         <Col>
+                         <Col span={24}>
                              <AvatarUpload/>
                          </Col>
                      </Row>
                  </Col>
-                 <Col span={12}>
+                 <Col  className={"col_infos-générale"} xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:12}} >
                      <Row gutter={[0, 30]}>
-                         <Col span={24} className={"col-forms"}>
+                         <Col  span={24} className={"col-forms"}>
                          <span style={{
                              textAlign: 'left',
                              fontSize: "20px",

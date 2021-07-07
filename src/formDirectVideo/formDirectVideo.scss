@@ -541,3 +541,12 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+
+@media screen and (max-width: 767px) {
+  .ant-menu-item , .ant-menu-item-selected , .ant-menu-item-only-child{
+    &:focus{
+      border-right: none !important;
+    }
+  }
+}

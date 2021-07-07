@@ -38,8 +38,8 @@ export const graphQL_shema = ()=> {
     const Update_AccountSetting = gql`
         mutation($input:UpdateteUserInput!) {
             updateUser(input:$input) {
-                Code
-                Message
+                code
+                message
             }
         }
     `;
@@ -47,8 +47,8 @@ export const graphQL_shema = ()=> {
     
     mutation($input:PasswordChange!) {
     changePassword(input:$input) {
-      Code
-      Message
+      code
+      message
       
       }
      }
