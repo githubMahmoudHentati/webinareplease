@@ -12,7 +12,7 @@ export const AccountSubscription=()=>{
     const {values}=Hooks()
     return(
         <Row gutter={[0, 40]}>
-            <Col span={11}>
+            <Col offset={1} xs={{ span: 24}} sm={{ span: 24}} md={{ span: 11}} lg={{span:11}}>
                 <Row gutter={[0, 25]} style={{borderRight:darkMode===false?"1px solid RGB(241, 241, 241)":"1px solid rgba(255, 255, 255, 0.15)"}}>
                     <Col span={24}>
                         <Row  gutter={[0, 5]}>
@@ -26,30 +26,30 @@ export const AccountSubscription=()=>{
                     </Col>
                     <Col span={24}>
                         <Row >
-                            <Col span={6}>
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:6}}>
                                 <span className={"parag_abonnement_gras"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Abonnement :</span>
                             </Col>
-                            <Col  >
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:18}} >
                                 <span className={"parag_abonnement"} style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}> {values.subscription.subscriptionType} <br/> {values.subscription.subscriptionAmount}<br/>{values.subscription.subscriptionMode}</span>
                             </Col>
                         </Row>
                     </Col>
                     <Col span={24}>
                         <Row >
-                            <Col span={6}>
+                            <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:6}}>
                                 <span className={"parag_abonnement_gras"}  style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Stockage utilisé :</span>
                             </Col>
-                            <Col >
+                            <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:18}}>
                                 <span className={"parag_abonnement"} style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}> {values.subscription.usedStorage}</span>
                             </Col>
                         </Row>
                     </Col>
                     <Col span={24}>
                         <Row >
-                            <Col span={6}>
+                            <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:6}}>
                                 <span className={"parag_abonnement_gras"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Durée du diffusion :</span>
                             </Col>
-                            <Col >
+                            <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:18}}>
                                 <span className={"parag_abonnement"} style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}>  {values.subscription.diffusionDuration}</span>
                             </Col>
                         </Row>
@@ -61,8 +61,8 @@ export const AccountSubscription=()=>{
                     </Col>
                 </Row>
             </Col>
-            <Col offset={1} span={11}>
-                <Row  gutter={[0, 25]}>
+            <Col offset={1}  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 11}} lg={{span:11}}>
+                <Row  gutter={[0, 20]}>
                     <Col span={24}>
                         <span className={"spn_abonnement"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Mode de paiement choisi</span>
                     </Col>
@@ -75,17 +75,17 @@ export const AccountSubscription=()=>{
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 20]}>
-                    <Col span={24}>
+                    <Col offset={1} span={24}>
                         <Row justify={"space-between"}>
-                            <Col>
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 14}} lg={{span:14}}>
                                 <span className={"spn_abonnement"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Facture d'abonnement</span>
                             </Col>
-                            <Col span={6}>
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 10}} lg={{span:10}}>
                                 <Button className={"parag_abonnement"} disabled style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}> Changer mes infos de facturation</Button>
                             </Col>
                         </Row>
                     </Col>
-                    <Col span={24}>
+                    <Col  span={24}>
                         <SubscriptionTable/>
                     </Col>
                 </Row>

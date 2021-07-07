@@ -130,3 +130,35 @@
     border-color: red !important;
   }
 }
+
+
+//************* Media Query Compte Settings ***************//
+
+@media (max-width: 1080px) {
+   .col_avatar{
+     margin-bottom: 30px;
+   }
+}
+
+@media screen and (max-width: 767px) {
+ .menuCompteSettings{
+   width: 100% !important;
+  display: flex !important;
+   flex-direction: row !important;
+   justify-content: space-between !important;
+   align-items: center !important;
+   border-right: none !important;
+ }
+  .ant-menu-item-selected{
+    background-color: var(--menu-background) !important;
+    color: var(--menu-color) !important;
+    border-right:none !important;
+    border-bottom: 3px solid var(--menu-border) !important;
+  }
+  .col_avatar{
+    text-align: center !important;
+  }
+
+
+
+}

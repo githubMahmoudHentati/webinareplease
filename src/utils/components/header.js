@@ -176,7 +176,7 @@ function GlobalHeader() {
     );
 
     return(
-        <>
+        <div className={"div_Header"}>
         <div className={"Header"} style={{backgroundColor:darkMode===false?"#ffffff":"#141414"}}>
 
             <div className="div_home_logo">
@@ -290,7 +290,7 @@ function GlobalHeader() {
 
             }
 
-        </>
+        </div>
     );
 
 }
