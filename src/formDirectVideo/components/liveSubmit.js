@@ -9,28 +9,34 @@ export const LiveSubmit=(props)=>{
     const dispatch = useDispatch()
     const [form] = Form.useForm();
     const {handleSubmit,values}=Hooks()
+    const [loading, setLoading] = useState(false);
+
     const {loading_securedPassword, data_securedPassword}=GraphQLFetchData(values)
-    useEffect(() => {
-        dispatch(setLiveForm(form));
-    }, [form]);
+    useEffect(async () => {
+        await dispatch(setLiveForm(form));
+        setLoading(true)
+    }, []);
     console.log("load",values.general.loadingSecuredPassword)
 
-    useEffect(() => {
+    useEffect(async () => {
         if (values.general.loadingSecuredPassword)
         {
             console.log("enteeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeer-form")
             console.log("dataaa", values.general.pwd)
             form.setFieldsValue({securedPasswordOption: "azeazeazeazeaz"})
+            await form.setFieldsValue({...form.getFieldsValue(),pwd:values.general.pwd})
+            console.log("live-sbmit-getFieldsValue()",form.getFieldsValue())
         }
     }, [values.general.loadingSecuredPassword]);
-    form.setFieldsValue({securedPasswordOption: "azeazeazeazeaz"})
+
+    //form.setFieldsValue({securedPasswordOption: "azeazeazeazeaz"})
 
 
     console.log("values.forms",values.form)
-    useEffect(() => {
+    useEffect(async () => {
         if (values.general.loadingSecuredPassword)
         {
-            form.setFieldsValue(values.form.getFieldValue())
+            await form.setFieldsValue(values.form.getFieldValue())
 
         }
     }, [values.form]);
@@ -39,14 +45,16 @@ export const LiveSubmit=(props)=>{
 
     return(
         <div>
+            {loading&&
             <Form
-                form={form}
+                form={values.form}
                 layout="horizontal"
                 name="product-form"
                 onFinish={handleSubmit}
             >
                 {props.children}
             </Form>
+            }
         </div>
     )
 }

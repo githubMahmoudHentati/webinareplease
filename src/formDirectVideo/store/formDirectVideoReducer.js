@@ -1,4 +1,5 @@
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
+import {Form} from "antd";
 const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 
 const formDirectInitialState = {
@@ -16,7 +17,6 @@ const formDirectInitialState = {
 
 
 export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
-
     switch (action.type){
 
         //******** general reducer case************//
