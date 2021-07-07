@@ -189,6 +189,57 @@
       display: block !important;
       font-size: 20px;
     }
+    .div_calendarevent{
+      width: 100% !important;
+      height: auto !important;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+    .span_time{
+      font-family: "SF Pro Display";
+      font-size: 14px;
+      font-weight: 400;
+      color: RGBA(0, 0, 0, 0.85);
+      margin-bottom: 2%;
+    }
+    .tag_moment{
+      width: 100%;
+    }
+    .spn_Date_event{
+      font-family: "SF Pro Display";
+      font-size: 20px;
+      font-weight: 400;
+      color: RGBA(0, 0, 0, 0.85);
+    }
+    .footer_modal_Avenir{
+      width: 320px !important;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .div2_time_calendar{
+      width: 100% !important;
+      height: 90% !important;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center !important;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .div2_time_calendar p{
+      width: 40% !important;
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      color: rgba(0, 0, 0, 0.85);
+    }
 
   }
 

@@ -23,7 +23,7 @@ export const GraphQLFetchData=(form)=> {
         fetchPolicy: "no-cache",
         skip:!values.constraintData.loadingConnexion,
         onCompleted: async (data) => {
-            if (data.login.Code === 200) {
+            if (data.login.code === 200) {
                 history.push("/")
                 dispatch(setAppSetLogin(data.login.Token));
                 localStorage.setItem('jwtToken', data.login.Token);
@@ -40,7 +40,7 @@ export const GraphQLFetchData=(form)=> {
 
                 document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
                 document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
-            } else if (data.login.Code === 500) {
+            } else if (data.login.code === 500) {
 
                 dispatch(setConnexionConstraintDataOnchange({
                     constraintDataNameChange: "connexionError",
