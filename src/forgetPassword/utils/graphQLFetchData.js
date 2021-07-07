@@ -1,4 +1,4 @@
-import {useMutation} from "@apollo/react-hooks";
+import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -11,7 +11,6 @@ export const GraphQLFetchData=(values)=> {
     const history = useHistory()
     const dispatch = useDispatch()
 
-
     const [ForgetPassword, {
         data: dataUpdate,
         loading: loading_EventUpdated,
@@ -20,7 +19,7 @@ export const GraphQLFetchData=(values)=> {
         variables: values.forgetPassword
         ,
         onCompleted: async (data) => {
-            if (data.ResetPasswordRequest.Code===200)
+            if (data.ResetPasswordRequest.code===200)
                 {
                     //history.push("/")
                     //dispatch(setAppSetLogin(data.login.Token));
