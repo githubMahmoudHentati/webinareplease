@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 export const GraphQLFetchData=(values)=> {
     const history = useHistory()
     const dispatch = useDispatch()
-    const token = new URLSearchParams(window.location.search).get('token') // id=123
+    const token = new URLSearchParams(window.location.search).get('token')
     const [ResetPassword, {
         data: dataUpdate,
         loading: loading_EventUpdated,

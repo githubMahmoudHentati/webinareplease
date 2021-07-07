@@ -8,6 +8,7 @@ export const graphQL_shema = ()=> {
             addUser(input:$input) {
                 code
                 message
+                token
             }
 
         }

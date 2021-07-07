@@ -5,33 +5,35 @@ import {useDispatch} from "react-redux";
 import {
     setForgetPasswordConstraintDataOnchange
 } from "../store/forgetPasswordAction";
+import {ToastMessage} from "./toastMessage";
 
 
 export const GraphQLFetchData=(values)=> {
     const history = useHistory()
     const dispatch = useDispatch()
+    const {success_submit,error_submit}=ToastMessage()
 
-
-    const [ForgetPassword, {
+    const tokenConfirmMail = localStorage.getItem('mailConfirmationToken')?localStorage.getItem('mailConfirmationToken'):'';
+    console.log("leaveToast",tokenConfirmMail)
+    const [ReSendConfirmMailAction, {
         data: dataUpdate,
         loading: loading_EventUpdated,
         error: error_EventUpdated,
-    }] = useMutation(graphQL_shema().forgetPassword, {
-        variables: values.forgetPassword
-        ,
+    }] = useMutation(graphQL_shema().ResendConfirmMailMutation, {
+        variables: {token: tokenConfirmMail},
         onCompleted: async (data) => {
-            if (data.ResetPasswordRequest.Code===200)
-                {
-                    //history.push("/")
-                    //dispatch(setAppSetLogin(data.login.Token));
-                    //localStorage.setItem('jwtToken', data.login.Token);
-                }
-            dispatch(setForgetPasswordConstraintDataOnchange({constraintDataNameChange:"loadingForgetPassword",constraintDataValueChange:false}))
-            dispatch(setForgetPasswordConstraintDataOnchange({constraintDataNameChange:"passwordSent",constraintDataValueChange:true}))
+            switch (data.ResendMailConfirmation.code) {
+                case  200 :
+                    values.constraintData.leaveToast&&await success_submit(200);
+                    break;
+                case  400 :
+                    values.constraintData.leaveToast&& await error_submit(400);
+                    break;
+            }
         }
     });
     return({
-        ForgetPassword,
+        ReSendConfirmMailAction,
     })
 }
 

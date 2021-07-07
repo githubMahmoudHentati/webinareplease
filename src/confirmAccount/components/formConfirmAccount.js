@@ -1,8 +1,10 @@
 import {Button, Col, Row} from "antd";
 import {useHistory} from "react-router-dom";
+import {Hooks} from "../utils/hooks";
 
 export const FormConfirmAccount =()=> {
     const history = useHistory()
+    const {ResendConfirmAccount}=Hooks()
 
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
@@ -23,10 +25,8 @@ export const FormConfirmAccount =()=> {
             </Col>
             <Col span={24}>
                 <span>vous n'avez pas trouvé l'email?     </span>
-                <a className={"spn_chbx"} onClick={() => {
-                    history.push("/contactClient")
-                }}>
-                    Renenvoyer l'e-mail de confirmation</a>
+                <a className={"spn_chbx"} onClick={ResendConfirmAccount}>
+                    Renvoyer l'e-mail de confirmation</a>
             </Col>
         </Row>
     )

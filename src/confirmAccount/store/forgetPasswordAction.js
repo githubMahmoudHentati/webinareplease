@@ -1,20 +1,10 @@
 
 
-//******************** connexion actions***************//
+//*******************Constraint confirmAccount Data actions*******************//
 
-        export function setForgetPasswordOnchange(e){
-
+        export function setConfirmAccountConstraintDataOnchange(e){
             return{
-                type: "SET_ForgetPasswordOnchange",
-                payload:e,
-            }
-        }
-
-//*******************Constraint Data actions*******************//
-
-        export function setForgetPasswordConstraintDataOnchange(e){
-            return{
-                type:"SET_ForgetPasswordConstraintDataOnchange",
+                type:"SET_ConfirmAccountConstraintDataOnchange",
                 payload:e
             }
         }
