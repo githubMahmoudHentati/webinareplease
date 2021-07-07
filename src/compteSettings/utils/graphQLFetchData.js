@@ -46,7 +46,7 @@ export const GraphQLFetchData=(form)=> {
                 values.generalInformation
         },
         onCompleted: async (data) => {
-            if (data.updateUser.Code === 200) {
+            if (data.updateUser.code === 200) {
                 history.push("/showVideos")
 
                 // document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
@@ -75,7 +75,7 @@ export const GraphQLFetchData=(form)=> {
                 values.securityAccount
         },
         onCompleted: async (data) => {
-            if(data.changePassword.Code === 200){
+            if(data.changePassword.code === 200){
                 dispatch(setEmptyPasswordInput(securityAccount()));
                 dispatch(setLoadingUpdatePassword({
                     LoadingUpdatePasswordNameChange: "loadingUpdatePassword",
@@ -84,7 +84,7 @@ export const GraphQLFetchData=(form)=> {
                 form.resetFields();
                 success_message_update_password()
 
-            }else if(data.changePassword.Code === 400){
+            }else if(data.changePassword.code === 400){
                 error_message_update_password()
             }
 

@@ -14,6 +14,7 @@ export const MenuForms =()=>{
         <Row>
             <Col span={24}>
                 <Menu
+                    className={"menuCompteSettings"}
                     style={{width:'100%',height:"100%" , backgroundColor:darkMode===false?"":"#141414" , borderRight:darkMode===false?"":"2px solid #1D1D1D"}}
                     selectedKeys={[selectedkey===0?'1':selectedkey===1?'2':selectedkey===2?'2':selectedkey===3?'3':'']}
                     defaultOpenKeys={['sub1']}

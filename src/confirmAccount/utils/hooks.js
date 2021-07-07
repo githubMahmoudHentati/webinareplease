@@ -5,30 +5,22 @@ import {
     setForgetPasswordOnchange
 } from "../store/forgetPasswordAction";
 import {GraphQLFetchData} from "./graphQLFetchData";
-import {ForgetPasswordReducer} from "../store/forgetPasswordReducer";
+import {ConfirmAccountReducer, ForgetPasswordReducer} from "../store/forgetPasswordReducer";
 
 
 export  const Hooks=()=> {
-    const dispatch = useDispatch()
-    const values = useSelector((state) => state.ForgetPasswordReducer)
-    const {ForgetPassword}=GraphQLFetchData(values)
-    console.log("values",values)
-//******************connexion************************//
-    const forgetPasswordOnChange = (event) => {
-        dispatch(setForgetPasswordOnchange({
-            forgetPasswordNameChange: event.target.name,
-            forgetPasswordValueChange: event.target.value
-        }));
-    };
+    const values = useSelector((state) => state.ConfirmAccountReducer)
+    const {ReSendConfirmMailAction} = GraphQLFetchData(values)
 
-    const handleSubmit =()=>{
-        dispatch(setForgetPasswordConstraintDataOnchange({constraintDataNameChange:"loadingForgetPassword",constraintDataValueChange:true}))
-        ForgetPassword()
+//******************connexion************************//
+
+
+    const ResendConfirmAccount =()=>{
+        values.constraintData.leaveToast&&ReSendConfirmMailAction()
     }
 
     return({
-        forgetPasswordOnChange,
-        handleSubmit,
+        ResendConfirmAccount,
         values
     })
 }

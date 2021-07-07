@@ -13,7 +13,17 @@ export const graphQL_shema = ()=> {
         }
     `;
 
+    const confirmAccountQuery = gql`
+    query ($token:String!) {
+        verifySubscriptionToken(token:$token) {
+            code
+            message
+        }
+    }
+    `;
+
     return({
         Connexion,
+        confirmAccountQuery
     })
 }
