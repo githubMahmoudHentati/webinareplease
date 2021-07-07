@@ -30,7 +30,7 @@ export const SignUp =()=>{
                       child2={
                         <Row className={"text-form"} gutter={[10,0]}>
                             <Col>
-                                <Button onClick={()=>{history.push("/connexion")}}>Annuler</Button>
+                                <Button onClick={()=>{history.push("/ConfirmAccount")}}>Annuler</Button>
                             </Col>
                             <Col>
                                 <Button  loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">Inscrivez-vous maintenant</Button>

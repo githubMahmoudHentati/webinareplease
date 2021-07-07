@@ -13,23 +13,26 @@ import {
     UnlockOutlined,
     LogoutOutlined,
     PieChartOutlined,
-     GlobalOutlined
+     GlobalOutlined,
 } from '@ant-design/icons';
 import { Badge , Menu, Dropdown , Avatar} from 'antd';
-import {setAccountSetting, setAppSetLogin, setAppSetLogout} from "../redux/actions";
+import {setAccountSetting, setAppSetLogin, setAppSetLogout , setSideMenu} from "../redux/actions";
 import {setDarkMode} from "../redux/actions";
 import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
+import { CSSTransition } from 'react-transition-group';
+
 
 
 function GlobalHeader() {
 
+
+
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const activeSideMenu = useSelector((state)=> state.Reducer.activeSideMenu)
 
     const [back , Setback]=useState(false)
-
-
 
 
     //fonction checkbox
@@ -173,12 +176,21 @@ function GlobalHeader() {
     );
 
     return(
+        <div className={"div_Header"}>
         <div className={"Header"} style={{backgroundColor:darkMode===false?"#ffffff":"#141414"}}>
 
             <div className="div_home_logo">
                <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg" style={{color:darkMode===false?"":"white"}}></span></div>
                 <HomeOutlined className={"Home_Icon"} style={{color:darkMode===false?"":"#007fcb"}}/>
             </div>{/*./div_home_logo*/}
+
+
+            {/*div_hambg_button*/}
+            <div className={"hambg_button"}>
+              <MenuFoldOutlined id={"id_menu_hamg"} className={"menu_hamg"} onClick={()=>{dispatch(setSideMenu(true))}}/>
+            </div>
+            {/*div_hambg_button*/}
+
 
             <div className="div_Notification_user_dar">
                 <QuestionCircleOutlined className={"icon_help"} style={{color:darkMode===false?"":"white"}}/>
@@ -211,7 +223,76 @@ function GlobalHeader() {
             </div>
 
         </div>
+
+            {
+                activeSideMenu === true
+                    ?
+                        <div className={"side-nav"} id={"side-menu"}>
+
+                            <div className={"div1_side_nav"}>
+                                <MenuUnfoldOutlined onClick={()=>{dispatch(setSideMenu(false))}}/>
+                                <label id="switch" className="switch" >
+                                    <input type="checkbox"
+                                           id="slider"
+                                           onClick={()=>onChange()}
+                                           defaultChecked={darkMode}
+                                    />
+                                    <span className="slider"></span>
+                                </label>
+                            </div>
+                            <div className={"div2_side_nav"}>
+                                <div className={"div1_div2_side_nav"}>
+                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
+                                        <Avatar style={{ backgroundColor: '#419BF9' }} icon={<UserOutlined />} /> Nom d'utilisateur
+                                    </a>
+                                </div>
+
+                                <div className={"div2_div2_side_nav"}>
+                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
+                                        <UserOutlined />Compte
+                                    </a>
+                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
+                                        <UnlockOutlined />Sécurité
+                                    </a>
+                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
+                                        <PieChartOutlined />Abonnement
+                                    </a>
+                                </div>
+
+                                <div className={"div3_div2_side_nav"}>
+                                    <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']}>
+                                        <div> <GlobalOutlined style={{color:darkMode===false?"":"white"}}/> langues</div>
+                                    </Dropdown>
+                                    <div><QuestionCircleOutlined className={"icon_help"} style={{color:darkMode===false?"":"white"}}/>  Aide</div>
+                                </div>
+
+                                <div className={"div4_div2_side_nav"}>
+                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
+                                        <LogoutOutlined />Déconnection
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    :
+                    null
+            }
+
+
+            {
+                activeSideMenu===true
+                    ?
+                    <div className={"overley"}>
+
+                    </div>
+                    :
+                    null
+
+            }
+
+        </div>
     );
 
 }
+
 export default GlobalHeader;

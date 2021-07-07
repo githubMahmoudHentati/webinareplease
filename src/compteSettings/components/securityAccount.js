@@ -11,12 +11,12 @@ import {setAccountSetting} from "../../utils/redux/actions";
 
      return(
         <Row  gutter={[0, 25]}>
-            <Col span={24}>
+            <Col offset={1} span={24}>
                 <span className={"spn1_securité"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Sécurité et accès</span>
             </Col>
-            <Col span={24}>
+            <Col offset={1} span={24}>
                 <Row justify={"space-between"}  gutter={[0, 15]}>
-                    <Col span={5}>
+                    <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 5}} lg={{span:5}} >
                         <Row>
                             <Col span={24}>
                                 <span className={"spn2_motDePasse"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Mot de passe</span>
@@ -26,7 +26,7 @@ import {setAccountSetting} from "../../utils/redux/actions";
                             </Col>
                         </Row>
                     </Col>
-                    <Col style={{display:"flex ",alignItems:"center"}}span={2}>
+                    <Col style={{display:"flex ",alignItems:"center"}} xs={{ span: 24}} sm={{ span: 24}} md={{ span: 2}} lg={{span:2}}>
                         <a className={"spn2_motDePasse"} onClick={()=>dispatch(setAccountSetting(2))}>Modifier</a>
                     </Col>
                 </Row>

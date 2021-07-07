@@ -837,6 +837,53 @@ margin-top: 2%;
     align-items: center;
     z-index: 999999999999 !important;
 }
+
+.overley{
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: all 0.5s ease-in-out !important;
+}
+.side-nav{
+    height: 100%;
+    width: 295px;
+    position: fixed;
+    z-index: 100000000000000;
+    top: 0;
+    right: 0;
+    background-color: white !important;
+    opacity: 1;
+    overflow-x: hidden;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition:20s !important;
+}
+.div1_side_nav{
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.div2_side_nav{
+    width: 85%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.div2_div2_side_nav{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 .div_home_logo{
     width: 30%;
     height: 100%;
@@ -845,6 +892,9 @@ margin-top: 2%;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+}
+.menu_hamg{
+   display: none !important;
 }
 .icon_webinaire{
     height: 100%;
@@ -1417,18 +1467,21 @@ input:checked + .slider:before {
     }
     .action{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
     }
     .action Button{
         width: 20px !important;
-        margin-right: 0 !important;
+        margin-right: 10px !important;
         display: flex;
         flex-direction: row;
         justify-content: center !important;
         align-items: center !important;
         text-align: center !important;
+    }
+    .span_action{
+        margin-bottom: 15px;
     }
     #icon_vs{
         margin-left: 5px !important;
@@ -1447,6 +1500,10 @@ input:checked + .slider:before {
         align-items: center;
         margin-top: 20px;
     }
+    .div_Filter{
+        width: 50%;
+        margin-top: 1.7%;
+    }
     .delete_number{
         width: 43%;
         height: 40px;
@@ -1456,6 +1513,17 @@ input:checked + .slider:before {
         align-items: center ;
     }
     .delete_number Button{
+        height: 100%;
+        width: 30%;
+    }
+    .div_home_logo{
+        width: 45%;
+        padding: 10px 0px;
+    }
+    .menu_hamg{
+        display: none;
+    }
+    .icon_webinaire{
         height: 100%;
         width: 30%;
     }

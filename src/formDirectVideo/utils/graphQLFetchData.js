@@ -71,7 +71,7 @@ export const GraphQLFetchData = (values) => {
 
     const [generateSecuredPassword,{loading:loading_securedPassword, data:data_securedPassword}]
         = useMutation(graphQL_shema().generateSecuredPassword, {
-        skip:!values.general.securedPasswordOption,
+        skip:values.general.securedPasswordOption,
         variables: {input:{autoGenerate:true}},
         context: { clientName: "second" },
         onCompleted :async (data)=>{

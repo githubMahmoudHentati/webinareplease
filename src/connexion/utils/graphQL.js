@@ -6,14 +6,24 @@ export const graphQL_shema = ()=> {
     const Connexion = gql`
         mutation($input:LoginInput!) {
             login(input:$input) {
-                Code
-                Message
-                Token
+                code
+                message
+                token
             }
         }
     `;
 
+    const confirmAccountQuery = gql`
+    query ($token:String!) {
+        verifySubscriptionToken(token:$token) {
+            code
+            message
+        }
+    }
+    `;
+
     return({
         Connexion,
+        confirmAccountQuery
     })
 }

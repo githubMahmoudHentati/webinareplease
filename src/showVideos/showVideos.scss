@@ -1,0 +1,246 @@
+:root {
+  --border_color:rgba(0 , 0 , 0 , 0.15);
+}
+
+@media screen and (min-width: 575px) and (max-width: 767px) {
+  .action{
+    height: 45px;
+    width: 25px;
+    position: absolute;
+    top: 73px;
+    left: 100px !important;
+  }
+  .span_action{
+    height: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: -5px !important;
+  }
+}
+  @media screen and (max-width: 767px) {
+    .ant-dropdown-menu{
+      margin-left: -50px !important;
+      margin-top: -5px;
+    }
+    .DataTable{
+      margin-top: 1%;
+    }
+    .DataTable .ant-table-cell:nth-of-type(1){
+      display: none !important;
+    }
+    .DataTable .ant-table-cell:nth-of-type(2) {
+      display: none !important;
+    }
+    .DataTable .ant-table-row{
+      border: 1px solid var(--border_color) !important;
+      min-height: 120px;
+      max-width: 100% !important;
+      position: relative !important;
+      margin-bottom: 2% !important;
+      margin-top: 2% !important;
+      overflow: hidden;
+    }
+    .DataTable .ant-table-cell{
+      border: 0 !important;
+    }
+    .DataTable .ant-table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+    }
+    .DataTable .ant-table tr {
+      display: block;
+    }
+    .div_apercu{
+      z-index: 9;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .img_aperçu{
+      width: 140px !important;
+      height: 120px !important;
+    }
+    .div_titre{
+      width: 150px;
+      min-height: 10px;
+      text-align: left !important;
+      padding:0 20px;
+      position: absolute;
+      top: 5px;
+      left: 110px;
+    }
+    .div_date{
+      width: 130px;
+      min-height: 10px !important;
+      text-align: left !important;
+      padding:0 15px;
+      position: absolute;
+      top: 40px;
+      left: 80px;
+    }
+    .div-status{
+      width: 50px;
+      position: absolute;
+      top: 85px;
+      left: 50px;
+    }
+    .action{
+      height: 45px;
+      width: 25px;
+      position: absolute;
+      top: 73px;
+      left: 80px;
+    }
+    #span_diffuser{
+      display: none;
+    }
+    .action Button{
+      width: 24px !important;
+      height: 24px !important;
+      display: flex;
+      flex-direction: row;
+      justify-content: center !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .span_action{
+      height: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-top: -15px;
+    }
+    #icon_vs{
+      margin-left: 10px !important;
+    }
+
+    #spn_ajouter{
+      display: none !important;
+    }
+    #Text_Calendar{
+      display: none !important;
+    }
+    #spn_option{
+      z-index: 99999999999999999999999999999;
+    }
+    .showVideo{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .div1_showVideo{
+      height: 205px;
+    }
+    .div_Filter{
+      width: 55%;
+      margin-top: 0.7%;
+      z-index: 99999999999999999;
+    }
+    .Filter{
+      width: 100%;
+      height: 80px;
+      display: flex;
+      flex-direction: column !important;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.7%;
+    }
+    .div_delete_select{
+      width: 100%;
+      height: 40px;
+    }
+    .div_filter{
+      width: 100% !important;
+    }
+    .div_Filter_global{
+      width: 100%;
+    }
+    .div_Filter{
+      z-index: 99999999999999999999999999999999999 !important;
+      width: 100%;
+      margin-top: 15%;
+      padding: 2% 2%;
+    }
+    .Calendrier{
+      width: 15%;
+    }
+    .showVideosDiv .card .ant-card-body{
+      padding: 0px !important;
+    }
+    .card2{
+      padding: 10px !important;
+    }
+    .div_Notification_user_dar{
+      display: none !important;
+    }
+    .div_home_logo{
+      width: 100% !important;
+      padding: 10px 0px;
+    }
+    .menu_hamg{
+      display: block !important;
+      font-size: 20px;
+    }
+    .div_calendarevent{
+      width: 100% !important;
+      height: auto !important;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 20px;
+    }
+    .span_time{
+      font-family: "SF Pro Display";
+      font-size: 14px;
+      font-weight: 400;
+      color: RGBA(0, 0, 0, 0.85);
+      margin-bottom: 2%;
+    }
+    .tag_moment{
+      width: 100%;
+    }
+    .spn_Date_event{
+      font-family: "SF Pro Display";
+      font-size: 20px;
+      font-weight: 400;
+      color: RGBA(0, 0, 0, 0.85);
+    }
+    .footer_modal_Avenir{
+      width: 320px !important;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .div2_time_calendar{
+      width: 100% !important;
+      height: 90% !important;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center !important;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .div2_time_calendar p{
+      width: 40% !important;
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      letter-spacing: normal;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+  }
+
+

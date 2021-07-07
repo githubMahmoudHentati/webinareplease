@@ -9,7 +9,7 @@ import {Hooks} from "../utils/hooks";
 import {useDispatch} from "react-redux";
 import {setPackagePayementAction} from "../store/PackagePayementAction";
 import '../PackagePayement.scss'
-import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
+import {setSignUpConstraintDataOnchange, setSignUpOnchange} from "../../signUp/store/signUpAction";
 const { Step } = Steps;
 const { Option } = Select;
 
@@ -44,6 +44,10 @@ function ChoicePackage(){
 
     // next step
     const nextToSignUp = () => {
+        dispatch(setSignUpOnchange({
+            SignUpNameChange: "subscriptionId",
+            SignUpValueChange: values.packagePayement.activeCard-1
+        }));
         dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:"current",constraintDataValueChange:valuesSignUp.constraintData.current+1}))
         if(values.packagePayement.activeCard===1){
             // dispatch amount card

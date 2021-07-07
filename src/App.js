@@ -30,7 +30,7 @@ function App() {
             <Redirect exact from="/" to="/connexion" />
             < Route exact path='/showVideos' component={ShowVideos} />
               <Route exact path='/FormDirectVideo' component={FormDirectVideo} />
-              <Route exact path='/PackagePayement' component={PackagePayement}/>
+              <Route exact path='/PackagePayement' > {!credentialsValues.appState.loggedIn?<PackagePayement/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/connexion'  > {!credentialsValues.appState.loggedIn?<Connexion/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/ConfirmAccount'  > {!credentialsValues.appState.loggedIn?<ConfirmAccount/>:<Redirect exact  to="/showVideos" />}</Route>
               <Route exact path='/signUp' > {!credentialsValues.appState.loggedIn?<SignUp/>:<Redirect exact  to="/showVideos" />}</Route>

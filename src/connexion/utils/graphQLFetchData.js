@@ -1,17 +1,33 @@
-import {useLazyQuery, useMutation} from "@apollo/react-hooks";
+import {useLazyQuery, useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setConnexionConstraintDataOnchange, setConnexionOnchange} from "../store/connexionAction";
 import {setAppSetLogin} from "../../utils/redux/actions";
+import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 
 
 export const GraphQLFetchData=(form)=> {
     const history = useHistory()
     const dispatch = useDispatch()
     const {values }=Hooks()
+    const token = new URLSearchParams(window.location.search).get('token')
 
+
+    const {loading: confirmAccount_loading, data: confirmAccountData}
+        = useQuery(graphQL_shema().confirmAccountQuery, {
+        fetchPolicy: 'cache-and-network',
+        variables: { token : token },
+        onCompleted: async (data) => {
+            if (data.verifySubscriptionToken.code === 200) {
+                localStorage.removeItem('mailConfirmationToken');
+            }
+            if (data.verifySubscriptionToken.code === 400) {
+                history.push("/connexion")
+            }
+        }
+    })
 
     const [Connexion, {
         data: dataUpdate,
@@ -23,10 +39,10 @@ export const GraphQLFetchData=(form)=> {
         fetchPolicy: "no-cache",
         skip:!values.constraintData.loadingConnexion,
         onCompleted: async (data) => {
-            if (data.login.Code === 200) {
+            if (data.login.code === 200) {
                 history.push("/")
-                dispatch(setAppSetLogin(data.login.Token));
-                localStorage.setItem('jwtToken', data.login.Token);
+                dispatch(setAppSetLogin(data.login.token));
+                localStorage.setItem('jwtToken', data.login.token);
                 if (values.constraintData.isRememberMe){
                     localStorage.setItem('username', values.connexion.username);
                     localStorage.setItem('password', values.connexion.password);
@@ -40,7 +56,7 @@ export const GraphQLFetchData=(form)=> {
 
                 document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
                 document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
-            } else if (data.login.Code === 500) {
+            } else if (data.login.code === 500) {
 
                 dispatch(setConnexionConstraintDataOnchange({
                     constraintDataNameChange: "connexionError",
@@ -59,6 +75,7 @@ export const GraphQLFetchData=(form)=> {
     });
     return({
         Connexion,
+        confirmAccountData
     })
 }
 

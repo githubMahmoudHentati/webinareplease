@@ -22,11 +22,14 @@ export const SubscriptionTable=()=>{
         title: 'Facture',
         dataIndex: 'bill',
         key: 'bill',
+        width: 80,
+        fixed: 'left',
     },
     {
         title: 'Emise le',
         dataIndex: 'issuedTime',
         key: 'issuedTime',
+        width: 150,
     },
     {
         title: 'Intitulé',
@@ -66,6 +69,7 @@ export const SubscriptionTable=()=>{
         title: '',
         dataIndex: 'payment',
         key: 'payment',
+
         render: (text,record) =>
         {
             return(
@@ -105,7 +109,7 @@ export const SubscriptionTable=()=>{
                 pageSize: values.paginationAbonnement.pageSize,
                 current: currentPage + 1,
             }}
-            scroll={{ y: 240 }}
+            scroll={{ x: 700 , y: 240 }}
         />
     )
 }

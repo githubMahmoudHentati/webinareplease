@@ -4,15 +4,29 @@ import {ArrowLeftOutlined } from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
 import {useSelector} from "react-redux";
 import "../Calendar.scss"
+import {CalendarReducer} from "../store/calendarReducer";
+import Calendar from "../Calendar";
+
+let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 function HeaderCalendar() {
     const history = useHistory();
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    // use Selector redux
+    const calendarProps = useSelector((state)=> state.CalendarReducer)
 
     // handle click arrow calendar
     const handleClickArrowCalendar = () =>{
-        history.push('/showVideos')
+        if(x.matches && calendarProps.calendar.activeCalendar === true){
+            return(
+                <Calendar/>
+            )
+        }
+        else {
+            history.push('/showVideos')
+        }
+
     }
 
     return(
@@ -32,7 +46,7 @@ function HeaderCalendar() {
             </div>{/*./Breadcrumb*/}
 
             <div className="MesDirectsHeaderCalendrier"  style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
-               <div className={"div_retour"}><ArrowLeftOutlined style={{color:darkMode===false?"":"white"}} className={"arrow"} onClick={()=>handleClickArrowCalendar()}/> <h4 style={{color:darkMode===false?"":"white"}} className={"h4"}>Calendrier</h4></div>
+                <div className={"div_retour"}><ArrowLeftOutlined style={{color:darkMode===false?"":"white"}} className={"arrow"} onClick={()=>handleClickArrowCalendar()}/> <h4 style={{color:darkMode===false?"":"white"}} className={"h4"}>Calendrier</h4></div>
             </div>{/*./TousMedia*/}
 
         </div>
