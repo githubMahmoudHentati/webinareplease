@@ -11,6 +11,7 @@ import {ForgetPasswordReducer} from "../../forgetPassword/store/forgetPasswordRe
 import {ResetPasswordReducer} from "../../resetPassword/store/resetPasswordReducer";
 import {PackagePayementReducer} from "../../PackagePayement/store/PackagePayementReducer";
 import {CalendarReducer} from "../../Calendar/store/calendarReducer";
+import {ConfirmAccountReducer} from "../../confirmAccount/store/forgetPasswordReducer";
 
 
 export const rootReducer = combineReducers({
@@ -24,5 +25,6 @@ export const rootReducer = combineReducers({
     ForgetPasswordReducer,
     ResetPasswordReducer,
     PackagePayementReducer,
-    CalendarReducer
+    CalendarReducer,
+    ConfirmAccountReducer
 })

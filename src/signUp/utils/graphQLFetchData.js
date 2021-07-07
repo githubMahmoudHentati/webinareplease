@@ -34,16 +34,18 @@ export const GraphQLFetchData = (valuesSignUp) => {
                 }))
 
                 if (valuesSignUp.signUp.subscriptionId === 0) {
-                    history.push("/connexion")
+
+                    history.push("/ConfirmAccount")
+
                 } else
                     dispatch(setSignUpConstraintDataOnchange({
                         constraintDataNameChange: "current",
                         constraintDataValueChange: valuesSignUp.constraintData.current + 1
                     }))
 
-                //valuesSignUp.signUp.subscriptionId===0&&history.push("/connexion")
+                localStorage.setItem('mailConfirmationToken', data.addUser.token);
 
-            } else if (data.addUser.code === 403) {
+            } else if (data.addUser.code === 400) {
                 dispatch(setSignUpConstraintDataOnchange({
                     constraintDataNameChange: "signUpError",
                     constraintDataValueChange: true

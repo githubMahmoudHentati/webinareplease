@@ -1,30 +1,22 @@
-import {ConfirmAccount} from "../utils/confirmAccount";
+import {ConfirmAccountContaintes} from "../utils/ConfirmAccountContaintes";
 
-const {forgetPassword,constraintData} = ConfirmAccount()
+const {constraintData} = ConfirmAccountContaintes()
 
-const ConnexionInitialState = {
+const confirmAccountInitialState = {
 
-    forgetPassword: forgetPassword(),
     constraintData: constraintData()
 
 
 }
 
-export const  ForgetPasswordReducer=(state=ConnexionInitialState , action)=>{
+export const  ConfirmAccountReducer=(state=confirmAccountInitialState , action)=>{
 
     switch (action.type){
 
-        //******** connexion reducer case************//
+        //******** ConfirmAccount reducer case************//
 
-        case "SET_ForgetPasswordOnchange":
-            const {forgetPasswordNameChange,forgetPasswordValueChange}=action.payload
-            const forgetPasswordOnOnchangeObj = {...state.forgetPassword,[forgetPasswordNameChange]: forgetPasswordValueChange}
-            return{
-                ...state,
-                forgetPassword:forgetPasswordOnOnchangeObj
-            }
 
-        case "SET_ForgetPasswordConstraintDataOnchange":
+        case "SET_ConfirmAccountConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
             const constraintDataOnOnchangeObj = {...state.constraintData,[constraintDataNameChange]: constraintDataValueChange}
             return{

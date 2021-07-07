@@ -98,58 +98,58 @@ export function CalendarFile() {
                 {
                     allow &&
                     <ul className="events">
-                {listData.map(item => {
-                    return (
-                        <div>
-                            <Tag className={"btn_error"}
-                                 color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
-                                 onClick={() => onShowModal()}>
-                                <Badge
-                                    color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
-                                    text={item.content} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
-                            </Tag>
+                        {listData.map(item => {
+                            return (
+                                <div>
+                                    <Tag className={"btn_error"}
+                                         color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
+                                         onClick={() => onShowModal()}>
+                                        <Badge
+                                            color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
+                                            text={item.content} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
+                                    </Tag>
 
-                            <Modal
-                                visible={visible}
-                                title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
-                                              text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
-                                onCancel={handleCancel}
-                                footer={[
-                                    <div className={"footer_modal_Avenir"}>
-                                        <div><Button><DeleteOutlined/> Supprimer</Button></div>
+                                    <Modal
+                                        visible={visible}
+                                        title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
+                                                      text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                                        onCancel={handleCancel}
+                                        footer={[
+                                            <div className={"footer_modal_Avenir"}>
+                                                <div><Button><DeleteOutlined/> Supprimer</Button></div>
 
-                                        <div>
-                                            <Button key="back" onClick={handleCancel}>
-                                                Annuler
-                                            </Button>
-                                            <Button key="submit" type="primary">
-                                                Visualiser
-                                            </Button>
-                                        </div>
+                                                <div>
+                                                    <Button key="back" onClick={handleCancel}>
+                                                        Annuler
+                                                    </Button>
+                                                    <Button key="submit" type="primary">
+                                                        Visualiser
+                                                    </Button>
+                                                </div>
 
-                                    </div>
-                                ]}
-                            >
-                                <div className={"body_Modal"}>
-                                    <div className={"div_image_modal"}><img
-                                        src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
-                                    </div>
-                                    <div className={"div_time_calendar"}>
-                                        <div className={"type_btn"}><Tag
-                                            color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
+                                            </div>
+                                        ]}
+                                    >
+                                        <div className={"body_Modal"}>
+                                            <div className={"div_image_modal"}><img
+                                                src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
+                                            </div>
+                                            <div className={"div_time_calendar"}>
+                                                <div className={"type_btn"}><Tag
+                                                    color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
+                                                </div>
+                                                <div className={"div2_time_calendar"}>
+                                                    <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                        <CalendarOutlined/> 13-05-2121</p>
+                                                    <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                        <ClockCircleOutlined/> 16:30:00</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className={"div2_time_calendar"}>
-                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                                <CalendarOutlined/> 13-05-2121</p>
-                                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                                <ClockCircleOutlined/> 16:30:00</p>
-                                        </div>
-                                    </div>
+                                    </Modal>
                                 </div>
-                            </Modal>
-                        </div>
-                    )
-                })}
+                            )
+                        })}
                     </ul>
                 }
             </div>
@@ -185,11 +185,11 @@ export function CalendarFile() {
     return(
         <div className={"CalendarFile"}>
             {
-                  x.matches && activeCalendarEvents === true
-                      ?
-                     <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues} GetCalendarDataNow={GetCalendarDataNow}/>
-                      :
-                     <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange} onSelect={selectDate}/>
+                x.matches && activeCalendarEvents === true
+                    ?
+                    <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues} GetCalendarDataNow={GetCalendarDataNow}/>
+                    :
+                    <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange} onSelect={selectDate}/>
             }
 
         </div>
