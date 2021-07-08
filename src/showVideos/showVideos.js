@@ -1,4 +1,4 @@
-import React,{useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import UseDataTableVideos from "./components/ListVideos";
 import HeaderVideos from "./components/headerVideos";
 import GlobalHeader from "../utils/components/header"
@@ -18,6 +18,10 @@ import './showVideos.scss'
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
 function ShowVideos() {
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);// scroll window with the pagination
+    })
 
     const {DeleteItemsMutation}=GraphQLFetchData()
 

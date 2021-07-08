@@ -11,7 +11,7 @@ export const MenuForms =()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
     return (
-        <Row>
+        <Row className={"row_menu"}>
             <Col span={24} >
                 <Menu
                     style={{width:'100%',height:"100%" , backgroundColor:darkMode===false?"":"#141414" , borderRight:darkMode===false?"":"2px solid #1D1D1D"}}
@@ -33,7 +33,7 @@ export const MenuForms =()=>{
 
                     </div>
 
-                    <Menu.Item className={"menuItem"} onClick={()=>{dispatch(setDirectSetting(0))}} key="1">
+                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(0))}} key="1">
                         Géneral
                     </Menu.Item>
                     <div className={"titre-menu"}>
@@ -45,19 +45,19 @@ export const MenuForms =()=>{
                         fontWeight: "500"
                     }}>Paramètres optionnels</span>
                     </div>
-                    <Menu.Item className={"menuItem"} onClick={()=>{dispatch(setDirectSetting(1))}} key="2">
+                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(1))}} key="2">
                         Configuration
                     </Menu.Item>
 
-                    <Menu.Item className={"menuItem"} onClick={()=>{dispatch(setDirectSetting(2))}}key="3">
+                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(2))}}key="3">
                         Invitations
                     </Menu.Item>
 
-                    <Menu.Item className={"menuItem"} onClick={()=>{dispatch(setDirectSetting(3))}} key="4">
+                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(3))}} key="4">
                         Outils social
                     </Menu.Item>
 
-                    <Menu.Item className={"menuItem"} onClick={()=>{dispatch(setDirectSetting(4))}} key="5">
+                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(4))}} key="5">
                         Templates
                     </Menu.Item>
                 </Menu>

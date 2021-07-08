@@ -18,6 +18,7 @@ export  const Hooks=()=>{
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
     const {CreateLive,generateSecuredPassword} = GraphQLFetchData(values)
+    let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 
     //******************General************************//
@@ -125,6 +126,7 @@ export  const Hooks=()=>{
         InvitationOnChangeChecked,
         invitationOnChangeSelect,
         handleSubmit,
-        values
+        values,
+        matchesMedia
     })
 }
