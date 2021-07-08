@@ -21,12 +21,13 @@ import {LiveSubmit} from "./liveSubmit.js";
 export const IframeDirectVideo =()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
+    let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
     const [formLive, setFormLive] = useState([]);
     const setFormLiveAction=(e)=>{
         setFormLive(e)
     }
-    console.log("formLive",formLive)
+    console.log("directMenu",directMenu)
     const SelectMenu = ()=>{
         switch(directMenu){
             case 0:
@@ -44,6 +45,7 @@ export const IframeDirectVideo =()=>{
                 return <Generals/>
         }
     }
+
     return(
         <LiveSubmit  setFormLiveAction={setFormLiveAction}>
                 <Row gutter={[0, 10]}>
@@ -62,14 +64,28 @@ export const IframeDirectVideo =()=>{
                         <BarHeader/>
                     </Col>
                     <Col span={24}>
-                        <Row gutter={[30, 20]}>
-                            <Col span={4}>
-                                <MenuForms />
-                            </Col>
-                            <Col span={12}>
-                                <SelectMenu formLive={formLive}/>
-                            </Col>
-                        </Row>
+                            {
+                               matchesMedia.matches
+                                   ?
+                                directMenu === 5
+                                    ?
+                                        <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:4}}>
+                                            <MenuForms />
+                                        </Col>
+                                     : //directMenu=5
+                                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:12}}>
+                                                <SelectMenu formLive={formLive}/>
+                                            </Col>
+                                      : //matchesMedia.matches
+                                   <Row gutter={[30, 20]}>
+                                       <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:4}}>
+                                           <MenuForms />
+                                       </Col>
+                                       <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:12}}>
+                                           <SelectMenu formLive={formLive}/>
+                                       </Col>
+                                   </Row>
+                            }
                     </Col>
                 </Row>
         </LiveSubmit>

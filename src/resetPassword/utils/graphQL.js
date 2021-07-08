@@ -6,14 +6,23 @@ export const graphQL_shema = ()=> {
     const resetPassword = gql`
         mutation($token:String!,$input:PasswordReset!) {
             resetPassword(token:$token, input:$input) {
-                Code
-                Message
+                code
+                message
 
             }
         }
     `;
 
+    const verificationTokenPasswordResetQuery = gql`
+        query ($token:String!) {
+            resetPasswordTokenVerification(token:$token) {
+                code
+                message
+            }
+        }
+    `;
     return({
         resetPassword,
+        verificationTokenPasswordResetQuery
     })
 }

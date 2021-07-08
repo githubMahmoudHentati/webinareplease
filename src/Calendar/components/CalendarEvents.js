@@ -17,8 +17,8 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
         if (calendarValues) {
 
             calendarValues.forEach((element) => {
-                switch ((calenderEventClick.month()+"-"+calenderEventClick.date())) {
-                    case (moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
+                switch ((calenderEventClick.year()+"-"+calenderEventClick.month()+"-"+calenderEventClick.date())) {
+                    case (moment(element.date.date , ).year()+"-"+moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
                         listData=[...listData,{id:(element.id),type:element.type , content:element.content,style:element.date.isAMomentObject,date:element.date.date}]
                         break;
                 }
