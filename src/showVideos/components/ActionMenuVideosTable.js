@@ -13,11 +13,10 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos}=Hooks()
+    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , visible , infosLives}=Hooks()
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
 
-    const [visible , SetVisible] = useState(false)
     const [visibleModalExport , SetVisibleModalExport] = useState(false)
 
     // use Selector redux
@@ -28,7 +27,7 @@ function useActionMenu({record}) {
 
     const actionMenu = (
         <Menu className="menu">
-            <Menu.Item onClick={()=>handleInfos()}><InfoCircleOutlined />infos</Menu.Item>
+            <Menu.Item onClick={()=>handleInfos(record.id)}><InfoCircleOutlined />infos</Menu.Item>
             <Menu.Item><EditOutlined />Modifier</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> Templates</Menu.Item>
@@ -43,14 +42,7 @@ function useActionMenu({record}) {
     const handleCancelModalExport = () =>{
         SetVisibleModalExport(false)
     }
-    // fonction handleInfos
-    const handleInfos =()=>{
-        SetVisible(true)
-    }
-    //handleCancel MODAL
-    const handleCancel = () => {
-        SetVisible(false)
-    };
+
     // fonction pour copier url participant
     const CopyUrlParticipant = () =>{
         if(document.getElementById("myUrlParticipant").value === ""){
@@ -124,7 +116,7 @@ function useActionMenu({record}) {
             >
                 <div className="div_Url_diffusion">
                    <span>Url de diffusion</span>
-                    <Input placeholder="//demo.webtv-solution.com/fo/embed/267"/>
+                    <Input placeholder="//demo.webtv-solution.com/fo/embed/267" name={"inputUrlDiffusion"} value={infosLives.inputUrlDiffusion}/>
                 </div>{/*./div_Url_diffusion*/}
                 <div className="div_Nom_de_flux">
                     <span>Nom de flux</span>
