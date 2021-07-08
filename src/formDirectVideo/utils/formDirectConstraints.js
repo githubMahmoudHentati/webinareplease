@@ -44,9 +44,11 @@ export const FormDirectConstraints = ()=>{
                     lastName: 'Prénom',
                     title: "Titre",
                     email: "",
-                    logoSpeaker: {thumbUrl: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"}
+                    logoSpeaker: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
                 }],
-                speaker: {id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: {}},
+                addSpeakerList:{},
+                speaker: {id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: []},
+                fileListSpeaker:{},
                 LiveInteractiveOption:[],
                 chat:false,
                 comments:false,
@@ -55,7 +57,7 @@ export const FormDirectConstraints = ()=>{
                 richeMediaDiffusion:false,
                 videoMode: "",
                 theme:"",
-                tags:[]
+                tags:[],
             }
         )
     }

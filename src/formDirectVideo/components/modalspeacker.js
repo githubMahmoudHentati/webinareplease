@@ -36,8 +36,9 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
          </Col>
          <Col span={24}>
           <Upload
+              accept="image/jpeg,image/png"
               name="fileList"
-              fileList={[...fileList]}
+              fileList={[...values.configuration.speaker.logoSpeaker]}
               onChange={onChangeFile}
               beforeUpload={{beforeUpload}}
               {...props} listType="picture">

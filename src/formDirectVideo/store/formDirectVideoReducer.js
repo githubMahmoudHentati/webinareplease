@@ -62,7 +62,8 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             }
 
         case "SET_ConfigurationSpeakerList":
-            const {id, name, lastName, title, email} = action.payload
+            const {id, name, lastName, title, email,logoSpeaker} = action.payload
+            console.log("logoSpeaker",logoSpeaker)
             let newArr = state.configuration.SpeakerList.map((item, index) => (action.payload.id === index ? {
                     ...item,
                     id: id,
@@ -70,9 +71,10 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                     lastName: lastName,
                     title: title,
                     email: email,
-                    logoSpeaker:{}
-                } : item
+                    logoSpeaker: logoSpeaker
+                    } : item
             ))
+            console.log("newArr",newArr)
             const configurationSpeakerListObj=!action.payload.id ?{...state.configuration,SpeakerList: [...state.configuration.SpeakerList, action.payload]}:{...state.configuration,SpeakerList:newArr}
 
             return (

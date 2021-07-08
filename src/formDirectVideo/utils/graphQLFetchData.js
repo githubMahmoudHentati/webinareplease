@@ -6,7 +6,7 @@ import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexio
 import {useDispatch} from "react-redux";
 import moment from "moment";
 import {setAppSetLogin} from "../../utils/redux/actions";
-import {setGeneralOnchange} from "../store/formDirectVideoAction";
+import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
 
 
 
@@ -15,7 +15,7 @@ export const GraphQLFetchData = (values) => {
     const dispatch = useDispatch()
     console.log("test",values)
     let startDate= values.general.startDate && values.general.startHour ? (values.general.startDate).format('YYYY-MM-DD') + "T" + (values.general.startHour).format('HH:mm:ss') + "Z" : ""
-    console.log("startDate",startDate)
+    console.log("addSpeaker",values.configuration.addSpeakerList)
 
 
     const [CreateLive, {
@@ -39,6 +39,8 @@ export const GraphQLFetchData = (values) => {
                 },
                 configuration:{
                     liveProgram:values.configuration.directProgram,
+                    addSpeaker:values.configuration.addSpeakerList,
+
                     interOption:{
                         chat:values.configuration.chat,
                         comment:values.configuration.comments,
@@ -53,7 +55,7 @@ export const GraphQLFetchData = (values) => {
                         visible:values.configuration.videoMode!=="notVisibleVideo",
                         theme:values.configuration.theme
                     },
-                    tags:"tag1, tag2, tag3"
+                    tags:"tags1,tags2"
                 }
             }
         },
