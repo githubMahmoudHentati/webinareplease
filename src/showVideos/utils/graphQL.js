@@ -27,8 +27,21 @@ export const graphQL_shema = ()=> {
        }
      }
     `;
+
+    const Get_Live_Info = gql `
+       mutation($liveId:Int!) {
+       getliveInfo(liveId:$liveId) {
+        urlDiffusion
+        streamName
+        idLive
+        pwdLive
+        code
+      }
+     }
+    `
     return({
         Get_Lives,
-        Delete_Items
+        Delete_Items,
+        Get_Live_Info
     })
 }

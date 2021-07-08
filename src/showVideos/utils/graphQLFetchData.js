@@ -1,4 +1,4 @@
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation, useQuery , useLazyQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
@@ -48,8 +48,9 @@ export const GraphQLFetchData=()=> {
         }
     })
 
+
     return({
         GetCalendarDataNow,
-        DeleteItemsMutation
+        DeleteItemsMutation,
     })
 }

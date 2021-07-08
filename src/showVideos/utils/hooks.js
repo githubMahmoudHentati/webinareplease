@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    setFilterVideosActions, setLoadingDeleteShowVideo,
+    setFilterVideosActions, setInfosLive, setLoadingDeleteShowVideo,
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions
@@ -16,6 +16,10 @@ import {setDirectSetting} from "../../utils/redux/actions";
 let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
+
+    const [visible , SetVisible] = useState(false)
+    const [visibleModalExport , SetVisibleModalExport] = useState(false)
+
     const history = useHistory();
 
     const {success_Delete , error_Delete , error_Filter}=StatusMessage()
@@ -35,10 +39,12 @@ export  const Hooks=()=> {
     const conditions = useSelector((state)=> state.ShowVideosReducerReducer.showdivscondition)
    //loading Delete Show Video
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
+    //Reducer infos lives
+    const infosLives = useSelector((state)=> state.ShowVideosReducerReducer.valuesInfosLives)
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("loadingDelete",loadingDelete)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",paginationProps)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -73,6 +79,16 @@ export  const Hooks=()=> {
                 error_Delete(404)
             }
 
+        }
+    })
+
+    // mutation delete lang from table of event
+    const [GETINFOSlIVES] = useMutation(graphQL_shema().Get_Live_Info,{
+        variables : {liveId:paginationProps.idLive},
+        context: { clientName: "second" },
+        onCompleted: (data)=>{
+            console.log("ajhdkfjhdksjfhksdjfhksdjfhksdj",data)
+            dispatch(setInfosLive({infosLivesName:"inputUrlDiffusion",infosLivesValue:data.getliveInfo.urlDiffusion}));
         }
     })
 
@@ -180,6 +196,9 @@ export  const Hooks=()=> {
     const handleClickDropdowMenu =(e)=>{
         // dispatch id list Video
         dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e}));
+        // dispatch id list Video
+        dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
+
     }
 
     /* Click Annuler button Alert*/
@@ -204,6 +223,18 @@ export  const Hooks=()=> {
         }
     }
 
+    // fonction handleInfos
+    const handleInfos =()=>{
+        SetVisible(true)
+        setTimeout(()=>{
+            GETINFOSlIVES()
+        },500)
+    }
+    //handleCancel MODAL
+    const handleCancel = () => {
+        SetVisible(false)
+    };
+
     return({
         handleSearchRow,
         handleHeaderSelect,
@@ -221,7 +252,11 @@ export  const Hooks=()=> {
         conditions,
         loadingDelete,
         handleClickAddLive,
-        matchesMedia
+        matchesMedia,
+        handleInfos,
+        handleCancel,
+        visible,
+        infosLives
     })
 
 

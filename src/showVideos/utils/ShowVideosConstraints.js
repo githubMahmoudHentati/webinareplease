@@ -20,7 +20,8 @@ export const ShowVideosList = ()=>{
                 order:'ascend',
                 columnKey:0,
                 current:1,
-                id:[0]
+                id:[0],
+                idLive:0
             }
         )
     }
@@ -43,12 +44,19 @@ export const ShowVideosList = ()=>{
         })
     }
 
+    const valuesInfosLives = () => {
+        return({
+            inputUrlDiffusion:"",
+        })
+    }
+
     return({
         FilterVideos,
         paginationProps,
         showVideoConstraintData,
         showDivsConditions,
-        loadingDeleteShowVideo
+        loadingDeleteShowVideo,
+        valuesInfosLives
     })
 
 }

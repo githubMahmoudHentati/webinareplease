@@ -44,3 +44,10 @@ export function setLoadingDeleteShowVideo(e){
         payload:e
     }
 }
+
+export function setInfosLive(e){
+    return{
+        type :"SET_INFOSLIVES",
+        payload:e
+    }
+}
