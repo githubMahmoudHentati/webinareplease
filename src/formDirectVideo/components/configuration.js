@@ -120,7 +120,7 @@ export const Configuration =()=>{
                                         renderItem={(item,indexItem) => (
                                             <List.Item   actions={indexItem != 0?[
                                                 <span key="list-loadmore-edit"><EditOutlined
-                                                    onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, indexItem)}
+                                                    onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email,item.logoSpeaker,indexItem)}
                                                     style={{fontSize: "21px",color:darkMode===false}}/></span>,
                                                 <span key="list-loadmore-more"><MinusCircleOutlined
                                                     style={{fontSize: "21px",color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}
@@ -129,7 +129,7 @@ export const Configuration =()=>{
                                             [<span style={{marginLeft:"48px"}}/>]} >
                                                 <List.Item.Meta
                                                     className={indexItem!=0&&"col-item-list"}
-                                                    avatar={<Avatar src={item.logoSpeaker.thumbUrl?item.logoSpeaker.thumbUrl:
+                                                    avatar={<Avatar src={item.logoSpeaker[0]&&item.logoSpeaker[0].thumbUrl?item.logoSpeaker[0].thumbUrl:
                                                         "https://www.trustedclothes.com/blog/wp-content/uploads/2019/02/anonymous-person-221117.jpg"} />}
                                                     title={
                                                         <div ref = { itemListRef }>

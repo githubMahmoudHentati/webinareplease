@@ -66,12 +66,14 @@ export  const Hooks=()=>{
 
     const addSpeaker = () => {
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:true}));
-        dispatch(setConfigurationInitialSpeaker({id:null,name:"",lastName:"",title:"",email:"",logoSpeaker:{}}))
+        dispatch(setConfigurationInitialSpeaker({id:null,name:"",lastName:"",title:"",email:"",logoSpeaker:[]}))
     };
 
-    const editSpeaker = (name,lastName,title,email,id) => {
+    const editSpeaker = (name,lastName,title,email,logoSpeaker,id) => {
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:true}));
-        dispatch(setConfigurationInitialSpeaker({id,name,lastName,title,email}))
+        dispatch(setConfigurationInitialSpeaker({id,name,lastName,title,email,logoSpeaker: logoSpeaker
+
+        }))
         console.log("azaez")
     };
 
@@ -106,7 +108,21 @@ export  const Hooks=()=>{
     };
 
 
-    const handleSubmit =()=>{
+    const handleSubmit =async ()=>{
+        await dispatch(setConfigurationOnchange({
+            configurationNameChange: "addSpeakerList", configurationValueChange:
+                values.configuration.SpeakerList.map((el, i) => (
+                    {
+                        ...values.configuration.addSpeakerList,
+                        name: el.name,
+                        lastName: el.lastName,
+                        function: el.title,
+                        avatar: el.logoSpeaker[0].thumbUrl,
+                        mail: el.email,
+
+                    }
+                ))
+        }));
         CreateLive()
     }
 
