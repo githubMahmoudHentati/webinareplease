@@ -82,8 +82,8 @@ export const GraphQLFetchData = (values) => {
 
                 await dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:data.generatePwd.pwd}));
 
-                await values.form.setFieldsValue({...values.form.getFieldValue(),securedPasswordOption:data.generatePwd.pwd})
-                console.log("form.getFieldsValue()",values.form.getFieldValue())
+                // await values.form.setFieldsValue({...values.form.getFieldsValue(),securedPasswordOption:data.generatePwd.pwd})
+                // console.log("form.getFieldsValue()",values.form.getFieldsValue())
                 await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
 
             }

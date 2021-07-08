@@ -11,10 +11,12 @@ import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {GraphQLFetchData} from "./graphQLFetchData";
 import {StatusMessage} from "./StatusMessage";
-
+import {useHistory} from "react-router-dom";
+import {setDirectSetting} from "../../utils/redux/actions";
 let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
+    const history = useHistory();
 
     const {success_Delete , error_Delete , error_Filter}=StatusMessage()
 
@@ -33,6 +35,8 @@ export  const Hooks=()=> {
     const conditions = useSelector((state)=> state.ShowVideosReducerReducer.showdivscondition)
    //loading Delete Show Video
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
+    // matches Media query
+    let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
        console.log("loadingDelete",loadingDelete)
     if(DataVideos.data){
@@ -192,6 +196,13 @@ export  const Hooks=()=> {
         //ClearTimeOut to Run API Delete
         clearTimeout(itemsRunAPI);
     }
+    /*Click Add live */
+    const handleClickAddLive =()=>{
+        history.push("/FormDirectVideo")
+        if(matchesMedia.matches){
+            dispatch(setDirectSetting(5))
+        }
+    }
 
     return({
         handleSearchRow,
@@ -208,7 +219,9 @@ export  const Hooks=()=> {
         sorterProps,
         loadingSpinner,
         conditions,
-        loadingDelete
+        loadingDelete,
+        handleClickAddLive,
+        matchesMedia
     })
 
 

@@ -5,6 +5,7 @@ import linkedinPost from "../../assets/linkedinPost.svg";
 import {Form} from "antd";
 
 export const FormDirectConstraints = ()=>{
+
     const generals = () => {
         return (
             {
