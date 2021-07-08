@@ -79,8 +79,8 @@ export function CalendarFile() {
         if (calendarValues) {
 
             calendarValues.forEach((element) => {
-                switch ((value.month()+"-"+value.date())) {
-                    case (moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
+                switch ((value.year()+"-"+value.month()+"-"+value.date())) {
+                    case (moment(element.date.date , ).year()+"-"+moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
                         listData=[...listData,{id:(element.id),type:element.type , content:element.content,style:element.date.isAMomentObject}]
                         break;
                 }
@@ -185,11 +185,13 @@ export function CalendarFile() {
     return(
         <div className={"CalendarFile"}>
             {
-                x.matches && activeCalendarEvents === true
-                    ?
+                x.matches ?
+                    activeCalendarEvents === true ?
                     <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues} GetCalendarDataNow={GetCalendarDataNow}/>
                     :
                     <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange} onSelect={selectDate}/>
+                        :
+                        <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange} onSelect={selectDate}/>
             }
 
         </div>

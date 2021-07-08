@@ -65,8 +65,8 @@ export const SocialTools=()=>{
                                 </Col>
                                 {item.switch === true &&
                                 <Col style={{marginBottom: "2%"}} span={24}>
-                                    <Row justify={"space-between"}>
-                                        <Col span={8}>
+                                    <Row gutter={[0, 24]} justify={"space-between"}>
+                                        <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:8}}>
                                             <Row gutter={[0, 20]}>
                                                 <Col span={24}>
                                                     <span className={"spn_planification"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier  la publication</span>
@@ -133,7 +133,7 @@ export const SocialTools=()=>{
                                                 </Col>
                                             </Row>
                                         </Col>
-                                        <Col span={14}  style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
+                                        <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:14}}  style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
                                             <Row gutter={[0, 10]} style={{border: "1px solid RGBA(0, 0, 0, 0.15)", padding: "2%"}}>
                                                 <Col span={24}>
                                                     <Row justify={"space-between"}>
