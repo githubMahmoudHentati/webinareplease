@@ -12,7 +12,8 @@ import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexio
 export  const HooksSignUp=()=> {
     const dispatch = useDispatch()
     const valuesSignUp = useSelector((state) => state.SignUpReducer)
-    const {CreateAccount}=GraphQLFetchData(valuesSignUp)
+    const valuesCard = useSelector((state) => state.PackagePayementReducer.packagePayement.activeCard)// reducer PackagePayement
+    const {CreateAccount , CREATECUSTOMER , CREATESUBSCRIPTIONCustomer}=GraphQLFetchData(valuesSignUp , valuesCard)
 
 //******************generalInformation************************//
     const signUpOnChange = (event) => {
@@ -38,12 +39,18 @@ export  const HooksSignUp=()=> {
         dispatch(setSignUpOnchange({SignUpNameChange: action.name, SignUpValueChange: action.value}));
     };
 
-    const handleSubmitSignUp = () => {
+    const handleSubmitSignUp = async () => {
         dispatch(setSignUpConstraintDataOnchange({
             constraintDataNameChange: "loadingSignUp",
             constraintDataValueChange: true
         }))
         CreateAccount()
+         CREATECUSTOMER()
+
+        setTimeout(()=>{
+            CREATESUBSCRIPTIONCustomer()
+        },2000)
+
     }
 
     return({

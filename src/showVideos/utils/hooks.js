@@ -83,19 +83,19 @@ export  const Hooks=()=> {
     const [GETINFOSlIVES] = useMutation(graphQL_shema().Get_Live_Info,{
         variables : {liveId:paginationProps.idLive},
         context: { clientName: "second" },
-        onCompleted: async (data)=>{
+        onCompleted:  (data)=>{
             if(data.getliveInfo.code === 200) {
                 console.log("ajhdkfjhdksjfhksdjfhksdjfhksdj", data)
-                await dispatch(setInfosLive({
+                 dispatch(setInfosLive({
                     infosLivesName: "inputUrlDiffusion",
                     infosLivesValue: data.getliveInfo.urlDiffusion
                 }));
-                await dispatch(setInfosLive({
+                dispatch(setInfosLive({
                     infosLivesName: "streamName",
                     infosLivesValue: data.getliveInfo.streamName
                 }));
-                await dispatch(setInfosLive({infosLivesName: "idLive", infosLivesValue: data.getliveInfo.idLive}));
-                await dispatch(setInfosLive({infosLivesName: "pwdLive", infosLivesValue: data.getliveInfo.pwdLive}));
+                 dispatch(setInfosLive({infosLivesName: "idLive", infosLivesValue: data.getliveInfo.idLive}));
+                 dispatch(setInfosLive({infosLivesName: "pwdLive", infosLivesValue: data.getliveInfo.pwdLive}));
             }else if(data.getliveInfo.code === 400){
                 error_getLives(400)
             }
@@ -235,8 +235,8 @@ export  const Hooks=()=> {
 
     // fonction handleInfos
     const handleInfos =()=>{
-              dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
-              GETINFOSlIVES()
+            dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
+            GETINFOSlIVES()
     }
     //handleCancel MODAL
     const handleCancel = () => {

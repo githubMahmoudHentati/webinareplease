@@ -42,6 +42,11 @@ function ChoicePackage(){
 
     console.log("valuesSignUp",valuesSignUp)
 
+
+        const subscriptionId = valuesSignUp.constSubscription.subscriptionId;
+        const clientSecret = valuesSignUp.constSubscription.clientSecret;
+
+
     // next step
     const nextToSignUp = () => {
         dispatch(setSignUpOnchange({
@@ -74,6 +79,24 @@ function ChoicePackage(){
 
     const handlechange =(e)=>{
         console.log("handlechange",e)
+    }
+
+    const handlePayer = () =>{
+        if (!stripe || !elements){
+            return;
+        }
+        setTimeout(()=>{
+            stripe.confirmCardPayment(
+                clientSecret, {
+                    payment_method:{
+                        card:elements.getElement(CardElement)
+                    }
+                }
+            )
+
+            message.success('Processing complete!')
+        },2500)
+
     }
 
     return(
@@ -211,7 +234,7 @@ function ChoicePackage(){
                                                         name="carddetails"
                                                         rules={[{required: true, message: 'Please input your adress!'}]}
                                                     >
-                                                        <CardElement name="carddetails" className={"input"}
+                                                        <CardElement id={"card-element"} name="carddetails" className={"input"}
                                                                      onChange={handlechange}/>
                                                     </Form.Item>
 
@@ -296,7 +319,7 @@ function ChoicePackage(){
                         </Button>
                     )}
                     {valuesSignUp.constraintData.current === steps.length - 1 && (
-                        <Button type="primary" onClick={() => message.success('Processing complete!')}>
+                        <Button type="primary" onClick={() =>handlePayer()}>
                             Payer
                         </Button>
                     )}

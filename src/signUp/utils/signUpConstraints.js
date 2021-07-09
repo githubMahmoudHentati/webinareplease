@@ -28,11 +28,20 @@ export const SignUpConstraints = ()=>{
             current:0
         })
     }
+    const constSubscription = () =>{
+        return({
+            customerId:"",
+            priceId:"",
+            clientSecret:"",
+            subscriptionId:""
+        })
+    }
 
 
     return({
         constraintData,
         signUp,
+        constSubscription
     })
 
 }

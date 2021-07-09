@@ -13,8 +13,30 @@ export const graphQL_shema = ()=> {
 
         }
     `;
+    const CreateCustomer = gql `
+    mutation ($email:String!) {
+     createCustomer(email:$email) {
+      code
+      message
+      customerId
+     }
+    }
+    `
+    const CreateSubscription = gql `
+  mutation ($input:PaymentSubscriptionInput) {
+  createSubscription(input:$input) {
+      code
+      message
+      subscriptionId
+      clientSecret
+      customerId
+  }
+}
+    `
 
     return({
         SignUp,
+        CreateCustomer,
+        CreateSubscription
     })
 }
