@@ -24,7 +24,7 @@ export const AvatarUpload = () => {
     }
 
     const onSave =(file)=>{
-         let url = "https://mbeji-cloud-sandbox.webtv-solution.dev/query"
+         let url = process.env.REACT_APP_API_EVENT_HOST
          let token = localStorage.getItem('jwtToken')
         axios({
             url: url,
