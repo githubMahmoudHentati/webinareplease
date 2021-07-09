@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import moment from "moment";
 import {setAppSetLogin} from "../../utils/redux/actions";
 import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
+import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 
 
 
@@ -61,8 +62,7 @@ export const GraphQLFetchData = (values) => {
         },
         onCompleted: async (data) => {
             if (data.addLive.code === 200) {
-                //history.push("/connexion")
-                console.log("enter")
+                history.push("/showVideos")
 
 
             } else if (data.addLive.code === 403) {
@@ -85,8 +85,16 @@ export const GraphQLFetchData = (values) => {
                 // await values.form.setFieldsValue({...values.form.getFieldsValue(),securedPasswordOption:data.generatePwd.pwd})
                 // console.log("form.getFieldsValue()",values.form.getFieldsValue())
                 await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
-
             }
+        }
+    })
+
+    const {loading: loading_themesDisplay, data: ThemesDisplayData}
+        = useQuery(graphQL_shema().themesDisplayQuery, {
+        fetchPolicy: 'cache-and-network',
+        context: { clientName: "second" },
+        onCompleted: async (data) => {
+            dispatch(setConfigurationOnchange({configurationNameChange:"themesList", configurationValueChange:data.getThemesList}));
         }
     })
 
@@ -94,7 +102,8 @@ export const GraphQLFetchData = (values) => {
         CreateLive,
         generateSecuredPassword,
         loading_securedPassword,
-        data_securedPassword
+        data_securedPassword,
+        ThemesDisplayData
     })
 }
 

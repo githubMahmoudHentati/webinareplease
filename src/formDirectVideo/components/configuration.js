@@ -35,7 +35,7 @@ export const Configuration =()=>{
 
     const itemListRef   = useRef(null);
     
-    const {configurationOnChangeByName,addSpeaker,editSpeaker,deleteSpeaker,configurationOnChange,configurationOnChangeButton}= Hooks()
+    const {configurationOnChangeByName,addSpeaker,editSpeaker,deleteSpeaker,configurationOnChange,configurationOnChangeButton,ConfigurationOnChangeSelect}= Hooks()
 
     console.log("values",values)
     // use Selector redux
@@ -280,7 +280,22 @@ export const Configuration =()=>{
                             <Col offset={1} span={23}>
                                 <Form.Item name="theme" className={"form-item-style"}
                                 >
-                                    <Input name="theme" onChange={configurationOnChange} placeholder={'choisir un thème'}></Input>
+                                    <Select
+                                        className={"spn2"}
+                                        name="theme" onChange={ConfigurationOnChangeSelect}
+                                        showSearch
+                                        style={{width: "100%"}}
+                                        placeholder="Choisir un thème"
+                                        optionFilterProp="children"
+                                        filterOption={(input, option) =>
+                                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }
+                                    >
+                                        {values.configuration.themesList.map((el)=>{
+                                            return(
+                                            <Option name="theme" key={el.id} value={el.id}>{el.title}</Option>
+                                        )})}
+                                    </Select>
                                 </Form.Item>
                             </Col>
                             }

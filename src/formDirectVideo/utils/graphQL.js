@@ -21,8 +21,19 @@ export const graphQL_shema = ()=> {
         }
     `;
 
+    const themesDisplayQuery = gql`
+        query {
+            getThemesList {
+                id
+                title
+            }
+        }
+    `;
+
+
     return({
         createLive,
-        generateSecuredPassword
+        generateSecuredPassword,
+        themesDisplayQuery
     })
 }

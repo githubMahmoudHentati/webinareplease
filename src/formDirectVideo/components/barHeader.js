@@ -78,7 +78,7 @@ export const BarHeader =()=>{
             <Col>
                 <Row gutter={[15, 0]}>
                     <Col>
-                        <Button className={"btn_add_live"} style={{fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseOutlined className={"icon_add_live"}/>}> <span className={"spn_add_live"}>Annuler</span></Button>
+                        <Button onClick={()=>{history.push("/showVideos")}} className={"btn_add_live"} style={{fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseOutlined className={"icon_add_live"}/>}> <span className={"spn_add_live"}>Annuler</span></Button>
                     </Col>
                     <Col>
                         <Button className={"btn_add_live"} htmlType="submit" style={{fontFamily: "SF Pro Display",fontWeight: "normal" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={values.general.directPlan?<CheckOutlined />:<VideoCameraOutlined />} type={"primary"}>{values.general.directPlan?<span className={"spn_add_live"}>Valider</span>:<span className={"spn_add_live"}>Diffuser</span>}</Button>

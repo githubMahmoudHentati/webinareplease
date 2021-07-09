@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {InfoCircleOutlined,DownloadOutlined,EditOutlined,LinkOutlined,FilePdfOutlined,PictureOutlined,DeleteOutlined , EyeOutlined , InsertRowLeftOutlined , VideoCameraOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import {Tooltip, Dropdown, Menu, Popconfirm, Button , Modal , Input , message , Spin} from 'antd';
+import {Tooltip, Dropdown, Menu, Popconfirm, Button , Modal , Input , message} from 'antd';
 import {useSelector} from "react-redux";
 import {setPaginationProps} from "../store/showVideosAction";
 import { useDispatch} from "react-redux";
@@ -13,8 +13,7 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives}=Hooks()
-
+    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , visible , infosLives}=Hooks()
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
 
@@ -28,8 +27,8 @@ function useActionMenu({record}) {
 
     const actionMenu = (
         <Menu className="menu">
-            <Menu.Item onClick={()=>handleInfos()}><InfoCircleOutlined />infos</Menu.Item>
-            <Menu.Item><EditOutlined />Modifier</Menu.Item>
+            <Menu.Item onClick={()=>handleInfos(record.id)}><InfoCircleOutlined />infos</Menu.Item>
+            <Menu.Item onClick={()=>{history.push("/FormDirectVideo")}}><EditOutlined />Modifier</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> Templates</Menu.Item>
             <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />Supprimer</Menu.Item>
@@ -106,7 +105,7 @@ function useActionMenu({record}) {
     </span>
 
             <Modal
-                visible={infosLives.visible}
+                visible={visible}
                 title="Informations : At vero eos et quale sit numer"
                 onCancel={handleCancel}
                 footer={[
@@ -121,9 +120,9 @@ function useActionMenu({record}) {
                 </div>{/*./div_Url_diffusion*/}
                 <div className="div_Nom_de_flux">
                     <span>Nom de flux</span>
-                    <Input placeholder="Nom de flux du direct" name={"streamName"} value={infosLives.streamName} />
-                    <Input placeholder="Identifiant du direct" name={"idLive"} value={infosLives.idLive}/>
-                    <Input placeholder="Mot de passe du direct" name={"pwdLive"} value={infosLives.pwdLive}/>
+                    <Input placeholder="Nom de flux du direct"/>
+                    <Input placeholder="Identifiant du direct"/>
+                    <Input placeholder="Mot de passe du direct"/>
 
                 </div>{/*./div_Nom_de_flux*/}
             </Modal>{/*./ModalInfos*/}
