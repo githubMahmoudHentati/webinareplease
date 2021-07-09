@@ -58,6 +58,7 @@ export const FormDirectConstraints = ()=>{
                 richeMediaDiffusion:false,
                 videoMode: "",
                 theme:"",
+                themesList:[],
                 tags:[],
             }
         )

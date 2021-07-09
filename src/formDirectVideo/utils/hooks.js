@@ -57,7 +57,10 @@ export  const Hooks=()=>{
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
     };
 
-
+    const ConfigurationOnChangeSelect = (value,action) => {
+        console.log("event",action.name, action.value)
+        dispatch(setConfigurationOnchange({configurationNameChange: action.name, configurationValueChange: action.value}));
+    };
 
     const onChangeSpeaker=(event,nameSpeaker)=>{
         const valueSpeaker=event.target.value
@@ -131,6 +134,7 @@ export  const Hooks=()=>{
         generalOnChange,
         generalOnChangeButton,
         configurationOnChangeByName,
+        ConfigurationOnChangeSelect,
         handleOk,
         handleCancel,
         addSpeaker,
