@@ -20,6 +20,14 @@
         }
 
 
+//*******************constSubscription Data actions*******************//
+
+export function setConstSubscription(e){
+    return{
+        type:"SET_ConstSubscriptionOnchange",
+        payload:e
+    }
+}
 
 
 
