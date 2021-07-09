@@ -46,7 +46,11 @@ export const ShowVideosList = ()=>{
 
     const valuesInfosLives = () => {
         return({
+            visible:false,
             inputUrlDiffusion:"",
+            streamName:"",
+            idLive:"",
+            pwdLive:""
         })
     }
 

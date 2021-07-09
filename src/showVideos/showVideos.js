@@ -20,7 +20,7 @@ import {GraphQLFetchData} from "./utils/graphQLFetchData";
 function ShowVideos() {
 
     useEffect(()=>{
-        window.scrollTo(0, 0);// scroll window with the pagination
+        //window.scrollTo(0, 0);// scroll window with the pagination
     })
 
     const {DeleteItemsMutation}=GraphQLFetchData()

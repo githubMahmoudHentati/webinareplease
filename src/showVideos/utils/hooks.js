@@ -17,12 +17,9 @@ let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
 
-    const [visible , SetVisible] = useState(false)
-    const [visibleModalExport , SetVisibleModalExport] = useState(false)
-
     const history = useHistory();
 
-    const {success_Delete , error_Delete , error_Filter}=StatusMessage()
+    const {success_Delete , error_Delete , error_Filter ,  error_getLives}=StatusMessage()
 
     const dispatch = useDispatch()
     //Filter Data
@@ -44,7 +41,7 @@ export  const Hooks=()=> {
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",paginationProps)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",infosLives)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -82,13 +79,26 @@ export  const Hooks=()=> {
         }
     })
 
-    // mutation delete lang from table of event
+    // mutation Get infos live
     const [GETINFOSlIVES] = useMutation(graphQL_shema().Get_Live_Info,{
         variables : {liveId:paginationProps.idLive},
         context: { clientName: "second" },
-        onCompleted: (data)=>{
-            console.log("ajhdkfjhdksjfhksdjfhksdjfhksdj",data)
-            dispatch(setInfosLive({infosLivesName:"inputUrlDiffusion",infosLivesValue:data.getliveInfo.urlDiffusion}));
+        onCompleted: async (data)=>{
+            if(data.getliveInfo.code === 200) {
+                console.log("ajhdkfjhdksjfhksdjfhksdjfhksdj", data)
+                await dispatch(setInfosLive({
+                    infosLivesName: "inputUrlDiffusion",
+                    infosLivesValue: data.getliveInfo.urlDiffusion
+                }));
+                await dispatch(setInfosLive({
+                    infosLivesName: "streamName",
+                    infosLivesValue: data.getliveInfo.streamName
+                }));
+                await dispatch(setInfosLive({infosLivesName: "idLive", infosLivesValue: data.getliveInfo.idLive}));
+                await dispatch(setInfosLive({infosLivesName: "pwdLive", infosLivesValue: data.getliveInfo.pwdLive}));
+            }else if(data.getliveInfo.code === 400){
+                error_getLives(400)
+            }
         }
     })
 
@@ -225,14 +235,12 @@ export  const Hooks=()=> {
 
     // fonction handleInfos
     const handleInfos =()=>{
-        SetVisible(true)
-        setTimeout(()=>{
-            GETINFOSlIVES()
-        },500)
+              dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
+              GETINFOSlIVES()
     }
     //handleCancel MODAL
     const handleCancel = () => {
-        SetVisible(false)
+              dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
     };
 
     return({
@@ -255,7 +263,6 @@ export  const Hooks=()=> {
         matchesMedia,
         handleInfos,
         handleCancel,
-        visible,
         infosLives
     })
 
