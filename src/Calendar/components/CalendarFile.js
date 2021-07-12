@@ -7,9 +7,10 @@ import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "../utils/graphql";
 import moment from 'moment'
 import CalendarEvents from "./CalendarEvents";
-import {setCalendarOnchange} from "../store/calendarAction";
+import {setCalendarOnchange, setCalendarVisibleOnchange} from "../store/calendarAction";
 
 import {useDispatch} from "react-redux";
+import {CalendarReducer} from "../store/calendarReducer";
 
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
@@ -25,13 +26,19 @@ export function CalendarFile() {
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
 
+    const VisibleModal = useSelector((state)=> state.CalendarReducer)
+
+    console.log("VisibleModal" , VisibleModal)
+
     //show Modal
     const onShowModal=()=>{
-        SetVisible(true)
+        //SetVisible(true)
+        dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange:"visible",CalendarVisibleValueChange:true}));
     }
     // Cancel modal
     const handleCancel = () => {
-        SetVisible(false)
+        //SetVisible(false)
+        dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange:"visible",CalendarVisibleValueChange:false}));
     }
     const {loading:calendar_loadingNow, data: GetCalendarDataNow}
         = useQuery(graphQL_shema().Get_Calendar_Data, {
@@ -110,7 +117,7 @@ export function CalendarFile() {
                                     </Tag>
 
                                     <Modal
-                                        visible={visible}
+                                        visible={VisibleModal.calendarVisible.visible}
                                         title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
                                                       text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
                                         onCancel={handleCancel}
