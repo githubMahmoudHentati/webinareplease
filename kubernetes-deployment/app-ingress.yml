@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-    - host: $BO_INGRESS
+    - host: $WIDGET_WEBINAIR_INGRESS
       http:
         paths:
         - path: /
