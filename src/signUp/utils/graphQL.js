@@ -33,10 +33,21 @@ export const graphQL_shema = ()=> {
   }
 }
     `
+    const payementIntent = gql `
+    mutation ($input:PaymentIntentInput!) {
+  createPaymentIntent(input:$input) {
+      code
+      message
+      clientSecret
+
+  }
+}
+    `
 
     return({
         SignUp,
         CreateCustomer,
-        CreateSubscription
+        CreateSubscription,
+        payementIntent
     })
 }
