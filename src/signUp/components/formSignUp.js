@@ -181,6 +181,7 @@ export const FormSignUp =({child1,child2})=>{
                                             <Select
                                                 className={"spn2"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
+                                                defaultValue="entre 5-10 employé(e)s"
                                                 showSearch
                                                 style={{width: "100%"}}
                                                 placeholder="Entre 5 - 10 employé(e)s"

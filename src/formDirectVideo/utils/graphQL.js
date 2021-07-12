@@ -22,7 +22,7 @@ export const graphQL_shema = ()=> {
     `;
 
     const themesDisplayQuery = gql`
-        query {
+        mutation{
             getThemesList {
                 id
                 title
