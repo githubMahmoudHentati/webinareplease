@@ -16,6 +16,7 @@ export const GraphQLFetchData = (values) => {
     const dispatch = useDispatch()
     console.log("test",values)
     let startDate= values.general.startDate && values.general.startHour ? (values.general.startDate).format('YYYY-MM-DD') + "T" + (values.general.startHour).format('HH:mm:ss') + "Z" : ""
+    let period = values.general.period? values.general.period.format('HH:mm:ss'):""
     console.log("addSpeaker",values.configuration.addSpeakerList)
 
 
@@ -33,7 +34,7 @@ export const GraphQLFetchData = (values) => {
                     livePlan:{
                         plan:values.general.liveAction,
                         startDate:startDate,
-                        duration:""
+                        duration:period
                     },
                     liveAccess:values.general.directAccessMode !== "freeAccess",
                     pwd:values.general.pwd,
@@ -89,21 +90,22 @@ export const GraphQLFetchData = (values) => {
         }
     })
 
-    const {loading: loading_themesDisplay, data: ThemesDisplayData}
-        = useQuery(graphQL_shema().themesDisplayQuery, {
-        fetchPolicy: 'cache-and-network',
+    const [themesDisplayQueryAction,{loading: loading_themesDisplay, data: ThemesDisplayData}]
+        = useMutation(graphQL_shema().themesDisplayQuery, {
         context: { clientName: "second" },
         onCompleted: async (data) => {
             dispatch(setConfigurationOnchange({configurationNameChange:"themesList", configurationValueChange:data.getThemesList}));
         }
     })
 
+
+
     return ({
         CreateLive,
         generateSecuredPassword,
         loading_securedPassword,
         data_securedPassword,
-        ThemesDisplayData
+        themesDisplayQueryAction
     })
 }
 

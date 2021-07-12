@@ -75,7 +75,6 @@ export  const Hooks=()=> {
             }else if(data.deleteLive.code === "404"){
                 error_Delete(404)
             }
-
         }
     })
 
@@ -113,7 +112,6 @@ export  const Hooks=()=> {
                 FilterVideosValueChange: event.target.value
             }));
         }
-
     };
     /*Function Select*/
     const handleHeaderSelect = (value,action) => {

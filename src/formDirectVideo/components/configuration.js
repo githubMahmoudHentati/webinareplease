@@ -35,7 +35,7 @@ export const Configuration =()=>{
 
     const itemListRef   = useRef(null);
     
-    const {configurationOnChangeByName,addSpeaker,editSpeaker,deleteSpeaker,configurationOnChange,configurationOnChangeButton,ConfigurationOnChangeSelect}= Hooks()
+    const {configurationOnChangeByName,addSpeaker,editSpeaker,deleteSpeaker,configurationOnChange,configurationOnChangeButton,ConfigurationOnChangeSelect,displayThemes}= Hooks()
 
     console.log("values",values)
     // use Selector redux
@@ -254,7 +254,7 @@ export const Configuration =()=>{
                             </Col>
                             {values.configuration.liveAutomaticArchiving&&
                             <Col span={24} className={"col-forms"}>
-                                <Form.Item name="liveAutomaticArchiving" className={"form-item-style"}
+                                <Form.Item name="videoMode" className={"form-item-style"}
                                 >
                                     <Radio.Group value={values.configuration.videoMode} name="videoMode"
                                                  onChange={configurationOnChange}>

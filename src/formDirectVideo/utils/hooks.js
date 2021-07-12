@@ -17,7 +17,7 @@ export  const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
-    const {CreateLive,generateSecuredPassword} = GraphQLFetchData(values)
+    const {CreateLive,generateSecuredPassword,themesDisplayQueryAction} = GraphQLFetchData(values)
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 
@@ -50,17 +50,23 @@ export  const Hooks=()=>{
 
     const configurationOnChangeButton = (event) => {
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
+
     };
 
     const configurationOnChange = (event) => {
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
+        event.target.name="visibleVideo" && themesDisplayQueryAction()
     };
 
     const ConfigurationOnChangeSelect = (value,action) => {
         console.log("event",action.name, action.value)
         dispatch(setConfigurationOnchange({configurationNameChange: action.name, configurationValueChange: action.value}));
     };
+
+    const displayThemes=()=>{
+        themesDisplayQueryAction()
+    }
 
     const onChangeSpeaker=(event,nameSpeaker)=>{
         const valueSpeaker=event.target.value
@@ -88,6 +94,8 @@ export  const Hooks=()=>{
     };
 
     const handleOk = () => {
+        // form.validateFields()
+        //     .then((values)=>{alert(values)})
         dispatch(setConfigurationSpeakerList(values.configuration.speaker));
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
     };
@@ -146,6 +154,7 @@ export  const Hooks=()=>{
         InvitationOnChangeChecked,
         invitationOnChangeSelect,
         handleSubmit,
+        displayThemes,
         values,
         matchesMedia
     })
