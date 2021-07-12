@@ -19,6 +19,8 @@ import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
 function ShowVideos() {
 
+    const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
+
     useEffect(()=>{
         //window.scrollTo(0, 0);// scroll window with the pagination
     })
@@ -46,14 +48,14 @@ function ShowVideos() {
         {
             title: 'Id',
             dataIndex: "id",
-            key: 0,
-            sorter: (a, b) => a.id.length - b.id.length,
-            sortDirections: ['descend','ascend'],
+            key: '1',
+            sortDirections: ['descend', 'ascend'],
+            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Aperçu',
             dataIndex: 'logo',
-            key:0,
+            key:'2',
             render: image =>
                 <div className={"div_apercu"}>
                 <img  src={image} className={"img_aperçu"}/>
@@ -62,32 +64,32 @@ function ShowVideos() {
         {
             title: 'Titre',
             dataIndex: 'title',
-            key: 0,
+            key: '3',
+            sorter: (a, b) => a.title.length - b.title.length,
+            sortDirections: ['descend', 'ascend'],
             render:(titre , record) =>{
                 return(
                     <div className="div_titre"><span>{record.title}</span></div>
                 )
             },
-            sorter: (a, b) => a.title.length - b.title.length,
-            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Date',
             dataIndex: 'liveDate',
-            key: 0,
+            key: '4',
+            sorter: (a, b) => a.date - b.date,
+            sortDirections: ['descend','ascend'],
             render:(date , record) =>{
                 return(
                     <div className="div_date">{record.liveDate}</div>
                 )
             },
-            sorter: (a, b) => a.date.length - b.date.length,
-            sortDirections: ['descend','ascend'],
         },
         {
             title: 'Etat',
             dataIndex: 'status',
-            key: 0,
-            sorter: (a, b) => a.status.length - b.status.length,
+            key: '5',
+            sorter: (a, b) => a.status - b.status,
             sortDirections: ['descend','ascend'],
             render: status => (
                 <div className={"div-status"}>

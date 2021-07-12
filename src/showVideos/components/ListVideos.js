@@ -77,6 +77,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
     const handleTableChange = (pagination, filters, sorter, extra) => {
         console.log('paginationLives:', pagination, filters, sorter, extra );
         setCurrentPage(pagination.current - 1);
+
         dispatch(setPaginationProps({PaginationPropsNameChange:"pageSize",PaginationPropsValueChange:pagination.pageSize}));
         dispatch(setPaginationProps({PaginationPropsNameChange:"order",PaginationPropsValueChange:sorter&&sorter.order}));
         dispatch(setPaginationProps({PaginationPropsNameChange:"columnKey",PaginationPropsValueChange:sorter&&sorter.columnKey}));
@@ -92,6 +93,8 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
                 rowSelection={rowSelection}
                 columns={updatedColumns}
                 dataSource={dataSource.content}
+
+
                 onChange={handleTableChange}
                 pagination={{
                     pageSize: paginationProps.pageSize,
