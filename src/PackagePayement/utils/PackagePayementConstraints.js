@@ -10,8 +10,8 @@ export const PackagePayementConstraints = () =>{
                 checkedRadioButtonOne:false,
                 checkedRadioButtonTwo:false,
                 packFree:'Gratuit',
-                packPro:'99€',
-                packASYouGo:'12€',
+                packPro:'99',
+                packASYouGo:'12',
                 packStripe:'',
             }
         )
