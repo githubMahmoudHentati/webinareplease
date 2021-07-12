@@ -115,11 +115,13 @@ export const Generals =({})=>{
                         <span style={{
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                         }}>Date de début</span>
+                        <span className="require">*</span>
                     </Col>
                     <Col span={8} className={"col_planification"}>
                         <span style={{
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                         }}>Heure de début</span>
+                        <span className="require">*</span>
                     </Col>
                     <Col span={8} className={"col_planification"}>
                         <span style={{
@@ -128,20 +130,22 @@ export const Generals =({})=>{
                     </Col>
                     <Col span={8}>
                         <Form.Item name="startDate" className={"form-item-style"}
+                                   rules={requiredFieldRule}
                         >
-                            <DatePicker onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                            <DatePicker placeholder="Choisir une date de début" onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item name="startHour" className={"form-item-style"}
+                        <Form.Item  name="startHour" className={"form-item-style"}
+                                    rules={requiredFieldRule}
                         >
-                            <TimePicker name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}></TimePicker>
+                            <TimePicker placeholder="Choisir une heure de début" name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}></TimePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
-                        <Form.Item name="finalHour" className={"form-item-style"}
+                        <Form.Item name="period" className={"form-item-style"}
                         >
-                            <DatePicker name="finalHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"finalHour")}}  style={{width: "100%"}}></DatePicker>
+                            <TimePicker placeholder="Choisir une periode" name="period" onChange={(value,event)=>{generalOnChangeByName(value,event,"period")}}  style={{width: "100%"}}></TimePicker>
                         </Form.Item>
                     </Col>
                 </Row>
