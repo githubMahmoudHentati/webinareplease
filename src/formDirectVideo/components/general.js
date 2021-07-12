@@ -19,7 +19,7 @@ export const Generals =({})=>{
 
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
-    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,values}= Hooks()
+    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks()
     console.log("values",values)
 
     return(
@@ -132,14 +132,17 @@ export const Generals =({})=>{
                         <Form.Item name="startDate" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <DatePicker placeholder="Choisir une date de début" onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                            <DatePicker disabledDate={disablePastDate} placeholder="Choisir une date de début" onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item  name="startHour" className={"form-item-style"}
                                     rules={requiredFieldRule}
                         >
-                            <TimePicker placeholder="Choisir une heure de début" name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}></TimePicker>
+                            <TimePicker placeholder="Choisir une heure de début" name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
+                                        disabledHours={()=>startGetDisabledHours(values)}
+                                        disabledMinutes={startGetDisabledMinutes}
+                            ></TimePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
