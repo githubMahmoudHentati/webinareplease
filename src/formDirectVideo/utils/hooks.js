@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import moment from "moment";
+import 'moment-timezone';
+
 import {
     setConfigurationInitialSpeaker,
     setConfigurationOnchange,
@@ -40,6 +43,42 @@ export  const Hooks=()=>{
             !event.target.checked&&await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
         }
     };
+
+    const disablePastDate=(current)=>{
+        // Can not select days before today and today
+        return current && current < moment().startOf('day');
+    }
+
+    const startGetDisabledHours = () => {
+        let hours = [];
+        console.log("values.general.startDate",values.general.startDate)
+        if (values.general.startDate&&values.general.startDate.format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
+            for (let i = 0; i < moment().tz("Europe/Paris").hour(); i++) {
+                hours.push(i);
+            }
+        }
+        // else if(finalHour)
+        //     for (let i = 23; i > finalHour.hour() ; i--) {
+        //         hours.push(i);
+        //     }
+        return hours;
+    }
+
+    const startGetDisabledMinutes = (selectedHour) => {
+        let minutes= [];
+        if (values.general.startDate&&values.general.startDate.format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
+            if (selectedHour === moment().tz("Europe/Paris").hour()) {
+                for (let i = 0; i < moment().minute(); i++) {
+                    minutes.push(i);
+                }
+            }
+        }
+        // else if(values.finalHour && selectedHour===values.finalHour.hour())
+        //     for (let i = 59; i > (values.finalHour.minutes())-1; i--) {
+        //         minutes.push(i);
+        //     }
+        return minutes;
+    }
 
 
     //*****************Configuration************//
@@ -141,6 +180,9 @@ export  const Hooks=()=>{
         generalOnChangeByName,
         generalOnChange,
         generalOnChangeButton,
+        startGetDisabledHours,
+        startGetDisabledMinutes,
+        disablePastDate,
         configurationOnChangeByName,
         ConfigurationOnChangeSelect,
         handleOk,
