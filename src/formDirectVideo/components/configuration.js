@@ -25,6 +25,7 @@ import {Hooks} from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
 import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
+import EditableTagGroupConfiguration from "./EditableTagGroupConfiguration";
 import moment from "moment";
 
 export const Configuration =()=>{
