@@ -1,3 +1,4 @@
+import React  from 'react';
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useHistory} from "react-router-dom";

@@ -1,3 +1,4 @@
+import React  from 'react';
 import {useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./shemaGraphQL";
 import {useDispatch} from "react-redux";
