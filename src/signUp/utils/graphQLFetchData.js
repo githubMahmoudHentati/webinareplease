@@ -11,6 +11,8 @@ import {setPackagePayementAction} from "../../PackagePayement/store/PackagePayem
 
 export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
 
+    const valuesPrices = useSelector((state) => state.PackagePayementReducer.packagePayement)// reducer PackagePayement
+
     console.log("jhgjhgjhgjhgjhgjhkjhkjhkjchkjhfkd",valuesSignUp)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -64,9 +66,10 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
         }
     });
 
-    // create customer
+    //create customer
     const [CREATECUSTOMER] = useMutation(graphQL_shema().CreateCustomer,{
         variables : {email:valuesSignUp.signUp.email},
+        skip:valuesSignUp.signUp.subscriptionId===0,
         context: { clientName: "first" },
         onCompleted:  (data)=>{
             console.log("123456789654123654789",data)
@@ -85,6 +88,7 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
             "priceId":"price_1JAAjrKvrhYT2AZi2wZ7EVZm"
             }
         },
+        skip:valuesSignUp.signUp.subscriptionId===0,
         context: { clientName: "first" },
         onCompleted:  (data)=>{
             console.log("azerfdsqwxcvbgty123",data)
@@ -99,11 +103,31 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
         }
     })
 
+    // mutation Payement Intent
+    const [CREATEPayementintent] = useMutation(graphQL_shema().payementIntent,{
+        variables : { input :{
+                "amount": valuesPrices.packASYouGo*100,
+                "paymentMethodType": "card",
+                "currency": "eur"
+            }
+        },
+        skip:valuesSignUp.signUp.subscriptionId===0,
+        context: { clientName: "first" },
+        onCompleted:  (data)=>{
+            console.log("azerfdsqwxcvbgt54654654654654y123",data)
+            dispatch(setConstSubscription({
+                ConstSubscriptionOnchangeNameChange: "clientSecret",
+                ConstSubscriptionOnchangeValueChange: data.createPaymentIntent.clientSecret
+            }))
+        }
+    })
+
 
     return ({
         CreateAccount,
         CREATECUSTOMER,
-        CREATESUBSCRIPTIONCustomer
+        CREATESUBSCRIPTIONCustomer,
+        CREATEPayementintent
     })
 }
 

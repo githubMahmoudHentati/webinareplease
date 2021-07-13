@@ -13,7 +13,7 @@ export const SignUpConstraints = ()=>{
                 city: "",
                 password:"",
                 address:"",
-                numberPerson:"",
+                numberPerson:2,
                 postalCode:"",
                 society:"",
                 subscriptionId:0

@@ -27,12 +27,25 @@ function GlobalHeader() {
 
 
 
+
+
+
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const activeSideMenu = useSelector((state)=> state.Reducer.activeSideMenu)
 
-    const [back , Setback]=useState(false)
+    // Clic outside Side Bar
+    useEffect(() => {
+        function gotoHeder(event) {
+
+            var noRedirect = '.side-nav * , .hambg_button * '
+            if (!event.target.matches(noRedirect)) {
+                dispatch(setSideMenu(false))
+            }
+        };
+        document.body.addEventListener('click', gotoHeder);
+    },[]);
 
 
     //fonction checkbox
@@ -180,8 +193,8 @@ function GlobalHeader() {
         <div className={"Header"} style={{backgroundColor:darkMode===false?"#ffffff":"#141414"}}>
 
             <div className="div_home_logo">
-               <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg" style={{color:darkMode===false?"":"white"}}></span></div>
-                <HomeOutlined className={"Home_Icon"} style={{color:darkMode===false?"":"#007fcb"}}/>
+               <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg" style={{color:darkMode===false?"":"white"}} onClick={()=>{history.push("/")}}></span></div>
+                <HomeOutlined className={"Home_Icon"} style={{color:darkMode===false?"":"#007fcb"}} onClick={()=>{history.push("/")}}/>
             </div>{/*./div_home_logo*/}
 
 
@@ -230,7 +243,7 @@ function GlobalHeader() {
                         <div className={"side-nav"} id={"side-menu"}>
 
                             <div className={"div1_side_nav"}>
-                                <MenuUnfoldOutlined onClick={()=>{dispatch(setSideMenu(false))}}/>
+                                <MenuUnfoldOutlined className={"menuhamg-close"} onClick={()=>{dispatch(setSideMenu(false))}}/>
                                 <label id="switch" className="switch" >
                                     <input type="checkbox"
                                            id="slider"

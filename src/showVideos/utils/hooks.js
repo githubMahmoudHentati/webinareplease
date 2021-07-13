@@ -17,6 +17,7 @@ let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
 
+    const [visible , setVisible] = useState(false)
     const history = useHistory();
 
     const {success_Delete , error_Delete , error_Filter ,  error_getLives}=StatusMessage()
@@ -75,7 +76,6 @@ export  const Hooks=()=> {
             }else if(data.deleteLive.code === "404"){
                 error_Delete(404)
             }
-
         }
     })
 
@@ -113,7 +113,6 @@ export  const Hooks=()=> {
                 FilterVideosValueChange: event.target.value
             }));
         }
-
     };
     /*Function Select*/
     const handleHeaderSelect = (value,action) => {
@@ -208,7 +207,6 @@ export  const Hooks=()=> {
         dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e}));
         // dispatch id list Video
         dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
-
     }
 
     /* Click Annuler button Alert*/
@@ -235,12 +233,15 @@ export  const Hooks=()=> {
 
     // fonction handleInfos
     const handleInfos =()=>{
+           GETINFOSlIVES()
+        setTimeout(()=>{
             dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
-            GETINFOSlIVES()
+        },300)
     }
     //handleCancel MODAL
     const handleCancel = () => {
               dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
+        //setVisible(false)
     };
 
     return({
@@ -263,7 +264,7 @@ export  const Hooks=()=> {
         matchesMedia,
         handleInfos,
         handleCancel,
-        infosLives
+        infosLives,
     })
 
 

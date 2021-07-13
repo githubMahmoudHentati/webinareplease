@@ -32,6 +32,21 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
     const history = useHistory();
     // use Selector redux
 
+    const [order , SetOrder]=useState(null) // setOrder
+    const [Current , SetCurrent] = useState(null) // set pagination current
+
+    // dispatch order Table
+    useEffect(()=>{
+        dispatch(setPaginationProps(
+            {PaginationPropsNameChange:"order",PaginationPropsValueChange:order},
+        ));
+    },[order ])
+    // dispatch current Table
+    useEffect(()=>{
+        dispatch(setPaginationProps(
+            {PaginationPropsNameChange:"current",PaginationPropsValueChange:Current},
+        ))
+    },[Current])
 
 
     const  onSelectChange = selectedRowKeys  => {
@@ -77,10 +92,8 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
     const handleTableChange = (pagination, filters, sorter, extra) => {
         console.log('paginationLives:', pagination, filters, sorter, extra );
         setCurrentPage(pagination.current - 1);
-        dispatch(setPaginationProps({PaginationPropsNameChange:"pageSize",PaginationPropsValueChange:pagination.pageSize}));
-        dispatch(setPaginationProps({PaginationPropsNameChange:"order",PaginationPropsValueChange:sorter&&sorter.order}));
-        dispatch(setPaginationProps({PaginationPropsNameChange:"columnKey",PaginationPropsValueChange:sorter&&sorter.columnKey}));
-        dispatch(setPaginationProps({PaginationPropsNameChange:"current",PaginationPropsValueChange:sorter&&pagination.current}));
+        SetOrder(sorter.order)
+        SetCurrent(pagination.current)
     };
 
 
@@ -92,6 +105,8 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
                 rowSelection={rowSelection}
                 columns={updatedColumns}
                 dataSource={dataSource.content}
+
+
                 onChange={handleTableChange}
                 pagination={{
                     pageSize: paginationProps.pageSize,

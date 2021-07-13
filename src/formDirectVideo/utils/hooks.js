@@ -1,5 +1,8 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
+import moment from "moment";
+import 'moment-timezone';
+
 import {
     setConfigurationInitialSpeaker,
     setConfigurationOnchange,
@@ -17,7 +20,7 @@ export  const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
-    const {CreateLive,generateSecuredPassword} = GraphQLFetchData(values)
+    const {CreateLive,generateSecuredPassword,themesDisplayQueryAction} = GraphQLFetchData(values)
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 
@@ -41,6 +44,42 @@ export  const Hooks=()=>{
         }
     };
 
+    const disablePastDate=(current)=>{
+        // Can not select days before today and today
+        return current && current < moment().startOf('day');
+    }
+
+    const startGetDisabledHours = () => {
+        let hours = [];
+        console.log("values.general.startDate",values.general.startDate)
+        if (values.general.startDate&&values.general.startDate.format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
+            for (let i = 0; i < moment().tz("Europe/Paris").hour(); i++) {
+                hours.push(i);
+            }
+        }
+        // else if(finalHour)
+        //     for (let i = 23; i > finalHour.hour() ; i--) {
+        //         hours.push(i);
+        //     }
+        return hours;
+    }
+
+    const startGetDisabledMinutes = (selectedHour) => {
+        let minutes= [];
+        if (values.general.startDate&&values.general.startDate.format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
+            if (selectedHour === moment().tz("Europe/Paris").hour()) {
+                for (let i = 0; i < moment().minute(); i++) {
+                    minutes.push(i);
+                }
+            }
+        }
+        // else if(values.finalHour && selectedHour===values.finalHour.hour())
+        //     for (let i = 59; i > (values.finalHour.minutes())-1; i--) {
+        //         minutes.push(i);
+        //     }
+        return minutes;
+    }
+
 
     //*****************Configuration************//
     const configurationOnChangeByName =(value,name)=>{
@@ -50,17 +89,23 @@ export  const Hooks=()=>{
 
     const configurationOnChangeButton = (event) => {
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
+
     };
 
     const configurationOnChange = (event) => {
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
+        event.target.name="visibleVideo" && themesDisplayQueryAction()
     };
 
     const ConfigurationOnChangeSelect = (value,action) => {
         console.log("event",action.name, action.value)
         dispatch(setConfigurationOnchange({configurationNameChange: action.name, configurationValueChange: action.value}));
     };
+
+    const displayThemes=()=>{
+        themesDisplayQueryAction()
+    }
 
     const onChangeSpeaker=(event,nameSpeaker)=>{
         const valueSpeaker=event.target.value
@@ -88,6 +133,8 @@ export  const Hooks=()=>{
     };
 
     const handleOk = () => {
+        // form.validateFields()
+        //     .then((values)=>{alert(values)})
         dispatch(setConfigurationSpeakerList(values.configuration.speaker));
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
     };
@@ -133,6 +180,9 @@ export  const Hooks=()=>{
         generalOnChangeByName,
         generalOnChange,
         generalOnChangeButton,
+        startGetDisabledHours,
+        startGetDisabledMinutes,
+        disablePastDate,
         configurationOnChangeByName,
         ConfigurationOnChangeSelect,
         handleOk,
@@ -146,6 +196,7 @@ export  const Hooks=()=>{
         InvitationOnChangeChecked,
         invitationOnChangeSelect,
         handleSubmit,
+        displayThemes,
         values,
         matchesMedia
     })

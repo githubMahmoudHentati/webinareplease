@@ -1,7 +1,6 @@
 import React, { useState,useEffect,useRef } from 'react';
 import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu , Select , Divider , Tag , Tooltip , Popover , Checkbox , Form} from 'antd'
 import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , ExportOutlined , DiffOutlined , PlusSquareOutlined  } from '@ant-design/icons';
-import EditableTagGroup from "./EditableTagGroup";
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import {setConfigurationOnchange} from "../store/formDirectVideoAction";

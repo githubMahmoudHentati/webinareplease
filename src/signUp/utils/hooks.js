@@ -11,9 +11,10 @@ import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexio
 
 export  const HooksSignUp=()=> {
     const dispatch = useDispatch()
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const valuesSignUp = useSelector((state) => state.SignUpReducer)
     const valuesCard = useSelector((state) => state.PackagePayementReducer.packagePayement.activeCard)// reducer PackagePayement
-    const {CreateAccount , CREATECUSTOMER , CREATESUBSCRIPTIONCustomer}=GraphQLFetchData(valuesSignUp , valuesCard)
+    const {CreateAccount , CREATECUSTOMER , CREATESUBSCRIPTIONCustomer , CREATEPayementintent}=GraphQLFetchData(valuesSignUp , valuesCard)
 
 //******************generalInformation************************//
     const signUpOnChange = (event) => {
@@ -45,16 +46,25 @@ export  const HooksSignUp=()=> {
             constraintDataValueChange: true
         }))
         CreateAccount()
-         CREATECUSTOMER()
 
-        setTimeout(()=>{
-            CREATESUBSCRIPTIONCustomer()
-        },2000)
+       if(valuesCard === 2){
+           CREATECUSTOMER() // Create Customer Stripe mutation
+
+           setTimeout(()=>{
+               CREATESUBSCRIPTIONCustomer() // Create Subsricption Stripe mutation
+           },2000)
+       }else if( valuesCard === 3){
+           CREATEPayementintent() // Payement Intent
+       }
+
+
+
 
     }
 
     return({
         signUpOnChange,
+        darkMode,
         signUpOnChangeSelect,
         valuesSignUp,
         handleSubmitSignUp

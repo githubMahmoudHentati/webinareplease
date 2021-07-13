@@ -16,8 +16,8 @@ export const ShowVideosList = ()=>{
     const paginationProps=()=>{
         return(
             {
-                pageSize:10,
                 order:'ascend',
+                pageSize:10,
                 columnKey:0,
                 current:1,
                 id:[0],
