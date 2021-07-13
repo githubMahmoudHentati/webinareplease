@@ -1,5 +1,6 @@
+import React  from 'react';
 import {useEffect} from 'react'
-import React ,{Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox , Select,Form} from 'antd'
+import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox , Select,Form} from 'antd'
 import '../signUp.scss'
 import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import {HooksSignUp} from "../utils/hooks";
