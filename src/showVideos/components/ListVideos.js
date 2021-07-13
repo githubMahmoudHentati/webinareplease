@@ -31,7 +31,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
     //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
     const history = useHistory();
     // use Selector redux
-
     const [order , SetOrder]=useState(null) // setOrder
     const [Current , SetCurrent] = useState(null) // set pagination current
 

@@ -25,15 +25,22 @@ import { CSSTransition } from 'react-transition-group';
 
 function GlobalHeader() {
 
-
-
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const activeSideMenu = useSelector((state)=> state.Reducer.activeSideMenu)
 
-    const [back , Setback]=useState(false)
+    // Clic outside Side Bar
+    useEffect(() => {
+        function gotoHeder(event) {
 
+            var noRedirect = '.side-nav * , .hambg_button * '
+            if (!event.target.matches(noRedirect)) {
+                dispatch(setSideMenu(false))
+            }
+        };
+        document.body.addEventListener('click', gotoHeder);
+    },[]);
 
     //fonction checkbox
     const onChange = (e) =>{
@@ -230,7 +237,7 @@ function GlobalHeader() {
                         <div className={"side-nav"} id={"side-menu"}>
 
                             <div className={"div1_side_nav"}>
-                                <MenuUnfoldOutlined onClick={()=>{dispatch(setSideMenu(false))}}/>
+                                <MenuUnfoldOutlined className={"menuhamg-close"} onClick={()=>{dispatch(setSideMenu(false))}}/>
                                 <label id="switch" className="switch" >
                                     <input type="checkbox"
                                            id="slider"
@@ -263,12 +270,12 @@ function GlobalHeader() {
                                     <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']}>
                                         <div> <GlobalOutlined style={{color:darkMode===false?"":"white"}}/> langues</div>
                                     </Dropdown>
-                                    <div><QuestionCircleOutlined className={"icon_help"} style={{color:darkMode===false?"":"white"}}/>  Aide</div>
+                                    <div className={"aide_div"}><QuestionCircleOutlined className={"icon_help"} style={{color:darkMode===false?"":"white"}}/><span>Aide</span></div>
                                 </div>
 
                                 <div className={"div4_div2_side_nav"}>
                                     <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
-                                        <LogoutOutlined />Déconnection
+                                        <LogoutOutlined /><span>Déconnection</span>
                                     </a>
                                 </div>
                             </div>
