@@ -15,6 +15,10 @@ export const UploadLogoSpeaker = () => {
         info.file.status='done'
     }
 
+    const removeLogoSpeaker=()=>{
+        dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:[]}))
+    }
+
     const onSave = async (file)=>{
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
@@ -81,6 +85,7 @@ export const UploadLogoSpeaker = () => {
     return {
         onChangeFile,
         beforeUpload,
+        removeLogoSpeaker,
         fileList
     };
 };

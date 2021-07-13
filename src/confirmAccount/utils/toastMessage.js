@@ -15,7 +15,7 @@ export const ToastMessage = () => {
             constraintDataValueChange: false
         }))
         const successMessage = {
-            200: "Point d'accèes invalide, veuillez registrer encore une foix",
+            200: "mail confirmation est renvoyé, veuillez  vérifier votre courrier électronique  pour  valider l'inscription.",
         }
         message.success({
             content: successMessage[code],

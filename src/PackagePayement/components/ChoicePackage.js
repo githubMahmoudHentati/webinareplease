@@ -35,12 +35,12 @@ function ChoicePackage(){
     const { handleClickCardZero, handleClickCardOne , handleClickCardTwo , values , handlePackagePayementInput , handlePackagePayementSelect} = Hooks()
     const dispatch = useDispatch()
 
-    const stripe = useStripe();
-    const elements = useElements();
+    const stripe = useStripe(); // Stripe Hooks
+    const elements = useElements(); // Stripe Hooks
 
     const {valuesSignUp,handleSubmitSignUp} = HooksSignUp()
 
-    console.log("valuesSignUp",valuesSignUp)
+    console.log("valuesSikjfhkfdsjhfksdjfhgnUp",values)
 
 
         const subscriptionId = valuesSignUp.constSubscription.subscriptionId;
@@ -81,21 +81,43 @@ function ChoicePackage(){
         console.log("handlechange",e)
     }
 
-    const handlePayer = () =>{
+    // handle Payement
+    const handlePayer = async () =>{
+
+        // Create payement intent on the server
+        // Confirm the payement on the client
         if (!stripe || !elements){
             return;
         }
-        setTimeout(()=>{
-            stripe.confirmCardPayment(
-                clientSecret, {
-                    payment_method:{
-                        card:elements.getElement(CardElement)
+        if ( values.packagePayement.activeCard===2){
+            setTimeout(()=>{
+                stripe.confirmCardPayment(
+                    clientSecret, {
+                        payment_method:{
+                            card:elements.getElement(CardElement)
+                        }
                     }
-                }
-            )
+                )
 
-            message.success('Processing complete!')
-        },2500)
+                message.success('Processing complete!')
+            },2500)
+        }else if(values.packagePayement.activeCard===3){
+            setTimeout(()=>{
+                stripe.confirmCardPayment(
+                    clientSecret, {
+                        payment_method:{
+                            card:elements.getElement(CardElement),
+                            billing_details: {
+                                name: values.packagePayementInput.email,
+                            },
+                        }
+                    }
+                )
+
+                message.success('Processing complete!')
+            },2500)
+        }
+
 
     }
 
@@ -145,7 +167,7 @@ function ChoicePackage(){
                                         <p >Idéal pour les équipes</p>
                                     </div>
                                     <div>
-                                        <h2 >{values.packagePayement.packPro}</h2>
+                                        <h2 >{values.packagePayement.packPro}€</h2>
                                         <li >Accueille jusqu’à 100 participants</li>
                                         <li > Réunions en groupe illimitées</li>
                                         <li >1 Go d’enregistrement sur le cloud</li>
@@ -160,7 +182,7 @@ function ChoicePackage(){
                                         <p >Payer à votre utilisation</p>
                                     </div>
                                     <div className={"Card2_Forfait_div2"}>
-                                        <h2 >{values.packagePayement.packASYouGo}</h2>
+                                        <h2 >{values.packagePayement.packASYouGo}€</h2>
                                         <div>
                                             <h5 >Durée de la réunion</h5>
                                             <Select defaultValue="1 Heure" >
@@ -234,8 +256,13 @@ function ChoicePackage(){
                                                         name="carddetails"
                                                         rules={[{required: true, message: 'Please input your adress!'}]}
                                                     >
-                                                        <CardElement id={"card-element"} name="carddetails" className={"input"}
-                                                                     onChange={handlechange}/>
+                                                        <CardElement
+                                                            id={"card-element"} name="carddetails" className={"input"}
+                                                            onChange={handlechange}
+                                                            options={{
+                                                                hidePostalCode:true
+                                                            }}
+                                                        />
                                                     </Form.Item>
 
                                                     <Form.Item

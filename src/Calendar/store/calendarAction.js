@@ -7,3 +7,13 @@ export function setCalendarOnchange(e){
         payload:e,
     }
 }
+
+//******************** calendar actions***************//
+
+export function setCalendarVisibleOnchange(e){
+
+    return{
+        type: "SET_CalendarVisibleOnchange",
+        payload:e,
+    }
+}

@@ -66,7 +66,7 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
         }
     });
 
-    create customer
+    //create customer
     const [CREATECUSTOMER] = useMutation(graphQL_shema().CreateCustomer,{
         variables : {email:valuesSignUp.signUp.email},
         skip:valuesSignUp.signUp.subscriptionId===0,

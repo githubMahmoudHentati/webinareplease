@@ -9,6 +9,8 @@ export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
     // Read Data from Hooks
     const {paginationProps ,  values }=Hooks()
+
+    console.log("paginationProps654654654654", paginationProps)
     const {error_getLives}=StatusMessage()
 
     // use Query to fetch Data

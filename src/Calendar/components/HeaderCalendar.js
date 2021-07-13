@@ -40,10 +40,10 @@ function HeaderCalendar() {
 
             <div className="BreadcrumbDivHeaderCalendrier">
                 <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
-                    <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} >
+                    <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
                         <span>Accueil</span>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
+                    <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
                         <span>Direct</span>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>Calendrier</Breadcrumb.Item>

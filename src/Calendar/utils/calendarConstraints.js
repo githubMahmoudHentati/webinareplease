@@ -9,8 +9,16 @@ export const CalendarConstraints = ()=>{
             }
         )
     }
+    const calendarVisibleModal = () => {
+        return (
+            {
+                visible:false,
+            }
+        )
+    }
     return({
-        calendar
+        calendar,
+        calendarVisibleModal
     })
 
 }
