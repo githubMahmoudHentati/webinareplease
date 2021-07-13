@@ -11,7 +11,6 @@ import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexio
 
 export  const HooksSignUp=()=> {
     const dispatch = useDispatch()
-    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const valuesSignUp = useSelector((state) => state.SignUpReducer)
     const valuesCard = useSelector((state) => state.PackagePayementReducer.packagePayement.activeCard)// reducer PackagePayement
     const {CreateAccount , CREATECUSTOMER , CREATESUBSCRIPTIONCustomer , CREATEPayementintent}=GraphQLFetchData(valuesSignUp , valuesCard)
@@ -64,7 +63,6 @@ export  const HooksSignUp=()=> {
 
     return({
         signUpOnChange,
-        darkMode,
         signUpOnChangeSelect,
         valuesSignUp,
         handleSubmitSignUp

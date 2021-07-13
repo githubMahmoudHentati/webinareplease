@@ -66,10 +66,9 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
         }
     });
 
-    //create customer
+    // create customer
     const [CREATECUSTOMER] = useMutation(graphQL_shema().CreateCustomer,{
         variables : {email:valuesSignUp.signUp.email},
-        skip:valuesSignUp.signUp.subscriptionId===0,
         context: { clientName: "first" },
         onCompleted:  (data)=>{
             console.log("123456789654123654789",data)
@@ -88,7 +87,6 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
             "priceId":"price_1JAAjrKvrhYT2AZi2wZ7EVZm"
             }
         },
-        skip:valuesSignUp.signUp.subscriptionId===0,
         context: { clientName: "first" },
         onCompleted:  (data)=>{
             console.log("azerfdsqwxcvbgty123",data)
@@ -111,7 +109,6 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
                 "currency": "eur"
             }
         },
-        skip:valuesSignUp.signUp.subscriptionId===0,
         context: { clientName: "first" },
         onCompleted:  (data)=>{
             console.log("azerfdsqwxcvbgt54654654654654y123",data)

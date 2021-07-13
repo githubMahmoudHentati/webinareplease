@@ -7,8 +7,6 @@ import {Provider} from "react-redux";
 import store from "./utils/redux/store";
 import { HashRouter } from 'react-router-dom'
 import ApolloProvider from "./ApolloProvider";
-import 'react-phone-input-2/lib/style.css'
-
 
 
 ReactDOM.render(ApolloProvider, document.getElementById('root'));

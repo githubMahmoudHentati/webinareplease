@@ -6,10 +6,6 @@ import {HooksSignUp} from "../utils/hooks";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setSignUpConstraintDataOnchange} from "../store/signUpAction";
 import {useDispatch} from "react-redux";
-import PhoneInput from 'react-phone-number-input'
-import InputPhone from 'react-phone-number-input/input'
-import 'react-phone-input-2/lib/style.css'
-
 const { Option } = Select;
 
 export const FormSignUp =({child1,child2})=>{
@@ -58,7 +54,6 @@ export const FormSignUp =({child1,child2})=>{
     console.log("signUp",valuesSignUp)
     return(
 
-
             <Row gutter={[0, 40]} className={'col-signUp'}>
                 <Col className={"spn1"} style={{textAlign: 'center'}} span={24}>
                     {child1}
@@ -89,7 +84,7 @@ export const FormSignUp =({child1,child2})=>{
                                     <Form.Item
                                         className={"form-item-style"}
                                         name="email"
-                                        label={<div><span className="require">*</span> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} >E-mail</span></div>}
+                                        label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >E-mail</span></div>}
                                         rules={[
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
@@ -111,24 +106,24 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                                 }
                                 <Col span={24}>
-                                            <Form.Item name="phone" className={"form-item-style"}
-                                                       label={<div><span className="require">*</span> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} >Téléphone</span></div>}
-                                                       rules={[
-                                                           ({getFieldValue}) => ({
-                                                               validator(_, value) {
-                                                                   if (isValidPhone(value)) {
-                                                                       return Promise.resolve('value');
-                                                                   }
-                                                                   return Promise.reject('Numéro telephone est invalide');
-                                                               },
-                                                           }),
-                                                       ]}
+                                    <Form.Item name="phone" className={"form-item-style"}
+                                               label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >Télephone</span></div>}
+                                               rules={[
+                                                   ({getFieldValue}) => ({
+                                                       validator(_, value) {
+                                                           if (isValidPhone(value)) {
+                                                               return Promise.resolve('value');
+                                                           }
+                                                           return Promise.reject('Numéro telephone est invalide');
+                                                       },
+                                                   }),
+                                               ]}
 
-                                            >
-                                                <Input className={"spn2"} name="phone"  onChange={signUpOnChange}
-                                                       placeholder={"Numéro de téléphone"}>
-                                                </Input>
-                                            </Form.Item>
+                                    >
+                                        <Input placeholder={"Saisir un numéro télephone"} className={"spn2"} name="phone" onChange={signUpOnChange}>
+
+                                            </Input>
+                                    </Form.Item>
                                 </Col>
                             </Row>
                         </Col>
@@ -136,7 +131,7 @@ export const FormSignUp =({child1,child2})=>{
                                     <Form.Item
                                         className={"form-item-style"}
                                         name="password"
-                                        label={<div><span className="require">*</span> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} >Mot de passe</span></div>}
+                                        label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >Mot de passe</span></div>}
                                         rules={[
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
@@ -201,10 +196,10 @@ export const FormSignUp =({child1,child2})=>{
                                             <Select
                                                 className={"spn2"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
-                                                defaultValue="entre 10-20 employé(e)s"
+                                                defaultValue="entre 5-10 employé(e)s"
                                                 showSearch
                                                 style={{width: "100%"}}
-                                                placeholder="entre 10-20 employé(e)s"
+                                                placeholder="Entre 5 - 10 employé(e)s"
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) =>
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
