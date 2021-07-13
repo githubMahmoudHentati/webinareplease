@@ -43,7 +43,7 @@ export const CompteSettings=()=>{
                 <Row gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px"}} style={{color:darkMode===false?"":"#ffffff"}}>
-                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
+                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
                                 <span
                                     onClick={()=>{
                                         dispatch(setConstraintDataOnchange({
@@ -56,8 +56,8 @@ export const CompteSettings=()=>{
                                     }}
                                 >Accueil</span>
                             </Breadcrumb.Item >
-                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}}>
-                                <span>Compte</span>
+                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
+                                <span>Direct</span>
                             </Breadcrumb.Item>
                             <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>Mon Compte</Breadcrumb.Item>
                         </Breadcrumb>

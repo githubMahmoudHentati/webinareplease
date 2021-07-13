@@ -180,8 +180,8 @@ function GlobalHeader() {
         <div className={"Header"} style={{backgroundColor:darkMode===false?"#ffffff":"#141414"}}>
 
             <div className="div_home_logo">
-               <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg" style={{color:darkMode===false?"":"white"}}></span></div>
-                <HomeOutlined className={"Home_Icon"} style={{color:darkMode===false?"":"#007fcb"}}/>
+               <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg" style={{color:darkMode===false?"":"white"}} onClick={()=>{history.push("/")}}></span></div>
+                <HomeOutlined className={"Home_Icon"} style={{color:darkMode===false?"":"#007fcb"}} onClick={()=>{history.push("/")}}/>
             </div>{/*./div_home_logo*/}
 
 
