@@ -869,19 +869,39 @@ margin-top: 2%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+}
+.menuhamg-close{
+    font-size: 20px !important;
 }
 .div2_side_nav{
     width: 85%;
     height: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+}
+.div1_div2_side_nav{
+    margin-bottom: 45px;
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    font-size: 14px;
 }
 .div2_div2_side_nav{
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 25px;
+}
+.div2_div2_side_nav a{
+    margin-bottom: 20px;
+    padding: 5px;
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    font-size: 14px;
+}
+.div2_div2_side_nav a:hover{
+    color: var(--menu-color) !important;
 }
 .div_home_logo{
     width: 30%;
@@ -894,6 +914,67 @@ margin-top: 2%;
 }
 .menu_hamg{
    display: none !important;
+}
+.div3_div2_side_nav{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+.div4_div2_side_nav{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+.div4_div2_side_nav a{
+    font-family: 'SF Pro Display';
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: normal;
+}
+.link_drp{
+    font-family: 'SF Pro Display';
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.65);
+}
+.link_drp:hover{
+    font-family: 'SF Pro Display';
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.65);
+}
+.drp_lang{
+    margin-bottom: 20px;
+    padding: 5px;
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    font-size: 14px;
+    color: RGBA(0, 0, 0, 0.65);
+}
+.drp_lang:hover {
+    color: var(--menu-color) !important;
+}
+.aide_div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    font-size: 14px;
+    color: RGBA(0, 0, 0, 0.65);
+}
+.aide_div:hover{
+    color: var(--menu-color) !important;
+}
+.aide_div:hover .icon_help{
+    color: var(--menu-color) !important;
 }
 .icon_webinaire{
     height: 100%;
@@ -919,7 +1000,7 @@ margin-top: 2%;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.65);
     cursor: pointer;
-    margin-right: 24px;
+    margin-right: 5px;
 }
 .Badge{
     margin-right: 24px;
@@ -943,20 +1024,7 @@ margin-top: 2%;
 .drp_lang{
     margin-right: 24px;
 }
-.link_drp{
-    font-family: 'SF Pro Display';
-    font-size: 14px;
-    font-weight: normal;
-    letter-spacing: normal;
-    color: rgba(0, 0, 0, 0.65);
-}
-.link_drp:hover{
-    font-family: 'SF Pro Display';
-    font-size: 14px;
-    font-weight: normal;
-    letter-spacing: normal;
-    color: rgba(0, 0, 0, 0.65);
-}
+
 .slider {
     position: absolute;
     cursor: pointer;
