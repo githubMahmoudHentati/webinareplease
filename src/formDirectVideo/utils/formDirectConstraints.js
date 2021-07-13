@@ -9,7 +9,8 @@ export const FormDirectConstraints = ()=>{
     const generals = () => {
         return (
             {
-                fileList:"",
+                thumbnail:"",
+                fileList:[],
                 liveTitle:"",
                 liveDescription:"",
                 liveAction:false,
