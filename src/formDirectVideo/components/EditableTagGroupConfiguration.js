@@ -66,7 +66,7 @@ class EditableTagGroupConfiguration extends React.Component {
         const { tags, inputVisible, inputValue } = this.state;
         const tagChild = tags.map(this.forMap);
         return (
-            <>
+            <div>
                 <div style={{ marginBottom: 16 }}>
                     <TweenOneGroup
                         enter={{
@@ -101,7 +101,7 @@ class EditableTagGroupConfiguration extends React.Component {
                         <PlusOutlined /> Ajouter un Tag
                     </Tag>
                 )}
-            </>
+            </div>
         );
     }
 }
