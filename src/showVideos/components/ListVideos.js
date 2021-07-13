@@ -47,6 +47,12 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
             {PaginationPropsNameChange:"current",PaginationPropsValueChange:Current},
         ))
     },[Current])
+    // dispatch page Size Table
+    useEffect(()=>{
+        dispatch(setPaginationProps(
+            {PaginationPropsNameChange:"pageSize",PaginationPropsValueChange:pageSize},
+        ))
+    },[pageSize])
 
 
     const  onSelectChange = selectedRowKeys  => {
@@ -94,6 +100,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
         setCurrentPage(pagination.current - 1);
         SetOrder(sorter.order)
         SetCurrent(pagination.current)
+        setPageSize(pagination.pageSize)
     };
 
 
