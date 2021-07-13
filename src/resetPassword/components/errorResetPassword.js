@@ -1,3 +1,4 @@
+import React from 'react';
 import {Button, Col, Row} from "antd";
 import {useHistory} from "react-router-dom";
 import {Hooks} from "../utils/hooks";

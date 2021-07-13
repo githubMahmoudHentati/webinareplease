@@ -12,7 +12,6 @@ import { Spin } from 'antd';
 import {setAppSetLogin} from "./utils/redux/actions";
 import {graphQL_shema} from "./utils/grapqhQL/shemaGraphQL";
 
-console.log("process.env.REACT_APP_API_WEBINARPLEASE_HOST;",process.env)
 
 const firstLink = new createHttpLink({
     uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST
@@ -30,7 +29,7 @@ const authLink = setContext(() => {
 
 // Create Second Link
 const secondLink = new HttpLink({
-    uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST2
+    uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST
 });
 
 const authLink2 = setContext(() => {

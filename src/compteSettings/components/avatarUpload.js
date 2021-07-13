@@ -24,7 +24,7 @@ export const AvatarUpload = () => {
     }
 
     const onSave =(file)=>{
-         let url = process.env.REACT_APP_API_EVENT_HOST
+         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
          let token = localStorage.getItem('jwtToken')
         axios({
             url: url,
