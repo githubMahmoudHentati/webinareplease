@@ -27,12 +27,25 @@ function GlobalHeader() {
 
 
 
+
+
+
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const activeSideMenu = useSelector((state)=> state.Reducer.activeSideMenu)
 
-    const [back , Setback]=useState(false)
+    // Clic outside Side Bar
+    useEffect(() => {
+        function gotoHeder(event) {
+
+            var noRedirect = '.side-nav * , .hambg_button * '
+            if (!event.target.matches(noRedirect)) {
+                dispatch(setSideMenu(false))
+            }
+        };
+        document.body.addEventListener('click', gotoHeder);
+    },[]);
 
 
     //fonction checkbox
@@ -230,7 +243,7 @@ function GlobalHeader() {
                         <div className={"side-nav"} id={"side-menu"}>
 
                             <div className={"div1_side_nav"}>
-                                <MenuUnfoldOutlined onClick={()=>{dispatch(setSideMenu(false))}}/>
+                                <MenuUnfoldOutlined className={"menuhamg-close"} onClick={()=>{dispatch(setSideMenu(false))}}/>
                                 <label id="switch" className="switch" >
                                     <input type="checkbox"
                                            id="slider"
