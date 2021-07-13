@@ -6,6 +6,10 @@ import {HooksSignUp} from "../utils/hooks";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setSignUpConstraintDataOnchange} from "../store/signUpAction";
 import {useDispatch} from "react-redux";
+import PhoneInput from 'react-phone-number-input'
+import InputPhone from 'react-phone-number-input/input'
+import 'react-phone-input-2/lib/style.css'
+
 const { Option } = Select;
 
 export const FormSignUp =({child1,child2})=>{
@@ -17,7 +21,11 @@ export const FormSignUp =({child1,child2})=>{
     };
 
 
-    const {signUpOnChange,signUpOnChangeSelect,valuesSignUp,handleSubmitSignUp}= HooksSignUp()
+    const {signUpOnChange,signUpOnChangeSelect,valuesSignUp,darkMode}= HooksSignUp()
+
+    const isValidPhone= (phone) => {
+        return phone.match( /^-?[\d.]+(?:e-?\d+)?$/)
+    }
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -50,6 +58,7 @@ export const FormSignUp =({child1,child2})=>{
     console.log("signUp",valuesSignUp)
     return(
 
+
             <Row gutter={[0, 40]} className={'col-signUp'}>
                 <Col className={"spn1"} style={{textAlign: 'center'}} span={24}>
                     {child1}
@@ -80,7 +89,7 @@ export const FormSignUp =({child1,child2})=>{
                                     <Form.Item
                                         className={"form-item-style"}
                                         name="email"
-                                        label={"E-mail"}
+                                        label={<div><span className="require">*</span> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} >E-mail</span></div>}
                                         rules={[
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
@@ -103,9 +112,20 @@ export const FormSignUp =({child1,child2})=>{
                                 }
                                 <Col span={24}>
                                             <Form.Item name="phone" className={"form-item-style"}
-                                                       label={"Téléphone "}
-                                                       rules={requiredFieldRule}>
-                                                <Input className={"spn2"} name="phone" onChange={signUpOnChange}
+                                                       label={<div><span className="require">*</span> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} >Téléphone</span></div>}
+                                                       rules={[
+                                                           ({getFieldValue}) => ({
+                                                               validator(_, value) {
+                                                                   if (isValidPhone(value)) {
+                                                                       return Promise.resolve('value');
+                                                                   }
+                                                                   return Promise.reject('Numéro telephone est invalide');
+                                                               },
+                                                           }),
+                                                       ]}
+
+                                            >
+                                                <Input className={"spn2"} name="phone"  onChange={signUpOnChange}
                                                        placeholder={"Numéro de téléphone"}>
                                                 </Input>
                                             </Form.Item>
@@ -116,7 +136,7 @@ export const FormSignUp =({child1,child2})=>{
                                     <Form.Item
                                         className={"form-item-style"}
                                         name="password"
-                                        label={"Mot de passe"}
+                                        label={<div><span className="require">*</span> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} >Mot de passe</span></div>}
                                         rules={[
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
@@ -181,10 +201,10 @@ export const FormSignUp =({child1,child2})=>{
                                             <Select
                                                 className={"spn2"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
-                                                defaultValue="entre 5-10 employé(e)s"
+                                                defaultValue="entre 10-20 employé(e)s"
                                                 showSearch
                                                 style={{width: "100%"}}
-                                                placeholder="Entre 5 - 10 employé(e)s"
+                                                placeholder="entre 10-20 employé(e)s"
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) =>
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
