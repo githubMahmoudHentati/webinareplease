@@ -39,7 +39,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
         dispatch(setPaginationProps(
             {PaginationPropsNameChange:"order",PaginationPropsValueChange:order},
         ));
-    },[order ])
+    },[order])
     // dispatch current Table
     useEffect(()=>{
         dispatch(setPaginationProps(
