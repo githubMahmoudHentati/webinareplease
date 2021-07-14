@@ -53,6 +53,7 @@ function useActionMenu({record}) {
             message.success({content:"cet champ est copié avec succée",duration:2});
         }
     }
+
     // fonction pour copier url auditeur
     const CopyUrlAuditeur = () =>{
         if(document.getElementById("myUrlAuditeur").value === ""){
