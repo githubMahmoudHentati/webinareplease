@@ -33,12 +33,12 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     const onShowModal=()=>{
         SetVisible(true)
     }
+
     // Cancel modal
     const handleCancel = () => {
         SetVisible(false)
     }
 
-    console.log("kdjfksdfgkdjsksdjfhksdjfhksdjf",listData)
     return(
         <div className={"div_global_calendar"}>
             <span className={"spn_Date_event"}>{calendarEvent.format('DD / MM / YYYY')}</span>

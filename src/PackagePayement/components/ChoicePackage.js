@@ -10,6 +10,7 @@ import {useDispatch} from "react-redux";
 import {setPackagePayementAction} from "../store/PackagePayementAction";
 import '../PackagePayement.scss'
 import {setSignUpConstraintDataOnchange, setSignUpOnchange} from "../../signUp/store/signUpAction";
+import {useHistory} from "react-router-dom";
 const { Step } = Steps;
 const { Option } = Select;
 
@@ -31,7 +32,7 @@ const steps = [
 
 function ChoicePackage(){
     const [form] = Form.useForm();
-
+    const history = useHistory();
     const { handleClickCardZero, handleClickCardOne , handleClickCardTwo , values , handlePackagePayementInput , handlePackagePayementSelect} = Hooks()
     const dispatch = useDispatch()
 
@@ -326,7 +327,7 @@ function ChoicePackage(){
                 {/*./steps-content*/}
                 <div className="steps-action">
                     {valuesSignUp.constraintData.current === 0 && (
-                        <Button style={{margin: '0 8px'}}>
+                        <Button onClick={()=>{history.push("/")}} style={{margin: '0 8px'}}>
                             Annuler
                         </Button>
                     )}
