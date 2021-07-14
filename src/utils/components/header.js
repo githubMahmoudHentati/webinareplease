@@ -16,7 +16,7 @@ import {
      GlobalOutlined,
 } from '@ant-design/icons';
 import { Badge , Menu, Dropdown , Avatar} from 'antd';
-import {setAccountSetting, setAppSetLogin, setAppSetLogout , setSideMenu} from "../redux/actions";
+import {setAccountSetting, setAppSetLogin, setAppSetLogout } from "../redux/actions";
 import {setDarkMode} from "../redux/actions";
 import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import { CSSTransition } from 'react-transition-group';
@@ -28,19 +28,20 @@ function GlobalHeader() {
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const activeSideMenu = useSelector((state)=> state.Reducer.activeSideMenu)
+
+    const [activeSideMenuState , SetActiveSideMenuState] = useState(false)
 
     // Clic outside Side Bar
-    // useEffect(() => {
-    //     function gotoHeder(event) {
-    //
-    //         var noRedirect = '.side-nav * , .hambg_button * '
-    //         if (!event.target.matches(noRedirect)) {
-    //             dispatch(setSideMenu(false))
-    //         }
-    //     };
-    //     document.body.addEventListener('click', gotoHeder);
-    // },[]);
+     useEffect(() => {
+        function HEADERGOTO(event) {
+
+             var noRedirect = '.side-nav * , .hambg_button * '
+             if (!event.target.matches(noRedirect)) {
+                 SetActiveSideMenuState(false)
+             }
+        };
+         document.body.addEventListener('click', HEADERGOTO);
+     },[]);
 
     //fonction checkbox
     const onChange = (e) =>{
@@ -181,6 +182,25 @@ function GlobalHeader() {
             </Menu.Item>
         </Menu>
     );
+    const Menulang1 = (
+        <Menu className="menu">
+            <Menu.Item >
+                 <span className="icon-fr">
+                     <span className="path1"></span>
+                     <span className="path2"></span>
+                     <span className="path3"></span><span className="path4"></span>
+                 </span>  Français
+            </Menu.Item>
+            <Menu.Item>
+                <span className="icon-ang">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                    <span className="path3"></span><span className="path4"></span>
+                    <span className="path5"></span>
+                </span>   Anglais
+            </Menu.Item>
+        </Menu>
+    );
 
     return(
         <div className={"div_Header"}>
@@ -194,7 +214,7 @@ function GlobalHeader() {
 
             {/*div_hambg_button*/}
             <div className={"hambg_button"}>
-              <MenuFoldOutlined id={"id_menu_hamg"} className={"menu_hamg"} onClick={()=>{dispatch(setSideMenu(true))}}/>
+              <MenuFoldOutlined id={"id_menu_hamg"} className={"menu_hamg"} onClick={()=>{SetActiveSideMenuState(true)}}/>
             </div>
             {/*div_hambg_button*/}
 
@@ -232,16 +252,16 @@ function GlobalHeader() {
         </div>
 
             {
-                activeSideMenu === true
+                activeSideMenuState === true
                     ?
-                        <div className={"side-nav"} id={"side-menu"}>
+                        <div className={"side-nav"} id={"side-menu"} >
 
                             <div className={"div1_side_nav"}>
-                                <MenuUnfoldOutlined className={"menuhamg-close"} onClick={()=>{dispatch(setSideMenu(false))}}/>
+                                <MenuUnfoldOutlined className={"menuhamg-close"} onClick={()=>{SetActiveSideMenuState(false)}}/>
                                 <label id="switch" className="switch" >
                                     <input type="checkbox"
                                            id="slider"
-                                           onClick={()=>onChange()}
+                                           onClick={onChange}
                                            defaultChecked={darkMode}
                                     />
                                     <span className="slider"></span>
@@ -250,32 +270,32 @@ function GlobalHeader() {
                             <div className={"div2_side_nav"}>
                                 <div className={"div1_div2_side_nav"}>
                                     <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
-                                        <Avatar style={{ backgroundColor: '#419BF9' }} icon={<UserOutlined />} /> Nom d'utilisateur
+                                        <Avatar style={{ backgroundColor: '#419BF9' }} icon={<UserOutlined />} className={"avtr"}/><span>Nom d'utilisateur</span>
                                     </a>
                                 </div>
 
                                 <div className={"div2_div2_side_nav"}>
-                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
-                                        <UserOutlined />Compte
+                                    <a className="ant-dropdown-link link_drp" onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(0)),SetActiveSideMenuState(false))}} style={{color:darkMode===false?"":"white"}}>
+                                        <UserOutlined className={"avtr"}/><span>Compte</span>
                                     </a>
-                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
-                                        <UnlockOutlined />Sécurité
+                                    <a className="ant-dropdown-link link_drp" onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(1)),SetActiveSideMenuState(false))}} style={{color:darkMode===false?"":"white"}}>
+                                        <UnlockOutlined className={"avtr"}/><span>Sécurité</span>
                                     </a>
-                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
-                                        <PieChartOutlined />Abonnement
+                                    <a className="ant-dropdown-link link_drp" onClick={()=>{history.push("/compteSettings",dispatch(setAccountSetting(3)),SetActiveSideMenuState(false))}} style={{color:darkMode===false?"":"white"}}>
+                                        <PieChartOutlined className={"avtr"}/><span>Abonnement</span>
                                     </a>
                                 </div>
 
                                 <div className={"div3_div2_side_nav"}>
-                                    <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']}>
-                                        <div> <GlobalOutlined style={{color:darkMode===false?"":"white"}}/> langues</div>
+                                    <Dropdown className={"drp_lang"} overlay={Menulang1} trigger={['click']}>
+                                        <div> <GlobalOutlined style={{color:darkMode===false?"":"white"}} className={"avtr"}/> <span className={"spnwhite"}>langues</span></div>
                                     </Dropdown>
-                                    <div className={"aide_div"}><QuestionCircleOutlined className={"icon_help"} style={{color:darkMode===false?"":"white"}}/><span>Aide</span></div>
+                                    <div className={"aide_div"}><QuestionCircleOutlined className={"icon_help"} style={{color:darkMode===false?"":"white"}}/><span className={"spnwhite"}>Aide</span></div>
                                 </div>
 
                                 <div className={"div4_div2_side_nav"}>
-                                    <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()} style={{color:darkMode===false?"":"white"}}>
-                                        <LogoutOutlined /><span>Déconnection</span>
+                                    <a className="ant-dropdown-link link_drp" onClick={logOut} style={{color:darkMode===false?"":"white"}}>
+                                        <LogoutOutlined className={"logout-icon"}/><span>Déconnection</span>
                                     </a>
                                 </div>
                             </div>
@@ -287,7 +307,7 @@ function GlobalHeader() {
 
 
             {
-                activeSideMenu===true
+                activeSideMenuState===true
                     ?
                     <div className={"overley"}>
 

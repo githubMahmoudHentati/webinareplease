@@ -38,12 +38,6 @@ export function setAppSetLogout(){
     }
 }
 
-export function setSideMenu(e){
-    return{
-        type:"SET_SideMenu",
-        payload:e
-    }
-}
 
 
 
