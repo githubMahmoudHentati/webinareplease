@@ -31,16 +31,16 @@ function GlobalHeader() {
     const activeSideMenu = useSelector((state)=> state.Reducer.activeSideMenu)
 
     // Clic outside Side Bar
-    useEffect(() => {
-        function gotoHeder(event) {
-
-            var noRedirect = '.side-nav * , .hambg_button * '
-            if (!event.target.matches(noRedirect)) {
-                dispatch(setSideMenu(false))
-            }
-        };
-        document.body.addEventListener('click', gotoHeder);
-    },[]);
+    // useEffect(() => {
+    //     function gotoHeder(event) {
+    //
+    //         var noRedirect = '.side-nav * , .hambg_button * '
+    //         if (!event.target.matches(noRedirect)) {
+    //             dispatch(setSideMenu(false))
+    //         }
+    //     };
+    //     document.body.addEventListener('click', gotoHeder);
+    // },[]);
 
     //fonction checkbox
     const onChange = (e) =>{

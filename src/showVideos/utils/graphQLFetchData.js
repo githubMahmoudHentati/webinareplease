@@ -23,7 +23,7 @@ export const GraphQLFetchData=()=> {
                 "order_dir": paginationProps.order,
                 "order_column": paginationProps.columnKey,
                 "search_word":values.search,
-                "date":["",""],
+                "date":[" ", ""],
                 "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
             } },
         context: { clientName: "second" },

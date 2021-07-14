@@ -14,7 +14,7 @@
     "@testing-library/user-event": "^12.8.3",
     "@types/react-transition-group": "^4.4.1",
     "@vimeo/player": "^2.15.0",
-    "antd": "^4.15.5",
+    "antd": "^4.16.7",
     "antd-theme": "^0.3.4",
     "apollo": "^2.32.5",
     "apollo-boost": "^0.4.9",
