@@ -337,7 +337,10 @@ function ChoicePackage(){
                         </Button>
                     )}
                     {valuesSignUp.constraintData.current === 1 && (
-                        <Button  onClick={()=>{!valuesSignUp.constraintData.confidentialityOption&&document.documentElement.style.setProperty('--box-signup', "red");}} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">Inscrivez-vous maintenant</Button>
+                        <Button  onClick={()=>{
+                            !valuesSignUp.constraintData.confidentialityOption?document.documentElement.style.setProperty('--box-signup', "red"):
+                                document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
+                        }} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">Inscrivez-vous maintenant</Button>
                     )}
                     {valuesSignUp.constraintData.current ===0 && (
                         <Button
