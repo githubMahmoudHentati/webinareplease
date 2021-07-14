@@ -8,6 +8,7 @@ import {SignUpReducer} from "../store/signUpReducer";
 import {setSignUpConstraintDataOnchange, setSignUpOnchange} from "../store/signUpAction";
 import {GraphQLFetchData} from "./graphQLFetchData";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
+import {setConfigurationOnchange} from "../../formDirectVideo/store/formDirectVideoAction";
 
 export  const HooksSignUp=()=> {
     const dispatch = useDispatch()
@@ -34,16 +35,22 @@ export  const HooksSignUp=()=> {
         }
     };
 
+    const SignUpOnChangeButton = (event) => {
+        document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
+        dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:event.target.value, constraintDataValueChange:event.target.checked}));
+    };
+
     const signUpOnChangeSelect = (value,action) => {
         console.log("event",action.name, action.value)
         dispatch(setSignUpOnchange({SignUpNameChange: action.name, SignUpValueChange: action.value}));
     };
 
     const handleSubmitSignUp = async () => {
-        dispatch(setSignUpConstraintDataOnchange({
+        await dispatch(setSignUpConstraintDataOnchange({
             constraintDataNameChange: "loadingSignUp",
             constraintDataValueChange: true
         }))
+        !valuesSignUp.constraintData.confidentialityOption&&document.documentElement.style.setProperty('--box-signup', "red");
         CreateAccount()
 
        if(valuesCard === 2){
@@ -65,6 +72,7 @@ export  const HooksSignUp=()=> {
         signUpOnChange,
         signUpOnChangeSelect,
         valuesSignUp,
-        handleSubmitSignUp
+        handleSubmitSignUp,
+        SignUpOnChangeButton
     })
 }

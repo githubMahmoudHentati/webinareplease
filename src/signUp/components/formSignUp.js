@@ -18,7 +18,7 @@ export const FormSignUp =({child1,child2})=>{
     };
 
 
-    const {signUpOnChange,signUpOnChangeSelect,valuesSignUp,darkMode}= HooksSignUp()
+    const {signUpOnChange,signUpOnChangeSelect,valuesSignUp,SignUpOnChangeButton}= HooksSignUp()
 
     const isValidPhone= (phone) => {
         return phone.match( /^-?[\d.]+(?:e-?\d+)?$/)
@@ -220,7 +220,13 @@ export const FormSignUp =({child1,child2})=>{
                         <Col span={24}>
                             <Row className={"row_politique"} gutter={[10, 0]}>
                                 <Col offset={4} span={1}>
-                                    <Checkbox></Checkbox>
+                                    <Form.Item name="confidentialityOptionGroup" className={"form-item-style"} valuePropName="checked"
+                                               rules={[{required: true, message: ''}]}
+                                    >
+                                        <Checkbox.Group name="confidentialityOptionGroup">
+                                        <Checkbox value="confidentialityOption"  name="confidentialityOption" onChange={SignUpOnChangeButton}></Checkbox>
+                                        </Checkbox.Group>
+                                    </Form.Item>
                                 </Col>
                                 <Col className={"col-politique"} style={{color: "RGB(185, 185, 185)"}} span={15}>
                                     <span

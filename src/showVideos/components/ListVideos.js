@@ -56,7 +56,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
 
     const  onSelectChange = selectedRowKeys  => {
         setSelectedRowKeys(selectedRowKeys);
-        console.log(`selectedhgjhgjhgjhgjh : ${selectedRowKeys}`);
         dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:selectedRowKeys}));
         dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:selectedRowKeys.length}));
     };

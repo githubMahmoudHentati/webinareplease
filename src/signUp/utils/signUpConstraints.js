@@ -22,6 +22,7 @@ export const SignUpConstraints = ()=>{
     }
     const constraintData =()=>{
         return({
+            confidentialityOption:false,
             loadingSignUp:false,
             signUpError:false,
             isMailValid:true,
