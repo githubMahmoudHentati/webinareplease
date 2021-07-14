@@ -40,11 +40,6 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 appState: { loggedIn: false },
                 authToken : ''
             }
-        case "SET_SideMenu" :
-            return {
-                ...state,
-                activeSideMenu:action.payload
-            }
 
         default:{
             return state
