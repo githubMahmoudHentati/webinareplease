@@ -211,6 +211,9 @@ export  const Hooks=()=> {
 
     /* Click Annuler button Alert*/
     const handleClickAnnulerAlert=()=>{
+        // dispatch loading Delete Button
+        dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
+        //show selected element
         dispatch(setshowDivsConditions({showDivsConditionsName:"showElementSelected",showDivsConditionsValue:true}));
         dispatch(setshowDivsConditions({showDivsConditionsName:"rubDeleteItems",showDivsConditionsValue:true}));
         setTimeout(()=>{
