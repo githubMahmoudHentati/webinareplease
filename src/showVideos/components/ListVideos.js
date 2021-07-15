@@ -16,7 +16,7 @@ const DEFAULT_PAGE_NUMBER = 0;
 function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
 
     // Read Data from Hooks
-    const {DataVideos , paginationProps}=Hooks()
+    const {DataVideos , paginationProps , conditions}=Hooks()
 
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -110,7 +110,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
                 rowSelection={rowSelection}
                 columns={updatedColumns}
                 dataSource={dataSource.content}
-
+                rowClassName={record => !record.enabled && "disabled-row"}
 
                 onChange={handleTableChange}
                 pagination={{
