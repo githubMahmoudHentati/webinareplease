@@ -42,7 +42,7 @@ export  const Hooks=()=> {
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",infosLives)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",paginationProps)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -175,12 +175,13 @@ export  const Hooks=()=> {
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
 
+
+
     }
 
     // Delete One Row
     //fonction pour supprimer un live
     const handleDeleteOneRow =  (e) =>{
-
 
             // dispatch show Alert
             dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
