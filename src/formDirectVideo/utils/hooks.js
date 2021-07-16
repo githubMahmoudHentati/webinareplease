@@ -175,6 +175,29 @@ const Hooks=()=>{
         CreateLive()
     }
 
+    // Suppression des régles invitations
+
+    const handleClickDelete =(name)=>{
+        if(name === 1){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription", invitationValueChangeRules:false}));
+        }else if(name === 2){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ7", invitationValueChangeRules:false}));
+        } else if(name === 3){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ1", invitationValueChangeRules:false}));
+        }else if(name === 4){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH1", invitationValueChangeRules:false}));
+        }else if(name === 5){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription2", invitationValueChangeRules:false}));
+        }else if(name === 6){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ72", invitationValueChangeRules:false}));
+        } else if(name === 7){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ12", invitationValueChangeRules:false}));
+        }else if(name === 8){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH12", invitationValueChangeRules:false}));
+        }
+    }
+
+
     return({
         generalOnChangeByName,
         generalOnChange,
@@ -197,7 +220,8 @@ const Hooks=()=>{
         handleSubmit,
         displayThemes,
         values,
-        matchesMedia
+        matchesMedia,
+        handleClickDelete
     })
 }
 

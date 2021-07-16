@@ -93,6 +93,10 @@ body{
 
     --box-signup:#d9d9d9
 }
+.disabled-row {
+    background-color: #dcdcdc;
+    pointer-events: none;
+}
 
 .ant-breadcrumb-link{
     font-family: "SF Pro Display";
@@ -508,7 +512,9 @@ body{
 
 
 
-
+.spnwhite{
+    color: var(--white_color) !important;
+}
 
     /* HeaderVideos */
 .HeaderVideo{
@@ -742,9 +748,11 @@ margin-top: 2%;
 
 /*Action*/
 .action{
+    width: 55%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
 .action Button{
     margin-right: 30%;
@@ -850,21 +858,26 @@ margin-top: 2%;
     z-index: 10;
     transition: all 0.5s ease-in-out !important;
 }
-.side-nav{
+.avtr{
+    margin-right: 14px;
+}
+.avtr:hover .spnwhite{
+    color: var(--menu-color) !important;
+}
+#side-menu{
+    background-color: var(--card_color) !important;
     height: 100%;
     width: 295px;
     position: fixed;
     z-index: 100000000000000;
     top: 0;
     right: 0;
-    background-color: white !important;
     opacity: 1;
     overflow-x: hidden;
     padding-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition:20s !important;
 }
 .div1_side_nav{
     width: 85%;
@@ -875,6 +888,7 @@ margin-top: 2%;
 }
 .menuhamg-close{
     font-size: 20px !important;
+    color: var(--white_color) !important;
 }
 .div2_side_nav{
     width: 85%;
@@ -915,7 +929,8 @@ margin-top: 2%;
     align-items: center;
 }
 .menu_hamg{
-   display: none !important;
+    display: none !important;
+    color: var(--white_color) !important;
 }
 .div3_div2_side_nav{
     width: 100%;
@@ -929,6 +944,9 @@ margin-top: 2%;
     flex-direction: row;
     margin-bottom: 25px;
     padding: 5px;
+}
+.logout-icon{
+    margin-right: 14px;
 }
 .div4_div2_side_nav a{
     font-family: 'SF Pro Display';
@@ -951,7 +969,6 @@ margin-top: 2%;
     color: rgba(0, 0, 0, 0.65);
 }
 .drp_lang{
-
     padding: 5px;
     font-family: "SF Pro Display";
     font-weight: 400;
@@ -1763,6 +1780,16 @@ input:checked + .slider:before {
     }
     /***** Package Payement Tab *****/
 
+    .icon_help{
+        font-size: 16px;
+        color: rgba(0, 0, 0, 0.65);
+        cursor: pointer;
+        margin-right: 14px;
+    }
+    .icon_webinaire{
+        height: 100%;
+        width: 30% !important;
+    }
 }
 .divsignup{
     background-color: #e74c3c !important;
