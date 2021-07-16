@@ -2,7 +2,7 @@ import {Upload, message, Avatar, Button} from 'antd';
 import {InboxOutlined, LoadingOutlined, PlusOutlined, UploadOutlined, UserOutlined} from '@ant-design/icons';
 import React ,{useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import axios from 'axios';
 import {
     setConstraintDataOnchange,

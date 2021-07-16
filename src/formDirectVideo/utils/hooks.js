@@ -16,7 +16,7 @@ import {
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchData} from "./graphQLFetchData";
 
-export  const Hooks=()=>{
+const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
@@ -122,7 +122,6 @@ export  const Hooks=()=>{
         dispatch(setConfigurationInitialSpeaker({id,name,lastName,title,email,logoSpeaker: logoSpeaker
 
         }))
-        console.log("azaez")
     };
 
     const deleteSpeaker = async (id) => {
@@ -201,3 +200,5 @@ export  const Hooks=()=>{
         matchesMedia
     })
 }
+
+export default Hooks

@@ -4,8 +4,14 @@ import {
     setFilterVideosActions, setInfosLive, setLoadingDeleteShowVideo,
     setPaginationProps,
     setshowDivsConditions,
-    setshowVideosActions
+    setshowVideosActions,
+    setShowVideoConstraintDataOnchange
 } from "../store/showVideosAction"
+import fbPost from  "../../assets/facebookPost.svg"
+import linkedinPost from  "../../assets/linkedinPost.svg"
+import youtubePost from  "../../assets/youtubePost.svg"
+import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../../formDirectVideo/store/formDirectVideoAction"
+import Hookss from "../../formDirectVideo/utils/hooks"
 import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
@@ -13,16 +19,121 @@ import {GraphQLFetchData} from "./graphQLFetchData";
 import {StatusMessage} from "./StatusMessage";
 import {useHistory} from "react-router-dom";
 import {setDirectSetting} from "../../utils/redux/actions";
+import moment from "moment";
 let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
 
     const [visible , setVisible] = useState(false)
     const history = useHistory();
+    const dispatch = useDispatch()
+
+    //const {GETLiveUpdatedInfo}=GraphQLFetchData()
+    
+    const valuesFormDirectVideo=Hookss().values
+
+    const [GETLiveUpdatedInfo ,{loading:LiveUpdated_Info, data: LiveUpdatedInfData}]
+        = useLazyQuery(graphQL_shema().Get_UpdatedLive_Info, {
+        fetchPolicy:  "cache-and-network",
+        onCompleted: async (data)=>{
+            history.push("/FormDirectVideo")
+            let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
+            let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
+            console.log("startDate",startDate,"startHour",startHour)
+            await dispatch(setLiveInfo({
+                general:{
+                    thumbnail:data.getlive.generalInfoOut.thumbnail,
+                    fileList:[{
+                        uid: '-1',
+                        name: 'xxx.png',
+                        status: 'done',
+                        url: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
+                        thumbUrl: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
+                    }],
+                    liveTitle:data.getlive.generalInfoOut.liveTitle,
+                    liveDescription:data.getlive.generalInfoOut.liveDescription,
+                    liveAction:data.getlive.generalInfoOut.livePlan.plan,
+                    livePlan:{
+                        plan: false,
+                        startDate:"",
+                        duration:"",
+                    },
+                    startDate: startDate,
+                    startHour: startHour,
+                    period: data.getlive.generalInfoOut.livePlan.duration,
+                    directAccessMode: !data.getlive.generalInfoOut.liveAccess?"freeAccess":"liveAccess",
+                    liveAccess: data.getlive.generalInfoOut.liveAccess,
+                    pwd: data.getlive.generalInfoOut.pwd,
+                    liveSharedLink: data.getlive.generalInfoOut.liveLink,
+                    securedPasswordOption: data.getlive.generalInfoOut.securedPasswordOption,
+                },
+                configuration:{
+                    directProgram: data.getlive.configurationOut.liveProgram,
+                    notVisibleVideo: false,
+                    visibleVideo: false,
+                    modalSpeaker: false,
+                    switchSpeaker: false,
+                    liveAutomaticArchiving: false,
+                    SpeakerList: [{
+                        id: 0,
+                        name: "Nom ",
+                        lastName: 'Prénom',
+                        title: "Titre",
+                        email: "",
+                        logoSpeaker: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
+                    }],
+                    addSpeakerList:{},
+                    speaker: {id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: []},
+                    loadingSpeakerInfo:false,
+                    chat: data.getlive.configurationOut.interOption.chat,
+                    comments: data.getlive.configurationOut.interOption.comment,
+                    likeMention: data.getlive.configurationOut.interOption.like,
+                    attachments: data.getlive.configurationOut.multiOption.shareFile,
+                    richeMediaDiffusion: data.getlive.configurationOut.multiOption.isRm,
+                    videoMode: data.getlive.configurationOut.videoMode?"visibleVideo":"notVisibleVideo",
+                    theme:"",
+                    themesList:[],
+                    tags:data.getlive.configurationOut.tags,
+                },
+                socialTools:[
+                    {
+                        id: 0,
+                        idServer:data.getlive.socialOut[0].id,
+                        title:data.getlive.socialOut[0].title,
+                        type: "Facebook post",
+                        switch: data.getlive.socialOut[0].active,
+                        link:data.getlive.socialOut[0].link,
+                        logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
+                        plan: data.getlive.socialOut[0].planifications
+                    },
+                    {
+                        id: 1,
+                        idServer:data.getlive.socialOut[1].id,
+                        type: "Youtube post",
+                        title:data.getlive.socialOut[1].title,
+                        link:data.getlive.socialOut[1].link,
+                        switch: data.getlive.socialOut[1].active,
+                        logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
+                        plan: data.getlive.socialOut[1].planifications
+                    },
+                    {
+                        id: 2,
+                        idServer:data.getlive.socialOut[2].id,
+                        type: "Linkedlin post",
+                        title:data.getlive.socialOut[2].title,
+                        link:data.getlive.socialOut[2].link,
+                        switch: data.getlive.socialOut[2].active,
+                        logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
+                        plan: data.getlive.socialOut[2].planifications
+                    },
+                ]
+            }));
+            await dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
+        }
+    })
 
     const {success_Delete , error_Delete , error_Filter ,  error_getLives}=StatusMessage()
 
-    const dispatch = useDispatch()
     //Filter Data
     const values = useSelector((state) => state.ShowVideosReducerReducer.FilterVideos)
     //Data of Query
@@ -231,6 +342,10 @@ export  const Hooks=()=> {
         }
     }
 
+    const updateLive= async (id)=>{
+        await GETLiveUpdatedInfo({variables: { "id":id  }})
+    }
+
     // fonction handleInfos
     const handleInfos =()=>{
            GETINFOSlIVES()
@@ -238,6 +353,7 @@ export  const Hooks=()=> {
             dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
         },300)
     }
+
     //handleCancel MODAL
     const handleCancel = () => {
               dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
@@ -265,7 +381,6 @@ export  const Hooks=()=> {
         handleInfos,
         handleCancel,
         infosLives,
+        updateLive
     })
-
-
 }

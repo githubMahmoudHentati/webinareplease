@@ -113,6 +113,23 @@ export function setGeneralOnchange(e){
             }
         }
 
+//***************************Update live info***************************//
+
+        export function setLiveInfo(e){
+            return{
+                type:"SET_LiveInfo",
+                payload:e
+            }
+        }
+
+    export function setFormDirectLiveConstraintDataOnchange(e){
+        return{
+            type:"SET_FormDirectLiveConstraintDataOnchange",
+            payload:e
+        }
+    }
+
+
 
 
 

@@ -4,7 +4,7 @@ import '../compteSettings.scss'
 import { EyeInvisibleOutlined, EyeTwoTone,CloseCircleOutlined,CheckCircleOutlined } from '@ant-design/icons';
 import {setAccountSetting} from "../../utils/redux/actions";
 import {useDispatch , useSelector} from "react-redux";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 
 export const PasswordEdit =()=>{

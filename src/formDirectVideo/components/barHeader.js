@@ -4,7 +4,7 @@ import '../formDirectVideo.scss'
 import {ArrowLeftOutlined,CloseOutlined,CheckOutlined,VideoCameraOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import {setDirectSetting} from "../../utils/redux/actions";
 
 export const BarHeader =()=>{

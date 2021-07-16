@@ -10,7 +10,13 @@ export const FormDirectConstraints = ()=>{
         return (
             {
                 thumbnail:"",
-                fileList:[],
+                fileList:[{
+                    uid: '-1',
+                    name: 'xxx.png',
+                    status: 'done',
+                    url: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
+                    thumbUrl: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
+                }],
                 liveTitle:"",
                 liveDescription:"",
                 liveAction:false,
@@ -52,7 +58,6 @@ export const FormDirectConstraints = ()=>{
                 addSpeakerList:{},
                 speaker: {id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: []},
                 loadingSpeakerInfo:false,
-                LiveInteractiveOption:[],
                 chat:false,
                 comments:false,
                 likeMention:false,
@@ -70,24 +75,30 @@ export const FormDirectConstraints = ()=>{
         return [
             {
                 id: 0,
+                title:"",
                 type: "Facebook post",
                 switch: true,
+                link:"",
                 logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{active: true, startDate: "", endDate: ""}]
+                plan: [{id:0,active: true, startDate: "", endDate: ""}]
             },
             {
                 id: 1,
                 type: "Youtube post",
+                title:"",
+                link:"",
                 switch: false,
                 logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{active: true, startDate: "", endDate: ""}]
+                plan: [{id:1,active: true, startDate: "", endDate: ""}]
             },
             {
                 id: 2,
                 type: "Linkedlin post",
+                title:"",
+                link:"",
                 switch: false,
                 logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{active: true, startDate: "", endDate: ""}]
+                plan: [{id:2,active: true, startDate: "", endDate: ""}]
             },
         ]
     }
@@ -112,6 +123,12 @@ export const FormDirectConstraints = ()=>{
         )
     }
 
+    const constraintData =()=>{
+        return({
+            loadingLiveFetchData:false
+        })
+    }
+
     // const formLive =()=>{
     //     return (
     //             form
@@ -123,6 +140,7 @@ export const FormDirectConstraints = ()=>{
         configuration,
         socialTools,
         invitation,
+        constraintData,
         // formLive
     })
 

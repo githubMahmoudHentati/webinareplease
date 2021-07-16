@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {AccountGeneralInformation} from "../../compteSettings/components/accountGeneralInformation";
 import {SecurityAccount} from "../../compteSettings/components/securityAccount";
 import {PasswordEdit} from "../../compteSettings/components/passwordEdit";
-import {Hooks} from "../../formDirectVideo/utils/hooks";
+import Hooks from "../../formDirectVideo/utils/hooks";
 import {setIframeStyle} from "../redux/actions";
 
 

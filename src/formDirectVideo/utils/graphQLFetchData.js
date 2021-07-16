@@ -15,10 +15,9 @@ export const GraphQLFetchData = (values) => {
     const history = useHistory()
     const dispatch = useDispatch()
     console.log("test",values)
-    let startDate= values.general.startDate && values.general.startHour ? (values.general.startDate).format('YYYY-MM-DD') + "T" + (values.general.startHour).format('HH:mm:ss') + "Z" : ""
-    let period = values.general.period? values.general.period.format('HH:mm:ss'):""
     console.log("addSpeaker",values.configuration.addSpeakerList)
-
+    //let startDate= values.general.startDate && values.general.startHour ? (values.general.startDate).format('YYYY-MM-DD') + "T" + (values.general.startHour).format('HH:mm:ss') + "Z" : ""
+    let period = values.general.period? values.general.period.format('HH:mm:ss'):""
 
     const [CreateLive, {
         data: dataUpdate,
@@ -33,8 +32,8 @@ export const GraphQLFetchData = (values) => {
                     liveDescription:values.general.liveDescription,
                     livePlan:{
                         plan:values.general.liveAction,
-                        startDate:startDate,
-                        duration:period
+                        startDate:"",
+                        duration:""
                     },
                     liveAccess:values.general.directAccessMode !== "freeAccess",
                     pwd:values.general.pwd,

@@ -5,7 +5,7 @@ import EditableTagGroup from "./EditableTagGroup";
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import {setConfigurationOnchange} from "../store/formDirectVideoAction";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 const { Option } = Select;
 let index = 0;
 

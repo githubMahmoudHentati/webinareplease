@@ -39,9 +39,58 @@ export const graphQL_shema = ()=> {
       }
      }
     `
-    return({
+    const Get_UpdatedLive_Info = gql`
+        query($id:Int!) {
+            getlive(id:$id) {
+                generalInfoOut{
+                    thumbnail
+                    liveTitle
+                    liveDescription
+                    liveLink
+                    livePlan{
+                        plan
+                        startDate
+                        duration
+                    }
+                    liveAccess
+                    pwd
+                    securedPasswordOption
+                }
+                configurationOut{
+                    liveProgram
+                    interOption{
+                        chat
+                        comment
+                        like
+                    }
+                    multiOption{
+                        isRm
+                        shareFile
+                    }
+                    tags
+                }
+                socialOut{
+                    id
+                    title
+                    logo
+                    Type
+                    link
+                    active
+                    planifications{
+                        id
+                        startDate
+                        endDate
+                        active
+                    }
+                }
+            }
+        }
+    `
+
+    return ({
         Get_Lives,
         Delete_Items,
-        Get_Live_Info
+        Get_Live_Info,
+        Get_UpdatedLive_Info
     })
 }

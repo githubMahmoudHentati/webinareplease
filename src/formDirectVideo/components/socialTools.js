@@ -7,7 +7,8 @@ import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
 import {useDispatch, useSelector} from "react-redux";
-import{Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
+import moment from "moment";
 import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/formDirectVideoAction";
 
 
@@ -99,7 +100,7 @@ export const SocialTools=()=>{
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de début</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker style={{width: "100%"}}/>
+                                                                                <DatePicker value={moment(element.startDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -111,7 +112,7 @@ export const SocialTools=()=>{
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de fin</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker style={{width: "100%"}}/>
+                                                                                <DatePicker value={moment(element.endDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>

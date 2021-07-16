@@ -4,7 +4,7 @@ import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone, InboxOutlined} from '@ant-design/icons';
 import {useSelector} from "react-redux";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import {DraggerUpload} from "./DraggerUpload";
 import moment from "moment";
 
