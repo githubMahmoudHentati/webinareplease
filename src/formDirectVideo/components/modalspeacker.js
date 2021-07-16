@@ -2,7 +2,7 @@ import React, { useState,useEffect,useRef } from 'react';
 import {Row, Col, Input, Button, Modal, Upload, Form} from 'antd'
 import '../formDirectVideo.scss'
 import {UploadOutlined} from '@ant-design/icons';
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
 import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
 

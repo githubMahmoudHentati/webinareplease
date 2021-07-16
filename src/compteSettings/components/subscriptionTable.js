@@ -2,7 +2,7 @@ import {Table, Tag, Space, Badge, Button} from 'antd';
 import React, { useState,useEffect,useRef } from 'react';
 import '../compteSettings.scss'
 import {EyeOutlined,DownloadOutlined} from '@ant-design/icons';
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import {setPaginationAbonnement} from "../store/accountSettingsAction";
 import { useDispatch} from "react-redux";
 

@@ -13,7 +13,7 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives }=Hooks()
+    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives, updateLive }=Hooks()
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
 
@@ -24,11 +24,12 @@ function useActionMenu({record}) {
     !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
     const history = useHistory();
 
-
+    
+    
     const actionMenu = (
         <Menu className="menu">
             <Menu.Item onClick={()=>handleInfos()}><InfoCircleOutlined />infos</Menu.Item>
-            <Menu.Item onClick={()=>{history.push("/FormDirectVideo")}}><EditOutlined />Modifier</Menu.Item>
+            <Menu.Item onClick={()=>updateLive(record.id)}><EditOutlined />Modifier</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> Templates</Menu.Item>
             <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />Supprimer</Menu.Item>

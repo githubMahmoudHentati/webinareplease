@@ -10,7 +10,7 @@ import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexio
 
 
 
-export  const Hooks=(callback)=> {
+const Hooks=(callback)=> {
 
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -73,3 +73,5 @@ export  const Hooks=(callback)=> {
         //subscriptionOnChange
     })
 }
+
+export  default Hooks

@@ -21,7 +21,7 @@ import {
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled } from '@ant-design/icons';
-import {Hooks} from '../utils/hooks'
+import Hooks from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
 import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
@@ -171,21 +171,20 @@ export const Configuration =()=>{
                                 }}>Option Interactives du direct</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <Form.Item name="LiveInteractiveOption" className={"form-item-style"}
-                                >
-                                    <CheckboxGroup onChange={(value)=>{configurationOnChangeByName(value,"LiveInteractiveOption")}} name="LiveInteractiveOption">
                                         <Checkbox onChange={configurationOnChangeButton} value="chat"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                                  checked={values.configuration.chat}
+                                        >
                                             <p>Chat(nom modéré)</p></Checkbox>
                                         <Checkbox  onChange={configurationOnChangeButton} value="comments"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                                   checked={values.configuration.comments}>
                                             <p>Commentaires (modérés)</p></Checkbox>
                                         <Checkbox onChange={configurationOnChangeButton} value="likeMention"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                                  checked={values.configuration.likeMention}>
                                             <p>Mention j'aime</p>
                                         </Checkbox>
-                                    </CheckboxGroup>
-                                </Form.Item>
                             </Col>
                         </Row>
                     </Col>
@@ -196,30 +195,34 @@ export const Configuration =()=>{
                                     color:darkMode===false?"":"rgba(255, 255, 255, 0.85",
                                 }}>Options multimédia du direct </span>
                             </Col>
-                            <Col span={24}  className={"col-forms"}>
-                                <Form.Item name="liveMultimediaOptions" className={"form-item-style"}
-                                >
-                                <CheckboxGroup onChange={(value) => {
-                                    configurationOnChangeByName(value, "liveMultimediaOptions")
-                                }} name="liveMultimediaOptions">
-                                    <Checkbox onChange={configurationOnChangeButton}
-                                              value="richeMediaDiffusion"
-                                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                        <p>Diffusion Richmedia
-                                            <InfoCircleFilled
-                                                style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
-                                                className={"infosIcon"}/></p>
-                                    </Checkbox>
-                                    <br/>
-                                    <Checkbox onChange={configurationOnChangeButton}
-                                              value="attachments"
-                                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                        <p>Fichiers joints
-                                            <InfoCircleFilled
-                                                style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
-                                                className={"infosIcon"}/></p></Checkbox>
-                                </CheckboxGroup>
-                                </Form.Item>
+                            <Col span={24}>
+                                <Row>
+                                    <Col span={24}  className={"col-forms"}>
+
+                                        <Checkbox onChange={configurationOnChangeButton}
+                                                  name="richeMediaDiffusion"
+                                                  value="richeMediaDiffusion"
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                                  checked={values.configuration.richeMediaDiffusion}>
+                                            <p>Diffusion Richmedia
+                                                <InfoCircleFilled
+                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                    className={"infosIcon"}/></p>
+                                        </Checkbox>
+                                        <br/>
+                                    </Col>
+                                    <Col span={24}  className={"col-forms"}>
+                                        <Checkbox onChange={configurationOnChangeButton}
+                                                  name="attachments"
+                                                  value="attachments"
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                                  checked={values.configuration.attachments}>
+                                            <p>Fichiers joints
+                                                <InfoCircleFilled
+                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                    className={"infosIcon"}/></p></Checkbox>
+                                    </Col>
+                                </Row>
                             </Col>
                         </Row>
                     </Col>

@@ -5,7 +5,7 @@ import strip from "../../assets/stripe.png"
 import {AccountGeneralInformation} from "./accountGeneralInformation";
 import{SubscriptionTable} from "./subscriptionTable";
 import {useSelector} from "react-redux";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 
 export const AccountSubscription=()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
