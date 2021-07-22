@@ -239,6 +239,7 @@ export  const Hooks=()=> {
     const handleClickAddLive = async ()=>{
         dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Ajouter"}))
         history.push("/FormDirectVideo")
         if(matchesMedia.matches){
             dispatch(setDirectSetting(5))
@@ -249,6 +250,8 @@ export  const Hooks=()=> {
     const updateLive= async (id)=>{
         localStorage.setItem('idLive', id);
         history.push("/FormDirectVideo")
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
+
     }
 
     // fonction handleInfos

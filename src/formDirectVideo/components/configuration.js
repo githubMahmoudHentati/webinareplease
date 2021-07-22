@@ -102,12 +102,9 @@ export const Configuration =()=>{
                                 }}>Intervenants</span>
                             </Col>
                             <Col>
-                                <Form.Item name="switchSpeaker" className={"form-item-style"}
-                                >
-                                    <Switch checked={values.configuration.switchSpeaker} name="switchSpeaker"
+                                    <Switch value={values.configuration.switchSpeaker} name="switchSpeaker"
                                             onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
                                     />
-                                </Form.Item>
                             </Col>
                             {values.configuration.SpeakerList.length>1&&values.configuration.switchSpeaker &&
                              <Col span={24}>
