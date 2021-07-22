@@ -3,14 +3,18 @@ import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Form,Spin} from '
 import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import Hooks from "../utils/hooks";
 import {setLiveForm} from "../store/formDirectVideoAction";
-import {useDispatch} from "react-redux";
 import moment from "moment";
+import {useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {BarHeader} from "./barHeader";
 
 export const LiveSubmit=(props)=>{
+    const history = useHistory()
     const dispatch = useDispatch()
     const [form] = Form.useForm();
     const {handleSubmit,values}=Hooks()
-    const {loading_securedPassword, data_securedPassword,LiveUpdatedInfData}=GraphQLFetchDataForm(values)
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+
 
     useEffect(async () => {
         if (values.general.loadingSecuredPassword)
@@ -70,7 +74,23 @@ export const LiveSubmit=(props)=>{
                 onFinish={handleSubmit}
             >
                 <Spin spinning={localStorage.getItem('idLive')?!values.constraintData.loadingLiveFetchData:false}>
-                {props.children}
+                    <Row gutter={[0, 10]}>
+                        <Col span={24} className={"header-col"}>
+                            <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                                <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
+                                    <span >Accueil</span>
+                                </Breadcrumb.Item>
+                                <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
+                                    <span>Direct</span>
+                                </Breadcrumb.Item>
+                                <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{values.constraintData.crudOption} un direct</Breadcrumb.Item>
+                            </Breadcrumb>
+                        </Col>
+                        <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
+                            <BarHeader/>
+                        </Col>
+                        {props.children}
+                    </Row>
                 </Spin>
             </Form>
         </div>

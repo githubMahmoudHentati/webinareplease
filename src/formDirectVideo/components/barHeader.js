@@ -69,7 +69,7 @@ export const BarHeader =()=>{
                                         }}> {
                                       matchesMedia.matches &&  directMenu ===5
                                           ?
-                                          <span>Ajouter un direct</span>
+                                          <span>{values.constraintData.crudOption} un direct</span>
                                           :
                                           matchesMedia.matches &&  directMenu ===0
                                           ?
@@ -91,7 +91,7 @@ export const BarHeader =()=>{
                                                               ?
                                                               <span>Templetes</span>
                                                               :
-                                                              <span>Ajouter un direct</span>
+                                                              <span>{values.constraintData.crudOption}  un direct</span>
 
                              }
                         </span>

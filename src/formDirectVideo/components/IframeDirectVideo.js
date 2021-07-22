@@ -12,12 +12,10 @@ import {useHistory} from "react-router-dom";
 import {SocialTools} from "./socialTools";
 import {Templetes} from "./Templetes";
 import {setDarkMode} from "../../utils/redux/actions";
-import {BarHeader} from "./barHeader";
 import {LiveSubmit} from "./liveSubmit.js";
 
 
 export const IframeDirectVideo =()=>{
-    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
@@ -31,7 +29,6 @@ export const IframeDirectVideo =()=>{
             case 0:
                 return <Generals/>
             case 1:
-                console.log("darkModeFormVideo",darkMode)
                 return <Configuration/>
             case 2:
                 return <Invitation/>
@@ -46,21 +43,6 @@ export const IframeDirectVideo =()=>{
 
     return(
         <LiveSubmit  setFormLiveAction={setFormLiveAction}>
-                <Row gutter={[0, 10]}>
-                    <Col span={24} className={"header-col"}>
-                        <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                <span >Accueil</span>
-                            </Breadcrumb.Item>
-                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                <span>Direct</span>
-                            </Breadcrumb.Item>
-                            <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Ajouter un direct</Breadcrumb.Item>
-                        </Breadcrumb>
-                    </Col>
-                    <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
-                        <BarHeader/>
-                    </Col>
                     <Col span={24}>
                             {
                                matchesMedia.matches
@@ -85,7 +67,6 @@ export const IframeDirectVideo =()=>{
                                    </Row>
                             }
                     </Col>
-                </Row>
         </LiveSubmit>
     )
 }
