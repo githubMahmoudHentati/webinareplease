@@ -132,7 +132,8 @@ export const Generals =({})=>{
                         <Form.Item name="startDate" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <DatePicker disabledDate={disablePastDate} placeholder="Choisir une date de début" onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                            <DatePicker initialValues={values.general.startHour && moment(values.general.startHour, 'YYYY-MM-DD')}
+                                disabledDate={disablePastDate} placeholder="Choisir une date de début" onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>

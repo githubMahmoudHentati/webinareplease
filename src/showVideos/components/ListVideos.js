@@ -110,7 +110,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
                 rowSelection={rowSelection}
                 columns={updatedColumns}
                 dataSource={dataSource.content}
-                rowClassName={record => !record.enabled && "disabled-row"}
+                // rowClassName={record => !record.enabled && "disabled-row"}
 
                 onChange={handleTableChange}
                 pagination={{

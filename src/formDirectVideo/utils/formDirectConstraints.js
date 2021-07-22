@@ -10,13 +10,7 @@ export const FormDirectConstraints = ()=>{
         return (
             {
                 thumbnail:"",
-                fileList:[{
-                    uid: '-1',
-                    name: 'xxx.png',
-                    status: 'done',
-                    url: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
-                    thumbUrl: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
-                }],
+                fileList:[],
                 liveTitle:"",
                 liveDescription:"",
                 liveAction:false,

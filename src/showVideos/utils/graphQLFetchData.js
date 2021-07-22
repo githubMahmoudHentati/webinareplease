@@ -50,19 +50,9 @@ export const GraphQLFetchData=()=> {
         }
     })
 
-    const [GETLiveUpdatedInfo ,{loading:LiveUpdated_Info, data: LiveUpdatedInfData}]
-        = useLazyQuery(graphQL_shema().Get_UpdatedLive_Info, {
-        fetchPolicy:  "cache-and-network",
-        variables: { "id":152  },
-        onCompleted: (data)=>{
-            dispatch(setShowVideoConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
-        }
-    })
-
 
     return({
         GetCalendarDataNow,
         DeleteItemsMutation,
-        GETLiveUpdatedInfo,
     })
 }

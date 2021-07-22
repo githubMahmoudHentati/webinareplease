@@ -84,7 +84,7 @@ export const DraggerUpload = () => {
         <Dragger  style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
                  name="fileList" listType="picture"
                   accept="image/jpeg,image/png"
-                  fileList={[...values.general.fileList]}
+                  fileList={values.general.fileList}
                   //beforeUpload={beforeUpload}
                   onChange={handleChange}
                   onRemove={removeThumbnail}

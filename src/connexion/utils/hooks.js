@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {setConnexionConstraintDataOnchange, setConnexionOnchange} from "../store/connexionAction";
 import {ConnexionReducer} from "../store/connexionReducer";
 import {GraphQLFetchData} from "./graphQLFetchData";
-import {setGeneralOnchange} from "../../formDirectVideo/store/formDirectVideoAction";
 
 
 export  const Hooks=(connexionAction)=> {

@@ -3,7 +3,6 @@ import {MenuForms} from './components/menuforms'
 import {Breadcrumb, Card, Col, Row} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 import history from "../router/history";
-import {Configuration} from "../formDirectVideo/components/configuration";
 import {AccountGeneralInformation} from "./components/accountGeneralInformation";
 import {SecurityAccount} from "./components/securityAccount"
 import {PrincipalPage} from "../utils/components/principalPage";

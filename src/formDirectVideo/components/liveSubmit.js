@@ -1,6 +1,6 @@
 import React, { useState,useEffect,useRef } from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Form} from 'antd'
-import {GraphQLFetchData} from "../utils/graphQLFetchData";
+import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Form,Spin} from 'antd'
+import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import Hooks from "../utils/hooks";
 import {setLiveForm} from "../store/formDirectVideoAction";
 import {useDispatch} from "react-redux";
@@ -10,10 +10,7 @@ export const LiveSubmit=(props)=>{
     const dispatch = useDispatch()
     const [form] = Form.useForm();
     const {handleSubmit,values}=Hooks()
-    const {loading_securedPassword, data_securedPassword}=GraphQLFetchData(values)
-    useEffect(() => {
-        dispatch(setLiveForm(form));
-    }, [form]);
+    const {loading_securedPassword, data_securedPassword,LiveUpdatedInfData}=GraphQLFetchDataForm(values)
 
     useEffect(async () => {
         if (values.general.loadingSecuredPassword)
@@ -25,8 +22,9 @@ export const LiveSubmit=(props)=>{
     }, [values.general.loadingSecuredPassword]);
 
     useEffect(async () => {
-        if (values.constraintData.loadingLiveFetchData)
+        if (values.constraintData.loadingLiveFetchData&&localStorage.getItem('idLive'))
         {
+            console.log("enteer-field")
             await form.setFieldsValue(Object.assign(form.getFieldsValue(),
                 {
                     //**********general live info***********/////
@@ -71,7 +69,9 @@ export const LiveSubmit=(props)=>{
                 name="product-form"
                 onFinish={handleSubmit}
             >
+                <Spin spinning={localStorage.getItem('idLive')?!values.constraintData.loadingLiveFetchData:false}>
                 {props.children}
+                </Spin>
             </Form>
         </div>
     )

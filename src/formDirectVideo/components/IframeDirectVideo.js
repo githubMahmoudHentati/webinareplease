@@ -13,7 +13,6 @@ import {SocialTools} from "./socialTools";
 import {Templetes} from "./Templetes";
 import {setDarkMode} from "../../utils/redux/actions";
 import {BarHeader} from "./barHeader";
-import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {LiveSubmit} from "./liveSubmit.js";
 
 

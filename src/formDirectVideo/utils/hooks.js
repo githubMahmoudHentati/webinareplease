@@ -14,13 +14,13 @@ import {
     setInvitationOnchangeRules
 } from "../store/formDirectVideoAction";
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
-import {GraphQLFetchData} from "./graphQLFetchData";
+import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 
 const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
-    const {CreateLive,generateSecuredPassword,themesDisplayQueryAction} = GraphQLFetchData(values)
+    const {CreateLive,generateSecuredPassword,themesDisplayQueryAction} = GraphQLFetchDataForm(values)
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 
@@ -168,7 +168,6 @@ const Hooks=()=>{
                         function: el.title,
                         avatar: el.logoSpeaker[0].thumbUrl,
                         mail: el.email,
-
                     }
                 ))
         }));
