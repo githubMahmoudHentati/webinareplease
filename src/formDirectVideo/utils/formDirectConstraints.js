@@ -25,7 +25,7 @@ export const FormDirectConstraints = ()=>{
                 directAccessMode: "freeAccess",
                 liveAccess: false,
                 pwd:"",
-                liveSharedLink:"",
+                liveLink:"",
                 securedPasswordOption:false,
                 loadingSecuredPassword:false
             }

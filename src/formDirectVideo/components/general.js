@@ -74,11 +74,10 @@ export const Generals =({})=>{
                     <Col span={24} className={"col-forms"}>
                         <Row justify={"space-between"} style={{width: '100%'}} gutter={[0, 0]}>
                             <Col xxl={22} xl={21} lg={20} md={19} sm={17} xs={14}>
-                                <Form.Item name="liveTitle" className={"form-item-style"}
-                                >
-                                    <Input name="liveTitle" onChange={generalOnChange}
-                                           placeholder={'www.empreinte.com/titrelive'}></Input>
-                                </Form.Item>
+                                    <Input disabled name="liveLink" onChange={generalOnChange}
+                                           placeholder={'www.empreinte.com/titrelive'}
+                                           value={values.general.liveLink+"/"+values.general.liveTitle}
+                                    ></Input>
                             </Col>
                             <Col>
                                 <Button style={{

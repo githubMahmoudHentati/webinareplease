@@ -126,6 +126,7 @@ export const GraphQLFetchDataForm = (values) => {
                     }],
                     liveTitle:data.getlive.generalInfoOut.liveTitle,
                     liveDescription:data.getlive.generalInfoOut.liveDescription,
+                    liveLink:data.getlive.generalInfoOut.liveLink+"/"+data.getlive.generalInfoOut.liveTitle,
                     liveAction:data.getlive.generalInfoOut.livePlan.plan,
                     livePlan:{
                         plan: false,
