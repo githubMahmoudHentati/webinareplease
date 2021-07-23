@@ -3,13 +3,17 @@ import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Switch, Radio, Ch
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone, InboxOutlined} from '@ant-design/icons';
-import {useSelector} from "react-redux";
+import {useSelector,useDispatch} from "react-redux";
 import Hooks from "../utils/hooks";
 import {DraggerUpload} from "./DraggerUpload";
 import moment from "moment";
+import useCopy from '@react-hook/copy'
+import {setFormDirectLiveConstraintDataOnchange} from '../store/formDirectVideoAction'
 
 
 export const Generals =({})=>{
+
+    const dispatch = useDispatch()
 
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
@@ -21,6 +25,32 @@ export const Generals =({})=>{
     }
     const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks()
     console.log("values",values)
+
+    const {copied, copy, reset} = useCopy(
+        values.general.liveLink+"/"+values.general.liveTitle
+    )
+
+    const copySuccess =async ()=>
+    {
+        await dispatch(setFormDirectLiveConstraintDataOnchange({
+            constraintDataNameChange: "leaveToast",
+            constraintDataValueChange: false
+        }))
+        copy()
+        values.constraintData.leaveToast&&await message.success({
+            content: 'lien partagé est copié',
+            duration: 2,
+            style: {
+                marginTop: '2vh',
+            },
+        })
+            .then(async () =>
+                await dispatch(setFormDirectLiveConstraintDataOnchange({
+                    constraintDataNameChange: "leaveToast",
+                    constraintDataValueChange: true
+                }))
+            )
+    }
 
     return(
         <Row gutter={[0, 30]}>
@@ -83,8 +113,9 @@ export const Generals =({})=>{
                                 <Button style={{
                                     backgroundColor: darkMode === false ? "" : "#141414",
                                     border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)",
-                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                }}>Copier</Button>
+                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
+                                    }}
+                                        onClick={copySuccess}>Copier</Button>
                             </Col>
                         </Row>
 
