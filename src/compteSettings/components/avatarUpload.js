@@ -5,12 +5,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {setConstraintDataOnchange, setGeneralInformationOnchange} from "../store/accountSettingsAction";
 import {Hooks} from "../utils/hooks";
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 export const AvatarUpload = () => {
     const dispatch = useDispatch()
     const values = useSelector((state) => state.AccountSettingsReducer)
     const {darkMode}=Hooks()
     console.log("values",values)
+    const { t, i18n } = useTranslation();
 
     const GetBase64 = (img, callback) => {
         const reader = new FileReader();
@@ -111,7 +113,7 @@ export const AvatarUpload = () => {
             beforeUpload={beforeUpload}
             onChange={handleChange}
         >
-            <Button icon={<UploadOutlined />} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>Change l'avatar</Button>
+            <Button icon={<UploadOutlined />} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>{t("CompteSettings.Changer l'avatar")}</Button>
         </Upload>
     );
 }

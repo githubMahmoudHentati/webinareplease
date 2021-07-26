@@ -207,6 +207,7 @@ export  const Hooks=()=> {
         dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e}));
         // dispatch id list Video
         dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
+          
     }
 
     /* Click Annuler button Alert*/

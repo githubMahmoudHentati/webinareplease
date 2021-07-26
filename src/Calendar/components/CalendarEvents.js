@@ -3,6 +3,7 @@ import moment from "moment";
 import {Badge, Button, Modal, Tag} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {useSelector} from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     const [visible , SetVisible] = useState(false);
@@ -38,7 +39,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     const handleCancel = () => {
         SetVisible(false)
     }
-
+    const { t, i18n } = useTranslation();
     return(
         <div className={"div_global_calendar"}>
             <span className={"spn_Date_event"}>{calendarEvent.format('DD / MM / YYYY')}</span>
@@ -65,14 +66,14 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                     onCancel={handleCancel}
                                     footer={[
                                         <div className={"footer_modal_Avenir"}>
-                                            <div><Button><DeleteOutlined/> Supprimer</Button></div>
+                                            <div><Button><DeleteOutlined/> {t("calendrier.Supprimer")}</Button></div>
 
                                             <div>
                                                 <Button key="back" onClick={handleCancel}>
-                                                    Annuler
+                                                    {t("calendrier.Annuler")}
                                                 </Button>
                                                 <Button key="submit" type="primary">
-                                                    Visualiser
+                                                    {t("calendrier.Visualiser")}
                                                 </Button>
                                             </div>
 

@@ -5,10 +5,13 @@ import {UploadOutlined} from '@ant-design/icons';
 import {Hooks} from "../utils/hooks";
 import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
 import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
+import { useTranslation } from 'react-i18next';
 
  export const ModalSpeaker =({isVisible})=>{
   const [form] = Form.useForm();
-  const requiredFieldRule = [{required: true, message: 'Champs requis'}];
+  const { t, i18n } = useTranslation();
+
+  const requiredFieldRule = [{required: true, message: t("contactClient.Champs requis")}];
 
   const isValidEmail = (email) => {
    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,14 +34,14 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
   }, []);
 
   return (
-       <Modal className="modal-speaker" title="Ajouter un intervenant" visible={isVisible} onOk={form.submit} onCancel={handleCancel}
+       <Modal className="modal-speaker" title={t("formDirectVideo.Ajouter un intervenant")} visible={isVisible} onOk={form.submit} onCancel={handleCancel}
               // okButtonProps={{form:'category-editor-form', key: 'submit', htmlType: 'submit'}}
               footer={[
                <Button className={"input_modal"} onClick={handleCancel} key="back">
-                Annuler
+                {t("formDirectVideo.Annuler")}
                </Button>,
                <Button onClick={form.submit} key='submit' htmlType='submit' className={"input_modal"}  type="primary">
-                Ajouter
+                {t("formDirectVideo.Ajouter")}
                </Button>,
               ]}>
         <Form
@@ -52,7 +55,7 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
          <Col span={24}>
           <Row gutter={[0, 8]}>
            <Col span={24}>
-            <span className={"span_modal"}>Photo</span>
+            <span className={"span_modal"}>{t("formDirectVideo.Photo")}</span>
            </Col>
            <Col span={24}>
             <Upload
@@ -63,7 +66,7 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
                 onChange={onChangeFile}
                 beforeUpload={{beforeUpload}}
                 {...props} listType="picture">
-             <Button className={"btn_upload_pic"} icon={<UploadOutlined/>}>Click to Upload</Button>
+             <Button className={"btn_upload_pic"} icon={<UploadOutlined/>}>{t("formDirectVideo.Cliquez pour télécharger")}</Button>
             </Upload>
            </Col>
           </Row>
@@ -72,11 +75,11 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
          <Col span={24}>
           <Row gutter={[10, 8]}>
            <Col span={12}>
-            <span className={"span_modal"}>Nom</span>
+            <span className={"span_modal"}>{t("CompteSettings.Nom")}</span>
             <span className="require">*</span>
            </Col>
            <Col span={12}>
-            <span className={"span_modal"}>Prénom</span>
+            <span className={"span_modal"}>{t("CompteSettings.Prénom")}</span>
             <span className="require">*</span>
            </Col>
            <Col span={12}>
@@ -84,7 +87,7 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
                        rules={requiredFieldRule}
             >
              <Input className={"input_modal"} defaultValue={values.configuration.speaker.name}
-                    onChange={(event) => onChangeSpeaker(event, "name")} placeholder={"Nom"}></Input>
+                    onChange={(event) => onChangeSpeaker(event, "name")} placeholder={t("CompteSettings.Nom")}></Input>
             </Form.Item>
            </Col>
            <Col span={12}>
@@ -92,7 +95,7 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
                        rules={requiredFieldRule}
             >
              <Input name="lastName" className={"input_modal"} defaultValue={values.configuration.speaker.lastName}
-                    onChange={(event) => onChangeSpeaker(event, "lastName")} placeholder={"Prenom"}></Input>
+                    onChange={(event) => onChangeSpeaker(event, "lastName")} placeholder={t("CompteSettings.Prénom")}></Input>
             </Form.Item>
            </Col>
           </Row>
@@ -101,13 +104,13 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
          <Col span={24}>
           <Row gutter={[0, 8]}>
            <Col span={24}>
-            <span className={"span_modal"}>Fonction</span>
+            <span className={"span_modal"}>{t("formDirectVideo.Fonction")}</span>
            </Col>
            <Col span={24}>
             <Form.Item name="title" className={"form-item-style"}
             >
              <Input name="title" className={"input_modal"} defaultValue={values.configuration.speaker.title}
-                    onChange={(event) => onChangeSpeaker(event, "title")} placeholder={"Fonction"}></Input>
+                    onChange={(event) => onChangeSpeaker(event, "title")} placeholder={t("formDirectVideo.Fonction")}></Input>
             </Form.Item>
            </Col>
           </Row>
@@ -125,9 +128,9 @@ import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
                         ({getFieldValue}) => ({
                          validator(_, value) {
                           if (isValidEmail(value)) {
-                           return Promise.resolve('value');
+                           return Promise.resolve(t("formDirectVideo.valeur"));
                           }
-                          return Promise.reject('Veuillez entrer un mail valide');
+                          return Promise.reject(t('formDirectVideo.Veuillez entrer une adresse email valide'));
                          },
                         }),
                        ]}

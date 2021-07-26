@@ -9,6 +9,7 @@ import {
     setGeneralInformationOnchange
 } from "../../compteSettings/store/accountSettingsAction";
 import {setConfigurationSpeaker, setGeneralOnchange} from "../store/formDirectVideoAction";
+import { useTranslation } from 'react-i18next';
 
 
 export const DraggerUpload = () => {
@@ -79,6 +80,7 @@ export const DraggerUpload = () => {
         onSave(formData)
     }
     //***********************End of Upload***********************////////
+    const { t, i18n } = useTranslation();
 
     return(
         <Dragger  style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
@@ -92,9 +94,9 @@ export const DraggerUpload = () => {
             <p className="ant-upload-drag-icon">
                 <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
             </p>
-            <p className="ant-upload-text" style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Cliquer ou faites glisser le fichier</p>
+            <p className="ant-upload-text" style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Cliquer ou faites glisser le fichier")}</p>
             <p className="ant-upload-hint" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                Un seul fichier peut etre selectionné
+                {t("formDirectVideo.Un seul fichier peut etre selectionné")}
             </p>
         </Dragger>
     )

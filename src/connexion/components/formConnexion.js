@@ -8,12 +8,14 @@ import {setForgetPasswordConstraintDataOnchange} from "../../forgetPassword/stor
 import {useDispatch} from "react-redux";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../store/connexionAction";
+import { useTranslation } from 'react-i18next';
 
 export const FormConnexion =()=>{
     const dispatch = useDispatch()
     const [form] = Form.useForm();
     const history = useHistory()
     dispatch(setForgetPasswordConstraintDataOnchange({constraintDataNameChange:"passwordSent",constraintDataValueChange:false}))
+    const { t, i18n } = useTranslation();
 
     const isValidPassword = (password) => {
 
@@ -78,7 +80,7 @@ export const FormConnexion =()=>{
         >
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
-                <span className={"span_connexion"}>Connexion</span>
+                <span className={"span_connexion"}>{t("FormConnexion.Connexion")}</span>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 20]} >
@@ -109,7 +111,7 @@ export const FormConnexion =()=>{
                     </Col>
                     {values.constraintData.connexionError &&
                     <Col span={24} className={"col_input"}>
-                        <span style={{color: "red"}}>Oups, nous n'avons pas pu vous connecter. Veuillez vérifier vos informations et réessayer</span>
+                        <span style={{color: "red"}}>{t("FormConnexion.Oups, nous n'avons pas pu vous connecter. Veuillez vérifier vos informations et réessayer")}</span>
                     </Col>
                     }
                     <Col span={24}>
@@ -120,11 +122,11 @@ export const FormConnexion =()=>{
                                     name="isRememberMe"
                                     valuePropName="checked"
                                 >
-                                <Checkbox value="isRememberMe" name="isRememberMe" onChange={connexionOnChangeButton} ><span className={"spn_chbx"}>Se souvenir de moi</span></Checkbox>
+                                <Checkbox value="isRememberMe" name="isRememberMe" onChange={connexionOnChangeButton} ><span className={"spn_chbx"}>{t("FormConnexion.Se souvenir de moi")}</span></Checkbox>
                                 </Form.Item>
                             </Col>
                             <Col>
-                                <a  onClick={()=>{toForgotPassword()}} className={"spn_chbx"}> Mot de passe oublié</a>
+                                <a  onClick={()=>{toForgotPassword()}} className={"spn_chbx"}> {t("FormConnexion.Mot de passe oublié")}</a>
                             </Col>
                         </Row>
                     </Col>
@@ -138,13 +140,13 @@ export const FormConnexion =()=>{
                             constraintDataNameChange: "connexionError",
                             constraintDataValueChange: false
                         }))}} loading={values.constraintData.loadingConnexion}
-                            className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">Connexion</Button>
+                            className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">{t("FormConnexion.Connexion")}</Button>
                     </Col>
                     <Col >
-                        <span className={"spn_chbx"}>Pas encore membre?</span>
+                        <span className={"spn_chbx"}>{t("FormConnexion.Pas encore membre?")}</span>
                     </Col>
                     <Col onClick={()=>{toSignUp()}}>
-                        <a className={"spn_chbx"}>Inscrivez-vous</a>
+                        <a className={"spn_chbx"}>{t("FormConnexion.Inscrivez-vous")}</a>
                     </Col>
                 </Row>
             </Col>

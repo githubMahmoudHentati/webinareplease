@@ -1,13 +1,14 @@
-import React,{useState , useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import "../Calendar.scss";
-import {Calendar, Badge, Button , Modal , Tag} from 'antd';
-import {CalendarOutlined , ClockCircleOutlined , DeleteOutlined  } from "@ant-design/icons";
+import {Calendar, Badge, Button, Modal, Tag} from 'antd';
+import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {useSelector} from "react-redux";
-import {useLazyQuery,useQuery} from "@apollo/react-hooks";
+import {useLazyQuery, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "../utils/graphql";
 import moment from 'moment'
 import CalendarEvents from "./CalendarEvents";
 import {setCalendarOnchange, setCalendarVisibleOnchange} from "../store/calendarAction";
+import { useTranslation } from 'react-i18next';
 
 import {useDispatch} from "react-redux";
 import {CalendarReducer} from "../store/calendarReducer";
@@ -17,45 +18,46 @@ let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher int
 
 export function CalendarFile() {
     const dispatch = useDispatch()
-    const [visible , SetVisible] = useState(false);
+    const [visible, SetVisible] = useState(false);
     const [allow, setAllow] = useState(false);
     const [calendarValues, setCalendarValues] = useState([]);
     const [dateTime, setDateTime] = useState(moment());
-    const [activeCalendarEvents , SetActiveCalendarEvents] = useState(false)
-    const [calendarEvent , SetCalendarEvents] = useState({})
-    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
+    const [activeCalendarEvents, SetActiveCalendarEvents] = useState(false)
+    const [calendarEvent, SetCalendarEvents] = useState({})
+    const darkMode = useSelector((state) => state.Reducer.DarkMode)
+    !darkMode && document.documentElement.style.setProperty('--modal_background', "white")
 
-    const VisibleModal = useSelector((state)=> state.CalendarReducer)
+    const VisibleModal = useSelector((state) => state.CalendarReducer)
 
-    console.log("VisibleModal" , VisibleModal)
+    console.log("VisibleModal", VisibleModal)
 
     //show Modal
-    const onShowModal=()=>{
+    const onShowModal = () => {
         //SetVisible(true)
-        dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange:"visible",CalendarVisibleValueChange:true}));
+        dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange: "visible", CalendarVisibleValueChange: true}));
     }
     // Cancel modal
     const handleCancel = () => {
         //SetVisible(false)
-        dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange:"visible",CalendarVisibleValueChange:false}));
+        dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange: "visible", CalendarVisibleValueChange: false}));
     }
-    const {loading:calendar_loadingNow, data: GetCalendarDataNow}
+
+    const {loading: calendar_loadingNow, data: GetCalendarDataNow}
         = useQuery(graphQL_shema().Get_Calendar_Data, {
         fetchPolicy: "cache-first",
-        variables :{ "dates":[moment().subtract(1, 'months').format("YYYY-MM"),moment().format("YYYY-MM"),moment().add(1, 'months').format("YYYY-MM")]},
-        context: { clientName: "second" },
-        onCompleted :(data)=>{
+        variables: {"dates": [moment().subtract(1, 'months').format("YYYY-MM"), moment().format("YYYY-MM"), moment().add(1, 'months').format("YYYY-MM")]},
+        context: {clientName: "second"},
+        onCompleted: (data) => {
 
             setCalendarValues(data.getCalendar)
             setAllow(true)
         }
     })
 
-    const [QueryCalendar,{loading:calendar_loading, data: GetCalendarData}]
+    const [QueryCalendar, {loading: calendar_loading, data: GetCalendarData}]
         = useLazyQuery(graphQL_shema().Get_Calendar_Data, {
         fetchPolicy: "cache-first",
-        onCompleted :async (data )=>{
+        onCompleted: async (data) => {
             if (data.getCalendar) {
                 await data.getCalendar.map(element => {
                     moment(element.date.date,).month() === dateTime.month() ? element.date.isAMomentObject = true : element.date.isAMomentObject = false
@@ -65,30 +67,35 @@ export function CalendarFile() {
             setAllow(true)
         }
     })
-
-    const OnPanelChange=async (date,mode)=>{
-        let month_number=date.month()+1
-        let month_before =month_number===1?"12":(date.month() < 9) ?   "0" + (month_number-1).toString()  :  (month_number-1).toString();
-        let year_before = month_before==="12"?date.year()-1:date.year();
+    const {t, i18n} = useTranslation();
+    const OnPanelChange = async (date, mode) => {
+        let month_number = date.month() + 1
+        let month_before = month_number === 1 ? "12" : (date.month() < 9) ? "0" + (month_number - 1).toString() : (month_number - 1).toString();
+        let year_before = month_before === "12" ? date.year() - 1 : date.year();
         let month = (date.month() < 9) ? "0" + month_number.toString() : month_number.toString();
-        let year=date.year()
+        let year = date.year()
         let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
-        let year_after = month_after=="01"?date.year()+1:date.year()
+        let year_after = month_after == "01" ? date.year() + 1 : date.year()
         setAllow(false)
-        console.log("date",date,"mode",mode)
+        console.log("date", date, "mode", mode)
         await setDateTime(date)
-        QueryCalendar({variables: {"dates": [year_before+ "-" + month_before, year+ "-" + month, year_after + "-" + month_after]}},date)
+        QueryCalendar({variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}, date)
     }
 
-    const getListData= (value)=>{
-        let listData =[];
+    const getListData = (value) => {
+        let listData = [];
         let check = value.format('YYYY/MM/DD');
         if (calendarValues) {
 
             calendarValues.forEach((element) => {
-                switch ((value.year()+"-"+value.month()+"-"+value.date())) {
-                    case (moment(element.date.date , ).year()+"-"+moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
-                        listData=[...listData,{id:(element.id),type:element.type , content:element.content,style:element.date.isAMomentObject}]
+                switch ((value.year() + "-" + value.month() + "-" + value.date())) {
+                    case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
+                        listData = [...listData, {
+                            id: (element.id),
+                            type: element.type,
+                            content: element.content,
+                            style: element.date.isAMomentObject
+                        }]
                         break;
                 }
             })
@@ -98,8 +105,8 @@ export function CalendarFile() {
     }
 
 
-    const DateCellRender=(value)=>{
-        const listData =    getListData(value);
+    const DateCellRender = (value) => {
+        const listData = getListData(value);
         return (
             <div>
                 {
@@ -113,7 +120,11 @@ export function CalendarFile() {
                                          onClick={() => onShowModal()}>
                                         <Badge
                                             color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
-                                            text={item.content} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
+                                            text={item.content} style={{
+                                            color: "#007fcb",
+                                            borderRadius: "2px",
+                                            opacity: !item.style && "0.3"
+                                        }}/>
                                     </Tag>
 
                                     <Modal
@@ -123,14 +134,15 @@ export function CalendarFile() {
                                         onCancel={handleCancel}
                                         footer={[
                                             <div className={"footer_modal_Avenir"}>
-                                                <div><Button><DeleteOutlined/> Supprimer</Button></div>
+                                                <div><Button><DeleteOutlined/>{t("calendrier.Supprimer")}</Button></div>
 
                                                 <div>
                                                     <Button key="back" onClick={handleCancel}>
-                                                        Annuler
+                                                        {t("calendrier.Annuler")}
+
                                                     </Button>
                                                     <Button key="submit" type="primary">
-                                                        Visualiser
+                                                        {t("calendrier.Visualiser")}
                                                     </Button>
                                                 </div>
 
@@ -179,7 +191,8 @@ export function CalendarFile() {
             return 1394;
         }
     }
-    const selectDate = (e) =>{
+
+    const selectDate = (e) => {
         SetActiveCalendarEvents(true)
         SetCalendarEvents(e)
         dispatch(setCalendarOnchange({
@@ -189,16 +202,19 @@ export function CalendarFile() {
 
     }
 
-    return(
+    return (
         <div className={"CalendarFile"}>
             {
                 x.matches ?
                     activeCalendarEvents === true ?
-                    <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues} GetCalendarDataNow={GetCalendarDataNow}/>
-                    :
-                    <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange} onSelect={selectDate}/>
+                        <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
+                                        GetCalendarDataNow={GetCalendarDataNow}/>
                         :
-                        <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}  onPanelChange={OnPanelChange} onSelect={selectDate}/>
+                        <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
+                                  onPanelChange={OnPanelChange} onSelect={selectDate}/>
+                    :
+                    <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
+                              onPanelChange={OnPanelChange} onSelect={selectDate}/>
             }
 
         </div>

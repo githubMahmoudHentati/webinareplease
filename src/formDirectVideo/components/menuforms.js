@@ -4,11 +4,13 @@ import '../formDirectVideo.scss'
 import {MailOutlined} from '@ant-design/icons';
 import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch, useSelector} from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 export const MenuForms =()=>{
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const { t, i18n } = useTranslation();
 
     return (
         <Row className={"row_menu"}>
@@ -28,13 +30,13 @@ export const MenuForms =()=>{
                                 fontFamily: "SF Pro Display",
                                 fontWeight: "500"
                             }}>
-                            Paramètres généraux
+                            {t("formDirectVideo.Paramètres généraux")}
                         </span>
 
                     </div>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(0))}} key="1">
-                        Géneral
+                        {t("formDirectVideo.Géneral")}
                     </Menu.Item>
                     <div className={"titre-menu"}>
                     <span style={{
@@ -43,22 +45,22 @@ export const MenuForms =()=>{
                         textAlign: "left",
                         fontFamily: "SF Pro Display",
                         fontWeight: "500"
-                    }}>Paramètres optionnels</span>
+                    }}>{t("formDirectVideo.Paramètres optionnels")}</span>
                     </div>
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(1))}} key="2">
-                        Configuration
+                        {t("formDirectVideo.Configuration")}
                     </Menu.Item>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(2))}}key="3">
-                        Invitations
+                        {t("formDirectVideo.Invitations")}
                     </Menu.Item>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(3))}} key="4">
-                        Outils social
+                        {t("formDirectVideo.Outils social")}
                     </Menu.Item>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(4))}} key="5">
-                        Templates
+                        {t("formDirectVideo.Templetes")}
                     </Menu.Item>
                 </Menu>
             </Col>

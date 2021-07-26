@@ -2,10 +2,12 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setPackagePayementAction , setPackagePayementActionInput} from "../store/PackagePayementAction";
 import {PackagePayementReducer} from "../store/PackagePayementReducer";
+import { useTranslation } from 'react-i18next';
 
 
 export  const Hooks=( )=> {
     const dispatch = useDispatch()
+    const { t, i18n } = useTranslation();
     const values = useSelector((state) => state.PackagePayementReducer)
     console.log("valuesPackageRducerReduce",values)
 

@@ -3,8 +3,12 @@ import {Button, Col, Form, Input, Row} from "antd";
 import {useHistory} from "react-router-dom";
 import {EyeInvisibleOutlined, EyeTwoTone, UserOutlined} from "@ant-design/icons";
 import {Hooks} from "../utils/hooks";
+import { useTranslation } from 'react-i18next';
+
 export const ResetPassword =()=> {
     const history = useHistory()
+    const { t, i18n } = useTranslation();
+
     const {values,darkMode,resetPasswordOnChange}=Hooks()
     console.log(values)
     const isValidPassword = (password) => {
@@ -19,12 +23,12 @@ export const ResetPassword =()=> {
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
-                    Réinitialisez votre mot de passe
+                    {t("resetPassword.Réinitialisez votre mot de passe")}
                 </span>
             </Col>
             <Col span={24}>
                 <span style={{fontSize:"14px"}} className={"span_connexion"}>
-                Presque là, entrez simplement votre nouveau mot de passe et vous serez à nouveau connecté en quelques secondes.
+                {t("resetPassword.Presque là, entrez simplement votre nouveau mot de passe et vous serez à nouveau connecté en quelques secondes.")}
                 </span>
             </Col>
             <Col span={24}>
@@ -32,7 +36,7 @@ export const ResetPassword =()=> {
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col span={24}>
-                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Choisir un nouveau mot de passe</span>
+                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("resetPassword.Choisir un nouveau mot de passe")}</span>
                             </Col>
                             <Col span={24}>
                                 <Form.Item
@@ -42,9 +46,9 @@ export const ResetPassword =()=> {
                                         ({getFieldValue}) => ({
                                             validator(_, value) {
                                                 if (isValidPassword(value)) {
-                                                    return Promise.resolve('value');
+                                                    return Promise.resolve(t("formDirectVideo.valeur"));
                                                 }
-                                                return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
+                                                return Promise.reject(t("resetPassword.Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale"));
                                             },
                                         }),
                                     ]}
@@ -54,7 +58,7 @@ export const ResetPassword =()=> {
                                         name="newPassword"
                                         onChange={resetPasswordOnChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                        placeholder={"Nouveau mot de passe"}>
+                                        placeholder={t("CompteSettings.Nouveau mot de passe")}>
                                     </Input.Password>
                                 </Form.Item>
                             </Col>
@@ -73,9 +77,9 @@ export const ResetPassword =()=> {
                                         ({getFieldValue}) => ({
                                             validator(_, value) {
                                                 if (isConfirmPassword(value)) {
-                                                    return Promise.resolve('value');
+                                                    return Promise.resolve(t("formDirectVideo.valeur"));
                                                 }
-                                                return Promise.reject('Les mots de passe saisis ne sont pas identiques');
+                                                return Promise.reject(t("resetPassword.Les mots de passe saisis ne sont pas identiques"));
                                             },
                                         }),
                                     ]}
@@ -85,7 +89,7 @@ export const ResetPassword =()=> {
                                         name="confirmPassword"
                                         onChange={resetPasswordOnChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                        placeholder={"Confirmer la nouveau mot de passe"}>
+                                        placeholder={t("resetPassword.Confirmer la nouveau mot de passe")}>
                                     </Input.Password>
                                 </Form.Item>
                             </Col>
@@ -98,11 +102,11 @@ export const ResetPassword =()=> {
                 <Row gutter={[20, 20]} >
                     <Col span={24}>
                         <Button loading={values.constraintData.loadingResetPassword}  className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">
-                            Réinitialiser le mot de passe</Button>
+                            {t("resetPassword.Réinitialiser le mot de passe")}</Button>
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
                         <a className={"spn_chbx"}>
-                            Contacter notre support</a>
+                            {t("resetPassword.Contactez notre support client")}</a>
                     </Col>
                 </Row>
             </Col>

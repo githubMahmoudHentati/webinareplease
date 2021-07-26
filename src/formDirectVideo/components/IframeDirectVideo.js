@@ -16,6 +16,7 @@ import {BarHeader} from "./barHeader";
 import {Hooks} from "../utils/hooks";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {LiveSubmit} from "./liveSubmit.js";
+import { useTranslation } from 'react-i18next';
 
 
 export const IframeDirectVideo =()=>{
@@ -45,6 +46,7 @@ export const IframeDirectVideo =()=>{
                 return <Generals/>
         }
     }
+    const { t, i18n } = useTranslation();
 
     return(
         <LiveSubmit  setFormLiveAction={setFormLiveAction}>
@@ -52,12 +54,12 @@ export const IframeDirectVideo =()=>{
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                <span >Accueil</span>
+                                <span >{t("CompteSettings.Accueil")}</span>
                             </Breadcrumb.Item>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                <span>Direct</span>
+                                <span>{t("CompteSettings.direct")}</span>
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Ajouter un direct</Breadcrumb.Item>
+                            <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Ajouter un direct")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>

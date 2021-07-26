@@ -12,7 +12,7 @@ import { Spin } from 'antd';
 import {setAppSetLogin} from "./utils/redux/actions";
 import {graphQL_shema} from "./utils/grapqhQL/shemaGraphQL";
 
-
+import './i18n'
 const firstLink = new createHttpLink({
     uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST
 });

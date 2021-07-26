@@ -9,6 +9,7 @@ import youtubePost from  "../../assets/youtubePost.svg"
 import {useDispatch, useSelector} from "react-redux";
 import{Hooks} from "../utils/hooks";
 import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/formDirectVideoAction";
+import { useTranslation } from 'react-i18next';
 
 
 export const SocialTools=()=>{
@@ -16,6 +17,7 @@ export const SocialTools=()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const {values}=Hooks()
     console.log("socialTools",values.socialTools)
+    const { t, i18n } = useTranslation();
 
     const addPlan =async (index)=>{
         dispatch(setAddPlan({addPlanIndex:index}))
@@ -41,7 +43,7 @@ export const SocialTools=()=>{
                 <p style={{
                     color:darkMode===false?"":"rgba(255, 255, 255, 0.85"
                 }}>
-                    Envoi des publications sur les réseaux sociaux
+                    {t("formDirectVideo.Envoi des publications sur les réseaux sociaux")}
                 </p>
                 <List
 
@@ -69,7 +71,7 @@ export const SocialTools=()=>{
                                         <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:8}}>
                                             <Row gutter={[0, 20]}>
                                                 <Col span={24}>
-                                                    <span className={"spn_planification"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier  la publication</span>
+                                                    <span className={"spn_planification"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Planifier  la publication")}</span>
                                                 </Col>
                                                 {values.socialTools[index].plan.map((element, indexPlan) => {
                                                         return (
@@ -83,7 +85,7 @@ export const SocialTools=()=>{
                                                                                         <DownOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{activePlan(index,indexPlan)}}/>
                                                                                     </Col>
                                                                                     <Col offset={2}>
-                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> Planification {indexPlan +1}</span>
+                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> {t("formDirectVideo.Planification")} {indexPlan +1}</span>
                                                                                     </Col>
                                                                                 </Row>
                                                                             </Col>
@@ -96,7 +98,7 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de début</span>
+                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Date de début")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker style={{width: "100%"}}/>
@@ -108,7 +110,7 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de fin</span>
+                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Date de fin")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker style={{width: "100%"}}/>
@@ -128,7 +130,7 @@ export const SocialTools=()=>{
                                                     justifyContent: "center"
                                                 }} span={24} className={"col-planification"}>
                                                     <Button  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
-                                                        Ajouter une planification
+                                                        {t("formDirectVideo.Ajouter une planification")}
                                                     </Button>
                                                 </Col>
                                             </Row>
@@ -149,7 +151,7 @@ export const SocialTools=()=>{
                                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                                                     }}>Empreinte</span><br/><span className={"spn2"} style={{
                                                                     color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
-                                                                }}>Environ 1mn</span>
+                                                                }}>{t("formDirectVideo.Environ 1mn")}</span>
                                                                 </Col>
                                                             </Row>
                                                         </Col>
@@ -170,7 +172,7 @@ export const SocialTools=()=>{
                                                 <Col span={24}>
                                                     <span className={"FundamentalsofWebinar"} style={{
                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
-                                                    }}>Fundamentals of Webinar</span><br/>
+                                                    }}>{t("formDirectVideo.Fundamentals of Webinar")}</span><br/>
                                                     <span className={"Empriente.com"} style={{
                                                         color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
                                                     }}>Empriente.com</span>
