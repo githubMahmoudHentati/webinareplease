@@ -20,7 +20,7 @@ export const DraggerUpload = () => {
 
     const { Dragger } = Upload;
 
-    const onSave =(file)=>{
+    const onSave =(file, fileInfos)=>{
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
@@ -36,7 +36,7 @@ export const DraggerUpload = () => {
             dispatch(setGeneralOnchange({generalNameChange:"fileList", generalValueChange:
                     [{
                         uid: '-1',
-                        name: 'xxx.png',
+                        name: (fileInfos && fileInfos.file.name) || "xxx.png",
                         status: 'done',
                         url: result.data.data.uploadLogo,
                         thumbUrl: result.data.data.uploadLogo,
@@ -76,7 +76,7 @@ export const DraggerUpload = () => {
         for (let p of formData) {
             console.log("ppppppppppp",p);
         }
-        onSave(formData)
+        onSave(formData, info)
     }
     //***********************End of Upload***********************////////
 
