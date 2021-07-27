@@ -1,21 +1,20 @@
 {
   "title": "Français",
   "lang1": "Anglais",
-  "lang2":"Français",
+  "lang2": "Français",
   "description": {
     "compte": "Compte",
     "user": "Nom d'utilisateur",
     "security": "Sécurité",
     "Abonnement": "Abonnement",
     "Déconnection": "Déconnection",
-    "aide":"Aide",
+    "aide": "Aide",
     "langue": "langue"
   },
   "error": {
     "oops": "oops! Page introuvable",
-    "Exist":"La page que vous tentez d’afficher n’existe pas\n                vous pouvez revenir à la page d’accueil",
+    "Exist": "La page que vous tentez d’afficher n’existe pas\n                vous pouvez revenir à la page d’accueil",
     "Acceuil": "Acceuil"
-
   },
   "calendrier": {
     "Acceuil": "Acceuil",
@@ -28,15 +27,15 @@
   "CompteSettings": {
     "Avatar": "Avatar",
     "Upload": "Télécharger",
-    "GenInfo":"Informations générales",
+    "GenInfo": "Informations générales",
     "Nom": "Nom",
-"Prénom": "Prénom",
+    "Prénom": "Prénom",
     "Email": "Email",
     "Oups, Cette adresse e-mail est déjà utilisée par un autre utilisateur": "Oups, Cette adresse e-mail est déjà utilisée par un autre utilisateur",
     "Condition de service,": "Condition de service,",
     "et je confirme que je passe commande pour des services pour mon entreprise ou pour d'autre objectifs professionnels": "et je confirme que je passe commande pour des services pour mon entreprise ou pour d'autre objectifs professionnels",
     "Politique de confidentialité.": "Politique de confidentialité.",
-    "en":"en",
+    "en": "en",
     "la": "la",
     "Créez votre compte gratuitement": "Créez votre compte gratuitement",
     "Inscrivez-vous maintenant": "Inscrivez-vous maintenant",
@@ -121,7 +120,6 @@
     "Contactez notre support client": "Contactez notre support client",
     "Retour à la page connexion": "Retour à la page connexion",
     "Si vous ne voyez pas l'e-mail, il se peut qu'il se trouve dans votre dossier de courrier indésirable ou que votre compte Webinarplease se trouve sous une autre adresse e-mail": "Si vous ne voyez pas l'e-mail, il se peut qu'il se trouve dans votre dossier de courrier indésirable ou que votre compte Webinarplease se trouve sous une autre adresse e-mail."
-
   },
   "formDirectVideo": {
     "Ajouter un direct": "Ajouter un direct",
@@ -251,10 +249,9 @@
     "Inscrivez-vous maintenant": "Inscrivez-vous maintenant",
     "Enregistrer et continuer": "Enregistrer et continuer",
     "Ou payer par carte bancaire": "Ou payer par carte bancaire"
-
   },
   "resetPassword": {
-"Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?": "Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?",
+    "Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?": "Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?",
     "Un problème est survenu lors de la réinitialisation de votre mot de passe.": "Un problème est survenu lors de la réinitialisation de votre mot de passe.",
     "Voulez-vous réessayer ?": "Voulez-vous réessayer ?",
     "Obtenir un nouveau lien": "Obtenir un nouveau lien",
@@ -314,8 +311,13 @@
     "Departement": "Departement",
     "Annuler": "Annuler",
     "les éléments sélectionnés seront supprimés": "les éléments sélectionnés seront supprimés",
-    "L'élément sélectionné sera supprimé": "L'élément sélectionné sera supprimé"
-
-
+    "L'élément sélectionné sera supprimé": "L'élément sélectionné sera supprimé",
+    "Aperçu": "Aperçu",
+    "Titre": "Titre",
+    "Etat": "Etat",
+    "Archivé": "Archivé",
+    "Rénitialiser médias": "Rénitialiser médias",
+    "Filtrer médias": "Filtrer médias",
+    "Réinitialiser": "Réinitialiser"
   }
 }

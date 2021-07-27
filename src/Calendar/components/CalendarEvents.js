@@ -48,6 +48,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                 calendarCompareMoment && calendarCompareMoment.includes(true)
                     ?
                     listData.map(item => {
+                        console.log("item", item)
                         return (
                             <div className={"div_calendarevent"}>
                                 <span className={"span_time"}>{moment(item.date.date).format('hh:mm:ss')}</span>

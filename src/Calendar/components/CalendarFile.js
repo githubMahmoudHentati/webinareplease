@@ -5,10 +5,11 @@ import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design
 import {useSelector} from "react-redux";
 import {useLazyQuery, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "../utils/graphql";
-import moment from 'moment'
+import moment from 'moment';
+
 import CalendarEvents from "./CalendarEvents";
 import {setCalendarOnchange, setCalendarVisibleOnchange} from "../store/calendarAction";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import {useDispatch} from "react-redux";
 import {CalendarReducer} from "../store/calendarReducer";
@@ -151,7 +152,7 @@ export function CalendarFile() {
                                     >
                                         <div className={"body_Modal"}>
                                             <div className={"div_image_modal"}><img
-                                                src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
+                                                src={"https://i.pinimg.com/originals/eMo2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
                                             </div>
                                             <div className={"div_time_calendar"}>
                                                 <div className={"type_btn"}><Tag

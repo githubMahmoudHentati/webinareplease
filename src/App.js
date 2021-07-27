@@ -19,12 +19,15 @@ import {ResetPassword} from "./resetPassword/resetPassword";
 import Error from "./utils/components/Error";
 import {ConfirmAccount} from "./confirmAccount/confirmAccount";
 
+
+
 function App() {
     const {verificationToken} = GraphQLFetchData()
     const credentialsValues = useSelector((state) => state.Reducer)
 
     return (
         <div className="App">
+
             {verificationToken &&
             <BrowserRouter history={history}>
                 <Switch>
@@ -51,6 +54,7 @@ function App() {
                 </Switch>
             </BrowserRouter>
             }
+
         </div>
     );
 }

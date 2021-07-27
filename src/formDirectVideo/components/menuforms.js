@@ -29,6 +29,7 @@ export const MenuForms =()=>{
                                 textAlign: "left",
                                 fontFamily: "SF Pro Display",
                                 fontWeight: "500"
+
                             }}>
                             {t("formDirectVideo.Paramètres généraux")}
                         </span>

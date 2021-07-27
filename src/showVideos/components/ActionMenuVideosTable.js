@@ -82,7 +82,7 @@ function useActionMenu({record}) {
             {
                 record.status === -1
                        ?
-                        <Tooltip title={"Diffuser"}>
+                        <Tooltip title={t("ShowVideo.Diffuser")}>
                             <Button className={"btn_Visualiser_diffuser"} style={{
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
@@ -90,7 +90,7 @@ function useActionMenu({record}) {
                             }}><VideoCameraOutlined id={"icon_vs"}/> <span id={"span_diffuser"}>{t("ShowVideo.Diffuser")}</span></Button>
                         </Tooltip>
                         :
-                        <Tooltip title={"Visualiser"}>
+                        <Tooltip title={t("ShowVideo.Visualiser")}>
                             <Button className={"btn_Visualiser_diffuser"} style={{
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",

@@ -107,6 +107,7 @@ function HeaderVideos() {
                   </div>
                   <div className="selectDiv">
                       <Select
+                          style={{ width: 120 }}
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
                           defaultValue="tous"
@@ -116,7 +117,7 @@ function HeaderVideos() {
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> <span id={'spn_option'}>{t("ShowVideo.Tout")}</span> </Option>
+                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> <span  style={{ padding: "15%" }}id={'spn_option'}>{t("ShowVideo.Tout")}</span> </Option>
                           <Option name="type" value="archivés"><span className="icon-Archive"></span>  <span id={'spn_option'}>{t("ShowVideo.Archivés")}</span></Option>
                           <Option name="type" value="encours"><span className="icon-Current"></span>  <span id={'spn_option'}>{t("ShowVideo.En cours")}</span></Option>
                           <Option name="type" value="avenir"><HourglassOutlined />  <span id={'spn_option'}>{t("ShowVideo.A venir")}</span></Option>
@@ -200,8 +201,8 @@ function HeaderVideos() {
                       </div>{/*./div2_div_Filter*/}
 
                       <div className="div_button_filter">
-                          <Tooltip title="Rénitialiser médias"><Button style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">Réinitialiser</Button></Tooltip>
-                          <Tooltip title="Filtrer médias"><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>{t("ShowVideo.Filtrer")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.Rénitialiser médias")}><Button style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Réinitialiser")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.Filtrer médias")}><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>{t("ShowVideo.Filtrer")}</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
 

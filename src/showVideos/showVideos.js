@@ -14,10 +14,12 @@ import {graphQL_shema} from "./utils/graphQL";
 import {Hooks} from "./utils/hooks";
 import { Spin } from 'antd';
 import './showVideos.scss'
+import { useTranslation } from 'react-i18next';
 
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
 function ShowVideos() {
+    const { t, i18n } = useTranslation();
 
     const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
 
@@ -53,7 +55,7 @@ function ShowVideos() {
             sorter: (a, b) => a.id - b.id,
         },
         {
-            title: 'Aperçu',
+            title: t("ShowVideo.Aperçu"),
             dataIndex: 'logo',
             key:'2',
             render: image =>
@@ -62,7 +64,7 @@ function ShowVideos() {
                 </div>,
         },
         {
-            title: 'Titre',
+            title: t("ShowVideo.Titre"),
             dataIndex: 'title',
             key: '3',
             sorter: (a, b) => a.title.length - b.title.length,
@@ -86,7 +88,7 @@ function ShowVideos() {
             },
         },
         {
-            title: 'Etat',
+            title: t("ShowVideo.Etat"),
             dataIndex: 'status',
             key: '5',
             sorter: (a, b) => a.status - b.status,
@@ -96,15 +98,15 @@ function ShowVideos() {
                     {
                         status === 1
                           ?
-                          <Tag color={"green"}><span>En cours</span></Tag>
+                          <Tag color={"green"}><span>{t("ShowVideo.En cours")}</span></Tag>
                           :
                             status === 0
                             ?
-                              <Tag color={"geekblue"}><span>Archivé</span></Tag>
+                              <Tag color={"geekblue"}><span>{t("ShowVideo.Archivé")}</span></Tag>
                               :
                                 status === -1
                                   ?
-                                  <Tag color={"blue"}><span>A venir</span></Tag>
+                                  <Tag color={"blue"}><span>{t("ShowVideo.A venir")}</span></Tag>
                                   :
                                   null
                     }

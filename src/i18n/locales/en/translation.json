@@ -233,7 +233,7 @@
     "Payer Webinar please Pro": "Pay for Webinar please Pro",
     "Payer": "Pay",
     "Please input your email!": "Please input your email!",
-    "Please input your adress!":"Please input your adress!",
+    "Please input your adress!": "Please input your adress!",
     "Card details": "Card details",
     "Nom du titulaire de la carte": "Name of the card owner",
     "Please input your username!": "Please input your username!",
@@ -246,7 +246,7 @@
     "Ou payer par carte bancaire": "Or pay by credit card"
   },
   "resetPassword": {
-"Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?": "This password reset link was no longer valid. Would you mind activating a new one?",
+    "Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?": "This password reset link was no longer valid. Would you mind activating a new one?",
     "Un problème est survenu lors de la réinitialisation de votre mot de passe.": "A problem occurred when you reset your password.",
     "Voulez-vous réessayer ?": "Would you like to try again?",
     "Obtenir un nouveau lien": "Get a new link",
@@ -264,14 +264,14 @@
     "infos": "Info",
     "Modifier": "Edit",
     "Templates": "Templates",
-    "Supprimer":"Delete",
+    "Supprimer": "Delete",
     "Cet champ est Vide": "This field is empty",
     "cet champ est copié avec succée": "this field is successfully copied",
     "Diffuser": "Broadcast",
     "Visualiser": "Visualize",
     "Informations": "Information",
-    "Fermer":"Close",
-    "Url de diffusion":"Broadcast Url",
+    "Fermer": "Close",
+    "Url de diffusion": "Broadcast Url",
     "Nom de flux": "Stream name",
     "Nom de flux du direct": "Live stream name",
     "Identifiant du direct": "Direct ID",
@@ -306,7 +306,13 @@
     "Departement": "Department",
     "Annuler": "Cancel",
     "les éléments sélectionnés seront supprimés": "the selected items will be deleted",
-    "L'élément sélectionné sera supprimé": "The selected item will be deleted"
-
+    "L'élément sélectionné sera supprimé": "The selected item will be deleted",
+    "Aperçu": "Overview",
+    "Titre": "Title",
+    "Etat": "State",
+    "Archivé": "Archived",
+    "Rénitialiser médias": "Reset media",
+    "Filtrer médias": "Filter media",
+    "Réinitialiser": "Reset"
   }
 }

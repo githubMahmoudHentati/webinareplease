@@ -88,7 +88,7 @@ export const CompteSettings=()=>{
                     </Col>
                     <Col span={24}>
                         <Row gutter={[30, 20]}>
-                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 5}} lg={{span:5}} >
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 6}} lg={{span:6}} >
                                 <MenuForms />
                             </Col>
                             <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 18}} lg={{span:18}} >

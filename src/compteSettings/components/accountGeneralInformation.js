@@ -28,7 +28,7 @@ export const AccountGeneralInformation = () => {
     } = Hooks(UpdateAccountSetting)
     console.log("generalInformation", values)
     const { t, i18n } = useTranslation();
-    const requiredFieldRule = [{required: true, message: 'Champs requis'}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.Champs requis")}];
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
