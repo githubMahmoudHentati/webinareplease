@@ -49,6 +49,7 @@ function ShowVideos() {
             title: 'Id',
             dataIndex: "id",
             key: '1',
+            className: "columnId",
             sortDirections: ['descend', 'ascend'],
             sorter: (a, b) => a.id - b.id,
         },
@@ -56,6 +57,7 @@ function ShowVideos() {
             title: 'Aperçu',
             dataIndex: 'logo',
             key:'2',
+            className: "columnFeed",
             render: image =>
                 <div className={"div_apercu"}>
                 <img  src={image} className={"img_aperçu"}/>
@@ -65,6 +67,7 @@ function ShowVideos() {
             title: 'Titre',
             dataIndex: 'title',
             key: '3',
+            className: "columnTitle",
             sorter: (a, b) => a.title.length - b.title.length,
             sortDirections: ['descend', 'ascend'],
             render:(titre , record) =>{
@@ -77,6 +80,7 @@ function ShowVideos() {
             title: 'Date',
             dataIndex: 'liveDate',
             key: '4',
+            className: "columnDate",
             sorter: (a, b) => a.date - b.date,
             sortDirections: ['descend','ascend'],
             render:(date , record) =>{
@@ -89,6 +93,7 @@ function ShowVideos() {
             title: 'Etat',
             dataIndex: 'status',
             key: '5',
+            className: "columnState",
             sorter: (a, b) => a.status - b.status,
             sortDirections: ['descend','ascend'],
             render: status => (
@@ -132,7 +137,6 @@ function ShowVideos() {
         dataSource: data,
         updateEntityPath: 'update-product',
     });
-
     return(
         <Spin  size="middle"  spinning={loadingSpinner.loading}>
        <PrincipalPage>

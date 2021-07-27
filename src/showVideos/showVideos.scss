@@ -252,5 +252,18 @@
     }
 
   }
+/*********desktop devices*************/
+  @media screen and (min-width: 1024px) {
+
+  .columnId{
+    width: 5%;
+  }
+  .columnFeed, .columnState{
+    width: 15%;
+  }
+  .columnDate, .columnTitle{
+    width: 20%
+  }
+}
 
 
