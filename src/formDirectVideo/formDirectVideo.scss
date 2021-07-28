@@ -595,7 +595,7 @@
     border-right:3px solid var(--menu-border) !important;
   }
   .row_menu .ant-menu-item-selected{
-    background-color: white !important;
+    background-color: var(--card_color) !important;
     color: var(--item-menu-color) !important;
   }
   .row_menu .ant-menu-item-selected:hover{
