@@ -102,7 +102,7 @@ function HeaderVideos() {
                   <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"#141414", color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
                       <Tooltip className="tooltip_calendrier" title={t("ShowVideo.ViewCalendar")}>
                       <CalendarOutlined  className="IconCalendrier" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)"}}/>
-                      <span id={"Text_Calendar"}>{t("ShowVideo.Calendrier")}</span>
+                      <span id={"Text_Calendar"}>{t("ShowVideo.Calendar")}</span>
                       </Tooltip>
                   </div>
                   <div className="selectDiv">
@@ -133,7 +133,7 @@ function HeaderVideos() {
                       placeholder={t("ShowVideo.Search")}
                       prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "RGBA(255, 255, 255, 0.15)", marginLeft: "10px" }}/>}
                       suffix={
-                          <Tooltip title={t("ShowVideo.Filtrer")}>
+                          <Tooltip title={t("ShowVideo.Filter")}>
                           <div
                               onClick={handlClickSuffix}
                               className="filter_icon"
@@ -176,7 +176,7 @@ function HeaderVideos() {
                               <Option name="periode" value="Semaine">{t("ShowVideo.Week")}</Option>
                               <Option name="periode" value="Mois">{t("ShowVideo.Month")}</Option>
                               <Option name="periode" value="Trimestre">{t("ShowVideo.Term")}</Option>
-                              <Option name="periode" value="Semestre">{t("ShowVideo.Semestre")}</Option>
+                              <Option name="periode" value="Semestre">{t("ShowVideo.Semester")}</Option>
                               <Option name="periode" value="Année">{t("ShowVideo.Year")}</Option>
                           </Select>
                           <DatePicker placeholder={t("ShowVideo.SelectDate")}  classNmae="datepicker_div1_div_Filter"  onChange={(momentValue,stringDateValue)=>handleChangeDatePicker("date",momentValue,stringDateValue)}/>
@@ -187,13 +187,13 @@ function HeaderVideos() {
                           <Select
                               className="select1_div2_div_Filter"
                               name="contributeur" onChange={handleHeaderSelect}
-                              placeholder={t("ShowVideo.Contributeur")}
+                              placeholder={t("ShowVideo.Contributor")}
                               optionFilterProp="children"
                               filterOption={(input, option) =>
                                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                               }
                           >
-                              <Option name="contributeur" value="Departement">{t("ShowVideo.Departement")}</Option>
+                              <Option name="contributeur" value="Departement">{t("ShowVideo.Department")}</Option>
                               <Option name="contributeur" value="Profile">Profile</Option>
                               <Option name="contributeur" value="lucy">lucy</Option>
                           </Select>
@@ -202,7 +202,7 @@ function HeaderVideos() {
 
                       <div className="div_button_filter">
                           <Tooltip title={t("ShowVideo.ResetMedia")}><Button style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
-                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>{t("ShowVideo.Filtrer")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>{t("ShowVideo.Filter")}</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
 

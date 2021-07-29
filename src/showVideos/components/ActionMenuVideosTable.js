@@ -110,11 +110,11 @@ function useActionMenu({record}) {
 
             <Modal
                 visible={infosLives.visible}
-                title={t("ShowVideo.Informations")}
+                title={t("ShowVideo.Information")}
                 onCancel={handleCancel}
                 footer={[
                     <Button key="back" onClick={handleCancel}>
-                        {t("ShowVideo.Fermer")}
+                        {t("ShowVideo.Close")}
                     </Button>,
                 ]}
             >
@@ -137,7 +137,7 @@ function useActionMenu({record}) {
                 onCancel={handleCancelModalExport}
                 footer={[
                     <Button key="back" onClick={handleCancelModalExport}>
-                        {t("ShowVideo.Fermer")}
+                        {t("ShowVideo.Close")}
                     </Button>,
                 ]}
             >

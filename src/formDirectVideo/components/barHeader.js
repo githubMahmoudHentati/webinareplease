@@ -68,7 +68,7 @@ export const BarHeader = () => {
                                                 :
                                                 matchesMedia.matches && directMenu === 4
                                                     ?
-                                                    <span>{t("formDirectVideo.Templetes")}</span>
+                                                    <span>{t("formDirectVideo.Templates")}</span>
                                                     :
                                                     <span>{t("formDirectVideo.AddLive")}</span>
 

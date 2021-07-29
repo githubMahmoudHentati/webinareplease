@@ -169,14 +169,14 @@ function GlobalHeader() {
         <Menu className="menu">
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(0)))
-            }}><UserOutlined/>{t("description.compte")}</Menu.Item>
+            }}><UserOutlined/>{t("description.Account")}</Menu.Item>
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(1)))
             }}><UnlockOutlined/>{t("description.security")}</Menu.Item>
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(3)))
             }}><PieChartOutlined/>{t("description.Subscription")}</Menu.Item>
-            <Menu.Item onClick={logOut}><LogoutOutlined/>{t("description.Déconnection")}</Menu.Item>
+            <Menu.Item onClick={logOut}><LogoutOutlined/>{t("description.LogOut")}</Menu.Item>
         </Menu>
     );
     const Menulang = (
@@ -316,7 +316,7 @@ function GlobalHeader() {
                                 <a className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(0)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
-                                    <UserOutlined className={"avtr"}/><span>{t("description.compte")}</span>
+                                    <UserOutlined className={"avtr"}/><span>{t("description.Account")}</span>
                                 </a>
                                 <a className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(1)), SetActiveSideMenuState(false))
@@ -334,7 +334,7 @@ function GlobalHeader() {
                                 <Dropdown className={"drp_lang"} overlay={Menulang1} trigger={['click']}>
                                     <div><GlobalOutlined style={{color: darkMode === false ? "" : "white"}}
                                                          className={"avtr"}/> <span
-                                        className={"spnwhite"}>{t("description.langue")}</span></div>
+                                        className={"spnwhite"}>{t("description.Language")}</span></div>
                                 </Dropdown>
                                 <div className={"aide_div"}><QuestionCircleOutlined className={"icon_help"}
                                                                                     style={{color: darkMode === false ? "" : "white"}}/><span
@@ -345,7 +345,7 @@ function GlobalHeader() {
                                 <a className="ant-dropdown-link link_drp" onClick={logOut}
                                    style={{color: darkMode === false ? "" : "white"}}>
                                     <LogoutOutlined
-                                        className={"logout-icon"}/><span>{t("description.Déconnection")}</span>
+                                        className={"logout-icon"}/><span>{t("description.LogOut")}</span>
                                 </a>
                             </div>
                         </div>

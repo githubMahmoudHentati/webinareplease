@@ -56,7 +56,7 @@ export const Forms =()=>{
                     </Menu.Item>
 
                     <Menu.Item key="5">
-                        {t("formDirectVideo.Templetes")}
+                        {t("formDirectVideo.Templates")}
                     </Menu.Item>
                 </Menu>
             </Col>

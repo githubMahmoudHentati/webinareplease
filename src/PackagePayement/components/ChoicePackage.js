@@ -20,7 +20,7 @@ function ChoicePackage(){
     const { t, i18n } = useTranslation();
     const steps = [
         {
-            title: t("PackagePayment.Forfaits"),
+            title: t("PackagePayment.Packages"),
             content: 'First-content',
         },
         {
@@ -28,7 +28,7 @@ function ChoicePackage(){
             content: 'Second-content',
         },
         {
-            title: t("PackagePayment.Paiement"),
+            title: t("PackagePayment.Payment"),
             content: 'Last-content',
         },
     ];
@@ -189,13 +189,13 @@ function ChoicePackage(){
                                         <div>
                                             <h5 >{t("PackagePayment.MeetingDuration")}</h5>
                                             <Select defaultValue="1 Heure" >
-                                                <Option value="1 Heure">1 {t("PackagePayment.Heure")}</Option>
+                                                <Option value="1 Heure">1 {t("PackagePayment.Hour")}</Option>
                                             </Select>
                                         </div>
                                         <div>
                                             <h5 >{t("PackagePayment.PartiNumber")}</h5>
                                             <Select defaultValue="20 Participants" >
-                                                <Option value="20 Participants">20 {t("formDirectVideo.Intervenants")}</Option>
+                                                <Option value="20 Participants">20 {t("formDirectVideo.Participants")}</Option>
                                             </Select>
                                         </div>
                                     </div>
@@ -335,7 +335,7 @@ function ChoicePackage(){
                     )}
                     {valuesSignUp.constraintData.current > 0 && (
                         <Button style={{margin: '0 8px'}} onClick={() => prev()}>
-                            {t("PackagePayment.retour")}
+                            {t("PackagePayment.Back")}
                         </Button>
                     )}
                     {valuesSignUp.constraintData.current === 1 && (

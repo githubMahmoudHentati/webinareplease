@@ -46,7 +46,7 @@ export const ResetPassword =()=> {
                                         ({getFieldValue}) => ({
                                             validator(_, value) {
                                                 if (isValidPassword(value)) {
-                                                    return Promise.resolve(t("formDirectVideo.valeur"));
+                                                    return Promise.resolve(t("formDirectVideo.value"));
                                                 }
                                                 return Promise.reject(t("resetPassword.MinCharCapLetterMsg"));
                                             },
@@ -77,7 +77,7 @@ export const ResetPassword =()=> {
                                         ({getFieldValue}) => ({
                                             validator(_, value) {
                                                 if (isConfirmPassword(value)) {
-                                                    return Promise.resolve(t("formDirectVideo.valeur"));
+                                                    return Promise.resolve(t("formDirectVideo.value"));
                                                 }
                                                 return Promise.reject(t("resetPassword.NotIdenticalPass"));
                                             },

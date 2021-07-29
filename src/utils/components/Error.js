@@ -12,7 +12,7 @@ const {t,i18n}=useTranslation()
             <h2>{t("error.oops")}</h2>
             <p>{t("error.Exist")}</p>
             <Link to='/connexion' className='btn'>
-                {t("error.Acceuil")}
+                {t("error.Home")}
             </Link>
         </div>
         </WebinairePlease>

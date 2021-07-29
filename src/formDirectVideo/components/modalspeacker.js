@@ -79,7 +79,7 @@ import { useTranslation } from 'react-i18next';
             <span className="require">*</span>
            </Col>
            <Col span={12}>
-            <span className={"span_modal"}>{t("CompteSettings.First name")}</span>
+            <span className={"span_modal"}>{t("CompteSettings.FirstName")}</span>
             <span className="require">*</span>
            </Col>
            <Col span={12}>
@@ -104,13 +104,13 @@ import { useTranslation } from 'react-i18next';
          <Col span={24}>
           <Row gutter={[0, 8]}>
            <Col span={24}>
-            <span className={"span_modal"}>{t("formDirectVideo.Fonction")}</span>
+            <span className={"span_modal"}>{t("formDirectVideo.Function")}</span>
            </Col>
            <Col span={24}>
             <Form.Item name="title" className={"form-item-style"}
             >
              <Input name="title" className={"input_modal"} defaultValue={values.configuration.speaker.title}
-                    onChange={(event) => onChangeSpeaker(event, "title")} placeholder={t("formDirectVideo.Fonction")}></Input>
+                    onChange={(event) => onChangeSpeaker(event, "title")} placeholder={t("formDirectVideo.Function")}></Input>
             </Form.Item>
            </Col>
           </Row>
@@ -128,7 +128,7 @@ import { useTranslation } from 'react-i18next';
                         ({getFieldValue}) => ({
                          validator(_, value) {
                           if (isValidEmail(value)) {
-                           return Promise.resolve(t("formDirectVideo.valeur"));
+                           return Promise.resolve(t("formDirectVideo.value"));
                           }
                           return Promise.reject(t('formDirectVideo.EnterValidEmailAddress'));
                          },

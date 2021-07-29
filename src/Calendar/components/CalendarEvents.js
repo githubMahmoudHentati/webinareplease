@@ -63,18 +63,18 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                 <Modal
                                     visible={visible}
                                     title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
-                                                  text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                                                       /> }
                                     onCancel={handleCancel}
                                     footer={[
                                         <div className={"footer_modal_Avenir"}>
-                                            <div><Button><DeleteOutlined/> {t("calendrier.Delete")}</Button></div>
+                                            <div><Button><DeleteOutlined/> {t("Calendar.Delete")}</Button></div>
 
                                             <div>
                                                 <Button key="back" onClick={handleCancel}>
-                                                    {t("calendrier.Cancel")}
+                                                    {t("Calendar.Cancel")}
                                                 </Button>
                                                 <Button key="submit" type="primary">
-                                                    {t("calendrier.Visualiser")}
+                                                    {t("Calendar.Visualiser")}
                                                 </Button>
                                             </div>
 

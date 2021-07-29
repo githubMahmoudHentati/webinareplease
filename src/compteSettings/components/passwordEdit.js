@@ -81,7 +81,7 @@ export const PasswordEdit =()=>{
                                         ({getFieldValue}) => ({
                                             validator(_, value) {
                                                 if (isValidPassword(values.securityAccount.newPassWord)) {
-                                                    return Promise.resolve(t("formDirectVideo.valeur"));
+                                                    return Promise.resolve(t("formDirectVideo.value"));
                                                 }
                                                 return Promise.reject(t("resetPassword.MinCharCapLetterMsg"));
                                             },
@@ -106,7 +106,7 @@ export const PasswordEdit =()=>{
                                 <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>dispatch(setAccountSetting(1))} >{t("CompteSettings.Cancel")}</Button>
                             </Col>
                             <Col>
-                                <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"} htmlType="submit" loading={values.loadingUpdatePassword.loadingUpdatePassword}>{t("CompteSettings.Enregistrer")}</Button>
+                                <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"} htmlType="submit" loading={values.loadingUpdatePassword.loadingUpdatePassword}>{t("CompteSettings.Save")}</Button>
                             </Col>
                         </Row>
                     </Col>

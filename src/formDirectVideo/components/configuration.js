@@ -112,7 +112,7 @@ export const Configuration = () => {
                             <Col className={"col-forms"}>
                                 <span style={{
                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"
-                                }}>{t("formDirectVideo.Intervenants")}</span>
+                                }}>{t("formDirectVideo.Participants")}</span>
                             </Col>
                             <Col>
                                 <Form.Item name="switchSpeaker" className={"form-item-style"}

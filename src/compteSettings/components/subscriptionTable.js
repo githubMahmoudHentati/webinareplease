@@ -39,7 +39,7 @@ export const SubscriptionTable=()=>{
         key: 'entitled',
     },
     {
-        title: t("CompteSettings.Statut"),
+        title: t("CompteSettings.Status"),
         key: 'status',
         dataIndex: 'status',
         render: (text,record) =>{
@@ -53,7 +53,7 @@ export const SubscriptionTable=()=>{
 
     },
     {
-        title: t("CompteSettings.Montant"),
+        title: t("CompteSettings.Amount"),
         dataIndex: 'amount',
         key: 'amount',
     },

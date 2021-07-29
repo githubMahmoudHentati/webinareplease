@@ -48,14 +48,14 @@ function HeaderCalendar() {
                     <Breadcrumb.Item href="" style={{color: darkMode === false ? "" : "#ffffff"}} onClick={() => {
                         history.push("/")
                     }}>
-                        <span>{t("calendrier.Acceuil")}</span>
+                        <span>{t("Calendar.Home")}</span>
                     </Breadcrumb.Item>
                     <Breadcrumb.Item href="" style={{color: darkMode === false ? "" : "#ffffff"}} onClick={() => {
                         history.push("/")
                     }}>
-                        <span>{t("calendrier.direct")}</span>
+                        <span>{t("Calendar.direct")}</span>
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item style={{color: darkMode === false ? "" : "#ffffff"}}>{t("calendrier.calendrier")}</Breadcrumb.Item>
+                    <Breadcrumb.Item style={{color: darkMode === false ? "" : "#ffffff"}}>{t("Calendar.Calendar")}</Breadcrumb.Item>
                 </Breadcrumb>
 
             </div>
@@ -66,7 +66,7 @@ function HeaderCalendar() {
                 <div className={"div_retour"}><ArrowLeftOutlined style={{color: darkMode === false ? "" : "white"}}
                                                                  className={"arrow"}
                                                                  onClick={() => handleClickArrowCalendar()}/> <h4
-                    style={{color: darkMode === false ? "" : "white"}} className={"h4"}>{t("calendrier.calendrier")}</h4></div>
+                    style={{color: darkMode === false ? "" : "white"}} className={"h4"}>{t("Calendar.Calendar")}</h4></div>
             </div>
             {/*./TousMedia*/}
 

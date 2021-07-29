@@ -233,7 +233,7 @@ export const FormSignUp =({child1,child2})=>{
                                         className={"spn2"}>{t("CompteSettings.WebinarDataProcess")}</span>
                                     <a> {t("CompteSettings.PrivacyPolicy")} </a>
                                     <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a className={"pol"}> {t("CompteSettings.Service condition,")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.la")}</span><a className={"pol"}> {t("CompteSettings.Politique de confidentialité")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a className={"pol"}> {t("CompteSettings.l'Accord de traitement des donnèes")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.the")}</span><a className={"pol"}> {t("CompteSettings.Politique de confidentialité")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a className={"pol"}> {t("CompteSettings.l'Accord de traitement des donnèes")} </a>
                                     <span className={"pol"}>{t("CompteSettings.ConfirmOrder")}</span>
                                 </Col>
                             </Row>

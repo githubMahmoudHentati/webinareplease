@@ -61,7 +61,7 @@ export const MenuForms =()=>{
                     </Menu.Item>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(4))}} key="5">
-                        {t("formDirectVideo.Templetes")}
+                        {t("formDirectVideo.Templates")}
                     </Menu.Item>
                 </Menu>
             </Col>

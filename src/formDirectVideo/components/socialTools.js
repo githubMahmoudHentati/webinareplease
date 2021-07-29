@@ -85,7 +85,7 @@ export const SocialTools=()=>{
                                                                                         <DownOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{activePlan(index,indexPlan)}}/>
                                                                                     </Col>
                                                                                     <Col offset={2}>
-                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> {t("formDirectVideo.Planification")} {indexPlan +1}</span>
+                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> {t("formDirectVideo.Planning")} {indexPlan +1}</span>
                                                                                     </Col>
                                                                                 </Row>
                                                                             </Col>
@@ -151,7 +151,7 @@ export const SocialTools=()=>{
                                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                                                     }}>Empreinte</span><br/><span className={"spn2"} style={{
                                                                     color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
-                                                                }}>{t("formDirectVideo.Environ 1mn")}</span>
+                                                                }}>{t("formDirectVideo.AboutOneMn")}</span>
                                                                 </Col>
                                                             </Row>
                                                         </Col>

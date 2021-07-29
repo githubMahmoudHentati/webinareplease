@@ -28,7 +28,7 @@ export const SecurityAccount = () => {
                             <Col span={24}>
                                 <span className={"spn2_motDePasse"}
                                       style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.StrengthPass")} :</span>
-                                <span className={"spn2_motDePasse"} style={{color: "RGB(69, 195, 59)"}}>   {t("CompteSettings.Moyen")}</span>
+                                <span className={"spn2_motDePasse"} style={{color: "RGB(69, 195, 59)"}}>   {t("CompteSettings.Medium")}</span>
                             </Col>
                         </Row>
                     </Col>
