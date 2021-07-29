@@ -54,10 +54,29 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
     },[pageSize])
 
 
-    const  onSelectChange = selectedRowKeys  => {
-        setSelectedRowKeys(selectedRowKeys);
-        dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:selectedRowKeys}));
-        dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:selectedRowKeys.length}));
+    const  onSelectChange = (selectedCheck)  => {  
+    //uncheck checkbox  
+    let filter =[]
+        filter =  dataSource.content.filter(item => {
+            return (!selectedCheck.includes(item.id))
+        }).map(ele => ele.id)  
+      
+      
+   selectedCheck = [...selectedRowKeys, ...selectedCheck]
+   let uniqItems = [...new Set(selectedCheck)];
+   let uniqItemsFilter =  uniqItems.filter(item => {
+    return (!filter.includes(item))
+})  
+   dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:uniqItemsFilter}));
+   dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:uniqItemsFilter.length}));
+
+     setSelectedRowKeys(uniqItemsFilter);
+
+     //old version
+     /*setSelectedRowKeys(selectedCheck);
+     dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:selectedCheck}));
+     dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:selectedCheck.length}));*/
+
     };
     const rowSelection = {
         selectedRowKeys,
@@ -100,7 +119,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
         SetCurrent(pagination.current)
         setPageSize(pagination.pageSize)
     };
-
 
     const DataTable = () => (
         <div className="DataTable" style={{backgroundColor:darkMode===false?"#ffffff":"#011529"}}>
