@@ -29,7 +29,7 @@ export const AccountSubscription=()=>{
                     <Col span={24}>
                         <Row >
                             <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:6}}>
-                                <span className={"parag_abonnement_gras"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Abonnement")} :</span>
+                                <span className={"parag_abonnement_gras"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Subscription")} :</span>
                             </Col>
                             <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:18}} >
                                 <span className={"parag_abonnement"} style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85)"}}> {values.subscription.subscriptionType} <br/> {values.subscription.subscriptionAmount}<br/>{values.subscription.subscriptionMode}</span>

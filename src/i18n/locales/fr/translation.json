@@ -55,7 +55,7 @@
     "Phone": "Téléphone",
     "Cancel": "Annuler",
     "Update": "Mettre à jour",
-    "Subscription": "Abonement",
+    "Subscription": "Abonnement",
     "YourSubscription": "Votre abonnement est actuellement le suivant",
     "UsedStorage": "Stockage utilisé",
     "BroadcastDuration": "Durée du diffusion",
@@ -129,6 +129,8 @@
     "General": "Géneral",
     "Configuration": "Configuration",
     "Invitations": "Invitations",
+    "Emails": "E-mails",
+
     "SocialTools": "Outils social",
     "Templates": "Templates",
     "Themes": "Thèmes",
@@ -251,7 +253,8 @@
     "Back": "Retour",
     "RegisterNow": "Inscrivez-vous maintenant",
     "SaveAndContinue": "Enregistrer et continuer",
-    "CreditCardPay": "Ou payer par carte bancaire"
+    "CreditCardPay": "Ou payer par carte bancaire",
+    "Free": "Gratuit"
   },
   "resetPassword": {
     "InvalidLink": "Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?",
@@ -320,6 +323,9 @@
     "State": "Etat",
     "ResetMedia": "Rénitialiser médias",
     "FilterMedia": "Filtrer médias",
-    "Reset": "Réinitialiser"
+    "Reset": "Réinitialiser",
+    "SuccessMsg":"cet vidéo a été supprimée avec succès",
+    "ErrorDelOne": "Oops!!! il y'a un erreur se produit",
+    "ErrorDelTwo": "Oops!!! cet vidéo n'existe pas"
   }
 }

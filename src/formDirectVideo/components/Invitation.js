@@ -124,7 +124,7 @@ function Invitation(){
             </div>{/*./groupEmail*/}
 
             <div className={"groupEmail div2"}>
-                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>E-mails   <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
+                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Emails")}  <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
                        <Form.Item
                            style={{width:"100%"}}
                            name="emails"

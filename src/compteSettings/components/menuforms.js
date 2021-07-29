@@ -22,7 +22,7 @@ export const MenuForms =()=>{
                     defaultOpenKeys={['sub1']}
                 >
                     <Menu.Item className={"menuItem"} key="1" onClick={()=>{dispatch(setAccountSetting(0))}}>
-                        {t("description.compte")}
+                        {t("description.Account")}
                     </Menu.Item>
                     <Menu.Item className={"menuItem"} key="2" onClick={()=>{dispatch(setAccountSetting(1))}}>
                         {t("description.security")}

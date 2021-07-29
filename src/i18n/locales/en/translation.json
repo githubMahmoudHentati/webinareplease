@@ -177,8 +177,9 @@
     "EnterValidEmailAddress": "Please enter a valid email address",
     "ExistEmailAddress": "Email address exist!",
     "SendInvitations": "Send invitations",
-    "Emails group": "Emails group",
+    "EmailsGroup": "Emails group",
     "Add": "Add",
+    "Emails": "Emails",
     "ChooseGroup": "Choose a group",
     "Group01": "Group 01",
     "Group02": "Group 02",
@@ -246,7 +247,8 @@
     "Back": "back to",
     "RegisterNow": "Sign up now",
     "SaveAndContinue": "Save and continue",
-    "CreditCardPay": "Or pay by credit card"
+    "CreditCardPay": "Or pay by credit card",
+    "Free": "Free"
   },
   "resetPassword": {
     "InvalidLink": "This password reset link was no longer valid. Would you mind activating a new one?",
@@ -314,6 +316,9 @@
     "State": "State",
     "ResetMedia": "Reset media",
     "FilterMedia": "Filter media",
-    "Reset": "Reset"
+    "Reset": "Reset",
+    "SuccessMsg": "This video has been successfully deleted",
+    "ErrorDelOne":"Oops!!! an error has occurred",
+    "ErrorDelTwo": "Oops!!! this video does not exist"
   }
 }

@@ -1,12 +1,16 @@
 import React from 'react';
 import {message} from "antd";
+import i18n from '../../i18n/index';
 
 export const StatusMessage = () => {
 
+
     //succes delete lang
     const success_Delete = () => {
+
+
         message.success({
-            content:"cet vidéo a été supprimée avec succès",
+            content:i18n.t("ShowVideo.SuccessMsg"),
             className: 'message-event',
             duration:1.5,
             style: {
@@ -17,8 +21,8 @@ export const StatusMessage = () => {
     // error delete lang
     const error_Delete = (code) => {
         const messageERROR = {
-            400: "Oops!!! il y'a un erreur se produit",
-            404:  "Oops!!! cet vidéo n'existe pas",
+            400: i18n.t("ShowVideo.ErrorDelOne"),
+            404:  i18n.t("ShowVideo.ErrorDelTwo"),
         }
         message.error({
             content: messageERROR[code],
@@ -28,7 +32,7 @@ export const StatusMessage = () => {
     // error Filter
     const error_Filter = (code) => {
         const messageERROR = {
-            400: "Oops!!! il y'a un erreur se produit",
+            400: i18n.t("ShowVideo.ErrorDelOne"),
         }
         message.error({
             content: messageERROR[code],
@@ -38,7 +42,7 @@ export const StatusMessage = () => {
     // error GET LIVES
     const error_getLives = (code) => {
         const messageERROR = {
-            400: "Oops!!! il y'a un erreur se produit",
+            400: i18n.t("ShowVideo.ErrorDelOne"),
         }
         message.error({
             content: messageERROR[code],
