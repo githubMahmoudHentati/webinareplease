@@ -17,6 +17,10 @@ import { useTranslation } from 'react-i18next';
    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
    return re.test(values.configuration.speaker.email)
   }
+  const isExistEmail = (email) => {
+   let existEmail=values.configuration.SpeakerList.filter(x=>x.email===values.configuration.speaker.email && x.id!==values.configuration.speaker.id )
+   return existEmail.length > 0
+  }
 
   const props = {
    name: 'file',
@@ -127,8 +131,10 @@ import { useTranslation } from 'react-i18next';
                        rules={[
                         ({getFieldValue}) => ({
                          validator(_, value) {
-                          if (isValidEmail(value)) {
+                          if (isValidEmail(value) && !isExistEmail(value)) {
                            return Promise.resolve(t("formDirectVideo.value"));
+                          }else if(isExistEmail(value)){
+                           return Promise.reject(t('formDirectVideo.ExistEmailAddress'));
                           }
                           return Promise.reject(t('formDirectVideo.EnterValidEmailAddress'));
                          },

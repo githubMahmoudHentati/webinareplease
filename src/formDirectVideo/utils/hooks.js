@@ -141,7 +141,8 @@ export  const Hooks=()=>{
 
     const handleCancel = () => {
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
-        values.configuration.SpeakerList.length===1&&dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
+         values.configuration.SpeakerList.length<=1&&
+        dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
         console.log("enteeeeeeeeeer")
     };
 

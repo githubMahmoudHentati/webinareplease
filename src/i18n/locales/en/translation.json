@@ -175,6 +175,7 @@
     "GenSecurePassword": "Generate a secure password",
     "GroupAdding": "Please fill in the field to add a group",
     "EnterValidEmailAddress": "Please enter a valid email address",
+    "ExistEmailAddress": "Email address exist!",
     "SendInvitations": "Send invitations",
     "Emails group": "Emails group",
     "Add": "Add",

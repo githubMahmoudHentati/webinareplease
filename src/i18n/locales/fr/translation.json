@@ -180,6 +180,7 @@
     "GenSecurePassword": "Générer un mot de passe sécurisé",
     "GroupAdding": "Veuillez remplir le champ pour ajouter un groupe",
     "EnterValidEmailAddress": "Veuillez entrer une adresse email valide",
+    "ExistEmailAddress": "L'adresse email existe!",
     "SendInvitations": "Envoi des invitations",
     "EmailsGroup": "Groupe d'emails",
     "Add": "Ajouter",
