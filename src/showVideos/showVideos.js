@@ -55,7 +55,7 @@ function ShowVideos() {
             sorter: (a, b) => a.id - b.id,
         },
         {
-            title: t("ShowVideo.Aperçu"),
+            title: t("ShowVideo.Overview"),
             dataIndex: 'logo',
             key:'2',
             render: image =>
@@ -88,7 +88,7 @@ function ShowVideos() {
             },
         },
         {
-            title: t("ShowVideo.Etat"),
+            title: t("ShowVideo.State"),
             dataIndex: 'status',
             key: '5',
             sorter: (a, b) => a.status - b.status,
@@ -98,15 +98,15 @@ function ShowVideos() {
                     {
                         status === 1
                           ?
-                          <Tag color={"green"}><span>{t("ShowVideo.En cours")}</span></Tag>
+                          <Tag color={"green"}><span>{t("ShowVideo.InProgress")}</span></Tag>
                           :
                             status === 0
                             ?
-                              <Tag color={"geekblue"}><span>{t("ShowVideo.Archivé")}</span></Tag>
+                              <Tag color={"geekblue"}><span>{t("ShowVideo.Archived")}</span></Tag>
                               :
                                 status === -1
                                   ?
-                                  <Tag color={"blue"}><span>{t("ShowVideo.A venir")}</span></Tag>
+                                  <Tag color={"blue"}><span>{t("ShowVideo.ComingSoon")}</span></Tag>
                                   :
                                   null
                     }

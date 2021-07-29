@@ -33,7 +33,7 @@ function useActionMenu({record}) {
             <Menu.Item onClick={()=>{history.push("/FormDirectVideo")}}><EditOutlined />{t("ShowVideo.Modifier")}</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> {t("ShowVideo.Templates")}</Menu.Item>
-            <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />{t("ShowVideo.Supprimer")}</Menu.Item>
+            <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>
         </Menu>
     );
 
@@ -46,32 +46,32 @@ function useActionMenu({record}) {
     // fonction pour copier url participant
     const CopyUrlParticipant = () =>{
         if(document.getElementById("myUrlParticipant").value === ""){
-            return message.error({content:t("ShowVideo.Cet champ est Vide"),duration:2});
+            return message.error({content:t("ShowVideo.EmptyField"),duration:2});
         }else {
             document.getElementById("myUrlParticipant").select();
             document.execCommand("Copy");
-            message.success({content:t("ShowVideo.cet champ est copié avec succée"),duration:2});
+            message.success({content:t("ShowVideo.SuccessCopy"),duration:2});
         }
     }
 
     // fonction pour copier url auditeur
     const CopyUrlAuditeur = () =>{
         if(document.getElementById("myUrlAuditeur").value === ""){
-            return message.error({content:t("ShowVideo.Cet champ est Vide"),duration:2});
+            return message.error({content:t("ShowVideo.EmptyField"),duration:2});
         }else {
             document.getElementById("myUrlAuditeur").select();
             document.execCommand("Copy");
-            message.success({content:t("ShowVideo.cet champ est copié avec succée"),duration:2});
+            message.success({content:t("SuccessCopy"),duration:2});
         }
     }
 
     const CopyLienIntegration = () =>{
         if(document.getElementById("myLienIntegration").value === ""){
-            return message.error({content:t("ShowVideo.Cet champ est Vide"),duration:2});
+            return message.error({content:t("ShowVideo.EmptyField"),duration:2});
         }else {
             document.getElementById("myLienIntegration").select();
             document.execCommand("Copy");
-            message.success({content:t("ShowVideo.cet champ est copié avec succée"),duration:2});
+            message.success({content:t("ShowVideo.SuccessCopy"),duration:2});
         }
     }
 
@@ -119,21 +119,21 @@ function useActionMenu({record}) {
                 ]}
             >
                 <div className="div_Url_diffusion">
-                   <span>{t("ShowVideo.Url de diffusion")}</span>
+                   <span>{t("ShowVideo.BroadcastUrl")}</span>
                     <Input placeholder="//demo.webtv-solution.com/fo/embed/267" name={"inputUrlDiffusion"} value={infosLives.inputUrlDiffusion}/>
                 </div>{/*./div_Url_diffusion*/}
                 <div className="div_Nom_de_flux">
-                    <span>{t("ShowVideo.Nom de flux")}</span>
-                    <Input placeholder={t("ShowVideo.Nom de flux du direct")} name={"streamName"} value={infosLives.streamName}/>
-                    <Input placeholder={t("ShowVideo.Identifiant du direct")} name={"idLive"} value={infosLives.idLive}/>
-                    <Input placeholder={t("ShowVideo.Mot de passe du direct")} name={"pwdLive"} value={infosLives.pwdLive}/>
+                    <span>{t("ShowVideo.StreamName")}</span>
+                    <Input placeholder={t("ShowVideo.LiveStreamName")} name={"streamName"} value={infosLives.streamName}/>
+                    <Input placeholder={t("ShowVideo.DirectID")} name={"idLive"} value={infosLives.idLive}/>
+                    <Input placeholder={t("ShowVideo.DirectPassword")} name={"pwdLive"} value={infosLives.pwdLive}/>
 
                 </div>{/*./div_Nom_de_flux*/}
             </Modal>{/*./ModalInfos*/}
 
             <Modal
                 visible={visibleModalExport}
-                title={t("ShowVideo.Liens d'export")}
+                title={t("ShowVideo.ExportLink")}
                 onCancel={handleCancelModalExport}
                 footer={[
                     <Button key="back" onClick={handleCancelModalExport}>
@@ -142,19 +142,19 @@ function useActionMenu({record}) {
                 ]}
             >
                 <div className="div_Url_diffusion">
-                    <span>{t("ShowVideo.Url participant")} </span>
+                    <span>{t("ShowVideo.UrlParticipant")} </span>
                     <Input id="myUrlParticipant" placeholder="//demo.webtv-solution.com/fo/embed/267"/>
                     <div className="div_Copier"><Button onClick={CopyUrlParticipant}>{t("ShowVideo.Copier")}</Button></div>
                 </div>{/*./div_Url_diffusion*/}
 
                 <div className="div_Url_diffusion">
-                    <span>{t("ShowVideo.Url auditeur")}</span>
+                    <span>{t("ShowVideo.AuditorUrl")}</span>
                     <Input id="myUrlAuditeur" placeholder="//demo.webtv-solution.com/fo/embed/267"/>
                     <div className="div_Copier"><Button onClick={CopyUrlAuditeur}>{t("ShowVideo.Copier")}</Button></div>
                 </div>{/*./div_Url_diffusion*/}
 
                 <div className="div_Url_diffusion">
-                    <span>{t("ShowVideo.Lien d'intégration")}</span>
+                    <span>{t("ShowVideo.IntegrationLink")}</span>
                     <TextArea id="myLienIntegration" rows={4} placeholder="//demo.webtv-solution.com/fo/embed/267"/>
                     <div className="div_Copier"><Button onClick={CopyLienIntegration}>{t("ShowVideo.Copier")}</Button></div>
                 </div>{/*./div_Url_diffusion*/}

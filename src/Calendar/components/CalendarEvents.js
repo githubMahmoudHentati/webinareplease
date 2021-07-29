@@ -67,11 +67,11 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                     onCancel={handleCancel}
                                     footer={[
                                         <div className={"footer_modal_Avenir"}>
-                                            <div><Button><DeleteOutlined/> {t("calendrier.Supprimer")}</Button></div>
+                                            <div><Button><DeleteOutlined/> {t("calendrier.Delete")}</Button></div>
 
                                             <div>
                                                 <Button key="back" onClick={handleCancel}>
-                                                    {t("calendrier.Annuler")}
+                                                    {t("calendrier.Cancel")}
                                                 </Button>
                                                 <Button key="submit" type="primary">
                                                     {t("calendrier.Visualiser")}
@@ -87,7 +87,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                         </div>
                                         <div className={"div_time_calendar"}>
                                             <div className={"type_btn"}><Tag
-                                                color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
+                                                color={item.type === "à venir" ? 'blue' : item.type ==="en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
                                             </div>
                                             <div className={"div2_time_calendar"}>
                                                 <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>

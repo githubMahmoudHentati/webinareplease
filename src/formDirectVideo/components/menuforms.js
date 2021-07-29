@@ -31,13 +31,13 @@ export const MenuForms =()=>{
                                 fontWeight: "500"
 
                             }}>
-                            {t("formDirectVideo.Paramètres généraux")}
+                            {t("formDirectVideo.GeneralSettings")}
                         </span>
 
                     </div>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(0))}} key="1">
-                        {t("formDirectVideo.Géneral")}
+                        {t("formDirectVideo.General")}
                     </Menu.Item>
                     <div className={"titre-menu"}>
                     <span style={{
@@ -46,7 +46,7 @@ export const MenuForms =()=>{
                         textAlign: "left",
                         fontFamily: "SF Pro Display",
                         fontWeight: "500"
-                    }}>{t("formDirectVideo.Paramètres optionnels")}</span>
+                    }}>{t("formDirectVideo.OptionalSettings")}</span>
                     </div>
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(1))}} key="2">
                         {t("formDirectVideo.Configuration")}
@@ -57,7 +57,7 @@ export const MenuForms =()=>{
                     </Menu.Item>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(3))}} key="4">
-                        {t("formDirectVideo.Outils social")}
+                        {t("formDirectVideo.SocialTools")}
                     </Menu.Item>
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(4))}} key="5">

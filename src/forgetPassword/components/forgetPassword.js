@@ -15,12 +15,12 @@ export const ForgetPassword =()=> {
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
-                    {t("forgetPassword.Réinitialisez votre mot de passe")}
+                    {t("forgetPassword.ResetPass")}
                 </span>
             </Col>
             <Col span={24}>
                 <span style={{fontSize:"14px"}} className={"span_connexion"}>
-                    {t("forgetPassword.Indiquez-nous simplement l'adresse e-mail que vous utilisez pour vous connecter à Webinarplease et nous vous aiderons à récupérer votre mot de passe.")}
+                    {t("forgetPassword.TellUsEmail")}
                 </span>
             </Col>
             <Col span={24}>
@@ -29,7 +29,7 @@ export const ForgetPassword =()=> {
                         <Form.Item name="username" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input name="email" onChange={forgetPasswordOnChange}  placeholder={t("forgetPassword.Votre mail address")} prefix={<UserOutlined/>}/>
+                            <Input name="email" onChange={forgetPasswordOnChange}  placeholder={t("forgetPassword.YourMailAddress")} prefix={<UserOutlined/>}/>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -37,11 +37,11 @@ export const ForgetPassword =()=> {
             <Col span={24}>
                 <Row gutter={[20, 20]} >
                     <Col span={24}>
-                        <Button loading={values.constraintData.loadingForgetPassword}  className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">{t("forgetPassword.Envoyer un email de réinitialisation du mot de passe")}</Button>
+                        <Button loading={values.constraintData.loadingForgetPassword}  className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">{t("forgetPassword.SendResetMail")}</Button>
                     </Col>
                     <Col onClick={()=>{history.push("/connexion")}}>
                         <a className={"spn_chbx"}>
-                            {t("forgetPassword.Reprenez-moi pour me connecter")}</a>
+                            {t("forgetPassword.LoginRedirect")}</a>
                     </Col>
                 </Row>
             </Col>

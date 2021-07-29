@@ -19,14 +19,14 @@ export const ErrorResetPassword =()=> {
             {values.constraintData.tokenExpired ?
                 <Col span={24}>
                             <span style={{fontSize: "14px"}} className={"span_connexion"}>
-                                {t("resetPassword.Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?")}
+                                {t("resetPassword.InvalidLink")}
                             </span>
                 </Col>
                 :
                 <Row gutter={[0, 20]}>
                     <Col span={24}>
                             <span style={{fontSize: "14px"}} className={"span_connexion"}>
-                            {t("resetPassword.Un problème est survenu lors de la réinitialisation de votre mot de passe.")}
+                            {t("resetPassword.ProblemInResetPass")}
                             </span>
                     </Col>
                     <Col span={24}>
@@ -41,12 +41,12 @@ export const ErrorResetPassword =()=> {
                     <Col span={24}>
                         <Button onClick={() => {
                             history.push("/forgot-password")
-                        }} className={"spn_chbx"} style={{width: "100%"}} type="primary"> {t("resetPassword.Obtenir un nouveau lien")}
+                        }} className={"spn_chbx"} style={{width: "100%"}} type="primary"> {t("resetPassword.GetNewLink")}
                         </Button>
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
                         <a className={"spn_chbx"}>
-                            {t("resetPassword.Contactez notre support client")}</a>
+                            {t("resetPassword.ContactClient")}</a>
                     </Col>
                 </Row>
             </Col>

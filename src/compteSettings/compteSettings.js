@@ -57,12 +57,12 @@ export const CompteSettings=()=>{
                                         document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
                                         history.push("/")
                                     }}
-                                >{t("CompteSettings.Acceuil")}</span>
+                                >{t("CompteSettings.Home")}</span>
                             </Breadcrumb.Item >
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
                                 <span>{t("CompteSettings.direct")}</span>
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>{t("CompteSettings.Mon Compte")}</Breadcrumb.Item>
+                            <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>{t("CompteSettings.MyAccount")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#141414"}}>
@@ -83,7 +83,7 @@ export const CompteSettings=()=>{
                             fontFamily: "Arial, Helvetica, sans-serif;",
                             marginLeft: "1%",
                             color:darkMode===false?"":"white"
-                        }}> {t("CompteSettings.Mon Compte")}
+                        }}> {t("CompteSettings.MyAccount")}
                                         </span>
                     </Col>
                     <Col span={24}>

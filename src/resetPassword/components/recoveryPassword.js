@@ -17,7 +17,7 @@ export const RecoveryPassword =()=> {
             </Col>
             <Col span={24}>
                 <span style={{fontSize:"14px"}} className={"span_connexion"}>
-                {t("resetPassword.Votre mot de passe a été mis à jour avec succès et vous pouvez maintenant l'utiliser pour vous reconnecter à Webinarplease.")}
+                {t("resetPassword.UseNewPassMsg")}
                 </span>
             </Col>
             <Col span={24}>
@@ -28,7 +28,7 @@ export const RecoveryPassword =()=> {
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
                         <a className={"spn_chbx"}>
-                            {t("resetPassword.Contactez notre support client")}</a>
+                            {t("resetPassword.ContactClient")}</a>
                     </Col>
                 </Row>
             </Col>

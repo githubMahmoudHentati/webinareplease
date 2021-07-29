@@ -54,12 +54,12 @@ export const IframeDirectVideo =()=>{
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                <span >{t("CompteSettings.Acceuil")}</span>
+                                <span >{t("CompteSettings.Home")}</span>
                             </Breadcrumb.Item>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                                 <span>{t("CompteSettings.direct")}</span>
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Ajouter un direct")}</Breadcrumb.Item>
+                            <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.AddLive")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>

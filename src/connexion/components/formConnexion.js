@@ -111,7 +111,7 @@ export const FormConnexion =()=>{
                     </Col>
                     {values.constraintData.connexionError &&
                     <Col span={24} className={"col_input"}>
-                        <span style={{color: "red"}}>{t("FormConnexion.Oups, nous n'avons pas pu vous connecter. Veuillez vérifier vos informations et réessayer")}</span>
+                        <span style={{color: "red"}}>{t("FormConnexion.InfosVerificationMsg")}</span>
                     </Col>
                     }
                     <Col span={24}>
@@ -122,11 +122,11 @@ export const FormConnexion =()=>{
                                     name="isRememberMe"
                                     valuePropName="checked"
                                 >
-                                <Checkbox value="isRememberMe" name="isRememberMe" onChange={connexionOnChangeButton} ><span className={"spn_chbx"}>{t("FormConnexion.Se souvenir de moi")}</span></Checkbox>
+                                <Checkbox value="isRememberMe" name="isRememberMe" onChange={connexionOnChangeButton} ><span className={"spn_chbx"}>{t("FormConnexion.RememberMe")}</span></Checkbox>
                                 </Form.Item>
                             </Col>
                             <Col>
-                                <a  onClick={()=>{toForgotPassword()}} className={"spn_chbx"}> {t("FormConnexion.Mot de passe oublié")}</a>
+                                <a  onClick={()=>{toForgotPassword()}} className={"spn_chbx"}> {t("FormConnexion.ForgotPassword")}</a>
                             </Col>
                         </Row>
                     </Col>
@@ -143,10 +143,10 @@ export const FormConnexion =()=>{
                             className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">{t("FormConnexion.Connexion")}</Button>
                     </Col>
                     <Col >
-                        <span className={"spn_chbx"}>{t("FormConnexion.Pas encore membre?")}</span>
+                        <span className={"spn_chbx"}>{t("FormConnexion.NotYetMem")}</span>
                     </Col>
                     <Col onClick={()=>{toSignUp()}}>
-                        <a className={"spn_chbx"}>{t("FormConnexion.Inscrivez-vous")}</a>
+                        <a className={"spn_chbx"}>{t("FormConnexion.SignUp")}</a>
                     </Col>
                 </Row>
             </Col>

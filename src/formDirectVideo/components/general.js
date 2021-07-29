@@ -27,12 +27,12 @@ export const Generals =({})=>{
     return(
         <Row gutter={[0, 30]}>
             <Col span={24} className={"col-forms"}>
-                <span style={{textAlign:'left',fontSize:"20px", fontFamily: "SF Pro Display",fontWeight: "normal" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Paramètres généraux")}</span>
+                <span style={{textAlign:'left',fontSize:"20px", fontFamily: "SF Pro Display",fontWeight: "normal" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.GeneralSettings")}</span>
             </Col>
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Ajouter une vignette")}</span>
+                        <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.AddLabel")}</span>
                     </Col>
                     <Col span={24} className={"col-forms-upload"}>
                         <DraggerUpload/>
@@ -42,14 +42,14 @@ export const Generals =({})=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Titre du direct")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveTitle")}</span>
                         <span className="require">*</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Form.Item name="liveTitle" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.Titre du vidéo")}></Input>
+                            <Input name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -57,13 +57,13 @@ export const Generals =({})=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Description du direct")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveFeedDescription")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Form.Item name="liveDescription" className={"form-item-style"}
                         >
                             <Input.TextArea name="liveDescription" onChange={generalOnChange}
-                                            placeholder={t("formDirectVideo.Description du vidéo")}></Input.TextArea>
+                                            placeholder={t("formDirectVideo.VideoDescription")}></Input.TextArea>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -71,7 +71,7 @@ export const Generals =({})=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Lien de partage du direct")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ShareLiveLink")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Row justify={"space-between"} style={{width: '100%'}} gutter={[0, 0]}>
@@ -97,7 +97,7 @@ export const Generals =({})=>{
             <Col span={24}>
                 <Row gutter={[10, 0]}>
                     <Col className={"col-forms"} >
-                        <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Planifier le direct")}</span>
+                        <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.PlanBroadcast")}</span>
                     </Col>
                     <Col >
                         <Form.Item name="liveAction" className={"form-item-style"}
@@ -116,32 +116,32 @@ export const Generals =({})=>{
                     <Col span={8} className={"col_planification"}>
                         <span style={{
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                        }}>{t("formDirectVideo.Date de début")}</span>
+                        }}>{t("formDirectVideo.StartingDate")}</span>
                         <span className="require">*</span>
                     </Col>
                     <Col span={8} className={"col_planification"}>
                         <span style={{
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                        }}>{t("formDirectVideo.Heure de début")}</span>
+                        }}>{t("formDirectVideo.StartingTime")}</span>
                         <span className="require">*</span>
                     </Col>
                     <Col span={8} className={"col_planification"}>
                         <span style={{
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                        }}>{t("formDirectVideo.Durée")}</span>
+                        }}>{t("formDirectVideo.Duration")}</span>
                     </Col>
                     <Col span={8}>
                         <Form.Item name="startDate" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <DatePicker disabledDate={disablePastDate} placeholder={t("formDirectVideo.Choisir une date de début")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                            <DatePicker disabledDate={disablePastDate} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
                         <Form.Item  name="startHour" className={"form-item-style"}
                                     rules={requiredFieldRule}
                         >
-                            <TimePicker placeholder={t("formDirectVideo.Choisir une heure de début")} name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
+                            <TimePicker placeholder={t("formDirectVideo.ChooseStartTime")} name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
                                         disabledHours={()=>startGetDisabledHours(values)}
                                         disabledMinutes={startGetDisabledMinutes}
                             ></TimePicker>
@@ -150,7 +150,7 @@ export const Generals =({})=>{
                     <Col span={8}>
                         <Form.Item name="period" className={"form-item-style"}
                         >
-                            <TimePicker placeholder={t("formDirectVideo.Choisir une periode")} name="period" onChange={(value,event)=>{generalOnChangeByName(value,event,"period")}}  style={{width: "100%"}}></TimePicker>
+                            <TimePicker placeholder={t("formDirectVideo.ChooseTimeFrame")} name="period" onChange={(value,event)=>{generalOnChangeByName(value,event,"period")}}  style={{width: "100%"}}></TimePicker>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -159,14 +159,14 @@ export const Generals =({})=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Modes d'accès au direct")}</span>
+                        <span style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.AccessModeToStreaming")}</span>
                     </Col>
                     <Col span={24} >
                         <Row gutter={[0, 10]} >
                             <Col span={24}>
                                 <Radio.Group name="directAccessMode" onChange={generalOnChange} defaultValue={values.general.directAccessMode} >
-                                    <Radio onChange={generalOnChangeButton} name="freeAccess"  value="freeAccess"  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Accès libre")}</Radio>
-                                    <Radio onChange={generalOnChangeButton} name="liveAccess" value="liveAccess" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Accès sécurisé")}</Radio>
+                                    <Radio onChange={generalOnChangeButton} name="freeAccess"  value="freeAccess"  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.PublicAccess")}</Radio>
+                                    <Radio onChange={generalOnChangeButton} name="liveAccess" value="liveAccess" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.SecureAccess")}</Radio>
                                 </Radio.Group>
                             </Col>
                             {values.general.directAccessMode === "liveAccess" &&
@@ -189,7 +189,7 @@ export const Generals =({})=>{
                                         onChange={generalOnChange}
                                         className={"spn2"}
                                         name="pwd"
-                                        placeholder={t("CompteSettings.Mot de passe")}
+                                        placeholder={t("CompteSettings.Password")}
                                         iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                                     />
                                 </Form.Item>
@@ -199,7 +199,7 @@ export const Generals =({})=>{
                             <Col offset={3} span={21}>
                                 <Form.Item name="securedPasswordOption"  className={"form-item-style"}
                                 >
-                                <Checkbox onChange={generalOnChangeButton} value="securedPasswordOption" name="securedPasswordOption" style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Générer un mot de passe sécurisé")}</Checkbox></Form.Item>
+                                <Checkbox onChange={generalOnChangeButton} value="securedPasswordOption" name="securedPasswordOption" style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.GenSecurePassword")}</Checkbox></Form.Item>
                             </Col>
                             }
                         </Row>

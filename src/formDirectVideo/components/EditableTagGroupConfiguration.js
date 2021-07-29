@@ -101,7 +101,7 @@ class EditableTagGroupConfiguration extends React.Component {
                 )}
                 {!inputVisible && (
                     <Tag onClick={this.showInput} className="site-tag-plus">
-                        <PlusOutlined /> {t("formDirectVideo.Ajouter une étiquette")}
+                        <PlusOutlined /> {t("formDirectVideo.AddTag")}
                     </Tag>
                 )}
             </div>

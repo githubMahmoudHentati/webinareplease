@@ -26,13 +26,13 @@ export const Forms =()=>{
                                 fontFamily: "Ping Fang SC",
                                 fontWeight: "bold"
                             }}>
-                            {t("formDirectVideo.Paramètres généraux")}
+                            {t("formDirectVideo.GeneralSettings")}
                         </span>
 
                     </div>
 
                     <Menu.Item key="1">
-                        {t("formDirectVideo.Géneral")}
+                        {t("formDirectVideo.General")}
                     </Menu.Item>
                     <div className={"titre-menu"}>
                     <span style={{
@@ -41,7 +41,7 @@ export const Forms =()=>{
                         textAlign: "left",
                         fontFamily: "Ping Fang SC",
                         fontWeight: "bold"
-                    }}>{t("formDirectVideo.Paramètres généraux")}</span>
+                    }}>{t("formDirectVideo.GeneralSettings")}</span>
                     </div>
                     <Menu.Item key="2">
                         {t("formDirectVideo.Configuration")}
@@ -52,7 +52,7 @@ export const Forms =()=>{
                     </Menu.Item>
 
                     <Menu.Item key="4">
-                        {t("formDirectVideo.Outils social")}
+                        {t("formDirectVideo.SocialTools")}
                     </Menu.Item>
 
                     <Menu.Item key="5">

@@ -18,16 +18,22 @@ import {ForgetPassword} from "./forgetPassword/forgetPassword";
 import {ResetPassword} from "./resetPassword/resetPassword";
 import Error from "./utils/components/Error";
 import {ConfirmAccount} from "./confirmAccount/confirmAccount";
-
+import en_US from "antd/lib/locale/en_US";
+import frFR from "antd/lib/locale/fr_FR";
+import { ConfigProvider } from "antd";
+import 'moment/locale/fr';
 
 
 function App() {
     const {verificationToken} = GraphQLFetchData()
     const credentialsValues = useSelector((state) => state.Reducer)
-
+    const lang =useSelector((state)=>state.Reducer.lang)
+    console.log('credentialsValues',credentialsValues)
+    console.log('lang',lang)
     return (
-        <div className="App">
+        <ConfigProvider locale={lang==="fr"?frFR:en_US}>
 
+        <div className="App">
             {verificationToken &&
             <BrowserRouter history={history}>
                 <Switch>
@@ -56,6 +62,7 @@ function App() {
             }
 
         </div>
+        </ConfigProvider>
     );
 }
 

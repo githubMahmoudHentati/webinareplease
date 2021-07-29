@@ -89,10 +89,11 @@ export function CalendarFile() {
         if (calendarValues) {
 
             calendarValues.forEach((element) => {
+                console.log("element--------", element)
                 switch ((value.year() + "-" + value.month() + "-" + value.date())) {
                     case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
                         listData = [...listData, {
-                            id: (element.id),
+                            id: element.id,
                             type: element.type,
                             content: element.content,
                             style: element.date.isAMomentObject
@@ -114,6 +115,7 @@ export function CalendarFile() {
                     allow &&
                     <ul className="events">
                         {listData.map(item => {
+                            console.log("itemmodal", item)
                             return (
                                 <div>
                                     <Tag className={"btn_error"}
@@ -135,11 +137,11 @@ export function CalendarFile() {
                                         onCancel={handleCancel}
                                         footer={[
                                             <div className={"footer_modal_Avenir"}>
-                                                <div><Button><DeleteOutlined/>{t("calendrier.Supprimer")}</Button></div>
+                                                <div><Button><DeleteOutlined/>{t("calendrier.Delete")}</Button></div>
 
                                                 <div>
                                                     <Button key="back" onClick={handleCancel}>
-                                                        {t("calendrier.Annuler")}
+                                                        {t("calendrier.Cancel")}
 
                                                     </Button>
                                                     <Button key="submit" type="primary">
@@ -151,12 +153,11 @@ export function CalendarFile() {
                                         ]}
                                     >
                                         <div className={"body_Modal"}>
-                                            <div className={"div_image_modal"}><img
-                                                src={"https://i.pinimg.com/originals/eMo2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
+                                            <div className={"div_image_modal"}><img src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
                                             </div>
                                             <div className={"div_time_calendar"}>
                                                 <div className={"type_btn"}><Tag
-                                                    color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
+                                                    color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type==="à venir"?t("ShowVideo.ComingSoon"): (item.type ==="en cours" ?t ("ShowVideo.InProgress"): t("ShowVideo.Archived"))}</Tag>
                                                 </div>
                                                 <div className={"div2_time_calendar"}>
                                                     <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>

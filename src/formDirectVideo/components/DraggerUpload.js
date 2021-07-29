@@ -94,9 +94,9 @@ export const DraggerUpload = () => {
             <p className="ant-upload-drag-icon">
                 <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
             </p>
-            <p className="ant-upload-text" style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.Cliquer ou faites glisser le fichier")}</p>
+            <p className="ant-upload-text" style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ClickOrDrag")}</p>
             <p className="ant-upload-hint" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                {t("formDirectVideo.Un seul fichier peut etre selectionné")}
+                {t("formDirectVideo.OneFile")}
             </p>
         </Dragger>
     )

@@ -23,12 +23,12 @@ export const ResetPassword =()=> {
         <Row gutter={[0, 40]} className={'col-connexion'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
-                    {t("resetPassword.Réinitialisez votre mot de passe")}
+                    {t("resetPassword.ResetPass")}
                 </span>
             </Col>
             <Col span={24}>
                 <span style={{fontSize:"14px"}} className={"span_connexion"}>
-                {t("resetPassword.Presque là, entrez simplement votre nouveau mot de passe et vous serez à nouveau connecté en quelques secondes.")}
+                {t("resetPassword.InputNewPass")}
                 </span>
             </Col>
             <Col span={24}>
@@ -36,7 +36,7 @@ export const ResetPassword =()=> {
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col span={24}>
-                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("resetPassword.Choisir un nouveau mot de passe")}</span>
+                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("resetPassword.ChooseNewPass")}</span>
                             </Col>
                             <Col span={24}>
                                 <Form.Item
@@ -48,7 +48,7 @@ export const ResetPassword =()=> {
                                                 if (isValidPassword(value)) {
                                                     return Promise.resolve(t("formDirectVideo.valeur"));
                                                 }
-                                                return Promise.reject(t("resetPassword.Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale"));
+                                                return Promise.reject(t("resetPassword.MinCharCapLetterMsg"));
                                             },
                                         }),
                                     ]}
@@ -79,7 +79,7 @@ export const ResetPassword =()=> {
                                                 if (isConfirmPassword(value)) {
                                                     return Promise.resolve(t("formDirectVideo.valeur"));
                                                 }
-                                                return Promise.reject(t("resetPassword.Les mots de passe saisis ne sont pas identiques"));
+                                                return Promise.reject(t("resetPassword.NotIdenticalPass"));
                                             },
                                         }),
                                     ]}
@@ -89,7 +89,7 @@ export const ResetPassword =()=> {
                                         name="confirmPassword"
                                         onChange={resetPasswordOnChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                        placeholder={t("resetPassword.Confirmer la nouveau mot de passe")}>
+                                        placeholder={t("resetPassword.ConfirmNewPass")}>
                                     </Input.Password>
                                 </Form.Item>
                             </Col>
@@ -102,11 +102,11 @@ export const ResetPassword =()=> {
                 <Row gutter={[20, 20]} >
                     <Col span={24}>
                         <Button loading={values.constraintData.loadingResetPassword}  className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">
-                            {t("resetPassword.Réinitialiser le mot de passe")}</Button>
+                            {t("resetPassword.ResetPassword")}</Button>
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
                         <a className={"spn_chbx"}>
-                            {t("resetPassword.Contactez notre support client")}</a>
+                            {t("resetPassword.ContactClient")}</a>
                     </Col>
                 </Row>
             </Col>

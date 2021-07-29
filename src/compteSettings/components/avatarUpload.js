@@ -113,7 +113,7 @@ export const AvatarUpload = () => {
             beforeUpload={beforeUpload}
             onChange={handleChange}
         >
-            <Button icon={<UploadOutlined />} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>{t("CompteSettings.Changer l'avatar")}</Button>
+            <Button icon={<UploadOutlined />} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>{t("CompteSettings.ChangeAvatar")}</Button>
         </Upload>
     );
 }

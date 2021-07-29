@@ -16,7 +16,8 @@ import {
     GlobalOutlined,
 } from '@ant-design/icons';
 import {Badge, Menu, Dropdown, Avatar} from 'antd';
-import {setAccountSetting, setAppSetLogin, setAppSetLogout} from "../redux/actions";
+import {setAccountSetting, setAppSetLogin,setAppSetLogout} from "../redux/actions";
+import {changeLangEN,changeLangFR} from "../redux/actions"
 import {setDarkMode} from "../redux/actions";
 import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {CSSTransition} from 'react-transition-group';
@@ -174,20 +175,26 @@ function GlobalHeader() {
             }}><UnlockOutlined/>{t("description.security")}</Menu.Item>
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(3)))
-            }}><PieChartOutlined/>{t("description.Abonnement")}</Menu.Item>
+            }}><PieChartOutlined/>{t("description.Subscription")}</Menu.Item>
             <Menu.Item onClick={logOut}><LogoutOutlined/>{t("description.Déconnection")}</Menu.Item>
         </Menu>
     );
     const Menulang = (
         <Menu className="menu">
-            <Menu.Item onClick={() => changeLanguage('fr')}>
+            <Menu.Item onClick={() => {
+                changeLanguage('fr');
+                 dispatch(changeLangFR())
+            }}>
                  <span className="icon-fr">
                      <span className="path1"></span>
                      <span className="path2"></span>
                      <span className="path3"></span><span className="path4"></span>
                  </span> {t("lang2")}
             </Menu.Item>
-            <Menu.Item onClick={() => changeLanguage('en')}>
+            <Menu.Item onClick={() => {
+                changeLanguage('en');
+                 dispatch(changeLangEN())
+            }}>
                 <span className="icon-ang">
                     <span className="path1"></span>
                     <span className="path2"></span>
@@ -319,7 +326,7 @@ function GlobalHeader() {
                                 <a className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(3)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
-                                    <PieChartOutlined className={"avtr"}/><span>{t("description.Abonnement")}</span>
+                                    <PieChartOutlined className={"avtr"}/><span>{t("description.Subscription")}</span>
                                 </a>
                             </div>
 
@@ -337,7 +344,8 @@ function GlobalHeader() {
                             <div className={"div4_div2_side_nav"}>
                                 <a className="ant-dropdown-link link_drp" onClick={logOut}
                                    style={{color: darkMode === false ? "" : "white"}}>
-                                    <LogoutOutlined className={"logout-icon"}/><span>{t("description.Déconnection")}</span>
+                                    <LogoutOutlined
+                                        className={"logout-icon"}/><span>{t("description.Déconnection")}</span>
                                 </a>
                             </div>
                         </div>

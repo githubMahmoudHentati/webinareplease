@@ -28,7 +28,7 @@ export const MenuForms =()=>{
                         {t("description.security")}
                     </Menu.Item>
                     <Menu.Item className={"menuItem"} key="3" onClick={()=>{dispatch(setAccountSetting(3))}}>
-                        {t("description.Abonnement")}
+                        {t("description.Subscription")}
                     </Menu.Item>
                 </Menu>
             </Col>

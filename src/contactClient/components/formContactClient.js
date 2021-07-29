@@ -26,7 +26,7 @@ export const FormContactClient =()=> {
         return re.test(email)
     }
     const { t, i18n } = useTranslation();
-    const requiredFieldRule = [{required: true, message: t("contactClient.Champs requis")}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
     console.log("values-contaclient",values)
 
 
@@ -42,7 +42,7 @@ export const FormContactClient =()=> {
         >
         <Row gutter={[0, 40]} className={'col-contact'}>
             <Col style={{textAlign: 'center'}} span={24}>
-                <span className={"spn1"}>{t("contactClient.Contactez-nous et présicez vos besions")}</span>
+                <span className={"spn1"}>{t("contactClient.ContactUsWithReq")}</span>
             </Col>
             <Col span={24} >
                 <Row gutter={[0, 10]}>
@@ -58,10 +58,10 @@ export const FormContactClient =()=> {
                     <Col span={24}>
                         <Form.Item name="lastName" className={"form-item-style"}
                                    rules={requiredFieldRule}
-                                   label={t("CompteSettings.Prénom")}
+                                   label={t("CompteSettings.FirstName")}
                         >
                             <Input className={"spn2"} onChange={ContactClientOnChange}
-                                   name="lastName" placeholder={t("CompteSettings.Prénom")} value={values.contactClient.lastName} />
+                                   name="lastName" placeholder={t("CompteSettings.FirstName")} value={values.contactClient.lastName} />
                         </Form.Item>
                     </Col>
                     <Col span={24}>
@@ -75,7 +75,7 @@ export const FormContactClient =()=> {
                                         if (isValidEmail(value)) {
                                             return Promise.resolve('value');
                                         }
-                                        return Promise.reject(t("contactClient.Veuillez entrer un mail valide"));
+                                        return Promise.reject(t("contactClient.EnterValidMail"));
                                     },
                                 }),
                             ]}
@@ -87,9 +87,9 @@ export const FormContactClient =()=> {
                     <Col span={24} >
                         <Form.Item name="message" className={"form-item-style"}
                                    rules={requiredFieldRule}
-                                   label={t("contactClient.Votre message")}
+                                   label={t("contactClient.YourMessage")}
                         >
-                            <Input.TextArea className={"spn2"} placeholder={t("contactClient.Votre message")} name="message" onChange={ContactClientOnChange} value={values.contactClient.message} />
+                            <Input.TextArea className={"spn2"} placeholder={t("contactClient.YourMessage")} name="message" onChange={ContactClientOnChange} value={values.contactClient.message} />
                         </Form.Item>
                     </Col>
                 </Row>
@@ -97,7 +97,7 @@ export const FormContactClient =()=> {
             <Col span={16}>
                 <Row  gutter={[10, 0]} className={"text-form"}>
                     <Col>
-                        <Button className={"spn2"}> {t("CompteSettings.Annuler")}</Button>
+                        <Button className={"spn2"}> {t("CompteSettings.Cancel")}</Button>
                     </Col>
                     <Col>
                         <Button htmlType="submit" type={"primary"} className={"spn2"} loading={values.loading.loading}>{t("contactClient.envoyer")}</Button>

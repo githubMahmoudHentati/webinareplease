@@ -48,11 +48,11 @@ export const BarHeader = () => {
                         }}> {
                             matchesMedia.matches && directMenu === 5
                                 ?
-                                <span>{t("formDirectVideo.Ajouter un direct")}</span>
+                                <span>{t("formDirectVideo.AddLive")}</span>
                                 :
                                 matchesMedia.matches && directMenu === 0
                                     ?
-                                    <span>{t("formDirectVideo.Géneral")}</span>
+                                    <span>{t("formDirectVideo.General")}</span>
                                     :
                                     matchesMedia.matches && directMenu === 1
                                         ?
@@ -64,13 +64,13 @@ export const BarHeader = () => {
                                             :
                                             matchesMedia.matches && directMenu === 3
                                                 ?
-                                                <span>{t("formDirectVideo.Outils social")}</span>
+                                                <span>{t("formDirectVideo.SocialTools")}</span>
                                                 :
                                                 matchesMedia.matches && directMenu === 4
                                                     ?
                                                     <span>{t("formDirectVideo.Templetes")}</span>
                                                     :
-                                                    <span>{t("formDirectVideo.Ajouter un direct")}</span>
+                                                    <span>{t("formDirectVideo.AddLive")}</span>
 
                         }
                         </span>
@@ -89,7 +89,7 @@ export const BarHeader = () => {
                             background: darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
                             border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                         }} icon={<CloseOutlined className={"icon_add_live"}/>}> <span
-                            className={"spn_add_live"}>{t("formDirectVideo.Annuler")}</span></Button>
+                            className={"spn_add_live"}>{t("formDirectVideo.Cancel")}</span></Button>
                     </Col>
                     <Col>
                         <Button className={"btn_add_live"} htmlType="submit" style={{
@@ -100,7 +100,7 @@ export const BarHeader = () => {
                             border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                         }} icon={values.general.directPlan ? <CheckOutlined/> : <VideoCameraOutlined/>}
                                 type={"primary"}>{values.general.directPlan ?
-                            <span className={"spn_add_live"}>{t("formDirectVideo.Valider")}</span> :
+                            <span className={"spn_add_live"}>{t("formDirectVideo.Confirm")}</span> :
                             <span className={"spn_add_live"}>{t("formDirectVideo.Diffuser")}</span>}</Button>
                     </Col>
                 </Row>

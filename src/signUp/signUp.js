@@ -27,15 +27,15 @@ export const SignUp =()=>{
         <WebinairePlease logo={logo}>
                     <FormSignUp
                         child1={
-                            <span>{t("CompteSettings.Créez votre compte gratuitement")}</span>
+                            <span>{t("CompteSettings.CFreeAccount")}</span>
                         }
                       child2={
                         <Row className={"text-form"} gutter={[10,0]}>
                             <Col>
-                                <Button onClick={()=>{history.push("/ConfirmAccount")}}>{t("CompteSettings.Annuler")}</Button>
+                                <Button onClick={()=>{history.push("/ConfirmAccount")}}>{t("CompteSettings.Cancel")}</Button>
                             </Col>
                             <Col>
-                                <Button  loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("CompteSettings.Inscrivez-vous maintenant")}</Button>
+                                <Button  loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("CompteSettings.RegisterNow")}</Button>
                             </Col>
                         </Row>
                        }

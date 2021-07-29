@@ -17,7 +17,7 @@ let index = 0;
 function Invitation(){
     const [name , SetName] = useState('')
     const { t, i18n } = useTranslation();
-    const [items , SetItems] = useState([t("formDirectVideo.Groupe 01") , t("formDirectVideo.Groupe 02") , t("formDirectVideo.Groupe 03") , t("formDirectVideo.Groupe 04")])
+    const [items , SetItems] = useState([t("formDirectVideo.Group01") , t("formDirectVideo.Group02") , t("formDirectVideo.Group03") , t("formDirectVideo.Group04")])
     const [visible , SetVisible] = useState(false)
     const [visbleRegle , SetVisibleRegle] = useState(false);
 
@@ -38,7 +38,7 @@ function Invitation(){
     const addItem = () => {
 
         if(name===""){
-            message.error(t("formDirectVideo.veuillez remplir le champ pour ajouter un groupe"));
+            message.error(t("formDirectVideo.GroupAdding"));
         }else{
             SetItems([...items, name ])
             SetName('')
@@ -62,7 +62,7 @@ function Invitation(){
             value.map(ele => {
                 console.log("isValidEmail(ele)",isValidEmail(ele))
                 isValidEmail(ele) === false &&
-                    callback(t("formDirectVideo.Veuillez entrer une adresse email valide"));
+                    callback(t("formDirectVideo.EnterValidEmailAddress"));
             })
         }
     }
@@ -84,10 +84,10 @@ function Invitation(){
 
     return(
         <div className={"Invitation"}>
-            <div className={"title_invitation"}><h3 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Envoi des invitations")}</h3></div>{/*./title_invitation*/}
+            <div className={"title_invitation"}><h3 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.SendInvitations")}</h3></div>{/*./title_invitation*/}
 
             <div className={"groupEmail"}>
-                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Groupe d'emails")}   <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
+                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.EmailsGroup")}   <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
                 <Form.Item name="emailsGroup" className={"form-item-style"}
                 >
                     <Select
@@ -99,7 +99,7 @@ function Invitation(){
                         className={"selectGroupGmail"}
                         mode="multiple"
                         style={{width: 240}}
-                        placeholder={t("formDirectVideo.Choisir un groupe")}
+                        placeholder={t("formDirectVideo.ChooseGroup")}
                         dropdownRender={menu => (
                             <div>
                                 {menu}
@@ -110,7 +110,7 @@ function Invitation(){
                                         style={{flex: 'none', padding: '8px', display: 'block', cursor: 'pointer'}}
                                         onClick={addItem}
                                     >
-                                        <PlusOutlined/> {t("formDirectVideo.Ajouter")}
+                                        <PlusOutlined/> {t("formDirectVideo.Add")}
                                     </a>
                                 </div>
                             </div>
@@ -140,16 +140,16 @@ function Invitation(){
             </div>{/*./groupEmail*/}
 
             <div className={"groupEmail div3"}>
-                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Régles d'envoi")} </span>
+                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.SendingRules")} </span>
                 <div className={"div_Email_accée"}>
-                     <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Emails d'inscription et d'accès")}</p>
+                     <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.RegistrationAccessEmails")}</p>
                     <div className={"div_ajout_régle"}>
 
                         {values.invitation.addRules.visibleInscription === true
                             ?
                             <div className={"infos_ajout_régle"}>
                                 <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Inscription")}</span></div>
-                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Dès la programmation du webinar")}</p></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.WebinarIsScheduled")}</p></div>
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"color: rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                             </div>
                             :
@@ -159,8 +159,8 @@ function Invitation(){
                         {values.invitation.addRules.visibleRappelJ7 === true
                             ?
                             <div className={"infos_ajout_régle"}>
-                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Rappel J-7")}</span></div>
-                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.7 jours avant le début")}</p></div>
+                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.ReminderJ7")}</span></div>
+                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.7DBeforeTheStart")}</p></div>
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                             </div>
                             :
@@ -170,8 +170,8 @@ function Invitation(){
                         {values.invitation.addRules.visibleRappelJ1 === true
                             ?
                             <div className={"infos_ajout_régle"}>
-                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Rappel J-1")}</span></div>
-                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.1 jours avant le début")}</p></div>
+                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.ReminderJ1")}</span></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.1DBeforeTheStart")}</p></div>
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                             </div>
                             :
@@ -181,20 +181,20 @@ function Invitation(){
                         {values.invitation.addRules.visibleRappelH1 === true
                             ?
                             <div className={"infos_ajout_régle"}>
-                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Rappel H-1")}</span></div>
-                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.1 Heure avant le début")}</p></div>
+                                <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.ReminderH1")}</span></div>
+                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.1HBeforeTheStart")}</p></div>
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                             </div>
                             :
                             null
                         }
-                        <Tooltip placement="bottom" title={t("formDirectVideo.Ajouter une règle")}>
+                        <Tooltip placement="bottom" title={t("formDirectVideo.AddRule")}>
                         <Popover
 
                             className={"popover"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox value="visibleInscription"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Invitation pour inscription")}</Checkbox>
+                                    <Checkbox value="visibleInscription"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.RegistrationInv")}</Checkbox>
                                     <Checkbox value="visibleRappelJ7"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Rappel J-7")}</Checkbox>
                                     <Checkbox value="visibleRappelJ1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Rappel J-1")}</Checkbox>
                                     <Checkbox value="visibleRappelH1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Rappel H-1")}</Checkbox>
@@ -204,7 +204,7 @@ function Invitation(){
                             visible={visible}
                             onVisibleChange={handleVisibleChange}
                         >
-                            <Button style={{  background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" , border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)" }} ><PlusSquareOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} /> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Ajouter une règle")}</span></Button>
+                            <Button style={{  background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" , border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)" }} ><PlusSquareOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} /> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.AddRule")}</span></Button>
                         </Popover>
                         </Tooltip>
 
@@ -213,14 +213,14 @@ function Invitation(){
 
 
                 <div className={"div_Email_accée list2"}>
-                    <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Emails pour les inscrits")}</p>
+                    <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.RegEmail")}</p>
                     <div className={"div_ajout_régle"}>
 
                         {values.invitation.addRules.visibleInscription2 === true
                             ?
                             <div className={"infos_ajout_régle"}>
-                                <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Confirmation d'inscription")}</span></div>
-                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.Juste après l'inscription")}</p></div>
+                                <div className={"title_ajout_régle"}><DiffOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.ConfirmReg")}</span></div>
+                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.AfterReg")}</p></div>
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                             </div>
                             :
@@ -230,8 +230,8 @@ function Invitation(){
                             values.invitation.addRules.visibleRappelJ72 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
-                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.A participé")}</span></div>
-                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Juste après la fin")}</p></div>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Participated")}</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.AfterTheEnd")}</p></div>
                                     <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                                 </div>
                                 :
@@ -242,8 +242,8 @@ function Invitation(){
                             values.invitation.addRules.visibleRappelJ12 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
-                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Non venu")}</span></div>
-                                    <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.Juste après la fin")}</p></div>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.NoCome")}</span></div>
+                                    <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"p_ajout_régle"}>{t("formDirectVideo.AfterTheEnd")}</p></div>
                                     <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                                 </div>
                                 :
@@ -254,8 +254,8 @@ function Invitation(){
                             values.invitation.addRules.visibleRappelH12 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
-                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Non venu")}</span></div>
-                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Juste après la fin")}</p></div>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.NoCome")}</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.AfterTheEnd")}</p></div>
                                     <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"}/></div>
                                 </div>
                                 :
@@ -263,12 +263,12 @@ function Invitation(){
                         }
 
 
-                        <Tooltip placement="bottom" title={t("formDirectVideo.Ajouter une règle")}>
+                        <Tooltip placement="bottom" title={t("formDirectVideo.AddRule")}>
                         <Popover
                             className={"popover"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Invitation pour inscription")}</Checkbox>
+                                    <Checkbox value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.RegistrationInv")}</Checkbox>
                                     <Checkbox value = "visibleRappelJ72" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Rappel J-7")}</Checkbox>
                                     <Checkbox value = "visibleRappelJ12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Rappel J-1")}</Checkbox>
                                     <Checkbox value = "visibleRappelH12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Rappel H-1")}</Checkbox>
@@ -278,7 +278,7 @@ function Invitation(){
                             visible={visbleRegle}
                             onVisibleChange={handleVisibleChangeRegle}
                         >
-                            <Button style={{  background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" , border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)" }} ><PlusSquareOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} /> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Ajouter une règle")}</span></Button>
+                            <Button style={{  background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" , border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)" }} ><PlusSquareOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} /> <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.AddRule")}</span></Button>
                         </Popover>
                         </Tooltip>
 

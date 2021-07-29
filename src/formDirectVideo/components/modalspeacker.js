@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
   const [form] = Form.useForm();
   const { t, i18n } = useTranslation();
 
-  const requiredFieldRule = [{required: true, message: t("contactClient.Champs requis")}];
+  const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
 
   const isValidEmail = (email) => {
    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,14 +34,14 @@ import { useTranslation } from 'react-i18next';
   }, []);
 
   return (
-       <Modal className="modal-speaker" title={t("formDirectVideo.Ajouter un intervenant")} visible={isVisible} onOk={form.submit} onCancel={handleCancel}
+       <Modal className="modal-speaker" title={t("formDirectVideo.AddParticipant")} visible={isVisible} onOk={form.submit} onCancel={handleCancel}
               // okButtonProps={{form:'category-editor-form', key: 'submit', htmlType: 'submit'}}
               footer={[
                <Button className={"input_modal"} onClick={handleCancel} key="back">
-                {t("formDirectVideo.Annuler")}
+                {t("formDirectVideo.Cancel")}
                </Button>,
                <Button onClick={form.submit} key='submit' htmlType='submit' className={"input_modal"}  type="primary">
-                {t("formDirectVideo.Ajouter")}
+                {t("formDirectVideo.Add")}
                </Button>,
               ]}>
         <Form
@@ -66,7 +66,7 @@ import { useTranslation } from 'react-i18next';
                 onChange={onChangeFile}
                 beforeUpload={{beforeUpload}}
                 {...props} listType="picture">
-             <Button className={"btn_upload_pic"} icon={<UploadOutlined/>}>{t("formDirectVideo.Cliquez pour télécharger")}</Button>
+             <Button className={"btn_upload_pic"} icon={<UploadOutlined/>}>{t("formDirectVideo.ClickToUpload")}</Button>
             </Upload>
            </Col>
           </Row>
@@ -79,7 +79,7 @@ import { useTranslation } from 'react-i18next';
             <span className="require">*</span>
            </Col>
            <Col span={12}>
-            <span className={"span_modal"}>{t("CompteSettings.Prénom")}</span>
+            <span className={"span_modal"}>{t("CompteSettings.First name")}</span>
             <span className="require">*</span>
            </Col>
            <Col span={12}>
@@ -95,7 +95,7 @@ import { useTranslation } from 'react-i18next';
                        rules={requiredFieldRule}
             >
              <Input name="lastName" className={"input_modal"} defaultValue={values.configuration.speaker.lastName}
-                    onChange={(event) => onChangeSpeaker(event, "lastName")} placeholder={t("CompteSettings.Prénom")}></Input>
+                    onChange={(event) => onChangeSpeaker(event, "lastName")} placeholder={t("CompteSettings.FirstName")}></Input>
             </Form.Item>
            </Col>
           </Row>
@@ -130,7 +130,7 @@ import { useTranslation } from 'react-i18next';
                           if (isValidEmail(value)) {
                            return Promise.resolve(t("formDirectVideo.valeur"));
                           }
-                          return Promise.reject(t('formDirectVideo.Veuillez entrer une adresse email valide'));
+                          return Promise.reject(t('formDirectVideo.EnterValidEmailAddress'));
                          },
                         }),
                        ]}

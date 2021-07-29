@@ -61,7 +61,7 @@ export const Configuration = () => {
 
     const selectProps = {
         mode: "tags",
-        placeholder: t("formDirectVideo.Mode d'étiquettes"),
+        placeholder: t("formDirectVideo.ModeTags"),
         dropdownClassName: `custom-dropdown`,
         className: `custom-select`
     };
@@ -85,14 +85,14 @@ export const Configuration = () => {
                 <Row gutter={[0, 25]}>
                     <Col span={24} className={"col-forms"}>
                         <span className={"config_direct"}
-                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Configuration de la page du direct")}</span>
+                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.LivePageConfiguration")}</span>
                     </Col>
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col className={"col-forms"} span={24}>
 
                                 <span name="directProgram"
-                                      style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Programme du direct")}</span>
+                                      style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.LiveProgram")}</span>
 
                             </Col>
                             <Col span={24} className={"col-forms"}>
@@ -101,7 +101,7 @@ export const Configuration = () => {
                                     <Input.TextArea Rows={5}
                                                     name="directProgram"
                                                     onChange={configurationOnChange}
-                                                    placeholder={t("formDirectVideo.Titre et description du sujet")}>
+                                                    placeholder={t("formDirectVideo.TitleAndDesc")}>
                                     </Input.TextArea>
                                 </Form.Item>
                             </Col>
@@ -183,7 +183,7 @@ export const Configuration = () => {
                                 }
                                 {values.configuration.switchSpeaker && values.configuration.SpeakerList.length > 1 &&
                                 <Button onClick={addSpeaker} icon={
-                                    <PlusSquareOutlined/>}>{t("formDirectVideo.Ajouter un intervenant")}</Button>
+                                    <PlusSquareOutlined/>}>{t("formDirectVideo.AddParticipant")}</Button>
                                 }
                             </Col>
                         </Row>
@@ -193,7 +193,7 @@ export const Configuration = () => {
                             <Col className={"col-forms"} span={24}>
                                 <span style={{
                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
-                                }}>{t("formDirectVideo.Option Interactives du direct")}</span>
+                                }}>{t("formDirectVideo.InterActiveOption")}</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <Form.Item name="LiveInteractiveOption" className={"form-item-style"}
@@ -203,13 +203,13 @@ export const Configuration = () => {
                                     }} name="LiveInteractiveOption">
                                         <Checkbox onChange={configurationOnChangeButton} value="chat"
                                                   style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                            <p>{t("formDirectVideo.Conversation(nom modéré)")}</p></Checkbox>
+                                            <p>{t("formDirectVideo.Chat")}</p></Checkbox>
                                         <Checkbox onChange={configurationOnChangeButton} value="comments"
                                                   style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                            <p>{t("formDirectVideo.Commentaires (modérés)")}</p></Checkbox>
+                                            <p>{t("formDirectVideo.Comments")}</p></Checkbox>
                                         <Checkbox onChange={configurationOnChangeButton} value="likeMention"
                                                   style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                            <p>{t("formDirectVideo.Mention j'aime")}</p>
+                                            <p>{t("formDirectVideo.Likes")}</p>
                                         </Checkbox>
                                     </CheckboxGroup>
                                 </Form.Item>
@@ -221,7 +221,7 @@ export const Configuration = () => {
                             <Col className={"col-forms"} span={24}>
                                 <span style={{
                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
-                                }}>{t("formDirectVideo.Options multimédia du direct ")}</span>
+                                }}>{t("formDirectVideo.LiveMultimediaOptions")}</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <Form.Item name="liveMultimediaOptions" className={"form-item-style"}
@@ -232,7 +232,7 @@ export const Configuration = () => {
                                         <Checkbox onChange={configurationOnChangeButton}
                                                   value="richeMediaDiffusion"
                                                   style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                            <p>{t("formDirectVideo.Diffusion Richmedia")}
+                                            <p>{t("formDirectVideo.Richmedia")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p>
@@ -241,7 +241,7 @@ export const Configuration = () => {
                                         <Checkbox onChange={configurationOnChangeButton}
                                                   value="attachments"
                                                   style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                            <p>{t("formDirectVideo.Fichiers joints")}
+                                            <p>{t("formDirectVideo.AttachedFiles")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p></Checkbox>
@@ -256,7 +256,7 @@ export const Configuration = () => {
                 <Row gutter={[0, 25]}>
                     <Col span={24} className={"col-forms"}>
                         <span className={"config_direct"}
-                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Configuration vidéo")}</span>
+                              style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.VideoSetup")}</span>
                     </Col>
                     <Col span={24}>
                         <Row gutter={[0, 15]}>
@@ -265,7 +265,7 @@ export const Configuration = () => {
                                     <Col className={"col-forms"}>
                                         <span style={{
                                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
-                                        }}>{t("formDirectVideo.Archivage automatique du direct")}</span>
+                                        }}>{t("formDirectVideo.AutomaticArchiving")}</span>
                                     </Col>
                                     <Col>
                                         <Form.Item name="liveAutomaticArchiving" className={"form-item-style"}
@@ -274,7 +274,7 @@ export const Configuration = () => {
                                                     onChange={(value) => configurationOnChangeByName(value, "liveAutomaticArchiving")}
                                             />
                                             <Tooltip placement="right"
-                                                     title={t("formDirectVideo.Votre direct sera automatiquement archivé et disponible visualisation vidéo à la demande")}>
+                                                     title={t("formDirectVideo.ArchivedAndVisualisationMsg")}>
                                                 <InfoCircleFilled style={{
                                                     cursor: "pointer",
                                                     color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"
@@ -293,11 +293,11 @@ export const Configuration = () => {
                                         <Space direction="vertical">
                                             <Radio onChange={configurationOnChangeButton} value="notVisibleVideo">
                                                 <span
-                                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><p>{t("formDirectVideo.Vidéo non visible")}</p></span></Radio>
+                                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><p>{t("formDirectVideo.VideoNotVisible")}</p></span></Radio>
                                             <Radio checked={values.configuration.visibleVideo}
                                                    onChange={configurationOnChangeButton} value="visibleVideo">
                                                 <span
-                                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><p>{t("formDirectVideo.Vidéo visible")}</p></span></Radio>
+                                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}><p>{t("formDirectVideo.VisibleVideo")}</p></span></Radio>
                                         </Space>
                                     </Radio.Group>
                                 </Form.Item>
@@ -306,7 +306,7 @@ export const Configuration = () => {
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
                             <Col span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
                                  className={"col-forms"}>
-                                <span>{t("formDirectVideo.Thèmes")}</span>
+                                <span>{t("formDirectVideo.Themes")}</span>
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
@@ -318,7 +318,7 @@ export const Configuration = () => {
                                         name="theme" onChange={ConfigurationOnChangeSelect}
                                         showSearch
                                         style={{width: "100%"}}
-                                        placeholder={t("formDirectVideo.Choisir un thème")}
+                                        placeholder={t("formDirectVideo.SelectTheme")}
                                         optionFilterProp="children"
                                         filterOption={(input, option) =>
                                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -338,13 +338,13 @@ export const Configuration = () => {
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col className={"col-forms"} span={24}>
-                                <span style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.étiquettes")}</span>
+                                <span style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Tags")}</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
                                 <Form.Item name="tags" className={"form-item-style"}
                                 >
                                     <Select name="tags" className={"selectTags"} mode="tags"
-                                            style={{width: '100%', minHeight: "32px"}} placeholder={t("formDirectVideo.Mode d'étiquettes")}
+                                            style={{width: '100%', minHeight: "32px"}} placeholder={t("formDirectVideo.ModeTags")}
                                             onChange={(value, event) => {
                                                 configurationOnChangeByName(value, "tags")
                                             }}  {...selectProps} />

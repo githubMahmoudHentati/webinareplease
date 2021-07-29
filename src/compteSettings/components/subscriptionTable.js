@@ -28,13 +28,13 @@ export const SubscriptionTable=()=>{
         fixed: 'left',
     },
     {
-        title: t("CompteSettings.Emise le"),
+        title: t("CompteSettings.IssuedOn"),
         dataIndex: 'issuedTime',
         key: 'issuedTime',
         width: 150,
     },
     {
-        title: t("CompteSettings.Intitulé"),
+        title: t("CompteSettings.Entitled"),
         dataIndex: 'entitled',
         key: 'entitled',
     },
@@ -58,7 +58,7 @@ export const SubscriptionTable=()=>{
         key: 'amount',
     },
     {
-        title: t("CompteSettings.Détails"),
+        title: t("CompteSettings.Details"),
         key: 'details',
         render: (text, record) => (
             <Space size="middle">

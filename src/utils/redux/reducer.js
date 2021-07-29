@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     gqlError: { msg: '' },
     authToken : '',
     activeSideMenu:false,
+    lang:localStorage.getItem("i18nextLng") ? localStorage.getItem("i18nextLng"):"fr"
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
@@ -40,6 +41,10 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 appState: { loggedIn: false },
                 authToken : ''
             }
+        case "CHANGE_LANG_FR":
+            return {...state,lang:"fr"}
+        case "CHANGE_LANG_EN":
+            return {...state,lang:"en"}
 
         default:{
             return state

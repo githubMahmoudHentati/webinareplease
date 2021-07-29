@@ -24,7 +24,7 @@ function ChoicePackage(){
             content: 'First-content',
         },
         {
-            title: t("PackagePayment.Créer un compte"),
+            title: t("PackagePayment.CNewAccout"),
             content: 'Second-content',
         },
         {
@@ -102,7 +102,7 @@ function ChoicePackage(){
                     }
                 )
 
-                message.success(t("PackagePayment.Créer un compte"))
+                message.success(t("PackagePayment.CNewAccout"))
             },2500)
         }else if(values.packagePayement.activeCard===3){
             setTimeout(()=>{
@@ -117,7 +117,7 @@ function ChoicePackage(){
                     }
                 )
 
-                message.success(t("PackagePayment.Créer un compte"))
+                message.success(t("PackagePayment.CNewAccout"))
             },2500)
         }
 
@@ -144,7 +144,7 @@ function ChoicePackage(){
                         ?
                         <div className="choix_Forfait">
                             <div className="header_Forfait">
-                                {t("PackagePayment.Choisissez votre forfait")}
+                                {t("PackagePayment.ChoosePackage")}
                             </div>
                             {/*./header_Forfait*/}
 
@@ -153,13 +153,13 @@ function ChoicePackage(){
                                     <div>
                                         <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonZero}></Radio>
                                         <h3 >{t("PackagePayment.Basic")}</h3>
-                                        <p >{t("PackagePayment.Idéal pour les équipes")}</p>
+                                        <p >{t("PackagePayment.IdealForTeams")}</p>
                                     </div>
                                     <div>
                                         <h2 >{values.packagePayement.packFree}</h2>
-                                        <li >{t("PackagePayment.Accueille jusqu’à 5 participants")}</li>
-                                        <li >{t("PackagePayment.Réunions de 30 minutes maximum")}</li>
-                                        <li >{t("PackagePayment.Réunions en tête à tête jusqu’à 2 heures")}</li>
+                                        <li >{t("PackagePayment.AccommodatesUpFive")}</li>
+                                        <li >{t("PackagePayment.Meetings")}</li>
+                                        <li >{t("PackagePayment.OneOneMeet")}</li>
                                     </div>
                                 </div>{/*./Card1_Forfai*/}
 
@@ -167,13 +167,13 @@ function ChoicePackage(){
                                     <div>
                                         <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonOne}></Radio>
                                         <h3 >Pro</h3>
-                                        <p >{t("PackagePayment.Idéal pour les équipes")}</p>
+                                        <p >{t("PackagePayment.IdealForTeams")}</p>
                                     </div>
                                     <div>
                                         <h2 >{values.packagePayement.packPro}€</h2>
-                                        <li >{t("PackagePayment.Accueille jusqu’à 100 participants")}</li>
-                                        <li > {t("PackagePayment.Réunions en groupe illimitées")}</li>
-                                        <li >{t("PackagePayment.1 Go d’enregistrement sur le cloud")}</li>
+                                        <li >{t("PackagePayment.Accommodates100")}</li>
+                                        <li > {t("PackagePayment.UnlimitedGroupMeetings")}</li>
+                                        <li >{t("PackagePayment.CapacityOnCloud")}</li>
                                     </div>
                                 </div>{/*./Card1_Forfai*/}
 
@@ -182,18 +182,18 @@ function ChoicePackage(){
                                     <div className={"Card2_Forfait_div1"}>
                                         <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonTwo}></Radio>
                                         <h3 >Pay As You Go</h3>
-                                        <p >{t("PackagePayment.Payer à votre utilisation")}</p>
+                                        <p >{t("PackagePayment.PayUse")}</p>
                                     </div>
                                     <div className={"Card2_Forfait_div2"}>
                                         <h2 >{values.packagePayement.packASYouGo}€</h2>
                                         <div>
-                                            <h5 >{t("PackagePayment.Durée de la réunion")}</h5>
+                                            <h5 >{t("PackagePayment.MeetingDuration")}</h5>
                                             <Select defaultValue="1 Heure" >
                                                 <Option value="1 Heure">1 {t("PackagePayment.Heure")}</Option>
                                             </Select>
                                         </div>
                                         <div>
-                                            <h5 >{t("PackagePayment.Nombre de participants")}</h5>
+                                            <h5 >{t("PackagePayment.PartiNumber")}</h5>
                                             <Select defaultValue="20 Participants" >
                                                 <Option value="20 Participants">20 {t("formDirectVideo.Intervenants")}</Option>
                                             </Select>
@@ -209,7 +209,7 @@ function ChoicePackage(){
                             ?
                             <div className="form_signup">
                                 <div className="header_Forfait">
-                                    {t("FormConnexion.Inscrivez-vous")}
+                                    {t("FormConnexion.SignUp")}
                                 </div>
                                 {/*./header_Forfait*/}
                                 <div className={"divsignup"}>
@@ -222,7 +222,7 @@ function ChoicePackage(){
                                 <div className="PayementDiv">
 
                                     <div className="header_Forfait">
-                                        {t("PackagePayment.Payez votre forfait")}
+                                        {t("PackagePayment.PayPackage")}
                                     </div>
                                     {/*./header_Forfait*/}
 
@@ -230,7 +230,7 @@ function ChoicePackage(){
 
                                         <div className="div1_champsPayement">
                                             <div className="texte_div1_champsPayement">
-                                                <span>{t("PackagePayment.Payer Webinar please Pro")}</span>
+                                                <span>{t("PackagePayment.PayWebinarPleasePro")}</span>
                                                 <h3>{values.packagePayement.packStripe}</h3>
                                             </div>
                                             <div className="icon_div1_champsPayement"><span
@@ -239,14 +239,14 @@ function ChoicePackage(){
 
                                         <div className="div2_champsPayement">
                                             <Button><AppleFilled/>{t("PackagePayment.Payer")}</Button>
-                                            <div className={"divpayerparcarte"}>{t("PackagePayment.Ou payer par carte bancaire")}</div>
+                                            <div className={"divpayerparcarte"}>{t("PackagePayment.CreditCardPay")}</div>
                                             <div className={"form_Input"}>
                                                 <Form>
                                                     <Form.Item
                                                         className={"formItem"}
                                                         label="Email"
                                                         name="email"
-                                                        rules={[{required: true, message: t("PackagePayment.Please input your email!")}]}
+                                                        rules={[{required: true, message: t("PackagePayment.InputMail")}]}
                                                     >
                                                         <Input name="email" className={"input"}
                                                                onChange={handlePackagePayementInput}/>
@@ -255,9 +255,9 @@ function ChoicePackage(){
 
                                                     <Form.Item
                                                         className={"formItem"}
-                                                        label={t("PackagePayment.Card details")}
+                                                        label={t("PackagePayment.CardDetails")}
                                                         name="carddetails"
-                                                        rules={[{required: true, message: t("PackagePayment.Please input your adress!")}]}
+                                                        rules={[{required: true, message: t("PackagePayment.InputAddress")}]}
                                                     >
                                                         <CardElement
                                                             id={"card-element"} name="carddetails" className={"input"}
@@ -270,11 +270,11 @@ function ChoicePackage(){
 
                                                     <Form.Item
                                                         className={"formItem"}
-                                                        label={t("PackagePayment.Nom du titulaire de la carte")}
+                                                        label={t("PackagePayment.CardOwnerName")}
                                                         name="nom"
                                                         rules={[{
                                                             required: true,
-                                                            message: t("PackagePayment.Please input your username!")
+                                                            message: t("PackagePayment.InputUserName")
                                                         }]}
                                                     >
                                                         <Input name="nom" className={"input"}
@@ -287,7 +287,7 @@ function ChoicePackage(){
                                                         name="pays"
                                                         rules={[{
                                                             required: true,
-                                                            message: t("PackagePayment.Please input your Country")
+                                                            message: t("PackagePayment.InputCountry")
                                                         }]}
                                                     >
                                                         <Select defaultValue="France" name="pays"
@@ -303,10 +303,10 @@ function ChoicePackage(){
                                                         name="postalCode"
                                                         rules={[{
                                                             required: true,
-                                                            message: t("PackagePayment.Please input your zipcode!")
+                                                            message: t("PackagePayment.InputZipCode")
                                                         }]}
                                                     >
-                                                        <Input name="postalCode" placeholder={t("CompteSettings.Code postale")}
+                                                        <Input name="postalCode" placeholder={t("CompteSettings.ZipCode")}
                                                                className={"input"}
                                                                onChange={handlePackagePayementInput}/>
                                                     </Form.Item>
@@ -330,7 +330,7 @@ function ChoicePackage(){
                 <div className="steps-action">
                     {valuesSignUp.constraintData.current === 0 && (
                         <Button onClick={()=>{history.push("/")}} style={{margin: '0 8px'}}>
-                            {t("CompteSettings.Annuler")}
+                            {t("CompteSettings.Cancel")}
                         </Button>
                     )}
                     {valuesSignUp.constraintData.current > 0 && (
@@ -342,13 +342,13 @@ function ChoicePackage(){
                         <Button  onClick={()=>{
                             !valuesSignUp.constraintData.confidentialityOption?document.documentElement.style.setProperty('--box-signup', "red"):
                                 document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
-                        }} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("PackagePayment.Inscrivez-vous maintenant")}</Button>
+                        }} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("PackagePayment.RegisterNow")}</Button>
                     )}
                     {valuesSignUp.constraintData.current ===0 && (
                         <Button
                             type="primary" onClick={nextToSignUp}
                                 disabled={values.packagePayement.activeCard === 0}>
-                            {t("PackagePayment.Enregistrer et continuer")}
+                            {t("PackagePayment.SaveAndContinue")}
                         </Button>
                     )}
                     {valuesSignUp.constraintData.current === steps.length - 1 && (

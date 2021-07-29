@@ -27,7 +27,7 @@ export const PasswordEdit =()=>{
 
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
-    const requiredFieldRule = [{required: true, message: t("contactClient.Champs requis")}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
 
     return(
         <Form
@@ -40,12 +40,12 @@ export const PasswordEdit =()=>{
         >
         <Row  gutter={[0, 30]}>
             <Col span={24}>
-                <span className={"spn1_securité"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Sécurité et accès")}</span>
+                <span className={"spn1_securité"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.SecurityAndAccess")}</span>
             </Col>
             <Col span={24}>
                 <Row  gutter={[0, 20]}>
                     <Col span={24}>
-                        <span className={"spn2_motDePasse"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" }}>{t("CompteSettings.modifier votre mot de passe")}</span>
+                        <span className={"spn2_motDePasse"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" }}>{t("CompteSettings.EditPass")}</span>
                     </Col>
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
@@ -83,7 +83,7 @@ export const PasswordEdit =()=>{
                                                 if (isValidPassword(values.securityAccount.newPassWord)) {
                                                     return Promise.resolve(t("formDirectVideo.valeur"));
                                                 }
-                                                return Promise.reject(t("resetPassword.Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale"));
+                                                return Promise.reject(t("resetPassword.MinCharCapLetterMsg"));
                                             },
                                         }),
                                     ]}
@@ -103,7 +103,7 @@ export const PasswordEdit =()=>{
                     <Col span={24}>
                         <Row gutter={[10, 0]} justify={"end"}>
                             <Col>
-                                <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>dispatch(setAccountSetting(1))} >{t("CompteSettings.Annuler")}</Button>
+                                <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>dispatch(setAccountSetting(1))} >{t("CompteSettings.Cancel")}</Button>
                             </Col>
                             <Col>
                                 <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"} htmlType="submit" loading={values.loadingUpdatePassword.loadingUpdatePassword}>{t("CompteSettings.Enregistrer")}</Button>

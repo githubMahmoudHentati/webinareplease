@@ -28,7 +28,7 @@ export const AccountGeneralInformation = () => {
     } = Hooks(UpdateAccountSetting)
     console.log("generalInformation", values)
     const { t, i18n } = useTranslation();
-    const requiredFieldRule = [{required: true, message: t("contactClient.Champs requis")}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -124,7 +124,7 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Prénom")}<span className="require">*</span> </span>
+                                  }}>{t("CompteSettings.FirstName")}<span className="require">*</span> </span>
                                             </Col>
                                             <Col span={24}>
                                                 <Form.Item name="lastName"
@@ -169,7 +169,7 @@ export const AccountGeneralInformation = () => {
                                     </Col>
                                     {values.constraintData.updateAccountSettingError &&
                                     <Col offset={4} span={20} className={"col_input"}>
-                                        <span style={{color: "red"}}>{t("CompteSettings.Oups, Cette adresse e-mail est déjà utilisée par un autre utilisateur")} </span>
+                                        <span style={{color: "red"}}>{t("CompteSettings.UsedAddress")} </span>
                                     </Col>
                                     }
                                     <Col span={24}>
@@ -195,7 +195,7 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Adresse")} </span>
+                                  }}>{t("CompteSettings.Address")} </span>
                                             </Col>
                                             <Col span={24}>
                                                 <Form.Item name="address"
@@ -213,7 +213,7 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Nombre d'employées")} </span>
+                                  }}>{t("CompteSettings.NumberOfEmployees")} </span>
                                             </Col>
                                             <Col span={24}>
                                                 <Select
@@ -228,9 +228,9 @@ export const AccountGeneralInformation = () => {
                                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                     }
                                                 >
-                                                    <Option name="numberPerson" key={1} value="1">{t("CompteSettings.5-10 employé(e)s")}</Option>
-                                                    <Option name="numberPerson" key={2} value="2">{t("CompteSettings.10-20 employé(e)s")}</Option>
-                                                    <Option name="numberPerson" key={3} value="3">{t("CompteSettings.20-30 employé(e)s")}</Option>
+                                                    <Option name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
+                                                    <Option name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
+                                                    <Option name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
                                                 </Select>
                                             </Col>
                                         </Row>
@@ -240,7 +240,7 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Code postale")} </span>
+                                  }}>{t("CompteSettings.ZipCode")} </span>
                                             </Col>
                                             <Col span={24}>
                                                 <Form.Item name="postalCode"
@@ -259,7 +259,7 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Téléphone")}<span className="require">*</span> </span>
+                                  }}>{t("CompteSettings.Phone")}<span className="require">*</span> </span>
                                             </Col>
                                             <Col span={24}>
                                                 <Form.Item name="phone"
@@ -288,7 +288,7 @@ export const AccountGeneralInformation = () => {
                                                     background: darkMode === false ? "" : "#141414",
                                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                                     border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                                                }}>{t("CompteSettings.Annuler")}</Button>
+                                                }}>{t("CompteSettings.Cancel")}</Button>
                                             </Col>
                                             <Col>
                                                 <Button loading={values.constraintData.loadingUpdateAccountSetting}
@@ -303,7 +303,7 @@ export const AccountGeneralInformation = () => {
                                                     background: darkMode === false ? "" : "#141414",
                                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                                     border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                                                }}>{t("CompteSettings.Mettre à jour")}</Button>
+                                                }}>{t("CompteSettings.Update")}</Button>
                                             </Col>
                                         </Row>
                                     </Col>

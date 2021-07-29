@@ -13,9 +13,12 @@ import {GraphQLFetchData} from "./graphQLFetchData";
 import {StatusMessage} from "./StatusMessage";
 import {useHistory} from "react-router-dom";
 import {setDirectSetting} from "../../utils/redux/actions";
+
+
 let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
+
 
     const [visible , setVisible] = useState(false)
     const history = useHistory();

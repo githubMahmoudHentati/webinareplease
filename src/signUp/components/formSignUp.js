@@ -53,7 +53,7 @@ export const FormSignUp =({child1,child2})=>{
 
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
-    const requiredFieldRule = [{required: true, message: t("contactClient.Champs requis")}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
 
     console.log("signUp",valuesSignUp)
     return(
@@ -78,10 +78,10 @@ export const FormSignUp =({child1,child2})=>{
                                 <Col span={24}>
                                     <Form.Item name="lastName" className={"form-item-style"}
                                                rules={requiredFieldRule}
-                                               label={t("CompteSettings.Prénom")}
+                                               label={t("CompteSettings.FirstName")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="lastName" placeholder={t("CompteSettings.Prénom")}></Input>
+                                               name="lastName" placeholder={t("CompteSettings.FirstName")}></Input>
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
@@ -95,7 +95,7 @@ export const FormSignUp =({child1,child2})=>{
                                                     if (isValidEmail(value)) {
                                                         return Promise.resolve('value');
                                                     }
-                                                    return Promise.reject(t("contactClient.Veuillez entrer un mail valide"));
+                                                    return Promise.reject(t("contactClient.EnterValidMail"));
                                                 },
                                             }),
                                         ]}
@@ -106,25 +106,25 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                                 {valuesSignUp.constraintData.signUpError &&
                                 <Col offset={4} span={20} className={"col_input"}>
-                                    <span style={{color: "red"}}>{t("CompteSettings.Oups, Cette adresse e-mail est déjà utilisée par un autre utilisateur")}</span>
+                                    <span style={{color: "red"}}>{t("CompteSettings.UsedAddress")}</span>
                                 </Col>
                                 }
                                 <Col span={24}>
                                     <Form.Item name="phone" className={"form-item-style"}
-                                               label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >{t("CompteSettings.Téléphone")}</span></div>}
+                                               label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >{t("CompteSettings.Phone")}</span></div>}
                                                rules={[
                                                    ({getFieldValue}) => ({
                                                        validator(_, value) {
                                                            if (isValidPhone(value)) {
                                                                return Promise.resolve('value');
                                                            }
-                                                           return Promise.reject(t("CompteSettings.Numéro telephone est invalide"));
+                                                           return Promise.reject(t("CompteSettings.InvalidPhone"));
                                                        },
                                                    }),
                                                ]}
 
                                     >
-                                        <Input placeholder={t("CompteSettings.Saisir un numéro télephone")} className={"spn2"} name="phone" onChange={signUpOnChange}>
+                                        <Input placeholder={t("CompteSettings.EnterPhone")} className={"spn2"} name="phone" onChange={signUpOnChange}>
 
                                             </Input>
                                     </Form.Item>
@@ -135,14 +135,14 @@ export const FormSignUp =({child1,child2})=>{
                                     <Form.Item
                                         className={"form-item-style"}
                                         name="password"
-                                        label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >{t("CompteSettings.Mot de passe")}</span></div>}
+                                        label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >{t("CompteSettings.Password")}</span></div>}
                                         rules={[
                                             ({getFieldValue}) => ({
                                                 validator(_, value) {
                                                     if (isValidPassword(valuesSignUp.signUp.password)) {
                                                         return Promise.resolve('value');
                                                     }
-                                                    return Promise.reject(t("resetPassword.Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale"));
+                                                    return Promise.reject(t("resetPassword.MinCharCapLetterMsg"));
                                                 },
                                             }),
                                         ]}
@@ -150,7 +150,7 @@ export const FormSignUp =({child1,child2})=>{
                                         <Input.Password
                                             className={"spn2"}
                                             name="password" onChange={signUpOnChange}
-                                            placeholder={t("CompteSettings.Mot de passe")}
+                                            placeholder={t("CompteSettings.Password")}
                                             iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                                         />
                                     </Form.Item>
@@ -162,7 +162,7 @@ export const FormSignUp =({child1,child2})=>{
                                                label={"Adress"}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="address" placeholder={t("CompteSettings.Adresse")}></Input>
+                                               name="address" placeholder={t("CompteSettings.Address")}></Input>
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
@@ -175,10 +175,10 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                                 <Col span={24}>
                                     <Form.Item name="postalCode" className={"form-item-style"}
-                                               label={t("CompteSettings.Code postale")}
+                                               label={t("CompteSettings.ZipCode")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="postalCode" placeholder={t("CompteSettings.Code postale")}></Input>
+                                               name="postalCode" placeholder={t("CompteSettings.ZipCode")}></Input>
                                     </Form.Item>
                                 </Col>
                             </Row>
@@ -187,31 +187,31 @@ export const FormSignUp =({child1,child2})=>{
                             <Row gutter={[0, 10]}>
                                 <Col span={24}>
                                     <Form.Item name="society" className={"form-item-style"}
-                                               label={t("CompteSettings.Société")}
+                                               label={t("CompteSettings.Company")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="society" placeholder={t("CompteSettings.Société")}></Input>
+                                               name="society" placeholder={t("CompteSettings.Company")}></Input>
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
                                     <Form.Item name="numberPerson" className={"form-item-style"}
-                                               label={t("CompteSettings.Nombre d'employées")}
+                                               label={t("CompteSettings.NumberOfEmployees")}
                                     >
                                             <Select
                                                 className={"spn2"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
-                                                defaultValue={t("CompteSettings.5-10 employé(e)s")}
+                                                defaultValue={t("CompteSettings.choiceOne")}
                                                 showSearch
                                                 style={{width: "100%"}}
-                                                placeholder={t("CompteSettings.5 - 10 employé(e)s")}
+                                                placeholder={t("CompteSettings.choiceOne")}
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) =>
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                 }
                                             >
-                                                <Option name="numberPerson" key={1} value="1">{t("CompteSettings.5-10 employé(e)s")}</Option>
-                                                <Option name="numberPerson" key={2} value="2">{t("CompteSettings.10-20 employé(e)s")}</Option>
-                                                <Option name="numberPerson" key={3} value="3">{t("CompteSettings.20-30 employé(e)s")}</Option>
+                                                <Option name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
+                                                <Option name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
+                                                <Option name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
                                             </Select>
                                     </Form.Item>
                                 </Col>
@@ -230,11 +230,11 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                                 <Col className={"col-politique"} style={{color: "RGB(185, 185, 185)"}} span={15}>
                                     <span
-                                        className={"spn2"}>{t("CompteSettings.Webinar please doit traiter vos donnèes conformément a la")}</span>
-                                    <a> {t("CompteSettings.Politique de confidentialité.")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.En cliquant sur le bouton d'activation ci dessous j'accepte")}</span><a className={"pol"}> {t("CompteSettings.Condition de service,")} </a>
+                                        className={"spn2"}>{t("CompteSettings.WebinarDataProcess")}</span>
+                                    <a> {t("CompteSettings.PrivacyPolicy")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a className={"pol"}> {t("CompteSettings.Service condition,")} </a>
                                     <span className={"pol"}>{t("CompteSettings.la")}</span><a className={"pol"}> {t("CompteSettings.Politique de confidentialité")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a className={"pol"}> {t("CompteSettings.l'Accord de traitement des donnèes")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.et je confirme que je passe commande pour des services pour mon entreprise ou pour d'autre objectifs professionnels")}</span>
+                                    <span className={"pol"}>{t("CompteSettings.ConfirmOrder")}</span>
                                 </Col>
                             </Row>
                         </Col>
