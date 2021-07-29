@@ -24,35 +24,33 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
 
 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [record ,  setRecord] = useState([]);
     const [selectedRow, setSelectedRow] = useState(null);
     const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
     const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
-    //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
-    const history = useHistory();
     // use Selector redux
     const [order , SetOrder]=useState(null) // setOrder
     const [Current , SetCurrent] = useState(null) // set pagination current
 
     // dispatch order Table
     useEffect(()=>{
+        if(order)
         dispatch(setPaginationProps(
             {PaginationPropsNameChange:"order",PaginationPropsValueChange:order},
         ));
-    },[order])
-    // dispatch current Table
-    useEffect(()=>{
+        else if(Current){
         dispatch(setPaginationProps(
             {PaginationPropsNameChange:"current",PaginationPropsValueChange:Current},
         ))
-    },[Current])
-    // dispatch page Size Table
-    useEffect(()=>{
+        if(document.querySelector(".showVideo"))
+        document.querySelector(".showVideo").scrollIntoView();
+    }
+        else if (pageSize)
         dispatch(setPaginationProps(
             {PaginationPropsNameChange:"pageSize",PaginationPropsValueChange:pageSize},
         ))
-    },[pageSize])
-
+        else return
+    },[order, Current, pageSize, dispatch])
+   
 
     const  onSelectChange = (selectedCheck)  => {  
     //uncheck checkbox  
@@ -71,11 +69,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
    dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:uniqItemsFilter.length}));
 
      setSelectedRowKeys(uniqItemsFilter);
-
-     //old version
-     /*setSelectedRowKeys(selectedCheck);
-     dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:selectedCheck}));
-     dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:selectedCheck.length}));*/
 
     };
     const rowSelection = {
@@ -104,10 +97,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
         console.log('updateColumns:', updatedColumns);
     });
 
-    const handleSingleDelete = () => {
-        console.log('handleSingleDelete, selected:', selectedRow);
-    };
-
     const resetPagination = () => {
         setCurrentPage(DEFAULT_PAGE_NUMBER);
     };
@@ -128,7 +117,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
                 rowSelection={rowSelection}
                 columns={updatedColumns}
                 dataSource={dataSource.content}
-                // rowClassName={record => !record.enabled && "disabled-row"}
+                rowClassName={"DataTable__custom-row"}
 
                 onChange={handleTableChange}
                 pagination={{
