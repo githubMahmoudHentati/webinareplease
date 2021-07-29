@@ -7,23 +7,20 @@ import * as constantMedia from './utils/data';
 import{PrincipalPage} from "../utils/components/principalPage";
 import {useSelector , useDispatch} from "react-redux";
 import {setDarkMode} from "../utils/redux/actions";
-import {setshowVideosActions} from "./store/showVideosAction";
+import {setshowVideosActions, setShowVideoConstraintDataOnchange} from "./store/showVideosAction";
 import {ShowVideosReducerReducer} from "./store/showVideosReducer";
-import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/graphQL";
 import {Hooks} from "./utils/hooks";
 import { Spin } from 'antd';
 import './showVideos.scss'
+import { useQuery } from "@apollo/react-hooks";
+
 
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
 function ShowVideos() {
-
     const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
-
-    useEffect(()=>{
-        //window.scrollTo(0, 0);// scroll window with the pagination
-    })
+    const {paginationProps ,  values }=Hooks()
 
     const {DeleteItemsMutation}=GraphQLFetchData()
 

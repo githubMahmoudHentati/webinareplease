@@ -20,7 +20,7 @@ export const ShowVideosList = ()=>{
                 pageSize:10,
                 columnKey:0,
                 current:1,
-                id:[0],
+                id:[],
                 idLive:0
             }
         )

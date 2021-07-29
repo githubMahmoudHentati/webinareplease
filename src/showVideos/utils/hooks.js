@@ -59,14 +59,30 @@ export  const Hooks=()=> {
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
-        onCompleted:(data)=>{
-            if(data.getLives.code === 200){
-                dispatch(setshowVideosActions(data.getLives));
+            fetchPolicy:  "cache-and-network",
+            variables: { input : {
+                    "limit": paginationProps.pageSize,
+                    "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                    "order_dir": paginationProps.order,
+                    "order_column": paginationProps.columnKey,
+                    "search_word":values.search,
+                    "date":[" ", ""],
+                    "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+                } },
+            context: { clientName: "second" },
+            onCompleted :(data)=>{
+                if(data.getLives.code === 200){
+                    dispatch(setshowVideosActions(data.getLives));
+                    dispatch(setShowVideoConstraintDataOnchange({
+                        constraintDataNameChange: "loading",
+                        constraintDataValueChange: false
+                    }))
+                }else if(data.getLives.code === 400){
+                    error_getLives()
+                }
+    
             }
-            else if(data.getLives.code === 400){
-                error_Filter()
-            }
-        }
+     
     })
     // mutation delete lang from table of event
     const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
@@ -141,44 +157,25 @@ export  const Hooks=()=> {
     /*Filtrer Videos*/
     const handleFiltrerVideos = () =>{
      console.log("handleFiltrerVideos" , values)
-        GETDATEVIDEO({
-            variables:{
-                input : {
-                    "limit": paginationProps.pageSize,
-                    "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
-                    "order_dir": paginationProps.order,
-                    "order_column": paginationProps.columnKey,
-                    "search_word":values.search,
-                    "date":values.date,
-                    "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
-                }
-            },
-            context: { clientName: "second" },
-        })
+      /*  GETDATEVIDEO()*/
     }
     /*Delete Rows*/
-    const handleClickDeleteIcon = () =>{
+    const handleClickDeleteIcon = async() =>{
         // dispatch show Alert
-        dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
+      await  dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
         setTimeout(()=>{
             dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
         },3000)
-        // Delete items from table
-         let items = DataVideos.data.filter(item => {
-            return !(paginationProps.id.includes(item.id))
-        })
-        // dispatch list Video
-        dispatch(setshowVideosActions({data:items}));
 
         // liste des items supprimer
          itemsDeleted = DataVideos.data.filter(item => {
-
             return (paginationProps.id.includes(item.id))
         })
 
         // Time out to Run API Delete
-        itemsRunAPI = setTimeout(()=>{
-            DeleteItemsMutation()
+        itemsRunAPI = setTimeout(async()=>{
+       await DeleteItemsMutation()
+        await GETDATEVIDEO()
         },3000)
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
@@ -230,7 +227,7 @@ export  const Hooks=()=> {
         },3000)
         // recover items deleted
 
-        dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));
+       /* dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));*/
 
         //ClearTimeOut to Run API Delete
         clearTimeout(itemsRunAPI);
