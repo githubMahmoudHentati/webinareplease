@@ -126,6 +126,7 @@
   },
   "formDirectVideo": {
     "AddLive": "Ajouter un direct",
+    "EditLive": "Modifier un direct",
     "General": "Géneral",
     "Configuration": "Configuration",
     "Invitations": "Invitations",
@@ -151,6 +152,7 @@
     "TitleAndDesc": "hh:mm - hh:mm\nTitre et description du sujet",
     "Confirm": "Valider",
     "Diffuser": "Diffuser",
+    "Update": "Modifier",
     "Cancel": "Annuler",
     "VideoNotVisible": "Vidéo non visible",
     "VisibleVideo": "Vidéo visible",

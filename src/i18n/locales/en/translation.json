@@ -121,6 +121,7 @@
   },
   "formDirectVideo": {
     "AddLive": "Add a live feed",
+    "EditLive": "Update a live feed",
     "General": "General",
     "Configuration": "Setup",
     "Invitations": "Invitations",
@@ -144,6 +145,7 @@
     "TitleAndDesc": "hh:mm - hh:mm\nTitle and description of the subject",
     "Confirm": "Confirm",
     "Diffuser": "Broadcast",
+    "Update": "Update",
     "Cancel": "Cancel",
     "VideoNotVisible": "Video not visible",
     "VisibleVideo": "Visible video",

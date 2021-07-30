@@ -4,7 +4,8 @@ import {
     setFilterVideosActions, setInfosLive, setLoadingDeleteShowVideo,
     setPaginationProps,
     setshowDivsConditions,
-    setshowVideosActions
+    setshowVideosActions,
+    updateFormDirectVideo
 } from "../store/showVideosAction"
 import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
@@ -228,11 +229,13 @@ export  const Hooks=()=> {
         clearTimeout(itemsRunAPI);
     }
     /*Click Add live */
-    const handleClickAddLive =()=>{
+    const handleClickAddLive =(page)=>{
         history.push("/FormDirectVideo")
+        localStorage.setItem('form-page', page)
         if(matchesMedia.matches){
             dispatch(setDirectSetting(5))
         }
+        dispatch(updateFormDirectVideo(page))
     }
 
     // fonction handleInfos

@@ -23,7 +23,7 @@ export const IframeDirectVideo =()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
-
+    const formPage= useSelector((state)=>state.ShowVideosReducerReducer.formPage);
     const [formLive, setFormLive] = useState([]);
     const setFormLiveAction=(e)=>{
         setFormLive(e)
@@ -59,7 +59,7 @@ export const IframeDirectVideo =()=>{
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                                 <span>{t("CompteSettings.direct")}</span>
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.AddLive")}</Breadcrumb.Item>
+                            <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{formPage==='add' ? t("formDirectVideo.AddLive"): t("formDirectVideo.EditLive")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>

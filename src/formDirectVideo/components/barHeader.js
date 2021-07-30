@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu} from 'antd'
 import '../formDirectVideo.scss'
-import {ArrowLeftOutlined, CloseOutlined, CheckOutlined, VideoCameraOutlined} from '@ant-design/icons';
+import {ArrowLeftOutlined, CloseOutlined, CheckOutlined, VideoCameraOutlined,EditOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {Hooks} from "../utils/hooks";
@@ -15,6 +15,7 @@ export const BarHeader = () => {
     const {values, matchesMedia} = Hooks()
     const dispatch = useDispatch()
     const {t, i18n} = useTranslation();
+    const formPage= useSelector((state)=>state.ShowVideosReducerReducer.formPage)
 
     return (
         <Row style={{width: "100%"}} justify={"space-between"}>
@@ -48,7 +49,7 @@ export const BarHeader = () => {
                         }}> {
                             matchesMedia.matches && directMenu === 5
                                 ?
-                                <span>{t("formDirectVideo.AddLive")}</span>
+                                <span>{formPage==='add' ? t("formDirectVideo.AddLive"): t("formDirectVideo.EditLive")}</span>
                                 :
                                 matchesMedia.matches && directMenu === 0
                                     ?
@@ -70,7 +71,7 @@ export const BarHeader = () => {
                                                     ?
                                                     <span>{t("formDirectVideo.Templates")}</span>
                                                     :
-                                                    <span>{t("formDirectVideo.AddLive")}</span>
+                                                    <span>{formPage==='add' ? t("formDirectVideo.AddLive"): t("formDirectVideo.EditLive")}</span>
 
                         }
                         </span>
@@ -98,10 +99,18 @@ export const BarHeader = () => {
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                             background: darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
                             border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                        }} icon={values.general.directPlan ? <CheckOutlined/> : <VideoCameraOutlined/>}
-                                type={"primary"}>{values.general.directPlan ?
-                            <span className={"spn_add_live"}>{t("formDirectVideo.Confirm")}</span> :
-                            <span className={"spn_add_live"}>{t("formDirectVideo.Diffuser")}</span>}</Button>
+                        }} icon={values.general.directPlan ? <CheckOutlined/> : formPage === 'add' ? <VideoCameraOutlined/> : null}
+                                type={"primary"}>
+                            {values.general.directPlan ?
+                                <span className={"spn_add_live"}>{t("formDirectVideo.Confirm")}</span> :
+                                (
+                                    formPage === 'add' ?
+                                    <span className={"spn_add_live"}>{t("formDirectVideo.Diffuser")}</span>
+                                    : <> <EditOutlined /> {t("formDirectVideo.Update")}</>
+                                )
+                            }
+                            </Button>
+
                     </Col>
                 </Row>
             </Col>
