@@ -20,7 +20,7 @@ import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
 function ShowVideos() {
     const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
-    const {paginationProps ,  values }=Hooks()
+    const {paginationProps ,  values, GETDATEVIDEO }=Hooks()
 
     const {DeleteItemsMutation}=GraphQLFetchData()
 
@@ -116,7 +116,9 @@ function ShowVideos() {
         },
 
     ];
-
+useEffect(()=>{
+    GETDATEVIDEO()
+},[])
      const data = {
          totalElements:DataVideos.recordsFiltered,
          content:DataVideos.data,
