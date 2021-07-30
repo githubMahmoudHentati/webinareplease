@@ -2,7 +2,7 @@ import {Upload, message, Avatar, Button} from 'antd';
 import {InboxOutlined, LoadingOutlined, PlusOutlined, UploadOutlined, UserOutlined} from '@ant-design/icons';
 import React ,{useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import axios from 'axios';
 import {
     setConstraintDataOnchange,
@@ -86,7 +86,7 @@ export const DraggerUpload = () => {
         <Dragger  style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
                  name="fileList" listType="picture"
                   accept="image/jpeg,image/png"
-                  fileList={[...values.general.fileList]}
+                  fileList={values.general.fileList}
                   //beforeUpload={beforeUpload}
                   onChange={handleChange}
                   onRemove={removeThumbnail}

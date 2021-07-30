@@ -34,7 +34,7 @@ function ShowVideos() {
     }
 
     // Read Data from Hooks
-    const {DataVideos, loadingSpinner}=Hooks(DeleteItemsAPIFunction)
+    const {DataVideos, loadingSpinner , conditions}=Hooks(DeleteItemsAPIFunction)
     const dispatch = useDispatch()
     const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
 
@@ -118,8 +118,9 @@ function ShowVideos() {
     ];
 
      const data = {
-        totalElements:DataVideos.recordsFiltered,
-        content:DataVideos.data
+         totalElements:DataVideos.recordsFiltered,
+         content:DataVideos.data,
+         enabled:conditions.clickDeleteIcon === true ? true : false
     }
 
     // fontion pour afficher le tableau de n'interface

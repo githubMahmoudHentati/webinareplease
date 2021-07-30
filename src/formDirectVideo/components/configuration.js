@@ -19,9 +19,9 @@ import {
     Tooltip
 } from 'antd'
 import '../formDirectVideo.scss'
-import {Upload, message} from 'antd';
-import {PlusSquareOutlined, EditOutlined, MinusCircleOutlined, InfoCircleFilled} from '@ant-design/icons';
-import {Hooks} from '../utils/hooks'
+import { Upload, message } from 'antd';
+import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled } from '@ant-design/icons';
+import Hooks from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
 import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
@@ -115,12 +115,9 @@ export const Configuration = () => {
                                 }}>{t("formDirectVideo.Participants")}</span>
                             </Col>
                             <Col>
-                                <Form.Item name="switchSpeaker" className={"form-item-style"}
-                                >
-                                    <Switch checked={values.configuration.switchSpeaker} name="switchSpeaker"
+                                    <Switch value={values.configuration.switchSpeaker} name="switchSpeaker"
                                             onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
                                     />
-                                </Form.Item>
                             </Col>
                             {values.configuration.SpeakerList.length > 1 && values.configuration.switchSpeaker &&
                             <Col span={24}>
@@ -196,23 +193,22 @@ export const Configuration = () => {
                                 }}>{t("formDirectVideo.InterActiveOption")}</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <Form.Item name="LiveInteractiveOption" className={"form-item-style"}
+                                <Checkbox onChange={configurationOnChangeButton} value="chat"
+                                          style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                          checked={values.configuration.chat}
                                 >
-                                    <CheckboxGroup onChange={(value) => {
-                                        configurationOnChangeByName(value, "LiveInteractiveOption")
-                                    }} name="LiveInteractiveOption">
-                                        <Checkbox onChange={configurationOnChangeButton} value="chat"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                            <p>{t("formDirectVideo.Chat")}</p></Checkbox>
-                                        <Checkbox onChange={configurationOnChangeButton} value="comments"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                            <p>{t("formDirectVideo.Comments")}</p></Checkbox>
-                                        <Checkbox onChange={configurationOnChangeButton} value="likeMention"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                            <p>{t("formDirectVideo.Chat")}</p>
+                                </Checkbox>
+                                <Checkbox  onChange={configurationOnChangeButton} value="comments"
+                                           style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                           checked={values.configuration.comments}>
+                                            <p>{t("formDirectVideo.Comments")}</p>
+                                </Checkbox>
+                                <Checkbox onChange={configurationOnChangeButton} value="likeMention"
+                                          style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                          checked={values.configuration.likeMention}>
                                             <p>{t("formDirectVideo.Likes")}</p>
-                                        </Checkbox>
-                                    </CheckboxGroup>
-                                </Form.Item>
+                                 </Checkbox>
                             </Col>
                         </Row>
                     </Col>
@@ -224,30 +220,34 @@ export const Configuration = () => {
                                 }}>{t("formDirectVideo.LiveMultimediaOptions")}</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <Form.Item name="liveMultimediaOptions" className={"form-item-style"}
-                                >
-                                    <CheckboxGroup onChange={(value) => {
-                                        configurationOnChangeByName(value, "liveMultimediaOptions")
-                                    }} name="liveMultimediaOptions">
-                                        <Checkbox onChange={configurationOnChangeButton}
-                                                  value="richeMediaDiffusion"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                <Row>
+                                    <Col span={24}  className={"col-forms"}>
+                                    <Checkbox onChange={configurationOnChangeButton}
+                                          name="richeMediaDiffusion"
+                                          value="richeMediaDiffusion"
+                                          style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                          checked={values.configuration.richeMediaDiffusion}>
                                             <p>{t("formDirectVideo.Richmedia")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p>
                                         </Checkbox>
                                         <br/>
+                                    </Col>
+                                    <Col span={24}  className={"col-forms"}>
+
                                         <Checkbox onChange={configurationOnChangeButton}
+                                                  name="attachments"
                                                   value="attachments"
-                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                                  checked={values.configuration.attachments}>
                                             <p>{t("formDirectVideo.AttachedFiles")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p></Checkbox>
-                                    </CheckboxGroup>
-                                </Form.Item>
-                            </Col>
+                                    </Col>
+                                </Row>
+                             </Col>
                         </Row>
                     </Col>
                 </Row>

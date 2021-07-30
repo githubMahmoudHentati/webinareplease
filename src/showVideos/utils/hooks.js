@@ -5,28 +5,33 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
+    setShowVideoConstraintDataOnchange,
     updateFormDirectVideo
 } from "../store/showVideosAction"
+import fbPost from  "../../assets/facebookPost.svg"
+import linkedinPost from  "../../assets/linkedinPost.svg"
+import youtubePost from  "../../assets/youtubePost.svg"
 import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
-import {GraphQLFetchData} from "./graphQLFetchData";
 import {StatusMessage} from "./StatusMessage";
 import {useHistory} from "react-router-dom";
 import {setDirectSetting} from "../../utils/redux/actions";
-
+import moment from "moment";
+import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../../formDirectVideo/store/formDirectVideoAction"
+import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
+const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
 
-
     const [visible , setVisible] = useState(false)
     const history = useHistory();
+    const dispatch = useDispatch()
 
     const {success_Delete , error_Delete , error_Filter ,  error_getLives}=StatusMessage()
 
-    const dispatch = useDispatch()
     //Filter Data
     const values = useSelector((state) => state.ShowVideosReducerReducer.FilterVideos)
     //Data of Query
@@ -46,7 +51,7 @@ export  const Hooks=()=> {
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",infosLives)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",paginationProps)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -179,6 +184,8 @@ export  const Hooks=()=> {
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
 
+
+
     }
 
     // Delete One Row
@@ -211,11 +218,13 @@ export  const Hooks=()=> {
         dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e}));
         // dispatch id list Video
         dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
-          
     }
 
     /* Click Annuler button Alert*/
     const handleClickAnnulerAlert=()=>{
+        // dispatch loading Delete Button
+        dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
+        //show selected element
         dispatch(setshowDivsConditions({showDivsConditionsName:"showElementSelected",showDivsConditionsValue:true}));
         dispatch(setshowDivsConditions({showDivsConditionsName:"rubDeleteItems",showDivsConditionsValue:true}));
         setTimeout(()=>{
@@ -230,12 +239,24 @@ export  const Hooks=()=> {
     }
     /*Click Add live */
     const handleClickAddLive =(page)=>{
+        dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Ajouter"}))
+
         history.push("/FormDirectVideo")
         localStorage.setItem('form-page', page)
         if(matchesMedia.matches){
             dispatch(setDirectSetting(5))
         }
         dispatch(updateFormDirectVideo(page))
+    }
+
+    /*Click Update live */
+    const updateLive= async (id)=>{
+        localStorage.setItem('idLive', id);
+        history.push("/FormDirectVideo")
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
+
     }
 
     // fonction handleInfos
@@ -245,6 +266,7 @@ export  const Hooks=()=> {
             dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
         },300)
     }
+
     //handleCancel MODAL
     const handleCancel = () => {
               dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
@@ -272,6 +294,7 @@ export  const Hooks=()=> {
         handleInfos,
         handleCancel,
         infosLives,
+        updateLive
     })
 
 

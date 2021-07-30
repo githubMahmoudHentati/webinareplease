@@ -8,7 +8,7 @@ import {
     setConstraintDataOnchange, setEmptyPasswordInput,
     setGeneralInformationOnchange, setLoadingUpdatePassword
 } from "../store/accountSettingsAction";
-import {Hooks} from "./hooks";
+import Hooks from "./hooks";
 import {AccountSettingsConstraints} from "./accountSettingsConstraints";
 import {StatusMessages} from "./StatusMessages";
 import {useHistory} from "react-router-dom";

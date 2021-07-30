@@ -14,7 +14,7 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives , handleClickAddLive}=Hooks()
+    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives, handleClickAddLive,updateLive }=Hooks()
     const { t, i18n } = useTranslation();
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
@@ -34,8 +34,6 @@ function useActionMenu({record}) {
             <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>
         </Menu>
     );
-
-
     //fonction handleExport and show modal infos
     const handleExport = () =>{SetVisibleModalExport(true)}
     // handle cancel Modal export
@@ -73,7 +71,7 @@ function useActionMenu({record}) {
         }
     }
 
-    
+
 
     const actionColumnView = (
         <div className="action">

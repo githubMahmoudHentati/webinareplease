@@ -3,7 +3,7 @@ import {LoadingOutlined, PlusOutlined, UploadOutlined, UserOutlined} from '@ant-
 import React ,{useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setConstraintDataOnchange, setGeneralInformationOnchange} from "../store/accountSettingsAction";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 

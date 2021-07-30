@@ -8,7 +8,6 @@ import {SignUpReducer} from "../store/signUpReducer";
 import {setSignUpConstraintDataOnchange, setSignUpOnchange} from "../store/signUpAction";
 import {GraphQLFetchData} from "./graphQLFetchData";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {setConfigurationOnchange} from "../../formDirectVideo/store/formDirectVideoAction";
 
 export  const HooksSignUp=()=> {
     const dispatch = useDispatch()

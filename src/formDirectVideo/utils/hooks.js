@@ -14,13 +14,13 @@ import {
     setInvitationOnchangeRules
 } from "../store/formDirectVideoAction";
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
-import {GraphQLFetchData} from "./graphQLFetchData";
+import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 
-export  const Hooks=()=>{
+const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
-    const {CreateLive,generateSecuredPassword,themesDisplayQueryAction} = GraphQLFetchData(values)
+    const {CreateLive,generateSecuredPassword,themesDisplayQueryAction} = GraphQLFetchDataForm(values)
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 
@@ -122,7 +122,6 @@ export  const Hooks=()=>{
         dispatch(setConfigurationInitialSpeaker({id,name,lastName,title,email,logoSpeaker: logoSpeaker
 
         }))
-        console.log("azaez")
     };
 
     const deleteSpeaker = async (id) => {
@@ -170,12 +169,34 @@ export  const Hooks=()=>{
                         function: el.title,
                         avatar: el.logoSpeaker[0].thumbUrl,
                         mail: el.email,
-
                     }
                 ))
         }));
         CreateLive()
     }
+
+    // Suppression des régles invitations
+
+    const handleClickDelete =(name)=>{
+        if(name === 1){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription", invitationValueChangeRules:false}));
+        }else if(name === 2){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ7", invitationValueChangeRules:false}));
+        } else if(name === 3){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ1", invitationValueChangeRules:false}));
+        }else if(name === 4){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH1", invitationValueChangeRules:false}));
+        }else if(name === 5){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription2", invitationValueChangeRules:false}));
+        }else if(name === 6){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ72", invitationValueChangeRules:false}));
+        } else if(name === 7){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ12", invitationValueChangeRules:false}));
+        }else if(name === 8){
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH12", invitationValueChangeRules:false}));
+        }
+    }
+
 
     return({
         generalOnChangeByName,
@@ -199,6 +220,9 @@ export  const Hooks=()=>{
         handleSubmit,
         displayThemes,
         values,
-        matchesMedia
+        matchesMedia,
+        handleClickDelete
     })
 }
+
+export default Hooks

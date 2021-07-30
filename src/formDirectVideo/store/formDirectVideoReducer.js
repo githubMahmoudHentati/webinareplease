@@ -1,6 +1,6 @@
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import {Form} from "antd";
-const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
+const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 const formDirectInitialState = {
 
@@ -11,6 +11,8 @@ const formDirectInitialState = {
     invitation:invitation(),
 
     socialTools: socialTools(),
+
+    constraintData: constraintData(),
 
     form : [],
 }
@@ -152,6 +154,18 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
         case 'SET_LiveForm' :
             return {...state,
                 form: action.payload
+            }
+
+        case 'SET_LiveInfo' :
+            const {general,configuration,socialTools}= action.payload
+            return  {...state,general,configuration,socialTools}
+
+        case "SET_FormDirectLiveConstraintDataOnchange":
+            const {constraintDataNameChange,constraintDataValueChange}=action.payload
+            const constraintDataOnOnchangeObj = {...state.constraintData,[constraintDataNameChange]: constraintDataValueChange}
+            return{
+                ...state,
+                constraintData:constraintDataOnOnchangeObj
             }
 
         default:{

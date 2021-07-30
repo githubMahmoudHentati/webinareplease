@@ -133,7 +133,7 @@ export const AccountSettingsReducer = (state = AccountSettingsInitialState, acti
                 ...state,
                 paginationAbonnement: PaginationAbonnementOnchangeObj
             }
-
+            
 
         default: {
             return state

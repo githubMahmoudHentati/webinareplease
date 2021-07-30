@@ -3,14 +3,18 @@ import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Switch, Radio, Ch
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
 import {EyeInvisibleOutlined, EyeTwoTone, InboxOutlined} from '@ant-design/icons';
-import {useSelector} from "react-redux";
-import {Hooks} from "../utils/hooks";
+import {useSelector,useDispatch} from "react-redux";
+import Hooks from "../utils/hooks";
 import {DraggerUpload} from "./DraggerUpload";
 import moment from "moment";
+import useCopy from '@react-hook/copy'
+import {setFormDirectLiveConstraintDataOnchange} from '../store/formDirectVideoAction'
 import { useTranslation } from 'react-i18next';
 
 
 export const Generals =({})=>{
+
+    const dispatch = useDispatch()
 
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t, i18n } = useTranslation();
@@ -23,6 +27,31 @@ export const Generals =({})=>{
     const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks()
     console.log("values",values)
 
+    const {copied, copy, reset} = useCopy(
+        values.general.liveLink+"/"+values.general.liveTitle
+    )
+
+    const copySuccess =async ()=>
+    {
+        await dispatch(setFormDirectLiveConstraintDataOnchange({
+            constraintDataNameChange: "leaveToast",
+            constraintDataValueChange: false
+        }))
+        copy()
+        values.constraintData.leaveToast&&await message.success({
+            content: 'lien partagé est copié',
+            duration: 2,
+            style: {
+                marginTop: '2vh',
+            },
+        })
+            .then(async () =>
+                await dispatch(setFormDirectLiveConstraintDataOnchange({
+                    constraintDataNameChange: "leaveToast",
+                    constraintDataValueChange: true
+                }))
+            )
+    }
 
     return(
         <Row gutter={[0, 30]}>
@@ -76,18 +105,17 @@ export const Generals =({})=>{
                     <Col span={24} className={"col-forms"}>
                         <Row justify={"space-between"} style={{width: '100%'}} gutter={[0, 0]}>
                             <Col xxl={22} xl={21} lg={20} md={19} sm={17} xs={14}>
-                                <Form.Item name="liveTitle" className={"form-item-style"}
-                                >
-                                    <Input name="liveTitle" onChange={generalOnChange}
-                                           placeholder={'www.empreinte.com/titrelive'}></Input>
-                                </Form.Item>
+                                    <Input disabled name="liveLink" onChange={generalOnChange}
+                                           placeholder={'www.empreinte.com/titrelive'}
+                                           value={values.general.liveLink+"/"+values.general.liveTitle}
+                                    ></Input>
                             </Col>
                             <Col>
                                 <Button style={{
                                     backgroundColor: darkMode === false ? "" : "#141414",
                                     border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)",
                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                }}>{t("formDirectVideo.Copier")}</Button>
+                                }}   onClick={copySuccess} >{t("formDirectVideo.Copier")}</Button>
                             </Col>
                         </Row>
 
@@ -134,7 +162,8 @@ export const Generals =({})=>{
                         <Form.Item name="startDate" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <DatePicker disabledDate={disablePastDate} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                            <DatePicker initialValues={values.general.startHour && moment(values.general.startHour, 'YYYY-MM-DD')}
+                                disabledDate={disablePastDate} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>

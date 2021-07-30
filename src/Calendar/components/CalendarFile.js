@@ -83,12 +83,11 @@ export function CalendarFile() {
         let month = (date.month() < 9) ? "0" + month_number.toString() : month_number.toString();
         let year = date.year()
         let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
-        let year_after = month_after == "01" ? date.year() + 1 : date.year();
-        if (mode === 'year')
+        let year_after = month_after=="01"?date.year()+1:date.year()
+        if(mode === 'year' )
             setAllow(false)
         else
             setAllow(true)
-        console.log("date", date, "mode", mode)
         await setDateTime(date)
         QueryCalendar({variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}, date)
     }
