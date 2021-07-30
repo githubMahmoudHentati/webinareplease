@@ -4,7 +4,6 @@ const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions 
 
 const ShowVideosINITIALSTATE = {
     ListVideos : [],
-    formPage: localStorage.getItem('form-page') || 'add',
     FilterVideos:FilterVideos(),
     paginationProps:paginationProps(),
     constraintDataShowVideo: showVideoConstraintData(),
@@ -62,12 +61,6 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
             return{
                 ...state,
                 valuesInfosLives:infosLivesObj
-            }
-            case "UPDATE_FORM_DIRECT_VIDEO":
-            const formPage = action.payload
-            return{
-                ...state,
-                formPage:formPage
             }
         default:{
             return state

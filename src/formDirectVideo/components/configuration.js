@@ -115,7 +115,8 @@ export const Configuration = () => {
                                 }}>{t("formDirectVideo.Participants")}</span>
                             </Col>
                             <Col>
-                                    <Switch value={values.configuration.switchSpeaker} name="switchSpeaker"
+                                    <Switch checked={values.configuration.switchSpeaker}
+                                            name="switchSpeaker"
                                             onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
                                     />
                             </Col>
@@ -123,7 +124,6 @@ export const Configuration = () => {
                             <Col span={24}>
                                 <Row>
                                     <List
-                                        className="list-speaker"
                                         className={`list-speaker ${values.configuration.SpeakerList.length > 3 ? "scrolling" : ""}`}
                                         itemLayout="horizontal"
                                         dataSource={values.configuration.SpeakerList}

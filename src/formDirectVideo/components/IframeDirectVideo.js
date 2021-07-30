@@ -19,7 +19,6 @@ import { useTranslation } from 'react-i18next';
 export const IframeDirectVideo =()=>{
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
-    const formPage= useSelector((state)=>state.ShowVideosReducerReducer.formPage);
     const [formLive, setFormLive] = useState([]);
     const setFormLiveAction=(e)=>{
         setFormLive(e)

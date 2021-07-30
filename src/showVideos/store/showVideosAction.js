@@ -51,9 +51,3 @@ export function setInfosLive(e){
         payload:e
     }
 }
-export function updateFormDirectVideo(e){
-    return{
-        type :"UPDATE_FORM_DIRECT_VIDEO",
-        payload:e
-    }
-}

@@ -14,7 +14,7 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives, handleClickAddLive,updateLive }=Hooks()
+    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive }=Hooks()
     const { t, i18n } = useTranslation();
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
@@ -28,7 +28,7 @@ function useActionMenu({record}) {
     const actionMenu = (
         <Menu className="menu">
             <Menu.Item onClick={()=>handleInfos()}><InfoCircleOutlined />{t("ShowVideo.infos")}</Menu.Item>
-            <Menu.Item onClick={()=>handleClickAddLive('edit')}><EditOutlined />{t("ShowVideo.Modifier")}</Menu.Item>
+            <Menu.Item onClick={()=>updateLive(record.id)}><EditOutlined />{t("ShowVideo.Modifier")}</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> {t("ShowVideo.Templates")}</Menu.Item>
             <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>

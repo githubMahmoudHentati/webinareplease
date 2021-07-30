@@ -28,6 +28,7 @@ export const BarHeader = () => {
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
         dispatch(setDirectSetting(0))
     }
+    const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
     return (
         <Row style={{width: "100%"}} justify={"space-between"}>
             <Col>
@@ -69,7 +70,7 @@ export const BarHeader = () => {
                         }}> {
                             matchesMedia.matches && directMenu === 5
                                 ?
-                                <span>{values.constraintData.crudOption + (formPage==='add' ? t("formDirectVideo.AddLive"): t("formDirectVideo.EditLive"))}</span>
+                                <span>{ isAddedForm ? t("formDirectVideo.AddLive"): t("formDirectVideo.EditLive")}</span>
                                 :
                                 matchesMedia.matches && directMenu === 0
                                     ?
@@ -91,7 +92,7 @@ export const BarHeader = () => {
                                                     ?
                                                     <span>{t("formDirectVideo.Templates")}</span>
                                                     :
-                                                    <span>{values.constraintData.crudOption + (formPage==='add' ? t("formDirectVideo.AddLive"): t("formDirectVideo.EditLive"))}</span>
+                                                    <span>{(isAddedForm ? t("formDirectVideo.AddLive"): t("formDirectVideo.Update") + ' : '+ values.general.liveTitle) }</span>
 
                         }
                         </span>
@@ -104,7 +105,7 @@ export const BarHeader = () => {
                         <Button onClick={cancelButton} className={"btn_add_live"} style={{fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseOutlined className={"icon_add_live"}/>}> <span className={"spn_add_live"}>{t("formDirectVideo.Cancel")}</span></Button>
                     </Col>
                     <Col>
-                        <Button className={"btn_add_live"} htmlType="submit" style={{fontFamily: "SF Pro Display",fontWeight: "normal" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={!values.general.liveAction?<CheckOutlined />:<VideoCameraOutlined />} type={"primary"}>{!values.general.liveAction?<span className={"spn_add_live"}>{t("formDirectVideo.Update")}</span>:<span className={"spn_add_live"}>{t("formDirectVideo.Diffuser")}</span>}</Button>
+                        <Button className={"btn_add_live"} htmlType="submit" style={{fontFamily: "SF Pro Display",fontWeight: "normal" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={values.general.liveAction?<CheckOutlined />: values.constraintData.crudOption==='Ajouter' ? <VideoCameraOutlined />: <EditOutlined />} type={"primary"}>{values.general.liveAction?<span className={"spn_add_live"}>{t("formDirectVideo.Validate")}</span>:<span className={"spn_add_live"}>{values.constraintData.crudOption==='Ajouter' ? t("formDirectVideo.Diffuser"): t("formDirectVideo.Update")}</span>}</Button>
                     </Col>
                 </Row>
             </Col>

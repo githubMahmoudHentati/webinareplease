@@ -5,7 +5,7 @@ import strip from "../../assets/stripe.png"
 import {AccountGeneralInformation} from "./accountGeneralInformation";
 import{SubscriptionTable} from "./subscriptionTable";
 import {useSelector} from "react-redux";
-import {Hooks} from "../utils/hooks";
+import Hooks from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
 
 export const AccountSubscription=()=>{

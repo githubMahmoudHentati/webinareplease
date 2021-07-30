@@ -5,8 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange,
-    updateFormDirectVideo
+    setShowVideoConstraintDataOnchange
 } from "../store/showVideosAction"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -238,23 +237,23 @@ export  const Hooks=()=> {
         clearTimeout(itemsRunAPI);
     }
     /*Click Add live */
-    const handleClickAddLive =(page)=>{
+    const handleClickAddLive = () =>{
         dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}));
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Ajouter"}))
 
         history.push("/FormDirectVideo")
-        localStorage.setItem('form-page', page)
+        localStorage.setItem('formPage', 'Ajouter')
         if(matchesMedia.matches){
             dispatch(setDirectSetting(5))
         }
-        dispatch(updateFormDirectVideo(page))
     }
 
     /*Click Update live */
     const updateLive= async (id)=>{
         localStorage.setItem('idLive', id);
         history.push("/FormDirectVideo")
+        localStorage.setItem('formPage', 'Modifier')
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
 
     }
