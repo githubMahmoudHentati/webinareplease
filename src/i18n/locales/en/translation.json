@@ -31,7 +31,7 @@
     "FirstName": "First name",
     "Email": "Email",
     "UsedAddress": "Oops, This email address is already used by another user",
-    "Ville": "City",
+    "City": "City",
     "Address": "Address",
     "NumberOfEmployees": "Number of employees",
     "choiceOne": "5-10 employees",

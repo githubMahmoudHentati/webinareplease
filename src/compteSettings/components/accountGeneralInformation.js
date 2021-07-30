@@ -113,7 +113,7 @@ export const AccountGeneralInformation = () => {
                                                            style={{marginBottom: 0}}
                                                 >
                                                     <Input value={values.generalInformation.firstName} name="firstName"
-                                                           placeholder={"Nom"}
+                                                           placeholder={t("CompteSettings.Nom")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
@@ -132,7 +132,7 @@ export const AccountGeneralInformation = () => {
                                                            style={{marginBottom: 0}}
                                                 >
                                                     <Input value={values.generalInformation.lastName} name="lastName"
-                                                           placeholder={"Prénom"}
+                                                           placeholder={t("CompteSettings.FirstName")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
@@ -155,7 +155,7 @@ export const AccountGeneralInformation = () => {
                                                                 if (isValidEmail(value)) {
                                                                     return Promise.resolve('value');
                                                                 }
-                                                                return Promise.reject('Veuillez entrer un mail valide');
+                                                                return Promise.reject(t('contactClient.EnterValidMail'));
                                                             },
                                                         }),
                                                     ]}
@@ -177,14 +177,14 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Ville")}  </span>
+                                  }}>{t("CompteSettings.City")}  </span>
                                             </Col>
                                             <Col span={24}>
                                                 <Form.Item name="city"
                                                            style={{marginBottom: 0}}
                                                 >
                                                     <Input value={values.generalInformation.city} name="city"
-                                                           placeholder={"Ville"}
+                                                           placeholder={t("CompteSettings.City")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
@@ -202,7 +202,7 @@ export const AccountGeneralInformation = () => {
                                                            style={{marginBottom: 0}}
                                                 >
                                                     <Input value={values.generalInformation.address} name='address'
-                                                           placeholder={"Adresse"}
+                                                           placeholder={t("CompteSettings.Address")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
@@ -248,7 +248,7 @@ export const AccountGeneralInformation = () => {
                                                 >
                                                     <Input value={values.generalInformation.postalCode}
                                                            name="postalCode"
-                                                           placeholder={"Code postale"}
+                                                           placeholder={t("CompteSettings.ZipCode")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
@@ -267,7 +267,7 @@ export const AccountGeneralInformation = () => {
                                                            style={{marginBottom: 0}}
                                                 >
                                                     <Input value={values.generalInformation.phone} name='phone'
-                                                           placeholder={"Téléphone"}></Input>
+                                                           placeholder={t("CompteSettings.Phone")}></Input>
                                                 </Form.Item>
                                             </Col>
                                         </Row>

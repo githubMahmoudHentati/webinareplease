@@ -7,9 +7,10 @@ import { useTranslation } from 'react-i18next';
 
 export const ForgetPassword =()=> {
     const history = useHistory()
-    const requiredFieldRule = [{required: true, message: 'Champs requis'}];
-    const {forgetPasswordOnChange,values}=Hooks()
     const { t, i18n } = useTranslation();
+    const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
+    const {forgetPasswordOnChange,values}=Hooks()
+
 
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>

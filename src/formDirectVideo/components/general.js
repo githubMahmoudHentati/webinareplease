@@ -13,8 +13,8 @@ import { useTranslation } from 'react-i18next';
 export const Generals =({})=>{
 
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-
-    const requiredFieldRule = [{required: true, message: 'Champs requis'}];
+    const { t, i18n } = useTranslation();
+    const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
 
     const isValidPassword = (password) => {
 
@@ -22,7 +22,7 @@ export const Generals =({})=>{
     }
     const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks()
     console.log("values",values)
-    const { t, i18n } = useTranslation();
+
 
     return(
         <Row gutter={[0, 30]}>
@@ -180,7 +180,7 @@ export const Generals =({})=>{
                                                 if (isValidPassword(value)) {
                                                     return Promise.resolve('value');
                                                 }
-                                                return Promise.reject('Minimum 8 caractéres avec au moins une majiscule, un chiffre et un caractère spéciale');
+                                                return Promise.reject(t("resetPassword.MinCharCapLetterMsg"));
                                             },
                                         }),
                                     ]}

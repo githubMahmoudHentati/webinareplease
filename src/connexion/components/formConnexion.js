@@ -43,7 +43,7 @@ export const FormConnexion =()=>{
         }
     }, []);
 
-    const requiredFieldRule = [{required: true, message: 'Champs requis'}];
+    const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
 
     const {Connexion}=GraphQLFetchData(form)
 

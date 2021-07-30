@@ -167,10 +167,10 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                                 <Col span={24}>
                                     <Form.Item name="city" className={"form-item-style"}
-                                               label={t("CompteSettings.Ville")}
+                                               label={t("CompteSettings.City")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="city" placeholder={t("CompteSettings.Ville")}></Input>
+                                               name="city" placeholder={t("CompteSettings.City")}></Input>
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>

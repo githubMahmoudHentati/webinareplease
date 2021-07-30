@@ -16,7 +16,7 @@ export const PackagePayementConstraints = () =>{
                 packStripe:'',
             }
         )
-    }
+    };
     const InputPackagePayement = () =>{
         return(
             {
@@ -27,10 +27,10 @@ export const PackagePayementConstraints = () =>{
                 postalCode:""
             }
         )
-    }
+    };
 
     return({
         ActiveCard,
         InputPackagePayement
     })
-}
+};
