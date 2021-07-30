@@ -59,7 +59,7 @@ export  const Hooks=()=> {
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
-           // fetchPolicy:  "cache-and-network",
+            fetchPolicy:  "cache-and-network",
             variables: { input : {
                     "limit": paginationProps.pageSize,
                     "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
@@ -227,8 +227,6 @@ export  const Hooks=()=> {
             
     }
     const handleClickDropdowMenu =(e)=>{
-        // dispatch id list Video
-     //   dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e})); no need for this
         // dispatch id list Video
         dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
     }

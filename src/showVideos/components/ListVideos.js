@@ -29,17 +29,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
   // use Selector redux
-  const [order, SetOrder] = useState(null); // setOrder
 
-  // dispatch order Table
-  useEffect(() => {
-    dispatch(
-      setPaginationProps({
-        PaginationPropsNameChange: "order",
-        PaginationPropsValueChange: order,
-      })
-    );
-  }, [order]);
   // dispatch current Table
   useEffect(() => {
     dispatch(
@@ -118,7 +108,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
   const handleTableChange = (pagination, filters, sorter, extra) => {
     console.log("paginationLives:", pagination, filters, sorter, extra);
     setCurrentPage(pagination.current);
-    SetOrder(sorter.order);
     setPageSize(pagination.pageSize);
   };
   const DataTable = () => (
