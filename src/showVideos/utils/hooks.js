@@ -220,10 +220,7 @@ export  const Hooks=()=> {
 
  })
  
- },3000)
-
- dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
-           
+ },3000)           
             
     }
     const handleClickDropdowMenu =(e)=>{

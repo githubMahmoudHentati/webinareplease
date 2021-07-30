@@ -30,27 +30,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
   //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
   // use Selector redux
 
-  // dispatch current Table
-  useEffect(() => {
-    dispatch(
-      setPaginationProps({
-        PaginationPropsNameChange: "current",
-        PaginationPropsValueChange: currentPage,
-      })
-    );
-      if(document.querySelector(".showVideo"))
-        document.querySelector(".showVideo").scrollIntoView();
-  }, [currentPage]);
-  // dispatch page Size Table
-  useEffect(() => {
-    dispatch(
-      setPaginationProps({
-        PaginationPropsNameChange: "pageSize",
-        PaginationPropsValueChange: pageSize,
-      })
-    );
-  }, [pageSize]);
-
   const onSelectChange = (selectedCheck) => {
     //uncheck checkbox
     let filter = [];
@@ -105,10 +84,46 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
     setCurrentPage(DEFAULT_PAGE_NUMBER);
   };
 
-  const handleTableChange = (pagination, filters, sorter, extra) => {
+  const handleTableChange = async(pagination, filters, sorter, extra) => {
     console.log("paginationLives:", pagination, filters, sorter, extra);
-    setCurrentPage(pagination.current);
-    setPageSize(pagination.pageSize);
+  //  setCurrentPage(pagination.current);
+   // SetOrder(sorter.order);
+  //  setPageSize(pagination.pageSize);
+  /************set data to store***************** */
+    //dispath sort
+    if(valuePagination.order !== sorter.order)
+  await  dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "order",
+        PaginationPropsValueChange: sorter.order === false ?  "" : sorter.order,
+      })
+    );
+    //dispatch current page
+    if(valuePagination.current !== pagination.current)
+   { await dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "current",
+        PaginationPropsValueChange: pagination.current,
+      })
+    );
+    if(document.querySelector(".showVideo"))
+    document.querySelector(".showVideo").scrollIntoView();}
+    //dispatch size page
+    if(valuePagination.pageSize !== pagination.pageSize)
+    await dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "pageSize",
+        PaginationPropsValueChange: pagination.pageSize,
+      })
+    );
+    if(valuePagination.columnKey !== sorter.columnKey)
+    await dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "columnKey",
+        PaginationPropsValueChange: (sorter.columnKey),
+      })
+    );
+    
   };
   const DataTable = () => (
     <div
@@ -125,7 +140,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
         onChange={handleTableChange}
         pagination={{
           pageSize: paginationProps.pageSize,
-          current: currentPage ,
+          current: valuePagination.current ,
           total: dataSource.totalElements,
           showQuickJumper: true,
           showSizeChanger: true,
@@ -138,7 +153,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
     DataTable,
     selectedRow,
     selectedRowKeys,
-    currentPage,
     pageSize,
     resetPagination,
   };

@@ -45,15 +45,15 @@ function ShowVideos() {
         {
             title: 'Id',
             dataIndex: "id",
-            key: '1',
+            key: '0',
             className: "columnId",
-            sortDirections: ['descend', 'ascend'],
+            sortOrder:paginationProps.columnKey === "0" &&  paginationProps.order,
             sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Aperçu',
             dataIndex: 'logo',
-            key:'2',
+            key:'4',
             className: "columnFeed",
             render: image =>
                 <div className={"div_apercu"}>
@@ -63,10 +63,10 @@ function ShowVideos() {
         {
             title: 'Titre',
             dataIndex: 'title',
-            key: '3',
+            key: '1',
             className: "columnTitle",
             sorter: (a, b) => a.title.length - b.title.length,
-            sortDirections: ['descend', 'ascend'],
+            sortOrder:paginationProps.columnKey === "1" &&  paginationProps.order,
             render:(titre , record) =>{
                 return(
                     <div className="div_titre"><span>{record.title}</span></div>
@@ -76,10 +76,10 @@ function ShowVideos() {
         {
             title: 'Date',
             dataIndex: 'liveDate',
-            key: '4',
+            key: '2',
             className: "columnDate",
             sorter: (a, b) => a.date - b.date,
-            sortDirections: ['descend','ascend'],
+            sortOrder:paginationProps.columnKey === "2" &&  paginationProps.order,
             render:(date , record) =>{
                 return(
                     <div className="div_date">{record.liveDate}</div>
@@ -89,10 +89,10 @@ function ShowVideos() {
         {
             title: 'Etat',
             dataIndex: 'status',
-            key: '5',
+            key: '3',
             className: "columnState",
             sorter: (a, b) => a.status - b.status,
-            sortDirections: ['descend','ascend'],
+            sortOrder:paginationProps.columnKey === "3" &&  paginationProps.order,
             render: status => (
                 <div className={"div-status"}>
                     {
