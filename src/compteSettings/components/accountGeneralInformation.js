@@ -10,7 +10,7 @@ import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../../
 import {setConstraintDataOnchange} from "../store/accountSettingsAction";
 import {useHistory} from "react-router-dom";
 import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 const {Option} = Select;
 
@@ -27,7 +27,7 @@ export const AccountGeneralInformation = () => {
         darkMode
     } = Hooks(UpdateAccountSetting)
     console.log("generalInformation", values)
-    const { t, i18n } = useTranslation();
+    const {t, i18n} = useTranslation();
     const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
 
     const isValidEmail = (email) => {
@@ -228,9 +228,12 @@ export const AccountGeneralInformation = () => {
                                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                     }
                                                 >
-                                                    <Option name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
-                                                    <Option name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
-                                                    <Option name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
+                                                    <Option name="numberPerson" key={1}
+                                                            value="1">{t("CompteSettings.choiceOne")}</Option>
+                                                    <Option name="numberPerson" key={2}
+                                                            value="2">{t("CompteSettings.choiceTwo")}</Option>
+                                                    <Option name="numberPerson" key={3}
+                                                            value="3">{t("CompteSettings.choiceThree")}</Option>
                                                 </Select>
                                             </Col>
                                         </Row>

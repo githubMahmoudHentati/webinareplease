@@ -104,7 +104,9 @@
     "ContactUsWithReq": "Contact us and specify your requests",
     "YourMessage": "Your message",
     "envoyer": "Send",
-    "EnterValidMail": "Please enter a valid email"
+    "EnterValidMail": "Please enter a valid email",
+    "ErrorMsgOne":"your message has been sent successfully",
+    "ErrorMsgTwo": "Oops!!! An error occurs"
   },
   "forgetPassword": {
     "FieldsRequired": "Fields required",
@@ -125,6 +127,7 @@
     "General": "General",
     "Configuration": "Setup",
     "Invitations": "Invitations",
+    "SuccessCopyMsg":"shared link is copied",
     "SocialTools": "Social tools",
     "Templates": "Templates",
     "Themes": "Themes",
@@ -322,6 +325,7 @@
     "Reset": "Reset",
     "SuccessMsg": "This video has been successfully deleted",
     "ErrorDelOne":"Oops!!! an error has occurred",
-    "ErrorDelTwo": "Oops!!! this video does not exist"
+    "ErrorDelTwo": "Oops!!! this video does not exist",
+    "SuccessPassMsg": "Your password has been successfully changed"
   }
 }

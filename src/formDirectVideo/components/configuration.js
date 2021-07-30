@@ -120,7 +120,7 @@ export const Configuration = () => {
                                             onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
                                     />
                             </Col>
-                            {values.configuration.SpeakerList.length > 1 && values.configuration.switchSpeaker &&
+                            {values.configuration.SpeakerList && values.configuration.SpeakerList.length > 1 && values.configuration.switchSpeaker &&
                             <Col span={24}>
                                 <Row>
                                     <List
@@ -270,7 +270,7 @@ export const Configuration = () => {
                                     <Col>
                                         <Form.Item name="liveAutomaticArchiving" className={"form-item-style"}
                                         >
-                                            <Switch name="liveAutomaticArchiving"
+                                            <Switch name="liveAutomaticArchiving" checked={values.configuration.liveAutomaticArchiving}
                                                     onChange={(value) => configurationOnChangeByName(value, "liveAutomaticArchiving")}
                                             />
                                             <Tooltip placement="right"

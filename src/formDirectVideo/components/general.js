@@ -10,6 +10,7 @@ import moment from "moment";
 import useCopy from '@react-hook/copy'
 import {setFormDirectLiveConstraintDataOnchange} from '../store/formDirectVideoAction'
 import { useTranslation } from 'react-i18next';
+import i18n from '../../i18n/index';
 
 
 export const Generals =({})=>{
@@ -39,7 +40,7 @@ export const Generals =({})=>{
         }))
         copy()
         values.constraintData.leaveToast&&await message.success({
-            content: 'lien partagé est copié',
+            content: i18n.t('formDirectVideo.SuccessCopyMsg'),
             duration: 2,
             style: {
                 marginTop: '2vh',

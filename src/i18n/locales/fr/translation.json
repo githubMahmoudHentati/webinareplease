@@ -109,7 +109,9 @@
     "ContactUsWithReq": "Contactez-nous et présicez vos besions",
     "YourMessage": "Votre message",
     "envoyer": "Envoyer",
-    "EnterValidMail": "Veuillez entrer un mail valide"
+    "EnterValidMail": "Veuillez entrer un mail valide",
+    "ErrorMsgOne": "votre message a été envoyé avec succès",
+    "ErrorMsgTwo": "Oops!!! il y'a un erreur se produit"
   },
   "forgetPassword": {
     "FieldsRequired": "Champs requis",
@@ -131,7 +133,7 @@
     "Configuration": "Configuration",
     "Invitations": "Invitations",
     "Emails": "E-mails",
-
+    "SuccessCopyMsg": "lien partagé est copié",
     "SocialTools": "Outils social",
     "Templates": "Templates",
     "Themes": "Thèmes",
@@ -329,6 +331,7 @@
     "Reset": "Réinitialiser",
     "SuccessMsg":"cet vidéo a été supprimée avec succès",
     "ErrorDelOne": "Oops!!! il y'a un erreur se produit",
-    "ErrorDelTwo": "Oops!!! cet vidéo n'existe pas"
+    "ErrorDelTwo": "Oops!!! cet vidéo n'existe pas",
+    "SuccessPassMsg": "Votre mot de passe a été modifié avec succès"
   }
 }
