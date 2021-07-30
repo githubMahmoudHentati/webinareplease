@@ -14,7 +14,7 @@ export const GraphQLFetchData=()=> {
     const {error_getLives}=StatusMessage()
 
     // use Query to fetch Data
-    const {loading:calendar_loadingNow, data: GetCalendarDataNow}
+   /* const {loading:calendar_loadingNow, data: GetCalendarDataNow}
         = useQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
@@ -39,7 +39,7 @@ export const GraphQLFetchData=()=> {
             }
 
         }
-    })
+    })*/
 
     // mutation delete lang from table of event
     const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
@@ -52,7 +52,7 @@ export const GraphQLFetchData=()=> {
 
 
     return({
-        GetCalendarDataNow,
+       // GetCalendarDataNow,
         DeleteItemsMutation,
     })
 }

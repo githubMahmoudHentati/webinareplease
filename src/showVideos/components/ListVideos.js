@@ -20,7 +20,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
   const valuePagination = useSelector(
-    (state) => state.ShowVideosReducerReducer.PaginationProps
+    (state) => state.ShowVideosReducerReducer.paginationProps
   );
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -69,8 +69,13 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
         return !selectedCheck.includes(item.id);
       })
       .map((ele) => ele.id);
-
-    selectedCheck = [...selectedRowKeys, ...selectedCheck];
+    //filter the current state
+    /*let filterState = selectedRowKeys.filter((item) => {
+        return dataSource.content.includes(item.id);
+      })*/
+    //concatenate state and selectedcheckboxes
+    selectedCheck = [...valuePagination.id, ...selectedCheck];
+    //remove some items
     let uniqItems = [...new Set(selectedCheck)];
     let uniqItemsFilter = uniqItems.filter((item) => {
       return !filter.includes(item);
@@ -91,7 +96,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
     setSelectedRowKeys(uniqItemsFilter);
   };
   const rowSelection = {
-    selectedRowKeys,
+    selectedRowKeys: valuePagination.id,
     onChange: onSelectChange,
   };
 

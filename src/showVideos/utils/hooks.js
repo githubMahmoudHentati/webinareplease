@@ -24,7 +24,7 @@ const {generals,configuration,invitation,socialTools,constraintData} = FormDirec
 let itemsRunAPI , itemsDeleted
 
 export  const Hooks=()=> {
-
+    let idLiveToDelete = []
     const [visible , setVisible] = useState(false)
     const history = useHistory();
     const dispatch = useDispatch()
@@ -59,7 +59,7 @@ export  const Hooks=()=> {
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
-            fetchPolicy:  "cache-and-network",
+           // fetchPolicy:  "cache-and-network",
             variables: { input : {
                     "limit": paginationProps.pageSize,
                     "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
@@ -85,7 +85,23 @@ export  const Hooks=()=> {
      
     })
     // mutation delete lang from table of event
-    const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
+    const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items,{
+        variables : {idLive: idLiveToDelete},
+        context: { clientName: "second" },
+        onCompleted: (data)=>{
+            if(data.deleteLive.code === "200"){
+                success_Delete()
+                GETDATEVIDEO();
+            }else if(data.deleteLive.code === "400"){
+                error_Delete(400)
+            }else if(data.deleteLive.code === "404"){
+                error_Delete(404)
+            }
+        }
+    })
+    //
+      // mutation delete lang from table of event
+      const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
         variables : {idLive:paginationProps.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
@@ -174,8 +190,10 @@ export  const Hooks=()=> {
 
         // Time out to Run API Delete
         itemsRunAPI = setTimeout(async()=>{
-       await DeleteItemsMutation()
-        await GETDATEVIDEO()
+       await DeleteItemsMutation().then(async()=> {
+          await GETDATEVIDEO();
+        await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));})
+        
         },3000)
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
@@ -186,31 +204,31 @@ export  const Hooks=()=> {
 
     // Delete One Row
     //fonction pour supprimer un live
-    const handleDeleteOneRow =  (e) =>{
+    const handleDeleteOneRow =  async(liveId) =>{
+ // dispatch show Alert
+    idLiveToDelete.push(liveId)
+  dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
+ setTimeout(()=>{
+     dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
+ },3000)
 
-            // dispatch show Alert
-            dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
-            setTimeout(()=>{
-                dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
-            },3000)
+ // Time out to Run API Delete
+ setTimeout(()=>{
+ DeleteItemMutation().then(()=> {
+     //do s.th
+  //GETDATEVIDEO();
 
-            // dispatch list Video
-            dispatch(setshowVideosActions({data:DataVideos.data.filter(item=>{return item.id !== e[0]})}))
+ })
+ 
+ },3000)
 
-            // deleted row
-            itemsDeleted = DataVideos.data.filter(item => {
-                return item.id === e[0]
-            })
-
-        // Time out to Run API Delete
-        itemsRunAPI =  setTimeout(()=>{
-            DeleteItemsMutation()
-        },3000)
-
+ dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
+           
+            
     }
     const handleClickDropdowMenu =(e)=>{
         // dispatch id list Video
-        dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e}));
+     //   dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:e})); no need for this
         // dispatch id list Video
         dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
     }
@@ -286,6 +304,7 @@ export  const Hooks=()=> {
         handleInfos,
         handleCancel,
         infosLives,
-        updateLive
+        updateLive,
+        GETDATEVIDEO
     })
 }

@@ -32,7 +32,7 @@ function useActionMenu({record}) {
             <Menu.Item onClick={()=>updateLive(record.id)}><EditOutlined />Modifier</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> Templates</Menu.Item>
-            <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />Supprimer</Menu.Item>
+            <Menu.Item onClick={()=>handleDeleteOneRow(record.id)}><DeleteOutlined />Supprimer</Menu.Item>
         </Menu>
     );
     //fonction handleExport and show modal infos
