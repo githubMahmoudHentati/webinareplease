@@ -28,6 +28,7 @@ export function CalendarFile() {
     const [modalInfo, setModalInfo] = useState({});
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
     !darkMode && document.documentElement.style.setProperty('--modal_background', "white");
+    const calendarProps = useSelector((state) => state.CalendarReducer)
 
     const VisibleModal = useSelector((state) => state.CalendarReducer);
 
@@ -76,20 +77,20 @@ export function CalendarFile() {
     })
     const {t, i18n} = useTranslation();
     const OnPanelChange = async (date, mode) => {
-        console.log("OnPanelChange")
-        let month_number = date.month() + 1
-        let month_before = month_number === 1 ? "12" : (date.month() < 9) ? "0" + (month_number - 1).toString() : (month_number - 1).toString();
-        let year_before = month_before === "12" ? date.year() - 1 : date.year();
-        let month = (date.month() < 9) ? "0" + month_number.toString() : month_number.toString();
-        let year = date.year()
-        let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
-        let year_after = month_after=="01"?date.year()+1:date.year()
-        if(mode === 'year' )
-            setAllow(false)
-        else
-            setAllow(true)
-        await setDateTime(date)
-        QueryCalendar({variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}, date)
+            await SetActiveCalendarEvents(false)
+            let month_number = date.month() + 1
+            let month_before = month_number === 1 ? "12" : (date.month() < 9) ? "0" + (month_number - 1).toString() : (month_number - 1).toString();
+            let year_before = month_before === "12" ? date.year() - 1 : date.year();
+            let month = (date.month() < 9) ? "0" + month_number.toString() : month_number.toString();
+            let year = date.year()
+            let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
+            let year_after = month_after=="01"?date.year()+1:date.year()
+            if(mode === 'year' )
+                setAllow(false)
+            else
+                setAllow(true)
+            await setDateTime(date)
+            QueryCalendar({variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}, date)
     }
 
     const getListData = (value) => {
@@ -125,28 +126,29 @@ export function CalendarFile() {
 
     const DateCellRender = (value) => {
         const listData = getListData(value);
-        console.log("allow", allow);
         return (
-            <div>
+            <div  style={{height:"100%" , width:'100%;'}} onClick={() => selectDate(value)}>
                 {
                     allow &&
-                    <ul className="events">
-                        {console.log("listData", listData)}
+                    <ul className="events" style={{height:"100%" , width:'100%;'}}>
                         {listData.map((item, index) => {
                             console.log("itemmodal" + item.id, item)
                             return (
                                 <div key={item.id}>
-                                    <Tag className={"btn_error"}
-                                         color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
-                                         onClick={() => onShowModal(item)}>
-                                        <Badge
-                                            color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
-                                            text={item.content} style={{
-                                            color: "#007fcb",
-                                            borderRadius: "2px",
-                                            opacity: !item.style && "0.3"
-                                        }}/>
-                                    </Tag>
+                                  <div >
+                                      <Tag className={"btn_error"}
+                                           color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
+                                           onClick={() => onShowModal(item)}>
+                                          <Badge
+                                              color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
+                                              text={item.content} style={{
+                                              color: "#007fcb",
+                                              borderRadius: "2px",
+                                              opacity: !item.style && "0.3"
+                                          }}/>
+                                      </Tag>
+                                  </div>
+
 
                                 </div>
                             )
@@ -176,32 +178,29 @@ export function CalendarFile() {
     }
 
     const selectDate = (e) => {
-        console.log("selectDate**************")
-        SetActiveCalendarEvents(true)
+         SetActiveCalendarEvents(true);
         SetCalendarEvents(e)
-        dispatch(setCalendarOnchange({
-            CalendarNameChange: "activeCalendar",
+         dispatch(setCalendarOnchange({
+             CalendarNameChange: "activeCalendar",
 
-            CalendarValueChange: true
+             CalendarValueChange: true
         }))
         console.log(' CalendarValueChange')
     }
 
     return (
         <div className={"CalendarFile"}>
-            {console.log("activeCalendarEvents", activeCalendarEvents)}
-            {console.log(" x.matches", x.matches)}
             {
                 x.matches ?
-                    activeCalendarEvents ?
+                    activeCalendarEvents && calendarProps.calendar.activeCalendar ?
                         <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
                                         GetCalendarDataNow={GetCalendarDataNow}/>
                         :
                         <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
-                                  onPanelChange={OnPanelChange} onSelect={() => selectDate()}/>
+                                  onPanelChange={OnPanelChange}/>
                     :
                     <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
-                              onPanelChange={OnPanelChange} onSelect={selectDate}/>
+                              onPanelChange={OnPanelChange}/>
             }
             <Modal
                 visible={VisibleModal.calendarVisible.visible}

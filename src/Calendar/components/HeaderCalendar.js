@@ -24,7 +24,7 @@ function HeaderCalendar() {
     const {t, i18n} = useTranslation();
     // handle click arrow calendar
     const handleClickArrowCalendar = async () =>{
-        if(x.matches && calendarProps.calendar.activeCalendar === true){
+        if(x.matches && calendarProps.calendar.activeCalendar){
             await   dispatch(setCalendarOnchange({
                 CalendarNameChange: "activeCalendar",
                 CalendarValueChange: false

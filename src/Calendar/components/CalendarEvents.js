@@ -15,9 +15,9 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
 
     const getListData= (calenderEventClick)=>{
         let listData =[];
-        if (calendarValues) {
-
+        if (calendarValues && calendarValues.length) {
             calendarValues.forEach((element) => {
+               if(calenderEventClick)
                 switch ((calenderEventClick.year()+"-"+calenderEventClick.month()+"-"+calenderEventClick.date())) {
                     case (moment(element.date.date , ).year()+"-"+moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
                         listData=[...listData,{id:(element.id),type:element.type , content:element.content,style:element.date.isAMomentObject,date:element.date.date}]
