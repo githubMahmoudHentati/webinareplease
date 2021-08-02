@@ -50,7 +50,7 @@ export  const Hooks=()=> {
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",paginationProps)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",values)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -170,10 +170,33 @@ export  const Hooks=()=> {
             FilterVideosValueChange: dateStringValue
         }));
     }
+    /* Function change RangePicker */
+    const onChangeRange = (name,datesValue,dateStringsValue) =>{
+        //console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+        console.log("handleChangeValuesRanges",name, dateStringsValue)
+        dispatch(setFilterVideosActions({
+            FilterVideosNameChange: name,
+            FilterVideosValueChange: dateStringsValue
+        }));
+    }
     /*Filtrer Videos*/
     const handleFiltrerVideos = () =>{
      console.log("handleFiltrerVideos" , values)
       /*  GETDATEVIDEO()*/
+        GETDATEVIDEO({
+            variables:
+                {
+                    input : {
+                        "limit": paginationProps.pageSize,
+                        "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                        "order_dir": paginationProps.order,
+                        "order_column": paginationProps.columnKey,
+                        "search_word":values.search,
+                        "date":values.date,
+                        "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+                    }
+                }}
+        )
     }
     /*Delete Rows*/
     const handleClickDeleteIcon = async() =>{
@@ -302,6 +325,7 @@ export  const Hooks=()=> {
         handleCancel,
         infosLives,
         updateLive,
-        GETDATEVIDEO
+        GETDATEVIDEO,
+        onChangeRange
     })
 }

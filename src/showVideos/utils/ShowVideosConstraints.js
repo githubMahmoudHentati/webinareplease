@@ -7,7 +7,7 @@ export const ShowVideosList = ()=>{
             {
                 search:"",
                 periode:"",
-                date:"",
+                date:["",""],
                 contributeur:"",
                 type:"tous"
             }

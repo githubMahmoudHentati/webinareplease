@@ -6,12 +6,14 @@ import {useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
 import {Hooks} from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
-
+import moment from 'moment';
 const { Option } = Select;
 let clicked = false;
 
+const { RangePicker } = DatePicker;
+
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia }=Hooks()
+    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , onChangeRange }=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
@@ -161,22 +163,14 @@ function HeaderVideos() {
                   <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
 
                       <div className="div1_div_Filter">
-                          <Select
-                              className="select_div1_div_Filter"
-                              name="periode" onChange={handleHeaderSelect}
-                              placeholder={t("ShowVideo.SelectPeriod")}
-                              optionFilterProp="children"
-                              filterOption={(input, option) =>
-                                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                              }
-                          >
-                              <Option name="periode" value="Semaine">{t("ShowVideo.Week")}</Option>
-                              <Option name="periode" value="Mois">{t("ShowVideo.Month")}</Option>
-                              <Option name="periode" value="Trimestre">{t("ShowVideo.Term")}</Option>
-                              <Option name="periode" value="Semestre">{t("ShowVideo.Semester")}</Option>
-                              <Option name="periode" value="Année">{t("ShowVideo.Year")}</Option>
-                          </Select>
-                          <DatePicker placeholder={t("ShowVideo.SelectDate")}  classNmae="datepicker_div1_div_Filter"  onChange={(momentValue,stringDateValue)=>handleChangeDatePicker("date",momentValue,stringDateValue)}/>
+                          <RangePicker
+                              className="range_div1_div_Filter"
+                              ranges={{
+                                  Today: [moment(), moment()],
+                                  'This Month': [moment().startOf('month'), moment().endOf('month')],
+                              }}
+                              onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
+                          />
                       </div>{/*./div1_div_Filter*/}
 
                       <div className="div2_div_Filter">
