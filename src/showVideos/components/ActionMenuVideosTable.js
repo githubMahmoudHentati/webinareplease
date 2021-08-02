@@ -79,7 +79,7 @@ function useActionMenu({record}) {
                 record.status === -1
                        ?
                         <Tooltip title={t("ShowVideo.Diffuser")}>
-                            <Button className={"btn_Visualiser_diffuser"} style={{
+                            <Button className={"btn_Visualiser_diffuser extra-margin"} style={{
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
