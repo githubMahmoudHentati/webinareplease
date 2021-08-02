@@ -131,20 +131,17 @@ function HeaderVideos() {
                       style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}
                       className="inputFilter"
                       placeholder={t("ShowVideo.Search")}
-                      prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "RGBA(255, 255, 255, 0.15)", marginLeft: "10px" }}/>}
+                      prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.85)", marginLeft: "10px" }}/>}
                       suffix={
                           <Tooltip title={t("ShowVideo.Filter")}>
                           <div
                               onClick={handlClickSuffix}
                               className="filter_icon"
                           >
-                              {darkMode===false
 
-                              ?
-                                  <FilterOutlined id={darkMode&&activeIcon===true?"activeIcon":""} className="class_icon_filter"/>
-                              :
-                                  <FilterOutlined style={{color:"RGBA(255, 255, 255, 0.15)"}} className="class_icon_filter"/>
-                              }
+
+                                  <FilterOutlined id={darkMode&&activeIcon===true?"activeIcon":""} style={{color: darkMode === true ? "rgba(255, 255, 255, 0.85)" : ""}} className="class_icon_filter"/>
+
 
                           </div>
                           </Tooltip>

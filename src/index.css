@@ -287,7 +287,7 @@ body{
     background-color: var(--card_color) !important;
     color: var(--white_color) !important;
 }
-.ant-input{
+.ant-input, .ant-input[disabled]{
     background-color: var(--card_color);
     color: var(--white_color) ;
     border: 1px solid var(--border_color) ;
@@ -513,7 +513,18 @@ body{
 .ant-picker-calendar-date-today{
     background-color: var(--option-background) !important;
 }
-
+.ant-picker-time-panel-cell .ant-picker-time-panel-cell-inner{
+color: var(--white_color) !important;
+}
+.ant-picker-time-panel-cell .ant-picker-time-panel-cell-inner:hover{
+    color: rgba(0, 0, 0, 0.85) !important;    
+    }
+.ant-picker-time-panel-cell.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner{
+    color: rgba(0, 0, 0, 0.85) !important;
+}
+.ant-picker-calendar-date-content .notes-month{
+    color: var(--white_color) !important;
+}
 
 
 

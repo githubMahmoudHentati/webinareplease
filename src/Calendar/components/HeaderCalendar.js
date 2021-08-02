@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import "../Calendar.scss"
 import {CalendarReducer} from "../store/calendarReducer";
 import Calendar from "../Calendar";
-import {setCalendarOnchange} from "../store/calendarAction";
+import {setCalendarOnchange, setCalendarVisibleOnchange} from "../store/calendarAction";
 import { useTranslation } from 'react-i18next';
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
@@ -23,16 +23,17 @@ function HeaderCalendar() {
     console.log("calendarProps", calendarProps)
     const {t, i18n} = useTranslation();
     // handle click arrow calendar
-    const handleClickArrowCalendar = () => {
-        if (x.matches && calendarProps.calendar.activeCalendar === true) {
-            dispatch(setCalendarOnchange({
+    const handleClickArrowCalendar = async () =>{
+        if(x.matches && calendarProps.calendar.activeCalendar === true){
+            await   dispatch(setCalendarOnchange({
                 CalendarNameChange: "activeCalendar",
                 CalendarValueChange: false
             }))
-        } else {
-            history.push('/showVideos')
         }
-
+        else {
+            await  history.push('/showVideos')
+        }
+        await dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange:"visible",CalendarVisibleValueChange:false}));
     }
 
     return (

@@ -7,25 +7,22 @@ import * as constantMedia from './utils/data';
 import{PrincipalPage} from "../utils/components/principalPage";
 import {useSelector , useDispatch} from "react-redux";
 import {setDarkMode} from "../utils/redux/actions";
-import {setshowVideosActions} from "./store/showVideosAction";
+import {setshowVideosActions, setShowVideoConstraintDataOnchange} from "./store/showVideosAction";
 import {ShowVideosReducerReducer} from "./store/showVideosReducer";
-import {useLazyQuery,useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./utils/graphQL";
 import {Hooks} from "./utils/hooks";
 import { Spin } from 'antd';
 import './showVideos.scss'
+import { useQuery } from "@apollo/react-hooks";
 import { useTranslation } from 'react-i18next';
+
 
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
 
 function ShowVideos() {
     const { t, i18n } = useTranslation();
-
     const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
-
-    useEffect(()=>{
-        //window.scrollTo(0, 0);// scroll window with the pagination
-    })
+    const {paginationProps ,  values, GETDATEVIDEO }=Hooks()
 
     const {DeleteItemsMutation}=GraphQLFetchData()
 
@@ -50,14 +47,16 @@ function ShowVideos() {
         {
             title: 'Id',
             dataIndex: "id",
-            key: '1',
-            sortDirections: ['descend', 'ascend'],
+            key: '0',
+            className: "columnId",
+            sortOrder:paginationProps.columnKey === "0" &&  paginationProps.order,
             sorter: (a, b) => a.id - b.id,
         },
         {
             title: t("ShowVideo.Overview"),
             dataIndex: 'logo',
-            key:'2',
+            key:'4',
+            className: "columnFeed",
             render: image =>
                 <div className={"div_apercu"}>
                 <img  src={image} className={"img_aperçu"}/>
@@ -66,9 +65,10 @@ function ShowVideos() {
         {
             title: t("ShowVideo.Titre"),
             dataIndex: 'title',
-            key: '3',
+            key: '1',
+            className: "columnTitle",
             sorter: (a, b) => a.title.length - b.title.length,
-            sortDirections: ['descend', 'ascend'],
+            sortOrder:paginationProps.columnKey === "1" &&  paginationProps.order,
             render:(titre , record) =>{
                 return(
                     <div className="div_titre"><span>{record.title}</span></div>
@@ -78,9 +78,10 @@ function ShowVideos() {
         {
             title: 'Date',
             dataIndex: 'liveDate',
-            key: '4',
+            key: '2',
+            className: "columnDate",
             sorter: (a, b) => a.date - b.date,
-            sortDirections: ['descend','ascend'],
+            sortOrder:paginationProps.columnKey === "2" &&  paginationProps.order,
             render:(date , record) =>{
                 return(
                     <div className="div_date">{record.liveDate}</div>
@@ -90,9 +91,10 @@ function ShowVideos() {
         {
             title: t("ShowVideo.State"),
             dataIndex: 'status',
-            key: '5',
+            key: '3',
+            className: "columnState",
             sorter: (a, b) => a.status - b.status,
-            sortDirections: ['descend','ascend'],
+            sortOrder:paginationProps.columnKey === "3" &&  paginationProps.order,
             render: status => (
                 <div className={"div-status"}>
                     {
@@ -116,7 +118,9 @@ function ShowVideos() {
         },
 
     ];
-
+useEffect(()=>{
+    GETDATEVIDEO()
+},[])
      const data = {
          totalElements:DataVideos.recordsFiltered,
          content:DataVideos.data,
@@ -134,7 +138,6 @@ function ShowVideos() {
         dataSource: data,
         updateEntityPath: 'update-product',
     });
-
     return(
         <Spin  size="middle"  spinning={loadingSpinner.loading}>
        <PrincipalPage>

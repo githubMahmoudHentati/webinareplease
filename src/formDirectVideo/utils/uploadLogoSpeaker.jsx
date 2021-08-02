@@ -19,7 +19,7 @@ export const UploadLogoSpeaker = () => {
         dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:[]}))
     }
 
-    const onSave = async (file)=>{
+    const onSave = async (file, fileInfos)=>{
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
         axios({
@@ -35,7 +35,7 @@ export const UploadLogoSpeaker = () => {
             dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:(
                 [{
                     uid: '-1',
-                    name: 'xxx.png',
+                    name: (fileInfos && fileInfos.file.name )||'xxx.png',
                     status: 'done',
                     url: result.data.data.uploadLogo,
                     thumbUrl: result.data.data.uploadLogo,
@@ -74,7 +74,7 @@ export const UploadLogoSpeaker = () => {
         for (let p of formData) {
             console.log("ppppppppppp",p);
         }
-        onSave(formData)
+        onSave(formData, info)
     }
 
     useEffect(async () => {
