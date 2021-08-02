@@ -173,7 +173,7 @@ export const SocialTools=()=>{
                                                             values.general.fileList[0].thumbUrl : defaultImg }
                                                         style={{height: "100%", width: "100%"}}/>
                                                 </Col>
-                                                <Col span={24}>
+                                                <Col span={24} style={{  overflow: 'hidden', 'text-overflow': 'ellipsis'}}>
                                                     <span className={"FundamentalsofWebinar"} style={{
                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                                     }}>{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
