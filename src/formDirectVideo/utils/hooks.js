@@ -108,7 +108,7 @@ const Hooks=()=>{
     }
 
     const onChangeSpeaker=(event,nameSpeaker)=>{
-        const valueSpeaker=event.target.value
+        const valueSpeaker=event && event.target ?  event.target.value : event
         dispatch(setConfigurationSpeaker({nameSpeaker,valueSpeaker}));
     }
 
@@ -139,6 +139,11 @@ const Hooks=()=>{
     };
 
     const handleCancel = () => {
+
+        let initSpeaker={id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: []}
+        for(const [key , value] of Object.entries(initSpeaker)){
+            onChangeSpeaker(value, key)
+        }
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
          values.configuration.SpeakerList.length<=1&&
         dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))

@@ -13,7 +13,7 @@ import {useTranslation} from 'react-i18next';
 
 import {useDispatch} from "react-redux";
 
-import imageModal from '../../assets/imageModal.jpg'
+import defaultImg from '../../assets/webinarplease-thumb.jpg'
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
@@ -226,7 +226,7 @@ export function CalendarFile() {
                 ]}
             >
                 <div className={"body_Modal"}>
-                    <div className={"div_image_modal"}><img src={modalInfo.thumbnail ? modalInfo.thumbnail : imageModal}/>
+                    <div className={"div_image_modal"}><img src={modalInfo.thumbnail ? modalInfo.thumbnail : defaultImg}/>
                     </div>
                     <div className={"div_time_calendar"}>
                         <div className={"type_btn"}><Tag
