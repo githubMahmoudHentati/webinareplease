@@ -31,7 +31,7 @@ function useActionMenu({record}) {
             <Menu.Item onClick={()=>updateLive(record.id)}><EditOutlined />{t("ShowVideo.Modifier")}</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> {t("ShowVideo.Templates")}</Menu.Item>
-            <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>
+            <Menu.Item onClick={()=>handleDeleteOneRow(record.id)}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>
         </Menu>
     );
     //fonction handleExport and show modal infos
