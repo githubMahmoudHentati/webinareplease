@@ -11,6 +11,7 @@ import Hooks from "../utils/hooks";
 import moment from "moment";
 import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/formDirectVideoAction";
 import { useTranslation } from 'react-i18next';
+import defaultImg from '../../assets/webinarplease-thumb.jpg'
 
 
 export const SocialTools=()=>{
@@ -163,21 +164,22 @@ export const SocialTools=()=>{
                                                     </Row>
                                                 </Col>
                                                 <Col span={24} className={"col_texte_empreinte"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                                                    Torquem detrexit hosti exercirlus quid ex ea voluptate et accurate
-                                                    disseredum.
+                                                    {values.general.liveDescription}
                                                 </Col>
                                                 <Col span={24} style={{display: "flex", justifyContent: "center"}}>
+                                                    {console.log("fileList social",values.general.fileList)}
                                                     <img
-                                                        src={"//test-tv.webtv-solution.com/web/data/vignettes/logoSAB2NjY3ZTg5MmItNGI0MS00YjIyLTgwZGYtNmNkY2NjZTRhZTVishutterstock562442005.jpg"}
+                                                        src={values.general.fileList && values.general.fileList.length ?
+                                                            values.general.fileList[0].thumbUrl : defaultImg }
                                                         style={{height: "100%", width: "100%"}}/>
                                                 </Col>
                                                 <Col span={24}>
                                                     <span className={"FundamentalsofWebinar"} style={{
                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
-                                                    }}>{t("formDirectVideo.BaseWebinaire")}</span><br/>
+                                                    }}>{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
                                                     <span className={"Empriente.com"} style={{
                                                         color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
-                                                    }}>Empriente.com</span>
+                                                    }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empriente.com'}</span>
                                                 </Col>
                                             </Row>
                                         </Col>

@@ -167,7 +167,7 @@ const Hooks=()=>{
                         name: el.name,
                         lastName: el.lastName,
                         function: el.title,
-                        avatar: el.logoSpeaker[0].thumbUrl,
+                        avatar: el.logoSpeaker && el.logoSpeaker.length ? el.logoSpeaker[0].thumbUrl : '',
                         mail: el.email,
                     }
                 ))
