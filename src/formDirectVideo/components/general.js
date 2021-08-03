@@ -194,7 +194,7 @@ export const Generals =({})=>{
                     <Col span={24} >
                         <Row gutter={[0, 10]} >
                             <Col span={24}>
-                                <Radio.Group name="directAccessMode" onChange={generalOnChange} defaultValue={values.general.directAccessMode} >
+                                <Radio.Group name="directAccessMode" onChange={generalOnChange} value={values.general.directAccessMode} >
                                     <Radio onChange={generalOnChangeButton} name="freeAccess"  value="freeAccess"  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.PublicAccess")}</Radio>
                                     <Radio onChange={generalOnChangeButton} name="liveAccess" value="liveAccess" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.SecureAccess")}</Radio>
                                 </Radio.Group>

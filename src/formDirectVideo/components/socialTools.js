@@ -96,7 +96,6 @@ export const SocialTools=()=>{
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
-
                                                                     {element.active &&
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
