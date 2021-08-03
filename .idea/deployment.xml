@@ -5,7 +5,7 @@
       <paths name="webinarplease">
         <serverdata>
           <mappings>
-            <mapping deploy="/webinare" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/mhentati/webinarplease/webinarplease" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
