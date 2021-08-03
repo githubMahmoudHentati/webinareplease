@@ -1,17 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment";
-import {Badge, Button, Modal, Tag} from "antd";
-import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design/icons";
-import {useSelector} from "react-redux";
+import {Badge, Tag} from "antd";
 import { useTranslation } from 'react-i18next';
+import CalendarModal from "./CalendarModal";
 
 function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     const [visible , SetVisible] = useState(false);
+    const [modalInfo, setModalInfo] = useState({});
     let calenderEventClick = calendarEvent
     let calendarCompareMoment =  calendarValues.map(item => moment(item.date.date).isSame(calenderEventClick , 'day'))
-    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
-
 
     const getListData= (calenderEventClick)=>{
         let listData =[];
@@ -20,7 +17,16 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                if(calenderEventClick)
                 switch ((calenderEventClick.year()+"-"+calenderEventClick.month()+"-"+calenderEventClick.date())) {
                     case (moment(element.date.date , ).year()+"-"+moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
-                        listData=[...listData,{id:(element.id),type:element.type , content:element.content,style:element.date.isAMomentObject,date:element.date.date}]
+                        listData=[...listData,{
+                            id:(element.id),
+                            type:element.type ,
+                            content:element.content,
+                            style:element.date.isAMomentObject,
+                            date: moment(element.date.date,).format('L'),
+                            time: moment(element.date.date,).format('LTS'),
+                            thumbnail: element.thumbnail,
+                            status:element.status
+                        }]
                         break;
                 }
             })
@@ -31,7 +37,8 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     const listData =    getListData(calenderEventClick); // get Calender event
 
     //show Modal
-    const onShowModal=()=>{
+    const onShowModal=(item)=>{
+        setModalInfo(item)
         SetVisible(true)
     }
 
@@ -54,56 +61,18 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                 <span className={"span_time"}>{moment(item.date.date).format('hh:mm:ss')}</span>
                                 <Tag className={"btn_error tag_moment"}
                                      color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && '#EBEBEB'}
-                                     onClick={() => onShowModal()}>
+                                     onClick={() => onShowModal(item)}>
                                     <Badge
                                         color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
                                         text={item.content} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
                                 </Tag>
-
-                                <Modal
-                                    visible={visible}
-                                    title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
-                                                       /> }
-                                    onCancel={handleCancel}
-                                    footer={[
-                                        <div className={"footer_modal_Avenir"}>
-                                            <div><Button><DeleteOutlined/> {t("Calendar.Delete")}</Button></div>
-
-                                            <div>
-                                                <Button key="back" onClick={handleCancel}>
-                                                    {t("Calendar.Cancel")}
-                                                </Button>
-                                                <Button key="submit" type="primary">
-                                                    {t("Calendar.Visualiser")}
-                                                </Button>
-                                            </div>
-
-                                        </div>
-                                    ]}
-                                >
-                                    <div className={"body_Modal"}>
-                                        <div className={"div_image_modal"}><img
-                                            src={"https://i.pinimg.com/originals/e2/bd/0e/e2bd0e31dcc375ad97ce3fe652456afa.jpg"}/>
-                                        </div>
-                                        <div className={"div_time_calendar"}>
-                                            <div className={"type_btn"}><Tag
-                                                color={item.type === "à venir" ? 'blue' : item.type ==="en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
-                                            </div>
-                                            <div className={"div2_time_calendar"}>
-                                                <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                                    <CalendarOutlined/> 13-05-2121</p>
-                                                <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                                    <ClockCircleOutlined/> 16:30:00</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Modal>
                             </div>
                         )
                     })
                     :
                     null
             }
+            <CalendarModal handleCancel={handleCancel} visible={visible} modalInfo={modalInfo}></CalendarModal>
         </div>
     )
 }

@@ -22,6 +22,7 @@ import {useDispatch} from "react-redux";
 
 import defaultImg from '../../assets/webinarplease-thumb.jpg'
 import Hooks from '../utils/hooks.js'
+import CalendarModal from "./CalendarModal";
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
@@ -35,8 +36,6 @@ export function CalendarFile() {
     const [calendarEvent, SetCalendarEvents] = useState({});
     const [modalInfo, setModalInfo] = useState({});
     const [deletedItems, setDeletedItems] = useState([]);
-    const darkMode = useSelector((state) => state.Reducer.DarkMode);
-    !darkMode && document.documentElement.style.setProperty('--modal_background', "white");
     const calendarProps = useSelector((state) => state.CalendarReducer)
 
     const VisibleModal = useSelector((state) => state.CalendarReducer);
@@ -154,10 +153,10 @@ export function CalendarFile() {
     const DateCellRender = (value) => {
         const listData = getListData(value);
         return (
-            <div  style={{height:"100%" , width:'100%;'}} onClick={() => selectDate(value)}>
+            <div  style={{height:"100%" , width:'100%'}} onClick={() => selectDate(value)}>
                 {
                     allow &&
-                    <ul className="events" style={{height:"100%" , width:'100%;'}}>
+                    <ul className="events" style={{height:"100%" , width:'100%'}}>
                         {listData.map((item, index) => {
 
                             return (
@@ -262,50 +261,11 @@ export function CalendarFile() {
                     <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
                               onPanelChange={OnPanelChange}/>
             }
-            <Modal
-                visible={VisibleModal.calendarVisible.visible}
-                title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
-                              text={modalInfo.content}/>}
-                onCancel={handleCancel}
-                footer={[
-                    <div className={"footer_modal_Avenir"}>
-                        <div>{modalInfo.status == -1 ?
-                            <Button onClick={() => {
-                                handleDelete(modalInfo.id);
-                                handleCancel()
-                            }}><DeleteOutlined/>{t("Calendar.Delete")}
-                            </Button> : null}</div>
-
-                        <div>
-                            <Button key="back" onClick={handleCancel}>
-                                {t("Calendar.Cancel")}
-
-                            </Button>
-                            <Button className={"ModalButtonPrimary"} type="primary" key="submit">
-                                {modalInfo.status == -1 ? t("Calendar.Edit") : modalInfo.status == 0 ? t("Calendar.Visualize") : t("Calendar.Broadcast")}
-                            </Button>
-                        </div>
-
-                    </div>
-                ]}
-            >
-                <div className={"body_Modal"}>
-                    <div className={"div_image_modal"}><img
-                        src={modalInfo.thumbnail ? modalInfo.thumbnail : defaultImg}/>
-                    </div>
-                    <div className={"div_time_calendar"}>
-                        <div className={"type_btn"}><Tag
-                            color={modalInfo.type === "à venir" ? 'blue' : modalInfo.type === "en cours" ? 'green' : modalInfo.type === "archivé" && 'gray'}>{modalInfo.type === "à venir" ? t("ShowVideo.ComingSoon") : (modalInfo.type === "en cours" ? t("ShowVideo.InProgress") : t("ShowVideo.Archived"))}</Tag>
-                        </div>
-                        <div className={"div2_time_calendar"}>
-                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                <CalendarOutlined/>{modalInfo.date}</p>
-                            <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                                <ClockCircleOutlined/>{modalInfo.time}</p>
-                        </div>
-                    </div>
-                </div>
-            </Modal>
+            <CalendarModal handleCancel={handleCancel}
+                           visible={VisibleModal.calendarVisible.visible}
+                           modalInfo={modalInfo}
+                           handleDelete={handleDelete}
+            ></CalendarModal>
         </div>
     );
 }
