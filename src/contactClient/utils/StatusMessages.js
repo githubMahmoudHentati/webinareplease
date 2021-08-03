@@ -1,12 +1,12 @@
 import React from 'react';
 import {message} from "antd";
-
+import i18n from '../../i18n/index';
 export const StatusMessages = () =>{
 
     //succes delete lang
     const success_message = () => {
         message.success({
-            content:"votre message a été envoyé avec succès",
+            content:i18n.t("ShowVideo.ErrorMsgOne"),
             className: 'message-event',
             duration:1.5,
             style: {
@@ -17,7 +17,7 @@ export const StatusMessages = () =>{
     // error delete lang
     const error_message = (code) => {
         const messageERROR = {
-            400: "Oops!!! il y'a un erreur se produit",
+            400: i18n.t("ShowVideo.ErrorMsgTwo"),
         }
         message.error({
             content: messageERROR[code],

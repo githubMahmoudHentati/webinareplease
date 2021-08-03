@@ -7,6 +7,7 @@ import moment from "moment";
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
+import {useTranslation} from 'react-i18next';
 
 export const LiveSubmit=(props)=>{
     const history = useHistory()
@@ -14,6 +15,8 @@ export const LiveSubmit=(props)=>{
     const [form] = Form.useForm();
     const {handleSubmit,values}=Hooks()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const {t, i18n} = useTranslation();
+    const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
 
 
     useEffect(async () => {
@@ -83,7 +86,7 @@ export const LiveSubmit=(props)=>{
                                 <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                                     <span>Direct</span>
                                 </Breadcrumb.Item>
-                                <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{values.constraintData.crudOption} un direct</Breadcrumb.Item>
+                                <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{localStorage.getItem('idLive') ? values.general.liveTitle :isAddedForm ? t("formDirectVideo.AddLive"): '' } </Breadcrumb.Item>
                             </Breadcrumb>
                         </Col>
                         <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>

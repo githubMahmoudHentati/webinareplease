@@ -3,6 +3,7 @@ import moment from "moment";
 import {Badge, Button, Modal, Tag} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {useSelector} from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     const [visible , SetVisible] = useState(false);
@@ -14,9 +15,9 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
 
     const getListData= (calenderEventClick)=>{
         let listData =[];
-        if (calendarValues) {
-
+        if (calendarValues && calendarValues.length) {
             calendarValues.forEach((element) => {
+               if(calenderEventClick)
                 switch ((calenderEventClick.year()+"-"+calenderEventClick.month()+"-"+calenderEventClick.date())) {
                     case (moment(element.date.date , ).year()+"-"+moment(element.date.date , ).month()+"-"+moment(element.date.date ,).date()):
                         listData=[...listData,{id:(element.id),type:element.type , content:element.content,style:element.date.isAMomentObject,date:element.date.date}]
@@ -38,7 +39,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     const handleCancel = () => {
         SetVisible(false)
     }
-
+    const { t, i18n } = useTranslation();
     return(
         <div className={"div_global_calendar"}>
             <span className={"spn_Date_event"}>{calendarEvent.format('DD / MM / YYYY')}</span>
@@ -47,6 +48,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                 calendarCompareMoment && calendarCompareMoment.includes(true)
                     ?
                     listData.map(item => {
+                        console.log("item", item)
                         return (
                             <div className={"div_calendarevent"}>
                                 <span className={"span_time"}>{moment(item.date.date).format('hh:mm:ss')}</span>
@@ -61,18 +63,18 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                 <Modal
                                     visible={visible}
                                     title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
-                                                  text={'Lorem ipsum dolor sit amet, consectetuer'}/>}
+                                                       /> }
                                     onCancel={handleCancel}
                                     footer={[
                                         <div className={"footer_modal_Avenir"}>
-                                            <div><Button><DeleteOutlined/> Supprimer</Button></div>
+                                            <div><Button><DeleteOutlined/> {t("Calendar.Delete")}</Button></div>
 
                                             <div>
                                                 <Button key="back" onClick={handleCancel}>
-                                                    Annuler
+                                                    {t("Calendar.Cancel")}
                                                 </Button>
                                                 <Button key="submit" type="primary">
-                                                    Visualiser
+                                                    {t("Calendar.Visualiser")}
                                                 </Button>
                                             </div>
 
@@ -85,7 +87,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                         </div>
                                         <div className={"div_time_calendar"}>
                                             <div className={"type_btn"}><Tag
-                                                color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
+                                                color={item.type === "à venir" ? 'blue' : item.type ==="en cours" ? 'green' : item.type === "archivé" && 'gray'}>{item.type}</Tag>
                                             </div>
                                             <div className={"div2_time_calendar"}>
                                                 <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>

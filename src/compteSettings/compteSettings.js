@@ -11,6 +11,7 @@ import {PasswordEdit} from "./components/passwordEdit";
 import {AccountSubscription} from './components/accountSubscription'
 import {useHistory} from "react-router-dom";
 import {setConstraintDataOnchange} from "./store/accountSettingsAction";
+import { useTranslation } from 'react-i18next';
 
 
 export const CompteSettings=()=>{
@@ -18,8 +19,10 @@ export const CompteSettings=()=>{
     const history = useHistory()
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     console.log("accountMenu",accountMenu)
+
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const { t, i18n } = useTranslation();
 
     const SelectMenu = ()=>{
         switch(accountMenu){
@@ -53,12 +56,12 @@ export const CompteSettings=()=>{
                                         document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
                                         history.push("/")
                                     }}
-                                >Accueil</span>
+                                >{t("CompteSettings.Home")}</span>
                             </Breadcrumb.Item >
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
-                                <span>Direct</span>
+                                <span>{t("CompteSettings.direct")}</span>
                             </Breadcrumb.Item>
-                            <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>Mon Compte</Breadcrumb.Item>
+                            <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>{t("CompteSettings.MyAccount")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#141414"}}>
@@ -79,12 +82,12 @@ export const CompteSettings=()=>{
                             fontFamily: "Arial, Helvetica, sans-serif;",
                             marginLeft: "1%",
                             color:darkMode===false?"":"white"
-                        }}> Mon Compte
+                        }}> {t("CompteSettings.MyAccount")}
                                         </span>
                     </Col>
                     <Col span={24}>
                         <Row gutter={[30, 20]}>
-                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 5}} lg={{span:5}} >
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 6}} lg={{span:6}} >
                                 <MenuForms />
                             </Col>
                             <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 18}} lg={{span:18}} >

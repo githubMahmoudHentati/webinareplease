@@ -5,6 +5,7 @@ import {EyeOutlined,DownloadOutlined} from '@ant-design/icons';
 import Hooks from "../utils/hooks";
 import {setPaginationAbonnement} from "../store/accountSettingsAction";
 import { useDispatch} from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const DEFAULT_PAGE_SIZE = 5;
 const DEFAULT_PAGE_NUMBER = 0;
@@ -14,30 +15,31 @@ export const SubscriptionTable=()=>{
     const dispatch = useDispatch()
     const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
     const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+    const { t, i18n } = useTranslation();
 
     const  {values} = Hooks()
 
     const columns = [
     {
-        title: 'Facture',
+        title: t("CompteSettings.Facture"),
         dataIndex: 'bill',
         key: 'bill',
         width: 80,
         fixed: 'left',
     },
     {
-        title: 'Emise le',
+        title: t("CompteSettings.IssuedOn"),
         dataIndex: 'issuedTime',
         key: 'issuedTime',
         width: 150,
     },
     {
-        title: 'Intitulé',
+        title: t("CompteSettings.Entitled"),
         dataIndex: 'entitled',
         key: 'entitled',
     },
     {
-        title: 'Statut',
+        title: t("CompteSettings.Status"),
         key: 'status',
         dataIndex: 'status',
         render: (text,record) =>{
@@ -51,12 +53,12 @@ export const SubscriptionTable=()=>{
 
     },
     {
-        title: 'Montant',
+        title: t("CompteSettings.Amount"),
         dataIndex: 'amount',
         key: 'amount',
     },
     {
-        title: 'Détail',
+        title: t("CompteSettings.Details"),
         key: 'details',
         render: (text, record) => (
             <Space size="middle">
@@ -74,7 +76,7 @@ export const SubscriptionTable=()=>{
         {
             return(
                 record.status === false ?
-                 <Button  className={"button-payment"}> Payer</Button>
+                 <Button  className={"button-payment"}> {t("CompteSettings.Payer")}</Button>
                     :
                     null
               )

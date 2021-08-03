@@ -1,9 +1,12 @@
 import React  from 'react';
 import {Button, Col, Row} from "antd";
 import {useHistory} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 
 export const RecoveryPassword =()=> {
     const history = useHistory()
+    const { t, i18n } = useTranslation();
 
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
@@ -14,7 +17,7 @@ export const RecoveryPassword =()=> {
             </Col>
             <Col span={24}>
                 <span style={{fontSize:"14px"}} className={"span_connexion"}>
-                Votre mot de passe a été mis à jour avec succès et vous pouvez maintenant l'utiliser pour vous reconnecter à Webinarplease.
+                {t("resetPassword.UseNewPassMsg")}
                 </span>
             </Col>
             <Col span={24}>
@@ -25,7 +28,7 @@ export const RecoveryPassword =()=> {
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
                         <a className={"spn_chbx"}>
-                            Contactez notre support client</a>
+                            {t("resetPassword.ContactClient")}</a>
                     </Col>
                 </Row>
             </Col>

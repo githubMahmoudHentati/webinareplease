@@ -482,6 +482,8 @@
   font-family: "SF Pro Display" !important;
   font-size: 12px !important;
   font-weight: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .FundamentalsofWebinar{
   font-family: "SF Pro Display" !important;
@@ -497,6 +499,7 @@
   font-family: "SF Pro Display";
   font-weight: 500;
   font-size: 14px;
+  color: var(--white_color);
 }
 .btn_upload_pic{
   font-family: "SF Pro Display" !important;
@@ -594,7 +597,7 @@
     border-right:3px solid var(--menu-border) !important;
   }
   .row_menu .ant-menu-item-selected{
-    background-color: white !important;
+    background-color: var(--card_color) !important;
     color: var(--item-menu-color) !important;
   }
   .row_menu .ant-menu-item-selected:hover{
