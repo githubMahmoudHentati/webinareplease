@@ -31,7 +31,7 @@ function useActionMenu({record}) {
             <Menu.Item onClick={()=>updateLive(record.id)}><EditOutlined />{t("ShowVideo.Modifier")}</Menu.Item>
             <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
             <Menu.Item ><span className="icon-Templates"></span> {t("ShowVideo.Templates")}</Menu.Item>
-            <Menu.Item onClick={()=>handleDeleteOneRow([record.id])}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>
+            <Menu.Item onClick={()=>handleDeleteOneRow(record.id)}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>
         </Menu>
     );
     //fonction handleExport and show modal infos
@@ -79,7 +79,7 @@ function useActionMenu({record}) {
                 record.status === -1
                        ?
                         <Tooltip title={t("ShowVideo.Diffuser")}>
-                            <Button className={"btn_Visualiser_diffuser"} style={{
+                            <Button className={"btn_Visualiser_diffuser extra-margin"} style={{
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"

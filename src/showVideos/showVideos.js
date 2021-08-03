@@ -39,6 +39,12 @@ function ShowVideos() {
     const fetch_element_selected = (selected) => {
         SetSelectedRow(selected);
     }
+
+    const displayDate = (date) =>{
+        if(date)
+        return(<><span> {date.split(' ')[0]}</span><br /><span>{date.split(' ')[1]}</span></>)
+        else return ""
+    }
     console.log("valuesCredentiels-showVideos",localStorage.getItem('jwtToken'))
 
     // Column AND DATA Table
@@ -84,7 +90,7 @@ function ShowVideos() {
             sortOrder:paginationProps.columnKey === "2" &&  paginationProps.order,
             render:(date , record) =>{
                 return(
-                    <div className="div_date">{record.liveDate}</div>
+                    <div className="div_date">{displayDate(record.liveDate)}</div>
                 )
             },
         },
