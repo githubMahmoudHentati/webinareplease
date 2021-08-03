@@ -105,9 +105,9 @@ export  const Hooks=()=> {
         variables : {idLive:paginationProps.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
+            // dispatch loading Delete Button
+            dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
             if(data.deleteLive.code === "200"){
-                // dispatch loading Delete Button
-                dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
                 // dispatch loading nombre des élements sélectionnés
                 dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:0}));
                 success_Delete()
@@ -176,21 +176,30 @@ export  const Hooks=()=> {
       /*  GETDATEVIDEO()*/
     }
     /*Delete Rows*/
+
     const handleClickDeleteIcon = async() =>{
-        // dispatch show Alert
-      await  dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
+        let filterListVid = [];  
+
+              // dispatch show Alert
+      await dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
         setTimeout(()=>{
             dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
         },3000)
 
-        // liste des items supprimer
-         itemsDeleted = DataVideos.data.filter(item => {
-            return (paginationProps.id.includes(item.id))
-        })
-
         // Time out to Run API Delete
         itemsRunAPI = setTimeout(async()=>{
-       await DeleteItemsMutation().then(async()=> {
+       await DeleteItemsMutation().then(async(res)=> {
+           const {data: {deleteLive}} = await res
+           let notDeletedItems =deleteLive.undeleteditems || []
+           filterListVid = DataVideos.data
+          .filter((item) => {
+            return (notDeletedItems).includes(item.id);
+          })  
+           if(filterListVid.length === 0)
+        { await dispatch(setPaginationProps({
+            PaginationPropsNameChange: "current",
+            PaginationPropsValueChange: paginationProps.current !== 1 ? paginationProps.current - 1 : 1 ,
+          }))}
           await GETDATEVIDEO();
         await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));})
 
