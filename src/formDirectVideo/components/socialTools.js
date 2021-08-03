@@ -96,23 +96,7 @@ export const SocialTools=()=>{
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
-                                                                    {element.active &&
-                                                                    <Col span={24}>
-                                                                        <Row gutter={[0, 10]}>
-                                                                            <Col span={24}>
-                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.StartingDate")}</span>
-                                                                            </Col>
-                                                                            <Col span={24}>
-<<<<<<< HEAD
-                                                                                <DatePicker  disabledDate={disablePastDate} value={moment(element.startDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
-=======
-                                                                                <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
-                                                                                {console.log("startDate",moment(element.startDate,'YYYY-MM-DD'))}
->>>>>>> 09c1c183b21df56226bbe1a24466fdf7d0b69ac4
-                                                                            </Col>
-                                                                        </Row>
-                                                                    </Col>
-                                                                    }
+
                                                                     {element.active &&
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
@@ -120,11 +104,10 @@ export const SocialTools=()=>{
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.EndingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
-<<<<<<< HEAD
                                                                                 <DatePicker disabledDate={disablePastDate} value={moment(element.endDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
-=======
+
                                                                                 <DatePicker defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
->>>>>>> 09c1c183b21df56226bbe1a24466fdf7d0b69ac4
+
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
