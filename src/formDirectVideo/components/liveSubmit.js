@@ -79,7 +79,7 @@ export const LiveSubmit=(props)=>{
                 <Spin spinning={localStorage.getItem('idLive')?!values.constraintData.loadingLiveFetchData:false}>
                     <Row gutter={[0, 10]}>
                         <Col span={24} className={"header-col"}>
-                            <Breadcrumb style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                            <Breadcrumb className={"header-col-breadcrumb"} style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                                     <span >Accueil</span>
                                 </Breadcrumb.Item>

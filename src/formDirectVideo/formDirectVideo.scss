@@ -43,6 +43,18 @@
   text-align: left;
   display:flex;
   alignItems:center;
+  &-breadcrumb{
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @media screen and (max-width: 768px){
+      width: 70%;
+    }
+    @media screen and (max-width: 480px){
+      width: 100%;
+    }
+  }
 }
 
 .titre-menu{
@@ -616,3 +628,22 @@
   border : 1px solid red !important;
 
 }
+.bar-header-container{
+  width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @media screen and (max-width: 598px){
+    width:80%;
+  }
+  .bar-header-title{
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @media screen and (max-width: 598px){
+      width:80%;
+    }
+  }
+}
+
