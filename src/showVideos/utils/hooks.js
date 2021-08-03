@@ -26,6 +26,14 @@ let itemsRunAPI , itemsDeleted
 export  const Hooks=()=> {
     let idLiveToDelete = []
     const [visible , setVisible] = useState(false)
+    const [liveObj , setLiveObj] = useState({
+        order:'ascend',
+        pageSize:10,
+        columnKey:0,
+        current:1,
+        id:[],
+        idLive:0
+    })
     const history = useHistory();
     const dispatch = useDispatch()
 
@@ -102,7 +110,7 @@ export  const Hooks=()=> {
     //
       // mutation delete lang from table of event
       const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
-        variables : {idLive:paginationProps.id},
+        variables : {idLive:paginationProps.id && paginationProps.id.length? paginationProps.id : liveObj.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
             // dispatch loading Delete Button
@@ -120,8 +128,8 @@ export  const Hooks=()=> {
     })
 
     // mutation Get infos live
-    const [GETINFOSlIVES] = useMutation(graphQL_shema().Get_Live_Info,{
-        variables : {liveId:paginationProps.idLive},
+    const [GETINFOSlIVES]= useMutation(graphQL_shema().Get_Live_Info,{
+        variables : {liveId: (paginationProps.idLive ? paginationProps.idLive : liveObj.idLive)},
         context: { clientName: "second" },
         onCompleted:  (data)=>{
             if(data.getliveInfo.code === 200) {
@@ -255,9 +263,11 @@ export  const Hooks=()=> {
  },3000)
 
     }
-    const handleClickDropdowMenu =(e)=>{
+    const handleClickDropdowMenu = ( e, liveId )=>{
         // dispatch id list Video
-        dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
+        e.preventDefault();
+        setLiveObj({...liveObj,idLive:liveId})
+        // dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange: liveId}));
     }
 
     /* Click Annuler button Alert*/

@@ -97,9 +97,9 @@ function useActionMenu({record}) {
             }
 
         <span className="span_action">
-      <Dropdown overlay={actionMenu} trigger={['click']}  onMouseEnter={()=>handleClickDropdowMenu([record.id])} >
-        <a className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }} onClick={e => e.preventDefault()}>
-          ...
+      <Dropdown overlay={actionMenu} trigger={['click']}  >
+        <a  onClick={(e)=>handleClickDropdowMenu(e, record.id)} className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }} >
+         ...
         </a>
       </Dropdown>
     </span>
