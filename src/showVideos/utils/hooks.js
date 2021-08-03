@@ -224,7 +224,7 @@ export  const Hooks=()=> {
             PaginationPropsValueChange: paginationProps.current !== 1 ? paginationProps.current - 1 : 1 ,
           }))}
           await GETDATEVIDEO();
-        await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));})
+        await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:notDeletedItems}));})
 
         },3000)
 
