@@ -101,13 +101,22 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
+                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.StartingDate")}</span>
+                                                                            </Col>
+                                                                            <Col span={24}>
+                                                                                <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
+                                                                            </Col>
+                                                                        </Row>
+                                                                    </Col>
+                                                                    }
+                                                                    {element.active &&
+                                                                    <Col span={24}>
+                                                                        <Row gutter={[0, 10]}>
+                                                                            <Col span={24}>
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.EndingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker disabledDate={disablePastDate} value={moment(element.endDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
-
                                                                                 <DatePicker defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
-
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
