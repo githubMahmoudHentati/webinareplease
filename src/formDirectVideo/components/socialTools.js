@@ -15,7 +15,7 @@ import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/f
 export const SocialTools=()=>{
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const {values}=Hooks()
+    const {values,disablePastDate}=Hooks()
     console.log("socialTools",values.socialTools)
 
     const addPlan =async (index)=>{
@@ -100,7 +100,7 @@ export const SocialTools=()=>{
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de début</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker value={moment(element.startDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
+                                                                                <DatePicker  disabledDate={disablePastDate} value={moment(element.startDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -112,7 +112,7 @@ export const SocialTools=()=>{
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de fin</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker value={moment(element.endDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
+                                                                                <DatePicker disabledDate={disablePastDate} value={moment(element.endDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
