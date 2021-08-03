@@ -10,6 +10,8 @@ import {useDispatch, useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import moment from "moment";
 import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/formDirectVideoAction";
+import { useTranslation } from 'react-i18next';
+import defaultImg from '../../assets/webinarplease-thumb.jpg'
 
 
 export const SocialTools=()=>{
@@ -17,6 +19,7 @@ export const SocialTools=()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const {values,disablePastDate}=Hooks()
     console.log("socialTools",values.socialTools)
+    const { t, i18n } = useTranslation();
 
     const addPlan =async (index)=>{
         dispatch(setAddPlan({addPlanIndex:index}))
@@ -42,7 +45,7 @@ export const SocialTools=()=>{
                 <p style={{
                     color:darkMode===false?"":"rgba(255, 255, 255, 0.85"
                 }}>
-                    Envoi des publications sur les réseaux sociaux
+                    {t("formDirectVideo.PostingOnMedia")}
                 </p>
                 <List
 
@@ -70,7 +73,7 @@ export const SocialTools=()=>{
                                         <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:8}}>
                                             <Row gutter={[0, 20]}>
                                                 <Col span={24}>
-                                                    <span className={"spn_planification"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier  la publication</span>
+                                                    <span className={"spn_planification"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.PlanPublication")}</span>
                                                 </Col>
                                                 {values.socialTools[index].plan.map((element, indexPlan) => {
                                                         return (
@@ -84,7 +87,7 @@ export const SocialTools=()=>{
                                                                                         <DownOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{activePlan(index,indexPlan)}}/>
                                                                                     </Col>
                                                                                     <Col offset={2}>
-                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> Planification {indexPlan +1}</span>
+                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> {t("formDirectVideo.Planning")} {indexPlan +1}</span>
                                                                                     </Col>
                                                                                 </Row>
                                                                             </Col>
@@ -97,10 +100,15 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de début</span>
+                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.StartingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
+<<<<<<< HEAD
                                                                                 <DatePicker  disabledDate={disablePastDate} value={moment(element.startDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
+=======
+                                                                                <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
+                                                                                {console.log("startDate",moment(element.startDate,'YYYY-MM-DD'))}
+>>>>>>> 09c1c183b21df56226bbe1a24466fdf7d0b69ac4
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -109,10 +117,14 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de fin</span>
+                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.EndingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
+<<<<<<< HEAD
                                                                                 <DatePicker disabledDate={disablePastDate} value={moment(element.endDate,'YYYY-MM-DD')} style={{width: "100%"}}/>
+=======
+                                                                                <DatePicker defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
+>>>>>>> 09c1c183b21df56226bbe1a24466fdf7d0b69ac4
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -129,7 +141,7 @@ export const SocialTools=()=>{
                                                     justifyContent: "center"
                                                 }} span={24} className={"col-planification"}>
                                                     <Button  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
-                                                        Ajouter une planification
+                                                        {t("formDirectVideo.AddingPlanning")}
                                                     </Button>
                                                 </Col>
                                             </Row>
@@ -150,7 +162,7 @@ export const SocialTools=()=>{
                                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                                                     }}>Empreinte</span><br/><span className={"spn2"} style={{
                                                                     color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
-                                                                }}>Environ 1mn</span>
+                                                                }}>{t("formDirectVideo.AboutOneMn")}</span>
                                                                 </Col>
                                                             </Row>
                                                         </Col>
@@ -160,21 +172,22 @@ export const SocialTools=()=>{
                                                     </Row>
                                                 </Col>
                                                 <Col span={24} className={"col_texte_empreinte"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                                                    Torquem detrexit hosti exercirlus quid ex ea voluptate et accurate
-                                                    disseredum.
+                                                    {values.general.liveDescription}
                                                 </Col>
                                                 <Col span={24} style={{display: "flex", justifyContent: "center"}}>
+                                                    {console.log("fileList social",values.general.fileList)}
                                                     <img
-                                                        src={"//test-tv.webtv-solution.com/web/data/vignettes/logoSAB2NjY3ZTg5MmItNGI0MS00YjIyLTgwZGYtNmNkY2NjZTRhZTVishutterstock562442005.jpg"}
+                                                        src={values.general.fileList && values.general.fileList.length ?
+                                                            values.general.fileList[0].thumbUrl : defaultImg }
                                                         style={{height: "100%", width: "100%"}}/>
                                                 </Col>
-                                                <Col span={24}>
+                                                <Col span={24} style={{  overflow: 'hidden', 'text-overflow': 'ellipsis'}}>
                                                     <span className={"FundamentalsofWebinar"} style={{
                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
-                                                    }}>Fundamentals of Webinar</span><br/>
+                                                    }}>{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
                                                     <span className={"Empriente.com"} style={{
                                                         color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
-                                                    }}>Empriente.com</span>
+                                                    }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empriente.com'}</span>
                                                 </Col>
                                             </Row>
                                         </Col>

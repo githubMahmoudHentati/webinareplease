@@ -4,11 +4,13 @@ import '../compteSettings.scss'
 import {MailOutlined} from '@ant-design/icons';
 import {useDispatch , useSelector} from "react-redux";
 import {setAccountSetting} from "../../utils/redux/actions";
+import { useTranslation } from 'react-i18next';
 
 export const MenuForms =()=>{
     const dispatch = useDispatch()
     const selectedkey = useSelector((state)=> state.Reducer.accountMenu)
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const { t, i18n } = useTranslation();
 
     return (
         <Row>
@@ -20,13 +22,13 @@ export const MenuForms =()=>{
                     defaultOpenKeys={['sub1']}
                 >
                     <Menu.Item className={"menuItem"} key="1" onClick={()=>{dispatch(setAccountSetting(0))}}>
-                        Compte
+                        {t("description.Account")}
                     </Menu.Item>
                     <Menu.Item className={"menuItem"} key="2" onClick={()=>{dispatch(setAccountSetting(1))}}>
-                        Securité
+                        {t("description.security")}
                     </Menu.Item>
                     <Menu.Item className={"menuItem"} key="3" onClick={()=>{dispatch(setAccountSetting(3))}}>
-                        Abonnement
+                        {t("description.Subscription")}
                     </Menu.Item>
                 </Menu>
             </Col>

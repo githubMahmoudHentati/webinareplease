@@ -3,6 +3,7 @@ import React, { useState,useEffect,useRef } from 'react';
 export const PackagePayementConstraints = () =>{
 
     const ActiveCard = () =>{
+
         return(
             {
                 activeCard:0,
@@ -15,7 +16,7 @@ export const PackagePayementConstraints = () =>{
                 packStripe:'',
             }
         )
-    }
+    };
     const InputPackagePayement = () =>{
         return(
             {
@@ -26,10 +27,10 @@ export const PackagePayementConstraints = () =>{
                 postalCode:""
             }
         )
-    }
+    };
 
     return({
         ActiveCard,
         InputPackagePayement
     })
-}
+};

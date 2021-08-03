@@ -5,15 +5,20 @@ import {useHistory} from "react-router-dom";
 import {useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
 import {Hooks} from "../utils/hooks";
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
 const { Option } = Select;
 let clicked = false;
 
+const { RangePicker } = DatePicker;
+
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia }=Hooks()
+    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , onChangeRange }=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const history = useHistory();
+    const { t, i18n } = useTranslation();
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -64,19 +69,19 @@ function HeaderVideos() {
           <div className="BreadcrumbDiv">
               <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
                   <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                      <span >Accueil</span>
+                      <span >{t("ShowVideo.Home")}</span>
                   </Breadcrumb.Item>
                   <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                      <span>Direct</span>
+                      <span>{t("ShowVideo.Direct")}</span>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Tous</Breadcrumb.Item>
+                  <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.All")}</Breadcrumb.Item>
               </Breadcrumb>
 
           </div>{/*./Breadcrumb*/}
 
           <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
-              <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Mes Directs</h4>
-              <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>handleClickAddLive()} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>Ajouter</span></Button>
+              <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
+              <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button>
           </div>{/*./TousMedia*/}
 
           <div className="Filter">
@@ -89,21 +94,22 @@ function HeaderVideos() {
                           null
                           :
                           <div className="delete_number">
-                              <Tooltip title="Supprimer">
+                              <Tooltip title={t("Calendar.Delete")}>
                                   <Button style={{backgroundColor:darkMode===false?"":"#141414"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} onClick={()=>handleClickDeleteIcon()} loading={loadingDelete.loadingDelete}/>
                               </Tooltip>
-                              <p style={{color:darkMode===false?"":"white"}}><span>{conditions.elementSelected}</span> <span id={"text_selection"}>élément(s) sélectionné(s)</span></p>
+                              <p style={{color:darkMode===false?"":"white"}}><span>{conditions.elementSelected}</span> <span id={"text_selection"}>{t("ShowVideo.SelectedItem")}</span></p>
                           </div>
                   }
 
                   <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"#141414", color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
-                      <Tooltip className="tooltip_calendrier" title="Afficher Calendrier">
+                      <Tooltip className="tooltip_calendrier" title={t("ShowVideo.ViewCalendar")}>
                       <CalendarOutlined  className="IconCalendrier" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)"}}/>
-                      <span id={"Text_Calendar"}>Calendrier</span>
+                      <span id={"Text_Calendar"}>{t("ShowVideo.Calendar")}</span>
                       </Tooltip>
                   </div>
                   <div className="selectDiv">
                       <Select
+                          style={{ width: 120 }}
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
                           defaultValue="tous"
@@ -113,10 +119,10 @@ function HeaderVideos() {
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> <span id={'spn_option'}>Tout</span> </Option>
-                          <Option name="type" value="archivés"><span className="icon-Archive"></span>  <span id={'spn_option'}>Archivés</span></Option>
-                          <Option name="type" value="encours"><span className="icon-Current"></span>  <span id={'spn_option'}>En cours</span></Option>
-                          <Option name="type" value="avenir"><HourglassOutlined />  <span id={'spn_option'}>A venir</span></Option>
+                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> <span  style={{ padding: "15%" }}id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
+                          <Option name="type" value="archivés"><span className="icon-Archive"></span>  <span id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
+                          <Option name="type" value="encours"><span className="icon-Current"></span>  <span id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
+                          <Option name="type" value="avenir"><HourglassOutlined />  <span id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
                       </Select>
                   </div>
 
@@ -126,21 +132,18 @@ function HeaderVideos() {
                   <Input
                       style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}
                       className="inputFilter"
-                      placeholder="Rechercher…"
-                      prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "RGBA(255, 255, 255, 0.15)", marginLeft: "10px" }}/>}
+                      placeholder={t("ShowVideo.Search")}
+                      prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.85)", marginLeft: "10px" }}/>}
                       suffix={
-                          <Tooltip title="Filtrer">
+                          <Tooltip title={t("ShowVideo.Filter")}>
                           <div
                               onClick={handlClickSuffix}
                               className="filter_icon"
                           >
-                              {darkMode===false
 
-                              ?
-                                  <FilterOutlined id={darkMode&&activeIcon===true?"activeIcon":""} className="class_icon_filter"/>
-                              :
-                                  <FilterOutlined style={{color:"RGBA(255, 255, 255, 0.15)"}} className="class_icon_filter"/>
-                              }
+
+                                  <FilterOutlined id={darkMode&&activeIcon===true?"activeIcon":""} style={{color: darkMode === true ? "rgba(255, 255, 255, 0.85)" : ""}} className="class_icon_filter"/>
+
 
                           </div>
                           </Tooltip>
@@ -160,22 +163,14 @@ function HeaderVideos() {
                   <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
 
                       <div className="div1_div_Filter">
-                          <Select
-                              className="select_div1_div_Filter"
-                              name="periode" onChange={handleHeaderSelect}
-                              placeholder="Sélectionnez la période"
-                              optionFilterProp="children"
-                              filterOption={(input, option) =>
-                                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                              }
-                          >
-                              <Option name="periode" value="Semaine">Semaine</Option>
-                              <Option name="periode" value="Mois">Mois</Option>
-                              <Option name="periode" value="Trimestre">Trimestre</Option>
-                              <Option name="periode" value="Semestre">Semestre</Option>
-                              <Option name="periode" value="Année">Année</Option>
-                          </Select>
-                          <DatePicker placeholder="Sélectionnez une date"  classNmae="datepicker_div1_div_Filter"  onChange={(momentValue,stringDateValue)=>handleChangeDatePicker("date",momentValue,stringDateValue)}/>
+                          <RangePicker
+                              className="range_div1_div_Filter"
+                              ranges={{
+                                  Today: [moment(), moment()],
+                                  'This Month': [moment().startOf('month'), moment().endOf('month')],
+                              }}
+                              onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
+                          />
                       </div>{/*./div1_div_Filter*/}
 
                       <div className="div2_div_Filter">
@@ -183,13 +178,13 @@ function HeaderVideos() {
                           <Select
                               className="select1_div2_div_Filter"
                               name="contributeur" onChange={handleHeaderSelect}
-                              placeholder="Contributeur"
+                              placeholder={t("ShowVideo.Contributor")}
                               optionFilterProp="children"
                               filterOption={(input, option) =>
                                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                               }
                           >
-                              <Option name="contributeur" value="Departement">Departement</Option>
+                              <Option name="contributeur" value="Departement">{t("ShowVideo.Department")}</Option>
                               <Option name="contributeur" value="Profile">Profile</Option>
                               <Option name="contributeur" value="lucy">lucy</Option>
                           </Select>
@@ -197,8 +192,8 @@ function HeaderVideos() {
                       </div>{/*./div2_div_Filter*/}
 
                       <div className="div_button_filter">
-                          <Tooltip title="Rénitialiser médias"><Button style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">Réinitialiser</Button></Tooltip>
-                          <Tooltip title="Filtrer médias"><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>Filtrer</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.ResetMedia")}><Button style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>{t("ShowVideo.Filter")}</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
 
@@ -216,11 +211,11 @@ function HeaderVideos() {
                   <div className="div_alert">
                       <Alert
                           id="ant-alert"
-                          message={conditions.elementSelected > 1 ? "les éléments sélectionnés seront supprimés" : "L'élément sélectionné sera supprimé"}
+                          message={conditions.elementSelected > 1 ? t("ShowVideo.DeleteSelectedItem") : t("ShowVideo.DeleteSelectedItems")}
                           banner
                           action={
                               <Button disabled={conditions.rubDeleteItems===true}  className="btn_annuler" size="small" type="text" onClick={handleClickAnnulerAlert}>
-                                  Annuler
+                                  {t("ShowVideo.Cancel")}
                               </Button>
                           }
                       />

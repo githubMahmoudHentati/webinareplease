@@ -11,6 +11,8 @@ export const graphQL_shema = ()=> {
                     date
                     isAMomentObject
                 }
+                 thumbnail
+                 status
             }
         }
     `;

@@ -11,6 +11,25 @@
   height: 100% !important;
   background-color: rgba(0, 0, 0, 0.2) !important;
 }
+.DataTable{
+&__custom-row {
+  &:hover td{
+    background:  var(--tag-blue-background)!important;
+  }
+}
+}
+.ant-pagination-item-active a{
+  background: #1890ff !important;
+  color: #fff !important;
+ }
+.DataTable .ant-table-row-selected td{
+  background: var(--tag-blue-background) !important;
+
+}
+.extra-margin{
+  margin-right: 40% !important;
+
+}
 
 @media screen and (min-width: 575px) and (max-width: 767px) {
   .action{
@@ -252,5 +271,24 @@
     }
 
   }
+/*********desktop devices*************/
+  @media screen and (min-width: 1024px) {
+
+    .columnId{
+      width: 5%;
+    }
+    .columnFeed{
+     width: 10% ;
+    }
+    .columnState{
+      width: 15%;
+    }
+    .columnDate{
+      width: 20%
+    }
+    .columnTitle{
+      width: 35%;
+    }
+}
 
 
