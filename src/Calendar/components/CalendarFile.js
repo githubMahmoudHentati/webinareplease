@@ -6,14 +6,22 @@ import {useSelector} from "react-redux";
 import {useLazyQuery, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "../utils/graphql";
 import moment from 'moment';
+import {useMutation} from "@apollo/react-hooks";
+import {StatusMessage} from "../utils/StatusMessage";
 
 import CalendarEvents from "./CalendarEvents";
-import {setCalendarOnchange, setCalendarVisibleOnchange} from "../store/calendarAction";
+import {
+    setCalendarOnchange,
+    setCalendarVisibleOnchange,
+    setLoadingDeleteCalendarVideo,
+    setShowDivsConditions
+} from "../store/calendarAction";
 import {useTranslation} from 'react-i18next';
 
 import {useDispatch} from "react-redux";
 
 import defaultImg from '../../assets/webinarplease-thumb.jpg'
+import Hooks from '../utils/hooks.js'
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
@@ -26,14 +34,16 @@ export function CalendarFile() {
     const [activeCalendarEvents, SetActiveCalendarEvents] = useState(false);
     const [calendarEvent, SetCalendarEvents] = useState({});
     const [modalInfo, setModalInfo] = useState({});
+    const [deletedItems, setDeletedItems] = useState([]);
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
     !darkMode && document.documentElement.style.setProperty('--modal_background', "white");
     const calendarProps = useSelector((state) => state.CalendarReducer)
 
     const VisibleModal = useSelector((state) => state.CalendarReducer);
-
+    const {success_Delete, error_Delete} = StatusMessage()
     console.log("VisibleModal", VisibleModal)
-
+    let  itemsDeleted;
+    const {setItemsRunAPI} = Hooks();
     //show Modal
     const onShowModal = (item) => {
         //SetVisible(true)
@@ -77,28 +87,26 @@ export function CalendarFile() {
     })
     const {t, i18n} = useTranslation();
     const OnPanelChange = async (date, mode) => {
-            await SetActiveCalendarEvents(false)
-            let month_number = date.month() + 1
-            let month_before = month_number === 1 ? "12" : (date.month() < 9) ? "0" + (month_number - 1).toString() : (month_number - 1).toString();
-            let year_before = month_before === "12" ? date.year() - 1 : date.year();
-            let month = (date.month() < 9) ? "0" + month_number.toString() : month_number.toString();
-            let year = date.year()
-            let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
-            let year_after = month_after=="01"?date.year()+1:date.year()
-            if(mode === 'year' )
-                setAllow(false)
-            else
-                setAllow(true)
-            await setDateTime(date)
-            QueryCalendar({variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}, date)
+        console.log("OnPanelChange")
+        let month_number = date.month() + 1
+        let month_before = month_number === 1 ? "12" : (date.month() < 9) ? "0" + (month_number - 1).toString() : (month_number - 1).toString();
+        let year_before = month_before === "12" ? date.year() - 1 : date.year();
+        let month = (date.month() < 9) ? "0" + month_number.toString() : month_number.toString();
+        let year = date.year()
+        let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
+        let year_after = month_after == "01" ? date.year() + 1 : date.year()
+        if (mode === 'year')
+            setAllow(false)
+        else
+            setAllow(true)
+        await setDateTime(date)
+        QueryCalendar({variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}, date)
     }
 
     const getListData = (value) => {
         let listData = [];
         let check = value.format('YYYY/MM/DD');
         if (calendarValues) {
-            console.log("CalendarValue", calendarValues)
-
             calendarValues.forEach((element) => {
 
                 switch ((value.year() + "-" + value.month() + "-" + value.date())) {
@@ -106,14 +114,14 @@ export function CalendarFile() {
                     case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
 
                         listData = [...listData, {
-                            id: randomDate(new Date(2012, 0, 1), new Date()),
+                            id: element.id,
                             type: element.type,
                             content: element.content,
                             style: element.date.isAMomentObject,
                             date: moment(element.date.date,).format('L'),
                             time: moment(element.date.date,).format('LTS'),
                             thumbnail: element.thumbnail,
-                            status:element.status
+                            status: element.status
                         }]
                         break;
                 }
@@ -124,6 +132,25 @@ export function CalendarFile() {
     }
 
 
+    const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items, {
+        variables: {idLive: deletedItems},
+        context: {clientName: "second"},
+        onCompleted: (data) => {
+
+            if (data.deleteLive.code === "200") {
+                success_Delete();
+                QueryCalendar();
+            } else if (data.deleteLive.code === "400") {
+                error_Delete(400)
+            } else if (data.deleteLive.code === "404") {
+                error_Delete(404)
+            }else if (data.deleteLive.code === "401") {
+                error_Delete(401)
+            }
+        }
+    })
+
+
     const DateCellRender = (value) => {
         const listData = getListData(value);
         return (
@@ -132,7 +159,7 @@ export function CalendarFile() {
                     allow &&
                     <ul className="events" style={{height:"100%" , width:'100%;'}}>
                         {listData.map((item, index) => {
-                            console.log("itemmodal" + item.id, item)
+
                             return (
                                 <div key={item.id}>
                                   <div >
@@ -168,6 +195,39 @@ export function CalendarFile() {
                 <span>Backlog number</span>
             </div>
         ) : null;
+    }
+    const handleDelayDelete=(ids)=>{
+
+        let items = calendarValues.filter(item => {
+            return !(ids.includes(item.id))
+        })
+        // dispatch list Video
+        setCalendarValues(items)
+
+        // liste des items supprimer
+        itemsDeleted = calendarValues.filter(item => {
+            return (ids.includes(item.id))
+
+        })
+
+    }
+    const handleDelete = async (id) => {
+        deletedItems.push(id);
+
+        setDeletedItems(deletedItems)
+        dispatch(setShowDivsConditions({showDivsConditionsName: "clickDeleteIcon", showDivsConditionsValue: false}));
+        setTimeout(() => {
+            console.log("handleDelete1")
+            dispatch(setShowDivsConditions({showDivsConditionsName: "clickDeleteIcon", showDivsConditionsValue: true}));
+        }, 3000)
+        // Time out to Run API Delete
+        setItemsRunAPI(setTimeout(()=>{
+            console.log("handleDelete2")
+            DeleteItemMutation()
+            handleDelayDelete(deletedItems)
+        },3000))
+
+        dispatch(setLoadingDeleteCalendarVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
     }
 
 
@@ -209,14 +269,19 @@ export function CalendarFile() {
                 onCancel={handleCancel}
                 footer={[
                     <div className={"footer_modal_Avenir"}>
-                        <div>{modalInfo.status == -1 ?<Button><DeleteOutlined/>{t("Calendar.Delete")}</Button>:null}</div>
+                        <div>{modalInfo.status == -1 ?
+                            <Button onClick={() => {
+                                handleDelete(modalInfo.id);
+                                handleCancel()
+                            }}><DeleteOutlined/>{t("Calendar.Delete")}
+                            </Button> : null}</div>
 
                         <div>
                             <Button key="back" onClick={handleCancel}>
                                 {t("Calendar.Cancel")}
 
                             </Button>
-                            <Button className={"ModalButtonPrimary"} type="primary" key="submit" >
+                            <Button className={"ModalButtonPrimary"} type="primary" key="submit">
                                 {modalInfo.status == -1 ? t("Calendar.Edit") : modalInfo.status == 0 ? t("Calendar.Visualize") : t("Calendar.Broadcast")}
                             </Button>
                         </div>
@@ -225,7 +290,8 @@ export function CalendarFile() {
                 ]}
             >
                 <div className={"body_Modal"}>
-                    <div className={"div_image_modal"}><img src={modalInfo.thumbnail ? modalInfo.thumbnail : defaultImg}/>
+                    <div className={"div_image_modal"}><img
+                        src={modalInfo.thumbnail ? modalInfo.thumbnail : defaultImg}/>
                     </div>
                     <div className={"div_time_calendar"}>
                         <div className={"type_btn"}><Tag

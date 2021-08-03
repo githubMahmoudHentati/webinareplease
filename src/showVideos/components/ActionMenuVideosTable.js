@@ -115,7 +115,7 @@ function useActionMenu({record}) {
                 ]}
             >
                 <div className="div_Url_diffusion">
-                   <span>{t("ShowVideo.BroadcastUrl")}</span>
+                    <span>{t("ShowVideo.BroadcastUrl")}</span>
                     <Input placeholder="//demo.webtv-solution.com/fo/embed/267" name={"inputUrlDiffusion"} value={infosLives.inputUrlDiffusion}/>
                 </div>{/*./div_Url_diffusion*/}
                 <div className="div_Nom_de_flux">
