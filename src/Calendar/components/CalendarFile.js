@@ -27,7 +27,6 @@ export function CalendarFile() {
     const [calendarEvent, SetCalendarEvents] = useState({});
     const [modalInfo, setModalInfo] = useState({});
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
-    !darkMode && document.documentElement.style.setProperty('--modal_background', "white");
     const calendarProps = useSelector((state) => state.CalendarReducer)
 
     const VisibleModal = useSelector((state) => state.CalendarReducer);
