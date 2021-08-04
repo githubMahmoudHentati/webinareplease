@@ -55,13 +55,23 @@ export const ShowVideosList = ()=>{
         })
     }
 
+    const valueExportLives = () =>{
+        return({
+            visibleExport : false,
+            participantUrl : "",
+            auditorUrl : "",
+            integrationUrl : "",
+        })
+    }
+
     return({
         FilterVideos,
         paginationProps,
         showVideoConstraintData,
         showDivsConditions,
         loadingDeleteShowVideo,
-        valuesInfosLives
+        valuesInfosLives,
+        valueExportLives
     })
 
 }
