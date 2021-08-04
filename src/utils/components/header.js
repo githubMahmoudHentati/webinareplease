@@ -160,7 +160,8 @@ function GlobalHeader() {
 
 
     const {t, i18n} = useTranslation();
-
+    let userName=  (localStorage.getItem('firstName') && localStorage.getItem('lastName') ? localStorage.getItem('firstName') + ' ' +localStorage.getItem('lastName') : t('description.user'))
+    let avatar = (localStorage.getItem('avatar') ? localStorage.getItem('avatar') : '')
     const changeLanguage = (language) => {
         i18n.changeLanguage(language);
     }
@@ -262,7 +263,8 @@ function GlobalHeader() {
                         <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: '#419BF9'}}
-                                    icon={<UserOutlined/>}/> {t("description.user")}
+                                    src={avatar}
+                                    icon={!avatar ? <UserOutlined/> : ""} /> {userName}
                         </a>
                     </Dropdown>
 
