@@ -65,8 +65,8 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
             <CalendarModal handleCancel={handleCancel}
                            visible={VisibleModal.calendarVisible.visible}
                            modalInfo={modalInfo}
-                           handleDelete={handleDelete}
-                           handleStatusEvents={handleStatusEvents}
+                           handleDelete={()=>handleDelete(modalInfo.id)}
+                           handleStatusEvents={()=>handleStatusEvents(modalInfo)}
             ></CalendarModal>
         </div>
     )
