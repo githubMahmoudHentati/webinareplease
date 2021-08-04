@@ -21,10 +21,7 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete,handleSta
             footer={[
                 <div className={"footer_modal_Avenir"}>
                     <div>{modalInfo.status == -1 ?
-                        <Button onClick={() => {
-                            handleDelete(modalInfo.id);
-                            handleCancel()
-                        }}><DeleteOutlined/>{t("Calendar.Delete")}
+                        <Button onClick={handleDelete}><DeleteOutlined/>{t("Calendar.Delete")}
                         </Button> : null}</div>
 
                     <div>

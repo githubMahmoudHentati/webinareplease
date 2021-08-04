@@ -2,14 +2,15 @@ import React, {useEffect, useState} from 'react';
 import moment from "moment";
 import {Badge, Tag} from "antd";
 import { useTranslation } from 'react-i18next';
+import {useSelector} from "react-redux";
 import CalendarModal from "./CalendarModal";
+import HooksCalendar from "../utils/hooks";
 
 function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
-    const [visible , SetVisible] = useState(false);
-    const [modalInfo, setModalInfo] = useState({});
     let calenderEventClick = calendarEvent
     let calendarCompareMoment =  calendarValues.map(item => moment(item.date.date).isSame(calenderEventClick , 'day'))
-
+    const VisibleModal = useSelector((state) => state.CalendarReducer);
+    const {handleDelete, handleStatusEvents, handleCancel, onShowModal, modalInfo} = HooksCalendar()
     const getListData= (calenderEventClick)=>{
         let listData =[];
         if (calendarValues && calendarValues.length) {
@@ -35,17 +36,6 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
     }
 
     const listData =    getListData(calenderEventClick); // get Calender event
-
-    //show Modal
-    const onShowModal=(item)=>{
-        setModalInfo(item)
-        SetVisible(true)
-    }
-
-    // Cancel modal
-    const handleCancel = () => {
-        SetVisible(false)
-    }
     const { t, i18n } = useTranslation();
     return(
         <div className={"div_global_calendar"}>
@@ -72,7 +62,12 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                     :
                     null
             }
-            <CalendarModal handleCancel={handleCancel} visible={visible} modalInfo={modalInfo}></CalendarModal>
+            <CalendarModal handleCancel={handleCancel}
+                           visible={VisibleModal.calendarVisible.visible}
+                           modalInfo={modalInfo}
+                           handleDelete={handleDelete}
+                           handleStatusEvents={handleStatusEvents}
+            ></CalendarModal>
         </div>
     )
 }
