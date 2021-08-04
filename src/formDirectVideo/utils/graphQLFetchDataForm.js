@@ -13,11 +13,9 @@ import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../store/form
 import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
 import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
-const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
-
-
 
 export const GraphQLFetchDataForm = (values) => {
+    const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
     const history = useHistory()
     const dispatch = useDispatch()
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';

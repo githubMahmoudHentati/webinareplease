@@ -4,9 +4,17 @@ import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
 import {setshowVideosActions , setShowVideoConstraintDataOnchange} from "../store/showVideosAction";
 import {StatusMessage} from "./StatusMessage";
+import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../../formDirectVideo/store/formDirectVideoAction"
+import {setDirectSetting} from "../../utils/redux/actions";
+import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
+
+
 
 export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
+
+    const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
+
     // Read Data from Hooks
     const {paginationProps ,  values }=Hooks()
 
@@ -14,7 +22,7 @@ export const GraphQLFetchData=()=> {
     const {error_getLives}=StatusMessage()
 
     // use Query to fetch Data
-   /* const {loading:calendar_loadingNow, data: GetCalendarDataNow}
+    const {loading:calendar_loadingNow, data: GetCalendarDataNow}
         = useQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
@@ -37,9 +45,12 @@ export const GraphQLFetchData=()=> {
             }else if(data.getLives.code === 400){
                 error_getLives()
             }
-
+            localStorage.removeItem('idLive')
+            dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
+            dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
+            dispatch(setDirectSetting(0))
         }
-    })*/
+    })
 
     // mutation delete lang from table of event
     const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
