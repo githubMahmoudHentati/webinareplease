@@ -13,7 +13,7 @@ let clicked = false;
 const { RangePicker } = DatePicker;
 
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , onChangeRange }=Hooks()
+    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , onChangeRange, paginationProps }=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
@@ -89,7 +89,7 @@ function HeaderVideos() {
               <div className="div_delete_select">
 
                   {
-                      conditions.elementSelected === 0
+                      paginationProps.id.length === 0
                           ?
                           null
                           :
@@ -97,7 +97,7 @@ function HeaderVideos() {
                               <Tooltip title={t("Calendar.Delete")}>
                                   <Button style={{backgroundColor:darkMode===false?"":"#141414"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} onClick={()=>handleClickDeleteIcon()} loading={loadingDelete.loadingDelete}/>
                               </Tooltip>
-                              <p style={{color:darkMode===false?"":"white"}}><span>{conditions.elementSelected}</span> <span id={"text_selection"}>{t("ShowVideo.SelectedItem")}</span></p>
+                              <p style={{color:darkMode===false?"":"white"}}><span>{paginationProps.id.length || ""}</span> <span id={"text_selection"}>{t("ShowVideo.SelectedItem")}</span></p>
                           </div>
                   }
 
