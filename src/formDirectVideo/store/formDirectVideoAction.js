@@ -122,6 +122,15 @@ export function setGeneralOnchange(e){
             }
         }
 
+        export function setInitialLiveInfo(e){
+            return{
+                type:"SET_InitialLiveInfo",
+                payload:e
+            }
+        }
+
+
+
     export function setFormDirectLiveConstraintDataOnchange(e){
         return{
             type:"SET_FormDirectLiveConstraintDataOnchange",

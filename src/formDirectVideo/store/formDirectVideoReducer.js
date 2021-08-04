@@ -168,6 +168,9 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 constraintData:constraintDataOnOnchangeObj
             }
 
+        case 'SET_InitialLiveInfo' :
+            return  formDirectInitialState
+
         default:{
             return state
         }
