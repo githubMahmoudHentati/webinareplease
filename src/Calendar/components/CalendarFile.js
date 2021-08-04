@@ -139,6 +139,7 @@ export function CalendarFile() {
             if (data.deleteLive.code === "200") {
                 success_Delete();
                 QueryCalendar();
+                handleDelayDelete(deletedItems)
             } else if (data.deleteLive.code === "400") {
                 error_Delete(400)
             } else if (data.deleteLive.code === "404") {
@@ -223,7 +224,7 @@ export function CalendarFile() {
         setItemsRunAPI(setTimeout(()=>{
             console.log("handleDelete2")
             DeleteItemMutation()
-            handleDelayDelete(deletedItems)
+
         },3000))
 
         dispatch(setLoadingDeleteCalendarVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
