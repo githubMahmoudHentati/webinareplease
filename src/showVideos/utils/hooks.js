@@ -5,7 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange
+    setShowVideoConstraintDataOnchange, setExportLive
 } from "../store/showVideosAction"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -47,10 +47,12 @@ export  const Hooks=()=> {
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
     //Reducer infos lives
     const infosLives = useSelector((state)=> state.ShowVideosReducerReducer.valuesInfosLives)
+    //Reducer export lives
+    const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",values)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",exportLives)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -139,6 +141,29 @@ export  const Hooks=()=> {
                 error_getLives(400)
             }
         }
+    })
+
+    //LazyQuery Export Live
+    const [EXPORTlIVE ,{data: eXPORTlIVE}]
+        = useLazyQuery(graphQL_shema().Export_Live,{
+        fetchPolicy:  "cache-and-network",
+        variables : {id:paginationProps.idLive},
+        context: { clientName: "second" },
+        onCompleted :(data)=>{
+            dispatch(setExportLive({
+                exportLivesName: "participantUrl",
+                exportLivesValue: data.GetLinkExport.participantUrl
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "auditorUrl",
+                exportLivesValue: data.GetLinkExport.auditorUrl
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "integrationUrl",
+                exportLivesValue: data.GetLinkExport.integrationUrl
+            }));
+        }
+
     })
 
     //******************Function Data Table************************//
@@ -316,6 +341,18 @@ export  const Hooks=()=> {
         //setVisible(false)
     };
 
+    // fonction export live
+    const handleExport = () =>{
+        EXPORTlIVE()
+        setTimeout(()=>{
+            dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:true}));
+        },300)
+    }
+    //handleCancel Modal export
+    const handleCancelModalExport = () =>{
+        dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:false}));
+    }
+
     return({
         handleSearchRow,
         handleHeaderSelect,
@@ -339,6 +376,9 @@ export  const Hooks=()=> {
         infosLives,
         updateLive,
         GETDATEVIDEO,
-        onChangeRange
+        onChangeRange,
+        handleExport,
+        handleCancelModalExport,
+        exportLives
     })
 }
