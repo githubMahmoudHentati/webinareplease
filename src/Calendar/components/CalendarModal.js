@@ -13,8 +13,9 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete}) {
     !darkMode && document.documentElement.style.setProperty('--modal_background', "white");
     return(
         <Modal
+
             visible={visible}
-            title={<Badge style={{fontSize: "16px", fontWeight: "500"}} color='green'
+            title={<Badge className={"Modal-header-title"} color={modalInfo.type === "à venir" ? 'blue' : modalInfo.type === "en cours" ? 'green' : modalInfo.type === "archivé" && 'gray'}
                           text={modalInfo.content}/>}
             onCancel={handleCancel}
             footer={[
