@@ -2,23 +2,25 @@ import React , {useState,useEffect} from 'react';
 import { Breadcrumb,Button, Tooltip , Select , Input  , Checkbox , DatePicker, Space , Alert} from "antd";
 import {  HourglassOutlined ,DownloadOutlined ,PlayCircleOutlined ,ImportOutlined ,BorderInnerOutlined , CalendarOutlined , DeleteOutlined , DownOutlined ,RightOutlined ,HomeOutlined , PlusSquareOutlined , MenuOutlined , TableOutlined  ,AppstoreOutlined , FilterOutlined , FolderOutlined , FolderOpenOutlined , SearchOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
 import {Hooks} from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import {setFilterVideosActions} from "../store/showVideosAction";
 const { Option } = Select;
 let clicked = false;
 
 const { RangePicker } = DatePicker;
 
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , onChangeRange, paginationProps }=Hooks()
+    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos , conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , onChangeRange, paginationProps , values}=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const history = useHistory();
     const { t, i18n } = useTranslation();
+    const dispatch = useDispatch()
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -150,6 +152,13 @@ function HeaderVideos() {
                       }
                       name="search"
                       onKeyDown={handleSearchRow}
+                      onChange={(e) =>// dispatch loading Delete Button
+                          dispatch(setFilterVideosActions({
+                              FilterVideosNameChange: "searchFake",
+                              FilterVideosValueChange: e.target.value
+                          }))
+                      }
+                      value={values.searchFake}
                   />
 
               </div>{/*./div_filter*/}
