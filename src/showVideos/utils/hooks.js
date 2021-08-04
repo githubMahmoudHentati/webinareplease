@@ -52,7 +52,7 @@ export  const Hooks=()=> {
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",exportLives)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",values)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
