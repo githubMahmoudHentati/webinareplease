@@ -21,7 +21,8 @@ import {useTranslation} from 'react-i18next';
 import {useDispatch} from "react-redux";
 
 import defaultImg from '../../assets/webinarplease-thumb.jpg'
-import Hooks from '../utils/hooks.js'
+import HooksCalendar from '../utils/hooks.js'
+import {Hooks} from '../../showVideos/utils/hooks.js'
 import CalendarModal from "./CalendarModal";
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
@@ -42,7 +43,8 @@ export function CalendarFile() {
     const {success_Delete, error_Delete} = StatusMessage()
     console.log("VisibleModal", VisibleModal)
     let  itemsDeleted;
-    const {setItemsRunAPI} = Hooks();
+    const {setItemsRunAPI} = HooksCalendar();
+    const {updateLive} = Hooks();
     //show Modal
     const onShowModal = (item) => {
         //SetVisible(true)
@@ -211,6 +213,15 @@ export function CalendarFile() {
         })
 
     }
+    const handleStatusEvents = (live) =>{
+        if(live.status== -1){
+            updateLive(live.id)
+        }else if(live.status== 0){
+
+        }else{
+
+        }
+    }
     const handleDelete = async (id) => {
         deletedItems.push(id);
 
@@ -266,6 +277,7 @@ export function CalendarFile() {
                            visible={VisibleModal.calendarVisible.visible}
                            modalInfo={modalInfo}
                            handleDelete={handleDelete}
+                           handleStatusEvents={handleStatusEvents}
             ></CalendarModal>
         </div>
     );

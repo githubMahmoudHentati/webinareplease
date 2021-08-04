@@ -4,7 +4,7 @@ var itemsRunAPI;
 
 
 
-const Hooks=(callback)=> {
+const HooksCalendar=(callback)=> {
 
     console.log("hooks calendar ")
 
@@ -18,4 +18,4 @@ const Hooks=(callback)=> {
     })
 }
 
-export  default Hooks
+export  default HooksCalendar

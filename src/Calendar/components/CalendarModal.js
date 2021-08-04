@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import { useTranslation } from 'react-i18next';
 import defaultImg from "../../assets/webinarplease-thumb.jpg";
 
-function CalendarModal({modalInfo, visible, handleCancel, handleDelete}) {
+function CalendarModal({modalInfo, visible, handleCancel, handleDelete,handleStatusEvents}) {
     console.log("modalInfo", modalInfo)
     const { t, i18n } = useTranslation();
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
@@ -32,7 +32,7 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete}) {
                             {t("Calendar.Cancel")}
 
                         </Button>
-                        <Button className={"ModalButtonPrimary"} type="primary" key="submit">
+                        <Button className={"ModalButtonPrimary"} type="primary" key="submit" onClick={()=>handleStatusEvents(modalInfo)}>
                             {modalInfo.status == -1 ? t("Calendar.Edit") : modalInfo.status == 0 ? t("Calendar.Visualize") : t("Calendar.Broadcast")}
                         </Button>
                     </div>
