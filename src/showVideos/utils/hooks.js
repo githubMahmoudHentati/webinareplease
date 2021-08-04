@@ -109,7 +109,6 @@ export  const Hooks=()=> {
             dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
             if(data.deleteLive.code === "200"){
                 // dispatch loading nombre des élements sélectionnés
-                dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:0}));
                 success_Delete()
             }else if(data.deleteLive.code === "400"){
                 error_Delete(400)
@@ -145,13 +144,13 @@ export  const Hooks=()=> {
     //******************Function Data Table************************//
 
     /*Function Input*/
-    const handleSearchRow = (event) => {
+    const handleSearchRow = async(event) => {
         if(event.key === 'Enter') {
-            console.log("handleSearchRow", event.target.value, event.target.name)
-            dispatch(setFilterVideosActions({
+           await dispatch(setFilterVideosActions({
                 FilterVideosNameChange: event.target.name,
                 FilterVideosValueChange: event.target.value
             }));
+            await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
         }
     };
     /*Function Select*/
@@ -161,6 +160,7 @@ export  const Hooks=()=> {
             FilterVideosNameChange: action.name,
             FilterVideosValueChange: action.value
         }));
+        if(action.name === 'type')  dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));
     };
     /*Function DatePicker */
     const handleChangeDatePicker = (name, momentValue , dateStringValue) => {
@@ -195,8 +195,11 @@ export  const Hooks=()=> {
                         "date":values.date,
                         "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                     }
-                }}
+                },
+            }
         )
+
+     dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
     }
     /*Delete Rows*/
 
@@ -224,8 +227,9 @@ export  const Hooks=()=> {
             PaginationPropsValueChange: paginationProps.current !== 1 ? paginationProps.current - 1 : 1 ,
           }))}
           await GETDATEVIDEO();
-        await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:notDeletedItems}));})
-
+        await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[...notDeletedItems]}));
+    })
+    
         },3000)
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
