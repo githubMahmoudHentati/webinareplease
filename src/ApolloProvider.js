@@ -57,7 +57,7 @@ export default (
     <Suspense fallback={(<Spin className="Spin">
         <div></div>
     </Spin>)}>
-        <Provider store={store}>
+        <Provider store={store} >
             <ApolloProvider client={client}>
                 <App/>
             </ApolloProvider>

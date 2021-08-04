@@ -51,3 +51,10 @@ export function setInfosLive(e){
         payload:e
     }
 }
+
+export function setExportLive(e){
+    return{
+        type :"SET_EXPORTLIVES",
+        payload:e
+    }
+}

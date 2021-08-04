@@ -14,7 +14,7 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive }=Hooks()
+    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive , handleExport , handleCancelModalExport , exportLives }=Hooks()
     const { t, i18n } = useTranslation();
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
@@ -34,10 +34,7 @@ function useActionMenu({record}) {
             <Menu.Item onClick={()=>handleDeleteOneRow(record.id)}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item>
         </Menu>
     );
-    //fonction handleExport and show modal infos
-    const handleExport = () =>{SetVisibleModalExport(true)}
-    // handle cancel Modal export
-    const handleCancelModalExport = () =>{SetVisibleModalExport(false)}
+
 
     // fonction pour copier url participant
     const CopyUrlParticipant = () =>{
@@ -57,7 +54,7 @@ function useActionMenu({record}) {
         }else {
             document.getElementById("myUrlAuditeur").select();
             document.execCommand("Copy");
-            message.success({content:t("SuccessCopy"),duration:2});
+            message.success({content:t("ShowVideo.SuccessCopy"),duration:2});
         }
     }
 
@@ -128,7 +125,7 @@ function useActionMenu({record}) {
             </Modal>{/*./ModalInfos*/}
 
             <Modal
-                visible={visibleModalExport}
+                visible={exportLives.visibleExport}
                 title={t("ShowVideo.ExportLink")}
                 onCancel={handleCancelModalExport}
                 footer={[
@@ -139,19 +136,19 @@ function useActionMenu({record}) {
             >
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.UrlParticipant")} </span>
-                    <Input id="myUrlParticipant" placeholder="//demo.webtv-solution.com/fo/embed/267"/>
+                    <Input id="myUrlParticipant" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"participantUrl"} value={exportLives.participantUrl}/>
                     <div className="div_Copier"><Button onClick={CopyUrlParticipant}>{t("ShowVideo.Copier")}</Button></div>
                 </div>{/*./div_Url_diffusion*/}
 
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.AuditorUrl")}</span>
-                    <Input id="myUrlAuditeur" placeholder="//demo.webtv-solution.com/fo/embed/267"/>
+                    <Input id="myUrlAuditeur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"auditorUrl"} value={exportLives.auditorUrl}/>
                     <div className="div_Copier"><Button onClick={CopyUrlAuditeur}>{t("ShowVideo.Copier")}</Button></div>
                 </div>{/*./div_Url_diffusion*/}
 
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.IntegrationLink")}</span>
-                    <TextArea id="myLienIntegration" rows={4} placeholder="//demo.webtv-solution.com/fo/embed/267"/>
+                    <TextArea id="myLienIntegration" rows={4} placeholder="//demo.webtv-solution.com/fo/embed/267" name={"integrationUrl"} value={exportLives.integrationUrl}/>
                     <div className="div_Copier"><Button onClick={CopyLienIntegration}>{t("ShowVideo.Copier")}</Button></div>
                 </div>{/*./div_Url_diffusion*/}
 
