@@ -74,6 +74,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
     {
       title: "Actions",
       key: "action",
+      className: 'columnAction',
       render: (action, record) => {
         return <UseActionMenu record={record} />;
       },
