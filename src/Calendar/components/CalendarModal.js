@@ -8,6 +8,7 @@ import defaultImg from "../../assets/webinarplease-thumb.jpg";
 import "../Calendar.scss"
 function CalendarModal({modalInfo, visible, handleCancel, handleDelete,handleStatusEvents}) {
     console.log("modalInfo", modalInfo)
+
     const { t, i18n } = useTranslation();
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
     !darkMode && document.documentElement.style.setProperty('--modal_background', "white");

@@ -9,6 +9,7 @@ import CalendarModal from "./CalendarModal";
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
+
 export function CalendarFile() {
     const {activeCalendarEvents,calendarEvent,
         calendarValues, DateCellRender, monthCellRender,
@@ -18,7 +19,17 @@ export function CalendarFile() {
     const VisibleModal = useSelector((state) => state.CalendarReducer);
     console.log("VisibleModal", VisibleModal)
     //show Modal
-
+    const GetCalendar=()=>
+        <>
+            <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
+                  onPanelChange={OnPanelChange}/>;
+            <CalendarModal handleCancel={handleCancel}
+                           visible={VisibleModal.calendarVisible.visible}
+                           modalInfo={modalInfo}
+                           handleDelete={()=>handleDelete(modalInfo.id)}
+                           handleStatusEvents={()=>handleStatusEvents(modalInfo)}
+            ></CalendarModal>
+        </>
     return (
         <div className={"CalendarFile"}>
             {
@@ -27,18 +38,11 @@ export function CalendarFile() {
                         <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
                                         GetCalendarDataNow={GetCalendarDataNow}/>
                         :
-                        <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
-                                  onPanelChange={OnPanelChange}/>
+                       <GetCalendar/>
                     :
-                    <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
-                              onPanelChange={OnPanelChange}/>
+                    <GetCalendar />
             }
-            <CalendarModal handleCancel={handleCancel}
-                           visible={VisibleModal.calendarVisible.visible}
-                           modalInfo={modalInfo}
-                           handleDelete={()=>handleDelete(modalInfo.id)}
-                           handleStatusEvents={()=>handleStatusEvents(modalInfo)}
-            ></CalendarModal>
+
         </div>
     );
 }

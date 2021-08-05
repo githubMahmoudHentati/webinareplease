@@ -57,11 +57,18 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                         text={item.content} className={"div-calendar-content"} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
                                 </Tag>
                             </div>
+
                         )
                     })
                     :
                     null
             }
+            <CalendarModal handleCancel={handleCancel}
+                           visible={VisibleModal.calendarVisible.visible}
+                           modalInfo={modalInfo}
+                           handleDelete={()=>handleDelete(modalInfo.id)}
+                           handleStatusEvents={()=>handleStatusEvents(modalInfo)}
+            ></CalendarModal>
 
         </div>
     )

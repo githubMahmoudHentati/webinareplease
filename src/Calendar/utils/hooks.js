@@ -28,6 +28,7 @@ const HooksCalendar=(callback)=> {
     const [calendarEvent, SetCalendarEvents] = useState({});
     const [modalInfo, setModalInfo] = useState({});
     const {success_Delete, error_Delete} = StatusMessage()
+    let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
     let  itemsDeleted;
     const {updateLive} = Hooks();
@@ -185,7 +186,9 @@ const HooksCalendar=(callback)=> {
                                     <div >
                                         <Tag className={"btn_error"}
                                              color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
+                                             style={x.matches ? {pointerEvents:'none'} : {}}
                                              onClick={() => onShowModal(item)}>
+
                                             <Badge
                                                 color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
                                                 text={item.content} style={{
