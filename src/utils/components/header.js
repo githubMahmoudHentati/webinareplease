@@ -269,8 +269,8 @@ function GlobalHeader() {
                             {
                                 firstName || lastName ?
                                     <div className={"avatar-userName"}>
-                                        <div className={"avatar-firstName"}>{firstName}</div>
                                         <div className={"avatar-lastName"}>{lastName}</div>
+                                        <div className={"avatar-firstName"}>{firstName}</div>
                                     </div>
                                     :
                                     t('description.firstName')
@@ -326,8 +326,8 @@ function GlobalHeader() {
                                     {
                                         firstName || lastName ?
                                             <div className={"avatar-userName"}>
-                                                <div className={"avatar-firstName"}>{firstName}</div>
                                                 <div className={"avatar-lastName"}>{lastName}</div>
+                                                <div className={"avatar-firstName"}>{firstName}</div>
                                             </div>
                                             :
                                             t('description.firstName')

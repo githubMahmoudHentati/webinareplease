@@ -15,9 +15,9 @@ import axios from 'axios';
 
 const {Option} = Select;
 
-export const AccountGeneralInformation = () => {
+export const AccountGeneralInformation = ({form}) => {
     const history = useHistory()
-    const [form] = Form.useForm();
+
     const dispatch = useDispatch()
     const {UpdateAccountSetting} = GraphQLFetchData(form)
     const {
@@ -32,10 +32,6 @@ export const AccountGeneralInformation = () => {
         const reader = new FileReader();
         reader.addEventListener('load', () => callback(reader.result));
         reader.readAsDataURL(img);
-
-    }
-
-    const beforeUpload = (file) => {
 
     }
 
@@ -114,7 +110,7 @@ export const AccountGeneralInformation = () => {
 
     console.log("generalInformation", values)
     const {t, i18n} = useTranslation();
-    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")},{max:15}];
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -168,7 +164,7 @@ export const AccountGeneralInformation = () => {
                                 />
                             </Col>
                             <Col span={24}>
-                                <AvatarUpload beforeUpload={beforeUpload} handleChange={handleChange} darkMode={darkMode}/>
+                                <AvatarUpload handleChange={handleChange} darkMode={darkMode}/>
                             </Col>
                         </Row>
                     </Col>
@@ -191,15 +187,17 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Nom")}<span className="require">*</span></span>
+                                  }}>{t("CompteSettings.LastName")}<span className="require">*</span></span>
                                             </Col>
                                             <Col span={24}>
-                                                <Form.Item name="firstName"
+                                                <Form.Item name="lastName"
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.firstName} name="firstName"
-                                                           placeholder={t("CompteSettings.Nom")}
+                                                    <Input value={values.generalInformation.lastName}
+                                                           name="lastName"
+                                                           placeholder={t("CompteSettings.LastName")}
+                                                           maxLength={16}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
@@ -213,12 +211,14 @@ export const AccountGeneralInformation = () => {
                                   }}>{t("CompteSettings.FirstName")}<span className="require">*</span> </span>
                                             </Col>
                                             <Col span={24}>
-                                                <Form.Item name="lastName"
+                                                <Form.Item name="firstName"
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.lastName} name="lastName"
+                                                    <Input value={values.generalInformation.firstName}
+                                                           name="firstName"
                                                            placeholder={t("CompteSettings.FirstName")}
+                                                           maxLength={16}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>

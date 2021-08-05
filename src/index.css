@@ -880,9 +880,7 @@ margin-top: 2%;
     z-index: 10;
     transition: all 0.5s ease-in-out !important;
 }
-.avtr{
-    margin-right: 14px;
-}
+
 .avtr:hover .spnwhite{
     color: var(--menu-color) !important;
 }
@@ -1074,33 +1072,12 @@ margin-top: 2%;
 }
 .avatar-userName{
     padding-left: 5px;
-    max-width: 200px;
-    min-width: 8em;
-    position: relative;
-    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.avatar-firstName{
-    padding-right: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 4em;
-    -webkit-line-clamp: 1;
-    white-space: nowrap;
-    position: absolute;
-    width: 50%;
-}
 .avatar-lastName{
-    width: 50%;
-    position: absolute;
-    left: 50%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 1;
-    white-space: nowrap;
-    position: absolute;
+    padding-right: 5px;
 }
 .slider {
     position: absolute;

@@ -1,6 +1,6 @@
 import React, { useState,useEffect,useRef } from 'react';
 import {MenuForms} from './components/menuforms'
-import {Breadcrumb, Card, Col, Row} from "antd";
+import {Breadcrumb, Card, Col, Row, Form} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 import history from "../router/history";
 import {AccountGeneralInformation} from "./components/accountGeneralInformation";
@@ -10,8 +10,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {PasswordEdit} from "./components/passwordEdit";
 import {AccountSubscription} from './components/accountSubscription'
 import {useHistory} from "react-router-dom";
-import {setConstraintDataOnchange} from "./store/accountSettingsAction";
+import {setAccountSetting, setConstraintDataOnchange} from "./store/accountSettingsAction";
 import { useTranslation } from 'react-i18next';
+import {graphQL_shema} from "./utils/graphQL";
+import {useQuery,useMutation} from "@apollo/react-hooks";
 
 
 export const CompteSettings=()=>{
@@ -23,11 +25,25 @@ export const CompteSettings=()=>{
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t, i18n } = useTranslation();
-
+    const [form] = Form.useForm();
+    const {loading: GetUserInfoData_loading, data: GetUserInfoData}
+        = useQuery(graphQL_shema().Get_UserInfoData, {
+        fetchPolicy: 'cache-and-network',
+        variables: { pagination : {
+                "limit": 2,
+                "offset": 0,
+            } },
+        onCompleted: async (data) => {
+            await dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
+            await dispatch(setConstraintDataOnchange({
+                constraintDataNameChange: "loadingGeneralInformation",
+                constraintDataValueChange: false
+            }))
+            form.setFieldsValue(GetUserInfoData.getUserInfo.generalInformation)
+        }
+    })
     const SelectMenu = ()=>{
         switch(accountMenu){
-            case 0:
-                return <AccountGeneralInformation/>
             case 1:
             return <SecurityAccount/>
             case 2:
@@ -35,7 +51,7 @@ export const CompteSettings=()=>{
             case 3:
                 return <AccountSubscription/>
             default:
-                return <AccountGeneralInformation/>
+                return <AccountGeneralInformation form={form}/>
         }
     }
 
@@ -79,7 +95,7 @@ export const CompteSettings=()=>{
                         />
                         <span style={{
                             fontSize: "medium",
-                            fontFamily: "Arial, Helvetica, sans-serif;",
+                            fontFamily: "Arial, Helvetica, sans-serif",
                             marginLeft: "1%",
                             color:darkMode===false?"":"white"
                         }}> {t("CompteSettings.MyAccount")}
