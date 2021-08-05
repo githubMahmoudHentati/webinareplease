@@ -112,6 +112,8 @@ const HooksCalendar=(callback)=> {
         dispatch(setLoadingDeleteCalendarVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
         handleCancel()
     }
+
+
     const handleDelayDelete=(ids)=>{
 
         let items = calendarValues.filter(item => {
