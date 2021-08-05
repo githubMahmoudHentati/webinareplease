@@ -74,7 +74,16 @@
 .col-forms{
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  &.interactive-options{
+    @media screen and (max-width: 380px){
+      flex-wrap: wrap;
+      flex-direction: column;
+      text-align: start;
+      .ant-checkbox-wrapper + .ant-checkbox-wrapper{
+        margin-left: 0!important;
+      }
+    }
+  }
 }
 .col-forms span{
   font-size: 14px;
@@ -550,7 +559,10 @@
   margin-left: 2px;
 }
 .col-forms-upload span{
-  width: 50% !important;
+  width: 100%;
+  &.picture{
+    width: auto;
+  }
 }
 .ant-upload-list-item-info{
   display: flex;
@@ -576,7 +588,7 @@
 
 @media screen and (max-width: 768px) {
   .ant-upload-drag{
-    width: 200% !important;
+    width: 100% !important;
   }
 }
 @media screen and (max-width: 767px) {

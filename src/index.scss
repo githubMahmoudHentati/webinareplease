@@ -213,6 +213,10 @@ body{
 }
 .ant-upload-list-item-name{
     color: var(--white_color) !important;
+    flex: none !important;
+    padding: 0 8px!important;
+    min-width: 100px!important;;
+    width: calc(100% - 90px )!important;;
 }
 .ant-upload-list-item-info:hover , .ant-upload-list-item-done:hover{
     background-color: var(--option-background) !important;
@@ -792,6 +796,17 @@ margin-top: 2%;
 }
 .ant-table-pagination.ant-pagination{
     position: relative;
+}
+.ant-table-pagination{
+    position: relative;
+    @media screen and (max-width: 340px) {
+        &-right {
+            justify-content: flex-start;
+        }
+        .ant-pagination-prev, .ant-pagination-next, .ant-pagination-jump-prev, .ant-pagination-jump-next{
+            min-width: 26px;
+        }
+    }
 }
 /*Action*/
 
@@ -1603,9 +1618,6 @@ input:checked + .slider:before {
     }
     .span_action{
         margin-bottom: 15px;
-    }
-    #icon_vs{
-        margin-left: 5px !important;
     }
     #Text_Calendar{
         display: none !important;

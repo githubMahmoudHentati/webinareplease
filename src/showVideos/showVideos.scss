@@ -33,11 +33,12 @@
 
 @media screen and (min-width: 575px) and (max-width: 767px) {
   .action{
-    height: 45px;
-    width: 25px;
     position: absolute;
-    top: 73px;
-    left: 100px !important;
+    top: 0;
+    width: 100%;
+    right: 0.5em;
+    justify-content: flex-end;
+    height: 100%;
   }
   .span_action{
     height: 20px;
@@ -46,7 +47,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: -5px !important;
+    margin-top: -15px!important;
+    margin-bottom:0!important;
   }
 }
   @media screen and (max-width: 767px) {
@@ -74,6 +76,14 @@
     }
     .DataTable .ant-table-cell{
       border: 0 !important;
+    }
+    .DataTable .ant-table-cell:last-child{
+      bottom: 5px;
+      text-align: end;
+      display: flex;
+      justify-content: end;
+      position: absolute;
+      right: 0;
     }
     .DataTable .ant-table thead {
       border: none;
@@ -103,28 +113,54 @@
       position: absolute;
       top: 5px;
       left: 110px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 6px;
+      padding-right: 0;
+      white-space: nowrap;
     }
     .div_date{
-      width: 130px;
       min-height: 10px !important;
       text-align: left !important;
       padding:0 15px;
       position: absolute;
-      top: 40px;
+      top: 32px;
       left: 80px;
+      padding-left: 5px;
+      padding-right: 0;
     }
     .div-status{
-      width: 50px;
+      //width: 50px;
       position: absolute;
       top: 85px;
       left: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      .ant-tag{
+        margin-right: 5px;
+        padding: 0 5px;
+      }
+    }
+    .btn_Visualiser_diffuser{
+      padding: 4px 7px;
+      height: 21px;
+      #icon_vs{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+      }
     }
     .action{
-      height: 45px;
-      width: 25px;
       position: absolute;
-      top: 73px;
-      left: 80px;
+      top: 0;
+      width: 100%;
+      right: 0.5em;
+      justify-content: flex-end;
+      height: 100%;
     }
     #span_diffuser{
       display: none;
@@ -145,10 +181,8 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      margin-top: -15px;
-    }
-    #icon_vs{
-      margin-left: 10px !important;
+      margin-top: -15px!important;
+      margin-bottom:0!important;
     }
 
     #spn_ajouter{

@@ -16,6 +16,7 @@ function useActionMenu({record}) {
     const dispatch = useDispatch()
     const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive }=Hooks()
     const { t, i18n } = useTranslation();
+    let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
 
@@ -76,26 +77,20 @@ function useActionMenu({record}) {
     const actionColumnView = (
         <div className="action">
             {
-                record.status === -1
-                       ?
-                        <Tooltip title={t("ShowVideo.Diffuser")}>
-                            <Button className={"btn_Visualiser_diffuser extra-margin"} style={{
-                                backgroundColor: darkMode === false ? "" : "#1D1D1D",
-                                color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
-                                border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                            }}><VideoCameraOutlined id={"icon_vs"}/> <span id={"span_diffuser"}>{t("ShowVideo.Diffuser")}</span></Button>
-                        </Tooltip>
-                        :
-                        <Tooltip title={t("ShowVideo.Visualiser")}>
-                            <Button className={"btn_Visualiser_diffuser"} style={{
-                                backgroundColor: darkMode === false ? "" : "#1D1D1D",
-                                color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
-                                border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                            }}><EyeOutlined id={"icon_vs"}/> <span id={"span_diffuser"}>{t("ShowVideo.Visualiser")}</span></Button>
-                        </Tooltip>
+                !x.matches &&  <Tooltip title={t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser" ))}>
+                    <Button className={"btn_Visualiser_diffuser "} style={{
+                        backgroundColor: darkMode === false ? "" : "#1D1D1D",
+                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
+                        border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
+                    }}>
+                        {
+                            record.status === -1 ? <VideoCameraOutlined id={"icon_vs"}/> : <EyeOutlined id={"icon_vs"}/>
+                        }
+                        <span id={"span_diffuser"}>{ t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser" ))}</span>
 
+                    </Button>
+                </Tooltip>
             }
-
         <span className="span_action">
       <Dropdown overlay={actionMenu} trigger={['click']}  >
         <a  onClick={(e)=>handleClickDropdowMenu(e, record.id)} className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }} >
