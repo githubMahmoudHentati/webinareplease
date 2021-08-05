@@ -9,7 +9,7 @@ import youtubePost from  "../../assets/youtubePost.svg"
 import {useDispatch, useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import moment from "moment";
-import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/formDirectVideoAction";
+import {setActivePlan, setActivePost, setAddPlan, setClosePlan,setDatePlan} from "../store/formDirectVideoAction";
 import { useTranslation } from 'react-i18next';
 import defaultImg from '../../assets/webinarplease-thumb.jpg'
 
@@ -32,9 +32,12 @@ export const SocialTools=()=>{
         dispatch(setActivePlan({indexPost,indexPlan}))
     }
 
-
     const closePlan =(indexPost,indexPlan)=>{
         dispatch(setClosePlan({closePlanIndexPost:indexPost,closePlanIndexPlan:indexPlan}))
+    }
+
+    const datePlan=(indexPost,indexPlan,typeDate,dateValue)=>{
+        dispatch(setDatePlan({dateIndexPost:indexPost,dateIndexPlan:indexPlan,typeDate:typeDate,dateValue:dateValue}))
     }
 
     return(
@@ -103,7 +106,8 @@ export const SocialTools=()=>{
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.StartingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
+                                                                                <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
+                                                                                            onChange={(moment,dateValue)=>{datePlan(index,indexPlan,"startDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -115,7 +119,8 @@ export const SocialTools=()=>{
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.EndingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
+                                                                                <DatePicker defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
+                                                                                            onChange={(moment,dateValue)=>{datePlan(index,indexPlan,"endDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>

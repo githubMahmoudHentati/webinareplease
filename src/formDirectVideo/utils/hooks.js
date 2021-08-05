@@ -88,19 +88,22 @@ const Hooks=()=>{
     }
 
     const configurationOnChangeButton = (event) => {
+
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
 
     };
 
     const configurationOnChange = (event) => {
+
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
         event.target.name="visibleVideo" && themesDisplayQueryAction()
     };
 
-    const ConfigurationOnChangeSelect = (value,action) => {
-        console.log("event",action.name, action.value)
-        dispatch(setConfigurationOnchange({configurationNameChange: action.name, configurationValueChange: action.value}));
+    const ConfigurationOnChangeSelect = (value,action,name) => {
+
+        console.log("event-select",action)
+        dispatch(setConfigurationOnchange({configurationNameChange: name, configurationValueChange: value}));
     };
 
     const displayThemes=()=>{
@@ -166,7 +169,7 @@ const Hooks=()=>{
     const handleSubmit =async ()=>{
         await dispatch(setConfigurationOnchange({
             configurationNameChange: "addSpeakerList", configurationValueChange:
-                values.configuration.SpeakerList.map((el, i) => (
+                values.configuration.SpeakerList.slice(1).map((el, i) => (
                     {
                         ...values.configuration.addSpeakerList,
                         name: el.name,

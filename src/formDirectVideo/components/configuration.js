@@ -314,8 +314,9 @@ export const Configuration = () => {
                                 <Form.Item name="theme" className={"form-item-style"}
                                 >
                                     <Select
+                                         mode="multiple"
                                         className={"spn2"}
-                                        name="theme" onChange={ConfigurationOnChangeSelect}
+                                        name="theme" onChange={(value,action)=>{ConfigurationOnChangeSelect(value,action,"theme")}}
                                         showSearch
                                         style={{width: "100%"}}
                                         placeholder={t("formDirectVideo.SelectTheme")}
@@ -326,7 +327,7 @@ export const Configuration = () => {
                                     >
                                         {values.configuration.themesList.map((el) => {
                                             return (
-                                                <Option name="theme" key={el.id} value={el.id}>{el.title}</Option>
+                                                <Option name="theme" key={el.id} value={el.title}>{el.title}</Option>
                                             )
                                         })}
                                     </Select>
