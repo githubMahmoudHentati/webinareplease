@@ -54,7 +54,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                                      onClick={() => onShowModal(item)}>
                                     <Badge
                                         color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
-                                        text={item.content} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
+                                        text={item.content} className={"div-calendar-content"} style={{color: "#007fcb", borderRadius: "2px", opacity:!item.style&&"0.3"}}/>
                                 </Tag>
                             </div>
                         )
@@ -62,12 +62,7 @@ function CalendarEvents({calendarEvent , calendarValues , GetCalendarDataNow}) {
                     :
                     null
             }
-            <CalendarModal handleCancel={handleCancel}
-                           visible={VisibleModal.calendarVisible.visible}
-                           modalInfo={modalInfo}
-                           handleDelete={()=>handleDelete(modalInfo.id)}
-                           handleStatusEvents={()=>handleStatusEvents(modalInfo)}
-            ></CalendarModal>
+
         </div>
     )
 }

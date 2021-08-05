@@ -5,7 +5,7 @@ import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design
 import {useSelector} from "react-redux";
 import { useTranslation } from 'react-i18next';
 import defaultImg from "../../assets/webinarplease-thumb.jpg";
-
+import "../Calendar.scss"
 function CalendarModal({modalInfo, visible, handleCancel, handleDelete,handleStatusEvents}) {
     console.log("modalInfo", modalInfo)
     const { t, i18n } = useTranslation();
@@ -19,7 +19,7 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete,handleSta
                           text={modalInfo.content}/>}
             onCancel={handleCancel}
             footer={[
-                <div className={"footer_modal_Avenir"}>
+                <div className={"modal-footer"}>
                     <div>{modalInfo.status == -1 ?
                         <Button onClick={handleDelete}><DeleteOutlined/>{t("Calendar.Delete")}
                         </Button> : null}</div>
@@ -45,11 +45,11 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete,handleSta
                     <div className={"type_btn"}><Tag
                         color={modalInfo.type === "à venir" ? 'blue' : modalInfo.type === "en cours" ? 'green' : modalInfo.type === "archivé" && 'gray'}>{modalInfo.type === "à venir" ? t("ShowVideo.ComingSoon") : (modalInfo.type === "en cours" ? t("ShowVideo.InProgress") : t("ShowVideo.Archived"))}</Tag>
                     </div>
-                    <div className={"div2_time_calendar"}>
+                    <div className={"modal-div2_time_calendar"}>
                         <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                            <CalendarOutlined/>{modalInfo.date}</p>
+                            <CalendarOutlined className={"div2_time_calendar_icon"}/>{modalInfo.date}</p>
                         <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
-                            <ClockCircleOutlined/>{modalInfo.time}</p>
+                            <ClockCircleOutlined className={"div2_time_calendar_icon"}/>{modalInfo.time}</p>
                     </div>
                 </div>
             </div>
