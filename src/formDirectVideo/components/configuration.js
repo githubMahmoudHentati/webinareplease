@@ -192,7 +192,7 @@ export const Configuration = () => {
                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
                                 }}>{t("formDirectVideo.InterActiveOption")}</span>
                             </Col>
-                            <Col span={24} className={"col-forms"}>
+                            <Col span={24} className={"col-forms  interactive-options"}>
                                 <Checkbox onChange={configurationOnChangeButton} value="chat"
                                           style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
                                           checked={values.configuration.chat}

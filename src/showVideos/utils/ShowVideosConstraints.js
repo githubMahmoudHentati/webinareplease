@@ -1,4 +1,3 @@
-import React, { useState,useEffect,useRef } from 'react';
 
 export const ShowVideosList = ()=>{
 
@@ -6,9 +5,10 @@ export const ShowVideosList = ()=>{
         return (
             {
                 search:"",
+                searchFake:"",
                 periode:"",
-                date:["",""],
-                contributeur:"",
+                date:[],
+                contributeur: null,
                 type:"tous"
             }
         )
@@ -55,13 +55,23 @@ export const ShowVideosList = ()=>{
         })
     }
 
+    const valueExportLives = () =>{
+        return({
+            visibleExport : false,
+            participantUrl : "",
+            auditorUrl : "",
+            integrationUrl : "",
+        })
+    }
+
     return({
         FilterVideos,
         paginationProps,
         showVideoConstraintData,
         showDivsConditions,
         loadingDeleteShowVideo,
-        valuesInfosLives
+        valuesInfosLives,
+        valueExportLives
     })
 
 }

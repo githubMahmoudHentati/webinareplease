@@ -9,6 +9,9 @@ export const graphQL_shema = ()=> {
                 code
                 message
                 token
+                firstName
+                lastName
+                thumbnail
             }
         }
     `;
