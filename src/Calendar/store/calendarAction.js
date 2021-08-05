@@ -17,3 +17,15 @@ export function setCalendarVisibleOnchange(e){
         payload:e,
     };
 }
+export function setLoadingDeleteCalendarVideo(e){
+    return{
+        type:"SET_LoadingDeleteCalendarVideo",
+        payload:e
+    }
+}
+export function setShowDivsConditions(e){
+    return {
+        type : "SET_showDivsConditions",
+        payload:e
+    }
+}

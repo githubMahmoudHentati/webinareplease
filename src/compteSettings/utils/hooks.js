@@ -50,6 +50,15 @@ const Hooks=(callback)=> {
     }
     const handleSubmit = async ()=>{
         await dispatch(setConstraintDataOnchange({constraintDataNameChange:"loadingUpdateAccountSetting",constraintDataValueChange:true}))
+        if(values.generalInformation.vignette!==localStorage.getItem('avatar')){
+            localStorage.setItem('avatar',values.generalInformation.vignette )
+        }
+        if(values.generalInformation.lastName!==localStorage.getItem('lastName')){
+            localStorage.setItem('lastName',values.generalInformation.lastName)
+        }
+        if(values.generalInformation.firstName!==localStorage.getItem('firstName')){
+            localStorage.setItem('firstName',values.generalInformation.firstName)
+        }
         callback()
     }
     //*******************Handle Save New Password**********//
@@ -60,6 +69,12 @@ const Hooks=(callback)=> {
             LoadingUpdatePasswordValueChange: true
         }))
     }
+    const generalInformationOnChangeAvatar= (avatar) => {
+         dispatch(setGeneralInformationOnchange({
+            generalInformationNameChange: "vignette",
+            generalInformationValueChange: avatar
+        }))
+    };
     console.log("valuesPassword",values)
     return({
         generalInformationOnChangeSelect,
@@ -67,9 +82,10 @@ const Hooks=(callback)=> {
         handleSubmit,
         securityAccountPassword,
         handleSaveNewPassword,
+        generalInformationOnChangeAvatar,
         values,
         darkMode,
-        valuesCredentiels
+        valuesCredentiels,
         //subscriptionOnChange
     })
 }

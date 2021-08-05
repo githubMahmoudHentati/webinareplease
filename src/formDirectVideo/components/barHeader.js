@@ -31,7 +31,7 @@ export const BarHeader = () => {
     const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
     return (
         <Row style={{width: "100%"}} justify={"space-between"}>
-            <Col>
+            <Col className={"bar-header-container"}>
                 <Row gutter={[15, 0]}>
                     <Col style={{display: "flex", alignItems: "center"}}>
                         <ArrowLeftOutlined
@@ -61,7 +61,7 @@ export const BarHeader = () => {
                             }}
                         />
                     </Col>
-                    <Col>
+                    <Col className={"bar-header-title"}>
                         <span style={{
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                             fontSize: "20px",

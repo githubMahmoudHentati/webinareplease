@@ -43,6 +43,9 @@ export const GraphQLFetchData=(form)=> {
                 history.push("/")
                 dispatch(setAppSetLogin(data.login.token));
                 localStorage.setItem('jwtToken', data.login.token);
+                localStorage.setItem('lastName', data.login.lastName);
+                localStorage.setItem('firstName',  data.login.firstName);
+                localStorage.setItem('avatar',  data.login.thumbnail);
                 if (values.constraintData.isRememberMe){
                     localStorage.setItem('username', values.connexion.username);
                     localStorage.setItem('password', values.connexion.password);

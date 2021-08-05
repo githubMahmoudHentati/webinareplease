@@ -23,13 +23,27 @@ import frFR from "antd/lib/locale/fr_FR";
 import { ConfigProvider } from "antd";
 import 'moment/locale/fr';
 
-
+let tabData = [
+    "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"
+]
 function App() {
     const {verificationToken} = GraphQLFetchData()
     const credentialsValues = useSelector((state) => state.Reducer)
     const lang =useSelector((state)=>state.Reducer.lang)
-    console.log('credentialsValues',credentialsValues)
-    console.log('lang',lang)
+    let pathName = window.location.pathname.replace('/', '')
+    
+   
+    React.useEffect(()=>{
+        const root = document.querySelector(':root')
+
+        if(tabData.includes(pathName)){
+            if(JSON.parse(localStorage.getItem('darkMode'))){
+                root.classList.remove('dark')
+                root.classList.add('light')
+               }
+        }
+
+    },[pathName])
     return (
         <ConfigProvider locale={lang==="fr"?frFR:en_US}>
 

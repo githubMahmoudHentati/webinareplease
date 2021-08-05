@@ -38,12 +38,22 @@ export const graphQL_shema = ()=> {
         code
       }
      }
+    `;
+    const Export_Live = gql `
+    query($id:Int!) {
+    GetLinkExport(id:$id) {
+    participantUrl
+    auditorUrl
+    integrationUrl
+     }
+    }
     `
 
 
     return ({
         Get_Lives,
         Delete_Items,
-        Get_Live_Info
+        Get_Live_Info,
+        Export_Live
     })
 }

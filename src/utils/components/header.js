@@ -30,9 +30,8 @@ function GlobalHeader() {
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
-
+   
     const [activeSideMenuState, SetActiveSideMenuState] = useState(false)
-
     // Clic outside Side Bar
     useEffect(() => {
         function HEADERGOTO(event) {
@@ -43,107 +42,36 @@ function GlobalHeader() {
             }
         };
         document.body.addEventListener('click', HEADERGOTO);
-    }, []);
+    }, [darkMode, dispatch]);
 
     //fonction checkbox
     const onChange = (e) => {
-
-        //dispatch redux
-        dispatch(setDarkMode(!darkMode));
-        //const dark = localStorage.getItem('darkMode')?localStorage.getItem('darkMode'):false;
-        ColorComposant();
-        // setter
-        localStorage.setItem('darkMode', darkMode);
+        const root = document.querySelector(':root')
+        if(darkMode){
+            root.classList.remove('dark')
+            root.classList.add('light')
+           }
+           else {
+            root.classList.remove('light')
+            root.classList.add('dark')
+           }
+        localStorage.setItem('darkMode', e.target.checked);
+        dispatch(setDarkMode(e.target.checked));
     }
 
-    const ColorComposant = () => {
-        // White Color
-        darkMode && document.documentElement.style.setProperty('--white_color', "rgba(0, 0, 0, 0.85)");
-        !darkMode && document.documentElement.style.setProperty('--white_color', "rgba(255, 255, 255, 0.85)");
-
-        // White Color
-        darkMode && document.documentElement.style.setProperty('--separator-color', "rgba(0, 0, 0, 0.45)");
-        !darkMode && document.documentElement.style.setProperty('--separator-color', "rgba(255, 255, 255, 0.85)");
-
-        //Dark Color
-        darkMode && document.documentElement.style.setProperty('--dark_color', "rgba(0, 0, 0, 0.04)");
-        !darkMode && document.documentElement.style.setProperty('--dark_color', "rgba(255, 255, 255, 0.04)");
-
-        //border Color
-        darkMode && document.documentElement.style.setProperty('--border_color', "rgba(0, 0, 0, 0.15)");
-        !darkMode && document.documentElement.style.setProperty('--border_color', "rgba(255, 255, 255, 0.15)");
-
-        //Card Color
-        darkMode && document.documentElement.style.setProperty('--card_color', "#FFFFFF");
-        !darkMode && document.documentElement.style.setProperty('--card_color', "#141414");
-
-        //Cell Color
-        darkMode && document.documentElement.style.setProperty('--cell-color', "#FFFFFF");
-        !darkMode && document.documentElement.style.setProperty('--cell-color', "#1D1D1D");
-
-        //option background
-        darkMode && document.documentElement.style.setProperty('--option-background', "#F5F5F5");
-        !darkMode && document.documentElement.style.setProperty('--option-background', "#111d2c");
-
-        //item menu background
-        darkMode && document.documentElement.style.setProperty('--item-menu-background', "#e7f7ff");
-        !darkMode && document.documentElement.style.setProperty('--item-menu-background', "#111d2c");
-        darkMode && document.documentElement.style.setProperty('--item-menu-color', "rgba(0, 0, 0, 0.65)");
-        !darkMode && document.documentElement.style.setProperty('--item-menu-color', "rgba(255, 255, 255, 0.65)");
-
-        //option background
-        darkMode && document.documentElement.style.setProperty('--option_select', "#FFFFFF");
-        !darkMode && document.documentElement.style.setProperty('--option_select', "#1D1D1D");
-
-        // Modal Dark Light
-        darkMode && document.documentElement.style.setProperty('--modal_background', "white");
-        !darkMode && document.documentElement.style.setProperty('--modal_background', "#1D1D1D");
-
-        // Menu Color
-        darkMode && document.documentElement.style.setProperty('--menu-background', "#E6F7FF");
-        !darkMode && document.documentElement.style.setProperty('--menu-background', "#111d2c");
-        darkMode && document.documentElement.style.setProperty('--menu-color', "#2B96FF");
-        !darkMode && document.documentElement.style.setProperty('--menu-color', "#2B96FF");
-        darkMode && document.documentElement.style.setProperty('--menu-border', "#2090FF");
-        !darkMode && document.documentElement.style.setProperty('--menu-border', "#2090FF");
-
-        // Switch Color
-        darkMode && document.documentElement.style.setProperty('--Switch-Color', "#BFBFBF");
-        !darkMode && document.documentElement.style.setProperty('--Switch-Color', "#4E4E4E");
-
-
-        // Tag Green dark light mode
-        darkMode && document.documentElement.style.setProperty('--tag-green-background', "#f6ffed");
-        !darkMode && document.documentElement.style.setProperty('--tag-green-background', "#162312");
-        darkMode && document.documentElement.style.setProperty('--tag-green-border', "#b7eb8f");
-        !darkMode && document.documentElement.style.setProperty('--tag-green-border', "#274916");
-
-        // Tag Blue dark light mode
-        darkMode && document.documentElement.style.setProperty('--tag-blue-background', "#e6f7ff");
-        !darkMode && document.documentElement.style.setProperty('--tag-blue-background', "#111d2c");
-        darkMode && document.documentElement.style.setProperty('--tag-blue-border', "#91d5ff");
-        !darkMode && document.documentElement.style.setProperty('--tag-blue-border', "#15395b");
-
-        // Tag Geekblue dark light mode
-        darkMode && document.documentElement.style.setProperty('--tag-Geekblue-background', "rgba(0, 0, 0, 0.04)");
-        !darkMode && document.documentElement.style.setProperty('--tag-Geekblue-background', "rgba(255, 255, 255, 0.04)");
-        darkMode && document.documentElement.style.setProperty('--tag-Geekblue-border', "rgba(0, 0, 0, 0.15)");
-        !darkMode && document.documentElement.style.setProperty('--tag-Geekblue-border', "rgba(255, 255, 255, 0.2)");
-        darkMode && document.documentElement.style.setProperty('--tag-Geekblue-color', "rgba(0, 0, 0, 0.65)");
-        !darkMode && document.documentElement.style.setProperty('--tag-Geekblue-color', "rgba(255, 255, 255, 0.65)");
-
-
-        // Tag Geekblue dark light mode
-        darkMode && document.documentElement.style.setProperty('--color-tag-text-blue', "#007fcb");
-        !darkMode && document.documentElement.style.setProperty('--color-tag-text-blue', "rgba(255, 255, 255, 0.85)");
-        darkMode && document.documentElement.style.setProperty('--color-tag-text-green', "#52c41a");
-        !darkMode && document.documentElement.style.setProperty('--color-tag-text-green', "#52c41a");
-        darkMode && document.documentElement.style.setProperty('--color-tag-text-gray', "rgba(0, 0, 0, 0.65)");
-        !darkMode && document.documentElement.style.setProperty('--color-tag-text-gray', "rgba(255, 255, 255, 0.65)");
-
-    }
-
-
+  useEffect(()=>{
+    const root = document.querySelector(':root')
+    
+   if(darkMode){
+    root.classList.remove('light')
+    root.classList.add('dark')
+   }
+   else {
+    root.classList.remove('dark')
+    root.classList.add('light')
+   }
+  },[darkMode])
+   
     const logOut = () => {
         history.push("/connexion", dispatch(setAccountSetting(4)))
         dispatch(setAppSetLogout());
@@ -160,7 +88,9 @@ function GlobalHeader() {
 
 
     const {t, i18n} = useTranslation();
-
+    let firstName=  localStorage.getItem('firstName')
+    let lastName=   localStorage.getItem('lastName')
+    let avatar = (localStorage.getItem('avatar') ? localStorage.getItem('avatar') : '')
     const changeLanguage = (language) => {
         i18n.changeLanguage(language);
     }
@@ -262,7 +192,17 @@ function GlobalHeader() {
                         <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: '#419BF9'}}
-                                    icon={<UserOutlined/>}/> {t("description.user")}
+                                    src={avatar}
+                                    icon={!avatar ? <UserOutlined/> : ""} />
+                            {
+                                firstName || lastName ?
+                                    <div className={"avatar-userName"}>
+                                        <div className={"avatar-lastName"}>{lastName}</div>
+                                        <div className={"avatar-firstName"}>{firstName}</div>
+                                    </div>
+                                    :
+                                    t('description.firstName')
+                            }
                         </a>
                     </Dropdown>
 
@@ -274,8 +214,8 @@ function GlobalHeader() {
                     <label id="switch" className="switch">
                         <input type="checkbox"
                                id="slider"
-                               onClick={() => onChange()}
-                               defaultChecked={darkMode}
+                               onClick={onChange}
+                               checked={darkMode}
                         />
                         <span className="slider"></span>
                     </label>
@@ -307,8 +247,19 @@ function GlobalHeader() {
                             <div className={"div1_div2_side_nav"}>
                                 <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
                                    style={{color: darkMode === false ? "" : "white"}}>
-                                    <Avatar style={{backgroundColor: '#419BF9'}} icon={<UserOutlined/>}
-                                            className={"avtr"}/><span>{t("description.user")}</span>
+                                    <Avatar style={{backgroundColor: '#419BF9'}}
+                                            src={avatar}
+                                            className={"avtr"}
+                                            icon={!avatar ? <UserOutlined/> : ""} />
+                                    {
+                                        firstName || lastName ?
+                                            <div className={"avatar-userName"}>
+                                                <div className={"avatar-lastName"}>{lastName}</div>
+                                                <div className={"avatar-firstName"}>{firstName}</div>
+                                            </div>
+                                            :
+                                            t('description.firstName')
+                                    }
                                 </a>
                             </div>
 

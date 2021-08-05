@@ -5,7 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange
+    setShowVideoConstraintDataOnchange, setExportLive
 } from "../store/showVideosAction"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -22,10 +22,18 @@ import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConst
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 let itemsRunAPI , itemsDeleted
-
+const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
     let idLiveToDelete = []
     const [visible , setVisible] = useState(false)
+    const [liveObj , setLiveObj] = useState({
+        order:'ascend',
+        pageSize:10,
+        columnKey:0,
+        current:1,
+        id:[],
+        idLive:0
+    })
     const history = useHistory();
     const dispatch = useDispatch()
 
@@ -41,12 +49,14 @@ export  const Hooks=()=> {
     const sorterProps = useSelector((state)=> state.ShowVideosReducerReducer.sorterProps)
     // loading
     const loadingSpinner = useSelector((state)=> state.ShowVideosReducerReducer.constraintDataShowVideo)
-   //condition
+    //condition
     const conditions = useSelector((state)=> state.ShowVideosReducerReducer.showdivscondition)
    //loading Delete Show Video
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
     //Reducer infos lives
     const infosLives = useSelector((state)=> state.ShowVideosReducerReducer.valuesInfosLives)
+    //Reducer export lives
+    const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
@@ -66,7 +76,7 @@ export  const Hooks=()=> {
                     "order_dir": paginationProps.order,
                     "order_column": paginationProps.columnKey,
                     "search_word":values.search,
-                    "date":[" ", ""],
+                    "date":["", ""],
                     "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                 } },
             context: { clientName: "second" },
@@ -102,7 +112,7 @@ export  const Hooks=()=> {
     //
       // mutation delete lang from table of event
       const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
-        variables : {idLive:paginationProps.id},
+        variables : {idLive:paginationProps.id && paginationProps.id.length? paginationProps.id : liveObj.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
             // dispatch loading Delete Button
@@ -119,13 +129,13 @@ export  const Hooks=()=> {
     })
 
     // mutation Get infos live
-    const [GETINFOSlIVES] = useMutation(graphQL_shema().Get_Live_Info,{
-        variables : {liveId:paginationProps.idLive},
+    const [GETINFOSlIVES]= useMutation(graphQL_shema().Get_Live_Info,{
+        variables : {liveId: (paginationProps.idLive ? paginationProps.idLive : liveObj.idLive)},
         context: { clientName: "second" },
         onCompleted:  (data)=>{
             if(data.getliveInfo.code === 200) {
                 console.log("ajhdkfjhdksjfhksdjfhksdjfhksdj", data)
-                 dispatch(setInfosLive({
+                dispatch(setInfosLive({
                     infosLivesName: "inputUrlDiffusion",
                     infosLivesValue: data.getliveInfo.urlDiffusion
                 }));
@@ -133,12 +143,35 @@ export  const Hooks=()=> {
                     infosLivesName: "streamName",
                     infosLivesValue: data.getliveInfo.streamName
                 }));
-                 dispatch(setInfosLive({infosLivesName: "idLive", infosLivesValue: data.getliveInfo.idLive}));
-                 dispatch(setInfosLive({infosLivesName: "pwdLive", infosLivesValue: data.getliveInfo.pwdLive}));
+                dispatch(setInfosLive({infosLivesName: "idLive", infosLivesValue: data.getliveInfo.idLive}));
+                dispatch(setInfosLive({infosLivesName: "pwdLive", infosLivesValue: data.getliveInfo.pwdLive}));
             }else if(data.getliveInfo.code === 400){
                 error_getLives(400)
             }
         }
+    })
+
+    //LazyQuery Export Live
+    const [EXPORTlIVE ,{data: eXPORTlIVE}]
+        = useLazyQuery(graphQL_shema().Export_Live,{
+        fetchPolicy:  "cache-and-network",
+        variables : {id:paginationProps.idLive},
+        context: { clientName: "second" },
+        onCompleted :(data)=>{
+            dispatch(setExportLive({
+                exportLivesName: "participantUrl",
+                exportLivesValue: data.GetLinkExport.participantUrl
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "auditorUrl",
+                exportLivesValue: data.GetLinkExport.auditorUrl
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "integrationUrl",
+                exportLivesValue: data.GetLinkExport.integrationUrl
+            }));
+        }
+
     })
 
     //******************Function Data Table************************//
@@ -176,7 +209,7 @@ export  const Hooks=()=> {
         console.log("handleChangeValuesRanges",name, dateStringsValue)
         dispatch(setFilterVideosActions({
             FilterVideosNameChange: name,
-            FilterVideosValueChange: dateStringsValue
+            FilterVideosValueChange: datesValue
         }));
     }
     /*Filtrer Videos*/
@@ -192,7 +225,7 @@ export  const Hooks=()=> {
                         "order_dir": paginationProps.order,
                         "order_column": paginationProps.columnKey,
                         "search_word":values.search,
-                        "date":values.date,
+                        "date": values.date && [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)],
                         "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                     }
                 },
@@ -201,10 +234,22 @@ export  const Hooks=()=> {
 
      dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
     }
+    const resetFilterVideos = async()=>{
+        await GETDATEVIDEO()
+        await dispatch(setFilterVideosActions({
+            FilterVideosNameChange: "date",
+            FilterVideosValueChange: []
+        }))
+        await dispatch(setFilterVideosActions({
+            FilterVideosNameChange: "contributeur",
+            FilterVideosValueChange: null
+        }))
+
+    }
     /*Delete Rows*/
 
     const handleClickDeleteIcon = async() =>{
-        let filterListVid = [];  
+        let filterListVid = [];
 
               // dispatch show Alert
       await dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
@@ -220,7 +265,7 @@ export  const Hooks=()=> {
            filterListVid = DataVideos.data
           .filter((item) => {
             return (notDeletedItems).includes(item.id);
-          })  
+          })
            if(filterListVid.length === 0)
         { await dispatch(setPaginationProps({
             PaginationPropsNameChange: "current",
@@ -229,7 +274,7 @@ export  const Hooks=()=> {
           await GETDATEVIDEO();
         await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[...notDeletedItems]}));
     })
-    
+
         },3000)
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
@@ -241,27 +286,29 @@ export  const Hooks=()=> {
     // Delete One Row
     //fonction pour supprimer un live
     const handleDeleteOneRow =  async(liveId) =>{
- // dispatch show Alert
-    idLiveToDelete.push(liveId)
-  dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
- setTimeout(()=>{
-     dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
- },3000)
+        // dispatch show Alert
+        idLiveToDelete.push(liveId)
+        dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
+        setTimeout(()=>{
+            dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
+        },3000)
 
- // Time out to Run API Delete
- setTimeout(()=>{
- DeleteItemMutation().then(()=> {
-     //do s.th
-  //GETDATEVIDEO();
+        // Time out to Run API Delete
+        setTimeout(()=>{
+            DeleteItemMutation().then(()=> {
+                //do s.th
+                //GETDATEVIDEO();
 
- })
+            })
 
- },3000)
+        },3000)
 
     }
-    const handleClickDropdowMenu =(e)=>{
+    const handleClickDropdowMenu = ( e, liveId )=>{
         // dispatch id list Video
-        dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
+        e.preventDefault();
+        setLiveObj({...liveObj,idLive:liveId})
+        // dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange: liveId}));
     }
 
     /* Click Annuler button Alert*/
@@ -276,7 +323,7 @@ export  const Hooks=()=> {
         },3000)
         // recover items deleted
 
-       /* dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));*/
+        /* dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));*/
 
         //ClearTimeOut to Run API Delete
         clearTimeout(itemsRunAPI);
@@ -304,7 +351,7 @@ export  const Hooks=()=> {
 
     // fonction handleInfos
     const handleInfos =()=>{
-           GETINFOSlIVES()
+        GETINFOSlIVES()
         setTimeout(()=>{
             dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
         },300)
@@ -312,9 +359,21 @@ export  const Hooks=()=> {
 
     //handleCancel MODAL
     const handleCancel = () => {
-              dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
+        dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
         //setVisible(false)
     };
+
+    // fonction export live
+    const handleExport = () =>{
+        EXPORTlIVE()
+        setTimeout(()=>{
+            dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:true}));
+        },300)
+    }
+    //handleCancel Modal export
+    const handleCancelModalExport = () =>{
+        dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:false}));
+    }
 
     return({
         handleSearchRow,
@@ -339,6 +398,10 @@ export  const Hooks=()=> {
         infosLives,
         updateLive,
         GETDATEVIDEO,
-        onChangeRange
+        onChangeRange,
+        handleExport,
+        handleCancelModalExport,
+        exportLives,
+        resetFilterVideos
     })
 }
