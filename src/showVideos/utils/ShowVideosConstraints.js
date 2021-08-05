@@ -1,4 +1,3 @@
-import React, { useState,useEffect,useRef } from 'react';
 
 export const ShowVideosList = ()=>{
 
@@ -8,8 +7,8 @@ export const ShowVideosList = ()=>{
                 search:"",
                 searchFake:"",
                 periode:"",
-                date:["",""],
-                contributeur:"",
+                date:[],
+                contributeur: null,
                 type:"tous"
             }
         )
