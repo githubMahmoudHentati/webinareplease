@@ -57,6 +57,11 @@ body{
     font-weight: normal;
     height: 100vh !important;
 }
+#root{
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
 :root.light{
     --white_color:rgba(0, 0, 0, 0.85);
     --dark_color:rgba(0, 0, 0, 0.04);
@@ -243,6 +248,10 @@ body{
 }
 .ant-upload-list-item-name{
     color: var(--white_color) !important;
+    flex: none !important;
+    padding: 0 8px!important;
+    min-width: 100px!important;;
+    width: calc(100% - 90px )!important;;
 }
 .ant-upload-list-item-info:hover , .ant-upload-list-item-done:hover{
     background-color: var(--option-background) !important;
@@ -822,6 +831,17 @@ margin-top: 2%;
 .ant-table-pagination.ant-pagination{
     position: relative;
 }
+.ant-table-pagination{
+    position: relative;
+    @media screen and (max-width: 340px) {
+        &-right {
+            justify-content: flex-start;
+        }
+        .ant-pagination-prev, .ant-pagination-next, .ant-pagination-jump-prev, .ant-pagination-jump-next{
+            min-width: 26px;
+        }
+    }
+}
 /*Action*/
 
 /*Modals*/
@@ -909,9 +929,7 @@ margin-top: 2%;
     z-index: 10;
     transition: all 0.5s ease-in-out !important;
 }
-.avtr{
-    margin-right: 14px;
-}
+
 .avtr:hover .spnwhite{
     color: var(--menu-color) !important;
 }
@@ -953,6 +971,8 @@ margin-top: 2%;
     font-family: "SF Pro Display";
     font-weight: 400;
     font-size: 14px;
+    display: flex;
+    align-items: center;
 }
 .div2_div2_side_nav{
     width: 100%;
@@ -1011,6 +1031,8 @@ margin-top: 2%;
     font-weight: normal;
     letter-spacing: normal;
     color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
 }
 .link_drp:hover{
     font-family: 'SF Pro Display';
@@ -1090,11 +1112,22 @@ margin-top: 2%;
 }
 .drp_user{
     margin-right: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .drp_lang{
     margin-right: 24px;
 }
-
+.avatar-userName{
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.avatar-lastName{
+    padding-right: 5px;
+}
 .slider {
     position: absolute;
     cursor: pointer;
@@ -1618,9 +1651,6 @@ input:checked + .slider:before {
     }
     .span_action{
         margin-bottom: 15px;
-    }
-    #icon_vs{
-        margin-left: 5px !important;
     }
     #Text_Calendar{
         display: none !important;

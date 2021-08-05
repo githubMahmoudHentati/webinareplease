@@ -21,22 +21,6 @@ export const GraphQLFetchData=(form)=> {
     const {securityAccount}=AccountSettingsConstraints()
     const {success_message_update_password , error_message_update_password}=StatusMessages()
 
-    const {loading: GetUserInfoData_loading, data: GetUserInfoData}
-        = useQuery(graphQL_shema().Get_UserInfoData, {
-        fetchPolicy: 'cache-and-network',
-        variables: { pagination : {
-                "limit": 2,
-                "offset": 0,
-            } },
-        onCompleted: async (data) => {
-            await dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
-            await dispatch(setConstraintDataOnchange({
-                constraintDataNameChange: "loadingGeneralInformation",
-                constraintDataValueChange: false
-            }))
-            form.setFieldsValue(GetUserInfoData.getUserInfo.generalInformation)
-        }
-    })
     const [UpdateAccountSetting, {
         data: dataUpdate,
         loading: loading_UpdateAccountSetting,
@@ -92,7 +76,6 @@ export const GraphQLFetchData=(form)=> {
     });
 
     return({
-        GetUserInfoData,
         UpdateAccountSetting,
         loading_UpdateAccountSetting,
         UpdatePassword

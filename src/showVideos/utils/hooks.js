@@ -26,6 +26,14 @@ const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
     let idLiveToDelete = []
     const [visible , setVisible] = useState(false)
+    const [liveObj , setLiveObj] = useState({
+        order:'ascend',
+        pageSize:10,
+        columnKey:0,
+        current:1,
+        id:[],
+        idLive:0
+    })
     const history = useHistory();
     const dispatch = useDispatch()
 
@@ -41,7 +49,7 @@ export  const Hooks=()=> {
     const sorterProps = useSelector((state)=> state.ShowVideosReducerReducer.sorterProps)
     // loading
     const loadingSpinner = useSelector((state)=> state.ShowVideosReducerReducer.constraintDataShowVideo)
-   //condition
+    //condition
     const conditions = useSelector((state)=> state.ShowVideosReducerReducer.showdivscondition)
    //loading Delete Show Video
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
@@ -104,7 +112,7 @@ export  const Hooks=()=> {
     //
       // mutation delete lang from table of event
       const [DeleteItemsMutation] = useMutation(graphQL_shema().Delete_Items,{
-        variables : {idLive:paginationProps.id},
+        variables : {idLive:paginationProps.id && paginationProps.id.length? paginationProps.id : liveObj.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
             // dispatch loading Delete Button
@@ -121,13 +129,13 @@ export  const Hooks=()=> {
     })
 
     // mutation Get infos live
-    const [GETINFOSlIVES] = useMutation(graphQL_shema().Get_Live_Info,{
-        variables : {liveId:paginationProps.idLive},
+    const [GETINFOSlIVES]= useMutation(graphQL_shema().Get_Live_Info,{
+        variables : {liveId: (paginationProps.idLive ? paginationProps.idLive : liveObj.idLive)},
         context: { clientName: "second" },
         onCompleted:  (data)=>{
             if(data.getliveInfo.code === 200) {
                 console.log("ajhdkfjhdksjfhksdjfhksdjfhksdj", data)
-                 dispatch(setInfosLive({
+                dispatch(setInfosLive({
                     infosLivesName: "inputUrlDiffusion",
                     infosLivesValue: data.getliveInfo.urlDiffusion
                 }));
@@ -135,8 +143,8 @@ export  const Hooks=()=> {
                     infosLivesName: "streamName",
                     infosLivesValue: data.getliveInfo.streamName
                 }));
-                 dispatch(setInfosLive({infosLivesName: "idLive", infosLivesValue: data.getliveInfo.idLive}));
-                 dispatch(setInfosLive({infosLivesName: "pwdLive", infosLivesValue: data.getliveInfo.pwdLive}));
+                dispatch(setInfosLive({infosLivesName: "idLive", infosLivesValue: data.getliveInfo.idLive}));
+                dispatch(setInfosLive({infosLivesName: "pwdLive", infosLivesValue: data.getliveInfo.pwdLive}));
             }else if(data.getliveInfo.code === 400){
                 error_getLives(400)
             }
@@ -236,12 +244,12 @@ export  const Hooks=()=> {
             FilterVideosNameChange: "contributeur",
             FilterVideosValueChange: null
         }))
-       
+
     }
     /*Delete Rows*/
 
     const handleClickDeleteIcon = async() =>{
-        let filterListVid = [];  
+        let filterListVid = [];
 
               // dispatch show Alert
       await dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
@@ -257,7 +265,7 @@ export  const Hooks=()=> {
            filterListVid = DataVideos.data
           .filter((item) => {
             return (notDeletedItems).includes(item.id);
-          })  
+          })
            if(filterListVid.length === 0)
         { await dispatch(setPaginationProps({
             PaginationPropsNameChange: "current",
@@ -266,7 +274,7 @@ export  const Hooks=()=> {
           await GETDATEVIDEO();
         await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[...notDeletedItems]}));
     })
-    
+
         },3000)
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
@@ -278,27 +286,29 @@ export  const Hooks=()=> {
     // Delete One Row
     //fonction pour supprimer un live
     const handleDeleteOneRow =  async(liveId) =>{
- // dispatch show Alert
-    idLiveToDelete.push(liveId)
-  dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
- setTimeout(()=>{
-     dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
- },3000)
+        // dispatch show Alert
+        idLiveToDelete.push(liveId)
+        dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
+        setTimeout(()=>{
+            dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
+        },3000)
 
- // Time out to Run API Delete
- setTimeout(()=>{
- DeleteItemMutation().then(()=> {
-     //do s.th
-  //GETDATEVIDEO();
+        // Time out to Run API Delete
+        setTimeout(()=>{
+            DeleteItemMutation().then(()=> {
+                //do s.th
+                //GETDATEVIDEO();
 
- })
+            })
 
- },3000)
+        },3000)
 
     }
-    const handleClickDropdowMenu =(e)=>{
+    const handleClickDropdowMenu = ( e, liveId )=>{
         // dispatch id list Video
-        dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange:e[0]}));
+        e.preventDefault();
+        setLiveObj({...liveObj,idLive:liveId})
+        // dispatch(setPaginationProps({PaginationPropsNameChange:"idLive",PaginationPropsValueChange: liveId}));
     }
 
     /* Click Annuler button Alert*/
@@ -313,7 +323,7 @@ export  const Hooks=()=> {
         },3000)
         // recover items deleted
 
-       /* dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));*/
+        /* dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));*/
 
         //ClearTimeOut to Run API Delete
         clearTimeout(itemsRunAPI);
@@ -341,7 +351,7 @@ export  const Hooks=()=> {
 
     // fonction handleInfos
     const handleInfos =()=>{
-           GETINFOSlIVES()
+        GETINFOSlIVES()
         setTimeout(()=>{
             dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
         },300)
@@ -349,7 +359,7 @@ export  const Hooks=()=> {
 
     //handleCancel MODAL
     const handleCancel = () => {
-              dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
+        dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:false}));
         //setVisible(false)
     };
 

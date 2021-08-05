@@ -16,9 +16,24 @@ export const CalendarConstraints = ()=>{
             }
         )
     }
+    const showDivsConditions = () =>{
+        return({
+            elementSelected: 0,
+            clickDeleteIcon:true,
+            showElementSelected:false,
+            rubDeleteItems:false
+        })
+    }
+    const loadingDeleteShowVideo =()=>{
+        return({
+            loadingDelete:false
+        })
+    }
     return({
         calendar,
-        calendarVisibleModal
+        calendarVisibleModal,
+        showDivsConditions,
+        loadingDeleteShowVideo
     })
 
 }

@@ -43,6 +43,18 @@
   text-align: left;
   display:flex;
   alignItems:center;
+  &-breadcrumb{
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @media screen and (max-width: 768px){
+      width: 70%;
+    }
+    @media screen and (max-width: 480px){
+      width: 100%;
+    }
+  }
 }
 
 .titre-menu{
@@ -62,7 +74,16 @@
 .col-forms{
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  &.interactive-options{
+    @media screen and (max-width: 380px){
+      flex-wrap: wrap;
+      flex-direction: column;
+      text-align: start;
+      .ant-checkbox-wrapper + .ant-checkbox-wrapper{
+        margin-left: 0!important;
+      }
+    }
+  }
 }
 .col-forms span{
   font-size: 14px;
@@ -538,7 +559,10 @@
   margin-left: 2px;
 }
 .col-forms-upload span{
-  width: 50% !important;
+  width: 100%;
+  &.picture{
+    width: auto;
+  }
 }
 .ant-upload-list-item-info{
   display: flex;
@@ -564,7 +588,7 @@
 
 @media screen and (max-width: 768px) {
   .ant-upload-drag{
-    width: 200% !important;
+    width: 100% !important;
   }
 }
 @media screen and (max-width: 767px) {
@@ -616,3 +640,22 @@
   border : 1px solid red !important;
 
 }
+.bar-header-container{
+  width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @media screen and (max-width: 598px){
+    width:80%;
+  }
+  .bar-header-title{
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    @media screen and (max-width: 598px){
+      width:80%;
+    }
+  }
+}
+

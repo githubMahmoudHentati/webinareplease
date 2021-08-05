@@ -7,28 +7,110 @@ import Hooks from "../utils/hooks";
 import {AvatarUpload} from "./avatarUpload"
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../../connexion/store/connexionAction";
-import {setConstraintDataOnchange} from "../store/accountSettingsAction";
+import {setConstraintDataOnchange,setGeneralInformationOnchange} from "../store/accountSettingsAction";
 import {useHistory} from "react-router-dom";
 import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
 import {useTranslation} from 'react-i18next';
+import axios from 'axios';
 
 const {Option} = Select;
 
-export const AccountGeneralInformation = () => {
+export const AccountGeneralInformation = ({form}) => {
     const history = useHistory()
-    const [form] = Form.useForm();
+
     const dispatch = useDispatch()
     const {UpdateAccountSetting} = GraphQLFetchData(form)
     const {
         generalInformationOnChange,
         generalInformationOnChangeSelect,
         handleSubmit,
+        generalInformationOnChangeAvatar,
         values,
         darkMode
     } = Hooks(UpdateAccountSetting)
+    const GetBase64 = (img, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result));
+        reader.readAsDataURL(img);
+
+    }
+
+    const onSave =(file)=>{
+        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let token = localStorage.getItem('jwtToken')
+        axios({
+            url: url,
+            method: 'post',
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'multipart/form-data',
+            },
+            data: file
+        }).then((result) => {
+            console.log("result",result.data.data.uploadLogo);
+            generalInformationOnChangeAvatar(result.data.data.uploadLogo)
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+    const handleChange = async info => {
+
+        if (info.file.status === 'uploading') {
+            await dispatch(setConstraintDataOnchange({
+                constraintDataNameChange: "avatarLoading",
+                constraintDataValueChange: true
+            }))
+            dispatch(setGeneralInformationOnchange({
+                generalInformationNameChange: "vignette",
+                generalInformationValueChange: ""
+            }))
+            return;
+        }
+
+        // Get this url from response in real world.
+        GetBase64(info.file.originFileObj, imageUrl =>
+                dispatch(setGeneralInformationOnchange({
+                    generalInformationNameChange: "vignette",
+                    generalInformationValueChange: imageUrl
+                })),
+                dispatch(setConstraintDataOnchange({
+                    constraintDataNameChange: "avatarLoading",
+                    constraintDataValueChange: false
+                })),
+        );
+
+        //*******************Upload Avatar In Server********************/////
+        let formData = new FormData();
+        const variables = {
+            avatar: null
+        }
+        const query = `
+    mutation ($avatar:Upload!)
+        {uploadLogo(avatar:$avatar)}
+`;
+        const operations = JSON.stringify({query, variables: {variables}});
+        formData.append("operations", operations);
+        const map = {
+            "0": ["variables.avatar"]
+        };
+        formData.append("map", JSON.stringify(map));
+        let fileList = [...info.fileList];
+        fileList = fileList.slice(-1);
+        await fileList.filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
+            const file = e.originFileObj;
+            console.log("*******************", file);
+            return formData.append("0", file);
+        })
+
+        for (let p of formData) {
+            console.log("ppppppppppp",p);
+        }
+        onSave(formData)
+    }
+
     console.log("generalInformation", values)
     const {t, i18n} = useTranslation();
-    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")},{max:15}];
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -82,7 +164,7 @@ export const AccountGeneralInformation = () => {
                                 />
                             </Col>
                             <Col span={24}>
-                                <AvatarUpload/>
+                                <AvatarUpload handleChange={handleChange} darkMode={darkMode}/>
                             </Col>
                         </Row>
                     </Col>
@@ -105,15 +187,17 @@ export const AccountGeneralInformation = () => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
-                                  }}>{t("CompteSettings.Nom")}<span className="require">*</span></span>
+                                  }}>{t("CompteSettings.LastName")}<span className="require">*</span></span>
                                             </Col>
                                             <Col span={24}>
-                                                <Form.Item name="firstName"
+                                                <Form.Item name="lastName"
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.firstName} name="firstName"
-                                                           placeholder={t("CompteSettings.Nom")}
+                                                    <Input value={values.generalInformation.lastName}
+                                                           name="lastName"
+                                                           placeholder={t("CompteSettings.LastName")}
+                                                           maxLength={16}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
@@ -127,12 +211,14 @@ export const AccountGeneralInformation = () => {
                                   }}>{t("CompteSettings.FirstName")}<span className="require">*</span> </span>
                                             </Col>
                                             <Col span={24}>
-                                                <Form.Item name="lastName"
+                                                <Form.Item name="firstName"
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.lastName} name="lastName"
+                                                    <Input value={values.generalInformation.firstName}
+                                                           name="firstName"
                                                            placeholder={t("CompteSettings.FirstName")}
+                                                           maxLength={16}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                             </Col>
