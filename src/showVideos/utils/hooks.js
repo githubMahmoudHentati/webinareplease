@@ -22,7 +22,7 @@ import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConst
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 let itemsRunAPI , itemsDeleted
-
+const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
     let idLiveToDelete = []
     const [visible , setVisible] = useState(false)
@@ -68,7 +68,7 @@ export  const Hooks=()=> {
                     "order_dir": paginationProps.order,
                     "order_column": paginationProps.columnKey,
                     "search_word":values.search,
-                    "date":[" ", ""],
+                    "date":["", ""],
                     "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                 } },
             context: { clientName: "second" },
@@ -201,7 +201,7 @@ export  const Hooks=()=> {
         console.log("handleChangeValuesRanges",name, dateStringsValue)
         dispatch(setFilterVideosActions({
             FilterVideosNameChange: name,
-            FilterVideosValueChange: dateStringsValue
+            FilterVideosValueChange: datesValue
         }));
     }
     /*Filtrer Videos*/
@@ -217,7 +217,7 @@ export  const Hooks=()=> {
                         "order_dir": paginationProps.order,
                         "order_column": paginationProps.columnKey,
                         "search_word":values.search,
-                        "date":values.date,
+                        "date": values.date && [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)],
                         "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                     }
                 },
@@ -225,6 +225,18 @@ export  const Hooks=()=> {
         )
 
      dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+    }
+    const resetFilterVideos = async()=>{
+        await GETDATEVIDEO()
+        await dispatch(setFilterVideosActions({
+            FilterVideosNameChange: "date",
+            FilterVideosValueChange: []
+        }))
+        await dispatch(setFilterVideosActions({
+            FilterVideosNameChange: "contributeur",
+            FilterVideosValueChange: null
+        }))
+       
     }
     /*Delete Rows*/
 
@@ -379,6 +391,7 @@ export  const Hooks=()=> {
         onChangeRange,
         handleExport,
         handleCancelModalExport,
-        exportLives
+        exportLives,
+        resetFilterVideos
     })
 }
