@@ -75,31 +75,33 @@ function useActionMenu({record}) {
             {
                 record.status === -1
                        ?
+                       <div>
                         <Tooltip title={t("ShowVideo.Diffuser")}>
-                            <Button className={"btn_Visualiser_diffuser extra-margin"} style={{
+                            <Button className={"btn_Visualiser_diffuser"} style={{
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                             }}><VideoCameraOutlined id={"icon_vs"}/> <span id={"span_diffuser"}>{t("ShowVideo.Diffuser")}</span></Button>
-                        </Tooltip>
+                        </Tooltip></div>
                         :
+                        <div style={{flex: 2}}>
                         <Tooltip title={t("ShowVideo.Visualiser")}>
                             <Button className={"btn_Visualiser_diffuser"} style={{
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                             }}><EyeOutlined id={"icon_vs"}/> <span id={"span_diffuser"}>{t("ShowVideo.Visualiser")}</span></Button>
-                        </Tooltip>
+                        </Tooltip></div>
 
             }
-
+<div>
         <span className="span_action">
       <Dropdown overlay={actionMenu} trigger={['click']}  onMouseEnter={()=>handleClickDropdowMenu([record.id])} >
         <a className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }} onClick={e => e.preventDefault()}>
           ...
         </a>
       </Dropdown>
-    </span>
+    </span></div>
 
             <Modal
                 visible={infosLives.visible}
