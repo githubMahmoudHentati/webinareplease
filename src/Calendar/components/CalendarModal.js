@@ -3,34 +3,37 @@ import moment from "moment";
 import {Badge, Button, Modal, Tag} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {useSelector} from "react-redux";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import defaultImg from "../../assets/webinarplease-thumb.jpg";
 import "../Calendar.scss"
-function CalendarModal({modalInfo, visible, handleCancel, handleDelete,handleStatusEvents}) {
-    console.log("modalInfo", modalInfo)
 
-    const { t, i18n } = useTranslation();
+function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleStatusEvents}) {
+    console.log("modalInfo", modalInfo)
+    let x = window.matchMedia("(max-width: 767px)")
+    const {t, i18n} = useTranslation();
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
     !darkMode && document.documentElement.style.setProperty('--modal_background', "white");
-    return(
+    return (
         <Modal
 
             visible={visible}
-            title={<Badge className={"Modal-header-title"} color={modalInfo.type === "à venir" ? 'blue' : modalInfo.type === "en cours" ? 'green' : modalInfo.type === "archivé" && 'gray'}
+            title={<Badge className={"Modal-header-title"}
+                          color={modalInfo.type === "à venir" ? 'blue' : modalInfo.type === "en cours" ? 'green' : modalInfo.type === "archivé" && 'gray'}
                           text={modalInfo.content}/>}
             onCancel={handleCancel}
             footer={[
                 <div className={"modal-footer"}>
-                    <div>{modalInfo.status == -1 ?
-                        <Button onClick={handleDelete}><DeleteOutlined/>{t("Calendar.Delete")}
-                        </Button> : null}</div>
+                    {modalInfo.status == -1 ?
+                        <div>{!x.matches ?
+                            <Button onClick={handleDelete}><DeleteOutlined/>{t("Calendar.Delete")}</Button> :
+                            <Button onClick={handleDelete}><DeleteOutlined/></Button>}</div> : <div></div>}
+                        <div>
 
-                    <div>
                         <Button key="back" onClick={handleCancel}>
                             {t("Calendar.Cancel")}
-
                         </Button>
-                        <Button className={"ModalButtonPrimary"} type="primary" key="submit" onClick={()=>handleStatusEvents(modalInfo)}>
+                        <Button className={"ModalButtonPrimary"} type="primary" key="submit"
+                                onClick={() => handleStatusEvents(modalInfo)}>
                             {modalInfo.status == -1 ? t("Calendar.Edit") : modalInfo.status == 0 ? t("Calendar.Visualize") : t("Calendar.Broadcast")}
                         </Button>
                     </div>
