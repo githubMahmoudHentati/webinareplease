@@ -9,10 +9,10 @@ import {setDirectSetting} from "../../utils/redux/actions";
 import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../store/formDirectVideoAction"
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import {useTranslation} from 'react-i18next';
-const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 
 export const BarHeader = () => {
+    const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
     const directMenu = useSelector((state) => state.Reducer.directMenu)
     const history = useHistory()

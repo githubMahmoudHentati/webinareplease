@@ -17,7 +17,7 @@ import defaultImg from '../../assets/webinarplease-thumb.jpg'
 export const SocialTools=()=>{
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const {values}=Hooks()
+    const {values,disablePastDate}=Hooks()
     console.log("socialTools",values.socialTools)
     const { t, i18n } = useTranslation();
 
@@ -104,7 +104,6 @@ export const SocialTools=()=>{
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}/>
-                                                                                {console.log("startDate",moment(element.startDate,'YYYY-MM-DD'))}
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>

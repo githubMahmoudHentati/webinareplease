@@ -142,9 +142,7 @@ function ShowVideos() {
         },
 
     ];
-useEffect(()=>{
-    GETDATEVIDEO()
-},[])
+
      const data = {
          totalElements:DataVideos.recordsFiltered,
          content:DataVideos.data,

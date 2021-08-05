@@ -5,7 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange
+    setShowVideoConstraintDataOnchange, setExportLive
 } from "../store/showVideosAction"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -22,7 +22,7 @@ import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConst
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 let itemsRunAPI , itemsDeleted
-
+const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
     let idLiveToDelete = []
     const [visible , setVisible] = useState(false)
@@ -51,10 +51,12 @@ export  const Hooks=()=> {
     const loadingSpinner = useSelector((state)=> state.ShowVideosReducerReducer.constraintDataShowVideo)
     //condition
     const conditions = useSelector((state)=> state.ShowVideosReducerReducer.showdivscondition)
-    //loading Delete Show Video
+   //loading Delete Show Video
     const loadingDelete = useSelector((state)=> state.ShowVideosReducerReducer.loadingDelete)
     //Reducer infos lives
     const infosLives = useSelector((state)=> state.ShowVideosReducerReducer.valuesInfosLives)
+    //Reducer export lives
+    const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
     // matches Media query
     let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
@@ -67,29 +69,29 @@ export  const Hooks=()=> {
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
-        fetchPolicy:  "cache-and-network",
-        variables: { input : {
-                "limit": paginationProps.pageSize,
-                "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
-                "order_dir": paginationProps.order,
-                "order_column": paginationProps.columnKey,
-                "search_word":values.search,
-                "date":[" ", ""],
-                "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
-            } },
-        context: { clientName: "second" },
-        onCompleted :(data)=>{
-            if(data.getLives.code === 200){
-                dispatch(setshowVideosActions(data.getLives));
-                dispatch(setShowVideoConstraintDataOnchange({
-                    constraintDataNameChange: "loading",
-                    constraintDataValueChange: false
-                }))
-            }else if(data.getLives.code === 400){
-                error_getLives()
-            }
+            fetchPolicy:  "cache-and-network",
+            variables: { input : {
+                    "limit": paginationProps.pageSize,
+                    "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                    "order_dir": paginationProps.order,
+                    "order_column": paginationProps.columnKey,
+                    "search_word":values.search,
+                    "date":["", ""],
+                    "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+                } },
+            context: { clientName: "second" },
+            onCompleted :(data)=>{
+                if(data.getLives.code === 200){
+                    dispatch(setshowVideosActions(data.getLives));
+                    dispatch(setShowVideoConstraintDataOnchange({
+                        constraintDataNameChange: "loading",
+                        constraintDataValueChange: false
+                    }))
+                }else if(data.getLives.code === 400){
+                    error_getLives()
+                }
 
-        }
+            }
 
     })
     // mutation delete lang from table of event
@@ -117,7 +119,6 @@ export  const Hooks=()=> {
             dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:false}));
             if(data.deleteLive.code === "200"){
                 // dispatch loading nombre des élements sélectionnés
-                dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:0}));
                 success_Delete()
             }else if(data.deleteLive.code === "400"){
                 error_Delete(400)
@@ -150,16 +151,39 @@ export  const Hooks=()=> {
         }
     })
 
+    //LazyQuery Export Live
+    const [EXPORTlIVE ,{data: eXPORTlIVE}]
+        = useLazyQuery(graphQL_shema().Export_Live,{
+        fetchPolicy:  "cache-and-network",
+        variables : {id:paginationProps.idLive},
+        context: { clientName: "second" },
+        onCompleted :(data)=>{
+            dispatch(setExportLive({
+                exportLivesName: "participantUrl",
+                exportLivesValue: data.GetLinkExport.participantUrl
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "auditorUrl",
+                exportLivesValue: data.GetLinkExport.auditorUrl
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "integrationUrl",
+                exportLivesValue: data.GetLinkExport.integrationUrl
+            }));
+        }
+
+    })
+
     //******************Function Data Table************************//
 
     /*Function Input*/
-    const handleSearchRow = (event) => {
+    const handleSearchRow = async(event) => {
         if(event.key === 'Enter') {
-            console.log("handleSearchRow", event.target.value, event.target.name)
-            dispatch(setFilterVideosActions({
+           await dispatch(setFilterVideosActions({
                 FilterVideosNameChange: event.target.name,
                 FilterVideosValueChange: event.target.value
             }));
+            await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
         }
     };
     /*Function Select*/
@@ -169,6 +193,7 @@ export  const Hooks=()=> {
             FilterVideosNameChange: action.name,
             FilterVideosValueChange: action.value
         }));
+        if(action.name === 'type')  dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));
     };
     /*Function DatePicker */
     const handleChangeDatePicker = (name, momentValue , dateStringValue) => {
@@ -184,7 +209,7 @@ export  const Hooks=()=> {
         console.log("handleChangeValuesRanges",name, dateStringsValue)
         dispatch(setFilterVideosActions({
             FilterVideosNameChange: name,
-            FilterVideosValueChange: dateStringsValue
+            FilterVideosValueChange: datesValue
         }));
     }
     /*Filtrer Videos*/
@@ -200,11 +225,26 @@ export  const Hooks=()=> {
                         "order_dir": paginationProps.order,
                         "order_column": paginationProps.columnKey,
                         "search_word":values.search,
-                        "date":values.date,
+                        "date": values.date && [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)],
                         "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                     }
-                }}
+                },
+            }
         )
+
+     dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+    }
+    const resetFilterVideos = async()=>{
+        await GETDATEVIDEO()
+        await dispatch(setFilterVideosActions({
+            FilterVideosNameChange: "date",
+            FilterVideosValueChange: []
+        }))
+        await dispatch(setFilterVideosActions({
+            FilterVideosNameChange: "contributeur",
+            FilterVideosValueChange: null
+        }))
+
     }
     /*Delete Rows*/
 
@@ -232,7 +272,8 @@ export  const Hooks=()=> {
             PaginationPropsValueChange: paginationProps.current !== 1 ? paginationProps.current - 1 : 1 ,
           }))}
           await GETDATEVIDEO();
-        await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:notDeletedItems}));})
+        await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[...notDeletedItems]}));
+    })
 
         },3000)
 
@@ -322,6 +363,18 @@ export  const Hooks=()=> {
         //setVisible(false)
     };
 
+    // fonction export live
+    const handleExport = () =>{
+        EXPORTlIVE()
+        setTimeout(()=>{
+            dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:true}));
+        },300)
+    }
+    //handleCancel Modal export
+    const handleCancelModalExport = () =>{
+        dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:false}));
+    }
+
     return({
         handleSearchRow,
         handleHeaderSelect,
@@ -345,6 +398,10 @@ export  const Hooks=()=> {
         infosLives,
         updateLive,
         GETDATEVIDEO,
-        onChangeRange
+        onChangeRange,
+        handleExport,
+        handleCancelModalExport,
+        exportLives,
+        resetFilterVideos
     })
 }

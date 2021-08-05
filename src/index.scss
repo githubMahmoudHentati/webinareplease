@@ -62,7 +62,7 @@ body{
     width: 100%;
     overflow-x: hidden;
 }
-:root {
+:root.light{
     --white_color:rgba(0, 0, 0, 0.85);
     --dark_color:rgba(0, 0, 0, 0.04);
     --border_color:rgba(0 , 0 , 0 , 0.15);
@@ -97,6 +97,41 @@ body{
     --separator-color:rgba(0, 0, 0, 0.45);
 
     --box-signup:#d9d9d9
+}
+:root.dark{
+    --white_color:rgba(255, 255, 255, 0.85);
+    --dark_color:rgba(255, 255, 255, 0.04);
+    --border_color:rgba(255, 255, 255, 0.15);
+    --card_color:#141414;
+    --cell-color:#1D1D1D;
+    --option-background:#111d2c;
+    --option_select:#1D1D1D;
+    --modal_background:#1D1D1D;
+    --item-menu-background:#e7f7ff;
+    --item-menu-color : rgba(255, 255, 255, 0.65);
+
+    --menu-background:#111d2c;
+    --menu-color:#2B96FF;
+    --menu-border:#2090FF;
+
+    --Switch-Color:#4E4E4E;
+
+    --tag-green-background:#162312;
+    --tag-green-border:#274916;
+
+    --tag-blue-background:#111d2c;
+    --tag-blue-border:#15395b;
+
+    --tag-Geekblue-background:rgba(255, 255, 255, 0.04);
+    --tag-Geekblue-border:rgba(255, 255, 255, 0.2) ;
+    --tag-Geekblue-color:rgba(255, 255, 255, 0.65) ;
+
+    --color-tag-text-blue:rgba(255, 255, 255, 0.85);
+    --color-tag-text-green:#52c41a;
+    --color-tag-text-gray:rgba(255, 255, 255, 0.65);
+
+    --separator-color:rgba(255, 255, 255, 0.85);
+
 }
 .disabled-row {
     background-color: #dcdcdc;
@@ -774,14 +809,13 @@ margin-top: 2%;
 
 /*Action*/
 .action{
-    width: 55%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 .action Button{
-    margin-right: 30%;
+    margin-right: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -1605,7 +1639,6 @@ input:checked + .slider:before {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
     }
     .action Button{
         width: 20px !important;
@@ -1841,3 +1874,7 @@ input:checked + .slider:before {
 .divsignup{
     background-color: #e74c3c !important;
 }
+.showVideosDiv{
+    overflow-x: hidden;
+}
+

@@ -2,7 +2,7 @@
 const INITIAL_STATE = {
     accountMenu : 0,
     directMenu : 0,
-    DarkMode : false,
+    DarkMode : JSON.parse(localStorage.getItem("darkMode"))|| false,
     iframeStyle:{height:"20%"},
     appState: { loggedIn: false },
     gqlError: { msg: '' },

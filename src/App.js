@@ -23,13 +23,27 @@ import frFR from "antd/lib/locale/fr_FR";
 import { ConfigProvider } from "antd";
 import 'moment/locale/fr';
 
-
+let tabData = [
+    "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"
+]
 function App() {
     const {verificationToken} = GraphQLFetchData()
     const credentialsValues = useSelector((state) => state.Reducer)
     const lang =useSelector((state)=>state.Reducer.lang)
-    console.log('credentialsValues',credentialsValues)
-    console.log('lang',lang)
+    let pathName = window.location.pathname.replace('/', '')
+    
+   
+    React.useEffect(()=>{
+        const root = document.querySelector(':root')
+
+        if(tabData.includes(pathName)){
+            if(JSON.parse(localStorage.getItem('darkMode'))){
+                root.classList.remove('dark')
+                root.classList.add('light')
+               }
+        }
+
+    },[pathName])
     return (
         <ConfigProvider locale={lang==="fr"?frFR:en_US}>
 
@@ -38,8 +52,6 @@ function App() {
             <BrowserRouter history={history}>
                 <Switch>
                     <Redirect exact from="/" to="/connexion"/>
-                    < Route exact path='/showVideos' component={ShowVideos}/>
-                    <Route exact path='/FormDirectVideo' component={FormDirectVideo}/>
                     <Route exact path='/PackagePayement'> {!credentialsValues.appState.loggedIn ? <PackagePayement/> :
                         <Redirect exact to="/showVideos"/>}</Route>
                     <Route exact path='/connexion'> {!credentialsValues.appState.loggedIn ? <Connexion/> :
@@ -53,9 +65,14 @@ function App() {
                     <Route exact path='/reset-password'> {!credentialsValues.appState.loggedIn ? <ResetPassword/> :
                         <Redirect exact to="/showVideos"/>}</Route>
                     <Route exact path='/contactClient' component={ContactClient}/>
+                    <Route exact path='/showVideos'> {!credentialsValues.appState.loggedIn ?
+                        <Redirect exact to="/connexion"/> : <ShowVideos/>}</Route>
+                    <Route exact path='/FormDirectVideo'> {!credentialsValues.appState.loggedIn ?
+                        <Redirect exact to="/connexion"/> : <FormDirectVideo/>}</Route>
                     <Route exact path='/compteSettings'> {!credentialsValues.appState.loggedIn ?
                         <Redirect exact to="/connexion"/> : <CompteSettings/>}</Route>
-                    <Route exact path='/calendar' component={Calendar}/>
+                    <Route exact path='/calendar'> {!credentialsValues.appState.loggedIn ?
+                        <Redirect exact to="/connexion"/> : <Calendar/>}</Route>
                     <Route path={"*"} component={Error}/>
                 </Switch>
             </BrowserRouter>

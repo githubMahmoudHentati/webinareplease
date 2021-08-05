@@ -9,7 +9,6 @@ import CalendarModal from "./CalendarModal";
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
-
 export function CalendarFile() {
     const {activeCalendarEvents,calendarEvent,
         calendarValues, DateCellRender, monthCellRender,
