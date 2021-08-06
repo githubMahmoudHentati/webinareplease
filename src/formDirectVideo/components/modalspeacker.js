@@ -96,7 +96,7 @@ export const ModalSpeaker = ({isVisible}) => {
                                     <Input className={"input_modal"} defaultValue={values.configuration.speaker.name}
                                            onChange={(event) => onChangeSpeaker(event, "name")}
                                            placeholder={t("CompteSettings.Nom")}
-                                           maxLength={10}></Input>
+                                           maxLength={25}></Input>
                                 </Form.Item>
                             </Col>
                             <Col span={12}>
@@ -107,7 +107,7 @@ export const ModalSpeaker = ({isVisible}) => {
                                            defaultValue={values.configuration.speaker.lastName}
                                            onChange={(event) => onChangeSpeaker(event, "lastName")}
                                            placeholder={t("CompteSettings.FirstName")}
-                                           maxLength={10}></Input>
+                                           maxLength={25}></Input>
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -125,7 +125,7 @@ export const ModalSpeaker = ({isVisible}) => {
                                            defaultValue={values.configuration.speaker.title}
                                            onChange={(event) => onChangeSpeaker(event, "title")}
                                            placeholder={t("formDirectVideo.Function")}
-                                           maxLength={10}></Input>
+                                           maxLength={25}></Input>
                                 </Form.Item>
                             </Col>
                         </Row>
@@ -156,7 +156,7 @@ export const ModalSpeaker = ({isVisible}) => {
                                            defaultValue={values.configuration.speaker.email}
                                            onChange={(event) => onChangeSpeaker(event, "email")}
                                            placeholder={"Email"}
-                                           maxLength={15}></Input>
+                                          ></Input>
                                 </Form.Item>
                             </Col>
                         </Row>
