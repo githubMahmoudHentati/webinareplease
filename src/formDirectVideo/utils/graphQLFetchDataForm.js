@@ -13,6 +13,7 @@ import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../store/form
 import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
 import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
+import defaultImg from '../../assets/webinarplease-thumb.jpg';
 
 export const GraphQLFetchDataForm = (values) => {
     const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
@@ -34,6 +35,8 @@ export const GraphQLFetchDataForm = (values) => {
         variables: {
             input: {
                 generalInfo: {
+                    thumbnail: values.general.fileList && values.general.fileList.length ?
+                        values.general.fileList[0].thumbUrl : defaultImg,
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
@@ -70,7 +73,8 @@ export const GraphQLFetchDataForm = (values) => {
                 social: [
                     {
                         title: values.general.liveTitle,
-                        logo: values.general.fileList[0],
+                        logo: values.general.fileList && values.general.fileList.length ?
+                            values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "Facebook Post",
                         link: values.general.liveLink,
                         active: true,
@@ -78,7 +82,8 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     {
                         title: values.general.liveTitle,
-                        logo: values.general.fileList[0],
+                        logo: values.general.fileList && values.general.fileList.length ?
+                            values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "Youtube Post",
                         link: values.general.liveLink,
                         active: false,
@@ -86,7 +91,8 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     {
                         title: values.general.liveTitle,
-                        logo: values.general.fileList[0],
+                        logo: values.general.fileList && values.general.fileList.length ?
+                            values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "LinkedIn Post",
                         link: values.general.liveLink,
                         active: false,

@@ -148,7 +148,7 @@ export const Configuration = () => {
                                                     title={
                                                         <div ref={itemListRef}>
                                                             <Row>
-                                                                <Col xl={8} lg={10} md={14} sm={16} xs={17}>
+                                                                <Col xl={12} lg={14} md={18} sm={18} xs={20}>
                                                                     <span style={{
                                                                         textAlign: 'left',
                                                                         fontSize: "17px",
