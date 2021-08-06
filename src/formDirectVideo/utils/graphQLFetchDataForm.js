@@ -21,7 +21,9 @@ export const GraphQLFetchDataForm = (values) => {
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
     console.log("values-graphQL",values)
     console.log("idLive",idLive)
-    let period = values.general.period? values.general.period.format('HH:mm:ss'):""
+    let period = values.general.period? values.general.period.format('HH:mm:ss'):"";
+    let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
+    let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
 
     const [CreateLive, {
         data: dataUpdate,
@@ -30,46 +32,73 @@ export const GraphQLFetchDataForm = (values) => {
     }] = useMutation(graphQL_shema().createLive, {
         context: { clientName: "second" },
         variables: {
-            input:{
-                generalInfo:{
-                    liveTitle:values.general.liveTitle,
-                    liveDescription:values.general.liveDescription,
-                    livePlan:{
-                        plan:values.general.liveAction,
-                        //startDate:values.general.startDate!="" && values.general.startHour!="" ? (values.general.startDate).format('YYYY-MM-DD') + "T" + (values.general.startHour).format('HH:mm:ss') + "Z" : "",
-                        duration:""
+            input: {
+                generalInfo: {
+                    liveTitle: values.general.liveTitle,
+                    liveDescription: values.general.liveDescription,
+                    livePlan: {
+                        plan: values.general.liveAction,
+                        startDate: newStartDate&&newStartHour?newStartDate+ "T" + newStartHour+ "Z":"",
+                        duration: ""
                     },
-                    liveAccess:values.general.directAccessMode !== "freeAccess",
-                    pwd:values.general.pwd,
+                    liveAccess: values.general.directAccessMode !== "freeAccess",
+                    pwd: values.general.pwd,
+                    securedPasswordOption: false
                 },
-                configuration:{
-                    liveProgram:values.configuration.directProgram,
-                    // addSpeaker:values.configuration.addSpeakerList,
+                configuration: {
+                    liveProgram: values.configuration.directProgram,
 
-                    interOption:{
-                        chat:values.configuration.chat,
-                        comment:values.configuration.comments,
-                        like:values.configuration.likeMention
+                    interOption: {
+                        chat: values.configuration.chat,
+                        comment: values.configuration.comments,
+                        like: values.configuration.likeMention
                     },
-                    multiOption:{
-                        isRm:values.configuration.richeMediaDiffusion,
-                        shareFile:values.configuration.attachments
+
+                    multiOption: {
+                        isRm: values.configuration.richeMediaDiffusion,
+                        shareFile: values.configuration.attachments
                     },
-                    autoArchLive:{
-                        auto:values.configuration.liveAutomaticArchiving,
-                        visible:values.configuration.videoMode!=="notVisibleVideo",
-                        theme:values.configuration.theme
+                    autoArchLive: {
+                        auto: values.configuration.liveAutomaticArchiving,
+                        visible: values.configuration.videoMode !== "notVisibleVideo",
+                        theme: "themeX"
                     },
-                    tags:values.configuration.tags
-                }
+                    tags: values.configuration.tags,
+                    addSpeaker: values.configuration.addSpeakerList,
+                    themes: values.configuration.theme,
+                },
+                social: [
+                    {
+                        title: values.general.liveTitle,
+                        logo: values.general.fileList[0],
+                        Type: "Facebook Post",
+                        link: values.general.liveLink,
+                        active: true,
+                        planifications: values.socialTools[0].plan
+                    },
+                    {
+                        title: values.general.liveTitle,
+                        logo: values.general.fileList[0],
+                        Type: "Youtube Post",
+                        link: values.general.liveLink,
+                        active: false,
+                        planifications: values.socialTools[1].plan
+                    },
+                    {
+                        title: values.general.liveTitle,
+                        logo: values.general.fileList[0],
+                        Type: "LinkedIn Post",
+                        link: values.general.liveLink,
+                        active: false,
+                        planifications: values.socialTools[2].plan
+                    }
+                ]
             }
         },
         onCompleted: async (data) => {
             if (data.addLive.code === 200) {
                 history.push("/showVideos")
                 dispatch(setLiveInfo({general:generals,configuration:configuration,invitation:invitation,socialTools:socialTools,constraintData:constraintData}))
-
-
 
             } else if (data.addLive.code === 403) {
 
