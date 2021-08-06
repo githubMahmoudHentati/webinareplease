@@ -559,7 +559,10 @@
   margin-left: 2px;
 }
 .col-forms-upload span{
-  width: 100%;
+  width: 50%;
+  @media screen and (max-width: 480px){
+    width: 100%;
+  }
   &.picture{
     width: auto;
   }

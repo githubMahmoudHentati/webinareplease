@@ -42,17 +42,37 @@
   width: 100%;
   margin-top: 2%;
 }
-.events {
+.events{
   margin: 0;
   padding: 0;
   list-style: none;
-}
-.events .ant-badge-status {
-  width: 100%;
-  overflow: hidden;
-  font-size: 12px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  &__list-tags{
+    width: 100% !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+    &__tag{
+      @media screen and (max-width: 768px){
+        width: 100%;
+      }
+      @media screen and (max-width: 340px){
+        padding: 0 2px;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .ant-badge-status{
+        width: 100%;
+        overflow: hidden;
+        font-size: 12px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
 }
 .notes-month {
   font-size: 28px;
@@ -111,6 +131,9 @@
   flex-direction: row;
  justify-content: space-between;
   align-items: center;
+  &--end{
+    justify-content: flex-end;
+  }
 }
 .modal_footer_EnCours , .modal_footer_Archivé{
   width: 454px;
@@ -253,14 +276,6 @@
   .menu_hamg{
     display: block !important;
     font-size: 20px;
-  }
-  .div_calendarevent{
-    width: 100% !important;
-    height: auto !important;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
   }
   .span_time{
     font-family: "SF Pro Display";

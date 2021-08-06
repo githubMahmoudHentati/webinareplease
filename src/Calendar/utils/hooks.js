@@ -12,7 +12,8 @@ import {StatusMessage} from "./StatusMessage";
 import {Hooks} from "../../showVideos/utils/hooks";
 import {useLazyQuery, useQuery} from "@apollo/react-hooks";
 import moment from 'moment';
-import {Badge , Tag} from 'antd';
+import {Badge , Tag,Calendar} from 'antd';
+import {useHistory} from "react-router-dom";
 
 var itemsRunAPI;
 
@@ -27,9 +28,10 @@ const HooksCalendar=(callback)=> {
     const [activeCalendarEvents, SetActiveCalendarEvents] = useState(false);
     const [calendarEvent, SetCalendarEvents] = useState({});
     const [modalInfo, setModalInfo] = useState({});
+    const calendarProps = useSelector((state) => state.CalendarReducer)
     const {success_Delete, error_Delete} = StatusMessage()
+    const history = useHistory();
     let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
-
     let  itemsDeleted;
     const {updateLive} = Hooks();
     const OnPanelChange = async (date, mode) => {
@@ -174,21 +176,23 @@ const HooksCalendar=(callback)=> {
     }
 
 
-    const DateCellRender = (value) => {
+    const DateCellRender = (value, isCurrentMoment) => {
         const listData = getListData(value);
         return (
             <div  style={{height:"100%" , width:'100%'}} onClick={() => selectDate(value)}>
                 {
-                    allow &&
+                    (isCurrentMoment ? isCurrentMoment : allow) &&
                     <ul className="events" style={{height:"100%" , width:'100%'}}>
                         {listData.map((item, index) => {
 
                             return (
-                                <div key={item.id}>
-                                    <div >
-                                        <Tag className={"btn_error"}
+                                <div key={item.id} className={isCurrentMoment ? "events__list-tags" : ""}>
+                                        {
+                                            isCurrentMoment && <span className={"span_time"}>{item.time}</span>
+                                        }
+                                        <Tag className={"events__list-tags__tag "}
                                              color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
-                                             style={x.matches ? {pointerEvents:'none'} : {}}
+                                             style={x.matches  && !calendarProps.calendar.activeCalendar? {pointerEvents:'none'} : {}}
                                              onClick={() => onShowModal(item)}>
 
                                             <Badge
@@ -199,9 +203,6 @@ const HooksCalendar=(callback)=> {
                                                 opacity: !item.style && "0.3"
                                             }}/>
                                         </Tag>
-                                    </div>
-
-
                                 </div>
                             )
                         })}
@@ -229,16 +230,19 @@ const HooksCalendar=(callback)=> {
         }
     }
 
-    const selectDate = (e) => {
-        SetActiveCalendarEvents(true);
-        SetCalendarEvents(e)
-        dispatch(setCalendarOnchange({
+    const selectDate =async (e) => {
+        await SetActiveCalendarEvents(true);
+        await dispatch(setCalendarOnchange({
+            CalendarNameChange: "activeCalendarEvents",
+            CalendarValueChange: e
+        }))
+        await SetCalendarEvents(e)
+        await dispatch(setCalendarOnchange({
             CalendarNameChange: "activeCalendar",
-
             CalendarValueChange: true
         }))
     }
-    const handleStatusEvents = (live) =>{
+    const handleStatusEvents =async (live) =>{
         if(live.status== -1){
             updateLive(live.id)
         }else if(live.status== 0){
@@ -246,8 +250,40 @@ const HooksCalendar=(callback)=> {
         }else{
 
         }
+        await handleClickArrowCalendar()
     }
+    const handleClickArrowCalendar = async () =>{
+        if(x.matches && calendarProps.calendar.activeCalendar){
+            await   dispatch(setCalendarOnchange({
+                CalendarNameChange: "activeCalendar",
+                CalendarValueChange: false
+            }))
+        }
+        else {
+            await  history.push('/showVideos')
+        }
+        await dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange:"visible",CalendarVisibleValueChange:false}));
+    }
+    const handleClickAnnulerAlert = () => {
+        // dispatch loading Delete Button
+        console.log("handle itemsRunAPI", itemsRunAPI)
+        console.log("handleClickAnnulerAlert")
+        dispatch(setLoadingDeleteCalendarVideo({LoadingDeleteName: "loadingDelete", LoadingDeleteValue: false}));
+        //show selected element
+        dispatch(setShowDivsConditions({showDivsConditionsName: "showElementSelected", showDivsConditionsValue: true}));
 
+        dispatch(setShowDivsConditions({showDivsConditionsName: "rubDeleteItems", showDivsConditionsValue: true}));
+
+        setTimeout(() => {
+            console.log("handleClickAnnulerAlert")
+            dispatch(setShowDivsConditions({showDivsConditionsName: "rubDeleteItems", showDivsConditionsValue: false}));
+        }, 3000)
+        // recover items deleted
+
+        //ClearTimeOut to Run API Delete
+        clearTimeout(itemsRunAPI);
+        /* dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));*/
+    }
     return ({
         setItemsRunAPI,
         itemsRunAPI,
@@ -262,7 +298,10 @@ const HooksCalendar=(callback)=> {
         handleCancel,
         modalInfo,
         GetCalendarDataNow,
-        onShowModal
+        onShowModal,
+        getListData,
+        handleClickArrowCalendar,
+        handleClickAnnulerAlert
     })
 }
 

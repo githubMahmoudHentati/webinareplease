@@ -22,13 +22,14 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleSt
                           text={modalInfo.content}/>}
             onCancel={handleCancel}
             footer={[
-                <div className={"modal-footer"}>
-                    {modalInfo.status == -1 ?
-                        <div>{!x.matches ?
-                            <Button onClick={handleDelete}><DeleteOutlined/>{t("Calendar.Delete")}</Button> :
-                            <Button onClick={handleDelete}><DeleteOutlined/></Button>}</div> : <div></div>}
-                        <div>
-
+                <div className={"modal-footer "+( modalInfo.status !== -1 ? ' modal-footer--end' : '')}>
+                    {
+                        modalInfo.status == -1 &&
+                            <Button onClick={handleDelete}>
+                                <DeleteOutlined/>{  !x.matches && t("Calendar.Delete")
+                            }</Button>
+                    }
+                    <div>
                         <Button key="back" onClick={handleCancel}>
                             {t("Calendar.Cancel")}
                         </Button>
