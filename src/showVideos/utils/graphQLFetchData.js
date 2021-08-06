@@ -29,12 +29,12 @@ export const GraphQLFetchData=()=> {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
                 "limit": paginationProps.pageSize,
-                "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                "offset": (paginationProps.current-1)*10,
                 "order_dir": paginationProps.order,
                 "order_column": paginationProps.columnKey,
                 "search_word":values.search,
-                "date":  values.date && values.date.lenght ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
-                "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+                "date":  values.date && values.date.length ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
+                "status":values.type
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{

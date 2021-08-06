@@ -68,7 +68,7 @@ export  const Hooks=()=> {
 
     //use Lazy Query
     //query getVideosLinks for embed Code
-    const [GETDATEVIDEO ,{error,data: GetlIVES}]
+    const [GETDATEVIDEO ,{error,data: getLives}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
             fetchPolicy:  "cache-and-network",
             variables: { input : {
@@ -78,7 +78,7 @@ export  const Hooks=()=> {
                     "order_column": paginationProps.columnKey,
                     "search_word":values.search,
                     "date":["", ""],
-                    "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+                    "status":values.type
                 } },
             context: { clientName: "second" },
             onCompleted :(data)=>{
@@ -226,37 +226,56 @@ export  const Hooks=()=> {
     }
     /*Filtrer Videos*/
     const handleFiltrerVideos = async(dates, contributor) =>{
-     console.log("handleFiltrerVideos" , values)
-      let state = 1
-      /*  GETDATEVIDEO()*/
-       await GETDATEVIDEO({
-            variables:
-                {
-                    input : {
-                        "limit": paginationProps.pageSize,
-                        "offset": values.search !== '' ? 0 :(state)*10,
-                        "order_dir": paginationProps.order,
-                        "order_column": paginationProps.columnKey,
-                        "search_word":values.search,
-                        "date": (dates && dates.length && [moment(dates[0]).format(dateFormat), moment(dates[1]).format(dateFormat)] )|| ["", ""],
-                        "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+        if(values.date !== dates){
+            await dispatch(
+                setPaginationProps({
+                  PaginationPropsNameChange: "current",
+                  PaginationPropsValueChange: 1,
+                })
+              );
+              await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "date",
+                FilterVideosValueChange: dates
+            }));
+            await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "contributeur",
+                FilterVideosValueChange: contributor
+            }));
+              /*  GETDATEVIDEO()*/
+               await GETDATEVIDEO({
+                    variables:
+                        {
+                            input : {
+                                "limit": paginationProps.pageSize,
+                                "offset": 0,
+                                "order_dir": paginationProps.order,
+                                "order_column": paginationProps.columnKey,
+                                "search_word":values.search,
+                                "date": (dates && dates.length && [moment(dates[0]).format(dateFormat), moment(dates[1]).format(dateFormat)] )|| ["", ""],
+                                "status":values.type
+                            }
+                        },
                     }
-                },
-            }
-        )
-
-    await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+                )
+        
+            await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+        }
+   
     }
     const resetFilterVideos = async()=>{
-        await GETDATEVIDEO()
-        await dispatch(setFilterVideosActions({
-            FilterVideosNameChange: "date",
-            FilterVideosValueChange: []
-        }))
-        await dispatch(setFilterVideosActions({
-            FilterVideosNameChange: "contributeur",
-            FilterVideosValueChange: null
-        }))
+        if((values && values.date.length) || values.contributeur)
+        {
+            await GETDATEVIDEO()
+            await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "date",
+                FilterVideosValueChange: []
+            }))
+            await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "contributeur",
+                FilterVideosValueChange: null
+            }))
+        }
+       
 
     }
     /*Delete Rows*/
