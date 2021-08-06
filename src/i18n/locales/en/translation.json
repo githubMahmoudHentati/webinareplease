@@ -24,6 +24,7 @@
   },
   "CompteSettings": {
     "Avatar": "Avatar",
+    "ErrorMsg": "The Image's Size is too Big",
     "Home": "Home",
     "Upload": "Upload",
     "GenInfo": "General Informations",
@@ -328,5 +329,6 @@
     "ErrorDelOne":"Oops!!! an error has occurred",
     "ErrorDelTwo": "Oops!!! this video does not exist",
     "SuccessPassMsg": "Your password has been successfully changed"
+
   }
 }

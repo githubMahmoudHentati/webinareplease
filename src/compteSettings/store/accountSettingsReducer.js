@@ -8,7 +8,8 @@ const {
     constraintData,
     securityAccount,
     loadingUpdatePassword,
-    paginationAbonnement
+    paginationAbonnement,
+    visible
 } = AccountSettingsConstraints()
 
 const AccountSettingsInitialState = {
@@ -27,7 +28,9 @@ const AccountSettingsInitialState = {
 
     loadingUpdatePassword: loadingUpdatePassword(),
 
-    paginationAbonnement: paginationAbonnement()
+    paginationAbonnement: paginationAbonnement(),
+
+    visible:visible()
 
 }
 
@@ -133,7 +136,20 @@ export const AccountSettingsReducer = (state = AccountSettingsInitialState, acti
                 ...state,
                 paginationAbonnement: PaginationAbonnementOnchangeObj
             }
-            
+
+
+        case "SET_ERROR_VISIBILITY":
+            const {ErrorVisibilityName, ErrorVisibilityValue}=action.payload
+            const ErrorVisibiltyOnchangeObj={
+                ...state.visible,
+                [ErrorVisibilityName]:ErrorVisibilityValue
+            }
+            return {
+                ...state,
+                visible: ErrorVisibiltyOnchangeObj
+            }
+
+
 
         default: {
             return state

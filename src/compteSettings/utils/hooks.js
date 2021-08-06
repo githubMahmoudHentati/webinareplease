@@ -2,11 +2,13 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
     setConstraintDataOnchange,
+    setErrorVisibility,
     setGeneralInformationOnchange,
     setLoadingUpdatePassword,
     setSecurityAccountPassword
 } from "../store/accountSettingsAction";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
+import {setCalendarVisibleOnchange} from "../../Calendar/store/calendarAction";
 
 
 
@@ -75,6 +77,7 @@ const Hooks=(callback)=> {
             generalInformationValueChange: avatar
         }))
     };
+
     console.log("valuesPassword",values)
     return({
         generalInformationOnChangeSelect,
@@ -86,6 +89,7 @@ const Hooks=(callback)=> {
         values,
         darkMode,
         valuesCredentiels,
+
         //subscriptionOnChange
     })
 }
