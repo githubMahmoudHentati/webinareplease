@@ -6,6 +6,7 @@ export const CalendarConstraints = ()=>{
         return (
             {
                 activeCalendar:false,
+                activeCalendarEvents:{},
             }
         )
     }

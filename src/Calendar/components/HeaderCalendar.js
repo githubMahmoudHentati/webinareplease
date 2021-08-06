@@ -9,6 +9,7 @@ import Calendar from "../Calendar";
 import {setCalendarOnchange, setCalendarVisibleOnchange,setLoadingDeleteCalendarVideo,setShowDivsConditions} from "../store/calendarAction";
 import { useTranslation } from 'react-i18next';
 import Hooks from '../utils/hooks.js'
+import HooksCalendar from "../utils/hooks";
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
@@ -26,38 +27,7 @@ function HeaderCalendar() {
     console.log("calendarProps", calendarProps)
     const {t, i18n} = useTranslation();
     // handle click arrow calendar
-    const handleClickArrowCalendar = async () =>{
-        if(x.matches && calendarProps.calendar.activeCalendar){
-            await   dispatch(setCalendarOnchange({
-                CalendarNameChange: "activeCalendar",
-                CalendarValueChange: false
-            }))
-        }
-        else {
-            await  history.push('/showVideos')
-        }
-        await dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange:"visible",CalendarVisibleValueChange:false}));
-    }
-    const handleClickAnnulerAlert = (e) => {
-        // dispatch loading Delete Button
-        console.log("handle itemsRunAPI", itemsRunAPI)
-        console.log("handleClickAnnulerAlert")
-        dispatch(setLoadingDeleteCalendarVideo({LoadingDeleteName: "loadingDelete", LoadingDeleteValue: false}));
-        //show selected element
-        dispatch(setShowDivsConditions({showDivsConditionsName: "showElementSelected", showDivsConditionsValue: true}));
-
-        dispatch(setShowDivsConditions({showDivsConditionsName: "rubDeleteItems", showDivsConditionsValue: true}));
-
-        setTimeout(() => {
-            console.log("handleClickAnnulerAlert")
-            dispatch(setShowDivsConditions({showDivsConditionsName: "rubDeleteItems", showDivsConditionsValue: false}));
-        }, 3000)
-        // recover items deleted
-
-        //ClearTimeOut to Run API Delete
-        clearTimeout(itemsRunAPI);
-        /* dispatch(setshowVideosActions({data:[...itemsDeleted , ...DataVideos.data]}));*/
-    }
+    const {handleClickArrowCalendar,handleClickAnnulerAlert} = HooksCalendar()
     return (
         <div className={"HeaderCalendar"}>
 
@@ -88,7 +58,7 @@ function HeaderCalendar() {
                  style={{backgroundColor: darkMode === false ? "RGBA(0, 0, 0, 0.04)" : "#1D1D1D"}}>
                 <div className={"div_retour"}><ArrowLeftOutlined style={{color: darkMode === false ? "" : "white"}}
                                                                  className={"arrow"}
-                                                                 onClick={() => handleClickArrowCalendar()}/> <h4
+                                                                 onClick={handleClickArrowCalendar}/> <h4
                     style={{color: darkMode === false ? "" : "white"}} className={"h4"}>{t("Calendar.Calendar")}</h4></div>
             </div>
             {/*./TousMedia*/}
@@ -102,7 +72,7 @@ function HeaderCalendar() {
                             message={t("ShowVideo.DeleteSelectedItem")}
                             banner
                             action={
-                                <a disabled={conditions.rubDeleteItems===true}  className="btn_annuler" size="small" type="text" onClick={(e)=>handleClickAnnulerAlert(e)}>
+                                <a disabled={conditions.rubDeleteItems===true}  className="btn_annuler" size="small" type="text" onClick={handleClickAnnulerAlert}>
                                     {t("ShowVideo.Cancel")}
                                 </a>
                             }
