@@ -12,6 +12,15 @@ export const graphQL_shema = ()=> {
         }
     `;
 
+    const updateLive = gql`
+       mutation($id:Int!, $form:FormUpdate!) {
+            editLive(id:$id, form:$form) {
+                code
+                message
+            }
+        } 
+    `;
+
     const generateSecuredPassword = gql`
         mutation($input:GeneratePwd) {
             generatePwd(input:$input) {
@@ -82,6 +91,7 @@ export const graphQL_shema = ()=> {
 
     return({
         createLive,
+        updateLive,
         generateSecuredPassword,
         themesDisplayQuery,
         Get_UpdatedLive_Info
