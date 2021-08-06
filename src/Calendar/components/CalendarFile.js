@@ -14,17 +14,15 @@ export function CalendarFile() {
     return (
         <div className={"CalendarFile"}>
             {
-                x.matches ?
-                    calendarProps.calendar.activeCalendar ?
-                       <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
-                                                 GetCalendarDataNow={GetCalendarDataNow}/>
-                        :
-                        <GetCalendar/>
-                    :
-                    <GetCalendar/>
-
+                x.matches &&
+                calendarProps.calendar.activeCalendar &&
+                <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
+                                GetCalendarDataNow={GetCalendarDataNow}/>
             }
 
+            <div className={ ( !x.matches || (x.matches && ! calendarProps.calendar.activeCalendar ) ? '' : 'hidden-calendar')}>
+                <GetCalendar  />
+            </div>
         </div>
     );
 }

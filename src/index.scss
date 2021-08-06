@@ -148,6 +148,9 @@ body{
         overflow-x: hidden;
     }
 }
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-today .ant-picker-calendar-date-value{
+    color: rgba(174,74, 74, 85%) !important;
+}
 .ant-picker-calendar-full .ant-picker-panel .ant-picker-cell-selected .ant-picker-calendar-date  {
     background-color: var(--option-background) !important;
 }

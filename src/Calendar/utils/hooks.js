@@ -4,7 +4,8 @@ import {
     setCalendarOnchange,
     setCalendarVisibleOnchange,
     setLoadingDeleteCalendarVideo,
-    setShowDivsConditions
+    setShowDivsConditions,
+    setCalendarInfoOnchange
 } from "../store/calendarAction";
 import {graphQL_shema} from "./graphql";
 import {useMutation} from "@apollo/react-hooks";
@@ -136,6 +137,7 @@ const HooksCalendar=(callback)=> {
         //SetVisible(true)
         setModalInfo(item)
         dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange: "visible", CalendarVisibleValueChange: true}));
+        dispatch(setCalendarInfoOnchange({CalendarInfoNameChange: "info", CalendarInfoValueChange: item}));
     }
     // Cancel modal
     const handleCancel = () => {
@@ -149,27 +151,29 @@ const HooksCalendar=(callback)=> {
 
     const getListData = (value) => {
         let listData = [];
-        let check = value.format('YYYY/MM/DD');
-        if (calendarValues) {
-            calendarValues.forEach((element) => {
+        if(value && Object.keys(value).length>0){
+             let check = value.format('YYYY/MM/DD');
+            if (calendarValues) {
+                calendarValues.forEach((element) => {
 
-                switch ((value.year() + "-" + value.month() + "-" + value.date())) {
+                    switch ((value.year() + "-" + value.month() + "-" + value.date())) {
 
-                    case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
+                        case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
 
-                        listData = [...listData, {
-                            id: element.id,
-                            type: element.type,
-                            content: element.content,
-                            style: element.date.isAMomentObject,
-                            date: moment(element.date.date,).format('L'),
-                            time: moment(element.date.date,).format('LTS'),
-                            thumbnail: element.thumbnail,
-                            status: element.status
-                        }]
-                        break;
-                }
-            })
+                            listData = [...listData, {
+                                id: element.id,
+                                type: element.type,
+                                content: element.content,
+                                style: element.date.isAMomentObject,
+                                date: moment(element.date.date,).format('L'),
+                                time: moment(element.date.date,).format('LTS'),
+                                thumbnail: element.thumbnail,
+                                status: element.status
+                            }]
+                            break;
+                    }
+                })
+            }
         }
         return listData || [];
 
