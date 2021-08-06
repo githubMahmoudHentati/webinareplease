@@ -2,11 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-<<<<<<< HEAD
-      <sshConfig host="mhentati-cloud-sandbox.webtv-solution.dev" id="9d96dee8-991d-4483-be29-eb07fdb355d6" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="mhentati" />
-=======
-      <sshConfig host="camri-cloud-server.sastec.dev" id="9d96dee8-991d-4483-be29-eb07fdb355d6" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="dev" />
->>>>>>> origin/master
+      <sshConfig host="mhentati-cloud-sandbox.webtv-solution.dev" id="f9319bab-1065-4388-a087-3f80d5550997" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="mhentati" />
     </configs>
   </component>
 </project>

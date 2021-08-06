@@ -36,8 +36,8 @@ export const SocialTools=()=>{
         dispatch(setClosePlan({closePlanIndexPost:indexPost,closePlanIndexPlan:indexPlan}))
     }
 
-    const datePlan=(indexPost,indexPlan,typeDate,dateValue)=>{
-        dispatch(setDatePlan({dateIndexPost:indexPost,dateIndexPlan:indexPlan,typeDate:typeDate,dateValue:dateValue}))
+    const datePlan=(moment,indexPost,indexPlan,typeDate,dateValue)=>{
+        dispatch(setDatePlan({dateIndexPost:indexPost,dateIndexPlan:indexPlan,typeDate:typeDate,dateValue:moment}))
     }
 
     return(
@@ -107,7 +107,7 @@ export const SocialTools=()=>{
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
-                                                                                            onChange={(moment,dateValue)=>{datePlan(index,indexPlan,"startDate",dateValue)}}/>
+                                                                                            onChange={(moment,dateValue)=>{datePlan(moment,index,indexPlan,"startDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -120,7 +120,7 @@ export const SocialTools=()=>{
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
-                                                                                            onChange={(moment,dateValue)=>{datePlan(index,indexPlan,"endDate",dateValue)}}/>
+                                                                                            onChange={(moment,dateValue)=>{datePlan(moment,index,indexPlan,"endDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
