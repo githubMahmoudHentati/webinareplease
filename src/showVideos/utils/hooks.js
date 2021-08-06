@@ -68,12 +68,12 @@ export  const Hooks=()=> {
 
     //use Lazy Query
     //query getVideosLinks for embed Code
-    const [GETDATEVIDEO ,{error,data: getLives}]
+    const [GETDATEVIDEO ,{error,refetch,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
             fetchPolicy:  "cache-and-network",
             variables: { input : {
                     "limit": paginationProps.pageSize,
-                    "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                    "offset": (paginationProps.current-1)*10,
                     "order_dir": paginationProps.order,
                     "order_column": paginationProps.columnKey,
                     "search_word":values.search,
@@ -102,7 +102,7 @@ export  const Hooks=()=> {
         onCompleted: (data)=>{
             if(data.deleteLive.code === "200"){
                 success_Delete()
-                GETDATEVIDEO();
+                //refetch();
             }else if(data.deleteLive.code === "400"){
                 error_Delete(400)
             }else if(data.deleteLive.code === "404"){
