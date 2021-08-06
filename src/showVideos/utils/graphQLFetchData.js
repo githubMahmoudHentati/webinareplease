@@ -7,8 +7,10 @@ import {StatusMessage} from "./StatusMessage";
 import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../../formDirectVideo/store/formDirectVideoAction"
 import {setDirectSetting} from "../../utils/redux/actions";
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
+import moment from "moment";
 
 
+const dateFormat = 'YYYY-MM-DD';
 
 export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
@@ -31,7 +33,7 @@ export const GraphQLFetchData=()=> {
                 "order_dir": paginationProps.order,
                 "order_column": paginationProps.columnKey,
                 "search_word":values.search,
-                "date":["", ""],
+                "date":  values.date && values.date.lenght ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
                 "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
             } },
         context: { clientName: "second" },

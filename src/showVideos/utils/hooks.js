@@ -185,15 +185,26 @@ export  const Hooks=()=> {
                 FilterVideosValueChange: event.target.value
             }));
             await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+            await dispatch(
+                setPaginationProps({
+                  PaginationPropsNameChange: "current",
+                  PaginationPropsValueChange: 1,
+                })
+              );
         }
     };
     /*Function Select*/
     const handleHeaderSelect = (value,action) => {
-        console.log("handleHeaderSelect",action.name, action.value)
         dispatch(setFilterVideosActions({
             FilterVideosNameChange: action.name,
             FilterVideosValueChange: action.value
         }));
+         dispatch(
+            setPaginationProps({
+              PaginationPropsNameChange: "current",
+              PaginationPropsValueChange: 1,
+            })
+          );
         if(action.name === 'type')  dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));
     };
     /*Function DatePicker */
@@ -214,26 +225,27 @@ export  const Hooks=()=> {
         }));
     }
     /*Filtrer Videos*/
-    const handleFiltrerVideos = () =>{
+    const handleFiltrerVideos = async(dates, contributor) =>{
      console.log("handleFiltrerVideos" , values)
+      let state = 1
       /*  GETDATEVIDEO()*/
-        GETDATEVIDEO({
+       await GETDATEVIDEO({
             variables:
                 {
                     input : {
                         "limit": paginationProps.pageSize,
-                        "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                        "offset": values.search !== '' ? 0 :(state)*10,
                         "order_dir": paginationProps.order,
                         "order_column": paginationProps.columnKey,
                         "search_word":values.search,
-                        "date": values.date && [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)],
+                        "date": (dates && dates.length && [moment(dates[0]).format(dateFormat), moment(dates[1]).format(dateFormat)] )|| ["", ""],
                         "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
                     }
                 },
             }
         )
 
-     dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+    await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
     }
     const resetFilterVideos = async()=>{
         await GETDATEVIDEO()
