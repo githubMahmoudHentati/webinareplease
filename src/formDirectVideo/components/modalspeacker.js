@@ -161,7 +161,6 @@ export const ModalSpeaker = ({isVisible}) => {
                             </Col>
                         </Row>
                     </Col>
-
                 </Row>
             </Form>
         </Modal>
