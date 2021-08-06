@@ -113,6 +113,15 @@ export function setGeneralOnchange(e){
             }
         }
 
+        export function setDatePlan(e){
+            return{
+                type:"SET_DatePlan",
+                payload:e
+            }
+        }
+
+
+
 //***************************Update live info***************************//
 
         export function setLiveInfo(e){

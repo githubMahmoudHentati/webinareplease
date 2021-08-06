@@ -21,6 +21,7 @@ import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../../formDir
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
+
 let itemsRunAPI , itemsDeleted
 const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
@@ -155,7 +156,7 @@ export  const Hooks=()=> {
     const [EXPORTlIVE ,{data: eXPORTlIVE}]
         = useLazyQuery(graphQL_shema().Export_Live,{
         fetchPolicy:  "cache-and-network",
-        variables : {id:paginationProps.idLive},
+        variables : {id:(paginationProps.idLive ? paginationProps.idLive : liveObj.idLive)},
         context: { clientName: "second" },
         onCompleted :(data)=>{
             dispatch(setExportLive({
@@ -286,6 +287,7 @@ export  const Hooks=()=> {
     // Delete One Row
     //fonction pour supprimer un live
     const handleDeleteOneRow =  async(liveId) =>{
+
         // dispatch show Alert
         idLiveToDelete.push(liveId)
         dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
@@ -300,8 +302,8 @@ export  const Hooks=()=> {
                 //GETDATEVIDEO();
 
             })
-
         },3000)
+
 
     }
     const handleClickDropdowMenu = ( e, liveId )=>{

@@ -58,7 +58,7 @@ export const FormDirectConstraints = ()=>{
                 attachments:false,
                 richeMediaDiffusion:false,
                 videoMode: "",
-                theme:"",
+                theme:[],
                 themesList:[],
                 tags:[],
             }
@@ -74,7 +74,7 @@ export const FormDirectConstraints = ()=>{
                 switch: true,
                 link:"",
                 logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{id:0,active: true, startDate: "", endDate: ""}]
+                plan: []
             },
             {
                 id: 1,
@@ -83,7 +83,7 @@ export const FormDirectConstraints = ()=>{
                 link:"",
                 switch: false,
                 logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{id:1,active: true, startDate: "", endDate: ""}]
+                plan: []
             },
             {
                 id: 2,
@@ -92,7 +92,7 @@ export const FormDirectConstraints = ()=>{
                 link:"",
                 switch: false,
                 logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{id:2,active: true, startDate: "", endDate: ""}]
+                plan: []
             },
         ]
     }

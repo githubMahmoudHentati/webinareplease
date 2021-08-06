@@ -151,6 +151,17 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 socialTools: socialToolsClosePlan
             }
 
+        case 'SET_DatePlan':
+            const {dateIndexPost,dateIndexPlan,typeDate,dateValue}=action.payload
+            let datePlanNewArr=state.socialTools[dateIndexPost].plan.map((el,i) => (i === dateIndexPlan ? {...el,[typeDate]:dateValue}:el))
+            const socialToolsDatePlan =state.socialTools.map(el => (el.id === dateIndexPost ? {...el,
+                plan: datePlanNewArr
+            } : el))
+            return{
+                ...state,
+                socialTools: socialToolsDatePlan
+            }
+
         case 'SET_LiveForm' :
             return {...state,
                 form: action.payload
