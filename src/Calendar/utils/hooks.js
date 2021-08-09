@@ -247,14 +247,14 @@ const HooksCalendar=(callback)=> {
         }))
     }
     const handleStatusEvents =async (live) =>{
-        if(live.status== -1){
-            updateLive(live.id)
-        }else if(live.status== 0){
+        if(live.status === -1){
+           await updateLive(live.id)
+        }else if(live.status === 0){
 
         }else{
 
         }
-        await handleClickArrowCalendar()
+        await handleCancel()
     }
     const handleClickArrowCalendar = async () =>{
         if(x.matches && calendarProps.calendar.activeCalendar){

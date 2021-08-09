@@ -54,10 +54,10 @@
     align-items: flex-start;
     margin-top: 20px;
     &__tag{
-      display: flex;
-      align-items: center;
       background: transparent;
       @media screen and (max-width: 768px){
+        display: flex;
+        align-items: center;
         width: 100%;
       }
       @media screen and (max-width: 340px){
