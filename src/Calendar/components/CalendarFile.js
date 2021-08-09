@@ -3,44 +3,26 @@ import "../Calendar.scss";
 import {Calendar} from 'antd';
 import {useSelector} from "react-redux";
 import CalendarEvents from "./CalendarEvents";
+import GetCalendar from "./GetCalendar";
 import HooksCalendar from '../utils/hooks.js'
-import {Hooks} from '../../showVideos/utils/hooks.js'
-import CalendarModal from "./CalendarModal";
 
 let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
 
 export function CalendarFile() {
-    const {activeCalendarEvents,calendarEvent,
-        calendarValues, DateCellRender, monthCellRender,
-        OnPanelChange, handleCancel, handleDelete, modalInfo, handleStatusEvents, GetCalendarDataNow}
-        = HooksCalendar();
+    const {activeCalendarEvents, calendarEvent, calendarValues, GetCalendarDataNow} = HooksCalendar();
     const calendarProps = useSelector((state) => state.CalendarReducer)
-    const VisibleModal = useSelector((state) => state.CalendarReducer);
-    console.log("VisibleModal", VisibleModal)
-    //show Modal
-    const GetCalendar=()=>
-        <>
-            <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
-                  onPanelChange={OnPanelChange}/>;
-            <CalendarModal handleCancel={handleCancel}
-                           visible={VisibleModal.calendarVisible.visible}
-                           modalInfo={modalInfo}
-                           handleDelete={()=>handleDelete(modalInfo.id)}
-                           handleStatusEvents={()=>handleStatusEvents(modalInfo)}
-            ></CalendarModal>
-        </>
-
     return (
         <div className={"CalendarFile"}>
             {
                 x.matches ?
-                    activeCalendarEvents && calendarProps.calendar.activeCalendar ?
-                        <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
-                                        GetCalendarDataNow={GetCalendarDataNow}/>
+                    calendarProps.calendar.activeCalendar ?
+                       <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
+                                                 GetCalendarDataNow={GetCalendarDataNow}/>
                         :
-                       <GetCalendar/>
+                        <GetCalendar/>
                     :
-                    <GetCalendar />
+                    <GetCalendar/>
+
             }
 
         </div>

@@ -143,6 +143,11 @@ body{
     font-size: 14px;
     font-weight: normal;
 }
+.ant-picker-calendar-date-content{
+    @media screen and (max-width: 767px){
+        overflow-x: hidden;
+    }
+}
 .ant-picker-calendar-full .ant-picker-panel .ant-picker-cell-selected .ant-picker-calendar-date  {
     background-color: var(--option-background) !important;
 }

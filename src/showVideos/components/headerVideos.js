@@ -15,10 +15,12 @@ const { RangePicker } = DatePicker;
 const dateFormat = 'YYYY/MM/DD';
 
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , onChangeRange, paginationProps , values}=Hooks()
+    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , paginationProps , values}=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
+    const [rangeDate, setDateRange] = useState(null)
+    const [selectedContributor, setContributor] = useState(null)
     const history = useHistory();
     const { t, i18n } = useTranslation();
     const dispatch = useDispatch()
@@ -63,6 +65,20 @@ function HeaderVideos() {
     // handle click calendar
     const handleClickCalendar = () =>{
         history.push("/calendar")
+    }
+
+    const onChangeRange = (name,datesValue,dateStringsValue) =>{
+        
+        setDateRange(datesValue)
+    }
+    const onChangeContributor = (value,action) =>{
+        setContributor(action.value)
+    }
+
+    const handleResetFilter = ()=>{
+        setDateRange(null)
+        setContributor(null)
+        resetFilterVideos()
     }
 
     return(
@@ -114,17 +130,17 @@ function HeaderVideos() {
                           style={{ width: 120 }}
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
-                          defaultValue="tous"
+                          defaultValue=""
                           optionFilterProp="children"
                           name="type" onChange={handleHeaderSelect}
                           filterOption={(input, option) =>
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option name="type"  value="tous"><span className="icon-select-all-line"></span> <span  style={{ padding: "15%" }}id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
-                          <Option name="type" value="archivés"><span className="icon-Archive"></span>  <span id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
-                          <Option name="type" value="encours"><span className="icon-Current"></span>  <span id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
-                          <Option name="type" value="avenir"><HourglassOutlined />  <span id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
+                          <Option name="type"  value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "15%" }}id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
+                          <Option name="type" value="archived"><span className="icon-Archive"></span>  <span id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
+                          <Option name="type" value="live"><span className="icon-Current"></span>  <span id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
+                          <Option name="type" value="upcoming"><HourglassOutlined />  <span id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
                       </Select>
                   </div>
 
@@ -169,7 +185,7 @@ function HeaderVideos() {
               ?
               <div className="div_Filter_global">
 
-                  <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
+                  <div id={"IDFilterDiv"} className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
 
                       <div className="div1_div_Filter">
                           <RangePicker
@@ -179,21 +195,22 @@ function HeaderVideos() {
                                   'This Month': [moment().startOf('month'), moment().endOf('month')],
                               }}
                               onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
-                              value={[values.date&&values.date.length && moment(values.date[0], 'YYYY-MM-DD'), values.date&&values.date.length && moment(values.date[1], 'YYYY-MM-DD')]}
-                                                        />
+                              value={[rangeDate && moment(rangeDate[0], 'YYYY-MM-DD'), rangeDate && moment(rangeDate[1], 'YYYY-MM-DD')]}
+                              getPopupContainer={() => document.getElementById("IDFilterDiv")}
+                          />
                       </div>{/*./div1_div_Filter*/}
 
                       <div className="div2_div_Filter">
 
                           <Select
                               className="select1_div2_div_Filter"
-                              name="contributeur" onChange={handleHeaderSelect}
+                              name="contributeur" onChange={onChangeContributor}
                               placeholder={t("ShowVideo.Contributor")}
                               optionFilterProp="children"
                               filterOption={(input, option) =>
                                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                               }
-                              value={values.contributeur}
+                              value={selectedContributor}
                           >
                               <Option name="contributeur" value="Departement">{t("ShowVideo.Department")}</Option>
                               <Option name="contributeur" value="Profile">Profile</Option>
@@ -203,8 +220,8 @@ function HeaderVideos() {
                       </div>{/*./div2_div_Filter*/}
 
                       <div className="div_button_filter">
-                          <Tooltip title={t("ShowVideo.ResetMedia")}><Button onClick={resetFilterVideos} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
-                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={handleFiltrerVideos}>{t("ShowVideo.Filter")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.ResetMedia")}><Button onClick={handleResetFilter} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={() => handleFiltrerVideos(rangeDate, selectedContributor)}>{t("ShowVideo.Filter")}</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
 

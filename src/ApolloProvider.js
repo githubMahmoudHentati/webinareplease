@@ -50,7 +50,12 @@ const client = new ApolloClient({
     ),
     cache: new InMemoryCache({
         addTypename: false
-    })
+    }),
+    defaultOptions: {
+        watchQuery: {
+            fetchPolicy: "cache-and-network",
+        },
+    },
 });
 
 export default (

@@ -68,17 +68,17 @@ export  const Hooks=()=> {
 
     //use Lazy Query
     //query getVideosLinks for embed Code
-    const [GETDATEVIDEO ,{error,data: GetlIVES}]
+    const [GETDATEVIDEO ,{error,refetch,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
             fetchPolicy:  "cache-and-network",
             variables: { input : {
                     "limit": paginationProps.pageSize,
-                    "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
+                    "offset": (paginationProps.current-1)*10,
                     "order_dir": paginationProps.order,
                     "order_column": paginationProps.columnKey,
                     "search_word":values.search,
-                    "date":["", ""],
-                    "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+                    "date":  values.date && values.date.length ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
+                    "status":values.type
                 } },
             context: { clientName: "second" },
             onCompleted :(data)=>{
@@ -102,7 +102,7 @@ export  const Hooks=()=> {
         onCompleted: (data)=>{
             if(data.deleteLive.code === "200"){
                 success_Delete()
-                GETDATEVIDEO();
+                refetch().then()
             }else if(data.deleteLive.code === "400"){
                 error_Delete(400)
             }else if(data.deleteLive.code === "404"){
@@ -185,15 +185,26 @@ export  const Hooks=()=> {
                 FilterVideosValueChange: event.target.value
             }));
             await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+            await dispatch(
+                setPaginationProps({
+                  PaginationPropsNameChange: "current",
+                  PaginationPropsValueChange: 1,
+                })
+              );
         }
     };
     /*Function Select*/
     const handleHeaderSelect = (value,action) => {
-        console.log("handleHeaderSelect",action.name, action.value)
         dispatch(setFilterVideosActions({
             FilterVideosNameChange: action.name,
             FilterVideosValueChange: action.value
         }));
+         dispatch(
+            setPaginationProps({
+              PaginationPropsNameChange: "current",
+              PaginationPropsValueChange: 1,
+            })
+          );
         if(action.name === 'type')  dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));
     };
     /*Function DatePicker */
@@ -214,37 +225,57 @@ export  const Hooks=()=> {
         }));
     }
     /*Filtrer Videos*/
-    const handleFiltrerVideos = () =>{
-     console.log("handleFiltrerVideos" , values)
-      /*  GETDATEVIDEO()*/
-        GETDATEVIDEO({
-            variables:
-                {
-                    input : {
-                        "limit": paginationProps.pageSize,
-                        "offset": values.search !== '' ? 0 :(paginationProps.current-1)*10,
-                        "order_dir": paginationProps.order,
-                        "order_column": paginationProps.columnKey,
-                        "search_word":values.search,
-                        "date": values.date && [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)],
-                        "status":values.type==="tous"?"":values.type==="archivés"?"archived":values.type==="encours"?"live":values.type==="avenir"?"upcoming":""
+    const handleFiltrerVideos = async(dates, contributor) =>{
+        if(values.date !== dates){
+            await dispatch(
+                setPaginationProps({
+                  PaginationPropsNameChange: "current",
+                  PaginationPropsValueChange: 1,
+                })
+              );
+              await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "date",
+                FilterVideosValueChange: dates
+            }));
+            await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "contributeur",
+                FilterVideosValueChange: contributor
+            }));
+              /*  GETDATEVIDEO()*/
+               await GETDATEVIDEO({
+                    variables:
+                        {
+                            input : {
+                                "limit": paginationProps.pageSize,
+                                "offset": 0,
+                                "order_dir": paginationProps.order,
+                                "order_column": paginationProps.columnKey,
+                                "search_word":values.search,
+                                "date": (dates && dates.length && [moment(dates[0]).format(dateFormat), moment(dates[1]).format(dateFormat)] )|| ["", ""],
+                                "status":values.type
+                            }
+                        },
                     }
-                },
-            }
-        )
-
-     dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+                )
+        
+            await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
+        }
+   
     }
     const resetFilterVideos = async()=>{
-        await GETDATEVIDEO()
-        await dispatch(setFilterVideosActions({
-            FilterVideosNameChange: "date",
-            FilterVideosValueChange: []
-        }))
-        await dispatch(setFilterVideosActions({
-            FilterVideosNameChange: "contributeur",
-            FilterVideosValueChange: null
-        }))
+        if((values && values.date.length) || values.contributeur)
+        {
+            await GETDATEVIDEO()
+            await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "date",
+                FilterVideosValueChange: []
+            }))
+            await dispatch(setFilterVideosActions({
+                FilterVideosNameChange: "contributeur",
+                FilterVideosValueChange: null
+            }))
+        }
+       
 
     }
     /*Delete Rows*/

@@ -27,9 +27,9 @@ export const GraphQLFetchDataForm = (values) => {
     let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
 
     const [CreateLive, {
-        data: dataUpdate,
-        loading: loading_EventUpdated,
-        error: error_EventUpdated,
+        data: dataCreate,
+        loading: loading_EventCreated,
+        error: error_EventCreated,
     }] = useMutation(graphQL_shema().createLive, {
         context: { clientName: "second" },
         variables: {
@@ -112,6 +112,93 @@ export const GraphQLFetchDataForm = (values) => {
         }
     });
 
+    const [UpdateLive, {
+        data: liveUpdate,
+        loading: loadingLiveUpdated,
+    }] = useMutation(graphQL_shema().UpdateLive, {
+        context: { clientName: "second" },
+        variables: {
+            id: idLive,
+            form: {
+                generalInfoOutput: {
+                    thumbnail: values.general.fileList && values.general.fileList.length ?
+                        values.general.fileList[0].thumbUrl : defaultImg,
+                    liveTitle: values.general.liveTitle,
+                    liveDescription: values.general.liveDescription,
+                    livePlan: {
+                        plan: values.general.liveAction,
+                        startDate: newStartDate&&newStartHour?newStartDate+ "T" + newStartHour+ "Z":"",
+                        duration: ""
+                    },
+                    liveAccess: values.general.directAccessMode !== "freeAccess",
+                    pwd: values.general.pwd,
+                    securedPasswordOption: false
+                },
+                configurationOutput: {
+                    liveProgram: values.configuration.directProgram,
+
+                    speakers: values.configuration.addSpeakerList,
+
+                    interOption: {
+                        chat: values.configuration.chat,
+                        comment: values.configuration.comments,
+                        like: values.configuration.likeMention
+                    },
+
+                    multiOption: {
+                        isRm: values.configuration.richeMediaDiffusion,
+                        shareFile: values.configuration.attachments
+                    },
+                    autoArchLive: {
+                        auto: values.configuration.liveAutomaticArchiving,
+                        visible: values.configuration.videoMode !== "notVisibleVideo",
+                        theme: "themeX"
+                    },
+                    tags: values.configuration.tags,
+                    themes: values.configuration.theme,
+                },
+                social: [
+                    {
+                        title: values.general.liveTitle,
+                        logo: values.general.fileList && values.general.fileList.length ?
+                            values.general.fileList[0].thumbUrl : defaultImg,
+                        Type: "Facebook Post",
+                        link: values.general.liveLink,
+                        active: true,
+                        planifications: values.socialTools[0].plan
+                    },
+                    {
+                        title: values.general.liveTitle,
+                        logo: values.general.fileList && values.general.fileList.length ?
+                            values.general.fileList[0].thumbUrl : defaultImg,
+                        Type: "Youtube Post",
+                        link: values.general.liveLink,
+                        active: false,
+                        planifications: values.socialTools[1].plan
+                    },
+                    {
+                        title: values.general.liveTitle,
+                        logo: values.general.fileList && values.general.fileList.length ?
+                            values.general.fileList[0].thumbUrl : defaultImg,
+                        Type: "LinkedIn Post",
+                        link: values.general.liveLink,
+                        active: false,
+                        planifications: values.socialTools[2].plan
+                    }
+                ]
+            }
+        },
+        onCompleted: async (data) => {
+            if (data.editLive.code === 200) {
+                history.push("/showVideos")
+                dispatch(setLiveInfo({general:generals,configuration:configuration,invitation:invitation,socialTools:socialTools,constraintData:constraintData}))
+
+            } else if (data.editLive.code === 403) {
+
+            }
+        }
+    });
+
     const [generateSecuredPassword,{loading:loading_securedPassword, data:data_securedPassword}]
         = useMutation(graphQL_shema().generateSecuredPassword, {
         skip:values.general.securedPasswordOption,
@@ -122,7 +209,6 @@ export const GraphQLFetchDataForm = (values) => {
             {
 
                 await dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:data.generatePwd.pwd}));
-
                 // await values.form.setFieldsValue({...values.form.getFieldsValue(),securedPasswordOption:data.generatePwd.pwd})
                 // console.log("form.getFieldsValue()",values.form.getFieldsValue())
                 await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
@@ -236,6 +322,7 @@ export const GraphQLFetchDataForm = (values) => {
 
     return ({
         CreateLive,
+        UpdateLive,
         generateSecuredPassword,
         loading_securedPassword,
         data_securedPassword,
