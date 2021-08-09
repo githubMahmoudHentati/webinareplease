@@ -19,6 +19,8 @@ import {setDirectSetting} from "../../utils/redux/actions";
 import moment from "moment";
 import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../../formDirectVideo/store/formDirectVideoAction"
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
+import {GraphQLFetchDataForm} from "../../formDirectVideo/utils/graphQLFetchDataForm"
+
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 
@@ -66,7 +68,7 @@ export  const Hooks=()=> {
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
 
-    //use Lazy Query
+   //use Lazy Query
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
@@ -342,13 +344,14 @@ export  const Hooks=()=> {
         }
     }
 
+
+
     /*Click Update live */
     const updateLive= async (id)=>{
-        localStorage.setItem('idLive', id);
-        history.push("/FormDirectVideo")
-        localStorage.setItem('formPage', 'Modifier')
-        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
-
+        await localStorage.setItem('idLive', id);
+        await history.push("/FormDirectVideo")
+        await localStorage.setItem('formPage', 'Modifier')
+        await dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
     }
 
     // fonction handleInfos

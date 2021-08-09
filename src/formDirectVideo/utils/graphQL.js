@@ -12,7 +12,7 @@ export const graphQL_shema = ()=> {
         }
     `;
 
-    const updateLive = gql`
+    const UpdateLive = gql`
        mutation($id:Int!, $form:FormUpdate!) {
             editLive(id:$id, form:$form) {
                 code
@@ -91,7 +91,7 @@ export const graphQL_shema = ()=> {
 
     return({
         createLive,
-        updateLive,
+        UpdateLive,
         generateSecuredPassword,
         themesDisplayQuery,
         Get_UpdatedLive_Info
