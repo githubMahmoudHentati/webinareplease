@@ -5,12 +5,12 @@ import {useSelector} from "react-redux";
 import CalendarEvents from "./CalendarEvents";
 import GetCalendar from "./GetCalendar";
 import HooksCalendar from '../utils/hooks.js'
-
-let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 export function CalendarFile() {
     const {activeCalendarEvents, calendarEvent, calendarValues, GetCalendarDataNow} = HooksCalendar();
     const calendarProps = useSelector((state) => state.CalendarReducer)
+    var  x  = useWindowDimensions();
     return (
         <div className={"CalendarFile"}>
             {
@@ -19,8 +19,7 @@ export function CalendarFile() {
                 <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
                                 GetCalendarDataNow={GetCalendarDataNow}/>
             }
-
-            <div className={ ( !x.matches || (x.matches && ! calendarProps.calendar.activeCalendar ) ? '' : 'hidden-calendar')}>
+            <div className={ "CalendarFile__list " + ( !x.matches || (x.matches && !calendarProps.calendar.activeCalendar ) ? '' : 'hidden-calendar')}>
                 <GetCalendar  />
             </div>
         </div>

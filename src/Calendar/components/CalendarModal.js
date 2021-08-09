@@ -6,12 +6,12 @@ import {useSelector} from "react-redux";
 import {useTranslation} from 'react-i18next';
 import defaultImg from "../../assets/webinarplease-thumb.jpg";
 import "../Calendar.scss"
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleStatusEvents}) {
-    let x = window.matchMedia("(max-width: 767px)")
+    var  x  = useWindowDimensions()
     const {t, i18n} = useTranslation();
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
-    // !darkMode && document.documentElement.style.setProperty('--modal_background', "white");
     return (
         <Modal
 
@@ -50,9 +50,9 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleSt
                         color={modalInfo.type === "à venir" ? 'blue' : modalInfo.type === "en cours" ? 'green' : modalInfo.type === "archivé" && 'gray'}>{modalInfo.type === "à venir" ? t("ShowVideo.ComingSoon") : (modalInfo.type === "en cours" ? t("ShowVideo.InProgress") : t("ShowVideo.Archived"))}</Tag>
                     </div>
                     <div className={"modal-div2_time_calendar"}>
-                        <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                        <p style={{color: !darkMode? "" : "rgba(255, 255, 255, 0.85)"}}>
                             <CalendarOutlined className={"div2_time_calendar_icon"}/>{modalInfo.date}</p>
-                        <p style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}>
+                        <p style={{color: !darkMode ? "" : "rgba(255, 255, 255, 0.85)"}}>
                             <ClockCircleOutlined className={"div2_time_calendar_icon"}/>{modalInfo.time}</p>
                     </div>
                 </div>

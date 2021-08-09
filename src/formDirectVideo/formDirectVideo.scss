@@ -48,7 +48,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 767px){
       width: 70%;
     }
     @media screen and (max-width: 480px){
@@ -586,7 +586,7 @@
   height: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .ant-upload-drag{
     width: 100% !important;
   }

@@ -55,7 +55,8 @@
     margin-top: 20px;
     &__tag{
       background: transparent;
-      @media screen and (max-width: 768px){
+      cursor: pointer;
+      @media screen and (max-width: 767px){
         display: flex;
         align-items: center;
         width: 100%;

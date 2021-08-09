@@ -15,6 +15,7 @@ import {useLazyQuery, useQuery} from "@apollo/react-hooks";
 import moment from 'moment';
 import {Badge , Tag,Calendar} from 'antd';
 import {useHistory} from "react-router-dom";
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 var itemsRunAPI;
 
@@ -32,7 +33,7 @@ const HooksCalendar=(callback)=> {
     const calendarProps = useSelector((state) => state.CalendarReducer)
     const {success_Delete, error_Delete} = StatusMessage()
     const history = useHistory();
-    let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+    var  x  = useWindowDimensions()
     let  itemsDeleted;
     const {updateLive} = Hooks();
     const OnPanelChange = async (date, mode) => {
@@ -196,7 +197,7 @@ const HooksCalendar=(callback)=> {
                                         }
                                         <Tag className={"events__list-tags__tag "}
                                              color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
-                                             style={x.matches  && !calendarProps.calendar.activeCalendar? {pointerEvents:'none'} : {}}
+                                             style={x.matches  && !calendarProps.calendar.activeCalendar ? {pointerEvents:'none'} : {}}
                                              onClick={() => onShowModal(item)}>
 
                                             <Badge
@@ -243,7 +244,7 @@ const HooksCalendar=(callback)=> {
         await SetCalendarEvents(e)
         await dispatch(setCalendarOnchange({
             CalendarNameChange: "activeCalendar",
-            CalendarValueChange: true
+            CalendarValueChange: x.matches ? true : false
         }))
     }
     const handleStatusEvents =async (live) =>{
