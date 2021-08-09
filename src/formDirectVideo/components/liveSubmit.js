@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction"
 
 export const LiveSubmit=(props)=>{
     const history = useHistory()
@@ -64,9 +65,17 @@ export const LiveSubmit=(props)=>{
                     tags: values.configuration.tags,
                 }
             ))
+            // dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
         }
     }, [values.constraintData.loadingLiveFetchData]);
     console.log("form.getFieldsValue()",form.getFieldsValue())
+
+    const values_data = useSelector((state)=> state.FormDirectVideoReducer)
+    const {getLiveData} = GraphQLFetchDataForm(values_data)
+
+    useEffect(async () => {
+        getLiveData()
+    }, []);
 
     return(
         <div>
