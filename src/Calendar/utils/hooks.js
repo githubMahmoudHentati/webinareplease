@@ -4,7 +4,8 @@ import {
     setCalendarOnchange,
     setCalendarVisibleOnchange,
     setLoadingDeleteCalendarVideo,
-    setShowDivsConditions
+    setShowDivsConditions,
+    setCalendarInfoOnchange
 } from "../store/calendarAction";
 import {graphQL_shema} from "./graphql";
 import {useMutation} from "@apollo/react-hooks";
@@ -14,6 +15,7 @@ import {useLazyQuery, useQuery} from "@apollo/react-hooks";
 import moment from 'moment';
 import {Badge , Tag,Calendar} from 'antd';
 import {useHistory} from "react-router-dom";
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 var itemsRunAPI;
 
@@ -31,7 +33,7 @@ const HooksCalendar=(callback)=> {
     const calendarProps = useSelector((state) => state.CalendarReducer)
     const {success_Delete, error_Delete} = StatusMessage()
     const history = useHistory();
-    let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+    var  x  = useWindowDimensions()
     let  itemsDeleted;
     const {updateLive} = Hooks();
     const OnPanelChange = async (date, mode) => {
@@ -136,6 +138,7 @@ const HooksCalendar=(callback)=> {
         //SetVisible(true)
         setModalInfo(item)
         dispatch(setCalendarVisibleOnchange({CalendarVisibleNameChange: "visible", CalendarVisibleValueChange: true}));
+        dispatch(setCalendarInfoOnchange({CalendarInfoNameChange: "info", CalendarInfoValueChange: item}));
     }
     // Cancel modal
     const handleCancel = () => {
@@ -149,27 +152,29 @@ const HooksCalendar=(callback)=> {
 
     const getListData = (value) => {
         let listData = [];
-        let check = value.format('YYYY/MM/DD');
-        if (calendarValues) {
-            calendarValues.forEach((element) => {
+        if(value && Object.keys(value).length>0){
+             let check = value.format('YYYY/MM/DD');
+            if (calendarValues) {
+                calendarValues.forEach((element) => {
 
-                switch ((value.year() + "-" + value.month() + "-" + value.date())) {
+                    switch ((value.year() + "-" + value.month() + "-" + value.date())) {
 
-                    case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
+                        case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
 
-                        listData = [...listData, {
-                            id: element.id,
-                            type: element.type,
-                            content: element.content,
-                            style: element.date.isAMomentObject,
-                            date: moment(element.date.date,).format('L'),
-                            time: moment(element.date.date,).format('LTS'),
-                            thumbnail: element.thumbnail,
-                            status: element.status
-                        }]
-                        break;
-                }
-            })
+                            listData = [...listData, {
+                                id: element.id,
+                                type: element.type,
+                                content: element.content,
+                                style: element.date.isAMomentObject,
+                                date: moment(element.date.date,).format('L'),
+                                time: moment(element.date.date,).format('LTS'),
+                                thumbnail: element.thumbnail,
+                                status: element.status
+                            }]
+                            break;
+                    }
+                })
+            }
         }
         return listData || [];
 
@@ -192,7 +197,7 @@ const HooksCalendar=(callback)=> {
                                         }
                                         <Tag className={"events__list-tags__tag "}
                                              color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
-                                             style={x.matches  && !calendarProps.calendar.activeCalendar? {pointerEvents:'none'} : {}}
+                                             style={x.matches  && !calendarProps.calendar.activeCalendar ? {pointerEvents:'none'} : {}}
                                              onClick={() => onShowModal(item)}>
 
                                             <Badge
@@ -200,8 +205,10 @@ const HooksCalendar=(callback)=> {
                                                 text={item.content} style={{
                                                 color: "#007fcb",
                                                 borderRadius: "2px",
-                                                opacity: !item.style && "0.3"
-                                            }}/>
+
+                                                // opacity: !item.style && "0.3"
+                                            }}
+                                                />
                                         </Tag>
                                 </div>
                             )
@@ -239,18 +246,18 @@ const HooksCalendar=(callback)=> {
         await SetCalendarEvents(e)
         await dispatch(setCalendarOnchange({
             CalendarNameChange: "activeCalendar",
-            CalendarValueChange: true
+            CalendarValueChange: x.matches ? true : false
         }))
     }
     const handleStatusEvents =async (live) =>{
-        if(live.status== -1){
-            updateLive(live.id)
-        }else if(live.status== 0){
+        if(live.status === -1){
+           await updateLive(live.id)
+        }else if(live.status === 0){
 
         }else{
 
         }
-        await handleClickArrowCalendar()
+        await handleCancel()
     }
     const handleClickArrowCalendar = async () =>{
         if(x.matches && calendarProps.calendar.activeCalendar){

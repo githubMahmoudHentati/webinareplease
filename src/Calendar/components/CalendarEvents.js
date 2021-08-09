@@ -8,12 +8,17 @@ import HooksCalendar from "../utils/hooks";
 
 function CalendarEvents({ calendarValues , GetCalendarDataNow}) {
     const CalendarReducer = useSelector((state) => state.CalendarReducer);
-    let calenderEventClick = CalendarReducer.calendar.activeCalendarEvents
+    let calenderEventClick = CalendarReducer.calendar.activeCalendarEvents;
+    let modalInfo=CalendarReducer.calendarInfo.info;
     let calendarCompareMoment =  calendarValues.map(item => moment(item.date.date).isSame(calenderEventClick , 'day'))
-    const {handleDelete, handleStatusEvents, handleCancel, onShowModal, modalInfo, getListData, DateCellRender} = HooksCalendar()
+    const {handleDelete, handleStatusEvents, handleCancel, onShowModal, getListData, DateCellRender} = HooksCalendar()
+    const getFormatCalendar = () =>{
+        if(calenderEventClick) return calenderEventClick.format('DD / MM / YYYY')
+        else return ''
+    }
     return(
         <div className={"div_global_calendar"}>
-            <span className={"spn_Date_event"}>{calenderEventClick.format('DD / MM / YYYY')}</span>
+            <span className={"spn_Date_event"}>{getFormatCalendar()}</span>
             {
                 DateCellRender(calenderEventClick, calendarCompareMoment)
             }

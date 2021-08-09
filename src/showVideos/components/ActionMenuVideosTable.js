@@ -7,6 +7,7 @@ import {setPaginationProps} from "../store/showVideosAction";
 import { useDispatch} from "react-redux";
 import {Hooks} from "../utils/hooks";
 import {useTranslation} from "react-i18next";
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 const { SubMenu } = Menu;
 const { TextArea } = Input;
@@ -16,7 +17,7 @@ function useActionMenu({record}) {
     const dispatch = useDispatch()
     const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive , handleExport , handleCancelModalExport , exportLives }=Hooks()
     const { t, i18n } = useTranslation();
-    let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+    var  x  = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
 
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
 
@@ -24,8 +25,7 @@ function useActionMenu({record}) {
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
-    const history = useHistory();
+
     const actionMenu = (
         <Menu className="menu">
             <Menu.Item onClick={()=>handleInfos()}><InfoCircleOutlined />{t("ShowVideo.infos")}</Menu.Item>

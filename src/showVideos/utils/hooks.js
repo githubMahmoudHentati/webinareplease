@@ -20,6 +20,7 @@ import moment from "moment";
 import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../../formDirectVideo/store/formDirectVideoAction"
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
 import {Reducer} from "../../utils/redux/reducer";
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 
@@ -63,7 +64,7 @@ export  const Hooks=()=> {
     const valuesReducer = useSelector((state)=> state.Reducer)
 
     // matches Media query
-    let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+    let matchesMedia = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
        console.log("paginatioklklsdjfhksdjhfksdjfhnProps",valuesReducer)
     if(DataVideos.data){

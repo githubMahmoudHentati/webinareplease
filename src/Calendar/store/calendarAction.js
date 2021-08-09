@@ -17,6 +17,13 @@ export function setCalendarVisibleOnchange(e){
         payload:e,
     };
 }
+export function setCalendarInfoOnchange(e){
+
+    return{
+        type: "SET_CalendarInfoOnchange",
+        payload:e,
+    };
+}
 export function setLoadingDeleteCalendarVideo(e){
     return{
         type:"SET_LoadingDeleteCalendarVideo",

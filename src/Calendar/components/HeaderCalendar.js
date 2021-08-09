@@ -11,9 +11,6 @@ import { useTranslation } from 'react-i18next';
 import Hooks from '../utils/hooks.js'
 import HooksCalendar from "../utils/hooks";
 
-let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
-
-
 
 function HeaderCalendar() {
     const dispatch = useDispatch()
