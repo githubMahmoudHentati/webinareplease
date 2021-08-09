@@ -2,13 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-<<<<<<< HEAD
-      <webServer id="76b03569-3d69-4ea4-9e29-930d7f935013" name="ssss">
-        <fileTransfer accessType="SFTP" host="mhentati-cloud-sandbox.webtv-solution.dev" port="22" sshConfigId="f9319bab-1065-4388-a087-3f80d5550997" sshConfig="mhentati@mhentati-cloud-sandbox.webtv-solution.dev:22 key" keyPair="true">
-=======
-      <webServer id="78f1d22b-06c3-4c37-8dac-3b8fbe8b84e5" name="webinarplease" url="">
-        <fileTransfer accessType="SFTP" host="tamaidi-cloud-sandbox.webtv-solution.dev" port="22" sshConfigId="9d96dee8-991d-4483-be29-eb07fdb355d6" sshConfig="tamaidi@tamaidi-cloud-sandbox.webtv-solution.dev:22 key" keyPair="true">
->>>>>>> origin/master
+      <webServer id="19f2761b-f036-49fc-8237-afaa639779aa" name="web">
+        <fileTransfer accessType="SFTP" host="mhentati-cloud-sandbox.webtv-solution.dev" port="22" sshConfigId="4b589187-bcc4-46c2-b497-0d1a5e4379f1" sshConfig="mhentati@mhentati-cloud-sandbox.webtv-solution.dev:22 key" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="ssss" remoteFilesAllowedToDisappearOnAutoupload="false" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" serverName="web">
     <serverData>
-      <paths name="ssss">
+      <paths name="web">
         <serverdata>
           <mappings>
-<<<<<<< HEAD
             <mapping deploy="/home/mhentati/webinarplease/webinarplease" local="$PROJECT_DIR$" web="/" />
-=======
-            <mapping deploy="/home/tamaidi/webinare" local="$PROJECT_DIR$" web="/" />
->>>>>>> origin/master
           </mappings>
         </serverdata>
       </paths>
     </serverData>
-    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
