@@ -14,11 +14,12 @@ import {Templetes} from "./Templetes";
 import {setDarkMode} from "../../utils/redux/actions";
 import {LiveSubmit} from "./liveSubmit.js";
 import { useTranslation } from 'react-i18next';
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 
 export const IframeDirectVideo =()=>{
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
-    let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+    let matchesMedia = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
     const [formLive, setFormLive] = useState([]);
     const setFormLiveAction=(e)=>{
         setFormLive(e)

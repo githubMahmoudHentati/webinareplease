@@ -18,19 +18,19 @@ import { useTranslation } from 'react-i18next';
 
 import {EyeOutlined , InsertRowLeftOutlined , VideoCameraOutlined } from '@ant-design/icons';
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
+import useWindowDimensions from "../utils/components/getWindowDimensions";
 
 function ShowVideos() {
     const { t, i18n } = useTranslation();
     const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
     const {paginationProps ,  values, GETDATEVIDEO }=Hooks()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    !darkMode&&document.documentElement.style.setProperty('--modal_background', "white")
     const {DeleteItemsMutation}=GraphQLFetchData()
 
     function DeleteItemsAPIFunction(){
         DeleteItemsMutation()
     }
-    let x = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+    var  x  = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
 
     // Read Data from Hooks
     const {DataVideos, loadingSpinner , conditions}=Hooks(DeleteItemsAPIFunction)

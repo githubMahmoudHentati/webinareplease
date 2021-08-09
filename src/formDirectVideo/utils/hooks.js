@@ -15,13 +15,14 @@ import {
 } from "../store/formDirectVideoAction";
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
-    let matchesMedia = window.matchMedia("(max-width: 767px)") // fonction js pour afficher interface seulement en 767px de width
+    let matchesMedia   = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
 
     //******************General************************//

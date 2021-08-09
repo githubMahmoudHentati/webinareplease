@@ -61,6 +61,11 @@ export const AccountSettingsConstraints = ()=>{
             isMailValid:true
         })
     }
+    const visible=()=>{
+        return({
+            errorVisibility:false
+        })
+    }
     const securityAccount = () => {
         return (
             {
@@ -92,7 +97,8 @@ export const AccountSettingsConstraints = ()=>{
         constraintData,
         securityAccount,
         loadingUpdatePassword,
-        paginationAbonnement
+        paginationAbonnement,
+        visible
     })
 
 }
