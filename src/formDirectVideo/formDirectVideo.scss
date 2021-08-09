@@ -659,3 +659,18 @@
   }
 }
 
+.parent{
+  height: auto !important;
+  text-align: center !important;
+  background: #fafafa !important;
+  border: 1px dashed #d9d9d9 !important;
+  border-radius: 2px !important;
+  cursor: pointer !important;
+  transition: border-color 0.3s !important;
+  margin-bottom: 10px !important;
+}
+.anticon-eye{
+  display: none !important;
+}
+
+
