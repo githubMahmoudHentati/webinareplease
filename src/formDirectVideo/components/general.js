@@ -79,7 +79,7 @@ export const Generals =({})=>{
                         <Form.Item name="liveTitle" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
+                            <Input maxLength={128} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
                         </Form.Item>
                     </Col>
                 </Row>
