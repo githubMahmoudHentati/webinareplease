@@ -112,11 +112,10 @@ export const GraphQLFetchDataForm = (values) => {
         }
     });
 
-    const [updateLive, {
-        data: dataUpdate,
-        loading: loading_EventUpdated,
-        error: error_EventUpdated,
-    }] = useMutation(graphQL_shema().updateLive, {
+    const [UpdateLive, {
+        data: liveUpdate,
+        loading: loadingLiveUpdated,
+    }] = useMutation(graphQL_shema().UpdateLive, {
         context: { clientName: "second" },
         variables: {
             id: idLive,
@@ -138,6 +137,8 @@ export const GraphQLFetchDataForm = (values) => {
                 configurationOutput: {
                     liveProgram: values.configuration.directProgram,
 
+                    speakers: values.configuration.addSpeakerList,
+
                     interOption: {
                         chat: values.configuration.chat,
                         comment: values.configuration.comments,
@@ -154,7 +155,6 @@ export const GraphQLFetchDataForm = (values) => {
                         theme: "themeX"
                     },
                     tags: values.configuration.tags,
-                    addSpeaker: values.configuration.addSpeakerList,
                     themes: values.configuration.theme,
                 },
                 social: [
@@ -189,11 +189,11 @@ export const GraphQLFetchDataForm = (values) => {
             }
         },
         onCompleted: async (data) => {
-            if (data.addLive.code === 200) {
+            if (data.editLive.code === 200) {
                 history.push("/showVideos")
                 dispatch(setLiveInfo({general:generals,configuration:configuration,invitation:invitation,socialTools:socialTools,constraintData:constraintData}))
 
-            } else if (data.addLive.code === 403) {
+            } else if (data.editLive.code === 403) {
 
             }
         }
@@ -322,7 +322,7 @@ export const GraphQLFetchDataForm = (values) => {
 
     return ({
         CreateLive,
-        updateLive,
+        UpdateLive,
         generateSecuredPassword,
         loading_securedPassword,
         data_securedPassword,
