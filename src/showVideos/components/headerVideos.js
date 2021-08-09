@@ -130,17 +130,18 @@ function HeaderVideos() {
                           style={{ width: 120 }}
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
-                          defaultValue="tous"
+                          defaultValue={t("ShowVideo.All")}
                           optionFilterProp="children"
                           name="type" onChange={handleHeaderSelect}
+                          key={t("ShowVideo.All")}
                           filterOption={(input, option) =>
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option name="type"  value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "15%" }}id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
-                          <Option name="type" value="archived"><span className="icon-Archive"></span>  <span id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
-                          <Option name="type" value="live"><span className="icon-Current"></span>  <span id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
-                          <Option name="type" value="upcoming"><HourglassOutlined />  <span id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
+                          <Option name="type" key={t("ShowVideo.All")}  value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "15%" }}id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
+                          <Option name="type" key={t("ShowVideo.Archived")} value="archived"><span className="icon-Archive"></span>  <span id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
+                          <Option name="type" key={t("ShowVideo.InProgress")} value="live"><span className="icon-Current"></span>  <span id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
+                          <Option name="type" key={t("ShowVideo.ComingSoon")} value="upcoming"><HourglassOutlined />  <span id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
                       </Select>
                   </div>
 

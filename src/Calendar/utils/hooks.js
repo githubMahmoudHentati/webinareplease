@@ -205,8 +205,10 @@ const HooksCalendar=(callback)=> {
                                                 text={item.content} style={{
                                                 color: "#007fcb",
                                                 borderRadius: "2px",
-                                                opacity: !item.style && "0.3"
-                                            }}/>
+
+                                                // opacity: !item.style && "0.3"
+                                            }}
+                                                />
                                         </Tag>
                                 </div>
                             )
