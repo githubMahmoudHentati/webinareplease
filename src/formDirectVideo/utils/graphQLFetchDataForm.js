@@ -1,9 +1,9 @@
-import {useQuery,useMutation,useLazyQuery} from "@apollo/react-hooks";
+import {useQuery,useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {useDispatch,useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import moment from "moment";
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -14,11 +14,8 @@ import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectV
 import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import defaultImg from '../../assets/webinarplease-thumb.jpg';
-import {setDirectSetting} from "../../utils/redux/actions";
-
 
 export const GraphQLFetchDataForm = (values) => {
-    const directMenu = useSelector((state)=>state.Reducer.directMenu)
     const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -107,10 +104,7 @@ export const GraphQLFetchDataForm = (values) => {
         onCompleted: async (data) => {
             if (data.addLive.code === 200) {
                 history.push("/showVideos")
-                localStorage.removeItem('idLive')
-                dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
-                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
-                dispatch(setDirectSetting(0))
+                dispatch(setLiveInfo({general:generals,configuration:configuration,invitation:invitation,socialTools:socialTools,constraintData:constraintData}))
 
             } else if (data.addLive.code === 403) {
 
@@ -195,12 +189,11 @@ export const GraphQLFetchDataForm = (values) => {
             }
         },
         onCompleted: async (data) => {
-            if (data.editLive.code === "200") {
+            if (data.editLive.code === 200) {
                 history.push("/showVideos")
-                localStorage.removeItem('idLive')
-                dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
-                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
-            } else if (data.editLive.code === "403") {
+                dispatch(setLiveInfo({general:generals,configuration:configuration,invitation:invitation,socialTools:socialTools,constraintData:constraintData}))
+
+            } else if (data.editLive.code === 403) {
 
             }
         }
@@ -231,13 +224,12 @@ export const GraphQLFetchDataForm = (values) => {
         }
     })
 
-    const [getLiveData,{loading:LiveUpdated_Info, data: LiveUpdatedInfData}]
-        = useLazyQuery(graphQL_shema().Get_UpdatedLive_Info, {
+    const {loading:LiveUpdated_Info, data: LiveUpdatedInfData}
+        = useQuery(graphQL_shema().Get_UpdatedLive_Info, {
         variables: { "id":idLive  },
-        skip:!idLive||values.constraintData.loadingLiveFetchData?true:false,
+        skip:idLive?false:true,
         fetchPolicy:  "cache-and-network",
         onCompleted: async (data)=>{
-            debugger
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
@@ -335,8 +327,7 @@ export const GraphQLFetchDataForm = (values) => {
         loading_securedPassword,
         data_securedPassword,
         themesDisplayQueryAction,
-        idLive,
-        getLiveData
+        LiveUpdatedInfData
     })
 }
 

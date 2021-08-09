@@ -130,7 +130,7 @@ function HeaderVideos() {
                           style={{ width: 120 }}
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
-                          defaultValue="tous"
+                          defaultValue=""
                           optionFilterProp="children"
                           name="type" onChange={handleHeaderSelect}
                           filterOption={(input, option) =>
@@ -185,7 +185,7 @@ function HeaderVideos() {
               ?
               <div className="div_Filter_global">
 
-                  <div className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
+                  <div id={"IDFilterDiv"} className="div_Filter" style={{backgroundColor:darkMode===false?"":"#1D1D1D"}}>
 
                       <div className="div1_div_Filter">
                           <RangePicker
@@ -196,7 +196,8 @@ function HeaderVideos() {
                               }}
                               onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
                               value={[rangeDate && moment(rangeDate[0], 'YYYY-MM-DD'), rangeDate && moment(rangeDate[1], 'YYYY-MM-DD')]}
-                                                        />
+                              getPopupContainer={() => document.getElementById("IDFilterDiv")}
+                          />
                       </div>{/*./div1_div_Filter*/}
 
                       <div className="div2_div_Filter">
