@@ -237,6 +237,7 @@ export const GraphQLFetchDataForm = (values) => {
         skip:!idLive||values.constraintData.loadingLiveFetchData?true:false,
         fetchPolicy:  "cache-and-network",
         onCompleted: async (data)=>{
+            debugger
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
