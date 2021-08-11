@@ -48,7 +48,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 767px){
       width: 70%;
     }
     @media screen and (max-width: 480px){
@@ -459,6 +459,7 @@
 }
 .ant-select-multiple .ant-select-selection-item{
   height: 28px !important;
+  background: transparent;
 }
 .Paramétres{
   font-family: 'SF Pro Display';
@@ -586,7 +587,7 @@
   height: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .ant-upload-drag{
     width: 100% !important;
   }
@@ -676,3 +677,20 @@
   text-transform: capitalize;
 }
 }
+
+.parent{
+  height: auto !important;
+  text-align: center !important;
+  border-radius: 2px !important;
+  cursor: pointer !important;
+  transition: border-color 0.3s !important;
+  margin-bottom: 10px !important;
+}
+.Configuration .anticon-eye{
+  display: none !important;
+}
+.Configuration .anticon-delete{
+  color: white !important;
+}
+
+

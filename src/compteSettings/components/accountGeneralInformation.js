@@ -7,17 +7,23 @@ import Hooks from "../utils/hooks";
 import {AvatarUpload} from "./avatarUpload"
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../../connexion/store/connexionAction";
-import {setConstraintDataOnchange,setGeneralInformationOnchange} from "../store/accountSettingsAction";
+import {
+    setConstraintDataOnchange,
+    setErrorVisibility,
+    setGeneralInformationOnchange
+} from "../store/accountSettingsAction";
 import {useHistory} from "react-router-dom";
 import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
 import {useTranslation} from 'react-i18next';
 import axios from 'axios';
+import {StatusMessages} from "../utils/StatusMessages";
+import {AccountSettingsReducer} from "../store/accountSettingsReducer";
 
 const {Option} = Select;
 
 export const AccountGeneralInformation = ({form}) => {
     const history = useHistory()
-
+    const {success_message_update_password , error_message_update_password}=StatusMessages()
     const dispatch = useDispatch()
     const {UpdateAccountSetting} = GraphQLFetchData(form)
     const {
@@ -26,15 +32,15 @@ export const AccountGeneralInformation = ({form}) => {
         handleSubmit,
         generalInformationOnChangeAvatar,
         values,
-        darkMode
+        darkMode,
     } = Hooks(UpdateAccountSetting)
+
     const GetBase64 = (img, callback) => {
         const reader = new FileReader();
         reader.addEventListener('load', () => callback(reader.result));
         reader.readAsDataURL(img);
 
     }
-
     const onSave =(file)=>{
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
@@ -48,31 +54,45 @@ export const AccountGeneralInformation = ({form}) => {
             data: file
         }).then((result) => {
             console.log("result",result.data.data.uploadLogo);
-            generalInformationOnChangeAvatar(result.data.data.uploadLogo)
+           if (result.data.data.uploadLogo){
+               generalInformationOnChangeAvatar(result.data.data.uploadLogo)
+               dispatch(setErrorVisibility({
+                   ErrorVisibilityName: "errorVisibility",
+                   ErrorVisibilityValue: false
+               }))
+           }else{
+               dispatch(setErrorVisibility({
+                   ErrorVisibilityName: "errorVisibility",
+                   ErrorVisibilityValue: true
+               }))
+           }
+
         }).catch(error => {
-            console.log(error)
+            console.log("error",error)
         });
     }
     const handleChange = async info => {
 
         if (info.file.status === 'uploading') {
+            console.log("info.file.status",info.file.status)
             await dispatch(setConstraintDataOnchange({
                 constraintDataNameChange: "avatarLoading",
                 constraintDataValueChange: true
             }))
-            dispatch(setGeneralInformationOnchange({
-                generalInformationNameChange: "vignette",
-                generalInformationValueChange: ""
-            }))
+
+            // dispatch(setGeneralInformationOnchange({
+            //     generalInformationNameChange: "vignette",
+            //     generalInformationValueChange: ""
+            // }))
             return;
         }
 
         // Get this url from response in real world.
         GetBase64(info.file.originFileObj, imageUrl =>
-                dispatch(setGeneralInformationOnchange({
-                    generalInformationNameChange: "vignette",
-                    generalInformationValueChange: imageUrl
-                })),
+                // dispatch(setGeneralInformationOnchange({
+                //     generalInformationNameChange: "vignette",
+                //     generalInformationValueChange: imageUrl
+                // })),
                 dispatch(setConstraintDataOnchange({
                     constraintDataNameChange: "avatarLoading",
                     constraintDataValueChange: false
@@ -110,7 +130,7 @@ export const AccountGeneralInformation = ({form}) => {
 
     console.log("generalInformation", values)
     const {t, i18n} = useTranslation();
-    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")},{max:15}];
+
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -120,7 +140,7 @@ export const AccountGeneralInformation = ({form}) => {
         }))
         return re.test(email)
     }
-
+console.log("vignette", values.generalInformation.vignette)
     useEffect(() => {
         if (values.constraintData.isMailValid === true) {
             document.documentElement.style.setProperty('--inputErrorForm', 'rgba(0 , 0 , 0 , 0.15)');
@@ -133,7 +153,7 @@ export const AccountGeneralInformation = ({form}) => {
             document.documentElement.style.setProperty('--inputBorderErrorForm', "red");
         }
     }, [values.constraintData.isMailValid]);
-
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")},{max:15}];
 
     return (
         <Form
@@ -160,7 +180,7 @@ export const AccountGeneralInformation = ({form}) => {
                                         icon={values.constraintData.avatarLoading ? <div>
                                             <LoadingOutlined/>
                                             <div style={{marginTop: 8}}>{t("CompteSettings.Upload")}</div>
-                                        </div> : !values.generalInformation.vignette ? <UserOutlined/> : ""}
+                                        </div> : !values.generalInformation.vignette ? <UserOutlined/>  : ""}
                                 />
                             </Col>
                             <Col span={24}>

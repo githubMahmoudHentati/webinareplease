@@ -29,6 +29,7 @@
   },
   "CompteSettings": {
     "Avatar": "Avatar",
+    "ErrorMsg":"la taille de l'image est trop grande",
     "Home": "Accueil",
     "Upload": "Télécharger",
     "GenInfo": "Informations générales",

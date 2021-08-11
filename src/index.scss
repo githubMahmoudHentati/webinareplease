@@ -137,16 +137,20 @@ body{
     background-color: #dcdcdc;
     pointer-events: none;
 }
-
+.div_filter .ant-input-affix-wrapper{
+    border:1px solid var(--border_color) !important;
+}
+.ant-picker-range-separator .anticon{
+    color: var(--white_color) !important;
+}
 .ant-breadcrumb-link{
     font-family: "SF Pro Display";
     font-size: 14px;
     font-weight: normal;
 }
-.ant-picker-calendar-date-content{
-    @media screen and (max-width: 767px){
-        overflow-x: hidden;
-    }
+
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date-today .ant-picker-calendar-date-value{
+    color: rgba(174,74, 74, 85%) !important;
 }
 .ant-picker-calendar-full .ant-picker-panel .ant-picker-cell-selected .ant-picker-calendar-date  {
     background-color: var(--option-background) !important;
@@ -1881,5 +1885,26 @@ input:checked + .slider:before {
 }
 .showVideosDiv{
     overflow-x: hidden;
+}
+@media screen and (max-width: 767px){
+    .Filter{
+        height: 80px;
+        flex-direction: column !important;
+        margin-top: 0.7%;
+    }
+    .div_filter{
+        width: 100% !important;
+    }
+    .ant-picker-calendar-date-content{
+        @media screen and (max-width: 767px){
+            overflow-x: hidden;
+        }
+    }
+    .div_Filter{
+        z-index: 99999999999999999999999999999999999 !important;
+        width: 100%;
+        top: 40px;
+        padding: 2% 2%;
+    }
 }
 

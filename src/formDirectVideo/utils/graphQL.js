@@ -58,6 +58,13 @@ export const graphQL_shema = ()=> {
                 }
                 configurationOut{
                     liveProgram
+                    speakers{
+                        name
+                        lastName
+                        function
+                        avatar
+                        mail
+                    }
                     interOption{
                         chat
                         comment
@@ -67,7 +74,12 @@ export const graphQL_shema = ()=> {
                         isRm
                         shareFile
                     }
+                    autoArchLive{
+                        auto
+                        visible
+                    }
                     tags
+                    themes
                 }
                 socialOut{
                     id

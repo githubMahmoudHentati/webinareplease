@@ -1,9 +1,9 @@
-import {useQuery,useMutation} from "@apollo/react-hooks";
+import {useQuery,useMutation,useLazyQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
 import moment from "moment";
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -14,8 +14,11 @@ import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectV
 import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import defaultImg from '../../assets/webinarplease-thumb.jpg';
+import {setDirectSetting} from "../../utils/redux/actions";
+
 
 export const GraphQLFetchDataForm = (values) => {
+    const directMenu = useSelector((state)=>state.Reducer.directMenu)
     const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -104,7 +107,10 @@ export const GraphQLFetchDataForm = (values) => {
         onCompleted: async (data) => {
             if (data.addLive.code === 200) {
                 history.push("/showVideos")
-                dispatch(setLiveInfo({general:generals,configuration:configuration,invitation:invitation,socialTools:socialTools,constraintData:constraintData}))
+                localStorage.removeItem('idLive')
+                dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
+                dispatch(setDirectSetting(0))
 
             } else if (data.addLive.code === 403) {
 
@@ -189,11 +195,12 @@ export const GraphQLFetchDataForm = (values) => {
             }
         },
         onCompleted: async (data) => {
-            if (data.editLive.code === 200) {
+            if (data.editLive.code === "200") {
                 history.push("/showVideos")
-                dispatch(setLiveInfo({general:generals,configuration:configuration,invitation:invitation,socialTools:socialTools,constraintData:constraintData}))
-
-            } else if (data.editLive.code === 403) {
+                localStorage.removeItem('idLive')
+                dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
+            } else if (data.editLive.code === "403") {
 
             }
         }
@@ -224,24 +231,39 @@ export const GraphQLFetchDataForm = (values) => {
         }
     })
 
-    const {loading:LiveUpdated_Info, data: LiveUpdatedInfData}
-        = useQuery(graphQL_shema().Get_UpdatedLive_Info, {
+    const [getLiveData,{loading:LiveUpdated_Info, data: LiveUpdatedInfData}]
+        = useLazyQuery(graphQL_shema().Get_UpdatedLive_Info, {
         variables: { "id":idLive  },
-        skip:idLive?false:true,
+        skip:!idLive||values.constraintData.loadingLiveFetchData?true:false,
         fetchPolicy:  "cache-and-network",
         onCompleted: async (data)=>{
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
+            let speakerList=[{
+                id: 0,
+                name: "Nom ",
+                lastName: 'Prénom',
+                title: "Titre",
+                email: "",
+                logoSpeaker: [{
+                    id: 0,
+                    name: "Nom ",
+                    lastName: 'Prénom',
+                    title: "Titre",
+                    email: "",
+                    thumbUrl: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
+                }]
+            },...data.getlive.configurationOut.speakers]
             await dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
                     fileList:[{
                         uid: '-1',
-                        name: 'xxx.png',
+                        name: data.getlive.generalInfoOut.thumbnail.substring(data.getlive.generalInfoOut.thumbnail.lastIndexOf("/")+1,data.getlive.generalInfoOut.thumbnail.length),
                         status: 'done',
-                        url: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
-                        thumbUrl: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
+                        url: data.getlive.generalInfoOut.thumbnail,
+                        thumbUrl: data.getlive.generalInfoOut.thumbnail,
                     }],
                     liveTitle:data.getlive.generalInfoOut.liveTitle,
                     liveDescription:data.getlive.generalInfoOut.liveDescription,
@@ -263,12 +285,21 @@ export const GraphQLFetchDataForm = (values) => {
                 },
                 configuration:{
                     directProgram: data.getlive.configurationOut.liveProgram,
-                    notVisibleVideo: false,
-                    visibleVideo: false,
                     modalSpeaker: values.configuration.modalSpeaker,
                     switchSpeaker: values.configuration.switchSpeaker,
-                    liveAutomaticArchiving: false,
-                    SpeakerList: values.configuration.SpeakerList,
+                    liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
+                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title, ...rest
+                                                 },index)  => ({
+                        logoSpeaker:[{
+                            uid: '-1',
+                            name: 'xxx.png',
+                            status: 'done',
+                            url: speakerList[index].avatar,
+                            thumbUrl:speakerList[index].avatar,
+                        }],email,title,
+                        ...rest
+                    })),
+
                     addSpeakerList:values.configuration.addSpeakerList,
                     speaker: values.configuration.speaker,
                     loadingSpeakerInfo:false,
@@ -277,8 +308,8 @@ export const GraphQLFetchDataForm = (values) => {
                     likeMention: data.getlive.configurationOut.interOption.like,
                     attachments: data.getlive.configurationOut.multiOption.shareFile,
                     richeMediaDiffusion: data.getlive.configurationOut.multiOption.isRm,
-                    videoMode: data.getlive.configurationOut.videoMode?"visibleVideo":"notVisibleVideo",
-                    theme:values.configuration.theme,
+                    videoMode: data.getlive.configurationOut.autoArchLive.visible?"visibleVideo":"notVisibleVideo",
+                    theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
                 },
@@ -327,7 +358,8 @@ export const GraphQLFetchDataForm = (values) => {
         loading_securedPassword,
         data_securedPassword,
         themesDisplayQueryAction,
-        LiveUpdatedInfData
+        idLive,
+        getLiveData
     })
 }
 

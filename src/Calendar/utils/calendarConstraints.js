@@ -17,6 +17,13 @@ export const CalendarConstraints = ()=>{
             }
         )
     }
+    const calendarInfoModal = () => {
+        return (
+            {
+                info:{},
+            }
+        )
+    }
     const showDivsConditions = () =>{
         return({
             elementSelected: 0,
@@ -34,7 +41,8 @@ export const CalendarConstraints = ()=>{
         calendar,
         calendarVisibleModal,
         showDivsConditions,
-        loadingDeleteShowVideo
+        loadingDeleteShowVideo,
+        calendarInfoModal
     })
 
 }

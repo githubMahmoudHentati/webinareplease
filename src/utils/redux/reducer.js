@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     gqlError: { msg: '' },
     authToken : '',
     activeSideMenu:false,
-    lang:localStorage.getItem("i18nextLng") ? localStorage.getItem("i18nextLng"):"fr"
+    lang:localStorage.getItem("i18nextLng") ? localStorage.getItem("i18nextLng"):"fr",
+    runDeleteOneRow:false,
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
@@ -23,6 +24,11 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
             return{
                 ...state,
                 directMenu: action.payload
+            }
+        case "SET_DeleteOneRow":
+            return{
+                ...state,
+                runDeleteOneRow: action.payload
             }
         case "SET_DarkMode":
             return {

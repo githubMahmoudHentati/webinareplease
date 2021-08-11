@@ -31,6 +31,7 @@ import moment from "moment";
 import {useTranslation} from 'react-i18next';
 import {TabMenu} from './RichMedia/TabMenu'
 
+import {AttachedFile} from "./attachedFile";
 
 export const Configuration = () => {
     const dispatch = useDispatch()
@@ -253,6 +254,15 @@ export const Configuration = () => {
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p></Checkbox>
                                     </Col>
+                                    {
+                                        values.configuration.attachments
+                                            ?
+                                            <Col span={24}  className={""}>
+                                                <AttachedFile/>
+                                            </Col>
+                                            :
+                                            null
+                                    }
                                 </Row>
                              </Col>
                         </Row>
@@ -362,6 +372,7 @@ export const Configuration = () => {
                     </Col>
                 </Row>
             </Col>
+
         </Row>
     )
 };

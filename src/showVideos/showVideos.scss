@@ -30,6 +30,10 @@
   margin-right: 40% !important;
 
 }
+
+.ant-picker-range-wrapper {
+  width: auto !important;
+}
 .isActiveMenu{
   color: #1890ff !important;
 }
@@ -205,35 +209,9 @@
     .div1_showVideo{
       height: 205px;
     }
-    .div_Filter{
-      width: 55%;
-      margin-top: 0.7%;
-      z-index: 99999999999999999;
-    }
-    .Filter{
-      width: 100%;
-      height: 80px;
-      display: flex;
-      flex-direction: column !important;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.7%;
-    }
     .div_delete_select{
       width: 100%;
       height: 40px;
-    }
-    .div_filter{
-      width: 100% !important;
-    }
-    .div_Filter_global{
-      width: 100%;
-    }
-    .div_Filter{
-      z-index: 99999999999999999999999999999999999 !important;
-      width: 100%;
-      margin-top: 15%;
-      padding: 2% 2%;
     }
     .Calendrier{
       width: 15%;
@@ -299,6 +277,17 @@
       color: rgba(0, 0, 0, 0.85);
     }
 
+      .ant-picker-panels {
+        flex-direction: column;
+        z-index: 999999999999999999999999999999999999999999999 !important;
+      }
+    .ant-picker-dropdown-range{
+      z-index: 99999999999999999999999999999999999 !important;
+      left: 30px !important;
+      top: 40px !important;
+    }
+
+
   }
 /*********desktop devices*************/
   @media screen and (min-width: 1024px) {
@@ -322,5 +311,23 @@
       width: 15%;
     }
 }
+@media screen and (max-width: 320px){
+  .ant-picker-panels {
+    flex-direction: column;
+    z-index: 999999999999999999999999999999999999999999999 !important;
+  }
+  .ant-picker-dropdown-range{
+    z-index: 99999999999999999999999999999999999 !important;
+    left: 10px !important;
+    top: 40px !important;
+  }
+  .ant-picker-range .ant-picker-active-bar{
 
+  }
+}
+@media screen and (min-width: 1140px) and (max-width: 1300px){
+  .ant-picker-range-wrapper{
+    margin-left: -30px;
+  }
+}
 

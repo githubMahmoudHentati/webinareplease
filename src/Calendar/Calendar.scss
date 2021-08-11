@@ -54,7 +54,11 @@
     align-items: flex-start;
     margin-top: 20px;
     &__tag{
-      @media screen and (max-width: 768px){
+      background: transparent;
+      cursor: pointer;
+      @media screen and (max-width: 767px){
+        display: flex;
+        align-items: center;
         width: 100%;
       }
       @media screen and (max-width: 340px){
@@ -73,6 +77,9 @@
       }
     }
   }
+}
+.hidden-calendar{
+  display: none!important;
 }
 .notes-month {
   font-size: 28px;
@@ -132,7 +139,7 @@
  justify-content: space-between;
   align-items: center;
   &--end{
-    justify-content: flex-end;
+    justify-content: flex-end!important;
   }
 }
 .modal_footer_EnCours , .modal_footer_Archivé{
@@ -226,36 +233,9 @@
   #spn_option{
     z-index: 99999999999999999999999999999;
   }
-
-  .div_Filter{
-    width: 55%;
-    margin-top: 0.7%;
-    z-index: 99999999999999999;
-  }
-  .Filter{
-    width: 100%;
-    height: 80px;
-    display: flex;
-    flex-direction: column !important;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.7%;
-  }
   .div_delete_select{
     width: 100%;
     height: 40px;
-  }
-  .div_filter{
-    width: 100% !important;
-  }
-  .div_Filter_global{
-    width: 100%;
-  }
-  .div_Filter{
-    z-index: 99999999999999999999999999999999999 !important;
-    width: 100%;
-    margin-top: 15%;
-    padding: 2% 2%;
   }
   .Calendrier{
     width: 15%;
@@ -281,7 +261,7 @@
     font-family: "SF Pro Display";
     font-size: 14px;
     font-weight: 400;
-    color: RGBA(0, 0, 0, 0.85);
+    color: var(--white_color);
     margin-bottom: 2%;
   }
   .tag_moment{

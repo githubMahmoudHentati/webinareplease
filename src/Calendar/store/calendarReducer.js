@@ -1,11 +1,12 @@
 import {CalendarConstraints} from "../utils/calendarConstraints";
 
-const { calendar , calendarVisibleModal,showDivsConditions} = CalendarConstraints()
+const { calendar , calendarVisibleModal,showDivsConditions, calendarInfoModal} = CalendarConstraints()
 
 const CalendarInitialState = {
 
     calendar: calendar(),
     calendarVisible : calendarVisibleModal(),
+    calendarInfo : calendarInfoModal(),
     showdivscondition:showDivsConditions(),
 }
 
@@ -30,6 +31,15 @@ export const  CalendarReducer=(state=CalendarInitialState , action)=>{
             return{
                 ...state,
                 calendarVisible:CalendarVisibleOnOnchangeObj
+            }
+
+
+        case "SET_CalendarInfoOnchange":
+            const {CalendarInfoNameChange,CalendarInfoValueChange}=action.payload
+            const CalendarInfoOnOnchangeObj = {...state.calendarVisible,[CalendarInfoNameChange]: CalendarInfoValueChange}
+            return{
+                ...state,
+                calendarInfo:CalendarInfoOnOnchangeObj
             }
 
 
