@@ -9,6 +9,7 @@ import {setDirectSetting} from "../../utils/redux/actions";
 import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../store/formDirectVideoAction"
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import {useTranslation} from 'react-i18next';
+import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 
 export const BarHeader = () => {
@@ -20,6 +21,7 @@ export const BarHeader = () => {
     const dispatch = useDispatch()
     const {t, i18n} = useTranslation();
     const formPage= useSelector((state)=>state.ShowVideosReducerReducer.formPage)
+    var  x  = useWindowDimensions();
     const cancelButton = async ()=>
     {
         history.push("/showVideos")
@@ -31,7 +33,7 @@ export const BarHeader = () => {
     const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
     return (
         <Row style={{width: "100%"}} justify={"space-between"}>
-            <Col className={"bar-header-container"}>
+            <Col className={"bar-header-container "+ (!isAddedForm && !x.matches && " bar-header-container--edit ")}>
                 <Row gutter={[15, 0]}>
                     <Col style={{display: "flex", alignItems: "center"}}>
                         <ArrowLeftOutlined
@@ -61,7 +63,7 @@ export const BarHeader = () => {
                             }}
                         />
                     </Col>
-                    <Col className={"bar-header-title"}>
+                    <Col className={"bar-header-title " + (!isAddedForm && !x.matches && " bar-header-title--edit ")}>
                         <span style={{
                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                             fontSize: "20px",

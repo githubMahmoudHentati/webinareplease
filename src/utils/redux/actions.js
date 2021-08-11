@@ -37,12 +37,9 @@ export function setAppSetLogout(){
         type:"SET_AppSetLogout",
     }
 }
-export const changeLangEN=()=>({
-    type:"CHANGE_LANG_EN"
-})
-
-export const changeLangFR=()=>({
-    type:"CHANGE_LANG_FR"
+export const changeLang=(lang)=>({
+    type:"CHANGE_LANG",
+    payload:lang
 })
 export function setRunDeleteOneRow(e){
     return{

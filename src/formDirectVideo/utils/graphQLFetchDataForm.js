@@ -283,6 +283,7 @@ export const GraphQLFetchDataForm = (values) => {
                     liveSharedLink: data.getlive.generalInfoOut.liveLink,
                     securedPasswordOption: data.getlive.generalInfoOut.securedPasswordOption,
                 },
+
                 configuration:{
                     directProgram: data.getlive.configurationOut.liveProgram,
                     modalSpeaker: values.configuration.modalSpeaker,
@@ -322,7 +323,7 @@ export const GraphQLFetchDataForm = (values) => {
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[0].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[0].link:"",
                         logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
-                        plan: data.getlive.socialOut.length>0?data.getlive.socialOut[0].planifications:[{id:0,active: true, startDate: "", endDate: ""}]
+                        plan: data.getlive.socialOut.length>0 && data.getlive.socialOut[0].planifications ?data.getlive.socialOut[0].planifications:[{id:0,active: true, startDate: "", endDate: ""}]
                     },
                     {
                         id: 1,
@@ -332,7 +333,7 @@ export const GraphQLFetchDataForm = (values) => {
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[1].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[1].link:"",
                         logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
-                        plan: data.getlive.socialOut.length>0?data.getlive.socialOut[1].planifications:[{id:1,active: true, startDate: "", endDate: ""}]
+                        plan: data.getlive.socialOut.length>0 && data.getlive.socialOut[1].planifications ?data.getlive.socialOut[1].planifications:[{id:1,active: true, startDate: "", endDate: ""}]
                     },
                     {
                         id: 2,
@@ -342,7 +343,7 @@ export const GraphQLFetchDataForm = (values) => {
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[2].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[2].link:"",
                         logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
-                        plan: data.getlive.socialOut.length>0?data.getlive.socialOut[2].planifications:[{id:2,active: true, startDate: "", endDate: ""}]
+                        plan: data.getlive.socialOut.length>0 &&  data.getlive.socialOut[2].planifications ?data.getlive.socialOut[2].planifications:[{id:2,active: true, startDate: "", endDate: ""}]
                     },
                 ]
             }));

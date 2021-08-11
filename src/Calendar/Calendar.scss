@@ -53,9 +53,47 @@
     flex-direction: column;
     align-items: flex-start;
     margin-top: 20px;
+
     &__tag{
       background: transparent;
       cursor: pointer;
+      .ant-badge-status{
+        width: 100%;
+        overflow: hidden;
+        font-size: 12px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      &--blue{
+        background-color: var(--tag-blue-background);
+        border: 1px solid var(--tag-blue-border);
+        .ant-badge-status{
+          color: var(--color-tag-text-blue);
+          &-text{
+            color: var(--color-tag-text-blue);
+          }
+        }
+      }
+      &--green{
+        background-color: var(--tag-green-background);
+        border: 1px solid var(--tag-green-border);
+        .ant-badge-status {
+          color: var(--color-tag-text-green);
+          &-text {
+            color: var(--color-tag-text-green);
+          }
+        }
+      }
+      &--gray{
+        background-color: var(--tag-Geekblue-background);
+        border: 1px solid var(--tag-Geekblue-border);
+        .ant-badge-status {
+          color: var(--color-tag-text-gray);
+          .ant-badge-status-text{
+            color: var(--color-tag-text-gray);
+          }
+        }
+      }
       @media screen and (max-width: 767px){
         display: flex;
         align-items: center;
@@ -67,13 +105,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-      .ant-badge-status{
-        width: 100%;
-        overflow: hidden;
-        font-size: 12px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
     }
   }
@@ -159,7 +190,11 @@
   width: 70%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  color: var(--white_color);
+  .ant-badge-status-text{
+    color: var(--white_color);
+  }
+white-space: nowrap;
   @media screen and (max-width: 598px){
     width:80%;
   }
@@ -271,7 +306,7 @@
     font-family: "SF Pro Display";
     font-size: 20px;
     font-weight: 400;
-    color: RGBA(0, 0, 0, 0.85);
+    color: var(--white_color);
   }
   .modal-footer{
 

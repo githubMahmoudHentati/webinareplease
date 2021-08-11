@@ -47,10 +47,8 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 appState: { loggedIn: false },
                 authToken : ''
             }
-        case "CHANGE_LANG_FR":
-            return {...state,lang:"fr"}
-        case "CHANGE_LANG_EN":
-            return {...state,lang:"en"}
+        case "CHANGE_LANG":
+            return {...state,lang:action.payload}
 
         default:{
             return state

@@ -17,7 +17,7 @@ import {
 } from '@ant-design/icons';
 import {Badge, Menu, Dropdown, Avatar} from 'antd';
 import {setAccountSetting, setAppSetLogin,setAppSetLogout} from "../redux/actions";
-import {changeLangEN,changeLangFR} from "../redux/actions"
+import {changeLang} from "../redux/actions"
 import {setDarkMode} from "../redux/actions";
 import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {CSSTransition} from 'react-transition-group';
@@ -91,8 +91,10 @@ function GlobalHeader() {
     let firstName=  localStorage.getItem('firstName')
     let lastName=   localStorage.getItem('lastName')
     let avatar = (localStorage.getItem('avatar') ? localStorage.getItem('avatar') : '')
-    const changeLanguage = (language) => {
-        i18n.changeLanguage(language);
+    const changeLanguage = (lang) => {
+        i18n.changeLanguage(lang);
+        i18n.locale=lang;
+        dispatch(changeLang(lang))
     }
 
     const MenuHeader = (
@@ -110,31 +112,6 @@ function GlobalHeader() {
         </Menu>
     );
     const Menulang = (
-        <Menu className="menu">
-            <Menu.Item onClick={() => {
-                changeLanguage('fr');
-                 dispatch(changeLangFR())
-            }}>
-                 <span className="icon-fr">
-                     <span className="path1"></span>
-                     <span className="path2"></span>
-                     <span className="path3"></span><span className="path4"></span>
-                 </span> {t("lang2")}
-            </Menu.Item>
-            <Menu.Item onClick={() => {
-                changeLanguage('en');
-                 dispatch(changeLangEN())
-            }}>
-                <span className="icon-ang">
-                    <span className="path1"></span>
-                    <span className="path2"></span>
-                    <span className="path3"></span><span className="path4"></span>
-                    <span className="path5"></span>
-                </span> {t("lang1")}
-            </Menu.Item>
-        </Menu>
-    );
-    const Menulang1 = (
         <Menu className="menu">
             <Menu.Item onClick={() => changeLanguage('fr')}>
                  <span className="icon-fr">
@@ -282,7 +259,7 @@ function GlobalHeader() {
                             </div>
 
                             <div className={"div3_div2_side_nav"}>
-                                <Dropdown className={"drp_lang"} overlay={Menulang1} trigger={['click']}>
+                                <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']}>
                                     <div><GlobalOutlined style={{color: darkMode === false ? "" : "white"}}
                                                          className={"avtr"}/> <span
                                         className={"spnwhite"}>{t("description.Language")}</span></div>
