@@ -19,6 +19,7 @@ import {setDirectSetting} from "../../utils/redux/actions";
 import moment from "moment";
 import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../../formDirectVideo/store/formDirectVideoAction"
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
+import {Reducer} from "../../utils/redux/reducer";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
@@ -59,10 +60,13 @@ export  const Hooks=()=> {
     const infosLives = useSelector((state)=> state.ShowVideosReducerReducer.valuesInfosLives)
     //Reducer export lives
     const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
+    //Reducer
+    const valuesReducer = useSelector((state)=> state.Reducer)
+
     // matches Media query
     let matchesMedia = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",values)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",valuesReducer)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -71,7 +75,7 @@ export  const Hooks=()=> {
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,refetch,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
-            fetchPolicy:  "cache-and-network",
+            fetchPolicy:  "network-only",
             variables: { input : {
                     "limit": paginationProps.pageSize,
                     "offset": (paginationProps.current-1)*10,
@@ -103,7 +107,6 @@ export  const Hooks=()=> {
         onCompleted: (data)=>{
             if(data.deleteLive.code === "200"){
                 success_Delete()
-                refetch().then()
             }else if(data.deleteLive.code === "400"){
                 error_Delete(400)
             }else if(data.deleteLive.code === "404"){
@@ -251,7 +254,7 @@ export  const Hooks=()=> {
                                 "offset": 0,
                                 "order_dir": paginationProps.order,
                                 "order_column": paginationProps.columnKey,
-                                "search_word":values.search,
+                                "search_word":values.searchFake,
                                 "date": (dates && dates.length && [moment(dates[0]).format(dateFormat), moment(dates[1]).format(dateFormat)] )|| ["", ""],
                                 "status":values.type
                             }
@@ -335,7 +338,6 @@ export  const Hooks=()=> {
 
             })
         },3000)
-
 
     }
     const handleClickDropdowMenu = ( e, liveId )=>{
@@ -436,6 +438,6 @@ export  const Hooks=()=> {
         handleExport,
         handleCancelModalExport,
         exportLives,
-        resetFilterVideos
+        resetFilterVideos,
     })
 }

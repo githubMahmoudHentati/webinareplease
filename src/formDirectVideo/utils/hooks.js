@@ -21,7 +21,7 @@ const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
-    const {CreateLive,generateSecuredPassword,themesDisplayQueryAction} = GraphQLFetchDataForm(values)
+    const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
     let matchesMedia   = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
 
@@ -181,9 +181,10 @@ const Hooks=()=>{
                     }
                 ))
         }));
-        CreateLive()
+        idLive?UpdateLive():CreateLive()
     }
 
+    console.log("values-hooks",values)
     // Suppression des régles invitations
 
     const handleClickDelete =(name)=>{

@@ -41,6 +41,11 @@ export const changeLang=(lang)=>({
     type:"CHANGE_LANG",
     payload:lang
 })
-
+export function setRunDeleteOneRow(e){
+    return{
+        type:"SET_DeleteOneRow",
+        payload:e
+    }
+}
 
 

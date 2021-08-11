@@ -40,6 +40,7 @@ export const SocialTools=()=>{
         dispatch(setDatePlan({dateIndexPost:indexPost,dateIndexPlan:indexPlan,typeDate:typeDate,dateValue:moment}))
     }
 
+    console.log("values-socialTools",values)
     return(
         <Row  gutter={[0, 0]}>
             <Col span={24}>
