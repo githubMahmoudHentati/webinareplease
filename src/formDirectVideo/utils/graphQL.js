@@ -67,6 +67,10 @@ export const graphQL_shema = ()=> {
                         isRm
                         shareFile
                     }
+                    autoArchLive{
+                        auto
+                        visible
+                    }
                     tags
                     themes
                 }
