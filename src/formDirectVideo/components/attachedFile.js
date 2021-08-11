@@ -6,6 +6,7 @@ import Hooks from "../utils/hooks";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 import {useDispatch, useSelector} from "react-redux";
+import {UploadHooks} from "./uploadHooks";
 
 const { Dragger } = Upload;
 
@@ -13,25 +14,24 @@ const { Dragger } = Upload;
 export const AttachedFile = () => {
     const dispatch = useDispatch()
     const {values}=Hooks()
+    const { removeThumbnailConfiguration , handleChangeConfiguration }=UploadHooks()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t, i18n } = useTranslation();
-    const fileList = [ ];
-
-    const props = {
-        name: "file",
-        multiple: true,
-        action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-        defaultFileList: [...fileList],
-        listType: "picture-card",
-    };
 
 
     return(
         <Row >
 
          <Col span={24}>
-             <Dragger {...props} className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}>
+             <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
+                       name="fileList" listType="picture-card" multiple={true}
+                       accept="image/jpeg,image/png"
+                       fileList={[...values.configuration.fileListConfiguration]}
+                 //beforeUpload={beforeUpload}
+                       onChange={handleChangeConfiguration}
+                       onRemove={removeThumbnailConfiguration}
+             >
                  <p className="ant-upload-drag-icon">
                      <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
                  </p>

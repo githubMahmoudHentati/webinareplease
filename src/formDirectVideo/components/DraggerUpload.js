@@ -10,86 +10,19 @@ import {
 } from "../../compteSettings/store/accountSettingsAction";
 import {setConfigurationSpeaker, setErrorUpload, setGeneralOnchange, setLoadingUpload} from "../store/formDirectVideoAction";
 import { useTranslation } from 'react-i18next';
+import {UploadHooks} from "./uploadHooks";
 
 
 export const DraggerUpload = () => {
     const [fileList, setFileList] = useState([])
     const dispatch = useDispatch()
     const {values}=Hooks()
+    const {onSaveGeneral,removeThumbnailGeneral,handleChangeGeneral}=UploadHooks()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
     const { Dragger } = Upload;
 
-    const onSave =(file, fileInfos)=>{
-        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
-        const token = localStorage.getItem('jwtToken');
-        dispatch(setLoadingUpload(true))
-        axios({
-            url: url,
-            method: 'post',
-            headers: {
-                Authorization: 'Bearer ' + token,
-                'Content-Type': 'multipart/form-data',
-            },
-            data: file
-        }).then((result) => {
-            console.log("resultData",result.data.data.uploadLogo);
-            let value=result.data.data.uploadLogo
-            dispatch(setLoadingUpload(false))
-            if (result.data.data.uploadLogo){
-                dispatch(setErrorUpload(false))
-            }else{
-                value=""
-                dispatch(setErrorUpload(true))
-            }
-
-            dispatch(setGeneralOnchange({generalNameChange:"fileList", generalValueChange:
-                    [{
-                        uid: '-1',
-                        name: (fileInfos && fileInfos.file.name) || "xxx.png",
-                        status: 'done',
-                        url: value,
-                        thumbUrl: value,
-                    }]
-            }));
-        }).catch(error => {
-            console.log(error)
-        });
-    }
-
-    const removeThumbnail=()=>{
-        dispatch(setGeneralOnchange({generalNameChange:"fileList",generalValueChange:[]}))
-    }
-
-    const handleChange = async info => {
-
-        let formData = new FormData();
-        const variables = {
-            avatar: null
-        }
-        const query = `
-    mutation ($avatar:Upload!)
-        {uploadLogo(avatar:$avatar)}
-`;
-        const operations = JSON.stringify({query, variables: {variables}});
-        formData.append("operations", operations);
-        const map = {
-            "0": ["variables.avatar"]
-        };
-        formData.append("map", JSON.stringify(map));
-        [...info.fileList].slice(-1).filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
-            const file = e.originFileObj;
-            console.log("*******************", file);
-            return formData.append("0", file);
-        })
-
-        for (let p of formData) {
-            console.log("ppppppppppp",p);
-        }
-        onSave(formData, info)
-    }
-    //***********************End of Upload***********************////////
     const { t, i18n } = useTranslation();
 
     return(
@@ -98,8 +31,8 @@ export const DraggerUpload = () => {
                   accept="image/jpeg,image/png"
                   fileList={values.general.fileList}
                   //beforeUpload={beforeUpload}
-                  onChange={handleChange}
-                  onRemove={removeThumbnail}
+                  onChange={handleChangeGeneral}
+                  onRemove={removeThumbnailGeneral}
          >
             <p className="ant-upload-drag-icon">
                 <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
