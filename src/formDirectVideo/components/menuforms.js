@@ -19,6 +19,7 @@ export const MenuForms =()=>{
                     style={{width:'100%',height:"100%" , backgroundColor:darkMode===false?"":"#141414" , borderRight:darkMode===false?"":"2px solid #1D1D1D"}}
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
+                    className="TabMenuForm"
                 >
 
                     <div className={"titre-menu"}>
