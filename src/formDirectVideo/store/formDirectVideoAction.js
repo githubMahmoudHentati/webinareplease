@@ -59,6 +59,12 @@ export function setGeneralOnchange(e){
             }
 
         }
+        export function setConfigurationFileList(e){
+          return{
+              type:"SET_ConfigurationFileList",
+              payload:e
+          }
+        }
 //*******************Invitations actions*******************//
 
         export function setInvitationOnchangeRules(e){
