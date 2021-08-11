@@ -641,21 +641,23 @@
   border : 1px solid red !important;
 
 }
-.bar-header-container{
-  width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  @media screen and (max-width: 598px){
-    width:80%;
-  }
-  .bar-header-title{
-    width: 90%;
+.bar-header{
+  &-container{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    @media screen and (max-width: 598px){
-      width:80%;
+    color:var(--white_color);
+    &--edit{
+      width: 60%;
+    }
+  }
+  &-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color:var(--white_color);
+    &--edit{
+      width: 90%;
     }
   }
 }
