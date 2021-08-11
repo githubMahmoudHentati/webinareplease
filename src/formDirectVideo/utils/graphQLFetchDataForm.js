@@ -283,6 +283,7 @@ export const GraphQLFetchDataForm = (values) => {
                     liveSharedLink: data.getlive.generalInfoOut.liveLink,
                     securedPasswordOption: data.getlive.generalInfoOut.securedPasswordOption,
                 },
+
                 configuration:{
                     directProgram: data.getlive.configurationOut.liveProgram,
                     modalSpeaker: values.configuration.modalSpeaker,
