@@ -622,7 +622,13 @@
   .ant-upload-drag{
     width: 100% !important;
   }
+  .div-copy-btn{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
 }
+
 @media screen and (max-width: 767px) {
   .ant-menu-item , .ant-menu-item-selected , .ant-menu-item-only-child{
     &:focus{

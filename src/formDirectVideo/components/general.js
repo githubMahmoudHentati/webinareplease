@@ -109,20 +109,19 @@ export const Generals =({})=>{
                         <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ShareLiveLink")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                        <Row justify={"space-between"} style={{width: '100%'}} gutter={[0, 0]}>
-                            <Col xxl={22} xl={21} lg={20} md={19} sm={17} xs={14}>
+                        <Row justify={"space-between"}
+                             style={{width: '100%', display:"inline-grid",  gridTemplateColumns: "82% 15%"
+                        }} >
                                     <Input disabled name="liveLink" onChange={generalOnChange}
                                            placeholder={'www.empreinte.com/titrelive'}
                                            value={values.general.liveLink+"/"+values.general.liveTitle}
                                     ></Input>
-                            </Col>
-                            <Col>
-                                <Button style={{
-                                    backgroundColor: darkMode === false ? "" : "#141414",
-                                    border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)",
-                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
+                                <Button className={"div-copy-btn"} style={{
+                                    backgroundColor: !darkMode ? "" : "#141414",
+                                    border: !darkMode ? "" : "1px solid rgba(255, 255, 255, 0.15)",
+                                    color: !darkMode? "" : "rgba(255, 255, 255, 0.85)",
+
                                 }}   onClick={copySuccess} >{t("formDirectVideo.Copier")}</Button>
-                            </Col>
                         </Row>
 
                     </Col>
