@@ -168,7 +168,7 @@ export const SocialTools=()=>{
                                                         </Col>
                                                     </Row>
                                                 </Col>
-                                                <Col span={24} className={"col_texte_empreinte"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                                                <Col span={24} className={"col_texte_empreinte"}>
                                                     {values.general.liveDescription}
                                                 </Col>
                                                 <Col span={24} style={{display: "flex", justifyContent: "center"}}>
@@ -178,12 +178,10 @@ export const SocialTools=()=>{
                                                             values.general.fileList[0].thumbUrl : defaultImg }
                                                         style={{height: "100%", width: "100%"}}/>
                                                 </Col>
-                                                <Col span={24} style={{  overflow: 'hidden', 'text-overflow': 'ellipsis'}}>
-                                                    <span className={"FundamentalsofWebinar"} style={{
-                                                        color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
-                                                    }}>{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
-                                                    <span className={"Empriente.com"} style={{
-                                                        color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
+                                                <Col span={24}  className={"social-description"}>
+                                                    <span className={"FundamentalsofWebinar social-description-text"} >{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
+                                                    <span className={"social-description-text"} style={{
+                                                        color:"var(--white_color)"
                                                     }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empriente.com'}</span>
                                                 </Col>
                                             </Row>

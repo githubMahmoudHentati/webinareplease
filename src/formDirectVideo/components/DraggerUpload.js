@@ -5,10 +5,10 @@ import {useDispatch, useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import axios from 'axios';
 import {
-    setConstraintDataOnchange,
+    setConstraintDataOnchange, setErrorVisibility,
     setGeneralInformationOnchange
 } from "../../compteSettings/store/accountSettingsAction";
-import {setConfigurationSpeaker, setGeneralOnchange} from "../store/formDirectVideoAction";
+import {setConfigurationSpeaker, setErrorUpload, setGeneralOnchange, setLoadingUpload} from "../store/formDirectVideoAction";
 import { useTranslation } from 'react-i18next';
 
 
@@ -24,6 +24,7 @@ export const DraggerUpload = () => {
     const onSave =(file, fileInfos)=>{
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
+        dispatch(setLoadingUpload(true))
         axios({
             url: url,
             method: 'post',
@@ -34,13 +35,22 @@ export const DraggerUpload = () => {
             data: file
         }).then((result) => {
             console.log("resultData",result.data.data.uploadLogo);
+            let value=result.data.data.uploadLogo
+            dispatch(setLoadingUpload(false))
+            if (result.data.data.uploadLogo){
+                dispatch(setErrorUpload(false))
+            }else{
+                value=""
+                dispatch(setErrorUpload(true))
+            }
+
             dispatch(setGeneralOnchange({generalNameChange:"fileList", generalValueChange:
                     [{
                         uid: '-1',
                         name: (fileInfos && fileInfos.file.name) || "xxx.png",
                         status: 'done',
-                        url: result.data.data.uploadLogo,
-                        thumbUrl: result.data.data.uploadLogo,
+                        url: value,
+                        thumbUrl: value,
                     }]
             }));
         }).catch(error => {

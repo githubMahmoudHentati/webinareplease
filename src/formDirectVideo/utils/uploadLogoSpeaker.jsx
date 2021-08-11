@@ -1,9 +1,14 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {setConfigurationOnchange, setConfigurationSpeaker} from "../store/formDirectVideoAction";
+import {
+    setConfigurationOnchange,
+    setConfigurationSpeaker,
+    setGeneralOnchange,
+    setErrorUpload,
+    setLoadingUpload
+} from "../store/formDirectVideoAction";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
-import {setGeneralInformationOnchange} from "../../compteSettings/store/accountSettingsAction";
 
 
 export const UploadLogoSpeaker = () => {
@@ -22,6 +27,7 @@ export const UploadLogoSpeaker = () => {
     const onSave = async (file, fileInfos)=>{
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
+        dispatch(setLoadingUpload(true))
         axios({
             url: url,
             method: 'post',
@@ -32,15 +38,25 @@ export const UploadLogoSpeaker = () => {
             data: file
         }).then((result) => {
             console.log("result",result.data.data.uploadLogo);
-            dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:(
-                [{
-                    uid: '-1',
-                    name: (fileInfos && fileInfos.file.name )||'xxx.png',
-                    status: 'done',
-                    url: result.data.data.uploadLogo,
-                    thumbUrl: result.data.data.uploadLogo,
-                }]
-                )}))
+            let value=result.data.data.uploadLogo;
+            dispatch(setLoadingUpload(false))
+            if (result.data.data.uploadLogo){
+                dispatch(setErrorUpload(false))
+            }else{
+                value=""
+                dispatch(setErrorUpload(true))
+            }
+            dispatch(setConfigurationSpeaker({
+                nameSpeaker: "logoSpeaker", valueSpeaker: (
+                    [{
+                        uid: '-1',
+                        name: (fileInfos && fileInfos.file.name) || 'xxx.png',
+                        status: 'done',
+                        url: value,
+                        thumbUrl: value,
+                    }]
+                )
+            }))
         }).catch(error => {
             console.log(error)
         });

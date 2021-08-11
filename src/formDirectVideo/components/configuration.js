@@ -49,7 +49,8 @@ export const Configuration = () => {
         configurationOnChange,
         configurationOnChangeButton,
         ConfigurationOnChangeSelect,
-        displayThemes
+        displayThemes,
+        getFirstCharacter
     } = Hooks()
 
     console.log("values", values)
@@ -147,9 +148,11 @@ export const Configuration = () => {
                                                 [<span style={{marginLeft: "48px"}}/>]}>
                                                 <List.Item.Meta
                                                     className={indexItem != 0 && "col-item-list"}
-                                                    avatar={<Avatar
+                                                    avatar={
+                                                        <Avatar
+                                                            className={'avatar-speaker'}
                                                         src={item.logoSpeaker[0] && item.logoSpeaker[0].thumbUrl ? item.logoSpeaker[0].thumbUrl :
-                                                            "https://www.trustedclothes.com/blog/wp-content/uploads/2019/02/anonymous-person-221117.jpg"}/>}
+                                                            '' }> {getFirstCharacter(item)}</Avatar>}
                                                     title={
                                                         <div ref={itemListRef}>
                                                             <Row>

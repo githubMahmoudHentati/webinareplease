@@ -1,17 +1,19 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {Row, Col, Input, Button, Modal, Upload, Form} from 'antd'
+import React, {useState, useEffect, useRef, useSelector} from 'react';
+import {Row, Col, Input, Button, Modal, Upload, Form,Spin} from 'antd'
 import '../formDirectVideo.scss'
 import {UploadOutlined} from '@ant-design/icons';
 import Hooks from "../utils/hooks";
 import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
 import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
 import {useTranslation} from 'react-i18next';
+import { LoadingOutlined } from '@ant-design/icons';
 
 export const ModalSpeaker = ({isVisible}) => {
     const [form] = Form.useForm();
     const {t, i18n} = useTranslation();
 
     const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
+    const antIcon = <LoadingOutlined style={{ fontSize: 20 }} spin />;
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -54,7 +56,7 @@ export const ModalSpeaker = ({isVisible}) => {
                 form={form}
                 layout="horizontal"
                 name="product-form"
-                onFinish={handleOk}
+                onFinish={(e)=>!values.error ? handleOk() : e.preventDefault}
             >
                 <Row gutter={[0, 20]}>
 
@@ -73,8 +75,13 @@ export const ModalSpeaker = ({isVisible}) => {
                                     beforeUpload={{beforeUpload}}
                                     {...props} listType="picture">
                                     <Button className={"btn_upload_pic"}
-                                            icon={<UploadOutlined/>}>{t("formDirectVideo.ClickToUpload")}</Button>
+                                            icon={values.loading ? <Spin indicator={antIcon} className={"spin-upload"} wrapperClassName={"spin-upload"} /> : <UploadOutlined/>}>{t("formDirectVideo.ClickToUpload")}</Button>
                                 </Upload>
+                            </Col>
+                            <Col span={24}>
+                                <div style={{color:"red", fontSize:"0.75rem"}}>
+                                    {values.error? t("CompteSettings.ErrorMsg"): ""}
+                                </div>
                             </Col>
                         </Row>
                     </Col>

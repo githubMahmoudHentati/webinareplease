@@ -15,6 +15,9 @@ const formDirectInitialState = {
     constraintData: constraintData(),
 
     form : [],
+
+    error:false,
+    loading:false
 }
 
 
@@ -181,6 +184,17 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
 
         case 'SET_InitialLiveInfo' :
             return  formDirectInitialState
+
+        case 'SET_UPLOAD_ERROR' :
+            return{
+            ...state,
+            error:action.payload
+        }
+        case 'SET_UPLOAD_LOADING' :
+            return{
+            ...state,
+            loading:action.payload
+        }
 
         default:{
             return state
