@@ -57,26 +57,41 @@
     &__tag{
       background: transparent;
       cursor: pointer;
+      .ant-badge-status{
+        width: 100%;
+        overflow: hidden;
+        font-size: 12px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       &--blue{
         background-color: var(--tag-blue-background);
         border: 1px solid var(--tag-blue-border);
-
-        .ant-badge-status-text{
+        .ant-badge-status{
           color: var(--color-tag-text-blue);
+          &-text{
+            color: var(--color-tag-text-blue);
+          }
         }
       }
       &--green{
         background-color: var(--tag-green-background);
         border: 1px solid var(--tag-green-border);
-        .ant-badge-status-text{
+        .ant-badge-status {
           color: var(--color-tag-text-green);
+          &-text {
+            color: var(--color-tag-text-green);
+          }
         }
       }
       &--gray{
         background-color: var(--tag-Geekblue-background);
         border: 1px solid var(--tag-Geekblue-border);
-        .ant-badge-status-text{
+        .ant-badge-status {
           color: var(--color-tag-text-gray);
+          .ant-badge-status-text{
+            color: var(--color-tag-text-gray);
+          }
         }
       }
       @media screen and (max-width: 767px){
@@ -90,13 +105,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-      .ant-badge-status{
-        width: 100%;
-        overflow: hidden;
-        font-size: 12px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
     }
   }
