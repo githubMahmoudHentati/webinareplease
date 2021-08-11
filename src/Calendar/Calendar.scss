@@ -53,9 +53,32 @@
     flex-direction: column;
     align-items: flex-start;
     margin-top: 20px;
+
     &__tag{
       background: transparent;
       cursor: pointer;
+      &--blue{
+        background-color: var(--tag-blue-background);
+        border: 1px solid var(--tag-blue-border);
+
+        .ant-badge-status-text{
+          color: var(--color-tag-text-blue);
+        }
+      }
+      &--green{
+        background-color: var(--tag-green-background);
+        border: 1px solid var(--tag-green-border);
+        .ant-badge-status-text{
+          color: var(--color-tag-text-green);
+        }
+      }
+      &--gray{
+        background-color: var(--tag-Geekblue-background);
+        border: 1px solid var(--tag-Geekblue-border);
+        .ant-badge-status-text{
+          color: var(--color-tag-text-gray);
+        }
+      }
       @media screen and (max-width: 767px){
         display: flex;
         align-items: center;
@@ -159,7 +182,8 @@
   width: 70%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  color: var(--white_color);
+white-space: nowrap;
   @media screen and (max-width: 598px){
     width:80%;
   }

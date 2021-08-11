@@ -92,7 +92,7 @@ body{
 
     --color-tag-text-blue:#007fcb;
     --color-tag-text-green:#52c41a;
-    --color-tag-text-gray:rgba(0, 0, 0, 0.65);
+    --color-tag-text-gray:rgba(255, 255, 255, 0.65);
 
     --separator-color:rgba(0, 0, 0, 0.45);
 
@@ -126,7 +126,7 @@ body{
     --tag-Geekblue-border:rgba(255, 255, 255, 0.2) ;
     --tag-Geekblue-color:rgba(255, 255, 255, 0.65) ;
 
-    --color-tag-text-blue:rgba(255, 255, 255, 0.85);
+    --color-tag-text-blue:#007fcb;
     --color-tag-text-green:#52c41a;
     --color-tag-text-gray:rgba(255, 255, 255, 0.65);
 
@@ -293,9 +293,6 @@ body{
     font-weight: normal !important;
 }
 .ant-select-selection-item-content{
-    color: var(--white_color) !important;
-}
-.ant-badge-status-text{
     color: var(--white_color) !important;
 }
 .ant-input-password{

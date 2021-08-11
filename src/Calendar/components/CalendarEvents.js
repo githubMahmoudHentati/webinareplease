@@ -14,7 +14,7 @@ function CalendarEvents({ calendarValues , GetCalendarDataNow}) {
 
     const { DateCellRender} = HooksCalendar()
     const getFormatCalendar = () =>{
-        if(calenderEventClick) return calenderEventClick.format('DD / MM / YYYY')
+        if(calenderEventClick) return calenderEventClick.format('DD / MM/ YYYY')
         else return ''
     }
     return(

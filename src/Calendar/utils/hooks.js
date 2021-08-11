@@ -16,6 +16,7 @@ import moment from 'moment';
 import {Badge , Tag,Calendar} from 'antd';
 import {useHistory} from "react-router-dom";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+//import 'moment/locale/fr';
 
 var itemsRunAPI;
 
@@ -187,24 +188,21 @@ const HooksCalendar=(callback)=> {
                     (isCurrentMoment ? isCurrentMoment : allow) &&
                     <ul className="events" style={{height:"100%" , width:'100%'}}>
                         {listData.map((item, index) => {
-
+                            const getColorTag=item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'
                             return (
                                 <div key={item.id} className={isCurrentMoment ? "events__list-tags" : ""}>
                                         {
                                             isCurrentMoment && <span className={"span_time"}>{item.time}</span>
                                         }
-                                        <Tag className={"events__list-tags__tag "}
-                                             color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'red'}
+                                        <Tag className={"events__list-tags__tag "+(getColorTag ? "events__list-tags__tag--"+getColorTag : '' )}
+                                             // color={getColorTag}
                                              style={x.matches  && !calendarProps.calendar.activeCalendar ? {pointerEvents:'none'} : {}}
                                              onClick={() => onShowModal(item)}>
 
                                             <Badge
-                                                color={item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'}
+                                                color={getColorTag}
                                                 text={item.content} style={{
-                                                color: "#007fcb",
                                                 borderRadius: "2px",
-
-                                                // opacity: !item.style && "0.3"
                                             }}
                                                 />
                                         </Tag>
