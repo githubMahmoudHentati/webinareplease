@@ -237,7 +237,6 @@ export const GraphQLFetchDataForm = (values) => {
         skip:!idLive||values.constraintData.loadingLiveFetchData?true:false,
         fetchPolicy:  "cache-and-network",
         onCompleted: async (data)=>{
-            debugger
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
@@ -246,10 +245,10 @@ export const GraphQLFetchDataForm = (values) => {
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
                     fileList:[{
                         uid: '-1',
-                        name: 'xxx.png',
+                        name: data.getlive.generalInfoOut.thumbnail.substring(data.getlive.generalInfoOut.thumbnail.lastIndexOf("/")+1,data.getlive.generalInfoOut.thumbnail.length),
                         status: 'done',
-                        url: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
-                        thumbUrl: "https://webinarplease.com/assets/images/content1-3.jpg?v=6",
+                        url: data.getlive.generalInfoOut.thumbnail,
+                        thumbUrl: data.getlive.generalInfoOut.thumbnail,
                     }],
                     liveTitle:data.getlive.generalInfoOut.liveTitle,
                     liveDescription:data.getlive.generalInfoOut.liveDescription,
