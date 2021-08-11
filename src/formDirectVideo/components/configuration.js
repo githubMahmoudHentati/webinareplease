@@ -20,14 +20,17 @@ import {
 } from 'antd'
 import '../formDirectVideo.scss'
 import { Upload, message } from 'antd';
-import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled } from '@ant-design/icons';
+import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled, SettingOutlined } from '@ant-design/icons';
 import Hooks from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
 import {useDispatch, useSelector} from "react-redux";
-import {setConfigurationOnchange, setModalSpeaker, setOnchange} from "../store/formDirectVideoAction";
+import {setConfigurationOnchange, setModalSpeaker, setOnchange, setTabRichmedia} from "../store/formDirectVideoAction";
 import EditableTagGroupConfiguration from "./EditableTagGroupConfiguration";
+
 import moment from "moment";
 import {useTranslation} from 'react-i18next';
+import {TabMenu} from './RichMedia/TabMenu'
+
 import {AttachedFile} from "./attachedFile";
 
 export const Configuration = () => {
@@ -79,6 +82,7 @@ export const Configuration = () => {
     }, []);
     console.log("testxxx", values.configuration.switchSpeaker)
 
+  
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
@@ -234,6 +238,9 @@ export const Configuration = () => {
                                                     className={"infosIcon"}/></p>
                                         </Checkbox>
                                         <br/>
+                                    </Col>
+                                    <Col span={24} className="bordered-col">
+                                        <TabMenu />
                                     </Col>
                                     <Col span={24}  className={"col-forms"}>
 

@@ -1,0 +1,117 @@
+/**chapter component*****/
+.Chapters {
+  &__list-item {
+    border-bottom: 1px solid #cdd3d9;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    span[aria-label="edit"] {
+      margin-right: 15px;
+    }
+    span[aria-label="menu"] {
+      margin-right: 5px;
+    }
+
+    &__contentToEdit {
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__input {
+    margin-top: 10px;
+  }
+  &__input-edit {
+    width: 100%;
+  }
+  &__list-item__actions {
+    visibility: hidden;
+    display: flex;
+  }
+  &__list-item:hover {
+    .Chapters__list-item__actions {
+      visibility: visible;
+    }
+  }
+}
+
+/********question**********/
+/**chapter component*****/
+.Question {
+  &__list-item {
+    border-bottom: 1px solid #cdd3d9;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    span[aria-label="edit"] {
+      margin-right: 15px;
+    }
+    span[aria-label="menu"] {
+      margin-right: 5px;
+    }
+
+    &__contentToEdit {
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__input {
+    margin-top: 10px;
+    &-label {
+      text-transform: capitalize;
+    }
+  }
+  &__input-edit {
+    width: 100%;
+  }
+  &__list-item__actions {
+   /* visibility: hidden;*/
+    display: flex;
+  }
+  &__list-item:hover {
+    .Question__list-item__actions {
+      visibility: visible;
+    }
+  }
+
+  &__add-question {
+    text-align: end;
+    width: 100%;
+    div {
+      cursor: pointer;
+    }
+  }
+  &__new-question {
+    background: #f1f3f4;
+    padding: 0.8em;
+  }
+  &__edit-question{
+    background: #f1f3f4;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+  }
+  &__actions {
+    &-abort {
+      margin-right: 10px;
+    }
+    &-disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+  &__custom-column{
+    display: flex;
+    align-items: center;
+    input{
+      margin: 0px;
+    }
+  }
+}
+
+/*****************TabMenu component**********/
+.TabMenu {
+  .ant-tabs-tab {
+    text-transform: capitalize;
+  }
+}
