@@ -542,6 +542,14 @@
   font-family: "SF Pro Display" !important;
   font-weight: normal !important;
   font-size: 14px !important;
+  .spin-upload{
+    padding-right: 15px;
+    .anticon-loading{
+      svg{
+        fill: var(--white_color);
+      }
+    }
+  }
 }
 .input_modal{
   font-family: "SF Pro Display" !important;
@@ -565,7 +573,12 @@
     color: whitesmoke !important;
   }
 }
-
+.avatar-speaker{
+  background-color: var(--menu-color);
+  .ant-avatar-string{
+    font-weight: bold;
+  }
+}
 .form-item-style{
   width: 100%;
 }

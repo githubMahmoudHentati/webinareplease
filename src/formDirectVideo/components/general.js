@@ -70,6 +70,11 @@ export const Generals =({})=>{
                 </Row>
             </Col>
             <Col span={24}>
+                <div style={{color:"red", fontSize:"0.75rem"}}>
+                    {values.error ? t("CompteSettings.ErrorMsg"): ""}
+                </div>
+            </Col>
+            <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
                         <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveTitle")}</span>

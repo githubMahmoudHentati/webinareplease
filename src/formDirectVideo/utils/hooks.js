@@ -44,7 +44,10 @@ const Hooks=()=>{
             !event.target.checked&&await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
         }
     };
-
+    const getFirstCharacter = (item)=>{
+        const finalUserName=  item.name.toUpperCase().split('').shift() + item.lastName.toUpperCase().split('').shift();
+        return finalUserName
+    }
     const disablePastDate=(current)=>{
         // Can not select days before today and today
         return current && current < moment().startOf('day');
@@ -231,7 +234,8 @@ const Hooks=()=>{
         displayThemes,
         values,
         matchesMedia,
-        handleClickDelete
+        handleClickDelete,
+        getFirstCharacter
     })
 }
 
