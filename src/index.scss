@@ -344,6 +344,9 @@ body{
 .ant-pagination-item-link{
     background-color: var(--card_color) !important;
     color: var(--white_color) !important;
+    .ant-pagination-item-ellipsis{
+        color:var(--white_color) !important;
+    }
 }
 .ant-pagination-item a{
     background-color: var(--card_color) !important;
