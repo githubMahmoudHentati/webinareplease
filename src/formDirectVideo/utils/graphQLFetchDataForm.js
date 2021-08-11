@@ -240,6 +240,21 @@ export const GraphQLFetchDataForm = (values) => {
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
+            let speakerList=[{
+                id: 0,
+                name: "Nom ",
+                lastName: 'Prénom',
+                title: "Titre",
+                email: "",
+                logoSpeaker: [{
+                    id: 0,
+                    name: "Nom ",
+                    lastName: 'Prénom',
+                    title: "Titre",
+                    email: "",
+                    thumbUrl: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
+                }]
+            },...data.getlive.configurationOut.speakers]
             await dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
@@ -273,7 +288,18 @@ export const GraphQLFetchDataForm = (values) => {
                     modalSpeaker: values.configuration.modalSpeaker,
                     switchSpeaker: values.configuration.switchSpeaker,
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
-                    SpeakerList: values.configuration.SpeakerList,
+                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title, ...rest
+                                                 },index)  => ({
+                        logoSpeaker:[{
+                            uid: '-1',
+                            name: 'xxx.png',
+                            status: 'done',
+                            url: speakerList[index].avatar,
+                            thumbUrl:speakerList[index].avatar,
+                        }],email,title,
+                        ...rest
+                    })),
+
                     addSpeakerList:values.configuration.addSpeakerList,
                     speaker: values.configuration.speaker,
                     loadingSpeakerInfo:false,
