@@ -182,7 +182,7 @@ export  const Hooks=()=> {
     //******************Function Data Table************************//
 
     /*Function Input*/
-    const handleSearchRow = async(event) => {
+    const handleSearchRow = async(event , dates) => {
         if(event.key === 'Enter') {
            await dispatch(setFilterVideosActions({
                 FilterVideosNameChange: event.target.name,
@@ -195,6 +195,23 @@ export  const Hooks=()=> {
                   PaginationPropsValueChange: 1,
                 })
               );
+
+            /*  GETDATEVIDEO()*/
+            await GETDATEVIDEO({
+                    variables:
+                        {
+                            input : {
+                                "limit": paginationProps.pageSize,
+                                "offset": 0,
+                                "order_dir": paginationProps.order,
+                                "order_column": paginationProps.columnKey,
+                                "search_word":values.searchFake,
+                                "date": (dates && dates.length && [moment(dates[0]).format(dateFormat), moment(dates[1]).format(dateFormat)] )|| ["", ""],
+                                "status":values.type
+                            }
+                        },
+                }
+            )
         }
     };
     /*Function Select*/
@@ -230,7 +247,7 @@ export  const Hooks=()=> {
     }
     /*Filtrer Videos*/
     const handleFiltrerVideos = async(dates, contributor) =>{
-        if(values.date !== dates){
+
             await dispatch(
                 setPaginationProps({
                   PaginationPropsNameChange: "current",
@@ -263,7 +280,7 @@ export  const Hooks=()=> {
                 )
         
             await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}))
-        }
+
    
     }
     const resetFilterVideos = async()=>{
