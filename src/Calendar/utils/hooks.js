@@ -19,8 +19,6 @@ import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 var itemsRunAPI;
 
-
-
 const HooksCalendar=(callback)=> {
     const [deletedItems, setDeletedItems] = useState([]);
     const [calendarValues, setCalendarValues] = useState([]);
@@ -273,8 +271,6 @@ const HooksCalendar=(callback)=> {
     }
     const handleClickAnnulerAlert = () => {
         // dispatch loading Delete Button
-        console.log("handle itemsRunAPI", itemsRunAPI)
-        console.log("handleClickAnnulerAlert")
         dispatch(setLoadingDeleteCalendarVideo({LoadingDeleteName: "loadingDelete", LoadingDeleteValue: false}));
         //show selected element
         dispatch(setShowDivsConditions({showDivsConditionsName: "showElementSelected", showDivsConditionsValue: true}));
@@ -282,7 +278,6 @@ const HooksCalendar=(callback)=> {
         dispatch(setShowDivsConditions({showDivsConditionsName: "rubDeleteItems", showDivsConditionsValue: true}));
 
         setTimeout(() => {
-            console.log("handleClickAnnulerAlert")
             dispatch(setShowDivsConditions({showDivsConditionsName: "rubDeleteItems", showDivsConditionsValue: false}));
         }, 3000)
         // recover items deleted
