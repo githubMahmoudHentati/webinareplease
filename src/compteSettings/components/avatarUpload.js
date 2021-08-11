@@ -27,8 +27,8 @@ export const AvatarUpload = ({beforeUpload,visible, handleChange, darkMode}) => 
             <Button icon={<UploadOutlined />} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>{t("CompteSettings.ChangeAvatar")}</Button>
         </Upload>
             <div style={{color:"red", fontSize:"0.75rem"}}>
-            {errorVisibility? t("CompteSettings.ErrorMsg"): ""}
-        </div>
+                {errorVisibility? t("CompteSettings.ErrorMsg"): ""}
+            </div>
     </>
     );
 }

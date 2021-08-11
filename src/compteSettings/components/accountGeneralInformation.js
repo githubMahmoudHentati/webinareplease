@@ -54,19 +54,20 @@ export const AccountGeneralInformation = ({form}) => {
             data: file
         }).then((result) => {
             console.log("result",result.data.data.uploadLogo);
+         let value=result.data.data.uploadLogo;
            if (result.data.data.uploadLogo){
-               generalInformationOnChangeAvatar(result.data.data.uploadLogo)
                dispatch(setErrorVisibility({
                    ErrorVisibilityName: "errorVisibility",
                    ErrorVisibilityValue: false
                }))
            }else{
+               value=""
                dispatch(setErrorVisibility({
                    ErrorVisibilityName: "errorVisibility",
                    ErrorVisibilityValue: true
                }))
            }
-
+            generalInformationOnChangeAvatar(value)
         }).catch(error => {
             console.log("error",error)
         });

@@ -6,14 +6,15 @@ import {useSelector} from "react-redux";
 import CalendarModal from "./CalendarModal";
 import HooksCalendar from "../utils/hooks";
 
-function CalendarEvents({ calendarValues , GetCalendarDataNow}) {
+function CalendarEvents() {
     const CalendarReducer = useSelector((state) => state.CalendarReducer);
     let calenderEventClick = CalendarReducer.calendar.activeCalendarEvents;
-    let modalInfo=CalendarReducer.calendarInfo.info;
+    const calendarValues = CalendarReducer.calendar.calendarValues;
     let calendarCompareMoment =  calendarValues.map(item => moment(item.date.date).isSame(calenderEventClick , 'day'))
-    const {handleDelete, handleStatusEvents, handleCancel, onShowModal, getListData, DateCellRender} = HooksCalendar()
+
+    const { DateCellRender} = HooksCalendar()
     const getFormatCalendar = () =>{
-        if(calenderEventClick) return calenderEventClick.format('DD / MM / YYYY')
+        if(calenderEventClick) return calenderEventClick.format('DD / MM/ YYYY')
         else return ''
     }
     return(
@@ -22,12 +23,6 @@ function CalendarEvents({ calendarValues , GetCalendarDataNow}) {
             {
                 DateCellRender(calenderEventClick, calendarCompareMoment)
             }
-            <CalendarModal handleCancel={handleCancel}
-                           visible={CalendarReducer.calendarVisible.visible}
-                           modalInfo={modalInfo}
-                           handleDelete={()=>handleDelete(modalInfo.id)}
-                           handleStatusEvents={()=>handleStatusEvents(modalInfo)}
-            ></CalendarModal>
 
         </div>
     )

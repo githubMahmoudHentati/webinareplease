@@ -503,16 +503,34 @@
   font-weight: normal !important;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  overflow-wrap: unset;
+  word-break: break-word;
+  height: 20px;
+  white-space: nowrap;
+  color: var(--white_color);
 }
-.FundamentalsofWebinar{
-  font-family: "SF Pro Display" !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-}
-.Empriente.com{
-  font-family: "SF Pro Display" !important;
-  font-size: 14px !important;
-  font-weight: normal !important;
+.social-description{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: nowrap;
+  color: var(--white_color);
+  .FundamentalsofWebinar{
+    font-family: "SF Pro Display" !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }
+  &-text{
+    font-family: "SF Pro Display" !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    overflow-wrap: unset;
+    height: 20px;
+    color: var(--white_color);
+  }
 }
 .span_modal{
   font-family: "SF Pro Display";
@@ -524,6 +542,14 @@
   font-family: "SF Pro Display" !important;
   font-weight: normal !important;
   font-size: 14px !important;
+  .spin-upload{
+    padding-right: 15px;
+    .anticon-loading{
+      svg{
+        fill: var(--white_color);
+      }
+    }
+  }
 }
 .input_modal{
   font-family: "SF Pro Display" !important;
@@ -547,7 +573,12 @@
     color: whitesmoke !important;
   }
 }
-
+.avatar-speaker{
+  background-color: var(--menu-color);
+  .ant-avatar-string{
+    font-weight: bold;
+  }
+}
 .form-item-style{
   width: 100%;
 }
@@ -591,7 +622,13 @@
   .ant-upload-drag{
     width: 100% !important;
   }
+  .div-copy-btn{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
 }
+
 @media screen and (max-width: 767px) {
   .ant-menu-item , .ant-menu-item-selected , .ant-menu-item-only-child{
     &:focus{
@@ -641,21 +678,23 @@
   border : 1px solid red !important;
 
 }
-.bar-header-container{
-  width: 60%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  @media screen and (max-width: 598px){
-    width:80%;
-  }
-  .bar-header-title{
-    width: 90%;
+.bar-header{
+  &-container{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    @media screen and (max-width: 598px){
-      width:80%;
+    color:var(--white_color);
+    &--edit{
+      width: 60%;
+    }
+  }
+  &-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color:var(--white_color);
+    &--edit{
+      width: 90%;
     }
   }
 }

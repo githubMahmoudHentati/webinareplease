@@ -146,6 +146,18 @@ export function setGeneralOnchange(e){
             payload:e
         }
     }
+    export function setErrorUpload(e){
+        return{
+            type:"SET_UPLOAD_ERROR",
+            payload:e
+        }
+    }
+    export function setLoadingUpload(e){
+        return{
+            type:"SET_UPLOAD_LOADING",
+            payload:e
+        }
+    }
 
 
 
