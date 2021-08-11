@@ -191,6 +191,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--white_color);
+  .ant-badge-status-text{
+    color: var(--white_color);
+  }
 white-space: nowrap;
   @media screen and (max-width: 598px){
     width:80%;
