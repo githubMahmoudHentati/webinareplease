@@ -68,6 +68,7 @@ export const graphQL_shema = ()=> {
                         shareFile
                     }
                     tags
+                    themes
                 }
                 socialOut{
                     id
