@@ -64,6 +64,7 @@ function Invitation(){
             })
         }
     }
+
     const selectProps = {
         mode:"tags",
         placeholder: "someone@example.com",
