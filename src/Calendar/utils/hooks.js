@@ -22,7 +22,6 @@ var itemsRunAPI;
 
 const HooksCalendar=(callback)=> {
     const [deletedItems, setDeletedItems] = useState([]);
-    const [calendarValues, setCalendarValues] = useState([]);
     const [allow, setAllow] = useState(false);
     const [dateTime, setDateTime] = useState(moment());
     const dispatch = useDispatch();
@@ -30,11 +29,15 @@ const HooksCalendar=(callback)=> {
     const [calendarEvent, SetCalendarEvents] = useState({});
     const [modalInfo, setModalInfo] = useState({});
     const calendarProps = useSelector((state) => state.CalendarReducer)
+    const calendarValues = calendarProps.calendar.calendarValues;
     const {success_Delete, error_Delete} = StatusMessage()
     const history = useHistory();
     var  x  = useWindowDimensions()
     let  itemsDeleted;
     const {updateLive} = Hooks();
+    useEffect(()=>{
+        QueryCalendar();
+    }, [])
     const OnPanelChange = async (date, mode) => {
         let month_number = date.month() + 1
         let month_before = month_number === 1 ? "12" : (date.month() < 9) ? "0" + (month_number - 1).toString() : (month_number - 1).toString();
@@ -68,27 +71,20 @@ const HooksCalendar=(callback)=> {
             }
         }
     })
-
-    const {loading: calendar_loadingNow, data: GetCalendarDataNow}
-        = useQuery(graphQL_shema().Get_Calendar_Data, {
-        fetchPolicy: "cache-first",
-        variables: {"dates": [moment().subtract(1, 'months').format("YYYY-MM"), moment().format("YYYY-MM"), moment().add(1, 'months').format("YYYY-MM")]},
-        context: {clientName: "second"},
-        onCompleted: (data) => {
-            setCalendarValues(data.getCalendar);
-            setAllow(true)
-        }
-    })
-
     const [QueryCalendar, {loading: calendar_loading, data: GetCalendarData}]
         = useLazyQuery(graphQL_shema().Get_Calendar_Data, {
         fetchPolicy: "cache-first",
+        variables: {"dates": [moment().subtract(1, 'months').format("YYYY-MM"), moment().format("YYYY-MM"), moment().add(1, 'months').format("YYYY-MM")]},
+        context: {clientName: "second"},
         onCompleted: async (data) => {
             if (data.getCalendar) {
                 await data.getCalendar.map(element => {
                     moment(element.date.date,).month() === dateTime.month() ? element.date.isAMomentObject = true : element.date.isAMomentObject = false
                 });
-                setCalendarValues(data.getCalendar)
+                await dispatch(setCalendarOnchange({
+                    CalendarNameChange: "calendarValues",
+                    CalendarValueChange: data.getCalendar
+                }))
             }
             setAllow(true)
         }
@@ -123,10 +119,13 @@ const HooksCalendar=(callback)=> {
             return !(ids.includes(item.id))
         })
         // dispatch list Video
-        setCalendarValues(items)
+         dispatch(setCalendarOnchange({
+            CalendarNameChange: "calendarValues",
+            CalendarValueChange: items
+        }))
 
         // liste des items supprimer
-        itemsDeleted = calendarValues.filter(item => {
+        itemsDeleted =calendarValues.filter(item => {
             return (ids.includes(item.id))
 
         })
@@ -291,13 +290,12 @@ const HooksCalendar=(callback)=> {
         handleStatusEvents,
         activeCalendarEvents,
         calendarEvent,
-        calendarValues,
         DateCellRender,
         monthCellRender,
         OnPanelChange,
         handleCancel,
         modalInfo,
-        GetCalendarDataNow,
+        GetCalendarData,
         onShowModal,
         getListData,
         handleClickArrowCalendar,

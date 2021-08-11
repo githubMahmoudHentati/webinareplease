@@ -6,10 +6,10 @@ import {useSelector} from "react-redux";
 import CalendarModal from "./CalendarModal";
 import HooksCalendar from "../utils/hooks";
 
-function CalendarEvents({ calendarValues , GetCalendarDataNow}) {
+function CalendarEvents() {
     const CalendarReducer = useSelector((state) => state.CalendarReducer);
     let calenderEventClick = CalendarReducer.calendar.activeCalendarEvents;
-
+    const calendarValues = CalendarReducer.calendar.calendarValues;
     let calendarCompareMoment =  calendarValues.map(item => moment(item.date.date).isSame(calenderEventClick , 'day'))
 
     const { DateCellRender} = HooksCalendar()

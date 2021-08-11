@@ -9,19 +9,16 @@ import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 import CalendarModal from "./CalendarModal";
 export function CalendarFile() {
-    const {activeCalendarEvents, calendarEvent, calendarValues, GetCalendarDataNow,
-        handleDelete, handleStatusEvents, handleCancel } = HooksCalendar();
+    const {handleDelete, handleStatusEvents, handleCancel } = HooksCalendar();
     const calendarProps = useSelector((state) => state.CalendarReducer)
-    const CalendarReducer = useSelector((state) => state.CalendarReducer);
-    let modalInfo=CalendarReducer.calendarInfo.info;
+    let modalInfo=calendarProps.calendarInfo.info;
     var  x  = useWindowDimensions();
     return (
         <div className={"CalendarFile"}>
             {
                 x.matches &&
                 calendarProps.calendar.activeCalendar &&
-                <CalendarEvents calendarEvent={calendarEvent} calendarValues={calendarValues}
-                                GetCalendarDataNow={GetCalendarDataNow}/>
+                <CalendarEvents />
             }
             <div className={ "CalendarFile__list " + ( !x.matches || (x.matches && !calendarProps.calendar.activeCalendar ) ? '' : 'hidden-calendar')}>
                 <GetCalendar  />
@@ -29,7 +26,7 @@ export function CalendarFile() {
 
             {
                   <CalendarModal handleCancel={handleCancel}
-                               visible={CalendarReducer.calendarVisible.visible}
+                               visible={calendarProps.calendarVisible.visible}
                                modalInfo={modalInfo}
                                handleDelete={()=>handleDelete(modalInfo.id)}
                                handleStatusEvents={()=>handleStatusEvents(modalInfo)}
