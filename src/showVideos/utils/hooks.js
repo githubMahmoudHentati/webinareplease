@@ -130,6 +130,9 @@ export  const Hooks=()=> {
             }else if(data.deleteLive.code === "404"){
                 error_Delete(404)
             }
+            else if(data.deleteLive.code === "401"){
+                error_Delete(401)
+            }
         }
     })
 
