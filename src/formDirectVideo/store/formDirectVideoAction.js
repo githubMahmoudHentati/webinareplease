@@ -59,17 +59,33 @@ export function setGeneralOnchange(e){
             }
 
         }
+        // Add File list Configuration joindre fichiers
         export function setConfigurationFileList(e){
           return{
               type:"SET_ConfigurationFileList",
               payload:e
           }
         }
+        // Delete File list Configuration joindre fichiers
        export function setDeleteFileList(e){
           return{
               type:"SET_DeleteFileList",
               payload:e
          }
+       }
+       // Add File list Configuration "Diapositive"
+       export function setDiapositivesFileList(e){
+         return{
+          type:"SET_DiapositivesFileList",
+          payload:e
+         }
+       }
+      // Add File list Configuration "Diapositive"
+       export function setDiapositivesDelete(e){
+         return{
+          type:"SET_DiapositivesDelete",
+          payload:e
+          }
        }
 //*******************Invitations actions*******************//
 

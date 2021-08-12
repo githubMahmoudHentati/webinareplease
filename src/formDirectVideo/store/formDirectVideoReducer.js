@@ -108,6 +108,26 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 ...state,
                 configuration:deleteFileListOBJ
             }
+        //************* Add File List Configuration ********//
+        case "SET_DiapositivesFileList":
+            const {diapositiveNameFileList , diapositivesValueFileList}=action.payload
+            const newArrayUploadDiapositivesList =  [...state.configuration.diapositivesFileLists,diapositivesValueFileList]
+            console.log("fileeeeeeeeeeeeeeList",newArrayUploadDiapositivesList)
+            const diapositivesFileListObj = {...state.configuration,diapositivesFileLists:newArrayUploadDiapositivesList}
+            return{
+                ...state,
+                configuration:diapositivesFileListObj
+            }
+        //***************** Delete File Lists ************//
+        case "SET_DiapositivesDelete":
+            const {diapositiveDeleteName , diapositivesDeleteValue}=action.payload
+            const newArrDeleteDiapositives = state.configuration.diapositivesFileLists
+            const deleteFileListArrDiapositives = newArrDeleteDiapositives.filter(item => item.uid !== diapositivesDeleteValue.uid)
+            const deleteDiapositivesFileListOBJ = {...state.configuration,diapositivesFileLists: deleteFileListArrDiapositives}
+            return{
+                ...state,
+                configuration:deleteDiapositivesFileListOBJ
+            }
         case "SET_ConfigurationDeleteSpeaker":
             state.configuration.SpeakerList.map((el,i) => (i === action.payload.id ? state.configuration.SpeakerList.splice(i,1):state.configuration.SpeakerList))
             const configurationDeleteSpeakerObj = {...state.configuration , SpeakerList: state.configuration.SpeakerList}
