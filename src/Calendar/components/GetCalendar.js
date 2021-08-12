@@ -6,10 +6,10 @@ import {useSelector} from "react-redux";
 import HooksCalendar from "../utils/hooks";
 
 const GetCalendar=()=>{
-    const { DateCellRender, monthCellRender, OnPanelChange,} = HooksCalendar()
+    const { DateCellRender, monthCellRender, OnPanelChange,mode} = HooksCalendar()
 
     return <Calendar dateCellRender={DateCellRender} monthCellRender={monthCellRender}
-                  onPanelChange={OnPanelChange} />;
+                  onPanelChange={OnPanelChange} mode={mode} />;
 }
 
 export default GetCalendar
