@@ -55,6 +55,7 @@ export const FormDirectConstraints = ()=>{
                 themesList:[],
                 tags:[],
                 fileListConfiguration:[],
+                diapositivesFileLists:[]
             }
         )
     }
