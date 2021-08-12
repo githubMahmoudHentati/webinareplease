@@ -36,7 +36,7 @@
     "lodash" "^4.17.21"
     "resize-observer-polyfill" "^1.5.0"
 
-"@apollo/client@^3.2.5", "@apollo/client@^3.4.1":
+"@apollo/client@^3.2.5", "@apollo/client@^3.4.1", "@apollo/client@latest":
   "integrity" "sha512-CT7ZBSHQD4UG1PDvMS9qOz5ACRIR0b4mBkqjCXEVjteOxA4wpFqUX3dg2bNl+Ok3LwPxFT4b3FwC3+LVcWFa6w=="
   "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.4.1.tgz"
   "version" "3.4.1"
@@ -53,25 +53,6 @@
     "ts-invariant" "^0.9.0"
     "tslib" "^2.3.0"
     "zen-observable-ts" "^1.1.0"
-
-"@apollo/client@latest":
-  "integrity" "sha512-RAmZReFuKCKx0Rs5C0nVJwKomAHUHn+gGP/YvbEsXQWu0sXoncEUZa71UqlfCPVXa/0MkYOIbCXSQdOcuRrHgw=="
-  "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.3.21.tgz"
-  "version" "3.3.21"
-  dependencies:
-    "@graphql-typed-document-node/core" "^3.0.0"
-    "@types/zen-observable" "^0.8.0"
-    "@wry/context" "^0.6.0"
-    "@wry/equality" "^0.5.0"
-    "fast-json-stable-stringify" "^2.0.0"
-    "graphql-tag" "^2.12.0"
-    "hoist-non-react-statics" "^3.3.2"
-    "optimism" "^0.16.0"
-    "prop-types" "^15.7.2"
-    "symbol-observable" "^4.0.0"
-    "ts-invariant" "^0.8.0"
-    "tslib" "^1.10.0"
-    "zen-observable" "^0.8.14"
 
 "@apollo/federation@0.25.0":
   "integrity" "sha512-HspsFSatOhBwDSbYq7WyrtalhX98ShOrzT1Knwj/VHLGfFbLsbREpx191S8D2Wr6ew8LhqCcUkfNrrTBB1l3XA=="
@@ -7348,7 +7329,7 @@
   "resolved" "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.15.tgz"
   "version" "4.1.15"
 
-"graphql-tag@^2.10.1", "graphql-tag@^2.12.0", "graphql-tag@^2.12.3", "graphql-tag@^2.12.4", "graphql-tag@^2.4.2":
+"graphql-tag@^2.10.1", "graphql-tag@^2.12.3", "graphql-tag@^2.12.4", "graphql-tag@^2.4.2":
   "integrity" "sha512-5xNhP4063d16Pz3HBtKprutsPrmHZi5IdUGOWRxA2B6VF7BIRGOHZ5WQvDmJXZuPcBg7rYwaFxvQYjqkSdR3TQ=="
   "resolved" "https://registry.npmjs.org/graphql-tag/-/graphql-tag-2.12.5.tgz"
   "version" "2.12.5"
@@ -10865,7 +10846,7 @@
   dependencies:
     "@wry/context" "^0.4.0"
 
-"optimism@^0.16.0", "optimism@^0.16.1":
+"optimism@^0.16.1":
   "integrity" "sha512-64i+Uw3otrndfq5kaoGNoY7pvOhSsjFEN4bdEFh80MWVk/dbgJfMv7VFDeCT8LxNAlEVhQmdVEbfE7X2nWNIIg=="
   "resolved" "https://registry.npmjs.org/optimism/-/optimism-0.16.1.tgz"
   "version" "0.16.1"
@@ -15104,13 +15085,6 @@
   dependencies:
     "tslib" "^1.9.3"
 
-"ts-invariant@^0.8.0":
-  "integrity" "sha512-VI1ZSMW8soizP5dU8DsMbj/TncHf7bIUqavuE7FTeYeQat454HHurJ8wbfCnVWcDOMkyiBUWOW2ytew3xUxlRw=="
-  "resolved" "https://registry.npmjs.org/ts-invariant/-/ts-invariant-0.8.2.tgz"
-  "version" "0.8.2"
-  dependencies:
-    "tslib" "^2.1.0"
-
 "ts-invariant@^0.9.0":
   "integrity" "sha512-+JqhKqywk+ue5JjAC6eTWe57mOIxYXypMUkBDStkAzvnlfkDJ1KGyeMuNRMwOt6GXzHSC1UT9JecowpZDmgXqA=="
   "resolved" "https://registry.npmjs.org/ts-invariant/-/ts-invariant-0.9.0.tgz"
@@ -16304,7 +16278,7 @@
     "@types/zen-observable" "0.8.3"
     "zen-observable" "0.8.15"
 
-"zen-observable@^0.8.0", "zen-observable@^0.8.14", "zen-observable@0.8.15":
+"zen-observable@^0.8.0", "zen-observable@0.8.15":
   "integrity" "sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ=="
   "resolved" "https://registry.npmjs.org/zen-observable/-/zen-observable-0.8.15.tgz"
   "version" "0.8.15"

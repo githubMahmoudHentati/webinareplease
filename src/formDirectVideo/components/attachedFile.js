@@ -23,10 +23,10 @@ export const AttachedFile = () => {
     return(
         <Row >
 
-         <Col span={24}>
+         <Col span={24} className={"draggerAttachedFile"}>
              <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
                        name="fileList" listType="picture-card" multiple={true}
-                       accept="image/jpeg,image/png"
+
                        fileList={[...values.configuration.fileListConfiguration]}
                  //beforeUpload={beforeUpload}
                        onChange={handleChangeConfiguration}
