@@ -101,7 +101,7 @@ const Hooks=()=>{
 
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
-        event.target.name="visibleVideo" && themesDisplayQueryAction()
+        event.target.value==="visibleVideo" && themesDisplayQueryAction()
     };
 
     const ConfigurationOnChangeSelect = (value,action,name) => {
