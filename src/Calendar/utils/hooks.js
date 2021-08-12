@@ -35,8 +35,8 @@ const HooksCalendar=(callback)=> {
     var  x  = useWindowDimensions()
     let  itemsDeleted;
     const {updateLive} = Hooks();
-    useEffect(()=>{
-        QueryCalendar();
+    useEffect(async ()=>{
+        await OnPanelChange(moment(new Date()), 'month')
     }, [])
     const OnPanelChange = async (date, mode) => {
         let month_number = date.month() + 1
@@ -73,8 +73,7 @@ const HooksCalendar=(callback)=> {
     })
     const [QueryCalendar, {loading: calendar_loading, data: GetCalendarData}]
         = useLazyQuery(graphQL_shema().Get_Calendar_Data, {
-        fetchPolicy: "cache-first",
-        variables: {"dates": [moment().subtract(1, 'months').format("YYYY-MM"), moment().format("YYYY-MM"), moment().add(1, 'months').format("YYYY-MM")]},
+        fetchPolicy: "cache-and-network",
         context: {clientName: "second"},
         onCompleted: async (data) => {
             if (data.getCalendar) {
