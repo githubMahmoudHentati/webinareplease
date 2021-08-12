@@ -65,6 +65,12 @@ export function setGeneralOnchange(e){
               payload:e
           }
         }
+       export function setDeleteFileList(e){
+          return{
+              type:"SET_DeleteFileList",
+              payload:e
+         }
+       }
 //*******************Invitations actions*******************//
 
         export function setInvitationOnchangeRules(e){
