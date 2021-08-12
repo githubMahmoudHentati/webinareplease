@@ -240,21 +240,7 @@ export const GraphQLFetchDataForm = (values) => {
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
-            let speakerList=[{
-                id: 0,
-                name: "Nom ",
-                lastName: 'Prénom',
-                title: "Titre",
-                email: "",
-                logoSpeaker: [{
-                    id: 0,
-                    name: "Nom ",
-                    lastName: 'Prénom',
-                    title: "Titre",
-                    email: "",
-                    thumbUrl: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
-                }]
-            },...data.getlive.configurationOut.speakers]
+            let speakerList=[...data.getlive.configurationOut.speakers]
             await dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,

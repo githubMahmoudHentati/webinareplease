@@ -32,6 +32,7 @@ export const AttachedFile = () => {
                        onChange={handleChangeConfiguration}
                        onRemove={removeThumbnailConfiguration}
              >
+
                  <p className="ant-upload-drag-icon">
                      <InboxOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
                  </p>
