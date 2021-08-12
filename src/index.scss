@@ -555,7 +555,7 @@ body{
     color: var(--white_color) !important;
 }
 .menuItem:focus{
-    background-color: var(--item-menu-background) !important;
+    background-color: var(--menu-background) !important;
 }
 .menuItem:focus .ant-menu-title-content{
     color: #007fcb  !important;
