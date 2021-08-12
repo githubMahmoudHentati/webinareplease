@@ -5,12 +5,15 @@ import axios from "axios";
 import {
     setConfigurationFileList,
     setConfigurationSpeakerList,
-    setGeneralOnchange
+    setGeneralOnchange,
+    setDeleteFileList
 } from "../store/formDirectVideoAction";
-
+import Hooks from "../utils/hooks";
+import { v4 as uuidv4 } from 'uuid';
 
 export const UploadHooks = () =>{
     const dispatch = useDispatch()
+    const {values}=Hooks()
 
     //******************** On Save General *****************//
     const onSaveGeneral =(file, fileInfos)=>{
@@ -90,8 +93,8 @@ export const UploadHooks = () =>{
             console.log("resultData",result.data.data.uploadLogo);
             dispatch(setConfigurationFileList({configurationNameFileList:"fileListConfiguration", configurationValueFileList:
                     {
-                        uid: '-1',
-                        name: (fileInfos && fileInfos.file.name) || "xxx.png",
+                        uid: uuidv4(),
+                        name: (fileInfos && fileInfos.file.name) || "image.png",
                         status: 'done',
                         url: result.data.data.uploadLogo,
                         thumbUrl: result.data.data.uploadLogo,
@@ -103,8 +106,8 @@ export const UploadHooks = () =>{
         });
     }
     //******************** On remove Configuration *****************//
-    const removeThumbnailConfiguration=()=>{
-        //dispatch(setGeneralOnchange({generalNameChange:"fileListConfiguration",generalValueChange:[]}))
+    const removeThumbnailConfiguration=(file)=>{
+        dispatch(setDeleteFileList({deleteFileListsName:"fileListConfiguration",deleteFileListsValue:file}))
     }
 
     //******************** handle change Configuration *****************//
@@ -124,7 +127,7 @@ export const UploadHooks = () =>{
             "0": ["variables.avatar"]
         };
         formData.append("map", JSON.stringify(map));
-        [...info.fileList].filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
+        [...info.fileList].filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "text/plain" ||file.type === "video/webm").map(async (e, index) => {
             const file = e.originFileObj;
             console.log("*******************", [...info.fileList]);
             return formData.append("0", file);
