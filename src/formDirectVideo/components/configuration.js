@@ -71,7 +71,6 @@ export const Configuration = () => {
         className: `custom-select`
     };
 
-
     useEffect(() => {
         itemListRef.current && setItemListHeight(itemListRef.current.offsetHeight)
     }, [itemListRef]);
@@ -81,9 +80,7 @@ export const Configuration = () => {
         values.configuration.SpeakerList.length > 1 &&
         dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
     }, []);
-    console.log("testxxx", values.configuration.switchSpeaker)
 
-  
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
