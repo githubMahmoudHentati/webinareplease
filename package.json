@@ -62,6 +62,7 @@
     "redux-thunk": "^2.3.0",
     "sfcookies": "^1.0.2",
     "simple-react-lightbox": "^3.6.6",
+    "uuid": "^3.4.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
