@@ -1907,4 +1907,11 @@ input:checked + .slider:before {
         padding: 2% 2%;
     }
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    transition: background-color 500000s;
+    -webkit-text-fill-color: var(--white_color) !important;
+}
 
