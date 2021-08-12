@@ -58,6 +58,13 @@ export const graphQL_shema = ()=> {
                 }
                 configurationOut{
                     liveProgram
+                    speakers{
+                        name
+                        lastName
+                        function
+                        avatar
+                        mail
+                    }
                     interOption{
                         chat
                         comment
