@@ -7,8 +7,8 @@ export const graphQL_shema = ()=> {
 
         mutation($input:Mail!) {
           sendMail(input:$input) {
-           Code
-           DeliveryStatus
+             code
+             deliveryStatus
         }
    
       }
