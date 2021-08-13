@@ -1,21 +1,20 @@
-import React from 'react';
-import {useState} from 'react';
-import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {message} from 'antd';
+import React,{useState} from 'react';
+import {message} from "antd";
+import i18n from '../../i18n/index';
+import {setConfirmAccountConstraintDataOnchange} from "../../confirmAccount/store/forgetPasswordAction";
 import {useDispatch} from "react-redux";
-import {setConfirmAccountConstraintDataOnchange} from "../store/forgetPasswordAction";
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
-
-export const ToastMessage = () => {
+export const StatusMessages = (id) => {
     const dispatch = useDispatch()
 
     const success_submit = async (code) => {
-        dispatch(setConfirmAccountConstraintDataOnchange({
+        dispatch(setFormDirectLiveConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
             constraintDataValueChange: false
         }))
         const successMessage = {
-            200: "mail confirmation est renvoyé, veuillez  vérifier votre courrier électronique  pour  valider l'inscription.",
+            200: id ? "Le direct est modifié avec success" : "Le direct est crée avec success",
         }
         message.success({
             content: successMessage[code],
@@ -25,7 +24,7 @@ export const ToastMessage = () => {
             },
         })
             .then(async () =>
-                 dispatch(setConfirmAccountConstraintDataOnchange({
+                dispatch(setFormDirectLiveConstraintDataOnchange({
                     constraintDataNameChange: "leaveToast",
                     constraintDataValueChange: true
                 }))
@@ -34,9 +33,9 @@ export const ToastMessage = () => {
 
     const error_submit = async (code) => {
         const errorMessage = {
-            400: "Point d'accèes invalide, veuillez registrer encore une foix",
+            400: id ? "Ooops , il y a  un problème qui s'est produit lors la modification" : "Ooops , il y a  un problème qui s'est produit lors la creation",
         }
-         dispatch(setConfirmAccountConstraintDataOnchange({
+        dispatch(setFormDirectLiveConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
             constraintDataValueChange: false
         }))
@@ -49,15 +48,16 @@ export const ToastMessage = () => {
                 },
             })
             .then(async () =>
-                 dispatch(setConfirmAccountConstraintDataOnchange({
+                dispatch(setFormDirectLiveConstraintDataOnchange({
                     constraintDataNameChange: "leaveToast",
                     constraintDataValueChange: true
                 }))
             )
     };
+
     return ({
         success_submit,
         error_submit
     })
-}
 
+}

@@ -1479,8 +1479,9 @@ input:checked + .slider:before {
 
 .div_alert{
     position: fixed;
-    top:15%;
-    left: 40%;
+    top:4% !important;
+    left: 50%;
+    transform: translate(-50% , -50%);
     z-index: 2000;
 }
 .btn_annuler{
@@ -1705,6 +1706,7 @@ input:checked + .slider:before {
         width: 30%;
     }
     /***** Package Payement Tab *****/
+
 }
 
 /********** Smart Phone *********************/
@@ -1732,9 +1734,26 @@ input:checked + .slider:before {
         flex-direction: column;
         justify-content: space-between;
     }
+    .div_alert{
+        position: fixed;
+        top:6% !important;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        z-index: 2000;
+        width: 90% !important;
+    }
 
 }
 @media (max-width:575px) {
+    .div_alert{
+        position: fixed;
+        top:6% !important;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        z-index: 2000;
+        width: 90% !important;
+    }
+
     /***** Package Payement Tab *****/
     .div1_WebinairePlease{
         width: 100%;

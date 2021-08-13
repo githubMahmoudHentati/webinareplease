@@ -20,7 +20,8 @@
     "Visualize": "Visualize",
     "Edit": "Edit",
     "Archived": "Archived",
-    "Broadcast": "Broadcast"
+    "Broadcast": "Broadcast",
+    "elements": "lives"
   },
   "CompteSettings": {
     "Avatar": "Avatar",
@@ -138,6 +139,7 @@
     "LiveProgram": "Live program",
     "Participants": "Participants",
     "AddParticipant": "Add a participant",
+    "UpdateParticipant": "Update participant",
     "InterActiveOption": "Live Interactive option",
     "Chat": "Chat (moderated name)",
     "Comments": "Comments (moderated)",

@@ -11,7 +11,7 @@ import {
     setConfigurationSpeakerList,
     setGeneralOnchange,
     setInvitationOnchange,
-    setInvitationOnchangeRules
+    setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange
 } from "../store/formDirectVideoAction";
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
@@ -117,6 +117,7 @@ const Hooks=()=>{
     const onChangeSpeaker=(event,nameSpeaker)=>{
         const valueSpeaker=event && event.target ?  event.target.value : event
         dispatch(setConfigurationSpeaker({nameSpeaker,valueSpeaker}));
+
     }
 
     const addSpeaker = () => {
@@ -125,10 +126,10 @@ const Hooks=()=>{
     };
 
     const editSpeaker = (name,lastName,title,email,logoSpeaker,id) => {
+console.log("editid",id)
+        console.log("SpeakerListedit",values.configuration.SpeakerList)
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:true}));
-        dispatch(setConfigurationInitialSpeaker({id,name,lastName,title,email,logoSpeaker: logoSpeaker
-
-        }))
+        dispatch(setConfigurationInitialSpeaker({id:id,name,lastName,title,email,logoSpeaker: logoSpeaker}))
     };
 
     const deleteSpeaker = async (id) => {
@@ -171,7 +172,8 @@ const Hooks=()=>{
 
 
     const handleSubmit =async ()=>{
-        await dispatch(setConfigurationOnchange({
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:true}));
+        dispatch(setConfigurationOnchange({
             configurationNameChange: "addSpeakerList", configurationValueChange:
                 values.configuration.SpeakerList.map((el, i) => (
                     {
@@ -187,7 +189,6 @@ const Hooks=()=>{
         idLive?UpdateLive():CreateLive()
     }
 
-    console.log("values-hooks",values)
     // Suppression des régles invitations
 
     const handleClickDelete =(name)=>{
