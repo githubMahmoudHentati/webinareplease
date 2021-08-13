@@ -302,6 +302,8 @@ export const GraphQLFetchDataForm = (values) => {
                     tags:data.getlive.configurationOut.tags,
                     diapositivesFileLists:[],
                     fileListConfiguration:[],
+                    listChapter: [],
+                    listQuestion: [],
                 },
                 socialTools:[
                     {
