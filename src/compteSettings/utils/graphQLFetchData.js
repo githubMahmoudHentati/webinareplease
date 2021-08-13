@@ -71,7 +71,6 @@ export const GraphQLFetchData=(form)=> {
             }else if(data.changePassword.code === 400){
                 error_message_update_password()
             }
-
         }
     });
 
