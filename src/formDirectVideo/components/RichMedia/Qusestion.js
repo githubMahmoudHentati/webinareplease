@@ -59,14 +59,7 @@ export const Question = ({ listQuestion }) => {
         };
       }
       return item
-      /*return {
-        ...ele,
-        ...ele.choices.map((item, index) => {
-          if (index === secondKey) {
-            item.response = e.target.value;
-          }
-        })
-      };*/
+   
     });
     setFakeList(newList);
   };
@@ -146,8 +139,7 @@ export const Question = ({ listQuestion }) => {
     setFakeList(listQuestion);
   };
   const responseList = Inputs.choices;
-  console.log("list", listQuestion);
-  console.log("listFake", fakeList);
+ 
   return (
     <Row gutter={[0, 15]} className="Question">
       <Col span={24}>
@@ -260,7 +252,7 @@ export const Question = ({ listQuestion }) => {
                             : "1px solid rgba(255, 255, 255, 0.15)",
                       }}
                     >
-                      Annuler
+                      {t("ShowVideo.Cancel")}
                     </Button>
                     <Button
                       className={
@@ -283,7 +275,7 @@ export const Question = ({ listQuestion }) => {
                             : "1px solid rgba(255, 255, 255, 0.15)",
                       }}
                     >
-                      {"Modifier"}
+                      {t("formDirectVideo.Update")}
                     </Button>
                   </Col>
                 </Row>
@@ -385,7 +377,7 @@ export const Question = ({ listQuestion }) => {
                     : "1px solid rgba(255, 255, 255, 0.15)",
               }}
             >
-              Annuler
+              {t("ShowVideo.Cancel")}
             </Button>
             <Button
               className={
@@ -407,7 +399,7 @@ export const Question = ({ listQuestion }) => {
                     : "1px solid rgba(255, 255, 255, 0.15)",
               }}
             >
-              {"Ajouter"}
+              {t("ShowVideo.Add")}
             </Button>
           </Col>
         </Row>
