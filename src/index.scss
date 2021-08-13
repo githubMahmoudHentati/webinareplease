@@ -555,7 +555,7 @@ body{
     color: var(--white_color) !important;
 }
 .menuItem:focus{
-    background-color: var(--item-menu-background) !important;
+    background-color: var(--menu-background) !important;
 }
 .menuItem:focus .ant-menu-title-content{
     color: #007fcb  !important;
@@ -1906,6 +1906,13 @@ input:checked + .slider:before {
         top: 40px;
         padding: 2% 2%;
     }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    transition: background-color 500000s;
+    -webkit-text-fill-color: var(--white_color) !important;
 }
 
 .d-none{

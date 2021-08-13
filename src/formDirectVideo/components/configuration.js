@@ -43,6 +43,7 @@ export const Configuration = () => {
     const itemListRef = useRef(null);
     const {t, i18n} = useTranslation();
 
+
     const {
         configurationOnChangeByName,
         addSpeaker,
@@ -72,19 +73,16 @@ export const Configuration = () => {
         className: `custom-select`
     };
 
-
     useEffect(() => {
         itemListRef.current && setItemListHeight(itemListRef.current.offsetHeight)
     }, [itemListRef]);
 
     useEffect(async () => {
         console.log("testswitch", values.configuration.SpeakerList.length > 0)
-        values.configuration.SpeakerList.length > 1 &&
+        values.configuration.SpeakerList.length > 0 &&
         dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
     }, []);
-    console.log("testxxx", values.configuration.switchSpeaker)
 
-  
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
@@ -127,7 +125,8 @@ export const Configuration = () => {
                                             onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
                                     />
                             </Col>
-                            {values.configuration.SpeakerList && values.configuration.SpeakerList.length > 1 && values.configuration.switchSpeaker &&
+                            {console.table("values.configuration.SpeakerList",values.configuration.SpeakerList)}
+                            {values.configuration.SpeakerList && values.configuration.SpeakerList.length > 0 && values.configuration.switchSpeaker &&
                             <Col span={24}>
                                 <Row>
                                     <List
@@ -135,7 +134,7 @@ export const Configuration = () => {
                                         itemLayout="horizontal"
                                         dataSource={values.configuration.SpeakerList}
                                         renderItem={(item, indexItem) => (
-                                            <List.Item actions={indexItem != 0 ? [
+                                            <List.Item actions={indexItem != -1 ? [
                                                     <span key="list-loadmore-edit"><EditOutlined
                                                         onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem)}
                                                         style={{fontSize: "21px", color: darkMode === false}}/></span>,
@@ -148,28 +147,21 @@ export const Configuration = () => {
                                                 ] :
                                                 [<span style={{marginLeft: "48px"}}/>]}>
                                                 <List.Item.Meta
-                                                    className={indexItem != 0 && "col-item-list"}
-                                                    avatar={<Avatar
+                                                    className={indexItem != -1 && "col-item-list"}
+                                                    avatar={
+                                                        <Avatar
+                                                            className={'avatar-speaker'}
                                                         src={item.logoSpeaker[0] && item.logoSpeaker[0].thumbUrl ? item.logoSpeaker[0].thumbUrl :
                                                             "https://www.trustedclothes.com/blog/wp-content/uploads/2019/02/anonymous-person-221117.jpg"}/>}
                                                     title={
-                                                        <div ref={itemListRef}>
+                                                        <div ref={itemListRef} >
                                                             <Row>
-                                                                <Col xl={12} lg={14} md={18} sm={18} xs={20}>
-                                                                    <span style={{
-                                                                        textAlign: 'left',
-                                                                        fontSize: "17px",
-                                                                        fontFamily: "system-ui"
-                                                                    }}>
+                                                                <Col xl={12} lg={14} md={18} sm={18} xs={20} className={"list-title-participant"}>
+                                                                    <span>
                                                                         {item.name} {item.lastName}</span>
                                                                 </Col>
-                                                                <Col offset={1}>
-                                                                    <span style={{
-                                                                        textAlign: 'left',
-                                                                        fontSize: "15px",
-                                                                        fontFamily: "system-ui",
-                                                                        fontWeight: "lighter"
-                                                                    }}>{item.title}</span>
+                                                                <Col offset={1}  className={"list-title-participant-dis"}>
+                                                                  <span >{item.title}</span>
                                                                 </Col>
                                                             </Row>
                                                         </div>
@@ -185,7 +177,7 @@ export const Configuration = () => {
                                 {values.configuration.modalSpeaker &&
                                 <ModalSpeaker isVisible={values.configuration.modalSpeaker}/>
                                 }
-                                {values.configuration.switchSpeaker && values.configuration.SpeakerList.length > 1 &&
+                                {values.configuration.switchSpeaker && values.configuration.SpeakerList.length > 0 &&
                                 <Button onClick={addSpeaker} icon={
                                     <PlusSquareOutlined/>}>{t("formDirectVideo.AddParticipant")}</Button>
                                 }

@@ -88,7 +88,7 @@ const Hooks=()=>{
     //*****************Configuration************//
     const configurationOnChangeByName =(value,name)=>{
         dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
-        values.configuration.SpeakerList.length < 2 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
+        values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
     }
 
     const configurationOnChangeButton = (event) => {
@@ -101,7 +101,7 @@ const Hooks=()=>{
 
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
-        event.target.name="visibleVideo" && themesDisplayQueryAction()
+        event.target.value==="visibleVideo" && themesDisplayQueryAction()
     };
 
     const ConfigurationOnChangeSelect = (value,action,name) => {
@@ -133,9 +133,9 @@ const Hooks=()=>{
 
     const deleteSpeaker = async (id) => {
         await dispatch(setConfigurationDeleteSpeaker({id}))
-        console.log("enteeeer",values.configuration.SpeakerList.length<2)
-        values.configuration.SpeakerList.length===1&&dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
-        values.configuration.SpeakerList.length===1&&dispatch(setConfigurationInitialSpeaker({id:null,name:"",lastName:"",title:"",email:"",logoSpeaker: []}))
+        console.log("enteeeer",values.configuration.SpeakerList.length<1)
+        values.configuration.SpeakerList.length===0&&dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
+        values.configuration.SpeakerList.length===0&&dispatch(setConfigurationInitialSpeaker({id:null,name:"",lastName:"",title:"",email:"",logoSpeaker: []}))
     };
 
     const handleOk = () => {
@@ -152,7 +152,7 @@ const Hooks=()=>{
             onChangeSpeaker(value, key)
         }
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
-         values.configuration.SpeakerList.length<=1&&
+         values.configuration.SpeakerList.length<=0&&
         dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
         console.log("enteeeeeeeeeer")
     };
@@ -173,7 +173,7 @@ const Hooks=()=>{
     const handleSubmit =async ()=>{
         await dispatch(setConfigurationOnchange({
             configurationNameChange: "addSpeakerList", configurationValueChange:
-                values.configuration.SpeakerList.slice(1).map((el, i) => (
+                values.configuration.SpeakerList.map((el, i) => (
                     {
                         ...values.configuration.addSpeakerList,
                         name: el.name,
