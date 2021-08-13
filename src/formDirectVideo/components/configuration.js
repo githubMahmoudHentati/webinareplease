@@ -216,7 +216,7 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
                                 }}>{t("formDirectVideo.LiveMultimediaOptions")}</span>
                             </Col>
-                            <Col span={24} className={"col-forms"}>
+                            <Col span={24} >
                                 <Row gutter={[0, 15]}>
                                     <Col span={24}  className={"col-forms"}>
                                     <Checkbox onChange={configurationOnChangeButton}
