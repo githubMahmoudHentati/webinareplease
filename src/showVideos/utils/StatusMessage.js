@@ -23,6 +23,7 @@ export const StatusMessage = () => {
         const messageERROR = {
             400: i18n.t("ShowVideo.ErrorDelOne"),
             404:  i18n.t("ShowVideo.ErrorDelTwo"),
+            401:  i18n.t("ShowVideo.ErrorDelTwo"),
         }
         message.error({
             content: messageERROR[code],
