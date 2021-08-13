@@ -246,15 +246,15 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p></Checkbox>
                                     </Col>
-                                    {
-                                        values.configuration.attachments
-                                            ?
                                             <Col span={24}  className={""}>
-                                                <AttachedFile/>
+                                                {
+                                                    values.configuration.attachments
+                                                        ?
+                                                      <AttachedFile/>
+                                                        :
+                                                        null
+                                                }
                                             </Col>
-                                            :
-                                            null
-                                    }
                                 </Row>
                              </Col>
                         </Row>

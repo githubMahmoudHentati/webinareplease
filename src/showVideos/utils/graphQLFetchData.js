@@ -8,6 +8,7 @@ import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../../formDir
 import {setDirectSetting} from "../../utils/redux/actions";
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
 import moment from "moment";
+import {useEffect} from "react";
 
 
 const dateFormat = 'YYYY-MM-DD';
@@ -24,7 +25,7 @@ export const GraphQLFetchData=()=> {
     const {error_getLives}=StatusMessage()
 
     // use Query to fetch Data
-    const {loading:calendar_loadingNow, data: GetCalendarDataNow}
+    const {loading:calendar_loadingNow, refetch:refetchLives ,  data:dataLives}
         = useQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
@@ -62,6 +63,11 @@ export const GraphQLFetchData=()=> {
            console.log("dataDelete",data)
         }
     })
+
+    useEffect(()=>{
+        if(dataLives)
+        dispatch(setshowVideosActions(dataLives.getLives));
+    },[dataLives])
 
 
     return({

@@ -58,3 +58,9 @@ export function setExportLive(e){
         payload:e
     }
 }
+export function setFilter(e){
+    return{
+        type :"SET_FILTER",
+        payload:e
+    }
+}
