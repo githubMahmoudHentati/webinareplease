@@ -117,6 +117,7 @@ const Hooks=()=>{
     const onChangeSpeaker=(event,nameSpeaker)=>{
         const valueSpeaker=event && event.target ?  event.target.value : event
         dispatch(setConfigurationSpeaker({nameSpeaker,valueSpeaker}));
+
     }
 
     const addSpeaker = () => {
@@ -125,10 +126,10 @@ const Hooks=()=>{
     };
 
     const editSpeaker = (name,lastName,title,email,logoSpeaker,id) => {
+console.log("editid",id)
+        console.log("SpeakerListedit",values.configuration.SpeakerList)
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:true}));
-        dispatch(setConfigurationInitialSpeaker({id,name,lastName,title,email,logoSpeaker: logoSpeaker
-
-        }))
+        dispatch(setConfigurationInitialSpeaker({id:id,name,lastName,title,email,logoSpeaker: logoSpeaker}))
     };
 
     const deleteSpeaker = async (id) => {

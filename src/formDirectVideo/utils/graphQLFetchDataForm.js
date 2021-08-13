@@ -241,7 +241,7 @@ export const GraphQLFetchDataForm = (values) => {
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
             let speakerList=[...data.getlive.configurationOut.speakers]
-            await dispatch(setLiveInfo({
+            dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
                     fileList:[{
@@ -299,6 +299,8 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
+                    diapositivesFileLists:[],
+                    fileListConfiguration:[],
                 },
                 socialTools:[
                     {
@@ -333,7 +335,7 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                 ]
             }));
-            await dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
+           dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
         }
     })
 

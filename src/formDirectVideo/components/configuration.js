@@ -81,7 +81,7 @@ export const Configuration = () => {
         values.configuration.SpeakerList.length > 0 &&
         dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
     }, []);
-
+console.log("SpeakerList",values.configuration.SpeakerList)
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
@@ -124,8 +124,7 @@ export const Configuration = () => {
                                             onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
                                     />
                             </Col>
-                            {console.table("values.configuration.SpeakerList",values.configuration.SpeakerList)}
-                            {values.configuration.SpeakerList && values.configuration.SpeakerList.length > 0 && values.configuration.switchSpeaker &&
+                            {values.configuration.SpeakerList.length > 0 && values.configuration.switchSpeaker &&
                             <Col span={24}>
                                 <Row>
                                     <List
@@ -133,9 +132,9 @@ export const Configuration = () => {
                                         itemLayout="horizontal"
                                         dataSource={values.configuration.SpeakerList}
                                         renderItem={(item, indexItem) => (
-                                            <List.Item actions={indexItem != -1 ? [
+                                            <List.Item actions={[
                                                     <span key="list-loadmore-edit"><EditOutlined
-                                                        onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem)}
+                                                        onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem+1)}
                                                         style={{fontSize: "21px", color: darkMode === false}}/></span>,
                                                     <span key="list-loadmore-more"><MinusCircleOutlined
                                                         style={{
@@ -143,8 +142,7 @@ export const Configuration = () => {
                                                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"
                                                         }}
                                                         onClick={() => deleteSpeaker(indexItem)}/></span>
-                                                ] :
-                                                [<span style={{marginLeft: "48px"}}/>]}>
+                                                ]}>
                                                 <List.Item.Meta
                                                     className={indexItem != -1 && "col-item-list"}
                                                     avatar={
