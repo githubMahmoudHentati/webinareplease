@@ -79,7 +79,7 @@ export const GraphQLFetchDataForm = (values) => {
                             values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "Facebook Post",
                         link: values.general.liveLink,
-                        active: true,
+                        active: values.socialTools[0].switch,
                         planifications: values.socialTools[0].plan
                     },
                     {
@@ -88,7 +88,7 @@ export const GraphQLFetchDataForm = (values) => {
                             values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "Youtube Post",
                         link: values.general.liveLink,
-                        active: false,
+                        active: values.socialTools[1].switch,
                         planifications: values.socialTools[1].plan
                     },
                     {
@@ -97,7 +97,7 @@ export const GraphQLFetchDataForm = (values) => {
                             values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "LinkedIn Post",
                         link: values.general.liveLink,
-                        active: false,
+                        active: values.socialTools[2].switch,
                         planifications: values.socialTools[2].plan
                     }
                 ]
@@ -287,7 +287,6 @@ export const GraphQLFetchDataForm = (values) => {
                         }],email,title,
                         ...rest
                     })),
-
                     addSpeakerList:values.configuration.addSpeakerList,
                     speaker: values.configuration.speaker,
                     loadingSpeakerInfo:false,
