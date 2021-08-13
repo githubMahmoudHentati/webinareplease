@@ -5,36 +5,46 @@ import {
   DeleteOutlined,
   EditOutlined,
   CheckCircleOutlined,
-  MenuOutlined,
+  MenuOutlined,PlusCircleOutlined
 } from "@ant-design/icons";
-
+import {useDispatch, useSelector} from "react-redux";
+import {
+  setChapterList, removeChapter, editChapter
+} from "../../store/formDirectVideoAction";
 export const Chapter = () => {
-  const [listChapter, setChapters] = useState([]);
   const [newChap, setNewChap] = useState("");
   const [chapterToEdit, setChapterToEdit] = useState(null);
   const [localId, setLocalId] = useState(1);
+
+  const dispatch = useDispatch();
+  const {listChapter} = useSelector((state) => state.FormDirectVideoReducer.configuration)
+
   const handleChange = (e) => {
     e.persist();
     setNewChap(e.target.value);
   };
   const handleChangeToEdit = (e, chapter) => {
-    let oldArray = [...listChapter];
-    let objIndex = oldArray.findIndex((obj) => obj.id === chapter.id);
-    oldArray[objIndex].title = e.target.value;
-    setChapters(oldArray);
+    
+    dispatch(editChapter({event: e, chapter}))
   };
   const onRemove = (chapterId) => {
-    setChapters(listChapter.filter((ele) => ele.id !== chapterId));
+    dispatch(removeChapter({ chapterId }))
   };
 
   const onEdit = () => {
     setChapterToEdit(null);
   };
-
+const handleAdd = ()=>{
+  if (newChap.trim().length !== 0) {
+    setLocalId(localId + 1);
+    dispatch(setChapterList({ newChap, localId }))
+    setNewChap("");
+  }
+}
   return (
     <Row gutter={[0, 15]} className="Chapters">
       <Col span={24}>
-        {listChapter.map((ele, index) =>
+        {listChapter.length ? listChapter.map((ele, index) =>
           chapterToEdit !== ele ? (
             <div className="Chapters__list-item">
               <div className="Chapters__list-item__content">
@@ -53,18 +63,18 @@ export const Chapter = () => {
                       display: chapterToEdit !== null ? "none" : "block",
                     }}
                   >
-                    <EditOutlined />
+                    <EditOutlined className="list-item-icons" />
                   </div>
                 }
                 <div onClick={() => onRemove(ele.id)}>
-                  <DeleteOutlined />
+                  <DeleteOutlined className="list-item-icons" />
                 </div>
               </div>
             </div>
           ) : (
             <div className="Chapters__list-item">
               <div className="Chapters__list-item__contentToEdit">
-              <MenuOutlined />
+              <MenuOutlined className="list-item-icons" />
                 <span>
                   {index + 1}
                   {"."}
@@ -76,14 +86,19 @@ export const Chapter = () => {
                   className="Chapters__input-edit"
                   suffix={
                     <div onClick={onEdit}>
-                      <CheckCircleOutlined />
+                      <CheckCircleOutlined className="list-item-icons" />
                     </div>
                   }
+                  onKeyPress={(event) => {
+                    if (event.key === "Enter" && ele.title.trim().length !== 0) {
+                      onEdit()
+                    }
+                  }}
                 />
               </div>
             </div>
           )
-        )}
+        ) : <div className="Chapters__empty-list"><span>Pas de chapitres</span></div>}
       </Col>
       <Col span={24}>
         <Input
@@ -92,12 +107,13 @@ export const Chapter = () => {
           onKeyPress={(event) => {
             if (event.key === "Enter" && newChap.trim().length !== 0) {
               setLocalId(localId + 1);
-              setChapters([...listChapter, { title: newChap, id: localId }]);
+              dispatch(setChapterList({ newChap, localId }))
               setNewChap("");
             }
           }}
           placeholder="Nouveau chapitre"
           className="Chapters__input"
+          suffix={<PlusCircleOutlined onClick={handleAdd} />}
         />
       </Col>
     </Row>
