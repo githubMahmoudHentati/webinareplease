@@ -230,7 +230,29 @@
     "EndingDate": "Date de fin",
     "AddingPlanning": "Ajouter une planification",
     "AboutOneMn": "Environ 1mn",
-    "BaseWebinaire": "Principes de base du webinaire"
+    "BaseWebinaire": "Principes de base du webinaire",
+    "chaptersTab": {
+      "title": "Chapitres",
+      "emptyList": "Pas de chapitres",
+      "inputPlaceholder": "Nouveau chapitre"
+    },
+    "questionsTab":{
+      "title": "Question",
+      "emptyList": "Pas de questions",
+      "inputQuestionLabel": "Nouveau Question",
+      "addQuestion": "Ajouter une question",
+      "inputQuestionPlaceholder": "question",
+      "inputResponsePlaceholder": "Réponse",
+      "radioBox":{
+        "span1": "Oui-Non",
+        "span2": "Oui-Non-NSP",
+        "span3": "Choix simple",
+        "span4": "Choix multiple"
+      }
+    },
+    "slidesTab":{
+      "title": "Diapositives"
+    }
   },
   "PackagePayment": {
     "Packages": "Forfaits",

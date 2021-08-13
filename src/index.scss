@@ -96,7 +96,8 @@ body{
 
     --separator-color:rgba(0, 0, 0, 0.45);
 
-    --box-signup:#d9d9d9
+    --box-signup:#d9d9d9;
+    --bg-card-question: #f1f3f4;
 }
 :root.dark{
     --white_color:rgba(255, 255, 255, 0.85);
@@ -131,6 +132,7 @@ body{
     --color-tag-text-gray:rgba(255, 255, 255, 0.65);
 
     --separator-color:rgba(255, 255, 255, 0.85);
+    --bg-card-question: rgba(0, 0, 0, 0.04);
 
 }
 .disabled-row {
@@ -1477,8 +1479,9 @@ input:checked + .slider:before {
 
 .div_alert{
     position: fixed;
-    top:15%;
-    left: 40%;
+    top:4% !important;
+    left: 50%;
+    transform: translate(-50% , -50%);
     z-index: 2000;
 }
 .btn_annuler{
@@ -1703,6 +1706,7 @@ input:checked + .slider:before {
         width: 30%;
     }
     /***** Package Payement Tab *****/
+
 }
 
 /********** Smart Phone *********************/
@@ -1730,9 +1734,26 @@ input:checked + .slider:before {
         flex-direction: column;
         justify-content: space-between;
     }
+    .div_alert{
+        position: fixed;
+        top:6% !important;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        z-index: 2000;
+        width: 90% !important;
+    }
 
 }
 @media (max-width:575px) {
+    .div_alert{
+        position: fixed;
+        top:6% !important;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        z-index: 2000;
+        width: 90% !important;
+    }
+
     /***** Package Payement Tab *****/
     .div1_WebinairePlease{
         width: 100%;

@@ -242,7 +242,7 @@ function HeaderVideos() {
                   <div className="div_alert">
                       <Alert
                           id="ant-alert"
-                          message={conditions.elementSelected > 1 ? t("ShowVideo.DeleteSelectedItem") : t("ShowVideo.DeleteSelectedItems")}
+                          message={conditions.elementSelected > 1 ? t("ShowVideo.DeleteSelectedItems") : t("ShowVideo.DeleteSelectedItem")}
                           banner
                           action={
                               <Button disabled={conditions.rubDeleteItems===true}  className="btn_annuler" size="small" type="text" onClick={handleClickAnnulerAlert}>
