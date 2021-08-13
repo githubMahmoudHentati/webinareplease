@@ -442,7 +442,7 @@
 }
 
 .list-speaker{
-  max-height: 172px;
+  max-height:280px;
 }
 /*EmailsInvitations*/
 .custom-dropdown {
@@ -557,9 +557,28 @@
   font-size: 14px !important;
 }
 
-@media (max-width: 1161.1px) {
+@media (max-width: 1200px) {
   .list-speaker{
-    max-height: 257.33px !important;
+    max-height: 300px !important;
+  }
+  .list-title-participant-dis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    font-size: 17px;
+    font-family: system-ui;
+    font-weight: lighter;
+    max-width: 40%;
+  }
+
+
+  .list-title-participant{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    font-size: 17px;
+    font-family: system-ui;
+    max-width: 50%;
   }
 }
 
@@ -617,7 +636,11 @@
   width: 100%;
   height: 100%;
 }
-
+.row-copy-btn{
+  width: 100%;
+  display:inline-grid;
+  grid-template-columns: 82% 15%
+}
 @media screen and (max-width: 767px) {
   .ant-upload-drag{
     width: 100% !important;
@@ -666,6 +689,18 @@
     background-color: var(--menu-background) !important;
     color: var(--menu-color) !important;
     border-right:3px solid var(--menu-border) !important;
+  }
+  .list-title-participant-dis{
+    display:none
+
+  }
+  .list-title-participant{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    font-size: 17px;
+    font-family: system-ui;
+    max-width: 80%;
   }
 }
 
@@ -731,5 +766,19 @@
 .draggerAttachedFile .anticon-delete{
   color: white !important;
 }
-
+.list-title-participant-dis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  font-size: 17px;
+  font-family: system-ui;
+  font-weight: lighter
+}
+.list-title-participant{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  font-size: 17px;
+  font-family: system-ui;
+}
 

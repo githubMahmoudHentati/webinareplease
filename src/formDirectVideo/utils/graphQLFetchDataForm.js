@@ -15,6 +15,7 @@ import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import defaultImg from '../../assets/webinarplease-thumb.jpg';
 import {setDirectSetting} from "../../utils/redux/actions";
+import {StatusMessages} from "./StatusMessages";
 
 
 export const GraphQLFetchDataForm = (values) => {
@@ -23,12 +24,10 @@ export const GraphQLFetchDataForm = (values) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
-    console.log("values-graphQL",values)
-    console.log("idLive",idLive)
     let period = values.general.period? values.general.period.format('HH:mm:ss'):"";
     let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
     let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
-
+    let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
         data: dataCreate,
         loading: loading_EventCreated,
@@ -109,11 +108,12 @@ export const GraphQLFetchDataForm = (values) => {
                 history.push("/showVideos")
                 localStorage.removeItem('idLive')
                 dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
-                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
                 dispatch(setDirectSetting(0))
+                values.constraintData.leaveToast&& await success_submit(200)
 
-            } else if (data.addLive.code === 403) {
-
+            } else if (data.addLive.code === 400) {
+                values.constraintData.leaveToast && await error_submit(400)
             }
         }
     });
@@ -199,9 +199,10 @@ export const GraphQLFetchDataForm = (values) => {
                 history.push("/showVideos")
                 localStorage.removeItem('idLive')
                 dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
-                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
+                values.constraintData.leaveToast&&success_submit(200)
             } else if (data.editLive.code === "403") {
-
+                values.constraintData.leaveToast&&error_submit(400)
             }
         }
     });
@@ -215,10 +216,10 @@ export const GraphQLFetchDataForm = (values) => {
             if (data.generatePwd.code===200)
             {
 
-                await dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:data.generatePwd.pwd}));
+                 dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:data.generatePwd.pwd}));
                 // await values.form.setFieldsValue({...values.form.getFieldsValue(),securedPasswordOption:data.generatePwd.pwd})
                 // console.log("form.getFieldsValue()",values.form.getFieldsValue())
-                await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
+                 dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
             }
         }
     })
@@ -240,22 +241,8 @@ export const GraphQLFetchDataForm = (values) => {
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
             console.log("startDate",startDate,"startHour",startHour)
-            let speakerList=[{
-                id: 0,
-                name: "Nom ",
-                lastName: 'Prénom',
-                title: "Titre",
-                email: "",
-                logoSpeaker: [{
-                    id: 0,
-                    name: "Nom ",
-                    lastName: 'Prénom',
-                    title: "Titre",
-                    email: "",
-                    thumbUrl: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
-                }]
-            },...data.getlive.configurationOut.speakers]
-            await dispatch(setLiveInfo({
+            let speakerList=[...data.getlive.configurationOut.speakers]
+            dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
                     fileList:[{
@@ -313,6 +300,8 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
+                    diapositivesFileLists:[],
+                    fileListConfiguration:[],
                 },
                 socialTools:[
                     {
@@ -347,7 +336,7 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                 ]
             }));
-            await dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
+            dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
         }
     })
 

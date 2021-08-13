@@ -6,6 +6,7 @@ import {setConstraintDataOnchange, setGeneralInformationOnchange} from "../store
 import Hooks from "../utils/hooks";
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import ImgCrop from 'antd-img-crop';
 
 export const AvatarUpload = ({beforeUpload,visible, handleChange, darkMode}) => {
     const {t, i18n} = useTranslation();
@@ -15,6 +16,7 @@ export const AvatarUpload = ({beforeUpload,visible, handleChange, darkMode}) => 
     //***********************End of Upload***********************////////
     return (
         <>
+            <ImgCrop rotate fillColor modalTitle={t("CompteSettings.MoadalTitle")}>
         <Upload
             accept="image/jpeg,image/png"
             name="avatar"
@@ -26,6 +28,7 @@ export const AvatarUpload = ({beforeUpload,visible, handleChange, darkMode}) => 
         >
             <Button icon={<UploadOutlined />} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>{t("CompteSettings.ChangeAvatar")}</Button>
         </Upload>
+            </ImgCrop>
             <div style={{color:"red", fontSize:"0.75rem"}}>
                 {errorVisibility? t("CompteSettings.ErrorMsg"): ""}
             </div>

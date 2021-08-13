@@ -84,7 +84,7 @@ export const Generals =({})=>{
                         <Form.Item name="liveTitle" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input maxLength={128} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
+                            <Input maxLength={100} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -109,9 +109,7 @@ export const Generals =({})=>{
                         <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ShareLiveLink")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
-                        <Row justify={"space-between"}
-                             style={{width: '100%', display:"inline-grid",  gridTemplateColumns: "82% 15%"
-                        }} >
+                        <Row justify={"space-between"} className={"row-copy-btn"}>
                                     <Input disabled name="liveLink" onChange={generalOnChange}
                                            placeholder={'www.empreinte.com/titrelive'}
                                            value={values.general.liveLink+"/"+values.general.liveTitle}

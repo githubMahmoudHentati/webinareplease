@@ -84,7 +84,8 @@
     "Company": "Company",
     "MyAccount": "My Account",
     "InvalidPhone": "Phone number is invalid",
-    "EnterPhone": "Enter a phone number"
+    "EnterPhone": "Enter a phone number",
+    "MoadalTitle": "Edit image"
   },
   "ConfirmAccount": {
     "ConfirmationSend": " Confirmation e-mail sent!",

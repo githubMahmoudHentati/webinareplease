@@ -41,21 +41,7 @@ export const FormDirectConstraints = ()=>{
                 modalSpeaker: false,
                 switchSpeaker: false,
                 liveAutomaticArchiving: false,
-                SpeakerList: [{
-                    id: 0,
-                    name: "Nom ",
-                    lastName: 'Prénom',
-                    title: "Titre",
-                    email: "",
-                    logoSpeaker: [{
-                        id: 0,
-                        name: "Nom ",
-                        lastName: 'Prénom',
-                        title: "Titre",
-                        email: "",
-                        thumbUrl: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
-                    }]
-                }],
+                SpeakerList: [],
                 addSpeakerList:{},
                 speaker: {id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: []},
                 loadingSpeakerInfo:false,
@@ -69,6 +55,7 @@ export const FormDirectConstraints = ()=>{
                 themesList:[],
                 tags:[],
                 fileListConfiguration:[],
+                diapositivesFileLists:[]
             }
         )
     }
@@ -128,6 +115,7 @@ export const FormDirectConstraints = ()=>{
     const constraintData =()=>{
         return({
             loadingLiveFetchData:false,
+            loadingCreateEditLive:false,
             crudOption:"",
             leaveToast:true
         })

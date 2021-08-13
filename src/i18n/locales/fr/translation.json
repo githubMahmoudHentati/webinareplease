@@ -89,7 +89,8 @@
     "Company": "Société",
     "MyAccount": "Mon Compte",
     "InvalidPhone": "Numéro telephone est invalide",
-    "EnterPhone": "Saisir un numéro télephone"
+    "EnterPhone": "Saisir un numéro télephone",
+    "MoadalTitle": "Éditer l'image"
   },
   "ConfirmAccount": {
     "ConfirmationSend": "E-mail de confirmation envoyé !",
