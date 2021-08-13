@@ -13,12 +13,13 @@ import {
   removeQuestion,
   editQuestion,
 } from "../../store/formDirectVideoAction";
+import { useTranslation } from 'react-i18next';
 
 export const Question = ({ listQuestion }) => {
   const inputRef = React.useRef(null);
 
   const dispatch = useDispatch();
-
+  const {t} = useTranslation()
   const [fakeList, setFakeList] = useState([]);
   const [questionToEdit, setQuestionToEdit] = useState(null);
   const [localId, setLocalId] = useState(1);
@@ -201,10 +202,10 @@ export const Question = ({ listQuestion }) => {
                     onChange={(e) => handleChangeToEdit(e, index)}
                     value={ele.nsp}
                   >
-                    <Radio value={1}>Oui-Non</Radio>
-                    <Radio value={2}>Oui-Non-NSP</Radio>
-                    <Radio value={3}>Choix simple</Radio>
-                    <Radio value={4}>Choix multiple</Radio>
+                    <Radio value={1}>{t("formDirectVideo.questionsTab.radioBox.span1")}</Radio>
+                    <Radio value={2}>{t("formDirectVideo.questionsTab.radioBox.span2")}</Radio>
+                    <Radio value={3}>{t("formDirectVideo.questionsTab.radioBox.span3")}</Radio>
+                    <Radio value={4}>{t("formDirectVideo.questionsTab.radioBox.span4")}</Radio>
                   </Radio.Group>
                 </Col>
                 {ele.choices.map((resp, o) => (
@@ -218,7 +219,7 @@ export const Question = ({ listQuestion }) => {
                     <Input
                       value={resp.response}
                       onChange={(e) => handleChangeToEditResponse(e, index, o)}
-                      placeholder="Réponse"
+                      placeholder={t("formDirectVideo.questionsTab.inputResponsePlaceholder")}
                       className="Question__input"
                       name="response"
                       suffix={
@@ -291,7 +292,7 @@ export const Question = ({ listQuestion }) => {
           )
         ) : (
           <div className="Chapters__empty-list">
-            <span>Pas de questions</span>
+            <span>{t("formDirectVideo.questionsTab.emptyList")}</span>
           </div>
         )}
       </Col>
@@ -301,7 +302,7 @@ export const Question = ({ listQuestion }) => {
       >
         <div onClick={() => setIsAddingNewQuestion(true)}>
           {" "}
-          <PlusCircleOutlined /> <span>Ajouter une question</span>
+          <PlusCircleOutlined /> <span>{t("formDirectVideo.questionsTab.addQuestion")}</span>
         </div>
       </Col>
       <Row
@@ -311,12 +312,12 @@ export const Question = ({ listQuestion }) => {
       >
         {" "}
         <Col span={24}>
-          <div className="Question__input-label">nouveau question</div>
+          <div className="Question__input-label">{t("formDirectVideo.questionsTab.inputQuestionLabel")}</div>
           <Input
             ref={inputRef}
             value={Inputs && Inputs.question}
             onChange={handleChange}
-            placeholder="question"
+            placeholder={t("formDirectVideo.questionsTab.inputQuestionPlaceholder")}
             className="Question__input"
             name="question"
           />
@@ -327,10 +328,10 @@ export const Question = ({ listQuestion }) => {
             onChange={handleChange}
             value={Inputs && Inputs.nsp}
           >
-            <Radio value={1}>Oui-Non</Radio>
-            <Radio value={2}>Oui-Non-NSP</Radio>
-            <Radio value={3}>Choix simple</Radio>
-            <Radio value={4}>Choix multiple</Radio>
+           <Radio value={1}>{t("formDirectVideo.questionsTab.radioBox.span1")}</Radio>
+           <Radio value={2}>{t("formDirectVideo.questionsTab.radioBox.span2")}</Radio>
+           <Radio value={3}>{t("formDirectVideo.questionsTab.radioBox.span3")}</Radio>
+           <Radio value={4}>{t("formDirectVideo.questionsTab.radioBox.span4")}</Radio>
           </Radio.Group>
         </Col>
         {Inputs &&
@@ -343,7 +344,7 @@ export const Question = ({ listQuestion }) => {
               <Input
                 value={ele.response}
                 onChange={(e) => handleChangeResponse(e, o)}
-                placeholder="Réponse"
+                placeholder={t("formDirectVideo.questionsTab.inputResponsePlaceholder")}
                 className="Question__input"
                 name="response"
                 suffix={

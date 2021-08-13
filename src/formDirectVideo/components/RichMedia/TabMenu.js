@@ -3,17 +3,19 @@ import { SettingOutlined } from "@ant-design/icons";
 import { Slides } from "../RichMedia/Slides";
 import { Question } from "../RichMedia/Qusestion";
 import { Chapter } from "../RichMedia/Chapters";
+import { useTranslation } from 'react-i18next';
+
 const { TabPane } = Tabs;
 
 export const TabMenu = ({listQuestion}) => {
-  
+  const {t} =useTranslation()
   return (
     <Tabs defaultActiveKey="0" className="TabMenu">
       <TabPane
         tab={
           <span>
             <SettingOutlined />
-            chapitres
+            {t("formDirectVideo.chaptersTab.title")}
           </span>
         }
         key="0"
@@ -24,7 +26,7 @@ export const TabMenu = ({listQuestion}) => {
         tab={
           <span>
             <SettingOutlined />
-            question
+            {t("formDirectVideo.questionsTab.title")}
           </span>
         }
         key="1"
@@ -35,7 +37,7 @@ export const TabMenu = ({listQuestion}) => {
         tab={
           <span>
             <SettingOutlined />
-            diapositives
+            {t("formDirectVideo.slidesTab.title")}
           </span>
         }
         key="2"

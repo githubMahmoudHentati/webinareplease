@@ -11,11 +11,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   setChapterList, removeChapter, editChapter
 } from "../../store/formDirectVideoAction";
+import { useTranslation } from 'react-i18next';
+
 export const Chapter = () => {
   const [newChap, setNewChap] = useState("");
   const [chapterToEdit, setChapterToEdit] = useState(null);
   const [localId, setLocalId] = useState(1);
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const {listChapter} = useSelector((state) => state.FormDirectVideoReducer.configuration)
 
@@ -98,7 +100,7 @@ const handleAdd = ()=>{
               </div>
             </div>
           )
-        ) : <div className="Chapters__empty-list"><span>Pas de chapitres</span></div>}
+        ) : <div className="Chapters__empty-list"><span>{t("formDirectVideo.chaptersTab.emptyList")}</span></div>}
       </Col>
       <Col span={24}>
         <Input
@@ -111,7 +113,7 @@ const handleAdd = ()=>{
               setNewChap("");
             }
           }}
-          placeholder="Nouveau chapitre"
+          placeholder={t("formDirectVideo.chaptersTab.inputPlaceholder")}
           className="Chapters__input"
           suffix={<PlusCircleOutlined onClick={handleAdd} />}
         />
