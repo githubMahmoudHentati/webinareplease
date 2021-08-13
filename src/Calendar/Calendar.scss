@@ -42,79 +42,104 @@
   width: 100%;
   margin-top: 2%;
 }
-.events{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  &__list-tags{
-    width: 100% !important;
-    height: auto !important;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
-
-    &__tag{
-      background: transparent;
-      cursor: pointer;
-      .ant-badge-status{
-        width: 100%;
-        overflow: hidden;
-        font-size: 12px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+.event-list{
+  height:100%;
+  width:100%;
+  &__events{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height:100%;
+    width:100%;
+    &__list-tags{
+      width: 100% !important;
+      height: auto !important;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 20px;
+      &--year{
+        display: flex;
+        padding-bottom: 5px;
       }
-      &--blue{
-        background-color: var(--tag-blue-background);
-        border: 1px solid var(--tag-blue-border);
+      &__tag{
+        background: transparent;
+        cursor: pointer;
         .ant-badge-status{
-          color: var(--color-tag-text-blue);
-          &-text{
+          width: 100%;
+          overflow: hidden;
+          font-size: 12px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        &--blue{
+          background-color: var(--tag-blue-background);
+          border: 1px solid var(--tag-blue-border);
+          .ant-badge-status{
             color: var(--color-tag-text-blue);
+            &-text{
+              color: var(--color-tag-text-blue);
+            }
           }
         }
-      }
-      &--green{
-        background-color: var(--tag-green-background);
-        border: 1px solid var(--tag-green-border);
-        .ant-badge-status {
-          color: var(--color-tag-text-green);
-          &-text {
+        &--green{
+          background-color: var(--tag-green-background);
+          border: 1px solid var(--tag-green-border);
+          .ant-badge-status {
             color: var(--color-tag-text-green);
+            &-text {
+              color: var(--color-tag-text-green);
+            }
           }
         }
-      }
-      &--gray{
-        background-color: var(--tag-Geekblue-background);
-        border: 1px solid var(--tag-Geekblue-border);
-        .ant-badge-status {
-          color: var(--color-tag-text-gray);
-          .ant-badge-status-text{
+        &--gray{
+          background-color: var(--tag-Geekblue-background);
+          border: 1px solid var(--tag-Geekblue-border);
+          .ant-badge-status {
             color: var(--color-tag-text-gray);
+            .ant-badge-status-text{
+              color: var(--color-tag-text-gray);
+            }
           }
         }
-      }
-      @media screen and (max-width: 767px){
-        display: flex;
-        align-items: center;
-        width: 100%;
-      }
-      @media screen and (max-width: 340px){
-        padding: 0 2px;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        &--year{
+          width: 50%;
+          margin: 0;
+          .ant-badge-status{
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+          }
+          .ant-badge-status-dot{
+            display: none;
+          }
+        }
+        @media screen and (max-width: 767px){
+          display: flex;
+          align-items: center;
+          width: 100%;
+        }
+        @media screen and (max-width: 340px){
+          padding: 0 2px;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
   }
 }
+
 .hidden-calendar{
   display: none!important;
 }
 .notes-month {
   font-size: 28px;
   text-align: center;
+  height: 100%;
+  width: 100%;
 }
 .notes-month section {
   font-size: 28px;
