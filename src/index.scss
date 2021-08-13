@@ -96,7 +96,8 @@ body{
 
     --separator-color:rgba(0, 0, 0, 0.45);
 
-    --box-signup:#d9d9d9
+    --box-signup:#d9d9d9;
+    --bg-card-question: #f1f3f4;
 }
 :root.dark{
     --white_color:rgba(255, 255, 255, 0.85);
@@ -131,6 +132,7 @@ body{
     --color-tag-text-gray:rgba(255, 255, 255, 0.65);
 
     --separator-color:rgba(255, 255, 255, 0.85);
+    --bg-card-question: rgba(0, 0, 0, 0.04);
 
 }
 .disabled-row {
