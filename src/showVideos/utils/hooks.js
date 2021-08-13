@@ -5,7 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange, setExportLive
+    setShowVideoConstraintDataOnchange, setExportLive,setFilter
 } from "../store/showVideosAction"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -17,10 +17,15 @@ import {StatusMessage} from "./StatusMessage";
 import {useHistory} from "react-router-dom";
 import {setDirectSetting} from "../../utils/redux/actions";
 import moment from "moment";
-import {setFormDirectLiveConstraintDataOnchange,setLiveInfo} from "../../formDirectVideo/store/formDirectVideoAction"
+import {
+    setFilteredData,
+    setFormDirectLiveConstraintDataOnchange,
+    setLiveInfo
+} from "../../formDirectVideo/store/formDirectVideoAction"
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
 import {Reducer} from "../../utils/redux/reducer";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+import query from "apollo-cache-inmemory/lib/fragmentMatcherIntrospectionQuery";
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 
@@ -75,7 +80,7 @@ export  const Hooks=()=> {
     //query getVideosLinks for embed Code
     const [GETDATEVIDEO ,{error,refetch,data: GetlIVES}]
         = useLazyQuery(graphQL_shema().Get_Lives,{
-            fetchPolicy:  "network-only",
+            fetchPolicy:  "cache-and-network",
             variables: { input : {
                     "limit": paginationProps.pageSize,
                     "offset": (paginationProps.current-1)*10,
@@ -102,6 +107,18 @@ export  const Hooks=()=> {
     })
     // mutation delete lang from table of event
     const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items,{
+        refetchQueries:() => [{ query: graphQL_shema().Get_Lives, variables: { input : {
+                    "limit": paginationProps.pageSize,
+                    "offset": (paginationProps.current-1)*10,
+                    "order_dir": paginationProps.order,
+                    "order_column": paginationProps.columnKey,
+                    "search_word":values.search,
+                    "date":  values.date && values.date.length ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
+                    "status":values.type
+                },
+
+            },
+        }],
         variables : {idLive: idLiveToDelete},
         context: { clientName: "second" },
         onCompleted: (data)=>{
@@ -111,6 +128,8 @@ export  const Hooks=()=> {
                 error_Delete(400)
             }else if(data.deleteLive.code === "404"){
                 error_Delete(404)
+            }else if(data.deleteLive.code === "401"){
+                error_Delete(401)
             }
         }
     })
@@ -303,7 +322,6 @@ export  const Hooks=()=> {
 
     }
     /*Delete Rows*/
-
     const handleClickDeleteIcon = async() =>{
         let filterListVid = [];
 
@@ -317,10 +335,11 @@ export  const Hooks=()=> {
         itemsRunAPI = setTimeout(async()=>{
        await DeleteItemsMutation().then(async(res)=> {
            const {data: {deleteLive}} = await res
-           let notDeletedItems =deleteLive.undeleteditems || []
+           let deletedItems =deleteLive.deleteditems || []
+           let notDeletedItems = deleteLive.undeleteditems || []
            filterListVid = DataVideos.data
           .filter((item) => {
-            return (notDeletedItems).includes(item.id);
+            return !(deletedItems).includes(item.id);
           })
            if(filterListVid.length === 0)
         { await dispatch(setPaginationProps({
@@ -335,31 +354,50 @@ export  const Hooks=()=> {
 
         dispatch(setLoadingDeleteShowVideo({LoadingDeleteName:"loadingDelete",LoadingDeleteValue:true}));
 
-
-
     }
 
     // Delete One Row
     //fonction pour supprimer un live
     const handleDeleteOneRow =  async(liveId) =>{
-
+        let filterListVid = [];
+        let indexes = paginationProps.id
         // dispatch show Alert
         idLiveToDelete.push(liveId)
+
         dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:false}));
         setTimeout(()=>{
             dispatch(setshowDivsConditions({showDivsConditionsName:"clickDeleteIcon",showDivsConditionsValue:true}));
         },3000)
 
         // Time out to Run API Delete
-        setTimeout(()=>{
-            DeleteItemMutation().then(()=> {
-                //do s.th
-                //GETDATEVIDEO();
+        itemsRunAPI = setTimeout(async()=>{
+            await DeleteItemMutation().then(async(res)=> {
+                const {data: {deleteLive}} = await res
+                let deletedItems =deleteLive.deleteditems || []
 
+                filterListVid = DataVideos.data
+                    .filter((item) => {
+                        return !(deletedItems).includes(item.id);
+                    })
+               let notDeleted = paginationProps.id.filter(
+                   (item) =>{
+                       return !deletedItems.includes(item)
+                   }
+               )
+
+                if(filterListVid.length === 0)
+                { await dispatch(setPaginationProps({
+                    PaginationPropsNameChange: "current",
+                    PaginationPropsValueChange: paginationProps.current !== 1 ? paginationProps.current - 1 : 1 ,
+                }))}
+                await dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[...notDeleted]}));
             })
+
         },3000)
 
+
     }
+    // Click Dropdown menu
     const handleClickDropdowMenu = ( e, liveId )=>{
         // dispatch id list Video
         e.preventDefault();
@@ -406,7 +444,7 @@ export  const Hooks=()=> {
     }
 
     // fonction handleInfos
-    const handleInfos =()=>{
+    const handleInfos = async ()=>{
         GETINFOSlIVES()
         setTimeout(()=>{
             dispatch(setInfosLive({infosLivesName:"visible",infosLivesValue:true}));
