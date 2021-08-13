@@ -7,11 +7,19 @@ import {
   MenuOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setQuestionList,
+  removeQuestion,
+  editQuestion,
+} from "../../store/formDirectVideoAction";
 
-export const Question = () => {
-  const [listQuestion, setQuestions] = useState([]);
-  const [listQuestionFake, setQuestionsFake] = useState([]);
+export const Question = ({ listQuestion }) => {
+  const inputRef = React.useRef(null);
+
+  const dispatch = useDispatch();
+
+  const [fakeList, setFakeList] = useState([]);
   const [questionToEdit, setQuestionToEdit] = useState(null);
   const [localId, setLocalId] = useState(1);
   const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false);
@@ -21,6 +29,12 @@ export const Question = () => {
     question: "",
   });
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
+  useEffect(() => {
+    setFakeList(listQuestion);
+  }, []);
+  useEffect(() => {
+    if (inputRef && isAddingNewQuestion) inputRef.current.focus();
+  }, [isAddingNewQuestion]);
 
   const handleChange = (e) => {
     setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
@@ -29,206 +43,256 @@ export const Question = () => {
     Inputs.choices[key].response = e.target.value;
     setInputs({ ...Inputs });
   };
+  const handleChangeToEditResponse = (e, firstKey, secondKey) => {
+    const newList = fakeList.map((item, index) => {
+      if (index === firstKey) {
+        return {
+          ...item,
+          choices: item.choices.map((resp, o) => {
+              return {
+                ...resp,
+                response: o === secondKey ? e.target.value : resp.response,
+              };
+            
+          }),
+        };
+      }
+      return item
+      /*return {
+        ...ele,
+        ...ele.choices.map((item, index) => {
+          if (index === secondKey) {
+            item.response = e.target.value;
+          }
+        })
+      };*/
+    });
+    setFakeList(newList);
+  };
   const handleChangeToEdit = (e, firstKey, secondKey) => {
-    let oldArray = [...listQuestionFake];
-    if (e.target.name === "question")
-      oldArray[firstKey].question = e.target.value;
-    if (e.target.name === "nsp") oldArray[firstKey].nsp = e.target.value;
-    if (e.target.name === "response")
-      oldArray[firstKey].choices[secondKey].response = e.target.value;
-    setQuestionsFake(oldArray);
+    const newList = fakeList.map((item, index) => {
+      if (index === firstKey) {
+        if (e.target.name === "nsp") {
+          return {
+            ...item,
+            nsp: e.target.value,
+          };
+        }
+        if (e.target.name === "question") {
+          return {
+            ...item,
+            question: e.target.value,
+          };
+        }
+      }
+
+      return item;
+    });
+
+    setFakeList(newList);
   };
   const onRemove = (questionId) => {
-    setQuestions(listQuestion.filter((ele) => ele.id !== questionId));
+    dispatch(removeQuestion(questionId));
   };
 
   const handleAddQuestion = () => {
     const { nsp, question, choices } = Inputs;
     setLocalId(localId + 1);
-    setQuestions([...listQuestion, { question, id: localId, choices, nsp }]);
+    dispatch(setQuestionList({ nsp, question, choices, questionId: localId }));
+    setFakeList([...fakeList, { nsp, question, choices, questionId: localId }]);
     setInputs({ nsp: 1, choices: [{ response: "" }], question: "" });
     setIsAddingNewQuestion(false);
   };
 
-  const addNewResponse = () => {
-    setInputs((old) => ({
-      ...old,
-      choices: [...old.choices, { response: "" }],
-    }));
+  const addNewResponse = (firstKey, secondKey, attr) => {
+    if (attr === "edit") {
+      let oldArray = [...fakeList];
+      oldArray[firstKey].choices.push({ response: "" });
+      setFakeList(oldArray);
+    } else {
+      setInputs((old) => ({
+        ...old,
+        choices: [...old.choices, { response: "" }],
+      }));
+    }
   };
 
-  const removeResponse = (resp, attr) => {
+  const removeResponse = (firstKey, resp, attr) => {
     //to do
-    let filtered = []
-    if(attr == 'edit') {
-       filtered = listQuestion.choices.filter((ele) => ele !== resp);
-       setQuestions((old) => ({
+    let filtered = [...fakeList];
+
+    if (attr === "edit") {
+      filtered = filtered[firstKey].choices.filter((ele) => ele !== resp);
+      setFakeList((old) => ({
         ...old,
         choices: filtered,
       }));
-
-    }
-    else {
+    } else {
       filtered = Inputs.choices.filter((ele) => ele !== resp);
       setInputs((old) => ({
         ...old,
         choices: filtered,
       }));
     }
-     
   };
   const handleEditQuestion = () => {
     setQuestionToEdit(null);
-    setQuestions(listQuestionFake);
+    dispatch(editQuestion({ editedListQuestion: [...fakeList] }));
   };
 
-  const handleFakeData = (index) => {
-    setQuestionToEdit(index);
-    setQuestionsFake(listQuestion);
-  };
   const handleAbortEdit = () => {
     setQuestionToEdit(null);
-    setQuestions(listQuestion);
+    setFakeList(listQuestion);
   };
   const responseList = Inputs.choices;
-  console.log('list', listQuestion)
-  console.log('listfake', listQuestionFake)
-
+  console.log("list", listQuestion);
+  console.log("listFake", fakeList);
   return (
     <Row gutter={[0, 15]} className="Question">
       <Col span={24}>
-        {listQuestion.map((ele, index) =>
-          questionToEdit !== index ? (
-            <div className="Question__list-item">
-              <div className="Question__list-item__content">
-                <MenuOutlined />
-                <span>
-                  {index + 1}
-                  {"."}
-                </span>
-                {ele.question}
-              </div>
-              <div className="Question__list-item__actions">
-                {
-                  <div
-                    onClick={() => handleFakeData(index)}
-                    style={{
-                      display: questionToEdit !== null ? "none" : "block",
-                    }}
-                  >
-                    <EditOutlined />
+        {fakeList.length ? (
+          fakeList.map((ele, index) =>
+            questionToEdit !== index ? (
+              <div className="Question__list-item">
+                <div className="Question__list-item__content">
+                  <MenuOutlined />
+                  <span>
+                    {index + 1}
+                    {"."}
+                  </span>
+                  {ele.question}
+                </div>
+                <div className="Question__list-item__actions">
+                  {
+                    <div
+                      onClick={() => setQuestionToEdit(index)}
+                      style={{
+                        display: questionToEdit !== null ? "none" : "block",
+                      }}
+                    >
+                      <EditOutlined className="list-item-icons" />
+                    </div>
+                  }
+                  <div onClick={() => onRemove(ele.id)}>
+                    <DeleteOutlined className="list-item-icons" />
                   </div>
-                }
-                <div onClick={() => onRemove(ele.id)}>
-                  <DeleteOutlined />
                 </div>
               </div>
-            </div>
-          ) : (
-            <Row className="Question__new-question" gutter={[0, 15]}>
-              {" "}
-              <Col span={24} className="Question__custom-column">
-                <MenuOutlined />
-                <span>
-                  {index + 1}
-                  {"."}
-                </span>
-                <Input
-                  value={ele.question}
-                  onChange={(e) => handleChangeToEdit(e, index)}
-                  placeholder="question"
-                  className="Question__input"
-                  name="question"
-                />
-              </Col>
-              <Col span={24}>
-                <Radio.Group
-                  name="nsp"
-                  onChange={(e) => handleChangeToEdit(e, index)}
-                  value={ele.nsp}
-                >
-                  <Radio value={1}>Oui-Non</Radio>
-                  <Radio value={2}>Oui-Non-NSP</Radio>
-                  <Radio value={3}>Choix simple</Radio>
-                  <Radio value={4}>Choix multiple</Radio>
-                </Radio.Group>
-              </Col>
-              {ele.choices.map((resp, o) => (
-                <Col
-                  key={o}
-                  span={24}
-                  style={{
-                    display: ele.nsp > 2 ? "flex" : "none",
-                  }}
-                >
+            ) : (
+              <Row className="Question__new-question" gutter={[0, 15]}>
+                {" "}
+                <Col span={24} className="Question__custom-column">
+                  <MenuOutlined />
+                  <span>
+                    {index + 1}
+                    {"."}
+                  </span>
                   <Input
-                    value={resp.response}
-                    onChange={(e) => handleChangeToEdit(e, index, o)}
-                    placeholder="Réponse"
+                    value={ele.question}
+                    onChange={(e) => handleChangeToEdit(e, index)}
+                    placeholder="question"
                     className="Question__input"
-                    name="response"
-                    suffix={
-                      responseList.length === o + 1 ? (
-                        <PlusCircleOutlined onClick={addNewResponse} />
-                      ) : (
-                        <DeleteOutlined onClick={() => removeResponse(resp, 'edit')} />
-                      )
-                    }
+                    name="question"
                   />
                 </Col>
-              ))}
-              <Row
-                className="Question__actions"
-                gutter={[0, 15]}
-                justify="end"
-                style={{ width: "100%" }}
-              >
-                <Col>
-                  <Button
-                    onClick={handleAbortEdit}
-                    className="Question__actions-abort"
-                    style={{
-                      fontFamily: "SF Pro Display",
-                      fontWeight: "normal",
-                      color:
-                        darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                      background:
-                        darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                      border:
-                        darkMode === false
-                          ? ""
-                          : "1px solid rgba(255, 255, 255, 0.15)",
-                    }}
+                <Col span={24}>
+                  <Radio.Group
+                    name="nsp"
+                    onChange={(e) => handleChangeToEdit(e, index)}
+                    value={ele.nsp}
                   >
-                    Annuler
-                  </Button>
-                  <Button
-                    className={
-                      ele.question.trim().length !== 0
-                        ? ""
-                        : "Question__actions-disabled"
-                    }
-                    onClick={handleEditQuestion}
-                    type={"primary"}
-                    style={{
-                      fontFamily: "SF Pro Display",
-                      fontWeight: "normal",
-                      color:
-                        darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                      background:
-                        darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                      border:
-                        darkMode === false
-                          ? ""
-                          : "1px solid rgba(255, 255, 255, 0.15)",
-                    }}
-                  >
-                    {"Modifier"}
-                  </Button>
+                    <Radio value={1}>Oui-Non</Radio>
+                    <Radio value={2}>Oui-Non-NSP</Radio>
+                    <Radio value={3}>Choix simple</Radio>
+                    <Radio value={4}>Choix multiple</Radio>
+                  </Radio.Group>
                 </Col>
+                {ele.choices.map((resp, o) => (
+                  <Col
+                    key={o}
+                    span={24}
+                    style={{
+                      display: ele.nsp > 2 ? "flex" : "none",
+                    }}
+                  >
+                    <Input
+                      value={resp.response}
+                      onChange={(e) => handleChangeToEditResponse(e, index, o)}
+                      placeholder="Réponse"
+                      className="Question__input"
+                      name="response"
+                      suffix={
+                        ele.choices.length === o + 1 ? (
+                          <PlusCircleOutlined
+                            onClick={() => addNewResponse(index, o, "edit")}
+                          />
+                        ) : (
+                          <DeleteOutlined
+                            className="list-item-icons"
+                            onClick={() => removeResponse(index, resp, "edit")}
+                          />
+                        )
+                      }
+                    />
+                  </Col>
+                ))}
+                <Row
+                  className="Question__actions"
+                  gutter={[0, 15]}
+                  justify="end"
+                  style={{ width: "100%" }}
+                >
+                  <Col>
+                    <Button
+                      onClick={handleAbortEdit}
+                      className="Question__actions-abort"
+                      style={{
+                        fontFamily: "SF Pro Display",
+                        fontWeight: "normal",
+                        color:
+                          darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
+                        background:
+                          darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
+                        border:
+                          darkMode === false
+                            ? ""
+                            : "1px solid rgba(255, 255, 255, 0.15)",
+                      }}
+                    >
+                      Annuler
+                    </Button>
+                    <Button
+                      className={
+                        ele.question.trim().length !== 0
+                          ? ""
+                          : "Question__actions-disabled"
+                      }
+                      onClick={handleEditQuestion}
+                      type={"primary"}
+                      style={{
+                        fontFamily: "SF Pro Display",
+                        fontWeight: "normal",
+                        color:
+                          darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
+                        background:
+                          darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
+                        border:
+                          darkMode === false
+                            ? ""
+                            : "1px solid rgba(255, 255, 255, 0.15)",
+                      }}
+                    >
+                      {"Modifier"}
+                    </Button>
+                  </Col>
+                </Row>
               </Row>
-            </Row>
+            )
           )
+        ) : (
+          <div className="Chapters__empty-list">
+            <span>Pas de questions</span>
+          </div>
         )}
       </Col>
       <Col
@@ -249,6 +313,7 @@ export const Question = () => {
         <Col span={24}>
           <div className="Question__input-label">nouveau question</div>
           <Input
+            ref={inputRef}
             value={Inputs && Inputs.question}
             onChange={handleChange}
             placeholder="question"
@@ -283,9 +348,15 @@ export const Question = () => {
                 name="response"
                 suffix={
                   responseList.length === o + 1 ? (
-                    <PlusCircleOutlined onClick={addNewResponse} />
+                    <PlusCircleOutlined
+                      className="list-item-icons"
+                      onClick={addNewResponse}
+                    />
                   ) : (
-                    <DeleteOutlined onClick={() => removeResponse(ele)} />
+                    <DeleteOutlined
+                      className="list-item-icons"
+                      onClick={() => removeResponse(ele)}
+                    />
                   )
                 }
               />

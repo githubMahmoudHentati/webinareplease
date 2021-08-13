@@ -69,9 +69,9 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
         case "SET_ConfigurationSpeakerList":
             const {id, name, lastName, title, email,logoSpeaker} = action.payload
             console.log("logoSpeaker",logoSpeaker)
-            let newArr = state.configuration.SpeakerList.map((item, index) => (id === index ? {
+            console.log("bool",id)
+            let newArr = state.configuration.SpeakerList.map((item, index) => (id === index+1 ? {
                     ...item,
-                    id: id,
                     name: name,
                     lastName: lastName,
                     title: title,
@@ -80,7 +80,8 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                     } : item
             ))
             console.log("newArr",newArr)
-            const configurationSpeakerListObj=!id ?{...state.configuration,SpeakerList: [...state.configuration.SpeakerList, {...action.payload, id: state.configuration.SpeakerList.length }]}:{...state.configuration,SpeakerList:newArr}
+            console.log("newArridone",state.configuration.SpeakerList)
+            const configurationSpeakerListObj=!id ?{...state.configuration,SpeakerList: [...state.configuration.SpeakerList, {...action.payload, id: state.configuration.SpeakerList.length+1 }]}:{...state.configuration,SpeakerList:newArr}
 
             return (
                 {
@@ -234,6 +235,47 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             ...state,
             loading:action.payload
         }
+
+        case "SET_CHAPTER_LIST":
+            const {newChap, localId}=action.payload;
+            return{
+                ...state, configuration: {...state.configuration,listChapter:[...state.configuration.listChapter,{title: newChap, id: localId }]}
+
+            }
+            case "REMOVE_CHAPTER":
+                const {chapterId}=action.payload
+                let filtered = state.configuration.listChapter.filter((ele) => ele.id !== chapterId)
+                return{
+                    ...state, configuration: {...state.configuration,listChapter: filtered}
+
+                }
+            case "EDIT_CHAPTER":
+                const {event, chapter}=action.payload
+                let oldArray = [...state.configuration.listChapter];
+                let objIndex = oldArray.findIndex((obj) => obj.id === chapter.id);
+                oldArray[objIndex].title = event.target.value;
+                return{
+                   ...state, configuration: {...state.configuration, listChapter: oldArray}
+                }
+
+            case "SET_QUESTION_LIST":
+                    const {nsp, question, choices, questionId}=action.payload;
+                    return{
+                        ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, choices, id: questionId}]}
+        
+                    }
+            case "REMOVE_QUESTION":
+                        let filteredListQuestion = state.configuration.listQuestion.filter((ele) => ele.id !== action.payload)
+                        return{
+                            ...state, configuration: {...state.configuration,listQuestion: filteredListQuestion}
+        
+                        }
+            case "EDIT_QUESTION":
+                        const { editedListQuestion }=action.payload
+                        
+                        return{
+                           ...state, configuration: {...state.configuration, listQuestion: editedListQuestion}
+                        }
 
         default:{
             return state

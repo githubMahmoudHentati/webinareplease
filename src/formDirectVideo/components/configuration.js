@@ -37,7 +37,9 @@ export const Configuration = () => {
     const dispatch = useDispatch()
     const [itemListHeight, setItemListHeight] = useState(null);
     const values = useSelector((state) => state.FormDirectVideoReducer)
-
+    const { listQuestion } = useSelector(
+        (state) => state.FormDirectVideoReducer.configuration
+      );
     const itemListRef = useRef(null);
     const {t, i18n} = useTranslation();
 
@@ -50,8 +52,7 @@ export const Configuration = () => {
         configurationOnChange,
         configurationOnChangeButton,
         ConfigurationOnChangeSelect,
-        displayThemes,
-        getFirstCharacter
+        displayThemes
     } = Hooks()
 
     console.log("values", values)
@@ -81,7 +82,7 @@ export const Configuration = () => {
         values.configuration.SpeakerList.length > 0 &&
         dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
     }, []);
-
+console.log("SpeakerList",values.configuration.SpeakerList)
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
@@ -124,8 +125,7 @@ export const Configuration = () => {
                                             onChange={(value) => configurationOnChangeByName(value, "switchSpeaker")}
                                     />
                             </Col>
-                            {console.table("values.configuration.SpeakerList",values.configuration.SpeakerList)}
-                            {values.configuration.SpeakerList && values.configuration.SpeakerList.length > 0 && values.configuration.switchSpeaker &&
+                            {values.configuration.SpeakerList.length > 0 && values.configuration.switchSpeaker &&
                             <Col span={24}>
                                 <Row>
                                     <List
@@ -133,9 +133,9 @@ export const Configuration = () => {
                                         itemLayout="horizontal"
                                         dataSource={values.configuration.SpeakerList}
                                         renderItem={(item, indexItem) => (
-                                            <List.Item actions={indexItem != -1 ? [
+                                            <List.Item actions={[
                                                     <span key="list-loadmore-edit"><EditOutlined
-                                                        onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem)}
+                                                        onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem+1)}
                                                         style={{fontSize: "21px", color: darkMode === false}}/></span>,
                                                     <span key="list-loadmore-more"><MinusCircleOutlined
                                                         style={{
@@ -143,15 +143,14 @@ export const Configuration = () => {
                                                             color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"
                                                         }}
                                                         onClick={() => deleteSpeaker(indexItem)}/></span>
-                                                ] :
-                                                [<span style={{marginLeft: "48px"}}/>]}>
+                                                ]}>
                                                 <List.Item.Meta
                                                     className={indexItem != -1 && "col-item-list"}
                                                     avatar={
                                                         <Avatar
                                                             className={'avatar-speaker'}
                                                         src={item.logoSpeaker[0] && item.logoSpeaker[0].thumbUrl ? item.logoSpeaker[0].thumbUrl :
-                                                            '' }> {getFirstCharacter(item)}</Avatar>}
+                                                            "https://www.trustedclothes.com/blog/wp-content/uploads/2019/02/anonymous-person-221117.jpg"}/>}
                                                     title={
                                                         <div ref={itemListRef} >
                                                             <Row>
@@ -218,22 +217,22 @@ export const Configuration = () => {
                                 }}>{t("formDirectVideo.LiveMultimediaOptions")}</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <Row>
+                                <Row gutter={[0, 15]}>
                                     <Col span={24}  className={"col-forms"}>
                                     <Checkbox onChange={configurationOnChangeButton}
                                           name="richeMediaDiffusion"
                                           value="richeMediaDiffusion"
                                           style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
                                           checked={values.configuration.richeMediaDiffusion}>
-                                            <p>{t("formDirectVideo.Richmedia")}
+                                            <p style={{margin: 0}}>{t("formDirectVideo.Richmedia")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p>
                                         </Checkbox>
                                         <br/>
                                     </Col>
-                                    <Col span={24} className="bordered-col">
-                                        <TabMenu />
+                                    <Col span={24} className={values.configuration.richeMediaDiffusion ? "bordered-col d-block" : "d-none"}>
+                                        <TabMenu listQuestion={listQuestion} />
                                     </Col>
                                     <Col span={24}  className={"col-forms"}>
 
@@ -242,7 +241,7 @@ export const Configuration = () => {
                                                   value="attachments"
                                                   style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
                                                   checked={values.configuration.attachments}>
-                                            <p>{t("formDirectVideo.AttachedFiles")}
+                                            <p style={{margin: 0}}>{t("formDirectVideo.AttachedFiles")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p></Checkbox>
