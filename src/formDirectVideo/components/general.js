@@ -229,9 +229,7 @@ export const Generals =({})=>{
                             }
                             {values.general.directAccessMode === "liveAccess" &&
                             <Col offset={3} span={21}>
-                                <Form.Item name="securedPasswordOption"  className={"form-item-style"}
-                                >
-                                <Checkbox onChange={generalOnChangeButton} value="securedPasswordOption" name="securedPasswordOption" style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.GenSecurePassword")}</Checkbox></Form.Item>
+                                <Checkbox checked={values.general.securedPasswordOption} onChange={generalOnChangeButton} value="securedPasswordOption" name="securedPasswordOption" style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.GenSecurePassword")}</Checkbox>
                             </Col>
                             }
                         </Row>
