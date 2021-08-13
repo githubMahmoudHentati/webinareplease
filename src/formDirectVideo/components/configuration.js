@@ -37,7 +37,9 @@ export const Configuration = () => {
     const dispatch = useDispatch()
     const [itemListHeight, setItemListHeight] = useState(null);
     const values = useSelector((state) => state.FormDirectVideoReducer)
-
+    const { listQuestion } = useSelector(
+        (state) => state.FormDirectVideoReducer.configuration
+      );
     const itemListRef = useRef(null);
     const {t, i18n} = useTranslation();
 
@@ -49,8 +51,7 @@ export const Configuration = () => {
         configurationOnChange,
         configurationOnChangeButton,
         ConfigurationOnChangeSelect,
-        displayThemes,
-        getFirstCharacter
+        displayThemes
     } = Hooks()
 
     console.log("values", values)
@@ -148,11 +149,9 @@ export const Configuration = () => {
                                                 [<span style={{marginLeft: "48px"}}/>]}>
                                                 <List.Item.Meta
                                                     className={indexItem != 0 && "col-item-list"}
-                                                    avatar={
-                                                        <Avatar
-                                                            className={'avatar-speaker'}
+                                                    avatar={<Avatar
                                                         src={item.logoSpeaker[0] && item.logoSpeaker[0].thumbUrl ? item.logoSpeaker[0].thumbUrl :
-                                                            '' }> {getFirstCharacter(item)}</Avatar>}
+                                                            "https://www.trustedclothes.com/blog/wp-content/uploads/2019/02/anonymous-person-221117.jpg"}/>}
                                                     title={
                                                         <div ref={itemListRef}>
                                                             <Row>
@@ -228,22 +227,22 @@ export const Configuration = () => {
                                 }}>{t("formDirectVideo.LiveMultimediaOptions")}</span>
                             </Col>
                             <Col span={24} className={"col-forms"}>
-                                <Row>
+                                <Row gutter={[0, 15]}>
                                     <Col span={24}  className={"col-forms"}>
                                     <Checkbox onChange={configurationOnChangeButton}
                                           name="richeMediaDiffusion"
                                           value="richeMediaDiffusion"
                                           style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
                                           checked={values.configuration.richeMediaDiffusion}>
-                                            <p>{t("formDirectVideo.Richmedia")}
+                                            <p style={{margin: 0}}>{t("formDirectVideo.Richmedia")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p>
                                         </Checkbox>
                                         <br/>
                                     </Col>
-                                    <Col span={24} className="bordered-col">
-                                        <TabMenu />
+                                    <Col span={24} className={values.configuration.richeMediaDiffusion ? "bordered-col d-block" : "d-none"}>
+                                        <TabMenu listQuestion={listQuestion} />
                                     </Col>
                                     <Col span={24}  className={"col-forms"}>
 
@@ -252,7 +251,7 @@ export const Configuration = () => {
                                                   value="attachments"
                                                   style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
                                                   checked={values.configuration.attachments}>
-                                            <p>{t("formDirectVideo.AttachedFiles")}
+                                            <p style={{margin: 0}}>{t("formDirectVideo.AttachedFiles")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p></Checkbox>

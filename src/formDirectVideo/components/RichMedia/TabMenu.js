@@ -5,7 +5,7 @@ import { Question } from "../RichMedia/Qusestion";
 import { Chapter } from "../RichMedia/Chapters";
 const { TabPane } = Tabs;
 
-export const TabMenu = () => {
+export const TabMenu = ({listQuestion}) => {
   
   return (
     <Tabs defaultActiveKey="0" className="TabMenu">
@@ -29,7 +29,7 @@ export const TabMenu = () => {
         }
         key="1"
       >
-        <Question />
+        <Question listQuestion={listQuestion} />
       </TabPane>
       <TabPane
         tab={
