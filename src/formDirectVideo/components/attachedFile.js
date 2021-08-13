@@ -18,7 +18,7 @@ export const AttachedFile = () => {
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t, i18n } = useTranslation();
-
+    console.log("values.configuration.fileListConfiguration",values.configuration.fileListConfiguration)
 
     return(
         <Row >
