@@ -69,6 +69,9 @@ export const FormDirectConstraints = ()=>{
                 themesList:[],
                 tags:[],
                 fileListConfiguration:[],
+                listChapter: [],
+                listQuestion: []
+                
             }
         )
     }

@@ -65,6 +65,51 @@ export function setGeneralOnchange(e){
               payload:e
           }
         }
+
+
+        export function setChapterList(e){
+
+            return{
+                type: "SET_CHAPTER_LIST",
+                payload:e,
+            }
+        }
+        export function removeChapter(e){
+
+            return{
+                type: "REMOVE_CHAPTER",
+                payload:e,
+            }
+        }
+        export function editChapter(e){
+
+            return{
+                type: "EDIT_CHAPTER",
+                payload:e,
+            }
+        }
+
+        export function setQuestionList(e){
+
+            return{
+                type: "SET_QUESTION_LIST",
+                payload:e,
+            }
+        }
+        export function removeQuestion(e){
+
+            return{
+                type: "REMOVE_QUESTION",
+                payload:e,
+            }
+        }
+        export function editQuestion(e){
+
+            return{
+                type: "EDIT_QUESTION",
+                payload:e,
+            }
+        }
 //*******************Invitations actions*******************//
 
         export function setInvitationOnchangeRules(e){
