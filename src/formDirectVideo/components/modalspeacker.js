@@ -7,10 +7,12 @@ import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
 import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
 import {useTranslation} from 'react-i18next';
 import { LoadingOutlined } from '@ant-design/icons';
+import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 
 export const ModalSpeaker = ({isVisible}) => {
     const [form] = Form.useForm();
     const {t, i18n} = useTranslation();
+
 
     const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
     const antIcon = <LoadingOutlined style={{ fontSize: 20 }} spin />;
@@ -34,13 +36,14 @@ export const ModalSpeaker = ({isVisible}) => {
 
     const {handleOk, handleCancel, onChangeSpeaker, values} = Hooks()
     let {onChangeFile, beforeUpload, removeLogoSpeaker} = UploadLogoSpeaker()
-
+    console.log("values.configuration.speaker.id",values.configuration.speaker.id)
+    console.log("values.configuration.speaker.id",values.configuration.SpeakerList)
     useEffect(() => {
         form.setFieldsValue(values.configuration.speaker)
     }, []);
 
     return (
-        <Modal className="modal-speaker" title={t("formDirectVideo.AddParticipant")} visible={isVisible}
+        <Modal className="modal-speaker" title={values.configuration.speaker.id?t("formDirectVideo.UpdateParticipant"):t("formDirectVideo.AddParticipant")} visible={isVisible}
                onOk={form.submit} onCancel={handleCancel}
             // okButtonProps={{form:'category-editor-form', key: 'submit', htmlType: 'submit'}}
                footer={[
@@ -49,7 +52,7 @@ export const ModalSpeaker = ({isVisible}) => {
                    </Button>,
                    <Button onClick={form.submit} key='submit' htmlType='submit' className={"input_modal"}
                            type="primary">
-                       {t("formDirectVideo.Add")}
+                       {values.configuration.speaker.id?t("formDirectVideo.Update"):t("formDirectVideo.Add")}
                    </Button>,
                ]}>
             <Form

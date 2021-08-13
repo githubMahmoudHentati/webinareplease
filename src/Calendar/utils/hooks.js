@@ -17,7 +17,7 @@ import {Badge , Tag,Calendar} from 'antd';
 import {useHistory} from "react-router-dom";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 //import 'moment/locale/fr';
-
+import i18n from '../../i18n/index';
 var itemsRunAPI;
 
 const HooksCalendar=(callback)=> {
@@ -28,6 +28,7 @@ const HooksCalendar=(callback)=> {
     const [activeCalendarEvents, SetActiveCalendarEvents] = useState(false);
     const [calendarEvent, SetCalendarEvents] = useState({});
     const [modalInfo, setModalInfo] = useState({});
+    const [mode, setMode] = useState('month');
     const calendarProps = useSelector((state) => state.CalendarReducer)
     const calendarValues = calendarProps.calendar.calendarValues;
     const {success_Delete, error_Delete} = StatusMessage()
@@ -46,12 +47,17 @@ const HooksCalendar=(callback)=> {
         let year = date.year()
         let month_after = month_number === 12 ? "01" : (date.month() < 9) ? "0" + (month_number + 1).toString() : (month_number + 1).toString();
         let year_after = month_after == "01" ? date.year() + 1 : date.year()
-        if (mode === 'year')
+        let query= {variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}
+        setMode(mode)
+        if (mode === 'year'){
+            query={variables: {"dates": [year.toString()]}}
             setAllow(false)
-        else
+        }
+        else{
             setAllow(true)
+        }
         await setDateTime(date)
-        QueryCalendar({variables: {"dates": [year_before + "-" + month_before, year + "-" + month, year_after + "-" + month_after]}}, date)
+        QueryCalendar(query, mode === 'year' ? year :   date)
     }
     const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items, {
         variables: {idLive: deletedItems},
@@ -153,82 +159,111 @@ const HooksCalendar=(callback)=> {
              let check = value.format('YYYY/MM/DD');
             if (calendarValues) {
                 calendarValues.forEach((element) => {
+                        switch ((value.year() + "-" + value.month() + "-" + value.date())) {
 
-                    switch ((value.year() + "-" + value.month() + "-" + value.date())) {
+                            case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
 
-                        case (moment(element.date.date,).year() + "-" + moment(element.date.date,).month() + "-" + moment(element.date.date,).date()):
+                                listData = [...listData, {
+                                    id: element.id,
+                                    type: element.type,
+                                    content: element.content,
+                                    style: element.date.isAMomentObject,
+                                    date: moment(element.date.date,).format('L'),
+                                    time: moment(element.date.date,).format('LTS'),
+                                    thumbnail: element.thumbnail,
+                                    status: element.status
+                                }]
+                                break;
+                        }
+                })
+            }
+        }
+        return  listData || [];
+    }
+    const getTagElm = (listData,value , isCurrentMoment, isYearMode) =>{
+        return (<div  onClick={(e)=> isYearMode ? e.preventDefault() : selectDate(value)} className={'event-list '} >
+            {
+                (isCurrentMoment ? isCurrentMoment : allow) &&
+                <ul className="event-list__events" >
+                    {listData.map((item, index) => {
+                        if(item){
+                            const getColorTag=item.status === -1 ? 'blue' : item.status === 1 ? 'green' : item.status === 0 && 'gray'
+                            return  (<div key={item.id} className={(isCurrentMoment ? "event-list__events__list-tags" : "") +  (isYearMode ? 'event-list__events__list-tags--year' : '')}>
+                                {
+                                    isCurrentMoment && <span className={"span_time"}>{item.time}</span>
+                                }
+                                <Tag className={"event-list__events__list-tags__tag "+(getColorTag ? " event-list__events__list-tags__tag--"+getColorTag : '' ) + (isYearMode ? " event-list__events__list-tags__tag--year" : '')}
+                                     style={x.matches  && !calendarProps.calendar.activeCalendar ? {pointerEvents:'none'} : {}}
+                                     onClick={(e)=> isYearMode ? e.preventDefault() : onShowModal(item)}>
 
-                            listData = [...listData, {
-                                id: element.id,
-                                type: element.type,
-                                content: element.content,
-                                style: element.date.isAMomentObject,
-                                date: moment(element.date.date,).format('L'),
-                                time: moment(element.date.date,).format('LTS'),
-                                thumbnail: element.thumbnail,
-                                status: element.status
-                            }]
-                            break;
+                                    <Badge
+                                        color={getColorTag}
+                                        text={item.content + (isYearMode ? ' '+i18n.t('Calendar.elements') + ' ' + item.type: '' )}
+                                        style={{
+                                            borderRadius: "2px",
+                                        }}
+                                    />
+                                </Tag>
+                            </div>)
+                        }
+                    })}
+                </ul>
+            }
+
+        </div>)
+
+    }
+    const DateCellRender = (value, isCurrentMoment) => {
+        const listData = getListData(value);
+        return  getTagElm(listData, value , isCurrentMoment)
+
+    }
+    const getCountEventsData = (value) => {
+        let filtredEvents= [];
+        let arrInProgress=[]
+        let arrArchived=[]
+        let arrComing=[]
+        let totalEvents= [];
+        let countInProgress=0;
+        let countArchived=0;
+        let countComing=0;
+        if(value && Object.keys(value).length>0){
+            if (calendarValues) {
+                calendarValues.forEach((element) => {
+                    if((moment(element.date.date,).year() + "-" + moment(element.date.date,).month()) === (value.year() + "-" + value.month() )) {
+                        switch (element.status){
+                            case 0 :
+                                arrArchived =[...arrArchived ,element];
+                                countArchived=arrArchived.length
+                                break;
+                            case 1:
+                                arrInProgress =[...arrInProgress ,element];
+                                countInProgress=arrInProgress.length
+                                break;
+                            default:
+                                arrComing =[...arrComing ,element];
+                                countComing=arrComing.length
+                                break;
+                        }
+
                     }
                 })
             }
         }
-        return listData || [];
-
+        totalEvents= [
+            countInProgress > 0 && {id:1, status: 1 , content: countInProgress , type: i18n.t("ShowVideo.InProgress")},
+            countArchived > 0 && {id:2, status: 0 , content: countArchived, type: i18n.t("ShowVideo.Archived")},
+            countComing > 0 && {id:3, status: -1 , content: countComing,  type: i18n.t("ShowVideo.ComingSoon")}
+            ];
+        return  totalEvents;
     }
-
-
-    const DateCellRender = (value, isCurrentMoment) => {
-        const listData = getListData(value);
-        return (
-            <div  style={{height:"100%" , width:'100%'}} onClick={() => selectDate(value)}>
-                {
-                    (isCurrentMoment ? isCurrentMoment : allow) &&
-                    <ul className="events" style={{height:"100%" , width:'100%'}}>
-                        {listData.map((item, index) => {
-                            const getColorTag=item.type === "à venir" ? 'blue' : item.type === "en cours" ? 'green' : item.type === "archivé" && 'gray'
-                            return (
-                                <div key={item.id} className={isCurrentMoment ? "events__list-tags" : ""}>
-                                        {
-                                            isCurrentMoment && <span className={"span_time"}>{item.time}</span>
-                                        }
-                                        <Tag className={"events__list-tags__tag "+(getColorTag ? "events__list-tags__tag--"+getColorTag : '' )}
-                                             // color={getColorTag}
-                                             style={x.matches  && !calendarProps.calendar.activeCalendar ? {pointerEvents:'none'} : {}}
-                                             onClick={() => onShowModal(item)}>
-
-                                            <Badge
-                                                color={getColorTag}
-                                                text={item.content} style={{
-                                                borderRadius: "2px",
-                                            }}
-                                                />
-                                        </Tag>
-                                </div>
-                            )
-                        })}
-                    </ul>
-                }
-
-            </div>
-        );
-    }
-
     function monthCellRender(value) {
-        const num = getMonthData(value);
-        return num ? (
-            <div className="notes-month">
-                <section>{num}</section>
-                <span>Backlog number</span>
+        const dataYearMode = getCountEventsData(value);
+        return value ? (
+            <div className="notes-month" onClick={()=>OnPanelChange(value, 'month')}>
+                {getTagElm(dataYearMode, value, false, true)}
             </div>
         ) : null;
-    }
-
-
-    function getMonthData(value) {
-        if (value.month() === 8) {
-            return 1394;
-        }
     }
 
     const selectDate =async (e) => {
@@ -298,7 +333,8 @@ const HooksCalendar=(callback)=> {
         onShowModal,
         getListData,
         handleClickArrowCalendar,
-        handleClickAnnulerAlert
+        handleClickAnnulerAlert,
+        mode
     })
 }
 
