@@ -103,10 +103,10 @@ export const CompteSettings=()=>{
                     </Col>
                     <Col span={24}>
                         <Row gutter={[30, 20]}>
-                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 6}} lg={{span:6}} >
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:4}} >
                                 <MenuForms />
                             </Col>
-                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 18}} lg={{span:18}} >
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:12}} >
                                 <SelectMenu />
                             </Col>
                         </Row>

@@ -70,6 +70,7 @@ export const Question = ({ listQuestion }) => {
           return {
             ...item,
             nsp: e.target.value,
+            choices: item.choices.length === 0 ? [...item.choices, {response: ""}]  : [...item.choices]
           };
         }
         if (e.target.name === "question") {
@@ -92,14 +93,15 @@ export const Question = ({ listQuestion }) => {
 
   const handleAddQuestion = () => {
     const { nsp, question, choices } = Inputs;
+
     setLocalId(localId + 1);
-    dispatch(setQuestionList({ nsp, question, choices, questionId: localId }));
-    setFakeList([...fakeList, { nsp, question, choices, questionId: localId }]);
+    dispatch(setQuestionList({ nsp, question, choices: [...choices.filter(ele => ele.response.trim().length > 0)], questionId: localId }));
+    setFakeList([...fakeList, { nsp, question, choices: [...choices.filter(ele => ele.response.trim().length > 0)], questionId: localId }]);
     setInputs({ nsp: 1, choices: [{ response: "" }], question: "" });
     setIsAddingNewQuestion(false);
   };
 
-  const addNewResponse = (firstKey, secondKey, attr) => {
+  const addNewResponse = (firstKey, attr) => {
     if (attr === "edit") {
       let oldArray = [...fakeList];
       oldArray[firstKey].choices.push({ response: "" });
@@ -114,11 +116,9 @@ export const Question = ({ listQuestion }) => {
   };
 
   const removeResponse = (firstKey, resp, attr) => {
-    //to do
     let filtered = [...fakeList];
 
     if (attr === "edit") {
-      //filtered = filtered[firstKey].choices.filter((ele) => ele !== resp);
       const newList = filtered.map((item, index) => {
         if (index === firstKey) {
           return {
@@ -149,11 +149,21 @@ export const Question = ({ listQuestion }) => {
     setFakeList(listQuestion);
     setIsEditing((old) => !old);
   };
+
+  const checkResponseStatus = (check, responses) =>{
+    switch(check){
+case 1 : return true;
+case 2 : return true;
+case 3: return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 0 ?  true : false;
+case 4 : return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 1 ?  true : false;;
+default : return 
+    }
+  }
   const responseList = Inputs.choices;
 
   return (
     <Row gutter={[0, 15]} className="Question">
-      <Col>
+      <Col span={24}>
         {fakeList.length ? (
           fakeList.map((ele, index) =>
             questionToEdit !== index ? (
@@ -191,22 +201,23 @@ export const Question = ({ listQuestion }) => {
               </div>
             ) : (
               <Row className="Question__new-question" gutter={[0, 15]}>
-                {" "}
-                <Col span={24} className="Question__custom-column">
+                  <Row style={{width: '100%'}} className="Question__custom-column">
+                  <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
                   <MenuOutlined />
                   <span>
                     {index + 1}
                     {"."}
-                  </span>
+                  </span></Col>
+                  <Col xs={{ span: 19 }} lg={{ span: 22}} md={{span: 21}} xxl={{span: 22}} className="text-overflow">
                   <Input
                     value={ele.question}
                     onChange={(e) => handleChangeToEdit(e, index)}
                     placeholder="question"
                     className="Question__input"
                     name="question"
-                  />
-                </Col>
-                <Col span={24}>
+                  /></Col>
+                  </Row>
+                <Row style={{width: '100%'}}>
                   <Radio.Group
                     name="nsp"
                     onChange={(e) => handleChangeToEdit(e, index)}
@@ -226,7 +237,7 @@ export const Question = ({ listQuestion }) => {
                       {t("formDirectVideo.questionsTab.radioBox.span4")}
                     </Radio>
                   </Radio.Group>
-                </Col>
+                </Row>
                 {ele.choices.map((resp, o) => (
                   <Col
                     key={o}
@@ -247,7 +258,7 @@ export const Question = ({ listQuestion }) => {
                       suffix={
                         ele.choices.length === o + 1 ? (
                           <PlusCircleOutlined
-                            onClick={() => addNewResponse(index, o, "edit")}
+                            onClick={() => addNewResponse(index, "edit")}
                           />
                         ) : (
                           <DeleteOutlined
@@ -286,7 +297,7 @@ export const Question = ({ listQuestion }) => {
                     </Button>
                     <Button
                       className={
-                        ele.question.trim().length !== 0 && isEditing
+                        ele.question.trim().length !== 0 && isEditing && checkResponseStatus(ele.nsp, ele.choices)
                           ? ""
                           : "Question__actions-disabled"
                       }
@@ -397,7 +408,7 @@ export const Question = ({ listQuestion }) => {
                   ) : (
                     <DeleteOutlined
                       className="list-item-icons"
-                      onClick={() => removeResponse(ele)}
+                      onClick={() => removeResponse({} ,ele)}
                     />
                   )
                 }
@@ -430,7 +441,7 @@ export const Question = ({ listQuestion }) => {
             </Button>
             <Button
               className={
-                Inputs && Inputs.question && Inputs.question.trim().length !== 0
+                Inputs && Inputs.question && Inputs.question.trim().length !== 0 && checkResponseStatus(Inputs.nsp, Inputs.choices)
                   ? ""
                   : "Question__actions-disabled"
               }
