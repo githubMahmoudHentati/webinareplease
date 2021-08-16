@@ -106,7 +106,7 @@ export const PasswordEdit =()=>{
                                 <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>dispatch(setAccountSetting(1))} >{t("CompteSettings.Cancel")}</Button>
                             </Col>
                             <Col>
-                                <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} type={"primary"} htmlType="submit" loading={values.loadingUpdatePassword.loadingUpdatePassword}>{t("CompteSettings.Save")}</Button>
+                                <Button className={"spn2_motDePasse"}  type={"primary"} htmlType="submit" loading={values.loadingUpdatePassword.loadingUpdatePassword}>{t("CompteSettings.Save")}</Button>
                             </Col>
                         </Row>
                     </Col>
