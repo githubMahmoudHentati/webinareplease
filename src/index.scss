@@ -963,6 +963,10 @@ margin-top: 2%;
     z-index: 10;
     transition: all 0.5s ease-in-out !important;
 }
+.avtr{
+    font-size: 21px;
+    margin-right: 10px;
+}
 
 .avtr:hover .spnwhite{
     color: var(--menu-color) !important;
@@ -1001,7 +1005,7 @@ margin-top: 2%;
     justify-content: flex-start;
 }
 .div1_div2_side_nav{
-    margin-bottom: 45px;
+    margin-bottom: 35px;
     font-family: "SF Pro Display";
     font-weight: 400;
     font-size: 14px;
@@ -1066,6 +1070,7 @@ margin-top: 2%;
     letter-spacing: normal;
     color: rgba(0, 0, 0, 0.65);
     display: flex;
+    flex-direction: row;
     align-items: center;
 }
 .link_drp:hover{

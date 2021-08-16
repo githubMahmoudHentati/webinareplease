@@ -276,6 +276,21 @@ function GlobalHeader() {
                                         className={"logout-icon"}/><span>{t("description.LogOut")}</span>
                                 </a>
                             </div>
+
+                            <div>
+                               <span className="icon-fr">
+                         <span className="path1"></span>
+                       <span className="path2"></span>
+                        <span className="path3"></span><span className="path4"></span>
+                           </span> {t("lang2")}
+
+                                <span className="icon-ang">
+                    <span className="path1"></span>
+                    <span className="path2"></span>
+                    <span className="path3"></span><span className="path4"></span>
+                    <span className="path5"></span>
+                    </span> {t("lang1")}
+                            </div>
                         </div>
 
                     </div>
