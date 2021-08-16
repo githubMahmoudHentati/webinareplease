@@ -27,22 +27,26 @@ const Hooks=()=>{
 
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
-        console.log("a",name,value)
+        console.log("testtest",name,value)
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:value}));
     }
     const generalOnChange = (event) => {
         console.log("event",event.target.value,event.target.name)
-        dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}));
+        dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}))
+        if(event.target.name==="pwd"){
+            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false})) ;}
+
+
     };
 
     const generalOnChangeButton = async (event) => {
         console.log("event",event.target)
-        await dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.checked}));
+        await dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.checked}))&&dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
         if(event.target.name==="securedPasswordOption")
         {
-            event.target.checked&&generateSecuredPassword()
-            !event.target.checked&&await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
+            event.target.checked?generateSecuredPassword():dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
         }
+
     };
     const getFirstCharacter = (item)=>{
         const finalUserName=  item.name.toUpperCase().split('').shift() + item.lastName.toUpperCase().split('').shift();
