@@ -100,7 +100,7 @@ function HeaderVideos() {
 
           <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
               <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
-              <Button style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)",background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button>
+              <Button  onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button>
           </div>{/*./TousMedia*/}
 
           <div className="Filter">
