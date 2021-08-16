@@ -5,28 +5,33 @@ import {
     setConfigurationSpeaker,
     setGeneralOnchange,
     setErrorUpload,
-    setLoadingUpload
+    setLoadingUpload, setFormDirectLiveConstraintDataOnchange
 } from "../store/formDirectVideoAction";
 import {useDispatch} from "react-redux";
-import {Hooks} from "./hooks";
+import Hooks from "./hooks";
 
 
 export const UploadLogoSpeaker = () => {
     const [fileList, setFileList] = useState([])
     const dispatch = useDispatch()
+    const[removeAction,setRemoveAction]=useState(false)
+    const {values}=Hooks()
 
 
     const beforeUpload=(info)=>{
+
         info.file.status='done'
     }
 
     const removeLogoSpeaker=()=>{
-        dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:[]}))
+            dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:[]}))
     }
 
     const onSave = async (file, fileInfos)=>{
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
+
+        console.log("remove",values.constraintData.removeAction)
         dispatch(setLoadingUpload(true))
         axios({
             url: url,
@@ -46,11 +51,12 @@ export const UploadLogoSpeaker = () => {
                 value=""
                 dispatch(setErrorUpload(true))
             }
+
             dispatch(setConfigurationSpeaker({
                 nameSpeaker: "logoSpeaker", valueSpeaker: (
                     [{
                         uid: '-1',
-                        name: (fileInfos && fileInfos.file.name) || 'xxx.png',
+                        name: (fileInfos && fileInfos.file.name) || 'file.png',
                         status: 'done',
                         url: value,
                         thumbUrl: value,
@@ -58,8 +64,9 @@ export const UploadLogoSpeaker = () => {
                 )
             }))
         }).catch(error => {
-            console.log(error)
+            dispatch(setLoadingUpload(false))
         });
+
     }
 
     const onChangeFile =  async (info) => {
