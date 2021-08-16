@@ -11,7 +11,7 @@ const { TabPane } = Tabs;
 
 export const TabMenu = ({ listQuestion }) => {
   const { t } = useTranslation();
-  const state = useSelector((state) => state.FormDirectVideoReducer);
+  const {currentTab} = useSelector((state) => state.FormDirectVideoReducer);
   const dispatch = useDispatch();
   const onChangeTab = (key) => {
     dispatch(setTab(key));
@@ -19,7 +19,7 @@ export const TabMenu = ({ listQuestion }) => {
   return (
     <Tabs
       onChange={onChangeTab}
-      activeKey={state.currentTab}
+      activeKey={currentTab}
       className="TabMenu"
     >
       <TabPane
