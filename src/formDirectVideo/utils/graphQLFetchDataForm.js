@@ -27,6 +27,8 @@ export const GraphQLFetchDataForm = (values) => {
     let period = values.general.period? values.general.period.format('HH:mm:ss'):"";
     let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
     let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
+    let ThmbuUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
+    let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
     let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
         data: dataCreate,
