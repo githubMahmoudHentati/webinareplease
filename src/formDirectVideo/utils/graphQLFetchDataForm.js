@@ -38,7 +38,7 @@ export const GraphQLFetchDataForm = (values) => {
             input: {
                 generalInfo: {
                     thumbnail: values.general.fileList && values.general.fileList.length ?
-                        values.general.fileList[0].thumbUrl : defaultImg,
+                        values.general.fileList[0].thumbUrl : "",
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
@@ -76,7 +76,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : defaultImg,
+                            values.general.fileList[0].thumbUrl : "",
                         Type: "Facebook Post",
                         link: values.general.liveLink,
                         active: values.socialTools[0].switch,
@@ -85,7 +85,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : defaultImg,
+                            values.general.fileList[0].thumbUrl : "",
                         Type: "Youtube Post",
                         link: values.general.liveLink,
                         active: values.socialTools[1].switch,
@@ -94,7 +94,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : defaultImg,
+                            values.general.fileList[0].thumbUrl : "",
                         Type: "LinkedIn Post",
                         link: values.general.liveLink,
                         active: values.socialTools[2].switch,
@@ -128,7 +128,7 @@ export const GraphQLFetchDataForm = (values) => {
             form: {
                 generalInfoOutput: {
                     thumbnail: values.general.fileList && values.general.fileList.length ?
-                        values.general.fileList[0].thumbUrl : defaultImg,
+                        values.general.fileList[0].thumbUrl : "",
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
@@ -167,7 +167,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : defaultImg,
+                            values.general.fileList[0].thumbUrl : "",
                         Type: "Facebook Post",
                         link: values.general.liveLink,
                         active: true,
@@ -176,7 +176,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : defaultImg,
+                            values.general.fileList[0].thumbUrl : "",
                         Type: "Youtube Post",
                         link: values.general.liveLink,
                         active: false,
@@ -185,7 +185,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : defaultImg,
+                            values.general.fileList[0].thumbUrl : "",
                         Type: "LinkedIn Post",
                         link: values.general.liveLink,
                         active: false,
