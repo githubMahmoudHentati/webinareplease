@@ -409,11 +409,8 @@ console.log("vignette", values.generalInformation.vignette)
                                                             }))
                                                         }}
                                                         htmlType="submit" className={"spn_CompteSettings"}
-                                                        type={"primary"} style={{
-                                                    background: darkMode === false ? "" : "#141414",
-                                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                                                    border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                                                }}>{t("CompteSettings.Update")}</Button>
+                                                        type={"primary"}
+                                                >{t("CompteSettings.Update")}</Button>
                                             </Col>
                                         </Row>
                                     </Col>
