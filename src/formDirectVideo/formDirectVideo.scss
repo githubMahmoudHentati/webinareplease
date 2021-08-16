@@ -734,23 +734,10 @@
   }
 }
 .bordered-col{
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--border_color);
   padding: 15px;
 }
-.TabMenu{
-  .ant-menu-item-selected{
-      border-right: none !important;
- }
- .ant-menu-item-selected{
-   color: var(--white_color) !important;
- }
- .ant-menu-item:hover{
-  color: var(--white_color) !important;
-}
-.ant-menu-item{
-  text-transform: capitalize;
-}
-}
+
 
 .parent{
   height: auto !important;

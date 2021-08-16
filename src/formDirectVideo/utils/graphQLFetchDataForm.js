@@ -15,6 +15,7 @@ import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import defaultImg from '../../assets/webinarplease-thumb.jpg';
 import {setDirectSetting} from "../../utils/redux/actions";
+import {StatusMessages} from "./StatusMessages";
 
 
 export const GraphQLFetchDataForm = (values) => {
@@ -23,12 +24,10 @@ export const GraphQLFetchDataForm = (values) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
-    console.log("values-graphQL",values)
-    console.log("idLive",idLive)
     let period = values.general.period? values.general.period.format('HH:mm:ss'):"";
     let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
     let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
-
+    let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
         data: dataCreate,
         loading: loading_EventCreated,
@@ -80,7 +79,7 @@ export const GraphQLFetchDataForm = (values) => {
                             values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "Facebook Post",
                         link: values.general.liveLink,
-                        active: true,
+                        active: values.socialTools[0].switch,
                         planifications: values.socialTools[0].plan
                     },
                     {
@@ -89,7 +88,7 @@ export const GraphQLFetchDataForm = (values) => {
                             values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "Youtube Post",
                         link: values.general.liveLink,
-                        active: false,
+                        active: values.socialTools[1].switch,
                         planifications: values.socialTools[1].plan
                     },
                     {
@@ -98,7 +97,7 @@ export const GraphQLFetchDataForm = (values) => {
                             values.general.fileList[0].thumbUrl : defaultImg,
                         Type: "LinkedIn Post",
                         link: values.general.liveLink,
-                        active: false,
+                        active: values.socialTools[2].switch,
                         planifications: values.socialTools[2].plan
                     }
                 ]
@@ -109,11 +108,12 @@ export const GraphQLFetchDataForm = (values) => {
                 history.push("/showVideos")
                 localStorage.removeItem('idLive')
                 dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
-                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
                 dispatch(setDirectSetting(0))
+                values.constraintData.leaveToast&& await success_submit(200)
 
-            } else if (data.addLive.code === 403) {
-
+            } else if (data.addLive.code === 400) {
+                values.constraintData.leaveToast && await error_submit(400)
             }
         }
     });
@@ -199,9 +199,10 @@ export const GraphQLFetchDataForm = (values) => {
                 history.push("/showVideos")
                 localStorage.removeItem('idLive')
                 dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
-                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
+                values.constraintData.leaveToast&&success_submit(200)
             } else if (data.editLive.code === "403") {
-
+                values.constraintData.leaveToast&&error_submit(400)
             }
         }
     });
@@ -215,10 +216,10 @@ export const GraphQLFetchDataForm = (values) => {
             if (data.generatePwd.code===200)
             {
 
-                await dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:data.generatePwd.pwd}));
+                 dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:data.generatePwd.pwd}));
                 // await values.form.setFieldsValue({...values.form.getFieldsValue(),securedPasswordOption:data.generatePwd.pwd})
                 // console.log("form.getFieldsValue()",values.form.getFieldsValue())
-                await dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
+                 dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:true}));
             }
         }
     })
@@ -286,7 +287,6 @@ export const GraphQLFetchDataForm = (values) => {
                         }],email,title,
                         ...rest
                     })),
-
                     addSpeakerList:values.configuration.addSpeakerList,
                     speaker: values.configuration.speaker,
                     loadingSpeakerInfo:false,
@@ -301,6 +301,8 @@ export const GraphQLFetchDataForm = (values) => {
                     tags:data.getlive.configurationOut.tags,
                     diapositivesFileLists:[],
                     fileListConfiguration:[],
+                    listChapter: [],
+                    listQuestion: [],
                 },
                 socialTools:[
                     {
@@ -335,7 +337,8 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                 ]
             }));
-           dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
+            dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
+
         }
     })
 

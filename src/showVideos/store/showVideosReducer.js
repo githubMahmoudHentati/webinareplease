@@ -70,6 +70,19 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
                 ...state,
                 valueExportLives:exportLivesObj
             }
+
+        case "SET_FILTER":
+            const {deletedItems}=action.payload
+            let indexes1 =
+                state.paginationProps.id
+                    .filter((item) => {
+                        return !(deletedItems).includes(item.id);
+                    })
+console.log('kkkkkkkkkkkkkk', indexes1)
+            return{
+                ...state,
+                paginationProps: {...state.paginationProps, id:indexes1}
+            }
         default:{
             return state
         }
