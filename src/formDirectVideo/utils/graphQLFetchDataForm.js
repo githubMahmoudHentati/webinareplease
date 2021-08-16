@@ -276,7 +276,7 @@ export const GraphQLFetchDataForm = (values) => {
                     modalSpeaker: values.configuration.modalSpeaker,
                     switchSpeaker: values.configuration.switchSpeaker,
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
-                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title, ...rest
+                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
                         logoSpeaker:[{
                             uid: '-1',
@@ -284,11 +284,11 @@ export const GraphQLFetchDataForm = (values) => {
                             status: 'done',
                             url: speakerList[index].avatar,
                             thumbUrl:speakerList[index].avatar,
-                        }],email,title,
+                        }],email,title,id:index+1,
                         ...rest
                     })),
                     addSpeakerList:values.configuration.addSpeakerList,
-                    speaker: values.configuration.speaker,
+                    speaker:  values.configuration.speaker,
                     loadingSpeakerInfo:false,
                     chat: data.getlive.configurationOut.interOption.chat,
                     comments: data.getlive.configurationOut.interOption.comment,
