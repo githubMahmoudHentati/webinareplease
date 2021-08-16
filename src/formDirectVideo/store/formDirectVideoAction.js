@@ -231,6 +231,12 @@ export function setGeneralOnchange(e){
             payload:e
         }
     }
+    export function setTab(e){
+        return{
+            type:"SET_TAB",
+            payload:e
+        }
+    }
 
 
 

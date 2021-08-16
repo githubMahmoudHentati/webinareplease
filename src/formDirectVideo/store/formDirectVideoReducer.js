@@ -17,7 +17,8 @@ const formDirectInitialState = {
     form : [],
 
     error:false,
-    loading:false
+    loading:false,
+    currentTab: "0"
 }
 
 
@@ -276,6 +277,12 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                         return{
                            ...state, configuration: {...state.configuration, listQuestion: editedListQuestion}
                         }
+
+            case "SET_TAB":
+                        return{
+                                ...state, currentTab: action.payload
+            
+                            }
 
         default:{
             return state
