@@ -245,13 +245,13 @@ export const GraphQLFetchDataForm = (values) => {
             dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
-                    fileList:[{
+                    fileList:data.getlive.generalInfoOut.thumbnail.length?[{
                         uid: '-1',
                         name: data.getlive.generalInfoOut.thumbnail.substring(data.getlive.generalInfoOut.thumbnail.lastIndexOf("/")+1,data.getlive.generalInfoOut.thumbnail.length),
                         status: 'done',
                         url: data.getlive.generalInfoOut.thumbnail,
                         thumbUrl: data.getlive.generalInfoOut.thumbnail,
-                    }],
+                    }]:[],
                     liveTitle:data.getlive.generalInfoOut.liveTitle,
                     liveDescription:data.getlive.generalInfoOut.liveDescription,
                     liveLink:data.getlive.generalInfoOut.liveLink+"/"+data.getlive.generalInfoOut.liveTitle,
