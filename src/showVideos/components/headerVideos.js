@@ -139,10 +139,10 @@ function HeaderVideos() {
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
                       >
-                          <Option name="type"   value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "15%" }}id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
-                          <Option name="type"  value="archived"><span className="icon-Archive"></span>  <span id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
-                          <Option name="type"  value="live"><span className="icon-Current"></span>  <span id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
-                          <Option name="type"  value="upcoming"><HourglassOutlined />  <span id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
+                          <Option name="type"   value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
+                          <Option name="type"  value="archived"><span className="icon-Archive"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
+                          <Option name="type"  value="live"><span className="icon-Current"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
+                          <Option name="type"  value="upcoming"><HourglassOutlined />  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
                       </Select>
                   </div>
 

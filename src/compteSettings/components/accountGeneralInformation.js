@@ -166,8 +166,8 @@ console.log("vignette", values.generalInformation.vignette)
             <Spin spinning={values.constraintData.loadingGeneralInformation}>
                 <Row gutter={[20, 0]}>
                     <Col className={"col_avatar"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}} lg={{span: 6}}>
-                        <Row justify={"space-between"} gutter={[0, 15]}>
-                            <Col offset={2} span={22}>
+                        <Row justify={"space-around"} gutter={[0, 10]}>
+                            <Col offset={0} span={22}>
                              <span className={"spn_CompteSettings"}
                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Avatar")}</span>
                             </Col>

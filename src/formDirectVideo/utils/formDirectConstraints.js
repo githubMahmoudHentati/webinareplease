@@ -57,7 +57,6 @@ export const FormDirectConstraints = ()=>{
                 fileListConfiguration:[],
                 listChapter: [],
                 listQuestion: [],
-                
                 diapositivesFileLists:[]
             }
         )
