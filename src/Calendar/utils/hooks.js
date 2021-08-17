@@ -62,11 +62,11 @@ const HooksCalendar=(callback)=> {
     const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items, {
         variables: {idLive: deletedItems},
         context: {clientName: "second"},
-        onCompleted: (data) => {
+        onCompleted: async (data) => {
 
             if (data.deleteLive.code === "200") {
                 success_Delete();
-                QueryCalendar();
+                await OnPanelChange(moment(new Date()), 'month')
                 handleDelayDelete(deletedItems)
             } else if (data.deleteLive.code === "400") {
                 error_Delete(400)

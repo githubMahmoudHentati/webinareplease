@@ -138,7 +138,7 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
                     pwd: values.general.pwd,
-                    securedPasswordOption: false
+                    securedPasswordOption: values.general.securedPasswordOption
                 },
                 configurationOutput: {
                     liveProgram: values.configuration.directProgram,
@@ -278,13 +278,7 @@ export const GraphQLFetchDataForm = (values) => {
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
                     SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
-                        logoSpeaker:[{
-                            uid: '-1',
-                            name: 'xxx.png',
-                            status: 'done',
-                            url: speakerList[index].avatar,
-                            thumbUrl:speakerList[index].avatar,
-                        }],email,title,id:index+1,
+                        logoSpeaker:[],email,title,id:index+1,
                         ...rest
                     })),
                     addSpeakerList:values.configuration.addSpeakerList,
