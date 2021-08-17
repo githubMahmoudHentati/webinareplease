@@ -57,7 +57,7 @@ export const UploadHooks = () =>{
             avatar: null
         }
         const query = `
-    mutation ($avatar:Upload!)
+         mutation ($avatar:Upload!)
         {uploadLogo(avatar:$avatar)}
 `;
         const operations = JSON.stringify({query, variables: {variables}});
@@ -95,14 +95,14 @@ export const UploadHooks = () =>{
             },
             data: file
         }).then((result) => {
-            console.log("resultData",result.data.data.uploadLogo);
+            console.log("resultData",result.data.data.multipleUpload.path);
             dispatch(setConfigurationFileList({configurationNameFileList:"fileListConfiguration", configurationValueFileList:
                     {
                         uid: uuidv4(),
                         name: (fileInfos && fileInfos.file.name) || "image.png",
                         status: 'done',
-                        url: result.data.data.uploadLogo,
-                        thumbUrl: result.data.data.uploadLogo,
+                        url: result.data.data.multipleUpload.path,
+                        thumbUrl: result.data.data.multipleUpload.path,
                     }
             }));
 
@@ -120,19 +120,21 @@ export const UploadHooks = () =>{
 
         let formData = new FormData();
         const variables = {
-            avatar: null
-        }
+            files: null
+      }
         const query = `
-    mutation ($avatar:Upload!)
-        {uploadLogo(avatar:$avatar)}
+   mutation($files: Upload!) 
+   { multipleUpload(files: $files) 
+   {path} 
+   }
 `;
         const operations = JSON.stringify({query, variables: {variables}});
         formData.append("operations", operations);
         const map = {
-            "0": ["variables.avatar"]
+         "0": ["variables.files"],
         };
         formData.append("map", JSON.stringify(map));
-        [...info.fileList].filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "text/plain" ||file.type === "video/webm").map(async (e, index) => {
+        [...info.fileList].map(async (e, index) => {
             const file = e.originFileObj;
             console.log("*******************", [...info.fileList]);
             return formData.append("0", file);
