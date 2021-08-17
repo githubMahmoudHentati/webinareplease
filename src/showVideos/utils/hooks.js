@@ -83,7 +83,7 @@ export  const Hooks=()=> {
             fetchPolicy:  "cache-and-network",
             variables: { input : {
                     "limit": paginationProps.pageSize,
-                    "offset": (paginationProps.current-1)*10,
+                    "offset": (paginationProps.current-1)* (paginationProps.pageSize),
                     "order_dir": paginationProps.order,
                     "order_column": paginationProps.columnKey,
                     "search_word":values.search,
@@ -109,7 +109,7 @@ export  const Hooks=()=> {
     const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items,{
         refetchQueries:() => [{ query: graphQL_shema().Get_Lives, variables: { input : {
                     "limit": paginationProps.pageSize,
-                    "offset": (paginationProps.current-1)*10,
+                    "offset": (paginationProps.current-1)*(paginationProps.pageSize),
                     "order_dir": paginationProps.order,
                     "order_column": paginationProps.columnKey,
                     "search_word":values.search,
