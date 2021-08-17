@@ -22,6 +22,8 @@ import en_US from "antd/lib/locale/en_US";
 import frFR from "antd/lib/locale/fr_FR";
 import { ConfigProvider } from "antd";
 import 'moment/locale/fr';
+import 'react-phone-number-input/style.css'
+
 
 let tabData = [
     "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"

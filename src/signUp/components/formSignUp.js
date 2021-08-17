@@ -8,6 +8,8 @@ import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setSignUpConstraintDataOnchange} from "../store/signUpAction";
 import {useDispatch} from "react-redux";
 import { useTranslation } from 'react-i18next';
+import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
+
 const { Option } = Select;
 
 
@@ -21,7 +23,7 @@ export const FormSignUp =({child1,child2})=>{
 
     const { t, i18n } = useTranslation();
 
-    const {signUpOnChange,signUpOnChangeSelect,valuesSignUp,SignUpOnChangeButton}= HooksSignUp()
+    const {signUpOnChange, handleChangePhone,signUpOnChangeSelect,valuesSignUp,SignUpOnChangeButton}= HooksSignUp()
 
     const isValidPhone= (phone) => {
         return phone.match( /^-?[\d.]+(?:e-?\d+)?$/)
@@ -113,21 +115,31 @@ export const FormSignUp =({child1,child2})=>{
                                     <Form.Item name="phone" className={"form-item-style"}
                                                label={<div><span className="require">*</span> <span style={{color:"rgba(0, 0, 0, 0.85)"}} >{t("CompteSettings.Phone")}</span></div>}
                                                rules={[
-                                                   ({getFieldValue}) => ({
-                                                       validator(_, value) {
-                                                           if (isValidPhone(value)) {
-                                                               return Promise.resolve('value');
-                                                           }
-                                                           return Promise.reject(t("CompteSettings.InvalidPhone"));
-                                                       },
-                                                   }),
-                                               ]}
+                                                () => ({
+                                                    validator(_, value) {
+                                                        if(value){
+                                                            if (isValidPhoneNumber(value)) {
+                                                                return Promise.resolve('value');
+                                                            }
+                                                            return Promise.reject(t('CompteSettings.InvalidPhone'));
+
+                                                        }
+                                                        else return Promise.reject(t('contactClient.FieldsRequired'));
+                                                    
+                                                        
+                                                    },
+                                                })
+                                            ]}
 
                                     >
-                                        <Input placeholder={t("CompteSettings.EnterPhone")} className={"spn2"} name="phone" onChange={signUpOnChange}>
+                                        <PhoneInput international defaultCountry="RU"
+                                          placeholder={t("CompteSettings.EnterPhone")}
+                                          onChange={handleChangePhone}
+                                          value={valuesSignUp.signUp.phone}
 
-                                            </Input>
-                                    </Form.Item>
+      />
+
+                                   </Form.Item>
                                 </Col>
                             </Row>
                         </Col>

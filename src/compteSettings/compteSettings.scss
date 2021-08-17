@@ -162,3 +162,34 @@
 
 
 }
+
+/**************react phone number input*****************************/
+.PhoneInput{
+  border: 1px solid var(--border_color);
+  &:hover, &:focus{
+    border-color: #40a9ff !important;
+    border-right-width: 1px !important ;
+    outline: 0 !important;
+  }
+  .PhoneInputCountry{
+    padding-left: 10px;
+  }
+  .PhoneInputInput{
+      background-color: var(--card_color);
+      color: var(--white_color);
+      padding: 4px 11px !important;
+      border: none !important;
+      outline: 0 !important;
+     
+  
+      &::placeholder{
+        opacity: 0.6 !important;
+       }
+  }
+}
+.ant-form-item-has-error{
+  .PhoneInput{
+    border-color: #ff4d4f !important;
+  }
+}
+
