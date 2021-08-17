@@ -52,7 +52,8 @@ export const Configuration = () => {
         configurationOnChange,
         configurationOnChangeButton,
         ConfigurationOnChangeSelect,
-        displayThemes
+        displayThemes,
+        getFirstCharacter
     } = Hooks()
 
     console.log("values", values)
@@ -149,8 +150,8 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                                                     avatar={
                                                         <Avatar
                                                             className={'avatar-speaker'}
-                                                        src={item.logoSpeaker[0] && item.logoSpeaker[0].thumbUrl ? item.logoSpeaker[0].thumbUrl :
-                                                            "https://www.trustedclothes.com/blog/wp-content/uploads/2019/02/anonymous-person-221117.jpg"}/>}
+                                                            src={item.logoSpeaker[0] && item.logoSpeaker[0].thumbUrl ? item.logoSpeaker[0].thumbUrl :
+                                                                ''}> {getFirstCharacter(item)} </Avatar>}
                                                     title={
                                                         <div ref={itemListRef} >
                                                             <Row>
