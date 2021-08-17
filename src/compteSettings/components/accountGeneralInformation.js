@@ -18,11 +18,14 @@ import {useTranslation} from 'react-i18next';
 import axios from 'axios';
 import {StatusMessages} from "../utils/StatusMessages";
 import {AccountSettingsReducer} from "../store/accountSettingsReducer";
+import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 
 const {Option} = Select;
 
 export const AccountGeneralInformation = ({form}) => {
     const history = useHistory()
+    const [phoneNumber, setPhoneNumber] = useState()
+
     const {success_message_update_password , error_message_update_password}=StatusMessages()
     const dispatch = useDispatch()
     const {UpdateAccountSetting} = GraphQLFetchData(form)
@@ -155,7 +158,11 @@ console.log("vignette", values.generalInformation.vignette)
         }
     }, [values.constraintData.isMailValid]);
     const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")},{max:15}];
-
+    
+  const handleChangePhone =(value)=>{
+    dispatch(setGeneralInformationOnchange({generalInformationNameChange: 'phone', generalInformationValueChange: value}));
+      
+  }
     return (
         <Form
             form={form}
@@ -373,11 +380,36 @@ console.log("vignette", values.generalInformation.vignette)
                                             </Col>
                                             <Col span={24}>
                                                 <Form.Item name="phone"
-                                                           rules={requiredFieldRule}
+                                                 rules={[
+                                                    ({_}) => ({
+                                                        validator(_, value) {
+                                                            if(value){
+                                                                if (isValidPhoneNumber(value)) {
+                                                                   
+                                                                    return Promise.resolve('value');
+                                                                }
+                                                                
+                                                                return Promise.reject(t('CompteSettings.InvalidPhone'));
+
+                                                            }
+                                                            else return Promise.reject(t('contactClient.FieldsRequired'))
+                                                            
+                                                        },
+                                                    })
+                                                ]}
+                                                           
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.phone} name='phone'
-                                                           placeholder={t("CompteSettings.Phone")}></Input>
+                                           
+                                                           <PhoneInput
+                                                              international
+                                                              defaultCountry="RU"
+                                                              placeholder={t("CompteSettings.Phone")}
+                                                              value={values.generalInformation.phone || ""}
+                                                              onChange={handleChangePhone}
+
+                                                                 />
+
                                                 </Form.Item>
                                             </Col>
                                         </Row>
