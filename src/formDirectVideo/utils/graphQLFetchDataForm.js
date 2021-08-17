@@ -27,6 +27,8 @@ export const GraphQLFetchDataForm = (values) => {
     let period = values.general.period? values.general.period.format('HH:mm:ss'):"";
     let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
     let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
+    let ThmbuUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
+    let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
     let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
         data: dataCreate,
@@ -276,13 +278,13 @@ export const GraphQLFetchDataForm = (values) => {
                     modalSpeaker: values.configuration.modalSpeaker,
                     switchSpeaker: values.configuration.switchSpeaker,
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
-                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title, ...rest
+                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
-                        logoSpeaker:[],email,title,
+                        logoSpeaker:[],email,title,id:index+1,
                         ...rest
                     })),
                     addSpeakerList:values.configuration.addSpeakerList,
-                    speaker: values.configuration.speaker,
+                    speaker:  values.configuration.speaker,
                     loadingSpeakerInfo:false,
                     chat: data.getlive.configurationOut.interOption.chat,
                     comments: data.getlive.configurationOut.interOption.comment,

@@ -97,7 +97,7 @@
 
 
 #product-form_email{
-  border-color: var(--inputErrorForm) !important ;
+  border-color: var(--border_color) !important ;
   box-shadow :none;
   &:hover{
     border-color: var(--inputBorderErrorForm) !important;
