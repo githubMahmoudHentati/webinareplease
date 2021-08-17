@@ -4,6 +4,7 @@ import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
 import {Form} from "antd";
 
+
 export const FormDirectConstraints = ()=>{
 
     const generals = () => {
@@ -25,7 +26,7 @@ export const FormDirectConstraints = ()=>{
                 directAccessMode: "freeAccess",
                 liveAccess: false,
                 pwd:"",
-                liveLink:"",
+                liveLink:"https://demo-tv.webtv-solution.com/pearl/live",
                 securedPasswordOption:false,
                 loadingSecuredPassword:false
             }
