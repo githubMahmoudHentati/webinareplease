@@ -403,7 +403,7 @@ console.log("vignette", values.generalInformation.vignette)
                                            
                                                            <PhoneInput
                                                               international
-                                                              defaultCountry="RU"
+                                                              defaultCountry="FR"
                                                               placeholder={t("CompteSettings.Phone")}
                                                               value={values.generalInformation.phone || ""}
                                                               onChange={handleChangePhone}
