@@ -30,7 +30,7 @@ export const GraphQLFetchData=()=> {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
                 "limit": paginationProps.pageSize,
-                "offset": (paginationProps.current-1)*10,
+                "offset": (paginationProps.current-1)* (paginationProps.pageSize),
                 "order_dir": paginationProps.order,
                 "order_column": paginationProps.columnKey,
                 "search_word":values.search,

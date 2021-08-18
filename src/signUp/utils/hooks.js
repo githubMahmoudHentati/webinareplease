@@ -34,6 +34,14 @@ export  const HooksSignUp=()=> {
         }
     };
 
+    const handleChangePhone = (val) => {
+        dispatch(setSignUpOnchange({
+            SignUpNameChange: 'phone',
+            SignUpValueChange: val
+        }));
+     
+    };
+
     const SignUpOnChangeButton = (event) => {
         document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
         dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:event.target.value, constraintDataValueChange:event.target.checked}));
@@ -69,6 +77,7 @@ export  const HooksSignUp=()=> {
 
     return({
         signUpOnChange,
+        handleChangePhone,
         signUpOnChangeSelect,
         valuesSignUp,
         handleSubmitSignUp,

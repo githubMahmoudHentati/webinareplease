@@ -14,6 +14,8 @@ import {
     LogoutOutlined,
     PieChartOutlined,
     GlobalOutlined,
+    CaretRightOutlined ,
+    CaretDownOutlined
 } from '@ant-design/icons';
 import {Badge, Menu, Dropdown, Avatar} from 'antd';
 import {setAccountSetting, setAppSetLogin,setAppSetLogout} from "../redux/actions";
@@ -30,6 +32,7 @@ function GlobalHeader() {
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
+    const [arrowSideMenu ,  setArrowSideMenu] = useState(false)
    
     const [activeSideMenuState, SetActiveSideMenuState] = useState(false)
     // Clic outside Side Bar
@@ -129,6 +132,7 @@ function GlobalHeader() {
                 </span> {t("lang1")}
             </Menu.Item>
         </Menu>
+
     );
 
     return (
@@ -259,38 +263,59 @@ function GlobalHeader() {
                             </div>
 
                             <div className={"div3_div2_side_nav"}>
-                                <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']}>
+
+                                <div className={"lang_div"} onClick={()=> setArrowSideMenu(!arrowSideMenu)}>
+                                <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']} >
                                     <div><GlobalOutlined style={{color: darkMode === false ? "" : "white"}}
                                                          className={"avtr"}/> <span
-                                        className={"spnwhite"}>{t("description.Language")}</span></div>
+                                        className={"titleLang"}>{t("description.Language")}</span></div>
                                 </Dropdown>
-                                <div className={"aide_div"}><QuestionCircleOutlined className={"icon_help"}
-                                                                                    style={{color: darkMode === false ? "" : "white"}}/><span
-                                    className={"spnwhite"}>{t("description.aide")}</span></div>
-                            </div>
+                                    {
+                                        arrowSideMenu
+                                            ?
+                                            <CaretDownOutlined className={"caretDownOutlined"}/>
+                                            :
+                                            <CaretRightOutlined className={"caretRightOutlined"}/>
+                                    }
+                                </div>{/*Div-Langue*/}
+
+                                {
+                                    arrowSideMenu
+                                        ?
+                                    <div className={"langIconDiv"}>
+                                        <div className={"langIconDiv1"} onClick={() => changeLanguage('fr')}>
+                                      <span className="icon-fr">
+                                      <span className="path1"></span>
+                                      <span className="path2"></span>
+                                      <span className="path3"></span><span className="path4"></span>
+                                      </span> <span className={"titleLang"}>{t("lang2")}</span>
+                                        </div>
+
+                                        <div className={"langIconDiv2"} onClick={() => changeLanguage('en')}>
+                                    <span className="icon-ang">
+                                  <span className="path1"></span>
+                                   <span className="path2"></span>
+                                  <span className="path3"></span><span className="path4"></span>
+                                  <span className="path5"></span>
+                                    </span> <span className={"titleLang"}>{t("lang1")}</span></div>
+                                    </div>
+                                    :
+                                    null
+
+                                }
+
+                                <div className={"aide_div"}><QuestionCircleOutlined className={"avtr"} style={{color: darkMode === false ? "" : "white"}}/><span
+                                    className={"titleLang"}>{t("description.aide")}</span></div>
+                                </div> {/*div-aide*/}
 
                             <div className={"div4_div2_side_nav"}>
                                 <a className="ant-dropdown-link link_drp" onClick={logOut}
                                    style={{color: darkMode === false ? "" : "white"}}>
                                     <LogoutOutlined
-                                        className={"logout-icon"}/><span>{t("description.LogOut")}</span>
+                                        className={"avtr"}/><span>{t("description.LogOut")}</span>
                                 </a>
                             </div>
 
-                            <div>
-                               <span className="icon-fr">
-                         <span className="path1"></span>
-                       <span className="path2"></span>
-                        <span className="path3"></span><span className="path4"></span>
-                           </span> {t("lang2")}
-
-                                <span className="icon-ang">
-                    <span className="path1"></span>
-                    <span className="path2"></span>
-                    <span className="path3"></span><span className="path4"></span>
-                    <span className="path5"></span>
-                    </span> {t("lang1")}
-                            </div>
                         </div>
 
                     </div>
