@@ -25,9 +25,7 @@ export const GraphQLFetchDataForm = (values) => {
     const dispatch = useDispatch()
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
     let period = values.general.period? values.general.period.format('HH:mm:ss'):"";
-    let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
-    let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
-    let ThmbuUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
+    let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
     let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
@@ -45,7 +43,7 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-                        startDate: newStartDate&&newStartHour?newStartDate+ "T" + newStartHour+ "Z":"",
+                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
                         duration: ""
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
@@ -135,7 +133,7 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-                        startDate: newStartDate&&newStartHour?newStartDate+ "T" + newStartHour+ "Z":"",
+                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
                         duration: ""
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
