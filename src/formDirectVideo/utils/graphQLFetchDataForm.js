@@ -130,7 +130,7 @@ export const GraphQLFetchDataForm = (values) => {
             form: {
                 generalInfoOutput: {
                     thumbnail: values.general.fileList && values.general.fileList.length ?
-                        values.general.fileList[0].thumbUrl : "",
+                        values.general.fileList[0].thumbUrl : "https://www.cerballiance.fr/sites/www.cerballiance.fr/files/media/image/2020-12/iStock-1210073353-covid-test-sanguin-achetee_0.jpg",
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
