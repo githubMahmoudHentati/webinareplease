@@ -7,10 +7,11 @@ import {useMutation } from '@apollo/react-hooks';
 import {graphQL_shema} from "../utils/graphQL";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import { useTranslation } from 'react-i18next';
+import {useHistory} from "react-router-dom";
 
 export const FormContactClient =()=> {
     const [form] = Form.useForm();
-
+    const history = useHistory()
 
     const {ContactClientMutation}=GraphQLFetchData(form)
 
@@ -97,7 +98,7 @@ export const FormContactClient =()=> {
             <Col span={16}>
                 <Row  gutter={[10, 0]} className={"text-form"}>
                     <Col>
-                        <Button className={"spn2"}> {t("CompteSettings.Cancel")}</Button>
+                        <Button className={"spn2"} onClick={()=>history.push("/compteSettings")}> {t("CompteSettings.Cancel")}</Button>
                     </Col>
                     <Col>
                         <Button htmlType="submit" type={"primary"} className={"spn2"} loading={values.loading.loading}>{t("contactClient.envoyer")}</Button>

@@ -90,7 +90,7 @@ function useActionMenu({record}) {
             }
             <div>
         <span className="span_action">
-      <Dropdown overlay={actionMenu} trigger={['click']}  >
+      <Dropdown getPopupContainer={() => document.querySelector(".drp_action")}  className={"drp_action"} overlay={actionMenu} trigger={['click']}  >
         <a  onClick={(e)=>handleClickDropdowMenu(e, record.id)} className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }} >
          ...
         </a>

@@ -7,11 +7,14 @@ import{SubscriptionTable} from "./subscriptionTable";
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
+import {setAccountSetting} from "../../utils/redux/actions";
+import {useHistory} from "react-router-dom";
 
 export const AccountSubscription=()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t, i18n } = useTranslation();
-    const {values}=Hooks()
+    const {values}=Hooks();
+    const history = useHistory()
     return(
         <Row gutter={[0, 40]}>
             <Col offset={1} xs={{ span: 24}} sm={{ span: 24}} md={{ span: 11}} lg={{span:11}}>
@@ -59,7 +62,7 @@ export const AccountSubscription=()=>{
                     <Col span={24}>
                         <span className={"spn_limite"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                             {t("CompteSettings.Quotes")} <br/> {t("CompteSettings.limits")}</span>
-                        <a className={"spn_limite"}> {t("CompteSettings.ContactUs")}</a>
+                        <a className={"spn_limite"} onClick={()=>{history.push("/contactClient") ;  document.querySelector(':root').classList.remove('dark')}}> {t("CompteSettings.ContactUs")}</a>
                     </Col>
                 </Row>
             </Col>
