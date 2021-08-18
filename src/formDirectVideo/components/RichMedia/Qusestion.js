@@ -259,6 +259,7 @@ default : return
                         ele.choices.length === o + 1 ? (
                           <PlusCircleOutlined
                             onClick={() => addNewResponse(index, "edit")}
+                            className={(resp.response.trim().length === 0 ? "d-none" : "d-block")}
                           />
                         ) : (
                           <DeleteOutlined
@@ -402,7 +403,7 @@ default : return
                 suffix={
                   responseList.length === o + 1 ? (
                     <PlusCircleOutlined
-                      className="list-item-icons"
+                      className={"list-item-icons " + (ele.response.trim().length === 0 ? "d-none" : "d-block")} 
                       onClick={addNewResponse}
                     />
                   ) : (
