@@ -108,6 +108,7 @@ export const SocialTools=()=>{
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
+                                                                                            disabledDate={(current)=>disablePastDate(current,index,indexPlan,"startDate")}
                                                                                             onChange={(moment,dateValue)=>{datePlan(moment,index,indexPlan,"startDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>
@@ -121,6 +122,7 @@ export const SocialTools=()=>{
                                                                             </Col>
                                                                             <Col span={24}>
                                                                                 <DatePicker defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
+                                                                                            disabledDate={(current)=>disablePastDate(current,index,indexPlan,"endDate")}
                                                                                             onChange={(moment,dateValue)=>{datePlan(moment,index,indexPlan,"endDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>

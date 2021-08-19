@@ -52,8 +52,17 @@ const Hooks=()=>{
         const finalUserName=  item.name.toUpperCase().split('').shift() + item.lastName.toUpperCase().split('').shift();
         return finalUserName
     }
-    const disablePastDate=(current)=>{
+    const disablePastDate=(current,indexPost,indexPlan,dateType)=>{
         // Can not select days before today and today
+         console.log("currenttt",indexPost )
+        if (indexPost===0 && values.socialTools[indexPost]&&values.socialTools[indexPost].plan){
+            if (values.socialTools[indexPost].plan[indexPlan].startDate&&dateType==="endDate")
+                return  moment(values.socialTools[indexPost].plan[indexPlan].startDate,"YYYY-MM-DDTHH:mm:ss+01:00").isAfter(current)
+            if (values.socialTools[indexPost].plan[indexPlan].endDate&&dateType==="startDate")
+                return  moment(values.socialTools[indexPost].plan[indexPlan].endDate,"YYYY-MM-DDTHH:mm:ss+01:00").isBefore(current) || current < moment().startOf('day')
+            else
+                return current && current < moment().startOf('day')
+        }
         return current && current < moment().startOf('day');
     }
 
