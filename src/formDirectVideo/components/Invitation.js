@@ -96,6 +96,7 @@ function Invitation(){
                         }}
                         showArrow
                         className={"selectGroupGmail"}
+                        getPopupContainer={() => document.querySelector(".selectGroupGmail")}
                         mode="multiple"
                         style={{width: 240}}
                         placeholder={t("formDirectVideo.ChooseGroup")}
@@ -189,8 +190,8 @@ function Invitation(){
                         }
                         <Tooltip placement="bottom" title={t("formDirectVideo.AddRule")}>
                         <Popover
-
-                            className={"popover"}
+                            getPopupContainer={() => document.querySelector(".popover1")}
+                            className={"popover popover1"}
                             content={
                                 <div className={"popoverCheckbox"}>
                                     <Checkbox checked={values.invitation.addRules.visibleInscription === true} value="visibleInscription"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.RegistrationInv")}</Checkbox>
@@ -264,7 +265,8 @@ function Invitation(){
 
                         <Tooltip placement="bottom" title={t("formDirectVideo.AddRule")}>
                         <Popover
-                            className={"popover"}
+                            getPopupContainer={() => document.querySelector(".popover2")}
+                            className={"popover popover2"}
                             content={
                                 <div className={"popoverCheckbox"}>
                                     <Checkbox checked={values.invitation.addRules.visibleInscription2 === true} value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.RegistrationInv")}</Checkbox>

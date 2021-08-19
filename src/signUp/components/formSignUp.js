@@ -132,7 +132,7 @@ export const FormSignUp =({child1,child2})=>{
                                             ]}
 
                                     >
-                                        <PhoneInput international defaultCountry="RU"
+                                        <PhoneInput international defaultCountry="FR"
                                           placeholder={t("CompteSettings.EnterPhone")}
                                           onChange={handleChangePhone}
                                           value={valuesSignUp.signUp.phone}
