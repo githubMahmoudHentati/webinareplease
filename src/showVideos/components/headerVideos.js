@@ -138,6 +138,7 @@ function HeaderVideos() {
                           filterOption={(input, option) =>
                               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                           }
+                          getPopupContainer={() => document.querySelector(".selectFilter")}
                       >
                           <Option name="type"   value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
                           <Option name="type"  value="archived"><span className="icon-Archive"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
@@ -214,6 +215,7 @@ function HeaderVideos() {
                                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                               }
                               value={selectedContributor}
+                              getPopupContainer={() => document.querySelector(".select1_div2_div_Filter")}
                           >
                               <Option name="contributeur" value="Departement">{t("ShowVideo.Department")}</Option>
                               <Option name="contributeur" value="Profile">Profile</Option>

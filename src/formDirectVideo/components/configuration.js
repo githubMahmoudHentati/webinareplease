@@ -334,6 +334,7 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                                         filterOption={(input, option) =>
                                             option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                         }
+                                         getPopupContainer={() => document.querySelector(".spn2")}
                                     >
                                         {values.configuration.themesList.map((el) => {
                                             return (
