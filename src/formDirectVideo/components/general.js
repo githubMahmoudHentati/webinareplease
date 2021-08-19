@@ -167,7 +167,7 @@ console.log("pwd",values.general.pwd)
                                    rules={requiredFieldRule}
                         >
                             <DatePicker initialValues={values.general.startHour && moment(values.general.startHour, 'YYYY-MM-DD')}
-                                disabledDate={disablePastDate} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                                        disabledDate={(current)=>disablePastDate(current)} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
                         </Form.Item>
                     </Col>
                     <Col span={8}>
