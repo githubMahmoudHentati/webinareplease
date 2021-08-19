@@ -74,6 +74,7 @@ export const FormSignUp =({child1,child2})=>{
                                                label={t("CompteSettings.Nom")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
+                                               maxLength={16}
                                                name="firstName" placeholder={t("CompteSettings.Nom")}></Input>
                                     </Form.Item>
                                 </Col>
@@ -83,6 +84,7 @@ export const FormSignUp =({child1,child2})=>{
                                                label={t("CompteSettings.FirstName")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
+                                               maxLength={16}
                                                name="lastName" placeholder={t("CompteSettings.FirstName")}></Input>
                                     </Form.Item>
                                 </Col>
@@ -221,9 +223,9 @@ export const FormSignUp =({child1,child2})=>{
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                 }
                                             >
-                                                <Option name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
-                                                <Option name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
-                                                <Option name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
+                                                <Option  name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
+                                                <Option  name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
+                                                <Option  name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
                                             </Select>
                                     </Form.Item>
                                 </Col>
