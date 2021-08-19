@@ -41,7 +41,7 @@ export const LiveSubmit=(props)=>{
                     liveAction: values.general.liveAction,
                     startDate: moment(values.general.startDate, "YYYY-MM-DD"),
                     startHour: moment(values.general.startHour, "HH:mm:ss"),
-                    //period: moment(values.general.startDate,"YYYY-MM-DD"),,
+                    period: moment(values.general.livePlan.duration,"HH:mm:ss"),
                     directAccessMode: values.general.directAccessMode,
                     liveAccess: values.general.liveAccess,
                     pwd: values.general.pwd,
