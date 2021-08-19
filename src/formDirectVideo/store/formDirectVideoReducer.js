@@ -1,5 +1,6 @@
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
-import {Form} from "antd";
+import moment from "moment";
+
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
 const formDirectInitialState = {
@@ -197,7 +198,7 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
 
         case 'SET_DatePlan':
             const {dateIndexPost,dateIndexPlan,typeDate,dateValue}=action.payload
-            let datePlanNewArr=state.socialTools[dateIndexPost].plan.map((el,i) => (i === dateIndexPlan ? {...el,[typeDate]:dateValue.format("YYYY-MM-DDTHH:mm:ssZ")}:el))
+            let datePlanNewArr=state.socialTools[dateIndexPost].plan.map((el,i) => (i === dateIndexPlan?dateValue ? {...el,[typeDate]:dateValue.format("YYYY-MM-DDTHH:mm:ssZ")}:typeDate==="startDate"?{...el,[typeDate]:moment().format("YYYY-MM-DDTHH:mm:ssZ")}:el["startDate"]?{...el,[typeDate]:el["startDate"]}:{...el,[typeDate]:moment().format("YYYY-MM-DDTHH:mm:ssZ")}:el))
             const socialToolsDatePlan =state.socialTools.map(el => (el.id === dateIndexPost ? {...el,
                 plan: datePlanNewArr
             } : el))
