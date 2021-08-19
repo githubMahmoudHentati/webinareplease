@@ -166,8 +166,10 @@ console.log("pwd",values.general.pwd)
                         <Form.Item name="startDate" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
+
                             <DatePicker getPopupContainer={() => document.querySelector(".DatePickerGeneral")} className={"DatePickerGeneral"} initialValues={values.general.startHour && moment(values.general.startHour, 'YYYY-MM-DD')}
-                                disabledDate={disablePastDate} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+                                        disabledDate={(current)=>disablePastDate(current)} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
+
                         </Form.Item>
                     </Col>
                     <Col span={8}>
