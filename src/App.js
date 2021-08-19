@@ -18,6 +18,7 @@ import {ForgetPassword} from "./forgetPassword/forgetPassword";
 import {ResetPassword} from "./resetPassword/resetPassword";
 import Error from "./utils/components/Error";
 import {ConfirmAccount} from "./confirmAccount/confirmAccount";
+import IframeStudioLive from "./webinareStudioLive/webinareStudioLive";
 import en_US from "antd/lib/locale/en_US";
 import frFR from "antd/lib/locale/fr_FR";
 import { ConfigProvider } from "antd";
@@ -73,6 +74,8 @@ function App() {
                         <Redirect exact to="/connexion"/> : <FormDirectVideo/>}</Route>
                     <Route exact path='/compteSettings'> {!credentialsValues.appState.loggedIn ?
                         <Redirect exact to="/connexion"/> : <CompteSettings/>}</Route>
+                    <Route exact path='/webinarStudioLive'> {!credentialsValues.appState.loggedIn ?
+                        <Redirect exact to="/connexion"/> : <IframeStudioLive/>}</Route>
                     <Route exact path='/calendar'> {!credentialsValues.appState.loggedIn ?
                         <Redirect exact to="/connexion"/> : <Calendar/>}</Route>
                     <Route path={"*"} component={Error}/>
