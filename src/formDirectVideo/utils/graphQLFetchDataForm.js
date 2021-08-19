@@ -24,11 +24,9 @@ export const GraphQLFetchDataForm = (values) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
-    let period = typeof values.general.period!="string"? values.general.period.format('HH:mm:ss'):values.general.period;
     let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
     let {success_submit , error_submit}=StatusMessages(idLive)
-    console.log("period",period)
     const [CreateLive, {
         data: dataCreate,
         loading: loading_EventCreated,
@@ -45,7 +43,7 @@ export const GraphQLFetchDataForm = (values) => {
                     livePlan: {
                         plan: values.general.liveAction,
                         startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
-                        duration: period,
+                        duration: values.general.period,
 
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
@@ -136,7 +134,7 @@ export const GraphQLFetchDataForm = (values) => {
                     livePlan: {
                         plan: values.general.liveAction,
                         startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
-                        duration: period,
+                        duration: values.general.period,
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
                     pwd: values.general.pwd,

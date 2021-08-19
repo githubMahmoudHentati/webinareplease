@@ -139,7 +139,6 @@ const Hooks=()=>{
     };
 
     const editSpeaker = (name,lastName,title,email,logoSpeaker,id) => {
-console.log("editid",id)
         console.log("SpeakerListedit",values.configuration.SpeakerList)
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:true}));
         dispatch(setConfigurationInitialSpeaker({id:id,name,lastName,title,email,logoSpeaker: logoSpeaker}))
@@ -168,7 +167,6 @@ console.log("editid",id)
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
          values.configuration.SpeakerList.length<=0&&
         dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
-        console.log("enteeeeeeeeeer")
     };
 
     //**************Invitation************//
@@ -185,6 +183,7 @@ console.log("editid",id)
 
 
     const handleSubmit =async ()=>{
+        console.log("values.general.period",values.general.period)
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:true}));
         dispatch(setConfigurationOnchange({
             configurationNameChange: "addSpeakerList", configurationValueChange:
@@ -201,8 +200,11 @@ console.log("editid",id)
         }));
         let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
         let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
+        // let period = typeof values.general.period!="string"? values.general.period.format('HH:mm:ss'):values.general.period;
         dispatch(setGeneralOnchange({generalNameChange:"startDate", generalValueChange:newStartDate}));
         dispatch(setGeneralOnchange({generalNameChange:"startHour", generalValueChange:newStartHour}));
+
+        dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:typeof values.general.period!="string"&&values.general.period===!null? values.general.period.format('HH:mm:ss'):values.general.period===null?"":values.general.period}));
         idLive?UpdateLive():CreateLive()
     }
 
