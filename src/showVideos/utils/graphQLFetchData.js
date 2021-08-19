@@ -32,7 +32,7 @@ export const GraphQLFetchData=()=> {
                 "limit": paginationProps.pageSize,
                 "offset": (paginationProps.current-1)* (paginationProps.pageSize),
                 "order_dir": paginationProps.order,
-                "order_column": paginationProps.columnKey,
+                "order_column": parseInt(paginationProps.columnKey),
                 "search_word":values.search,
                 "date":  values.date && values.date.length ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
                 "status":values.type
