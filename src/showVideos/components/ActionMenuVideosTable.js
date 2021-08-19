@@ -18,7 +18,7 @@ function useActionMenu({record}) {
     const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive , handleExport , handleCancelModalExport , exportLives }=Hooks()
     const { t, i18n } = useTranslation();
     var  x  = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
-
+    const history = useHistory()
     console.log("DataVideo123456789",DataVideos.data.map(item=>item.status))
 
     const [visibleModalExport , SetVisibleModalExport] = useState(false)
@@ -69,7 +69,13 @@ function useActionMenu({record}) {
         }
     }
 
-
+  const handleClickStreamin = () =>{
+        if (record.status === -1){
+            history.push('/webinarStudioLive')
+        }else {
+          return null;
+        }
+  }
 
     const actionColumnView = (
         <div className="action">
@@ -79,7 +85,7 @@ function useActionMenu({record}) {
                         backgroundColor: darkMode === false ? "" : "#1D1D1D",
                         color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                         border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                    }}>
+                    }} onClick={()=>handleClickStreamin()}>
                         {
                             record.status === -1 ? <VideoCameraOutlined id={"icon_vs"}/> : <EyeOutlined id={"icon_vs"}/>
                         }
