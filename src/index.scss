@@ -493,7 +493,31 @@ body{
     font-size: 14px !important;
     font-weight: 500 !important;
 }
-.ant-picker-cell-inner:hover{
+.ant-picker-cell-disabled{
+    background-color: var(--option-background) !important;
+}
+.ant-picker-time-panel-cell-disabled{
+    background-color: var(--option-background) !important;
+}
+.ant-picker-clear{
+ background: var(--card_color) !important;
+    color: var(--white_color) !important;
+}
+.timePicker2 .ant-picker-now-btn{
+    display: none !important;
+}
+.ant-picker-cell-inner{
+    background: transparent !important;
+}
+.ant-picker-time-panel-column > li.ant-picker-time-panel-cell .ant-picker-time-panel-cell-inner:hover{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.ant-picker-time-panel-column > li.ant-picker-time-panel-cell-selected .ant-picker-time-panel-cell-inner{
+    background-color: var(--option-background) !important;
+    color: var(--white_color) !important;
+}
+.picker-time-panel-cell-inner:hover{
     background-color: var(--option-background) !important;
     color: var(--white_color) !important;
 }
@@ -1195,9 +1219,14 @@ margin-top: 2%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 .drp_lang{
     margin-right: 24px;
+    position: relative;
+}
+.drp_action{
+    position: relative;
 }
 .avatar-userName{
     padding-left: 5px;

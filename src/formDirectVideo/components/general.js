@@ -166,7 +166,7 @@ console.log("pwd",values.general.pwd)
                         <Form.Item name="startDate" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <DatePicker initialValues={values.general.startHour && moment(values.general.startHour, 'YYYY-MM-DD')}
+                            <DatePicker getPopupContainer={() => document.querySelector(".DatePickerGeneral")} className={"DatePickerGeneral"} initialValues={values.general.startHour && moment(values.general.startHour, 'YYYY-MM-DD')}
                                 disabledDate={disablePastDate} placeholder={t("formDirectVideo.ChooseStartDate")} onChange={(value,event)=>{generalOnChangeByName(value,event,"startDate")}} name="startDate"style={{width: "100%"}}></DatePicker>
                         </Form.Item>
                     </Col>
@@ -174,7 +174,7 @@ console.log("pwd",values.general.pwd)
                         <Form.Item  name="startHour" className={"form-item-style"}
                                     rules={requiredFieldRule}
                         >
-                            <TimePicker placeholder={t("formDirectVideo.ChooseStartTime")} name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
+                            <TimePicker getPopupContainer={() => document.querySelector(".timePicker1")} className={"timePicker1"} placeholder={t("formDirectVideo.ChooseStartTime")} name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
                                         disabledHours={()=>startGetDisabledHours(values)}
                                         disabledMinutes={startGetDisabledMinutes}
                             ></TimePicker>
@@ -183,7 +183,7 @@ console.log("pwd",values.general.pwd)
                     <Col span={8}>
                         <Form.Item name="period" className={"form-item-style"}
                         >
-                            <TimePicker placeholder={t("formDirectVideo.ChooseTimeFrame")} name="period" onChange={(value,event)=>{generalOnChangeByName(value,event,"period")}}  style={{width: "100%"}}></TimePicker>
+                            <TimePicker getPopupContainer={() => document.querySelector(".timePicker2")} className={"timePicker2"} placeholder={t("formDirectVideo.ChooseTimeFrame")} name="period" onChange={(value,event)=>{generalOnChangeByName(value,event,"period")}}  style={{width: "100%"}}></TimePicker>
                         </Form.Item>
                     </Col>
                 </Row>

@@ -169,8 +169,8 @@ function GlobalHeader() {
                                       style={{color: darkMode === false ? "" : "white"}}/>
                     </Badge>
 
-                    <Dropdown className={"drp_user"} overlay={MenuHeader} trigger={['click']}>
-                        <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
+                    <Dropdown getPopupContainer={() => document.querySelector(".drp_user")} className={"drp_user"} overlay={MenuHeader} trigger={['click']}>
+                        <a  className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: '#419BF9'}}
                                     src={avatar}
@@ -187,7 +187,7 @@ function GlobalHeader() {
                         </a>
                     </Dropdown>
 
-                    <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']}>
+                    <Dropdown getPopupContainer={() => document.querySelector(".drp_lang")} className={"drp_lang"} overlay={Menulang} trigger={['click']}>
                         <GlobalOutlined style={{color: darkMode === false ? "" : "white"}}/>
                     </Dropdown>
 

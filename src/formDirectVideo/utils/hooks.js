@@ -190,6 +190,10 @@ console.log("editid",id)
                     }
                 ))
         }));
+        let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
+        let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
+        dispatch(setGeneralOnchange({generalNameChange:"startDate", generalValueChange:newStartDate}));
+        dispatch(setGeneralOnchange({generalNameChange:"startHour", generalValueChange:newStartHour}));
         idLive?UpdateLive():CreateLive()
     }
 
