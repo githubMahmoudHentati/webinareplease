@@ -75,7 +75,7 @@ function ShowVideos() {
             dataIndex: 'title',
             key: '1',
             className: "columnTitle",
-            sorter: (a, b) => a.title.length - b.title.length,
+            sorter: (a, b) => a.title - b.title,
             sortOrder:paginationProps.columnKey === "1" &&  paginationProps.order,
             render:(titre , record) =>{
                 return(

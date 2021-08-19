@@ -24,7 +24,6 @@ export const GraphQLFetchDataForm = (values) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
-    let period = values.general.period? values.general.period.format('HH:mm:ss'):"";
     let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
     let {success_submit , error_submit}=StatusMessages(idLive)
@@ -43,8 +42,13 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
+<<<<<<<<< Temporary merge branch 1
+                        startDate: newStartDate&&newStartHour?newStartDate+ "T" + newStartHour+ "Z":"",
+                        duration: period
+=========
                         startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
-                        duration: ""
+                        duration: values.general.period,
+
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
                     pwd: values.general.pwd,
@@ -133,8 +137,12 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
+<<<<<<<<< Temporary merge branch 1
+                        startDate: moment(newStartDate&&newStartHour?newStartDate+ "T" + newStartHour :""),
+                        duration:period,
+=========
                         startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
-                        duration: ""
+                        duration: values.general.period,
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
                     pwd: values.general.pwd,
@@ -240,6 +248,7 @@ export const GraphQLFetchDataForm = (values) => {
         onCompleted: async (data)=>{
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
+
             console.log("startDate",startDate,"startHour",startHour)
             let speakerList=[...data.getlive.configurationOut.speakers]
             dispatch(setLiveInfo({
@@ -259,7 +268,7 @@ export const GraphQLFetchDataForm = (values) => {
                     livePlan:{
                         plan: false,
                         startDate:"",
-                        duration:"",
+                        duration:data.getlive.generalInfoOut.livePlan.duration,
                     },
                     startDate: startDate,
                     startHour: startHour,
