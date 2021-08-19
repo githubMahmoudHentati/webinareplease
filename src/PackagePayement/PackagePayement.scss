@@ -2,3 +2,91 @@
   display: flex !important;
   justify-content: flex-start !important;
 }
+@media (min-width: 1081px){
+  .steps-action-form{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position: absolute;
+    top: 940px;
+    height:100px;
+
+  }
+  .ChoicePackage-form{
+    margin-top: 100px;
+    width: 80%;
+    position: absolute;
+    left: 10%;
+
+  }
+  .col-politique{
+    width:100%;
+    flex: 0 0 90%;
+    font-size:12px
+
+  }
+}
+@media (min-width:576px) and (max-width:1080px){
+  .steps-action-form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position: absolute;
+    top: 920px;
+    height:100px;
+    padding-bottom: 5%;
+
+  }
+
+  .ChoicePackage-form{
+    margin-top: 80px;
+    width: 80%;
+    position: absolute;
+    left: 10%;
+
+  }
+  .col-politique{
+    width:100%;
+    flex: 0 0 85%;
+    padding-left: 20px !important;
+
+  }
+}
+@media (min-width:280px) and (max-width: 576px){
+  .steps-action-form{
+width: 97%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position: absolute;
+    top: 1320px;
+    height:100px;
+    padding-bottom: 5% !important;
+
+  }
+  .empty_div{
+    width: 100%;
+    height: 100vh !important;
+    position: relative !important;
+    margin-top: 100px;
+  }
+
+  .row_politique{
+margin-bottom: 50px;
+
+
+
+  }
+  .col-politique{
+width:100%;
+    flex: 0 0 85%;
+    padding-left: 20px !important;
+
+
+  }
+}

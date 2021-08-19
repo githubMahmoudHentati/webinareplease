@@ -43,7 +43,7 @@
   display:flex ;
   align-items:center ;
   justify-content:flex-end ;
-  margin-bottom: 2%;
+  //margin-bottom: 2%;
 }
 .spn1{
   font-family: "SF Pro Display";
@@ -56,7 +56,7 @@
   font-weight: normal;
 }
 .form-item-style{
-  margin-bottom: 0 !important;
+  //margin-bottom: 0 !important;
 }
 .require{
   color: #ff4d4f;
@@ -82,13 +82,14 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top:470px !important;
+    top:540px !important;
     left: 50% !important;
     transform: translate(-50%,-50%) !important;
     margin-top: 4%;
   }
+
 }
-@media (min-width:576px) and (max-width:1250px) {
+@media (min-width:576px) and (max-width:1080px) {
 .pol{
   display: none !important;
 }
@@ -98,10 +99,13 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top:470px !important;
+    top:520px !important;
     left: 50% !important;
     transform: translate(-50%,-50%) !important;
     margin-top: 4%;
+  }
+  .ant-form-item-label{
+    overflow: visible;
   }
 }
 @media (max-width:576px) {
@@ -111,7 +115,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top:660px !important;
+    top:730px !important;
     left: 50% !important;
     transform: translate(-50%,-50%) !important;
     margin-top: 4%;
@@ -139,7 +143,7 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top:700px !important;
+    top:750px !important;
     left: 50% !important;
     transform: translate(-50%,-50%) !important;
     margin-top: 4%;

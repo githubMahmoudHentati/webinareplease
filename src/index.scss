@@ -638,7 +638,9 @@ color: var(--white_color) !important;
 }
 
 
-
+.WebinairePlease{
+    
+}
 
 .spnwhite{
     color: var(--white_color) !important;
@@ -782,6 +784,9 @@ color: var(--white_color) !important;
 }
 .inputFilter{
     height: 100%;
+}
+.option-background{
+    background: white;
 }
 .filter_icon{
     width: 40px !important;
@@ -1297,7 +1302,7 @@ input:checked + .slider:before {
 /*WebinairePlease*/
 .div1_WebinairePlease{
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: relative;
     display: flex;
     flex-direction: row;
@@ -1306,18 +1311,24 @@ input:checked + .slider:before {
 }
 .blue_div{
     width: 25%;
-    height: 100vh;
+    //height: 100vmin !important;
     background-color: #f0f3f7;
-    padding: 112px 115px 697px 116px;
+    padding: 112px 115px 35rem 116px;
     text-align: center;
+    height:100%;
 }
 .empty_div{
     width: 75%;
-    height: 100vh;
-    position: relative;
+    height: 100%;
+    position: absolute;
+    right: 0;
 }
 .icon1_webinaire{
-    font-size: 6vw;
+    display: flex;
+    font-size: 85px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10%;
 }
 .div_image{
     width: 20%;
@@ -1348,7 +1359,7 @@ input:checked + .slider:before {
     justify-content: space-between;
 }
 .steps-content {
-   height: 90%;
+   //height: 90%;
 }
 .steps-action {
     height: 5%;
@@ -1382,7 +1393,7 @@ input:checked + .slider:before {
 }
 .card_Forfait{
     width: 100%;
-    height: 600px;
+   // height: 600px;
     margin-top: 10%;
     display: flex;
     flex-direction: row;
@@ -1444,9 +1455,12 @@ input:checked + .slider:before {
 }
 .Card2_Forfait div h5{
     font-family: 'SF Pro Display';
-    font-size: 15.6px;
+    font-size: 15px;
     font-weight: 600;
     color: #4a4a4a;
+    white-space: nowrap;
+    width: 170px;
+
 }
 .Card2_Forfait .ant-select{
     width: 100% !important;
@@ -1643,11 +1657,11 @@ input:checked + .slider:before {
 /************************** Media Query ***********************/
 
 /********** Tablette *********************/
-@media (min-width:576px) and (max-width:1250px) {
+@media (min-width:576px) and (max-width:1080px) {
     /***** Package Payement Tab *****/
     .div1_WebinairePlease{
         width: 100%;
-        height: 100vh;
+        height: 100%;
         position: relative;
         display: flex;
         border: none;
@@ -1656,22 +1670,28 @@ input:checked + .slider:before {
         align-items: flex-start !important;
     }
     .blue_div{
-        width: 100% !important;
-        height: 9vh !important;
-        background-color: #f0f3f7;
-        padding: 15px 25px !important;
+        height: 60px;
+        width:100%;
+        padding: 0;
+        margin: 0;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-        margin-bottom: 2% !important;
     }
     .icon1_webinaire{
-        font-size: 55px;
+        height: 100%;
+        font-size: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 25px;
+        padding-top: 0px;
     }
     .empty_div{
         width: 100%;
         height: 90vh;
         position: relative !important;
+        margin-top: 100px;
     }
     .div_image{
         width: 100%;
@@ -1689,7 +1709,7 @@ input:checked + .slider:before {
     }
     .ChoicePackage{
         width: 95%;
-        height: 80vh;
+        height: 88vh;
 
         display: block !important;
     }
@@ -1697,9 +1717,10 @@ input:checked + .slider:before {
         height: 5%;
     }
     .steps-action{
-        margin-bottom: 20px;
-        position: absolute;
-        top: 11%;
+        //margin-bottom: 20px;
+        //position: absolute;
+        //top: 11%;
+        height: 10%;
     }
     .div2_champsPayement{
         width: 65%;
@@ -1735,7 +1756,9 @@ input:checked + .slider:before {
     .Card0_Forfait , .Card1_Forfait , .Card2_Forfait{
         display: flex;
         flex-direction: row;
+        height:auto;
     }
+
     .Card0_Forfait div , .Card1_Forfait  div{
         width: 50%;
     }
@@ -1858,7 +1881,7 @@ input:checked + .slider:before {
     /***** Package Payement Tab *****/
     .div1_WebinairePlease{
         width: 100%;
-        height: 100vh;
+        height: 100%;
         position: relative;
         display: flex;
         border: none;
@@ -1868,21 +1891,23 @@ input:checked + .slider:before {
     }
     .blue_div{
         width: 100% !important;
-        height: 12vh !important;
+       // height: 12vh !important;
         background-color: #f0f3f7;
         padding: 15px 25px !important;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-        margin-bottom: 2% !important;
+       // margin-bottom: 2% !important;
     }
     .icon1_webinaire{
         font-size: 40px;
+        padding-top: 0px;
     }
     .empty_div{
         width: 100%;
-        height: 88vh !important;
+        height: 100vh !important;
         position: relative !important;
+        margin-top: 5%;
     }
     .div_image{
         width: 100%;
@@ -1900,7 +1925,7 @@ input:checked + .slider:before {
     }
     .ChoicePackage{
         width: 95%;
-        height: 80vh;
+        height: 88vh;
         display: block !important;
     }
     .ant-steps-item-container{
@@ -1920,14 +1945,15 @@ input:checked + .slider:before {
         height: 5%;
     }
     .steps-action{
-        margin-bottom: 20px;
-        position: absolute;
-        top: 90px;
+        //margin-bottom: 20px;
+        //position: absolute;
+        //top: 90px;
+        height: 10%;
     }
     .card_Forfait{
         width: 100%;
         height: 60%;
-        margin-top: 25%;
+       // margin-top: 25%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1951,13 +1977,28 @@ input:checked + .slider:before {
     }
     .Card0_Forfait , .Card1_Forfait , .Card2_Forfait{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        height: auto;
+    }
+    .Card2_Forfait div h5 {
+        font-family: 'SF Pro Display';
+        font-size: 15px;
+        font-weight: 600;
+        color: #4a4a4a;
+        white-space: nowrap;
+        width: 170px;
+        margin-top: 27px;
     }
     .Card0_Forfait div , .Card1_Forfait  div{
-        width: 50%;
+        width: 100%;
+
     }
     .Card2_Forfait_div1 , .Card2_Forfait_div2{
-        width: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction:column;
+        justify-content:space-between;
+
     }
     .champsPayement{
         width: 100%;
@@ -2003,7 +2044,8 @@ input:checked + .slider:before {
     }
 }
 .divsignup{
-    background-color: #e74c3c !important;
+    //background-color: #e74c3c !important;
+
 }
 .showVideosDiv{
     overflow-x: hidden;
