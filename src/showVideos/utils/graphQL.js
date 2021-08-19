@@ -11,6 +11,7 @@ export const graphQL_shema = ()=> {
          logo
          status
          liveDate
+         owner
       }
       recordsTotal
       recordsFiltered
