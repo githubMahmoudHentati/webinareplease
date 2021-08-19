@@ -54,7 +54,7 @@ const Hooks=()=>{
     }
     const disablePastDate=(current,indexPost,indexPlan,dateType)=>{
         // Can not select days before today and today
-         console.log("currenttt",indexPost )
+        console.log("currenttt",indexPost )
         if (indexPost===0 && values.socialTools[indexPost]&&values.socialTools[indexPost].plan){
             if (values.socialTools[indexPost].plan[indexPlan].startDate&&dateType==="endDate")
                 return  moment(values.socialTools[indexPost].plan[indexPlan].startDate,"YYYY-MM-DDTHH:mm:ss+01:00").isAfter(current)
@@ -165,7 +165,7 @@ const Hooks=()=>{
             onChangeSpeaker(value, key)
         }
         dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:false}));
-         values.configuration.SpeakerList.length<=0&&
+        values.configuration.SpeakerList.length<=0&&
         dispatch(setConfigurationOnchange({configurationNameChange:"switchSpeaker", configurationValueChange:false}))
     };
 
