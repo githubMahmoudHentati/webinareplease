@@ -69,7 +69,7 @@ const Hooks=()=>{
     const startGetDisabledHours = () => {
         let hours = [];
         console.log("values.general.startDate",values.general.startDate)
-        if (values.general.startDate&&values.general.startDate.format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
+        if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
             for (let i = 0; i < moment().tz("Europe/Paris").hour(); i++) {
                 hours.push(i);
             }
@@ -83,7 +83,7 @@ const Hooks=()=>{
 
     const startGetDisabledMinutes = (selectedHour) => {
         let minutes= [];
-        if (values.general.startDate&&values.general.startDate.format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
+        if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
             if (selectedHour === moment().tz("Europe/Paris").hour()) {
                 for (let i = 0; i < moment().minute(); i++) {
                     minutes.push(i);
