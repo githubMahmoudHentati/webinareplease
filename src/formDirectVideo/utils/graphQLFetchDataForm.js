@@ -42,10 +42,6 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-<<<<<<<<< Temporary merge branch 1
-                        startDate: newStartDate&&newStartHour?newStartDate+ "T" + newStartHour+ "Z":"",
-                        duration: period
-=========
                         startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
                         duration: values.general.period,
 
@@ -137,10 +133,6 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-<<<<<<<<< Temporary merge branch 1
-                        startDate: moment(newStartDate&&newStartHour?newStartDate+ "T" + newStartHour :""),
-                        duration:period,
-=========
                         startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
                         duration: values.general.period,
                     },
