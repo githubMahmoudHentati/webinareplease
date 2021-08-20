@@ -1915,9 +1915,6 @@ input:checked + .slider:before {
 
 }
 @media (max-width:575px) {
-    .menu{
-        display: none;
-    }
     .div_alert{
         position: fixed;
         top:6% !important;

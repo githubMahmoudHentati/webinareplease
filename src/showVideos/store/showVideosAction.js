@@ -6,6 +6,14 @@ export function setshowVideosActions(e){
     }
 
 }
+export function setDiffusionLink(e){
+
+    return{
+        type: "SET_DiffusionLink",
+        payload:e,
+    }
+
+}
 
 export function setFilterVideosActions(e){
 

@@ -5,7 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange, setExportLive,setFilter
+    setShowVideoConstraintDataOnchange, setExportLive, setFilter, setDiffusionLink
 } from "../store/showVideosAction"
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -67,11 +67,13 @@ export  const Hooks=()=> {
     const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
     //Reducer
     const valuesReducer = useSelector((state)=> state.Reducer)
+    // Diffusion Link
+    const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
 
     // matches Media query
     let matchesMedia = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",valuesReducer)
+       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",diffusionLink)
     if(DataVideos.data){
         console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
     }
@@ -202,6 +204,15 @@ export  const Hooks=()=> {
     })
 
     //******************Function Data Table************************//
+
+    // mutation Get Diffusion Link
+    const [getDiffusionLink] = useMutation(graphQL_shema().diffusion_link,{
+        context: { clientName: "second" },
+        onCompleted: (data)=>{
+            console.log("getDiffusionLinkkkkkkkkkkkkk",data)
+            dispatch(setDiffusionLink(data.getDiffusionLink));
+        }
+    })
 
     /*Function Input*/
     const handleSearchRow = async(event , dates) => {
@@ -469,6 +480,21 @@ export  const Hooks=()=> {
         dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:false}));
     }
 
+    // Handle Click Visualiser/Diffuser
+    const handleClickStreamin = async (e) =>{
+        await dispatch(setPaginationProps({PaginationPropsNameChange:"idDiffusion",PaginationPropsValueChange:e.id}));
+
+        if(e.status === -1){
+            await getDiffusionLink({
+                variables : {id:e.id},
+            })
+            await history.push("/webinarStudioLive")
+        }else {
+           await  window.open("https://k8s-test-stream.webtv-solution.com/room/42-E1urW7hqgKHQJ2N?userName=Bou7mid Barhoum", '_blank');
+        }
+
+    }
+
     return({
         handleSearchRow,
         handleHeaderSelect,
@@ -497,5 +523,6 @@ export  const Hooks=()=> {
         handleCancelModalExport,
         exportLives,
         resetFilterVideos,
+        handleClickStreamin
     })
 }
