@@ -24,6 +24,7 @@ export const SignUp =()=>{
             name="product-form"
             onFinish={handleSubmitSignUp}
         >
+
         <WebinairePlease logo={logo}>
                     <FormSignUp
                         child1={
