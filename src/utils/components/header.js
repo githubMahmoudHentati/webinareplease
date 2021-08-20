@@ -163,11 +163,11 @@ function GlobalHeader() {
 
 
                 <div className="div_Notification_user_dar">
-                    <QuestionCircleOutlined className={"icon_help"} style={{color: darkMode === false ? "" : "white"}}/>
-                    <Badge count={5} className={"Badge"}>
-                        <BellOutlined className={"icon_notification"}
-                                      style={{color: darkMode === false ? "" : "white"}}/>
-                    </Badge>
+                    {/*<QuestionCircleOutlined className={"icon_help"} style={{color: darkMode === false ? "" : "white"}}/>*/}
+                    {/*<Badge count={5} className={"Badge"}>*/}
+                    {/*    <BellOutlined className={"icon_notification"}*/}
+                    {/*                  style={{color: darkMode === false ? "" : "white"}}/>*/}
+                    {/*</Badge>*/}
 
                     <Dropdown getPopupContainer={() => document.querySelector(".drp_user")} className={"drp_user"} overlay={MenuHeader} trigger={['click']}>
                         <a  className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}

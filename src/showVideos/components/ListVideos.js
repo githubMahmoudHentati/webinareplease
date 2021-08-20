@@ -66,6 +66,9 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
   };
   const rowSelection = {
     selectedRowKeys: valuePagination.id,
+      getCheckboxProps: (record) => ({
+          disabled: record.owner === false, // Column configuration not to be checked
+      }),
     onChange: onSelectChange,
   };
 
@@ -90,6 +93,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
   //  setCurrentPage(pagination.current);
    // SetOrder(sorter.order);
   //  setPageSize(pagination.pageSize);
+
   /************set data to store***************** */
     //dispath sort
     if(valuePagination.order !== sorter.order)

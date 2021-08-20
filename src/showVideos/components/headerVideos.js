@@ -204,25 +204,25 @@ function HeaderVideos() {
                           />
                       </div>{/*./div1_div_Filter*/}
 
-                      <div className="div2_div_Filter">
+                      {/*<div className="div2_div_Filter">*/}
 
-                          <Select
-                              className="select1_div2_div_Filter"
-                              name="contributeur" onChange={onChangeContributor}
-                              placeholder={t("ShowVideo.Contributor")}
-                              optionFilterProp="children"
-                              filterOption={(input, option) =>
-                                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                              }
-                              value={selectedContributor}
-                              getPopupContainer={() => document.querySelector(".select1_div2_div_Filter")}
-                          >
-                              <Option name="contributeur" value="Departement">{t("ShowVideo.Department")}</Option>
-                              <Option name="contributeur" value="Profile">Profile</Option>
-                              <Option name="contributeur" value="lucy">lucy</Option>
-                          </Select>
+                      {/*    <Select*/}
+                      {/*        className="select1_div2_div_Filter"*/}
+                      {/*        name="contributeur" onChange={onChangeContributor}*/}
+                      {/*        placeholder={t("ShowVideo.Contributor")}*/}
+                      {/*        optionFilterProp="children"*/}
+                      {/*        filterOption={(input, option) =>*/}
+                      {/*            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0*/}
+                      {/*        }*/}
+                      {/*        value={selectedContributor}*/}
+                      {/*        getPopupContainer={() => document.querySelector(".select1_div2_div_Filter")}*/}
+                      {/*    >*/}
+                      {/*        <Option name="contributeur" value="Departement">{t("ShowVideo.Department")}</Option>*/}
+                      {/*        <Option name="contributeur" value="Profile">Profile</Option>*/}
+                      {/*        <Option name="contributeur" value="lucy">lucy</Option>*/}
+                      {/*    </Select>*/}
 
-                      </div>{/*./div2_div_Filter*/}
+                      {/*</div>/!*./div2_div_Filter*!/*/}
 
                       <div className="div_button_filter">
                           <Tooltip title={t("ShowVideo.ResetMedia")}><Button onClick={handleResetFilter} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
