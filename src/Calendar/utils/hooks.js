@@ -103,7 +103,7 @@ const HooksCalendar=(callback)=> {
         onCompleted: async (data) => {
             let diffusionData=data.getDiffusionLink
             if (diffusionData) {
-                if(diffusionData.code==="200" ){
+                if(diffusionData.code===200 ){
                     if( statusLive===0){
                         history.push('/webinarStudioLive')
                     }else{
