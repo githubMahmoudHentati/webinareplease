@@ -135,7 +135,7 @@ console.log("pwd",values.general.pwd)
                         >
                             <Switch checked={values.general.liveAction} name="liveAction" value="liveAction"
                                     onChange={(checked, event) => {
-                                        generalOnChangeByName(checked, event, "liveAction")
+                                        generalOnChangeByName(checked, checked, "liveAction")
                                     }}/>
 
                         </Form.Item>

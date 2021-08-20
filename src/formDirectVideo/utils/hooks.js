@@ -28,7 +28,7 @@ const Hooks=()=>{
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
         console.log("testtest",name,value)
-        dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:value}));
+        dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:event}));
     }
     const generalOnChange = (event) => {
         console.log("event",event.target.value,event.target.name)
@@ -206,7 +206,7 @@ const Hooks=()=>{
 
         dispatch(setDatePlanFormat());
 
-        dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:typeof values.general.period!="string"&&values.general.period===!null? values.general.period.format('HH:mm:ss'):values.general.period===null?"":values.general.period}));
+        dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:typeof values.general.period!="string"&&values.general.period===!null? moment(values.general.period).format('HH'):values.general.period===null?"":values.general.period}));
         idLive?UpdateLive():CreateLive()
     }
 
