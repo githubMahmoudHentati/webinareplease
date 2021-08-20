@@ -32,6 +32,8 @@ const HooksCalendar=(callback)=> {
     const calendarProps = useSelector((state) => state.CalendarReducer)
     const calendarValues = calendarProps.calendar.calendarValues;
     const {success_Delete, error_Delete} = StatusMessage()
+    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
+    const statusLive = localStorage.getItem('statusLive')?localStorage.getItem('statusLive'):'';
     const history = useHistory();
     var  x  = useWindowDimensions()
     let  itemsDeleted;
@@ -94,7 +96,23 @@ const HooksCalendar=(callback)=> {
             setAllow(true)
         }
     })
-
+    const [GetDiffusionLive]
+        = useMutation(graphQL_shema().Get_Diffusion_Live, {
+        context: {clientName: "second"},
+        variables: {id: idLive},
+        onCompleted: async (data) => {
+            let diffusionData=data.getDiffusionLink
+            if (diffusionData) {
+                if(diffusionData.code==="200" ){
+                    if( statusLive===0){
+                        history.push('/webinarStudioLive')
+                    }else{
+                        window.open(diffusionData.visLink,'_blank')
+                    }
+                }
+            }
+        }
+    })
 //******************generalInformation************************//
     const setItemsRunAPI = (ItemsRunAPI) => {
         itemsRunAPI=ItemsRunAPI
@@ -278,13 +296,16 @@ const HooksCalendar=(callback)=> {
             CalendarValueChange: x.matches ? true : false
         }))
     }
+    const diffusionLive = ({id, status}) =>{
+        localStorage.setItem('idLive', id);
+        localStorage.setItem('statusLive', status);
+        GetDiffusionLive()
+    }
     const handleStatusEvents =async (live) =>{
         if(live.status === -1){
            await updateLive(live.id)
-        }else if(live.status === 0){
-
-        }else{
-
+        }else {
+            await diffusionLive({id: live.id, status:live.status})
         }
         await handleCancel()
     }
