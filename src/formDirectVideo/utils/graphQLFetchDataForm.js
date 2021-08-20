@@ -283,7 +283,13 @@ export const GraphQLFetchDataForm = (values) => {
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
                     SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
-                        logoSpeaker:[],email,title,id:index+1,
+                        logoSpeaker:[{
+                            uid: '-1',
+                            name: speakerList[index].avatar.substring(speakerList[index].avatar.lastIndexOf("/")+1,speakerList[index].avatar.length),
+                            status: 'done',
+                            url: speakerList[index].avatar,
+                            thumbUrl:speakerList[index].avatar,
+                        }],email,title,id:index+1,
                         ...rest
                     })),
                     addSpeakerList:values.configuration.addSpeakerList,
