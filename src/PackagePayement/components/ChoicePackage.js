@@ -134,7 +134,7 @@ function ChoicePackage(){
             onFinish={handleSubmitSignUp}
         >
             <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "ChoicePackage-form" : "ChoicePackage"}>
-                <Steps current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>
+                <Steps className={steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "steps-form" : "steps-choice"} current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>
                     {steps.map(item => (
                         <Step key={item.title} title={item.title}/>
                     ))}
@@ -324,41 +324,41 @@ function ChoicePackage(){
 
                     }
 
+                    <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "steps-action-form" : "steps-action"}>
+                        {valuesSignUp.constraintData.current === 0 && (
+                            <Button onClick={()=>{history.push("/")}} style={{margin: '0 8px'}}>
+                                {t("CompteSettings.Cancel")}
+                            </Button>
+                        )}
+                        {valuesSignUp.constraintData.current > 0 && (
+                            <Button style={{margin: '0 8px'}} onClick={() => prev()}>
+                                {t("PackagePayment.Back")}
+                            </Button>
+                        )}
+                        {valuesSignUp.constraintData.current === 1 && (
+                            <Button  onClick={()=>{
+                                !valuesSignUp.constraintData.confidentialityOption?document.documentElement.style.setProperty('--box-signup', "red"):
+                                    document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
+                            }} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("PackagePayment.RegisterNow")}</Button>
+                        )}
+                        {valuesSignUp.constraintData.current ===0 && (
+                            <Button
+                                type="primary" onClick={nextToSignUp}
+                                disabled={values.packagePayement.activeCard === 0}>
+                                {t("PackagePayment.SaveAndContinue")}
+                            </Button>
+                        )}
+                        {valuesSignUp.constraintData.current === steps.length - 1 && (
+                            <Button type="primary" onClick={() =>handlePayer()}>
+                                {t("PackagePayment.Payer")}
+                            </Button>
+                        )}
 
+                    </div>
                 </div>
 
                 {/*./steps-content*/}
-                <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "steps-action-form" : "steps-action"}>
-                    {valuesSignUp.constraintData.current === 0 && (
-                        <Button onClick={()=>{history.push("/")}} style={{margin: '0 8px'}}>
-                            {t("CompteSettings.Cancel")}
-                        </Button>
-                    )}
-                    {valuesSignUp.constraintData.current > 0 && (
-                        <Button style={{margin: '0 8px'}} onClick={() => prev()}>
-                            {t("PackagePayment.Back")}
-                        </Button>
-                    )}
-                    {valuesSignUp.constraintData.current === 1 && (
-                        <Button  onClick={()=>{
-                            !valuesSignUp.constraintData.confidentialityOption?document.documentElement.style.setProperty('--box-signup', "red"):
-                                document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
-                        }} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("PackagePayment.RegisterNow")}</Button>
-                    )}
-                    {valuesSignUp.constraintData.current ===0 && (
-                        <Button
-                            type="primary" onClick={nextToSignUp}
-                                disabled={values.packagePayement.activeCard === 0}>
-                            {t("PackagePayment.SaveAndContinue")}
-                        </Button>
-                    )}
-                    {valuesSignUp.constraintData.current === steps.length - 1 && (
-                        <Button type="primary" onClick={() =>handlePayer()}>
-                            {t("PackagePayment.Payer")}
-                        </Button>
-                    )}
 
-                </div>
             </div>
         </Form>
     );

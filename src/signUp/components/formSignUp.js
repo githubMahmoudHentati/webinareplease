@@ -55,19 +55,19 @@ export const FormSignUp =({child1,child2})=>{
 
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
-    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")},{max:15}];
 
     console.log("signUp",valuesSignUp)
     return(
 
-            <Row gutter={[0, 40]} className={'col-signUp'}>
-                <Col className={"spn1"} style={{textAlign: 'center'}} span={24}>
+            <Row gutter={[0, 25]} className={'col-signUp'}>
+                <Col className={"spn1"} style={{textAlign: 'center'}} span={18}>
                     {child1}
                 </Col>
-                <Col span={24}>
-                    <Row gutter={[0, 30]}>
-                        <Col span={24}>
-                            <Row gutter={[0, 10]} justify={"end"}>
+                <Col span={18}>
+                    <Row gutter={[0, 15]} className={"col-signUp__row"}>
+                        <Col span={18}>
+                            <Row gutter={[0, 0]} justify={"end"}>
                                 <Col span={24}>
                                     <Form.Item name="firstName" className={"form-item-style"}
                                                rules={requiredFieldRule}
@@ -145,7 +145,7 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={24}>
+                        <Col span={18}>
                                     <Form.Item
                                         className={"form-item-style"}
                                         name="password"
@@ -169,7 +169,7 @@ export const FormSignUp =({child1,child2})=>{
                                         />
                                     </Form.Item>
                         </Col>
-                        <Col span={24}>
+                        <Col span={18}>
                             <Row gutter={[0, 10]}>
                                 <Col span={24}>
                                     <Form.Item name="address" className={"form-item-style"}
@@ -197,7 +197,7 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={24}>
+                        <Col span={18}>
                             <Row gutter={[0, 10]}>
                                 <Col span={24}>
                                     <Form.Item name="society" className={"form-item-style"}
@@ -231,7 +231,7 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={24}>
+                        <Col span={18}>
                             <Row className={"row_politique"} gutter={[10, 0]}>
                                 <Col offset={4} span={1}>
                                     <Form.Item name="confidentialityOptionGroup" className={"form-item-style"} valuePropName="checked"
@@ -252,7 +252,7 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={20}>
+                        <Col span={18}>
                             {child2}
                         </Col>
                     </Row>
