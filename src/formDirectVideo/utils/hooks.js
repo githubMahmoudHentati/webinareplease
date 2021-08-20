@@ -11,7 +11,7 @@ import {
     setConfigurationSpeakerList,
     setGeneralOnchange,
     setInvitationOnchange,
-    setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange
+    setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat
 } from "../store/formDirectVideoAction";
 import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
@@ -55,7 +55,7 @@ const Hooks=()=>{
     const disablePastDate=(current,indexPost,indexPlan,dateType)=>{
         // Can not select days before today and today
          console.log("currenttt",indexPost )
-        if (indexPost===0 && values.socialTools[indexPost]&&values.socialTools[indexPost].plan){
+        if (indexPost===indexPost && values.socialTools[indexPost]&&values.socialTools[indexPost].plan){
             if (values.socialTools[indexPost].plan[indexPlan].startDate&&dateType==="endDate")
                 return  moment(values.socialTools[indexPost].plan[indexPlan].startDate,"YYYY-MM-DDTHH:mm:ss+01:00").isAfter(current)
             if (values.socialTools[indexPost].plan[indexPlan].endDate&&dateType==="startDate")
@@ -203,6 +203,8 @@ const Hooks=()=>{
         // let period = typeof values.general.period!="string"? values.general.period.format('HH:mm:ss'):values.general.period;
         dispatch(setGeneralOnchange({generalNameChange:"startDate", generalValueChange:newStartDate}));
         dispatch(setGeneralOnchange({generalNameChange:"startHour", generalValueChange:newStartHour}));
+
+        dispatch(setDatePlanFormat());
 
         dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:typeof values.general.period!="string"&&values.general.period===!null? values.general.period.format('HH:mm:ss'):values.general.period===null?"":values.general.period}));
         idLive?UpdateLive():CreateLive()

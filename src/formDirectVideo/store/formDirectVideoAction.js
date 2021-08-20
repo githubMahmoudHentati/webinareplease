@@ -193,6 +193,12 @@ export function setGeneralOnchange(e){
             }
         }
 
+        export function setDatePlanFormat(e){
+            return{
+                type:"SET_DatePlanFormat",
+                payload:e
+            }
+        }
 
 
 //***************************Update live info***************************//
