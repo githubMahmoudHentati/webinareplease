@@ -64,6 +64,7 @@ export const GraphQLFetchData=()=> {
         }
     })
 
+
     useEffect(()=>{
         if(dataLives)
         dispatch(setshowVideosActions(dataLives.getLives));

@@ -48,13 +48,19 @@ export const graphQL_shema = ()=> {
     integrationUrl
      }
     }
+    `;
+    const diffusion_link = gql `
+    mutation($id:Int!) {
+     getDiffusionLink(id:$id)
+     { code diffLink visLink }
+
+      }
     `
-
-
     return ({
         Get_Lives,
         Delete_Items,
         Get_Live_Info,
-        Export_Live
+        Export_Live,
+        diffusion_link
     })
 }
