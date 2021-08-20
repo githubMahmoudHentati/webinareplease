@@ -80,6 +80,8 @@ export const graphQL_shema = ()=> {
                     }
                     tags
                     themes
+                    attachedFiles
+                    slides
                 }
                 socialOut{
                     id
