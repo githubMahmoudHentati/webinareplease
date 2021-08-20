@@ -15,6 +15,7 @@ import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import defaultImg from '../../assets/webinarplease-thumb.jpg';
 import {setDirectSetting} from "../../utils/redux/actions";
 import {StatusMessages} from "./StatusMessages";
+import {v4 as uuidv4} from "uuid";
 
 
 export const GraphQLFetchDataForm = (values) => {
@@ -70,6 +71,8 @@ export const GraphQLFetchDataForm = (values) => {
                     tags: values.configuration.tags,
                     addSpeaker: values.configuration.addSpeakerList,
                     themes: values.configuration.theme,
+                    attachedFiles:ThumbUrlAttachementFile,
+                    slides:DiapositivesFile,
                 },
                 social: [
                     {
@@ -161,6 +164,8 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     tags: values.configuration.tags,
                     themes: values.configuration.theme,
+                    attachedFiles:ThumbUrlAttachementFile,
+                    slides:DiapositivesFile,
                 },
                 social: [
                     {
@@ -293,8 +298,24 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
-                    diapositivesFileLists:[],
-                    fileListConfiguration:[],
+                    diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
+                        return({
+                            uid: uuidv4(),
+                            name:item.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
+                            status: 'done',
+                            url: item,
+                            thumbUrl: item,
+                        })
+                    }),
+                    fileListConfiguration:data.getlive.configurationOut.attachedFiles.map((item)=>{
+                           return({
+                               uid: uuidv4(),
+                               name:item.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
+                               status: 'done',
+                               url: item,
+                               thumbUrl: item,
+                           })
+                    }),
                     listChapter: [],
                     listQuestion: [],
                 },
