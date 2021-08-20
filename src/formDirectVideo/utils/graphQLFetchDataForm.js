@@ -1,6 +1,5 @@
 import {useQuery,useMutation,useLazyQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
-import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
 import {useDispatch,useSelector} from "react-redux";
