@@ -55,26 +55,25 @@ export const FormSignUp =({child1,child2})=>{
 
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
-    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")},{max:15}];
+    const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
 
     console.log("signUp",valuesSignUp)
     return(
 
-            <Row gutter={[0, 25]} className={'col-signUp'}>
-                <Col className={"spn1"} style={{textAlign: 'center'}} span={18}>
+            <Row gutter={[0, 40]} className={'col-signUp'}>
+                <Col className={"spn1"} style={{textAlign: 'center'}} span={24}>
                     {child1}
                 </Col>
-                <Col span={18}>
-                    <Row gutter={[0, 15]} className={"col-signUp__row"}>
-                        <Col span={18}>
-                            <Row gutter={[0, 0]} justify={"end"}>
+                <Col span={24}>
+                    <Row gutter={[0, 30]}>
+                        <Col span={24}>
+                            <Row gutter={[0, 10]} justify={"end"}>
                                 <Col span={24}>
                                     <Form.Item name="firstName" className={"form-item-style"}
                                                rules={requiredFieldRule}
                                                label={t("CompteSettings.Nom")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               maxLength={16}
                                                name="firstName" placeholder={t("CompteSettings.Nom")}></Input>
                                     </Form.Item>
                                 </Col>
@@ -84,7 +83,6 @@ export const FormSignUp =({child1,child2})=>{
                                                label={t("CompteSettings.FirstName")}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               maxLength={16}
                                                name="lastName" placeholder={t("CompteSettings.FirstName")}></Input>
                                     </Form.Item>
                                 </Col>
@@ -145,7 +143,7 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={18}>
+                        <Col span={24}>
                                     <Form.Item
                                         className={"form-item-style"}
                                         name="password"
@@ -169,7 +167,7 @@ export const FormSignUp =({child1,child2})=>{
                                         />
                                     </Form.Item>
                         </Col>
-                        <Col span={18}>
+                        <Col span={24}>
                             <Row gutter={[0, 10]}>
                                 <Col span={24}>
                                     <Form.Item name="address" className={"form-item-style"}
@@ -197,7 +195,7 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={18}>
+                        <Col span={24}>
                             <Row gutter={[0, 10]}>
                                 <Col span={24}>
                                     <Form.Item name="society" className={"form-item-style"}
@@ -223,15 +221,15 @@ export const FormSignUp =({child1,child2})=>{
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                 }
                                             >
-                                                <Option  name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
-                                                <Option  name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
-                                                <Option  name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
+                                                <Option name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
+                                                <Option name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
+                                                <Option name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
                                             </Select>
                                     </Form.Item>
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={18}>
+                        <Col span={24}>
                             <Row className={"row_politique"} gutter={[10, 0]}>
                                 <Col offset={4} span={1}>
                                     <Form.Item name="confidentialityOptionGroup" className={"form-item-style"} valuePropName="checked"
@@ -252,7 +250,7 @@ export const FormSignUp =({child1,child2})=>{
                                 </Col>
                             </Row>
                         </Col>
-                        <Col span={18}>
+                        <Col span={20}>
                             {child2}
                         </Col>
                     </Row>
