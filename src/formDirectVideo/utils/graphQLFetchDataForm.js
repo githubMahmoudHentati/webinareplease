@@ -7,12 +7,9 @@ import moment from "moment";
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
-import {setAppSetLogin} from "../../utils/redux/actions";
 import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction"
 import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
-import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
-import defaultImg from '../../assets/webinarplease-thumb.jpg';
 import {setDirectSetting} from "../../utils/redux/actions";
 import {StatusMessages} from "./StatusMessages";
 import {v4 as uuidv4} from "uuid";
