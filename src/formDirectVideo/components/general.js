@@ -179,6 +179,7 @@ console.log("pwd",values.general.pwd)
                             <TimePicker getPopupContainer={() => document.querySelector(".timePicker1")} className={"timePicker1"} placeholder={t("formDirectVideo.ChooseStartTime")} name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
                                         disabledHours={()=>startGetDisabledHours(values)}
                                         disabledMinutes={startGetDisabledMinutes}
+                                        format = {'HH:mm'}
                             ></TimePicker>
                         </Form.Item>
                     </Col>

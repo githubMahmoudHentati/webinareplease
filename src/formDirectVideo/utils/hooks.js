@@ -54,7 +54,7 @@ const Hooks=()=>{
     }
     const disablePastDate=(current,indexPost,indexPlan,dateType)=>{
         // Can not select days before today and today
-         console.log("currenttt",indexPost )
+         console.log("currenttt",moment().startOf('day') )
         if (indexPost===indexPost && values.socialTools[indexPost]&&values.socialTools[indexPost].plan){
             if (values.socialTools[indexPost].plan[indexPlan].startDate&&dateType==="endDate")
                 return  moment(values.socialTools[indexPost].plan[indexPlan].startDate,"YYYY-MM-DDTHH:mm:ss+01:00").isAfter(current)
@@ -63,7 +63,11 @@ const Hooks=()=>{
             else
                 return current && current < moment().startOf('day')
         }
-        return current && current < moment().startOf('day');
+        console.log("values.general.startHour",(values.general.startHour&&moment(values.general.startHour,'HH:mm').isSameOrBefore(moment().tz("Europe/Paris"))))
+        if (values.general.startHour&&moment(values.general.startHour,'HH:mm').isSameOrBefore(moment().tz("Europe/Paris"))) {
+            return  current.isSameOrBefore(moment())
+        } else
+            return current && current < moment().startOf('day');
     }
 
     const startGetDisabledHours = () => {
@@ -84,7 +88,12 @@ const Hooks=()=>{
     const startGetDisabledMinutes = (selectedHour) => {
         let minutes= [];
         if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
-            if (selectedHour === moment().tz("Europe/Paris").hour()) {
+            if (selectedHour===-1) {
+                for (let i = 0; i < 60; i++) {
+                    minutes.push(i);
+                }
+            }
+            else if (selectedHour === moment().tz("Europe/Paris").hour()) {
                 for (let i = 0; i < moment().minute(); i++) {
                     minutes.push(i);
                 }
@@ -199,7 +208,7 @@ const Hooks=()=>{
                 ))
         }));
         let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
-        let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
+        let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm'):values.general.startHour
         // let period = typeof values.general.period!="string"? values.general.period.format('HH:mm:ss'):values.general.period;
         dispatch(setGeneralOnchange({generalNameChange:"startDate", generalValueChange:newStartDate}));
         dispatch(setGeneralOnchange({generalNameChange:"startHour", generalValueChange:newStartHour}));
