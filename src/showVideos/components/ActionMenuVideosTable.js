@@ -15,7 +15,7 @@ const { TextArea } = Input;
 function useActionMenu({record}) {
 
     const dispatch = useDispatch()
-    const {handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive , handleExport , handleCancelModalExport , exportLives }=Hooks()
+    const { handleClickStreamin,handleDeleteOneRow , handleClickDropdowMenu , DataVideos , handleInfos , handleCancel , infosLives,updateLive , handleExport , handleCancelModalExport , exportLives }=Hooks()
     const { t, i18n } = useTranslation();
     var  x  = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
     const history = useHistory()
@@ -69,13 +69,13 @@ function useActionMenu({record}) {
         }
     }
 
-  const handleClickStreamin = () =>{
-        if (record.status === -1){
-            history.push('/webinarStudioLive')
-        }else {
-          return null;
-        }
-  }
+  // const handleClickStreamin = () =>{
+  //       if (record.status === -1){
+  //           history.push('/webinarStudioLive')
+  //       }else {
+  //         return null;
+  //       }
+  // }
 
     const actionColumnView = (
         <div className="action">
@@ -85,7 +85,7 @@ function useActionMenu({record}) {
                         backgroundColor: darkMode === false ? "" : "#1D1D1D",
                         color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                         border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                    }} onClick={()=>handleClickStreamin()}>
+                    }} onClick={()=>handleClickStreamin(record)}>
                         {
                             record.status === -1 ? <VideoCameraOutlined id={"icon_vs"}/> : <EyeOutlined id={"icon_vs"}/>
                         }
@@ -96,7 +96,7 @@ function useActionMenu({record}) {
             }
             <div>
         <span className="span_action">
-      <Dropdown getPopupContainer={() => document.querySelector(".drp_action")}  className={"drp_action"} overlay={actionMenu} trigger={['click']}  >
+      <Dropdown getPopupContainer={() => document.querySelector(".DataTable")}  className={"drp_action"} overlay={actionMenu} trigger={['click']}  >
         <a  onClick={(e)=>handleClickDropdowMenu(e, record.id)} className="linkid" href="#"  style={{ fontSize:"30px"  , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" }} >
          ...
         </a>

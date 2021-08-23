@@ -6,6 +6,9 @@ import './webinareStudioLive.scss'
 
 function IframeStudioLive(){
 
+    // Diffusion Link
+    const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
+
     return(
         <PrincipalPage>
 
@@ -13,7 +16,9 @@ function IframeStudioLive(){
                 <iframe id="inlineFrameExample"
                         frameBorder="0"
                         title="Inline Frame Example"
-                        src="http://152.228.160.17:7022/room/300-ahmedwk4?userName=admin">
+                        // src={diffusionLink.diffLink}
+                         src="https://k8s-test-stream.webtv-solution.com/room/42-E1urW7hqgKHQJ2N?userName=Bou7mid Barhoum"
+                >
                 </iframe>
             </div>
 

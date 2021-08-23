@@ -11,6 +11,7 @@ const ShowVideosINITIALSTATE = {
     loadingDelete:loadingDeleteShowVideo(),
     valuesInfosLives:valuesInfosLives(),
     valueExportLives:valueExportLives(),
+    DiffusionLink:[]
 }
 
 export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=>{
@@ -21,6 +22,11 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
             return{
                 ...state,
                 ListVideos: action.payload
+            }
+        case "SET_DiffusionLink":
+            return{
+                ...state,
+                DiffusionLink: action.payload
             }
         case "SET_FilterVideos" :
             const {FilterVideosNameChange,FilterVideosValueChange}=action.payload
