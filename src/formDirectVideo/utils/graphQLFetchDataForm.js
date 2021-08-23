@@ -23,6 +23,8 @@ export const GraphQLFetchDataForm = (values) => {
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
     let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
+    let TitleChapters = values.configuration.listChapter.map(item=>item.title)
+    console.log("titleeeee",TitleChapters)
     let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
         data: dataCreate,
@@ -68,6 +70,7 @@ export const GraphQLFetchDataForm = (values) => {
                     tags: values.configuration.tags,
                     addSpeaker: values.configuration.addSpeakerList,
                     themes: values.configuration.theme,
+                    chapters:TitleChapters,
                     attachedFiles:ThumbUrlAttachementFile,
                     slides:DiapositivesFile,
                 },
@@ -301,6 +304,12 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
+                    listChapter:data.getlive.configurationOut.chapters.map((item)=>{
+                        return({
+                            id:item.chapterOrde,
+                            title:item.chapterTitle
+                        })
+                    }),
                     diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
                         return({
                             uid: uuidv4(),
@@ -319,7 +328,6 @@ export const GraphQLFetchDataForm = (values) => {
                                thumbUrl: item,
                            })
                     }),
-                    listChapter: [],
                     listQuestion: [],
                 },
                 socialTools:[
