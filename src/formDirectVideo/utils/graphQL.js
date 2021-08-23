@@ -82,6 +82,10 @@ export const graphQL_shema = ()=> {
                     themes
                     attachedFiles
                     slides
+                    chapters{
+                      chapterOrder
+                      chapterTitle
+                     }
                 }
                 socialOut{
                     id
