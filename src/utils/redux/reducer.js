@@ -2,12 +2,14 @@
 const INITIAL_STATE = {
     accountMenu : 0,
     directMenu : 0,
-    DarkMode : false,
+    DarkMode : JSON.parse(localStorage.getItem("darkMode"))|| false,
     iframeStyle:{height:"20%"},
     appState: { loggedIn: false },
     gqlError: { msg: '' },
     authToken : '',
     activeSideMenu:false,
+    lang:localStorage.getItem("i18nextLng") ? localStorage.getItem("i18nextLng"):"fr",
+    runDeleteOneRow:false,
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
@@ -22,6 +24,11 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
             return{
                 ...state,
                 directMenu: action.payload
+            }
+        case "SET_DeleteOneRow":
+            return{
+                ...state,
+                runDeleteOneRow: action.payload
             }
         case "SET_DarkMode":
             return {
@@ -40,11 +47,8 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 appState: { loggedIn: false },
                 authToken : ''
             }
-        case "SET_SideMenu" :
-            return {
-                ...state,
-                activeSideMenu:action.payload
-            }
+        case "CHANGE_LANG":
+            return {...state,lang:action.payload}
 
         default:{
             return state

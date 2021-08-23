@@ -89,6 +89,14 @@ export function setPaginationAbonnement(e){
         payload:e,
     }
 }
+export function setErrorVisibility(e){
+    return{
+        type:"SET_ERROR_VISIBILITY",
+        payload:e,
+    }
+}
+
+
 
 
 

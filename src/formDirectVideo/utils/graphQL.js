@@ -12,6 +12,15 @@ export const graphQL_shema = ()=> {
         }
     `;
 
+    const UpdateLive = gql`
+       mutation($id:Int!, $form:FormUpdate!) {
+            editLive(id:$id, form:$form) {
+                code
+                message
+            }
+        } 
+    `;
+
     const generateSecuredPassword = gql`
         mutation($input:GeneratePwd) {
             generatePwd(input:$input) {
@@ -21,8 +30,83 @@ export const graphQL_shema = ()=> {
         }
     `;
 
+    const themesDisplayQuery = gql`
+        mutation{
+            getThemesList {
+                id
+                title
+            }
+        }
+    `;
+
+    const Get_UpdatedLive_Info = gql`
+        query($id:Int!) {
+            getlive(id:$id) {
+                generalInfoOut{
+                    thumbnail
+                    liveTitle
+                    liveDescription
+                    liveLink
+                    livePlan{
+                        plan
+                        startDate
+                        duration
+                    }
+                    liveAccess
+                    pwd
+                    securedPasswordOption
+                }
+                configurationOut{
+                    liveProgram
+                    speakers{
+                        name
+                        lastName
+                        function
+                        avatar
+                        mail
+                    }
+                    interOption{
+                        chat
+                        comment
+                        like
+                    }
+                    multiOption{
+                        isRm
+                        shareFile
+                    }
+                    autoArchLive{
+                        auto
+                        visible
+                    }
+                    tags
+                    themes
+                    attachedFiles
+                    slides
+                }
+                socialOut{
+                    id
+                    title
+                    logo
+                    Type
+                    link
+                    active
+                    planifications{
+                        id
+                        startDate
+                        endDate
+                        active
+                    }
+                }
+            }
+        }
+    `
+    //
+
     return({
         createLive,
-        generateSecuredPassword
+        UpdateLive,
+        generateSecuredPassword,
+        themesDisplayQuery,
+        Get_UpdatedLive_Info
     })
 }

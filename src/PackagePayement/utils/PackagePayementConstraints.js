@@ -3,6 +3,7 @@ import React, { useState,useEffect,useRef } from 'react';
 export const PackagePayementConstraints = () =>{
 
     const ActiveCard = () =>{
+
         return(
             {
                 activeCard:0,
@@ -10,12 +11,12 @@ export const PackagePayementConstraints = () =>{
                 checkedRadioButtonOne:false,
                 checkedRadioButtonTwo:false,
                 packFree:'Gratuit',
-                packPro:'99€',
-                packASYouGo:'12€',
+                packPro:'99',
+                packASYouGo:'12',
                 packStripe:'',
             }
         )
-    }
+    };
     const InputPackagePayement = () =>{
         return(
             {
@@ -26,10 +27,10 @@ export const PackagePayementConstraints = () =>{
                 postalCode:""
             }
         )
-    }
+    };
 
     return({
         ActiveCard,
         InputPackagePayement
     })
-}
+};

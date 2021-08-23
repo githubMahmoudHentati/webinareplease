@@ -5,9 +5,11 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/package-lock.json
 # testing
 /coverage
+/package-lock.json
+
 
 # production
 /build

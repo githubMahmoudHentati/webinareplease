@@ -6,6 +6,14 @@ export function setshowVideosActions(e){
     }
 
 }
+export function setDiffusionLink(e){
+
+    return{
+        type: "SET_DiffusionLink",
+        payload:e,
+    }
+
+}
 
 export function setFilterVideosActions(e){
 
@@ -48,6 +56,19 @@ export function setLoadingDeleteShowVideo(e){
 export function setInfosLive(e){
     return{
         type :"SET_INFOSLIVES",
+        payload:e
+    }
+}
+
+export function setExportLive(e){
+    return{
+        type :"SET_EXPORTLIVES",
+        payload:e
+    }
+}
+export function setFilter(e){
+    return{
+        type :"SET_FILTER",
         payload:e
     }
 }

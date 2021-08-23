@@ -4,12 +4,14 @@ import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
 import {Form} from "antd";
 
+
 export const FormDirectConstraints = ()=>{
 
     const generals = () => {
         return (
             {
-                fileList:"",
+                thumbnail:"",
+                fileList:[],
                 liveTitle:"",
                 liveDescription:"",
                 liveAction:false,
@@ -20,10 +22,11 @@ export const FormDirectConstraints = ()=>{
                 },
                 startDate:"",
                 startHour:"",
+                period:"",
                 directAccessMode: "freeAccess",
                 liveAccess: false,
                 pwd:"",
-                liveSharedLink:"",
+                liveLink:"https://demo-tv.webtv-solution.com/pearl/live",
                 securedPasswordOption:false,
                 loadingSecuredPassword:false
             }
@@ -39,26 +42,23 @@ export const FormDirectConstraints = ()=>{
                 modalSpeaker: false,
                 switchSpeaker: false,
                 liveAutomaticArchiving: false,
-                SpeakerList: [{
-                    id: 0,
-                    name: "Nom ",
-                    lastName: 'Prénom',
-                    title: "Titre",
-                    email: "",
-                    logoSpeaker: "https://yamsoti.com/wp-content/uploads/2020/01/avatar-rectangle.png"
-                }],
+                SpeakerList: [],
                 addSpeakerList:{},
                 speaker: {id: null, name: "", lastName: "", title: "", email: "", logoSpeaker: []},
-                fileListSpeaker:{},
-                LiveInteractiveOption:[],
+                loadingSpeakerInfo:false,
                 chat:false,
                 comments:false,
                 likeMention:false,
                 attachments:false,
                 richeMediaDiffusion:false,
                 videoMode: "",
-                theme:"",
+                theme:[],
+                themesList:[],
                 tags:[],
+                fileListConfiguration:[],
+                listChapter: [],
+                listQuestion: [],
+                diapositivesFileLists:[]
             }
         )
     }
@@ -67,24 +67,30 @@ export const FormDirectConstraints = ()=>{
         return [
             {
                 id: 0,
+                title:"",
                 type: "Facebook post",
                 switch: true,
+                link:"",
                 logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{active: true, startDate: "", endDate: ""}]
+                plan: []
             },
             {
                 id: 1,
                 type: "Youtube post",
+                title:"",
+                link:"",
                 switch: false,
                 logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{active: true, startDate: "", endDate: ""}]
+                plan: []
             },
             {
                 id: 2,
                 type: "Linkedlin post",
+                title:"",
+                link:"",
                 switch: false,
                 logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
-                plan: [{active: true, startDate: "", endDate: ""}]
+                plan: []
             },
         ]
     }
@@ -109,6 +115,15 @@ export const FormDirectConstraints = ()=>{
         )
     }
 
+    const constraintData =()=>{
+        return({
+            loadingLiveFetchData:false,
+            loadingCreateEditLive:false,
+            crudOption:"",
+            leaveToast:true
+        })
+    }
+
     // const formLive =()=>{
     //     return (
     //             form
@@ -120,6 +135,7 @@ export const FormDirectConstraints = ()=>{
         configuration,
         socialTools,
         invitation,
+        constraintData,
         // formLive
     })
 

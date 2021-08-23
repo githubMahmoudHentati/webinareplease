@@ -1,6 +1,16 @@
 import {AccountSettingsConstraints} from "../utils/accountSettingsConstraints";
 
-const {generalInformation,subscription,bills,billCount,constraintData,securityAccount , loadingUpdatePassword , paginationAbonnement} = AccountSettingsConstraints()
+const {
+    generalInformation,
+    subscription,
+    bills,
+    billCount,
+    constraintData,
+    securityAccount,
+    loadingUpdatePassword,
+    paginationAbonnement,
+    visible
+} = AccountSettingsConstraints()
 
 const AccountSettingsInitialState = {
 
@@ -8,110 +18,140 @@ const AccountSettingsInitialState = {
 
     subscription: subscription(),
 
-    bills : bills(),
+    bills: bills(),
 
-    billsCount : billCount(),
+    billsCount: billCount(),
 
-    constraintData :constraintData(),
+    constraintData: constraintData(),
 
-    securityAccount:securityAccount(),
+    securityAccount: securityAccount(),
 
-    loadingUpdatePassword : loadingUpdatePassword(),
+    loadingUpdatePassword: loadingUpdatePassword(),
 
-    paginationAbonnement : paginationAbonnement()
+    paginationAbonnement: paginationAbonnement(),
+
+    visible:visible()
 
 }
 
-export const  AccountSettingsReducer=(state=AccountSettingsInitialState , action)=>{
+export const AccountSettingsReducer = (state = AccountSettingsInitialState, action) => {
 
-    switch (action.type){
+    switch (action.type) {
 
         //******** general reducer case************//
 
         case "SET_GeneralInformationOnchange":
-            const {generalInformationNameChange,generalInformationValueChange}=action.payload
-            const generalInformationOnOnchangeObj = {...state.generalInformation,[generalInformationNameChange]: generalInformationValueChange}
-            return{
+            const {generalInformationNameChange, generalInformationValueChange} = action.payload
+            const generalInformationOnOnchangeObj = {
+                ...state.generalInformation,
+                [generalInformationNameChange]: generalInformationValueChange
+            }
+            return {
                 ...state,
-                generalInformation:generalInformationOnOnchangeObj
+                generalInformation: generalInformationOnOnchangeObj
             }
 
         //******** configuration reducer case************//
 
         case "SET_SubscriptionOnchange":
-            const {subscriptionNameChange,subscriptionValueChange}=action.payload
-            const subscriptionOnOnchangeObj = {...state.subscription,[subscriptionNameChange]: subscriptionValueChange}
-            return{
+            const {subscriptionNameChange, subscriptionValueChange} = action.payload
+            const subscriptionOnOnchangeObj = {...state.subscription, [subscriptionNameChange]: subscriptionValueChange}
+            return {
                 ...state,
-                subscription:subscriptionOnOnchangeObj
+                subscription: subscriptionOnOnchangeObj
             }
 
         case "SET_BillsOnchange":
-            const {billsNameChange,billsValueChange}=action.payload
-            const billsOnOnchangeObj = {...state.bills,[billsNameChange]: billsValueChange}
-            return{
+            const {billsNameChange, billsValueChange} = action.payload
+            const billsOnOnchangeObj = {...state.bills, [billsNameChange]: billsValueChange}
+            return {
                 ...state,
-                subscription:billsOnOnchangeObj
+                subscription: billsOnOnchangeObj
             }
         case "SET_BillCountOnchange":
-            const {billCountNameChange,billCountValueChange}=action.payload
-            const billCountOnOnchangeObj = {...state.billsCount,[billCountNameChange]: billCountValueChange}
-            return{
+            const {billCountNameChange, billCountValueChange} = action.payload
+            const billCountOnOnchangeObj = {...state.billsCount, [billCountNameChange]: billCountValueChange}
+            return {
                 ...state,
-                billsCount:billCountOnOnchangeObj
+                billsCount: billCountOnOnchangeObj
             }
 
         case "SET_AccountSetting":
-            const {generalInformation,subscription,bills,billCount}=action.payload.dataUserInfo
-            return{
+            const {generalInformation, subscription, bills, billCount} = action.payload.dataUserInfo
+            return {
                 ...state,
-                generalInformation,subscription,bills,billCount
+                generalInformation, subscription, bills, billCount
             }
 
         case "SET_ConstraintDataOnchange":
-            const {constraintDataNameChange,constraintDataValueChange}=action.payload
-            const constraintDataOnOnchangeObj = {...state.constraintData,[constraintDataNameChange]: constraintDataValueChange}
-            return{
+            const {constraintDataNameChange, constraintDataValueChange} = action.payload
+            const constraintDataOnOnchangeObj = {
+                ...state.constraintData,
+                [constraintDataNameChange]: constraintDataValueChange
+            }
+            return {
                 ...state,
-                constraintData:constraintDataOnOnchangeObj
+                constraintData: constraintDataOnOnchangeObj
             }
 
         //******** Security Account************//
 
         case "SET_SecurityAccountPassword":
-            const {securityAccountNameChange,securityAccountValueChange}=action.payload
-            const securityAccountOnchangeObj = {...state.securityAccount,[securityAccountNameChange]: securityAccountValueChange}
-            return{
+            const {securityAccountNameChange, securityAccountValueChange} = action.payload
+            const securityAccountOnchangeObj = {
+                ...state.securityAccount,
+                [securityAccountNameChange]: securityAccountValueChange
+            }
+            return {
                 ...state,
-                securityAccount:securityAccountOnchangeObj
+                securityAccount: securityAccountOnchangeObj
             }
         //******** Empty Input Password ************//
 
         case "SET_EmptyPasswordInput":
-            return{
+            return {
                 ...state,
-                securityAccount:action.payload
+                securityAccount: action.payload
             }
-            //*********************** Update Password ***********************//
+        //*********************** Update Password ***********************//
         case "SET_LoadingUpdatePassword":
-            const {LoadingUpdatePasswordNameChange,LoadingUpdatePasswordValueChange}=action.payload
-            const LoadingUpdatePasswordOnchangeObj = {...state.loadingUpdatePassword,[LoadingUpdatePasswordNameChange]: LoadingUpdatePasswordValueChange}
-            return{
+            const {LoadingUpdatePasswordNameChange, LoadingUpdatePasswordValueChange} = action.payload
+            const LoadingUpdatePasswordOnchangeObj = {
+                ...state.loadingUpdatePassword,
+                [LoadingUpdatePasswordNameChange]: LoadingUpdatePasswordValueChange
+            }
+            return {
                 ...state,
-                loadingUpdatePassword:LoadingUpdatePasswordOnchangeObj
+                loadingUpdatePassword: LoadingUpdatePasswordOnchangeObj
             }
 
         //*********************** Pagination P ***********************//
         case "SET_PaginationAbonnement":
-            const {PaginationAbonnementNameChange,PaginationAbonnementValueChange}=action.payload
-            const PaginationAbonnementOnchangeObj = {...state.paginationAbonnement,[PaginationAbonnementNameChange]: PaginationAbonnementValueChange}
-            return{
+            const {PaginationAbonnementNameChange, PaginationAbonnementValueChange} = action.payload
+            const PaginationAbonnementOnchangeObj = {
+                ...state.paginationAbonnement,
+                [PaginationAbonnementNameChange]: PaginationAbonnementValueChange
+            }
+            return {
                 ...state,
-                paginationAbonnement:PaginationAbonnementOnchangeObj
+                paginationAbonnement: PaginationAbonnementOnchangeObj
             }
 
 
-        default:{
+        case "SET_ERROR_VISIBILITY":
+            const {ErrorVisibilityName, ErrorVisibilityValue}=action.payload
+            const ErrorVisibiltyOnchangeObj={
+                ...state.visible,
+                [ErrorVisibilityName]:ErrorVisibilityValue
+            }
+            return {
+                ...state,
+                visible: ErrorVisibiltyOnchangeObj
+            }
+
+
+
+        default: {
             return state
         }
 

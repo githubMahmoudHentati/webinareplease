@@ -7,9 +7,11 @@ import {FormSignUp} from './components/formSignUp'
 import logo from "../assets/logoWebinaireplease.svg"
 import {useHistory} from 'react-router-dom';
 import {HooksSignUp} from "./utils/hooks";
+import { useTranslation } from 'react-i18next';
 
 export const SignUp =()=>{
     const [form] = Form.useForm();
+    const { t, i18n } = useTranslation();
 
     const history = useHistory()
     const {handleSubmitSignUp,valuesSignUp}=HooksSignUp()
@@ -25,15 +27,15 @@ export const SignUp =()=>{
         <WebinairePlease logo={logo}>
                     <FormSignUp
                         child1={
-                            <span>Créez votre compte gratuitement</span>
+                            <span>{t("CompteSettings.CFreeAccount")}</span>
                         }
                       child2={
                         <Row className={"text-form"} gutter={[10,0]}>
                             <Col>
-                                <Button onClick={()=>{history.push("/ConfirmAccount")}}>Annuler</Button>
+                                <Button onClick={()=>{history.push("/ConfirmAccount")}}>{t("CompteSettings.Cancel")}</Button>
                             </Col>
                             <Col>
-                                <Button  loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">Inscrivez-vous maintenant</Button>
+                                <Button  loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("CompteSettings.RegisterNow")}</Button>
                             </Col>
                         </Row>
                        }

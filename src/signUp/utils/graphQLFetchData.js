@@ -3,13 +3,17 @@ import {graphQL_shema} from "./graphQL";
 import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
 import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
-import {setSignUpConstraintDataOnchange} from "../store/signUpAction";
+import {setConstSubscription, setSignUpConstraintDataOnchange} from "../store/signUpAction";
 import {setPackagePayementAction} from "../../PackagePayement/store/PackagePayementAction";
 
 
-export const GraphQLFetchData = (valuesSignUp) => {
+export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
+
+    const valuesPrices = useSelector((state) => state.PackagePayementReducer.packagePayement)// reducer PackagePayement
+
+    console.log("jhgjhgjhgjhgjhgjhkjhkjhkjchkjhfkd",valuesSignUp)
     const history = useHistory()
     const dispatch = useDispatch()
     const [CreateAccount, {
@@ -61,8 +65,66 @@ export const GraphQLFetchData = (valuesSignUp) => {
 
         }
     });
+
+    // create customer
+    const [CREATECUSTOMER] = useMutation(graphQL_shema().CreateCustomer,{
+        variables : {email:valuesSignUp.signUp.email},
+        context: { clientName: "first" },
+        onCompleted:  (data)=>{
+            console.log("123456789654123654789",data)
+            dispatch(setConstSubscription({
+                ConstSubscriptionOnchangeNameChange: "customerId",
+                ConstSubscriptionOnchangeValueChange: data.createCustomer.customerId
+            }))
+        }
+    })
+
+
+     // mutation Subricption Customer
+    const [CREATESUBSCRIPTIONCustomer] = useMutation(graphQL_shema().CreateSubscription,{
+        variables : { input :{
+            "customerId":valuesSignUp.constSubscription.customerId,
+            "priceId":"price_1JAAjrKvrhYT2AZi2wZ7EVZm"
+            }
+        },
+        context: { clientName: "first" },
+        onCompleted:  (data)=>{
+            console.log("azerfdsqwxcvbgty123",data)
+            dispatch(setConstSubscription({
+                ConstSubscriptionOnchangeNameChange: "clientSecret",
+                ConstSubscriptionOnchangeValueChange: data.createSubscription.clientSecret
+            }))
+            dispatch(setConstSubscription({
+                ConstSubscriptionOnchangeNameChange: "subscriptionId",
+                ConstSubscriptionOnchangeValueChange: data.createSubscription.subscriptionId
+            }))
+        }
+    })
+
+    // mutation Payement Intent
+    const [CREATEPayementintent] = useMutation(graphQL_shema().payementIntent,{
+        variables : { input :{
+                "amount": valuesPrices.packASYouGo*100,
+                "paymentMethodType": "card",
+                "currency": "eur"
+            }
+        },
+        context: { clientName: "first" },
+        onCompleted:  (data)=>{
+            console.log("azerfdsqwxcvbgt54654654654654y123",data)
+            dispatch(setConstSubscription({
+                ConstSubscriptionOnchangeNameChange: "clientSecret",
+                ConstSubscriptionOnchangeValueChange: data.createPaymentIntent.clientSecret
+            }))
+        }
+    })
+
+
     return ({
         CreateAccount,
+        CREATECUSTOMER,
+        CREATESUBSCRIPTIONCustomer,
+        CREATEPayementintent
     })
 }
 

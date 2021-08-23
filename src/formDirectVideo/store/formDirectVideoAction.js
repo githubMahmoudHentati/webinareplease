@@ -59,6 +59,79 @@ export function setGeneralOnchange(e){
             }
 
         }
+        // Add File list Configuration joindre fichiers
+        export function setConfigurationFileList(e){
+          return{
+              type:"SET_ConfigurationFileList",
+              payload:e
+          }
+        }
+
+
+        export function setChapterList(e){
+
+            return{
+                type: "SET_CHAPTER_LIST",
+                payload:e,
+            }
+        }
+        export function removeChapter(e){
+
+            return{
+                type: "REMOVE_CHAPTER",
+                payload:e,
+            }
+        }
+        export function editChapter(e){
+
+            return{
+                type: "EDIT_CHAPTER",
+                payload:e,
+            }
+        }
+
+        export function setQuestionList(e){
+
+            return{
+                type: "SET_QUESTION_LIST",
+                payload:e,
+            }
+        }
+        export function removeQuestion(e){
+
+            return{
+                type: "REMOVE_QUESTION",
+                payload:e,
+            }
+        }
+        export function editQuestion(e){
+
+            return{
+                type: "EDIT_QUESTION",
+                payload:e,
+            }
+        }
+        // Delete File list Configuration joindre fichiers
+       export function setDeleteFileList(e){
+          return{
+              type:"SET_DeleteFileList",
+              payload:e
+         }
+       }
+       // Add File list Configuration "Diapositive"
+       export function setDiapositivesFileList(e){
+         return{
+          type:"SET_DiapositivesFileList",
+          payload:e
+         }
+       }
+      // Add File list Configuration "Diapositive"
+       export function setDiapositivesDelete(e){
+         return{
+          type:"SET_DiapositivesDelete",
+          payload:e
+          }
+       }
 //*******************Invitations actions*******************//
 
         export function setInvitationOnchangeRules(e){
@@ -112,6 +185,65 @@ export function setGeneralOnchange(e){
                 payload:e
             }
         }
+
+        export function setDatePlan(e){
+            return{
+                type:"SET_DatePlan",
+                payload:e
+            }
+        }
+
+        export function setDatePlanFormat(e){
+            return{
+                type:"SET_DatePlanFormat",
+                payload:e
+            }
+        }
+
+
+//***************************Update live info***************************//
+
+        export function setLiveInfo(e){
+            return{
+                type:"SET_LiveInfo",
+                payload:e
+            }
+        }
+
+        export function setInitialLiveInfo(e){
+            return{
+                type:"SET_InitialLiveInfo",
+                payload:e
+            }
+        }
+
+
+
+    export function setFormDirectLiveConstraintDataOnchange(e){
+        return{
+            type:"SET_FormDirectLiveConstraintDataOnchange",
+            payload:e
+        }
+    }
+    export function setErrorUpload(e){
+        return{
+            type:"SET_UPLOAD_ERROR",
+            payload:e
+        }
+    }
+    export function setLoadingUpload(e){
+        return{
+            type:"SET_UPLOAD_LOADING",
+            payload:e
+        }
+    }
+    export function setTab(e){
+        return{
+            type:"SET_TAB",
+            payload:e
+        }
+    }
+
 
 
 

@@ -2,6 +2,7 @@ import React  from 'react';
 import { Tag, Input } from 'antd';
 import { TweenOneGroup } from 'rc-tween-one';
 import { PlusOutlined } from '@ant-design/icons';
+import { translate } from 'react-i18next';
 
 
 class EditableTagGroupConfiguration extends React.Component {
@@ -65,8 +66,10 @@ class EditableTagGroupConfiguration extends React.Component {
     render() {
         const { tags, inputVisible, inputValue } = this.state;
         const tagChild = tags.map(this.forMap);
+        const { t } = this.props;
+
         return (
-            <>
+            <div>
                 <div style={{ marginBottom: 16 }}>
                     <TweenOneGroup
                         enter={{
@@ -98,10 +101,10 @@ class EditableTagGroupConfiguration extends React.Component {
                 )}
                 {!inputVisible && (
                     <Tag onClick={this.showInput} className="site-tag-plus">
-                        <PlusOutlined /> Ajouter un Tag
+                        <PlusOutlined /> {t("formDirectVideo.AddTag")}
                     </Tag>
                 )}
-            </>
+            </div>
         );
     }
 }

@@ -10,12 +10,12 @@ export const ToastMessage = () => {
     const dispatch = useDispatch()
 
     const success_submit = async (code) => {
-        await dispatch(setConfirmAccountConstraintDataOnchange({
+        dispatch(setConfirmAccountConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
             constraintDataValueChange: false
         }))
         const successMessage = {
-            200: "Point d'accèes invalide, veuillez registrer encore une foix",
+            200: "mail confirmation est renvoyé, veuillez  vérifier votre courrier électronique  pour  valider l'inscription.",
         }
         message.success({
             content: successMessage[code],
@@ -25,19 +25,18 @@ export const ToastMessage = () => {
             },
         })
             .then(async () =>
-                await dispatch(setConfirmAccountConstraintDataOnchange({
+                 dispatch(setConfirmAccountConstraintDataOnchange({
                     constraintDataNameChange: "leaveToast",
                     constraintDataValueChange: true
                 }))
             )
-
     };
 
     const error_submit = async (code) => {
         const errorMessage = {
             400: "Point d'accèes invalide, veuillez registrer encore une foix",
         }
-        await dispatch(setConfirmAccountConstraintDataOnchange({
+         dispatch(setConfirmAccountConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
             constraintDataValueChange: false
         }))
@@ -50,7 +49,7 @@ export const ToastMessage = () => {
                 },
             })
             .then(async () =>
-                await dispatch(setConfirmAccountConstraintDataOnchange({
+                 dispatch(setConfirmAccountConstraintDataOnchange({
                     constraintDataNameChange: "leaveToast",
                     constraintDataValueChange: true
                 }))

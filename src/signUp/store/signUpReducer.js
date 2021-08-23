@@ -1,12 +1,12 @@
 import {SignUpConstraints} from "../utils/signUpConstraints";
 
-const {signUp,constraintData} = SignUpConstraints()
+const {signUp,constraintData,constSubscription} = SignUpConstraints()
 
 const SignUpInitialState = {
 
     signUp: signUp(),
-    constraintData:constraintData()
-
+    constraintData:constraintData(),
+    constSubscription:constSubscription()
 
 }
 
@@ -30,6 +30,13 @@ export const  SignUpReducer=(state=SignUpInitialState , action)=>{
             return{
                 ...state,
                 constraintData:constraintDataOnOnchangeObj
+            }
+        case "SET_ConstSubscriptionOnchange":
+            const {ConstSubscriptionOnchangeNameChange,ConstSubscriptionOnchangeValueChange}=action.payload
+            const ConstSubscriptionOnchangeOnOnchangeObj = {...state.constSubscription,[ConstSubscriptionOnchangeNameChange]: ConstSubscriptionOnchangeValueChange}
+            return{
+                ...state,
+                constSubscription:ConstSubscriptionOnchangeOnOnchangeObj
             }
 
         default:{

@@ -1,118 +1,165 @@
-import React, { useEffect, useState } from 'react';
-import { Table } from 'antd';
-import {useHistory} from "react-router-dom";
-import UseActionMenu from './ActionMenuVideosTable';
-import {useSelector} from "react-redux";
-import { useDispatch} from "react-redux";
-import {setPaginationProps , setshowDivsConditions} from "../store/showVideosAction";
-import * as constantMedia from "../utils/data";
-import {ShowVideosReducerReducer} from "../store/showVideosReducer";
-import {Hooks} from "../utils/hooks";
-
+import React, { useEffect, useState } from "react";
+import { Table } from "antd";
+import { useHistory } from "react-router-dom";
+import UseActionMenu from "./ActionMenuVideosTable";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  setPaginationProps,
+  setshowDivsConditions,
+} from "../store/showVideosAction";
+import { Hooks } from "../utils/hooks";
 
 const DEFAULT_PAGE_SIZE = 10;
-const DEFAULT_PAGE_NUMBER = 0;
+const DEFAULT_PAGE_NUMBER = 1;
 
-function UseDataTableVideos({ columns, dataSource, updateEntityPath } , ) {
+function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
+  // Read Data from Hooks
+  const { DataVideos, paginationProps, conditions } = Hooks();
 
-    // Read Data from Hooks
-    const {DataVideos , paginationProps}=Hooks()
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.Reducer.DarkMode);
+  const valuePagination = useSelector(
+    (state) => state.ShowVideosReducerReducer.paginationProps
+  );
 
-    const dispatch = useDispatch()
-    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const valuePagination = useSelector((state)=> state.ShowVideosReducerReducer.PaginationProps)
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+  //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
+  // use Selector redux
 
-
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-    const [record ,  setRecord] = useState([]);
-    const [selectedRow, setSelectedRow] = useState(null);
-    const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
-    const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
-    //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
-    const history = useHistory();
-    // use Selector redux
-
-
-
-    const  onSelectChange = selectedRowKeys  => {
-        setSelectedRowKeys(selectedRowKeys);
-        console.log(`selectedhgjhgjhgjhgjh : ${selectedRowKeys}`);
-        dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:selectedRowKeys}));
-        dispatch(setshowDivsConditions({showDivsConditionsName:"elementSelected",showDivsConditionsValue:selectedRowKeys.length}));
-    };
-    const rowSelection = {
-        selectedRowKeys,
-        onChange: onSelectChange,
-
-    };
-
-    const updatedColumns = [
-        ...columns,
-        {
-            title: 'Actions',
-            key: 'action',
-            render: (action, record) =>{
-                return(
-                    <UseActionMenu record={record}/>
-                )
-            }
-
-        },
-    ];
-
-    useEffect(() => {
-        console.log('columns:', columns);
-        console.log('datasoure:', dataSource);
-        console.log('updateColumns:', updatedColumns);
+  const onSelectChange = (selectedCheck) => {
+    //uncheck checkbox
+    let filter = [];
+    filter = dataSource.content
+      .filter((item) => {
+        return !selectedCheck.includes(item.id);
+      })
+      .map((ele) => ele.id);
+    //filter the current state
+    /*let filterState = selectedRowKeys.filter((item) => {
+        return dataSource.content.includes(item.id);
+      })*/
+    //concatenate state and selectedcheckboxes
+    selectedCheck = [...valuePagination.id, ...selectedCheck];
+    //remove some items
+    let uniqItems = [...new Set(selectedCheck)];
+    let uniqItemsFilter = uniqItems.filter((item) => {
+      return !filter.includes(item);
     });
-
-    const handleSingleDelete = () => {
-        console.log('handleSingleDelete, selected:', selectedRow);
-    };
-
-    const resetPagination = () => {
-        setCurrentPage(DEFAULT_PAGE_NUMBER);
-    };
-
-    const handleTableChange = (pagination, filters, sorter, extra) => {
-        console.log('paginationLives:', pagination, filters, sorter, extra );
-        setCurrentPage(pagination.current - 1);
-        dispatch(setPaginationProps({PaginationPropsNameChange:"pageSize",PaginationPropsValueChange:pagination.pageSize}));
-        dispatch(setPaginationProps({PaginationPropsNameChange:"order",PaginationPropsValueChange:sorter&&sorter.order}));
-        dispatch(setPaginationProps({PaginationPropsNameChange:"columnKey",PaginationPropsValueChange:sorter&&sorter.columnKey}));
-        dispatch(setPaginationProps({PaginationPropsNameChange:"current",PaginationPropsValueChange:sorter&&pagination.current}));
-    };
-
-
-    const DataTable = () => (
-        <div className="DataTable" style={{backgroundColor:darkMode===false?"#ffffff":"#011529"}}>
-            <Table
-                style={{backgroundColor:darkMode===false?"#ffffff":"#011529"}}
-                rowKey={record => record.id}
-                rowSelection={rowSelection}
-                columns={updatedColumns}
-                dataSource={dataSource.content}
-                onChange={handleTableChange}
-                pagination={{
-                    pageSize: paginationProps.pageSize,
-                    current: currentPage + 1,
-                    total: dataSource.totalElements,
-                    showQuickJumper:true,
-                    showSizeChanger:true
-                }}
-
-            />
-        </div>
+    dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "id",
+        PaginationPropsValueChange: uniqItemsFilter,
+      })
+    );
+    dispatch(
+      setshowDivsConditions({
+        showDivsConditionsName: "elementSelected",
+        showDivsConditionsValue: uniqItemsFilter.length,
+      })
     );
 
-    return{
-        DataTable,
-        selectedRow,
-        selectedRowKeys,
-        currentPage,
-        pageSize,
-        resetPagination,
-    };
+    setSelectedRowKeys(uniqItemsFilter);
+  };
+  const rowSelection = {
+    selectedRowKeys: valuePagination.id,
+      getCheckboxProps: (record) => ({
+          disabled: record.owner === false, // Column configuration not to be checked
+      }),
+    onChange: onSelectChange,
+  };
 
+  const updatedColumns = [
+    ...columns,
+    {
+      title: "Actions",
+      key: "action",
+      className: 'columnAction',
+      render: (action, record) => {
+        return <UseActionMenu record={record} />;
+      },
+    },
+  ];
+
+  const resetPagination = () => {
+    setCurrentPage(DEFAULT_PAGE_NUMBER);
+  };
+
+  const handleTableChange = async(pagination, filters, sorter, extra) => {
+    console.log("paginationLives:", pagination, filters, sorter, extra);
+  //  setCurrentPage(pagination.current);
+   // SetOrder(sorter.order);
+  //  setPageSize(pagination.pageSize);
+
+  /************set data to store***************** */
+    //dispath sort
+    if(valuePagination.order !== sorter.order)
+  await  dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "order",
+        PaginationPropsValueChange: sorter.order === false ?  "" : sorter.order,
+      })
+    );
+    //dispatch current page
+    if(valuePagination.current !== pagination.current)
+   { await dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "current",
+        PaginationPropsValueChange: pagination.current,
+      })
+    );
+    if(document.querySelector(".showVideo"))
+    document.querySelector(".showVideo").scrollIntoView();}
+    //dispatch size page
+    if(valuePagination.pageSize !== pagination.pageSize)
+    await dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "pageSize",
+        PaginationPropsValueChange: pagination.pageSize,
+      })
+    );
+    if(valuePagination.columnKey !== sorter.columnKey)
+    await dispatch(
+      setPaginationProps({
+        PaginationPropsNameChange: "columnKey",
+        PaginationPropsValueChange: (sorter.columnKey),
+      })
+    );
+    
+  };
+  const DataTable = () => (
+    <div
+      className="DataTable"
+      style={{ backgroundColor: darkMode === false ? "#ffffff" : "#011529" }}
+    >
+      <Table
+        style={{ backgroundColor: darkMode === false ? "#ffffff" : "#011529" }}
+        rowKey={(record) => record.id}
+        rowSelection={rowSelection}
+        columns={updatedColumns}
+        dataSource={dataSource.content}
+        rowClassName={"DataTable__custom-row"}
+        onChange={handleTableChange}
+        pagination={{
+          pageSize: paginationProps.pageSize,
+          current: valuePagination.current ,
+          total: dataSource.totalElements,
+          showQuickJumper: true,
+          showSizeChanger: true,
+        }}
+      />
+    </div>
+  );
+
+  return {
+    DataTable,
+    selectedRow,
+    selectedRowKeys,
+    pageSize,
+    resetPagination,
+  };
 }
 export default UseDataTableVideos;

@@ -1,4 +1,3 @@
-import React, { useState,useEffect,useRef } from 'react';
 
 export const ShowVideosList = ()=>{
 
@@ -6,9 +5,10 @@ export const ShowVideosList = ()=>{
         return (
             {
                 search:"",
+                searchFake:"",
                 periode:"",
-                date:"",
-                contributeur:"",
+                date:[],
+                contributeur: null,
                 type:"tous"
             }
         )
@@ -16,18 +16,20 @@ export const ShowVideosList = ()=>{
     const paginationProps=()=>{
         return(
             {
-                pageSize:10,
                 order:'ascend',
+                pageSize:10,
                 columnKey:0,
                 current:1,
-                id:[0],
-                idLive:0
+                id:[],
+                idLive:0,
+                idDiffusion:null
             }
         )
     }
     const showVideoConstraintData =()=>{
         return({
-            loading:true
+            loading:true,
+            loadingLiveFetchData:false,
         })
     }
     const showDivsConditions = () =>{
@@ -46,7 +48,20 @@ export const ShowVideosList = ()=>{
 
     const valuesInfosLives = () => {
         return({
+            visible:false,
             inputUrlDiffusion:"",
+            streamName:"",
+            idLive:"",
+            pwdLive:""
+        })
+    }
+
+    const valueExportLives = () =>{
+        return({
+            visibleExport : false,
+            participantUrl : "",
+            auditorUrl : "",
+            integrationUrl : "",
         })
     }
 
@@ -56,7 +71,8 @@ export const ShowVideosList = ()=>{
         showVideoConstraintData,
         showDivsConditions,
         loadingDeleteShowVideo,
-        valuesInfosLives
+        valuesInfosLives,
+        valueExportLives
     })
 
 }

@@ -13,7 +13,7 @@ export const SignUpConstraints = ()=>{
                 city: "",
                 password:"",
                 address:"",
-                numberPerson:"",
+                numberPerson:1,
                 postalCode:"",
                 society:"",
                 subscriptionId:0
@@ -22,10 +22,19 @@ export const SignUpConstraints = ()=>{
     }
     const constraintData =()=>{
         return({
+            confidentialityOption:false,
             loadingSignUp:false,
             signUpError:false,
             isMailValid:true,
             current:0
+        })
+    }
+    const constSubscription = () =>{
+        return({
+            customerId:"",
+            priceId:"",
+            clientSecret:"",
+            subscriptionId:""
         })
     }
 
@@ -33,6 +42,7 @@ export const SignUpConstraints = ()=>{
     return({
         constraintData,
         signUp,
+        constSubscription
     })
 
 }

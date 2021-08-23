@@ -37,13 +37,15 @@ export function setAppSetLogout(){
         type:"SET_AppSetLogout",
     }
 }
-
-export function setSideMenu(e){
+export const changeLang=(lang)=>({
+    type:"CHANGE_LANG",
+    payload:lang
+})
+export function setRunDeleteOneRow(e){
     return{
-        type:"SET_SideMenu",
+        type:"SET_DeleteOneRow",
         payload:e
     }
 }
-
 
 

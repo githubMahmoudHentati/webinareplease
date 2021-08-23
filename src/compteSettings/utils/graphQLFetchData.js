@@ -8,7 +8,7 @@ import {
     setConstraintDataOnchange, setEmptyPasswordInput,
     setGeneralInformationOnchange, setLoadingUpdatePassword
 } from "../store/accountSettingsAction";
-import {Hooks} from "./hooks";
+import Hooks from "./hooks";
 import {AccountSettingsConstraints} from "./accountSettingsConstraints";
 import {StatusMessages} from "./StatusMessages";
 import {useHistory} from "react-router-dom";
@@ -21,22 +21,6 @@ export const GraphQLFetchData=(form)=> {
     const {securityAccount}=AccountSettingsConstraints()
     const {success_message_update_password , error_message_update_password}=StatusMessages()
 
-    const {loading: GetUserInfoData_loading, data: GetUserInfoData}
-        = useQuery(graphQL_shema().Get_UserInfoData, {
-        fetchPolicy: 'cache-and-network',
-        variables: { pagination : {
-                "limit": 2,
-                "offset": 0,
-            } },
-        onCompleted: async (data) => {
-            await dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
-            await dispatch(setConstraintDataOnchange({
-                constraintDataNameChange: "loadingGeneralInformation",
-                constraintDataValueChange: false
-            }))
-            form.setFieldsValue(GetUserInfoData.getUserInfo.generalInformation)
-        }
-    })
     const [UpdateAccountSetting, {
         data: dataUpdate,
         loading: loading_UpdateAccountSetting,
@@ -87,12 +71,10 @@ export const GraphQLFetchData=(form)=> {
             }else if(data.changePassword.code === 400){
                 error_message_update_password()
             }
-
         }
     });
 
     return({
-        GetUserInfoData,
         UpdateAccountSetting,
         loading_UpdateAccountSetting,
         UpdatePassword

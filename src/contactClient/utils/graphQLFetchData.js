@@ -26,7 +26,7 @@ export const GraphQLFetchData=(form)=> {
         },
         context: { clientName: "first" },
         onCompleted: (data)=>{
-            if(data.sendMail.Code === 200){
+            if(data.sendMail.code === 200){
                 dispatch(setEmptyContactInput(ContactClient()))
                 form.resetFields();
                 success_message();
@@ -35,7 +35,7 @@ export const GraphQLFetchData=(form)=> {
                     loadingEnvoiMailNameChange: "loading",
                     loadingEnvoiMailValueChange: false
                 }))
-            }else if(data.sendMail.Code === 400){
+            }else if(data.sendMail.code === 400){
                 error_message()
             }
 

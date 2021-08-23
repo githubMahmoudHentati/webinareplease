@@ -11,6 +11,7 @@ export const graphQL_shema = ()=> {
          logo
          status
          liveDate
+         owner
       }
       recordsTotal
       recordsFiltered
@@ -38,10 +39,28 @@ export const graphQL_shema = ()=> {
         code
       }
      }
+    `;
+    const Export_Live = gql `
+    query($id:Int!) {
+    GetLinkExport(id:$id) {
+    participantUrl
+    auditorUrl
+    integrationUrl
+     }
+    }
+    `;
+    const diffusion_link = gql `
+    mutation($id:Int!) {
+     getDiffusionLink(id:$id)
+     { code diffLink visLink }
+
+      }
     `
-    return({
+    return ({
         Get_Lives,
         Delete_Items,
-        Get_Live_Info
+        Get_Live_Info,
+        Export_Live,
+        diffusion_link
     })
 }

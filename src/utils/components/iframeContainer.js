@@ -4,10 +4,8 @@ import {Card} from "antd";
 import {useSelector} from "react-redux";
 import {Reducer} from "../redux/reducer";
 import {useDispatch} from "react-redux";
-import {AccountGeneralInformation} from "../../compteSettings/components/accountGeneralInformation";
 import {SecurityAccount} from "../../compteSettings/components/securityAccount";
 import {PasswordEdit} from "../../compteSettings/components/passwordEdit";
-import {Hooks} from "../../formDirectVideo/utils/hooks";
 import {setIframeStyle} from "../redux/actions";
 
 
@@ -16,7 +14,7 @@ export const IframeContainer =(props)=>{
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
     // use Selector redux
-    const {values} = Hooks()
+    const values = useSelector((state)=>state.FormDirectVideoReducer)
 
     switch (props.menuType) {
         case "accountSetting":

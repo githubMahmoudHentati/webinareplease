@@ -1,23 +1,38 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {setConfigurationOnchange, setConfigurationSpeaker} from "../store/formDirectVideoAction";
+import {
+    setConfigurationOnchange,
+    setConfigurationSpeaker,
+    setGeneralOnchange,
+    setErrorUpload,
+    setLoadingUpload, setFormDirectLiveConstraintDataOnchange
+} from "../store/formDirectVideoAction";
 import {useDispatch} from "react-redux";
-import {Hooks} from "./hooks";
-import {setGeneralInformationOnchange} from "../../compteSettings/store/accountSettingsAction";
+import Hooks from "./hooks";
 
 
 export const UploadLogoSpeaker = () => {
     const [fileList, setFileList] = useState([])
     const dispatch = useDispatch()
+    const[removeAction,setRemoveAction]=useState(false)
+    const {values}=Hooks()
 
 
     const beforeUpload=(info)=>{
+
         info.file.status='done'
     }
 
-    const onSave = async (file)=>{
-        let url = "https://mbeji-cloud-sandbox.webtv-solution.dev/query"
+    const removeLogoSpeaker=()=>{
+            dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:[]}))
+    }
+
+    const onSave = async (file, fileInfos)=>{
+        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
+
+        console.log("remove",values.constraintData.removeAction)
+        dispatch(setLoadingUpload(true))
         axios({
             url: url,
             method: 'post',
@@ -28,18 +43,30 @@ export const UploadLogoSpeaker = () => {
             data: file
         }).then((result) => {
             console.log("result",result.data.data.uploadLogo);
-            dispatch(setConfigurationSpeaker({nameSpeaker:"logoSpeaker",valueSpeaker:(
-                [{
-                    uid: '-1',
-                    name: 'xxx.png',
-                    status: 'done',
-                    url: result.data.data.uploadLogo,
-                    thumbUrl: result.data.data.uploadLogo,
-                }]
-                )}))
+            let value=result.data.data.uploadLogo;
+            dispatch(setLoadingUpload(false))
+            if (result.data.data.uploadLogo){
+                dispatch(setErrorUpload(false))
+            }else{
+                value=""
+                dispatch(setErrorUpload(true))
+            }
+
+            dispatch(setConfigurationSpeaker({
+                nameSpeaker: "logoSpeaker", valueSpeaker: (
+                    [{
+                        uid: '-1',
+                        name: (fileInfos && fileInfos.file.name) || 'file.png',
+                        status: 'done',
+                        url: value,
+                        thumbUrl: value,
+                    }]
+                )
+            }))
         }).catch(error => {
-            console.log(error)
+            dispatch(setLoadingUpload(false))
         });
+
     }
 
     const onChangeFile =  async (info) => {
@@ -70,7 +97,7 @@ export const UploadLogoSpeaker = () => {
         for (let p of formData) {
             console.log("ppppppppppp",p);
         }
-        onSave(formData)
+        onSave(formData, info)
     }
 
     useEffect(async () => {
@@ -81,6 +108,7 @@ export const UploadLogoSpeaker = () => {
     return {
         onChangeFile,
         beforeUpload,
+        removeLogoSpeaker,
         fileList
     };
 };

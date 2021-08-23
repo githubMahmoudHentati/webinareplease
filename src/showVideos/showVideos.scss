@@ -1,24 +1,85 @@
 :root {
   --border_color:rgba(0 , 0 , 0 , 0.15);
 }
+.ant-modal-mask{
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 1000 !important;
+  height: 100% !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+.DataTable{
+&__custom-row {
+  &:hover td{
+    background:  var(--tag-blue-background)!important;
+  }
+}
+}
+.ant-pagination-item-active a{
+  background: #1890ff !important;
+  color: #fff !important;
+ }
+.DataTable .ant-table-row-selected td{
+  background: var(--tag-blue-background) !important;
+
+}
+.extra-margin{
+  margin-right: 40% !important;
+
+}
+
+.ant-picker-range-wrapper {
+  width: auto !important;
+}
+.isActiveMenu{
+  color: #1890ff !important;
+}
+.span_action{
+  height: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: -15px!important;
+  margin-bottom:0!important;
+  a{
+    color: var(--white_color);
+    &:focus, &:active { 
+      color: #1890ff !important;
+  }
+  
+  
+}
+}
+.div_titre{
+  width: 70%;
+}
+@media screen and (min-width: 768px) and (max-width: 1600px) {
+  .div_titre{
+    width: 150px;
+    min-height: 10px;
+    text-align: left !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
 
 @media screen and (min-width: 575px) and (max-width: 767px) {
   .action{
-    height: 45px;
-    width: 25px;
     position: absolute;
-    top: 73px;
-    left: 100px !important;
+    top: 0;
+    width: 100%;
+    right: 0.5em;
+    justify-content: flex-end;
+    height: 100%;
   }
-  .span_action{
-    height: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: -5px !important;
-  }
+
+  
 }
   @media screen and (max-width: 767px) {
     .ant-dropdown-menu{
@@ -45,6 +106,14 @@
     }
     .DataTable .ant-table-cell{
       border: 0 !important;
+    }
+    .DataTable .ant-table-cell:last-child{
+      bottom: 5px;
+      text-align: end;
+      display: flex;
+      justify-content: end;
+      position: absolute;
+      right: 0;
     }
     .DataTable .ant-table thead {
       border: none;
@@ -74,28 +143,54 @@
       position: absolute;
       top: 5px;
       left: 110px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 6px;
+      padding-right: 0;
+      white-space: nowrap;
     }
     .div_date{
-      width: 130px;
       min-height: 10px !important;
       text-align: left !important;
       padding:0 15px;
       position: absolute;
-      top: 40px;
+      top: 32px;
       left: 80px;
+      padding-left: 5px;
+      padding-right: 0;
     }
     .div-status{
-      width: 50px;
+      //width: 50px;
       position: absolute;
       top: 85px;
       left: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      .ant-tag{
+        margin-right: 5px;
+        padding: 0 5px;
+      }
+    }
+    .btn_Visualiser_diffuser{
+      padding: 4px 7px;
+      height: 21px;
+      #icon_vs{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+      }
     }
     .action{
-      height: 45px;
-      width: 25px;
       position: absolute;
-      top: 73px;
-      left: 80px;
+      top: 0;
+      width: 100%;
+      right: 0.5em;
+      justify-content: flex-end;
+      height: 100%;
     }
     #span_diffuser{
       display: none;
@@ -109,18 +204,7 @@
       align-items: center !important;
       text-align: center !important;
     }
-    .span_action{
-      height: 20px;
-      text-align: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      margin-top: -15px;
-    }
-    #icon_vs{
-      margin-left: 10px !important;
-    }
+  
 
     #spn_ajouter{
       display: none !important;
@@ -139,35 +223,9 @@
     .div1_showVideo{
       height: 205px;
     }
-    .div_Filter{
-      width: 55%;
-      margin-top: 0.7%;
-      z-index: 99999999999999999;
-    }
-    .Filter{
-      width: 100%;
-      height: 80px;
-      display: flex;
-      flex-direction: column !important;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.7%;
-    }
     .div_delete_select{
       width: 100%;
       height: 40px;
-    }
-    .div_filter{
-      width: 100% !important;
-    }
-    .div_Filter_global{
-      width: 100%;
-    }
-    .div_Filter{
-      z-index: 99999999999999999999999999999999999 !important;
-      width: 100%;
-      margin-top: 15%;
-      padding: 2% 2%;
     }
     .Calendrier{
       width: 15%;
@@ -189,14 +247,6 @@
       display: block !important;
       font-size: 20px;
     }
-    .div_calendarevent{
-      width: 100% !important;
-      height: auto !important;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 20px;
-    }
     .span_time{
       font-family: "SF Pro Display";
       font-size: 14px;
@@ -206,12 +256,6 @@
     }
     .tag_moment{
       width: 100%;
-    }
-    .spn_Date_event{
-      font-family: "SF Pro Display";
-      font-size: 20px;
-      font-weight: 400;
-      color: RGBA(0, 0, 0, 0.85);
     }
     .footer_modal_Avenir{
       width: 320px !important;
@@ -241,6 +285,56 @@
       color: rgba(0, 0, 0, 0.85);
     }
 
-  }
+      .ant-picker-panels {
+        flex-direction: column;
+        z-index: 999999999999999999999999999999999999999999999 !important;
+      }
+    .ant-picker-dropdown-range{
+      z-index: 99999999999999999999999999999999999 !important;
+      left: 30px !important;
+      top: 40px !important;
+    }
 
+
+  }
+/*********desktop devices*************/
+  @media screen and (min-width: 1024px) {
+    .columnId{
+      width: 5%;
+    }
+    .columnFeed{
+     width: 10% ;
+    }
+    .columnState{
+      width: 15%;
+    }
+    .columnDate{
+      width: 16%
+    }
+    .columnTitle{
+      width: 39%;
+    }
+    .columnAction{
+      width: 15%;
+    }
+}
+@media screen and (max-width: 320px){
+  .ant-picker-panels {
+    flex-direction: column;
+    z-index: 999999999999999999999999999999999999999999999 !important;
+  }
+  .ant-picker-dropdown-range{
+    z-index: 99999999999999999999999999999999999 !important;
+    left: 10px !important;
+    top: 40px !important;
+  }
+  .ant-picker-range .ant-picker-active-bar{
+
+  }
+}
+@media screen and (min-width: 1140px) and (max-width: 1300px){
+  .ant-picker-range-wrapper{
+    margin-left: -30px;
+  }
+}
 

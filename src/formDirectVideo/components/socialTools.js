@@ -7,15 +7,19 @@ import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
 import {useDispatch, useSelector} from "react-redux";
-import{Hooks} from "../utils/hooks";
-import {setActivePlan, setActivePost, setAddPlan, setClosePlan} from "../store/formDirectVideoAction";
+import Hooks from "../utils/hooks";
+import moment from "moment";
+import {setActivePlan, setActivePost, setAddPlan, setClosePlan,setDatePlan} from "../store/formDirectVideoAction";
+import { useTranslation } from 'react-i18next';
+import defaultImg from '../../assets/webinarplease-thumb.jpg'
 
 
 export const SocialTools=()=>{
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const {values}=Hooks()
+    const {values,disablePastDate}=Hooks()
     console.log("socialTools",values.socialTools)
+    const { t, i18n } = useTranslation();
 
     const addPlan =async (index)=>{
         dispatch(setAddPlan({addPlanIndex:index}))
@@ -28,11 +32,15 @@ export const SocialTools=()=>{
         dispatch(setActivePlan({indexPost,indexPlan}))
     }
 
-
     const closePlan =(indexPost,indexPlan)=>{
         dispatch(setClosePlan({closePlanIndexPost:indexPost,closePlanIndexPlan:indexPlan}))
     }
 
+    const datePlan=(moment,indexPost,indexPlan,typeDate,dateValue)=>{
+        dispatch(setDatePlan({dateIndexPost:indexPost,dateIndexPlan:indexPlan,typeDate:typeDate,dateValue:moment}))
+    }
+
+    console.log("values-socialTools",values)
     return(
         <Row  gutter={[0, 0]}>
             <Col span={24}>
@@ -41,7 +49,7 @@ export const SocialTools=()=>{
                 <p style={{
                     color:darkMode===false?"":"rgba(255, 255, 255, 0.85"
                 }}>
-                    Envoi des publications sur les réseaux sociaux
+                    {t("formDirectVideo.PostingOnMedia")}
                 </p>
                 <List
 
@@ -69,7 +77,7 @@ export const SocialTools=()=>{
                                         <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:8}}>
                                             <Row gutter={[0, 20]}>
                                                 <Col span={24}>
-                                                    <span className={"spn_planification"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Planifier  la publication</span>
+                                                    <span className={"spn_planification"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.PlanPublication")}</span>
                                                 </Col>
                                                 {values.socialTools[index].plan.map((element, indexPlan) => {
                                                         return (
@@ -83,7 +91,7 @@ export const SocialTools=()=>{
                                                                                         <DownOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{activePlan(index,indexPlan)}}/>
                                                                                     </Col>
                                                                                     <Col offset={2}>
-                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> Planification {indexPlan +1}</span>
+                                                                                        <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}> {t("formDirectVideo.Planning")} {indexPlan +1}</span>
                                                                                     </Col>
                                                                                 </Row>
                                                                             </Col>
@@ -96,10 +104,13 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de début</span>
+                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.StartingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker style={{width: "100%"}}/>
+
+                                                                                <DatePicker getPopupContainer={() => document.querySelector(".datePicker1SocialTools")}  className={"datePicker1SocialTools"} defaultValue={element.startDate ? moment(element.startDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
+                                                                                            disabledDate={(current)=>disablePastDate(current,index,indexPlan,"startDate")}
+                                                                                            onChange={(moment,dateValue)=>{datePlan(moment,index,indexPlan,"startDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -108,10 +119,12 @@ export const SocialTools=()=>{
                                                                     <Col span={24}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
-                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Date de fin</span>
+                                                                                <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.EndingDate")}</span>
                                                                             </Col>
                                                                             <Col span={24}>
-                                                                                <DatePicker style={{width: "100%"}}/>
+                                                                                <DatePicker getPopupContainer={() => document.querySelector(".datePicker2SocialTools")} className={"datePicker2SocialTools"} defaultValue={element.endDate ? moment(element.endDate,'YYYY-MM-DD') : ''} style={{width: "100%"}}
+                                                                                            disabledDate={(current)=>disablePastDate(current,index,indexPlan,"endDate")}
+                                                                                            onChange={(moment,dateValue)=>{datePlan(moment,index,indexPlan,"endDate",dateValue)}}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
@@ -128,7 +141,7 @@ export const SocialTools=()=>{
                                                     justifyContent: "center"
                                                 }} span={24} className={"col-planification"}>
                                                     <Button  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
-                                                        Ajouter une planification
+                                                        {t("formDirectVideo.AddingPlanning")}
                                                     </Button>
                                                 </Col>
                                             </Row>
@@ -149,7 +162,7 @@ export const SocialTools=()=>{
                                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
                                                                     }}>Empreinte</span><br/><span className={"spn2"} style={{
                                                                     color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
-                                                                }}>Environ 1mn</span>
+                                                                }}>{t("formDirectVideo.AboutOneMn")}</span>
                                                                 </Col>
                                                             </Row>
                                                         </Col>
@@ -158,22 +171,21 @@ export const SocialTools=()=>{
                                                         </Col>
                                                     </Row>
                                                 </Col>
-                                                <Col span={24} className={"col_texte_empreinte"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                                                    Torquem detrexit hosti exercirlus quid ex ea voluptate et accurate
-                                                    disseredum.
+                                                <Col span={24} className={"col_texte_empreinte"}>
+                                                    {values.general.liveDescription}
                                                 </Col>
                                                 <Col span={24} style={{display: "flex", justifyContent: "center"}}>
+                                                    {console.log("fileList social",values.general.fileList)}
                                                     <img
-                                                        src={"//test-tv.webtv-solution.com/web/data/vignettes/logoSAB2NjY3ZTg5MmItNGI0MS00YjIyLTgwZGYtNmNkY2NjZTRhZTVishutterstock562442005.jpg"}
+                                                        src={values.general.fileList && values.general.fileList.length ?
+                                                            values.general.fileList[0].thumbUrl : defaultImg }
                                                         style={{height: "100%", width: "100%"}}/>
                                                 </Col>
-                                                <Col span={24}>
-                                                    <span className={"FundamentalsofWebinar"} style={{
-                                                        color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
-                                                    }}>Fundamentals of Webinar</span><br/>
-                                                    <span className={"Empriente.com"} style={{
-                                                        color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
-                                                    }}>Empriente.com</span>
+                                                <Col span={24}  className={"social-description"}>
+                                                    <span className={"FundamentalsofWebinar social-description-text"} >{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
+                                                    <span className={"social-description-text"} style={{
+                                                        color:"var(--white_color)"
+                                                    }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empriente.com'}</span>
                                                 </Col>
                                             </Row>
                                         </Col>

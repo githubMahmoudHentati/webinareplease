@@ -12,7 +12,8 @@ import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexio
 export  const HooksSignUp=()=> {
     const dispatch = useDispatch()
     const valuesSignUp = useSelector((state) => state.SignUpReducer)
-    const {CreateAccount}=GraphQLFetchData(valuesSignUp)
+    const valuesCard = useSelector((state) => state.PackagePayementReducer.packagePayement.activeCard)// reducer PackagePayement
+    const {CreateAccount , CREATECUSTOMER , CREATESUBSCRIPTIONCustomer , CREATEPayementintent}=GraphQLFetchData(valuesSignUp , valuesCard)
 
 //******************generalInformation************************//
     const signUpOnChange = (event) => {
@@ -33,23 +34,53 @@ export  const HooksSignUp=()=> {
         }
     };
 
+    const handleChangePhone = (val) => {
+        dispatch(setSignUpOnchange({
+            SignUpNameChange: 'phone',
+            SignUpValueChange: val
+        }));
+     
+    };
+
+    const SignUpOnChangeButton = (event) => {
+        document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
+        dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:event.target.value, constraintDataValueChange:event.target.checked}));
+    };
+
     const signUpOnChangeSelect = (value,action) => {
         console.log("event",action.name, action.value)
         dispatch(setSignUpOnchange({SignUpNameChange: action.name, SignUpValueChange: action.value}));
     };
 
-    const handleSubmitSignUp = () => {
-        dispatch(setSignUpConstraintDataOnchange({
+    const handleSubmitSignUp = async () => {
+        await dispatch(setSignUpConstraintDataOnchange({
             constraintDataNameChange: "loadingSignUp",
             constraintDataValueChange: true
         }))
+        !valuesSignUp.constraintData.confidentialityOption&&document.documentElement.style.setProperty('--box-signup', "red");
         CreateAccount()
+
+       if(valuesCard === 2){
+           CREATECUSTOMER() // Create Customer Stripe mutation
+
+           setTimeout(()=>{
+               CREATESUBSCRIPTIONCustomer() // Create Subsricption Stripe mutation
+           },2000)
+       }else if( valuesCard === 3){
+           CREATEPayementintent() // Payement Intent
+       }
+
+
+
+
     }
 
     return({
         signUpOnChange,
+        handleChangePhone,
         signUpOnChangeSelect,
         valuesSignUp,
-        handleSubmitSignUp
+        handleSubmitSignUp,
+        SignUpOnChangeButton
     })
 }
