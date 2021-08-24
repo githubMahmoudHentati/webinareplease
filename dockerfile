@@ -7,9 +7,11 @@ COPY ./package.json ./
 
 RUN npm install
 RUN ls -la 
-RUN ls -la build
 RUN npm audit fix
+
 COPY . .
+
+RUN ls -la build
 RUN npm build
 RUN ls -la 
 RUN ls -la build
