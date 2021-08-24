@@ -14,7 +14,7 @@ COPY . .
 RUN ls -la build
 RUN ls -la public
 
-RUN npm build
+RUN npm run build
 
 RUN ls -la 
 RUN ls -la build
