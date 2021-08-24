@@ -17,7 +17,7 @@ import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
-const Hooks=()=>{
+const Hooks=(form)=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
@@ -34,10 +34,13 @@ const Hooks=()=>{
         console.log("event",event.target.value,event.target.name)
         dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}))
         if(event.target.name==="pwd"){
-            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false})) ;}
-
-
-    };
+            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
+        }
+        if(event.target.value==="freeAccess"){
+            dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
+            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
+        }
+    }
 
     const generalOnChangeButton = async (event) => {
         console.log("event",event.target)
@@ -109,6 +112,7 @@ const Hooks=()=>{
 
     //*****************Configuration************//
     const configurationOnChangeByName =(value,name)=>{
+
         dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
         values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
     }
@@ -124,12 +128,18 @@ const Hooks=()=>{
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
         event.target.value==="visibleVideo" && themesDisplayQueryAction()
+
+        if(event.target.value==="notVisibleVideo"){
+            dispatch(setConfigurationOnchange({configurationNameChange:"theme", configurationValueChange:[]}))
+        }
+
     };
 
     const ConfigurationOnChangeSelect = (value,action,name) => {
 
         console.log("event-select",action)
         dispatch(setConfigurationOnchange({configurationNameChange: name, configurationValueChange: value}));
+
     };
 
     const displayThemes=()=>{

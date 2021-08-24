@@ -47,7 +47,7 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
                     pwd: values.general.pwd,
-                    securedPasswordOption: false
+                    securedPasswordOption: values.general.securedPasswordOption,
                 },
                 configuration: {
                     liveProgram: values.configuration.directProgram,
