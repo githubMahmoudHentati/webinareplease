@@ -12,9 +12,14 @@ RUN npm audit fix
 COPY . .
 
 RUN ls -la build
+RUN ls -la public
+
 RUN npm build
+
 RUN ls -la 
 RUN ls -la build
+RUN ls -la public
+
 # production stage
 FROM nginx:stable-alpine as production-stage
 COPY --from=build-stage /app/build /usr/share/nginx/html
