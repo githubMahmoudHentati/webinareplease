@@ -39,6 +39,7 @@ export const FormContactClient =()=> {
             wrapperCol={{ span: 16 }}
             layout="horizontal"
             name="product-form"
+            className={"product-form-sign"}
             onFinish={handleSubmitContactClient}
         >
         <Row gutter={[0, 40]} className={'col-contact'}>
@@ -95,7 +96,7 @@ export const FormContactClient =()=> {
                     </Col>
                 </Row>
             </Col>
-            <Col span={16}>
+            <Col span={24}>
                 <Row  gutter={[10, 0]} className={"text-form"}>
                     <Col>
                         <Button className={"spn2"} onClick={()=>history.push("/compteSettings")}> {t("CompteSettings.Cancel")}</Button>

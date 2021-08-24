@@ -76,9 +76,10 @@ export const FormConnexion =()=>{
             form={form}
             layout="horizontal"
             name="product-form"
+            className={"product-form-sign"}
             onFinish={handleSubmit}
         >
-        <Row gutter={[0, 40]} className={'col-connexion'}>
+        <Row gutter={[0, 40]} className={'col-connexion-sign'}>
             <Col span={24}>
                 <span className={"span_connexion"}>{t("FormConnexion.Connexion")}</span>
             </Col>

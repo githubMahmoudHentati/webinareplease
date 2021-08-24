@@ -131,10 +131,11 @@ function ChoicePackage(){
             wrapperCol={{ span: 16 }}
             layout="horizontal"
             name="product-form"
+            className={"product-form-payment"}
             onFinish={handleSubmitSignUp}
         >
             <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "ChoicePackage-form" : "ChoicePackage"}>
-                <Steps className={steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "steps-form" : "steps-choice"} current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>
+                <Steps className={"steps-choice"} current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>
                     {steps.map(item => (
                         <Step key={item.title} title={item.title}/>
                     ))}

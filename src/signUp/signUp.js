@@ -21,7 +21,9 @@ export const SignUp =()=>{
             labelCol={{ span:4}}
             wrapperCol={{ span: 16 }}
             layout="horizontal"
+            className={"signIn-form"}
             name="product-form"
+
             onFinish={handleSubmitSignUp}
         >
 

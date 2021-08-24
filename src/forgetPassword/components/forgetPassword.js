@@ -13,7 +13,7 @@ export const ForgetPassword =()=> {
 
 
     return(
-        <Row gutter={[0, 40]} className={'col-connexion'}>
+        <Row gutter={[0, 40]} className={'col-connexion-forget-pass'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
                     {t("forgetPassword.ResetPass")}
