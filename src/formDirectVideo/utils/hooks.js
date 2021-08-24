@@ -36,6 +36,10 @@ const Hooks=(form)=>{
         if(event.target.name==="pwd"){
             dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
         }
+        if(event.target.value==="freeAccess"){
+            dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
+            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
+        }
     }
 
     const generalOnChangeButton = async (event) => {
