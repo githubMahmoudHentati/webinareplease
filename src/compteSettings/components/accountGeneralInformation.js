@@ -163,6 +163,7 @@ console.log("vignette", values.generalInformation.vignette)
     dispatch(setGeneralInformationOnchange({generalInformationNameChange: 'phone', generalInformationValueChange: value}));
       
   }
+    {console.log("SettingError",values.constraintData.updateAccountSettingError)}
     return (
         <Form
             form={form}
@@ -278,14 +279,16 @@ console.log("vignette", values.generalInformation.vignette)
                                                            placeholder={"Email"}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
+                                                {values.constraintData.updateAccountSettingError &&
+                                                <Col span={20} className={"col_input"}>
+                                                    <span style={{color: "red"}}>{t("CompteSettings.UsedAddress")} </span>
+                                                </Col>
+                                                }
                                             </Col>
                                         </Row>
                                     </Col>
-                                    {values.constraintData.updateAccountSettingError &&
-                                    <Col offset={4} span={20} className={"col_input"}>
-                                        <span style={{color: "red"}}>{t("CompteSettings.UsedAddress")} </span>
-                                    </Col>
-                                    }
+
+
                                     <Col span={24}>
                                         <Row gutter={[0, 10]}>
                                             <Col span={24}>

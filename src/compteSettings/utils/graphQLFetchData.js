@@ -30,13 +30,14 @@ export const GraphQLFetchData=(form)=> {
                 values.generalInformation
         },
         onCompleted: async (data) => {
-            if (data.updateUser.code === 200) {
+            console.log("codeapi", data.updateUser.code)
+            if ( data.updateUser.code === 200) {
                 history.push("/showVideos")
 
                 // document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
                 // document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
             }
-            else if (data.updateUser.Code === 400){
+            else if ( data.updateUser.code === 400){
                 dispatch(setConstraintDataOnchange({
                     constraintDataNameChange: "updateAccountSettingError",
                     constraintDataValueChange: true
