@@ -13,11 +13,10 @@ import {
     setInvitationOnchange,
     setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat
 } from "../store/formDirectVideoAction";
-import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
-const Hooks=(form)=>{
+const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
