@@ -29,6 +29,7 @@ export const LiveSubmit=(props)=>{
             await form.setFieldsValue({...form.getFieldsValue(),pwd:""})
     }, [values.general.loadingSecuredPassword]);
 
+
     useEffect(async () => {
         if (values.constraintData.loadingLiveFetchData&&localStorage.getItem('idLive'))
         {
