@@ -35,6 +35,10 @@ const Hooks=()=>{
         if(event.target.name==="pwd"){
             dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
         }
+        if(event.target.value==="freeAccess"){
+            dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
+            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
+        }
     }
 
     const generalOnChangeButton = async (event) => {
@@ -84,6 +88,7 @@ const Hooks=()=>{
     }
 
     const startGetDisabledMinutes = (selectedHour) => {
+        console.log("hel123654oo",selectedHour)
         let minutes= [];
         if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
             if (selectedHour===-1) {

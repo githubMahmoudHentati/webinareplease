@@ -136,6 +136,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
       style={{ backgroundColor: darkMode === false ? "#ffffff" : "#011529" }}
     >
       <Table
+          showSorterTooltip={false}
         style={{ backgroundColor: darkMode === false ? "#ffffff" : "#011529" }}
         rowKey={(record) => record.id}
         rowSelection={rowSelection}
@@ -150,6 +151,7 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
           showQuickJumper: true,
           showSizeChanger: true,
         }}
+        getPopupContainer={() => document.querySelector(".DataTable")}
       />
     </div>
   );

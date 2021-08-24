@@ -104,32 +104,34 @@ function GlobalHeader() {
         <Menu className="menu">
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(0)))
-            }}><UserOutlined/>{t("description.Account")}</Menu.Item>
+            }}><UserOutlined className={"dropdownIcon"}/>{t("description.Account")}</Menu.Item>
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(1)))
-            }}><UnlockOutlined/>{t("description.security")}</Menu.Item>
+            }}><UnlockOutlined className={"dropdownIcon"}/>{t("description.security")}</Menu.Item>
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(3)))
-            }}><PieChartOutlined/>{t("description.Subscription")}</Menu.Item>
-            <Menu.Item onClick={logOut}><LogoutOutlined/>{t("description.LogOut")}</Menu.Item>
+            }}><PieChartOutlined className={"dropdownIcon"}/>{t("description.Subscription")}</Menu.Item>
+            <Menu.Item onClick={logOut}><LogoutOutlined className={"dropdownIcon"}/>{t("description.LogOut")}</Menu.Item>
         </Menu>
     );
     const Menulang = (
         <Menu className="menu">
-            <Menu.Item onClick={() => changeLanguage('fr')}>
+            <Menu.Item  onClick={() => changeLanguage('fr')}>
+                <div className={"menuItemLang"}>
                  <span className="icon-fr">
                      <span className="path1"></span>
                      <span className="path2"></span>
                      <span className="path3"></span><span className="path4"></span>
-                 </span> {t("lang2")}
+                 </span> <span className={"dropdowlangIcon"}>{t("lang2")}</span></div>
             </Menu.Item>
-            <Menu.Item onClick={() => changeLanguage('en')}>
+            <Menu.Item className={"menuItemLang"} onClick={() => changeLanguage('en')}>
+                <div className={"menuItemLang"}>
                 <span className="icon-ang">
                     <span className="path1"></span>
                     <span className="path2"></span>
                     <span className="path3"></span><span className="path4"></span>
                     <span className="path5"></span>
-                </span> {t("lang1")}
+                </span> <span className={"dropdowlangIcon"}>{t("lang1")}</span></div>
             </Menu.Item>
         </Menu>
 

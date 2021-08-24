@@ -592,9 +592,9 @@ body{
     font-size: 16px !important;
     font-weight: 500 !important;
 }
-.anticon-close svg{
-    color: var(--white_color) !important;
-}
+//.anticon-close svg{
+//    color: var(--white_color) !important;
+//}
 .div_Url_diffusion .div_Copier Button{
     background-color: var(--modal_background) !important;
     color: var(--white_color) !important;
@@ -612,11 +612,14 @@ body{
     background-color: var(--option-background) !important;
     color: var(--white_color) !important;
 }
+.menuItem:hover .ant-menu-title-content{
+    color: #1890ff  !important;
+}
 .menuItem:focus{
     background-color: var(--menu-background) !important;
 }
 .menuItem:focus .ant-menu-title-content{
-    color: #007fcb  !important;
+    color: #1890ff  !important;
 }
 .ant-picker-cell-selected{
     background-color: var(--option-background) !important;
@@ -638,7 +641,23 @@ color: var(--white_color) !important;
 }
 
 
-
+.dropdownIcon{
+    margin-right: 8px !important;
+}
+.dropdownIconTemp{
+    margin-right: 6px !important;
+}
+.dropdowlangIcon{
+    margin-left: 6px !important;
+}
+.icon-fr , .icon-ang{
+    font-size: 20px !important;
+}
+.menuItemLang{
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
 
 .spnwhite{
     color: var(--white_color) !important;
@@ -871,7 +890,7 @@ color: var(--white_color) !important;
 
 /*Data Table*/
 .DataTable{
-margin-top: 2%;
+    margin-top: 2%;
 }
 /* Data Table*/
 

@@ -14,6 +14,8 @@ function IframeStudioLive(){
 
             <div className={"Templetes"}>
                 <iframe id="inlineFrameExample"
+                        allow="display-capture; microphone; camera"
+                        allowfullscreen=""
                         frameBorder="0"
                         title="Inline Frame Example"
                         // src={diffusionLink.diffLink}
