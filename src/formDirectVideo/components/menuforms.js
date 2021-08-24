@@ -10,6 +10,7 @@ export const MenuForms =()=>{
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const selectedkey = useSelector((state)=> state.Reducer.directMenu)
     const { t, i18n } = useTranslation();
 
     return (
@@ -17,7 +18,7 @@ export const MenuForms =()=>{
             <Col span={24} >
                 <Menu
                     style={{width:'100%',height:"100%" , backgroundColor:darkMode===false?"":"#141414" , borderRight:darkMode===false?"":"2px solid #1D1D1D"}}
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[selectedkey===0?'1':selectedkey===1?'2':selectedkey===2?'3':selectedkey===3?'4':selectedkey===4?'5':'']}
                     defaultOpenKeys={['sub1']}
                     className="TabMenuForm"
                 >

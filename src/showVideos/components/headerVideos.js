@@ -30,11 +30,10 @@ function HeaderVideos() {
 
     useEffect(() => {
         function goto(event) {
-
             var noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
                 ', .ant-select-selector * , .ant-select-dropdown * ,' +
                 ' .ant-select-item-option-content , .ant-picker-cell-inner , .ant-picker-dropdown * , ' +
-                '.div_filter_avance * , .div_Filter_global * '  ;
+                '.div_filter_avance * , .div_Filter_global , .div_Filter , .div1_div_Filter * , .div_button_filter , .btn_1'  ;
             if (!event.target.matches(noRedirect)) {
                 SetShowFilter(false);
                 SetActiveIcon(false)
@@ -100,7 +99,7 @@ function HeaderVideos() {
 
           <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
               <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
-              <Button  onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button>
+              <Tooltip getPopupContainer={() => document.querySelector(".btn_add_media")} title={t("ShowVideo.AjoutLive")}><Button  onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button></Tooltip>
           </div>{/*./TousMedia*/}
 
           <div className="Filter">
@@ -121,7 +120,7 @@ function HeaderVideos() {
                   }
 
                   <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"#141414", color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
-                      <Tooltip className="tooltip_calendrier" title={t("ShowVideo.ViewCalendar")}>
+                      <Tooltip getPopupContainer={() => document.querySelector(".Calendrier")} className="tooltip_calendrier" title={t("ShowVideo.ViewCalendar")}>
                       <CalendarOutlined  className="IconCalendrier" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)"}}/>
                       <span id={"Text_Calendar"}>{t("ShowVideo.Calendar")}</span>
                       </Tooltip>
@@ -156,7 +155,7 @@ function HeaderVideos() {
                       placeholder={t("ShowVideo.Search")}
                       prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.85)", marginLeft: "10px" }}/>}
                       suffix={
-                          <Tooltip title={t("ShowVideo.Filter")}>
+                          <Tooltip getPopupContainer={() => document.querySelector(".inputFilter")} title={t("ShowVideo.Filter")}>
                           <div
                               onClick={handlClickSuffix}
                               className="filter_icon"
