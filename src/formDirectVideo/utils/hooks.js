@@ -85,6 +85,7 @@ const Hooks=(form)=>{
     }
 
     const startGetDisabledMinutes = (selectedHour) => {
+        console.log("hel123654oo",selectedHour)
         let minutes= [];
         if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
             if (selectedHour===-1) {

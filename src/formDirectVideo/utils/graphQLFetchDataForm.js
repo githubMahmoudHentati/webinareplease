@@ -306,7 +306,7 @@ export const GraphQLFetchDataForm = (values) => {
                     tags:data.getlive.configurationOut.tags,
                     listChapter:data.getlive.configurationOut.chapters.map((item)=>{
                         return({
-                            id:item.chapterOrde,
+                            id:item.chapterOrder,
                             title:item.chapterTitle
                         })
                     }),

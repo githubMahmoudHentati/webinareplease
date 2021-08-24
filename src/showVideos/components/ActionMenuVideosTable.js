@@ -8,6 +8,7 @@ import { useDispatch} from "react-redux";
 import {Hooks} from "../utils/hooks";
 import {useTranslation} from "react-i18next";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+import {setAccountSetting, setDirectSetting} from "../../utils/redux/actions";
 
 const { SubMenu } = Menu;
 const { TextArea } = Input;
@@ -28,11 +29,11 @@ function useActionMenu({record}) {
 
     const actionMenu = (
         <Menu className="menu">
-            <Menu.Item onClick={()=>handleInfos()}><InfoCircleOutlined />{t("ShowVideo.infos")}</Menu.Item>
-            {record.owner ? <Menu.Item onClick={()=>updateLive(record.id)}><EditOutlined />{t("ShowVideo.Modifier")}</Menu.Item> : null}
-            <Menu.Item onClick={()=>handleExport()}><LinkOutlined />Export</Menu.Item>
-            <Menu.Item ><span className="icon-Templates"></span> {t("ShowVideo.Templates")}</Menu.Item>
-            {record.owner ? <Menu.Item onClick={()=>handleDeleteOneRow(record.id)}><DeleteOutlined />{t("ShowVideo.Delete")}</Menu.Item> : null}
+            <Menu.Item onClick={()=>handleInfos()}><InfoCircleOutlined className={"dropdownIcon"}/>{t("ShowVideo.infos")}</Menu.Item>
+            {record.owner ? <Menu.Item onClick={()=>updateLive(record.id)}><EditOutlined className={"dropdownIcon"}/>{t("ShowVideo.Modifier")}</Menu.Item> : null}
+            <Menu.Item onClick={()=>handleExport()}><LinkOutlined className={"dropdownIcon"}/>Export</Menu.Item>
+            <Menu.Item onClick={()=>history.push("/FormDirectVideo", dispatch(setDirectSetting(4)))}><span className="icon-Templates dropdownIconTemp"></span> {t("ShowVideo.Templates")}</Menu.Item>
+            {record.owner ? <Menu.Item onClick={()=>handleDeleteOneRow(record.id)}><DeleteOutlined className={"dropdownIcon"}/>{t("ShowVideo.Delete")}</Menu.Item> : null}
         </Menu>
     );
 
@@ -80,7 +81,7 @@ function useActionMenu({record}) {
     const actionColumnView = (
         <div className="action">
             {
-                !x.matches &&  <Tooltip title={t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser" ))}>
+                !x.matches &&  <Tooltip getPopupContainer={() => document.querySelector(".btn_Visualiser_diffuser")} title={t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser" ))}>
                     <Button className={"btn_Visualiser_diffuser "} style={{
                         backgroundColor: darkMode === false ? "" : "#1D1D1D",
                         color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
