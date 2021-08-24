@@ -50,4 +50,3 @@ spec:
       protocol: TCP
   selector:
     app: $APP_NAME
-  type: LoadBalancer
