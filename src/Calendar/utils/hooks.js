@@ -32,7 +32,7 @@ const HooksCalendar=(callback)=> {
     const calendarProps = useSelector((state) => state.CalendarReducer)
     const calendarValues = calendarProps.calendar.calendarValues;
     const {success_Delete, error_Delete} = StatusMessage()
-    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
+    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'): '';
     const statusLive = localStorage.getItem('statusLive')?localStorage.getItem('statusLive'):'';
     const history = useHistory();
     var  x  = useWindowDimensions()
@@ -99,7 +99,6 @@ const HooksCalendar=(callback)=> {
     const [GetDiffusionLive]
         = useMutation(graphQL_shema().Get_Diffusion_Live, {
         context: {clientName: "second"},
-        variables: {id: idLive},
         onCompleted: async (data) => {
             let diffusionData=data.getDiffusionLink
             if (diffusionData) {
@@ -299,7 +298,7 @@ const HooksCalendar=(callback)=> {
     const diffusionLive = ({id, status}) =>{
         localStorage.setItem('idLive', id);
         localStorage.setItem('statusLive', status);
-        GetDiffusionLive()
+        GetDiffusionLive({variables: {id: id}})
     }
     const handleStatusEvents =async (live) =>{
         if(live.status === -1){
