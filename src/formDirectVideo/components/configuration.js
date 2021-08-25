@@ -323,7 +323,8 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
                             <Col offset={1} span={23}>
                                     <Select
-                                         mode="multiple"
+                                        value={values.configuration.theme}
+                                        mode="multiple"
                                         className={"spn2"}
                                         name="theme" onChange={(value,action)=>{ConfigurationOnChangeSelect(value,action,"theme")}}
                                         showSearch
