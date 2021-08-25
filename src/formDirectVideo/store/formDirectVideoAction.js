@@ -1,12 +1,21 @@
 //********************* General actions *****************//
 
-export function setGeneralOnchange(e){
+        export function setGeneralOnchange(e){
 
-    return{
-        type: "SET_GeneralOnchange",
-        payload:e,
-    }
-}
+            return{
+                type: "SET_GeneralOnchange",
+                payload:e,
+            }
+        }
+
+        // export function setGeneralCleanDate(e){
+        //
+        //     return{
+        //         type: "SET_GeneralCleanDate",
+        //         payload:e,
+        //     }
+        // }
+
 
 //******************** Configuration actions***************//
 
