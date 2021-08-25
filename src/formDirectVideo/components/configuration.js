@@ -79,11 +79,11 @@ export const Configuration = () => {
         itemListRef.current && setItemListHeight(itemListRef.current.offsetHeight)
     }, [itemListRef]);
 
-    useEffect(async () => {
-        console.log("testswitch", values.configuration.SpeakerList.length > 0)
-        values.configuration.SpeakerList.length > 0 &&
-        dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
-    }, []);
+    // useEffect(async () => {
+    //     console.log("testswitch", values.configuration.SpeakerList.length > 0)
+    //     values.configuration.SpeakerList.length > 0 &&
+    //     dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
+    // }, []);
 console.log("SpeakerList",values.configuration.SpeakerList)
 
     return (
