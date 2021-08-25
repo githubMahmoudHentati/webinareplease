@@ -70,7 +70,7 @@ export const GraphQLFetchDataForm = (values) => {
                         theme: "themeX"
                     },
                     tags: values.configuration.tags,
-                    addSpeaker: values.configuration.addSpeakerList,
+                    addSpeaker: values.configuration.switchSpeaker?values.configuration.addSpeakerList:[],
                     themes: values.configuration.theme,
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
@@ -147,7 +147,7 @@ export const GraphQLFetchDataForm = (values) => {
                 configurationOutput: {
                     liveProgram: values.configuration.directProgram,
 
-                    speakers: values.configuration.addSpeakerList,
+                    speakers: values.configuration.switchSpeaker?values.configuration.addSpeakerList:[],
 
                     interOption: {
                         chat: values.configuration.chat,
@@ -247,9 +247,8 @@ export const GraphQLFetchDataForm = (values) => {
         onCompleted: async (data)=>{
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm")
-
-            console.log("startDate",startDate,"startHour",startHour)
             let speakerList=[...data.getlive.configurationOut.speakers]
+
             dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
@@ -282,7 +281,7 @@ export const GraphQLFetchDataForm = (values) => {
                 configuration:{
                     directProgram: data.getlive.configurationOut.liveProgram,
                     modalSpeaker: values.configuration.modalSpeaker,
-                    switchSpeaker: values.configuration.switchSpeaker,
+                    switchSpeaker:speakerList.length > 0,
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
                     SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
