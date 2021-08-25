@@ -36,6 +36,13 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 general:generalOnOnchangeObj
             }
 
+        // case "SET_GeneralCleanDate":
+        //     const generalCleanDateObj = {...state.general, startDate:"",startHour:"",period:""}
+        //     return{
+        //         ...state,
+        //         general:generalCleanDateObj
+        //     }
+
         //******** configuration reducer case************//
 
         case "SET_ConfigurationModalSpeaker":

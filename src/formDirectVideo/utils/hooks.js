@@ -11,7 +11,7 @@ import {
     setConfigurationSpeakerList,
     setGeneralOnchange,
     setInvitationOnchange,
-    setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat
+    setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat, setGeneralCleanDate
 } from "../store/formDirectVideoAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
@@ -26,9 +26,12 @@ const Hooks=()=>{
 
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
-        console.log("testtest",name,value)
+
+        console.log("eventswitch",event)
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:event}));
+
     }
+
     const generalOnChange = (event) => {
         console.log("event",event.target.value,event.target.name)
         dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}))
@@ -217,15 +220,15 @@ const Hooks=()=>{
                     }
                 ))
         }));
-        let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
-        let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm'):values.general.startHour
+        let newStartDate= !values.general.liveAction?"":typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
+        let newStartHour= !values.general.liveAction?"":typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm'):values.general.startHour
         // let period = typeof values.general.period!="string"? values.general.period.format('HH:mm:ss'):values.general.period;
         dispatch(setGeneralOnchange({generalNameChange:"startDate", generalValueChange:newStartDate}));
         dispatch(setGeneralOnchange({generalNameChange:"startHour", generalValueChange:newStartHour}));
 
         dispatch(setDatePlanFormat());
 
-        dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:typeof values.general.period!="string"&&values.general.period===!null? moment(values.general.period).format('HH'):values.general.period===null?"":values.general.period}));
+        dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:!values.general.liveAction?"":typeof values.general.period!="string"&&values.general.period===!null? moment(values.general.period).format('HH'):values.general.period===null?"":values.general.period}));
         idLive?UpdateLive():CreateLive()
     }
 
