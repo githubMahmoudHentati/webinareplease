@@ -15,7 +15,7 @@ import {
 } from "../../store/formDirectVideoAction";
 import { useTranslation } from "react-i18next";
 
-export const Question = ({  }) => {
+export const Question = ({ listQuestion }) => {
   const inputRef = React.useRef(null);
 
   const dispatch = useDispatch();
@@ -26,15 +26,11 @@ export const Question = ({  }) => {
   const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false);
   const [Inputs, setInputs] = useState({
     nsp: 1,
-    response: [ "" ],
+    choices: [{ response: "" }],
     question: "",
   });
   const [isEditing, setIsEditing] = useState(false);
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
-  const  listQuestion  = useSelector(
-      (state) => state.FormDirectVideoReducer.configuration.listQuestion
-  );
-  console.log("eeeeeeeeeeeeeeeeeeeee",listQuestion)
   useEffect(() => {
     setFakeList(listQuestion);
   }, [listQuestion]);
@@ -46,14 +42,21 @@ export const Question = ({  }) => {
     setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
   };
   const handleChangeResponse = (e, key) => {
-    Inputs.response[key] = e.target.value;
+    Inputs.choices[key].response = e.target.value;
     setInputs({ ...Inputs });
   };
   const handleChangeToEditResponse = (e, firstKey, secondKey) => {
-    console.log("helloEdit",firstKey)
     const newList = fakeList.map((item, index) => {
       if (index === firstKey) {
-          item.response[secondKey] = e.target.value
+        return {
+          ...item,
+          choices: item.choices.map((resp, o) => {
+            return {
+              ...resp,
+              response: o === secondKey ? e.target.value : resp.response,
+            };
+          }),
+        };
       }
       return item;
     });
@@ -67,7 +70,7 @@ export const Question = ({  }) => {
           return {
             ...item,
             nsp: e.target.value,
-            response: item.response.length === 0 ? [...item.response,  ""]  : [...item.response]
+            choices: item.choices.length === 0 ? [...item.choices, {response: ""}]  : [...item.choices]
           };
         }
         if (e.target.name === "question") {
@@ -89,25 +92,25 @@ export const Question = ({  }) => {
   };
 
   const handleAddQuestion = () => {
-    const { nsp, question, response } = Inputs;
+    const { nsp, question, choices } = Inputs;
 
     setLocalId(localId + 1);
-    dispatch(setQuestionList({ nsp, question, response: [...response.filter(ele => ele.trim().length > 0)], questionId: localId }));
-    setFakeList([...fakeList, { nsp, question, response: [...response.filter(ele => ele.trim().length > 0)], questionId: localId }]);
-    setInputs({ nsp: 1, response: [ "" ], question: "" });
+    dispatch(setQuestionList({ nsp, question, choices: [...choices.filter(ele => ele.response.trim().length > 0)], questionId: localId }));
+    setFakeList([...fakeList, { nsp, question, choices: [...choices.filter(ele => ele.response.trim().length > 0)], questionId: localId }]);
+    setInputs({ nsp: 1, choices: [{ response: "" }], question: "" });
     setIsAddingNewQuestion(false);
   };
 
   const addNewResponse = (firstKey, attr) => {
     if (attr === "edit") {
       let oldArray = [...fakeList];
-      oldArray[firstKey].response.push( "" );
+      oldArray[firstKey].choices.push({ response: "" });
       setFakeList(oldArray);
       setIsEditing(true);
     } else {
       setInputs((old) => ({
         ...old,
-        response: [...old.response, ""],
+        choices: [...old.choices, { response: "" }],
       }));
     }
   };
@@ -120,7 +123,7 @@ export const Question = ({  }) => {
         if (index === firstKey) {
           return {
             ...item,
-            response: item.response.filter((ele) => ele !== resp),
+            choices: item.choices.filter((ele) => ele !== resp),
           };
         }
         return item;
@@ -128,10 +131,10 @@ export const Question = ({  }) => {
       setFakeList(newList);
       setIsEditing(true);
     } else {
-      filtered = Inputs.response.filter((ele) => ele !== resp);
+      filtered = Inputs.choices.filter((ele) => ele !== resp);
       setInputs((old) => ({
         ...old,
-        response: filtered,
+        choices: filtered,
       }));
     }
   };
@@ -151,13 +154,13 @@ export const Question = ({  }) => {
     switch(check){
       case 1 : return true;
       case 2 : return true;
-      case 3: return responses && responses.filter(ele => ele.trim().length !== 0).length > 0 ?  true : false;
-      case 4 : return responses && responses.filter(ele => ele.trim().length !== 0).length > 1 ?  true : false;;
+      case 3: return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 0 ?  true : false;
+      case 4 : return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 1 ?  true : false;;
       default : return
     }
   }
-  const responseList = Inputs.response;
-  console.log('tttttttttttttttt', fakeList)
+  const responseList = Inputs.choices;
+
   return (
       <Row gutter={[0, 15]} className="Question">
         <Col span={24}>
@@ -235,7 +238,7 @@ export const Question = ({  }) => {
                             </Radio>
                           </Radio.Group>
                         </Row>
-                        {ele.response.map((resp, o) => (
+                        {ele.choices.map((resp, o) => (
                             <Col
                                 key={o}
                                 span={24}
@@ -245,7 +248,7 @@ export const Question = ({  }) => {
                                 className="custom-column"
                             >
                               <Input
-                                  value={resp}
+                                  value={resp.response}
                                   onChange={(e) => handleChangeToEditResponse(e, index, o)}
                                   placeholder={t(
                                       "formDirectVideo.questionsTab.inputResponsePlaceholder"
@@ -253,10 +256,10 @@ export const Question = ({  }) => {
                                   className="Question__input"
                                   name="response"
                                   suffix={
-                                    ele.response.length === o + 1 ? (
+                                    ele.choices.length === o + 1 ? (
                                         <PlusCircleOutlined
                                             onClick={() => addNewResponse(index, "edit")}
-                                            className={(resp.trim().length === 0 ? "d-none" : "d-block")}
+                                            className={(resp.response.trim().length === 0 ? "d-none" : "d-block")}
                                         />
                                     ) : (
                                         <DeleteOutlined
@@ -295,7 +298,7 @@ export const Question = ({  }) => {
                             </Button>
                             <Button
                                 className={
-                                  ele.question.trim().length !== 0 && isEditing && checkResponseStatus(ele.nsp, ele.response)
+                                  ele.question.trim().length !== 0 && isEditing && checkResponseStatus(ele.nsp, ele.choices)
                                       ? ""
                                       : "Question__actions-disabled"
                                 }
@@ -383,14 +386,14 @@ export const Question = ({  }) => {
             </Radio.Group>
           </Col>
           {Inputs &&
-          Inputs.response.map((ele, o) => (
+          Inputs.choices.map((ele, o) => (
               <Col
                   key={o}
                   span={24}
                   style={{ display: Inputs && Inputs.nsp > 2 ? "flex" : "none" }}
               >
                 <Input
-                    value={ele}
+                    value={ele.response}
                     onChange={(e) => handleChangeResponse(e, o)}
                     placeholder={t(
                         "formDirectVideo.questionsTab.inputResponsePlaceholder"
@@ -400,7 +403,7 @@ export const Question = ({  }) => {
                     suffix={
                       responseList.length === o + 1 ? (
                           <PlusCircleOutlined
-                              className={"list-item-icons " + (ele.trim().length === 0 ? "d-none" : "d-block")}
+                              className={"list-item-icons " + (ele.response.trim().length === 0 ? "d-none" : "d-block")}
                               onClick={addNewResponse}
                           />
                       ) : (
@@ -439,7 +442,7 @@ export const Question = ({  }) => {
               </Button>
               <Button
                   className={
-                    Inputs && Inputs.question && Inputs.question.trim().length !== 0 && checkResponseStatus(Inputs.nsp, Inputs.response)
+                    Inputs && Inputs.question && Inputs.question.trim().length !== 0 && checkResponseStatus(Inputs.nsp, Inputs.choices)
                         ? ""
                         : "Question__actions-disabled"
                   }
@@ -465,4 +468,3 @@ export const Question = ({  }) => {
       </Row>
   );
 };
-
