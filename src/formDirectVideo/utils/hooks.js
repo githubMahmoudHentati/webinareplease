@@ -13,11 +13,10 @@ import {
     setInvitationOnchange,
     setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat
 } from "../store/formDirectVideoAction";
-import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
-const Hooks=(form)=>{
+const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     // values.form&&console.log("hooks-form",values.form.getFieldValue())
@@ -34,10 +33,6 @@ const Hooks=(form)=>{
         console.log("event",event.target.value,event.target.name)
         dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}))
         if(event.target.name==="pwd"){
-            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
-        }
-        if(event.target.value==="freeAccess"){
-            dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
             dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
         }
     }

@@ -9,7 +9,14 @@ import youtubePost from  "../../assets/youtubePost.svg"
 import {useDispatch, useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import moment from "moment";
-import {setActivePlan, setActivePost, setAddPlan, setClosePlan,setDatePlan} from "../store/formDirectVideoAction";
+import {
+    setActivePlan,
+    setActivePost,
+    setAddPlan,
+    setClosePlan,
+    setDatePlan,
+    setDatePlanByPost
+} from "../store/formDirectVideoAction";
 import { useTranslation } from 'react-i18next';
 import defaultImg from '../../assets/webinarplease-thumb.jpg'
 
@@ -26,6 +33,8 @@ export const SocialTools=()=>{
     }
     const activePost=(checked,index)=>{
         dispatch(setActivePost({activePostChecked:checked,activePostIndex:index}))
+        !checked && dispatch(setDatePlanByPost({dateIndexByPost:index}))
+
     }
 
     const activePlan=(indexPost,indexPlan)=>{
