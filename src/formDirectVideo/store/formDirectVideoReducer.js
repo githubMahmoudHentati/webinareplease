@@ -207,6 +207,16 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 socialTools: socialToolsDatePlan
             }
 
+        case 'SET_DatePlanByPost':
+            const {dateIndexByPost}=action.payload
+            const socialToolsDatePlanByPost =state.socialTools.map(el => (el.id === dateIndexByPost ? {...el,
+                plan: []
+            } : el))
+            return{
+                ...state,
+                socialTools: socialToolsDatePlanByPost
+            }
+
         case 'SET_DatePlanFormat':
             let DatePlanFormatNewArr=state.socialTools.map((element,index)=>(element.plan.map((el,i) => (!el.startDate?el.endDate?{...el,startDate:moment().format("YYYY-MM-DDTHH:mm:ssZ")}:{...el,startDate:moment().format("YYYY-MM-DDTHH:mm:ssZ"),endDate:moment().format("YYYY-MM-DDTHH:mm:ssZ")}:!el.endDate?{...el,endDate:el.startDate}:el))))
             const socialToolsDatePlanFormat =state.socialTools.map((el,i) => ( {...el,
