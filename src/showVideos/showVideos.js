@@ -26,7 +26,7 @@ function ShowVideos() {
     const {paginationProps ,  values, GETDATEVIDEO }=Hooks()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const {DeleteItemsMutation}=GraphQLFetchData()
-
+    const {handleClickStreamin} = Hooks()
     function DeleteItemsAPIFunction(){
         DeleteItemsMutation()
     }
@@ -126,7 +126,7 @@ function ShowVideos() {
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                            }}>
+                            }} onClick={()=>handleClickStreamin(record)}>
                                 {
                                     record.status === -1 ? <VideoCameraOutlined id={"icon_vs"}/> : <EyeOutlined id={"icon_vs"}/>
                                 }
