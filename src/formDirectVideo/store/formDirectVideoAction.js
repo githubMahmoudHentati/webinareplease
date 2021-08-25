@@ -200,6 +200,15 @@ export function setGeneralOnchange(e){
             }
         }
 
+        export function setDatePlanByPost(e){
+            return{
+                type:"SET_DatePlanByPost",
+                payload:e
+            }
+        }
+
+
+
 
 //***************************Update live info***************************//
 
