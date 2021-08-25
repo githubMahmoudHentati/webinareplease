@@ -65,7 +65,7 @@ export const Configuration = () => {
     const {Option} = Select;
     const children = [];
     for (let i = 10; i < 36; i++) {
-        children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+        children.push(<Option key={i.toString(36) + i}></Option>);
     }
 
     const selectProps = {
@@ -354,11 +354,20 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                             <Col span={24} className={"col-forms"}>
                                 <Form.Item name="tags" className={"form-item-style"}
                                 >
-                                    <Select name="tags" className={"selectTags"} mode="tags"
+                                    <Select
+                                        onInputKeyDown={(e) => {
+                                            if (e.target.value.length === 0) {
+                                                e.stopPropagation()
+                                            }
+                                        }}
+                                           name="tags" className={"selectTags"} mode="tags"
                                             style={{width: '100%', minHeight: "32px"}} placeholder={t("formDirectVideo.ModeTags")}
                                             onChange={(value, event) => {
                                                 configurationOnChangeByName(value, "tags")
-                                            }}  {...selectProps} />
+                                            }}
+                                            {...selectProps}
+
+                                    />
                                 </Form.Item>
                             </Col>
                         </Row>
