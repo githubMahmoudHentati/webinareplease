@@ -15,7 +15,6 @@ function PackagePayement(){
             <Elements stripe={stripePromise}>
           <WebinairePlease logo={logo}>
             <ChoicePackage/>
-
           </WebinairePlease>
             </Elements>
         </div>

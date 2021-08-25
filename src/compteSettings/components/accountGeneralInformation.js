@@ -334,6 +334,7 @@ console.log("vignette", values.generalInformation.vignette)
                                             </Col>
                                             <Col span={24}>
                                                 <Select
+                                                    className={"selectCompte"}
                                                     showSearch
                                                     style={{width: "100%"}}
                                                     placeholder="Entre 5 - 10 employé(e)s"
@@ -344,6 +345,7 @@ console.log("vignette", values.generalInformation.vignette)
                                                     filterOption={(input, option) =>
                                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                     }
+                                                    getPopupContainer={() => document.querySelector(".selectCompte")}
                                                 >
                                                     <Option name="numberPerson" key={1}
                                                             value="1">{t("CompteSettings.choiceOne")}</Option>

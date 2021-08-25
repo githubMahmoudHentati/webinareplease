@@ -26,7 +26,6 @@ export const SignUp =()=>{
 
             onFinish={handleSubmitSignUp}
         >
-
         <WebinairePlease logo={logo}>
                     <FormSignUp
                         child1={

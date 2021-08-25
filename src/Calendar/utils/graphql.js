@@ -26,18 +26,8 @@ export const graphQL_shema = () => {
        }
      }
     `;
-    const Get_Diffusion_Live = gql`
-       mutation($id:Int!) {
-        getDiffusionLink(id:$id){ 
-            code
-            diffLink 
-            visLink 
-        }
-    }
-    `;
     return ({
         Get_Calendar_Data,
-        Delete_Items,
-        Get_Diffusion_Live
+        Delete_Items
     })
 }

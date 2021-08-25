@@ -36,6 +36,13 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 general:generalOnOnchangeObj
             }
 
+        // case "SET_GeneralCleanDate":
+        //     const generalCleanDateObj = {...state.general, startDate:"",startHour:"",period:""}
+        //     return{
+        //         ...state,
+        //         general:generalCleanDateObj
+        //     }
+
         //******** configuration reducer case************//
 
         case "SET_ConfigurationModalSpeaker":
@@ -205,6 +212,16 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             return{
                 ...state,
                 socialTools: socialToolsDatePlan
+            }
+
+        case 'SET_DatePlanByPost':
+            const {dateIndexByPost}=action.payload
+            const socialToolsDatePlanByPost =state.socialTools.map(el => (el.id === dateIndexByPost ? {...el,
+                plan: []
+            } : el))
+            return{
+                ...state,
+                socialTools: socialToolsDatePlanByPost
             }
 
         case 'SET_DatePlanFormat':

@@ -152,319 +152,319 @@ export const Question = ({ listQuestion }) => {
 
   const checkResponseStatus = (check, responses) =>{
     switch(check){
-case 1 : return true;
-case 2 : return true;
-case 3: return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 0 ?  true : false;
-case 4 : return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 1 ?  true : false;;
-default : return 
+      case 1 : return true;
+      case 2 : return true;
+      case 3: return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 0 ?  true : false;
+      case 4 : return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 1 ?  true : false;;
+      default : return
     }
   }
   const responseList = Inputs.choices;
 
   return (
-    <Row gutter={[0, 15]} className="Question">
-      <Col span={24}>
-        {fakeList.length ? (
-          fakeList.map((ele, index) =>
-            questionToEdit !== index ? (
-              <div className="Question__list-item">
-                <Row
-                  className="Question__list-item__content"
-                  style={{ width: "100%" }}
-                >
-                  <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
-                    <MenuOutlined />
-                    <span>
+      <Row gutter={[0, 15]} className="Question">
+        <Col span={24}>
+          {fakeList.length ? (
+              fakeList.map((ele, index) =>
+                  questionToEdit !== index ? (
+                      <div className="Question__list-item">
+                        <Row
+                            className="Question__list-item__content"
+                            style={{ width: "100%" }}
+                        >
+                          <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
+                            <MenuOutlined />
+                            <span>
                       {index + 1}
-                      {"."}
+                              {"."}
                     </span>
-                  </Col>
-                  <Col xs={{ span: 14 }} lg={{ span: 19}} md={{span: 17}} xxl={{span: 20}} className="text-overflow">
-                    <span>{ele.question}</span>
-                  </Col>
-                  <Col xs={{ span: 4 }} lg={{ span: 3}} md={{span: 4}} xxl={{span: 2}} className="Question__list-item__actions">
-                    {
-                      <div
-                        onClick={() => setQuestionToEdit(index)}
-                        style={{
-                          display: questionToEdit !== null ? "none" : "block",
-                        }}
-                      >
-                        <EditOutlined className="list-item-icons" />
+                          </Col>
+                          <Col xs={{ span: 14 }} lg={{ span: 19}} md={{span: 17}} xxl={{span: 20}} className="text-overflow">
+                            <span>{ele.question}</span>
+                          </Col>
+                          <Col xs={{ span: 4 }} lg={{ span: 3}} md={{span: 4}} xxl={{span: 2}} className="Question__list-item__actions">
+                            {
+                              <div
+                                  onClick={() => setQuestionToEdit(index)}
+                                  style={{
+                                    display: questionToEdit !== null ? "none" : "block",
+                                  }}
+                              >
+                                <EditOutlined className="list-item-icons" />
+                              </div>
+                            }
+                            <div onClick={() => onRemove(ele.id)}>
+                              <DeleteOutlined className="list-item-icons" />
+                            </div>
+                          </Col>
+                        </Row>
                       </div>
-                    }
-                    <div onClick={() => onRemove(ele.id)}>
-                      <DeleteOutlined className="list-item-icons" />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            ) : (
-              <Row className="Question__new-question" gutter={[0, 15]}>
-                  <Row style={{width: '100%'}} className="Question__custom-column">
-                  <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
-                  <MenuOutlined />
-                  <span>
+                  ) : (
+                      <Row className="Question__new-question" gutter={[0, 15]}>
+                        <Row style={{width: '100%'}} className="Question__custom-column">
+                          <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
+                            <MenuOutlined />
+                            <span>
                     {index + 1}
-                    {"."}
+                              {"."}
                   </span></Col>
-                  <Col xs={{ span: 19 }} lg={{ span: 22}} md={{span: 21}} xxl={{span: 22}} className="text-overflow">
-                  <Input
-                    value={ele.question}
-                    onChange={(e) => handleChangeToEdit(e, index)}
-                    placeholder="question"
-                    className="Question__input"
-                    name="question"
-                  /></Col>
-                  </Row>
-                <Row style={{width: '100%'}}>
-                  <Radio.Group
-                    name="nsp"
-                    onChange={(e) => handleChangeToEdit(e, index)}
-                    value={ele.nsp}
-                    className="Question__grp-radio"
-                  >
-                    <Radio value={1}>
-                      {t("formDirectVideo.questionsTab.radioBox.span1")}
-                    </Radio>
-                    <Radio value={2}>
-                      {t("formDirectVideo.questionsTab.radioBox.span2")}
-                    </Radio>
-                    <Radio value={3}>
-                      {t("formDirectVideo.questionsTab.radioBox.span3")}
-                    </Radio>
-                    <Radio value={4}>
-                      {t("formDirectVideo.questionsTab.radioBox.span4")}
-                    </Radio>
-                  </Radio.Group>
-                </Row>
-                {ele.choices.map((resp, o) => (
-                  <Col
-                    key={o}
-                    span={24}
-                    style={{
-                      display: ele.nsp > 2 ? "flex" : "none",
-                    }}
-                    className="custom-column"
-                  >
-                    <Input
-                      value={resp.response}
-                      onChange={(e) => handleChangeToEditResponse(e, index, o)}
-                      placeholder={t(
-                        "formDirectVideo.questionsTab.inputResponsePlaceholder"
-                      )}
-                      className="Question__input"
-                      name="response"
-                      suffix={
-                        ele.choices.length === o + 1 ? (
-                          <PlusCircleOutlined
-                            onClick={() => addNewResponse(index, "edit")}
-                            className={(resp.response.trim().length === 0 ? "d-none" : "d-block")}
-                          />
-                        ) : (
-                          <DeleteOutlined
-                            className="list-item-icons"
-                            onClick={() => removeResponse(index, resp, "edit")}
-                          />
-                        )
-                      }
-                    />
-                  </Col>
-                ))}
-                <Row
-                  className="Question__actions"
-                  gutter={[0, 15]}
-                  justify="end"
-                  style={{ width: "100%" }}
-                >
-                  <Col>
-                    <Button
-                      onClick={handleAbortEdit}
-                      className="Question__actions-abort"
-                      style={{
-                        fontFamily: "SF Pro Display",
-                        fontWeight: "normal",
-                        color:
-                          darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                        background:
-                          darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                        border:
-                          darkMode === false
-                            ? ""
-                            : "1px solid rgba(255, 255, 255, 0.15)",
-                      }}
-                    >
-                      {t("ShowVideo.Cancel")}
-                    </Button>
-                    <Button
-                      className={
-                        ele.question.trim().length !== 0 && isEditing && checkResponseStatus(ele.nsp, ele.choices)
-                          ? ""
-                          : "Question__actions-disabled"
-                      }
-                      onClick={handleEditQuestion}
-                      type={"primary"}
-                      style={{
-                        fontFamily: "SF Pro Display",
-                        fontWeight: "normal",
-                        color:
-                          darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                        background:
-                          darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                        border:
-                          darkMode === false
-                            ? ""
-                            : "1px solid rgba(255, 255, 255, 0.15)",
-                      }}
-                    >
-                      {t("formDirectVideo.Update")}
-                    </Button>
-                  </Col>
-                </Row>
-              </Row>
-            )
-          )
-        ) : (
-          <div className="empty-list">
-            <span>{t("formDirectVideo.questionsTab.emptyList")}</span>
-          </div>
-        )}
-      </Col>
-      <Col
-        className="Question__add-question"
-        style={{ display: isAddingNewQuestion ? "none" : "block" }}
-      >
+                          <Col xs={{ span: 19 }} lg={{ span: 22}} md={{span: 21}} xxl={{span: 22}} className="text-overflow">
+                            <Input
+                                value={ele.question}
+                                onChange={(e) => handleChangeToEdit(e, index)}
+                                placeholder="question"
+                                className="Question__input"
+                                name="question"
+                            /></Col>
+                        </Row>
+                        <Row style={{width: '100%'}}>
+                          <Radio.Group
+                              name="nsp"
+                              onChange={(e) => handleChangeToEdit(e, index)}
+                              value={ele.nsp}
+                              className="Question__grp-radio"
+                          >
+                            <Radio value={1}>
+                              {t("formDirectVideo.questionsTab.radioBox.span1")}
+                            </Radio>
+                            <Radio value={2}>
+                              {t("formDirectVideo.questionsTab.radioBox.span2")}
+                            </Radio>
+                            <Radio value={3}>
+                              {t("formDirectVideo.questionsTab.radioBox.span3")}
+                            </Radio>
+                            <Radio value={4}>
+                              {t("formDirectVideo.questionsTab.radioBox.span4")}
+                            </Radio>
+                          </Radio.Group>
+                        </Row>
+                        {ele.choices.map((resp, o) => (
+                            <Col
+                                key={o}
+                                span={24}
+                                style={{
+                                  display: ele.nsp > 2 ? "flex" : "none",
+                                }}
+                                className="custom-column"
+                            >
+                              <Input
+                                  value={resp.response}
+                                  onChange={(e) => handleChangeToEditResponse(e, index, o)}
+                                  placeholder={t(
+                                      "formDirectVideo.questionsTab.inputResponsePlaceholder"
+                                  )}
+                                  className="Question__input"
+                                  name="response"
+                                  suffix={
+                                    ele.choices.length === o + 1 ? (
+                                        <PlusCircleOutlined
+                                            onClick={() => addNewResponse(index, "edit")}
+                                            className={(resp.response.trim().length === 0 ? "d-none" : "d-block")}
+                                        />
+                                    ) : (
+                                        <DeleteOutlined
+                                            className="list-item-icons"
+                                            onClick={() => removeResponse(index, resp, "edit")}
+                                        />
+                                    )
+                                  }
+                              />
+                            </Col>
+                        ))}
+                        <Row
+                            className="Question__actions"
+                            gutter={[0, 15]}
+                            justify="end"
+                            style={{ width: "100%" }}
+                        >
+                          <Col>
+                            <Button
+                                onClick={handleAbortEdit}
+                                className="Question__actions-abort"
+                                style={{
+                                  fontFamily: "SF Pro Display",
+                                  fontWeight: "normal",
+                                  color:
+                                      darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
+                                  background:
+                                      darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
+                                  border:
+                                      darkMode === false
+                                          ? ""
+                                          : "1px solid rgba(255, 255, 255, 0.15)",
+                                }}
+                            >
+                              {t("ShowVideo.Cancel")}
+                            </Button>
+                            <Button
+                                className={
+                                  ele.question.trim().length !== 0 && isEditing && checkResponseStatus(ele.nsp, ele.choices)
+                                      ? ""
+                                      : "Question__actions-disabled"
+                                }
+                                onClick={handleEditQuestion}
+                                type={"primary"}
+                                style={{
+                                  fontFamily: "SF Pro Display",
+                                  fontWeight: "normal",
+                                  color:
+                                      darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
+                                  background:
+                                      darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
+                                  border:
+                                      darkMode === false
+                                          ? ""
+                                          : "1px solid rgba(255, 255, 255, 0.15)",
+                                }}
+                            >
+                              {t("formDirectVideo.Update")}
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Row>
+                  )
+              )
+          ) : (
+              <div className="empty-list">
+                <span>{t("formDirectVideo.questionsTab.emptyList")}</span>
+              </div>
+          )}
+        </Col>
+        <Col
+            className="Question__add-question"
+            style={{ display: isAddingNewQuestion ? "none" : "block" }}
+        >
         <span onClick={() => setIsAddingNewQuestion(true)}>
           {" "}
           <PlusCircleOutlined />{" "}
           <span>{t("formDirectVideo.questionsTab.addQuestion")}</span>
         </span>
-      </Col>
-      <Row
-        className="Question__new-question"
-        gutter={[0, 15]}
-        style={{
-          display: isAddingNewQuestion === true ? "flex" : "none",
-          width: "100%",
-        }}
-      >
-        {" "}
-        <Col span={24} className="custom-column">
-          <div className="Question__input-label">
-            {t("formDirectVideo.questionsTab.inputQuestionLabel")}
-          </div>
-          <Input
-            ref={inputRef}
-            value={Inputs && Inputs.question}
-            onChange={handleChange}
-            placeholder={t(
-              "formDirectVideo.questionsTab.inputQuestionPlaceholder"
-            )}
-            className="Question__input"
-            name="question"
-          />
         </Col>
-        <Col span={24}>
-          <Radio.Group
-            name="nsp"
-            onChange={handleChange}
-            value={Inputs && Inputs.nsp}
-            className="Question__grp-radio"
-          >
-            <Radio value={1}>
-              {t("formDirectVideo.questionsTab.radioBox.span1")}
-            </Radio>
-            <Radio value={2}>
-              {t("formDirectVideo.questionsTab.radioBox.span2")}
-            </Radio>
-            <Radio value={3}>
-              {t("formDirectVideo.questionsTab.radioBox.span3")}
-            </Radio>
-            <Radio value={4}>
-              {t("formDirectVideo.questionsTab.radioBox.span4")}
-            </Radio>
-          </Radio.Group>
-        </Col>
-        {Inputs &&
-          Inputs.choices.map((ele, o) => (
-            <Col
-              key={o}
-              span={24}
-              style={{ display: Inputs && Inputs.nsp > 2 ? "flex" : "none" }}
-            >
-              <Input
-                value={ele.response}
-                onChange={(e) => handleChangeResponse(e, o)}
+        <Row
+            className="Question__new-question"
+            gutter={[0, 15]}
+            style={{
+              display: isAddingNewQuestion === true ? "flex" : "none",
+              width: "100%",
+            }}
+        >
+          {" "}
+          <Col span={24} className="custom-column">
+            <div className="Question__input-label">
+              {t("formDirectVideo.questionsTab.inputQuestionLabel")}
+            </div>
+            <Input
+                ref={inputRef}
+                value={Inputs && Inputs.question}
+                onChange={handleChange}
                 placeholder={t(
-                  "formDirectVideo.questionsTab.inputResponsePlaceholder"
+                    "formDirectVideo.questionsTab.inputQuestionPlaceholder"
                 )}
                 className="Question__input"
-                name="response"
-                suffix={
-                  responseList.length === o + 1 ? (
-                    <PlusCircleOutlined
-                      className={"list-item-icons " + (ele.response.trim().length === 0 ? "d-none" : "d-block")} 
-                      onClick={addNewResponse}
-                    />
-                  ) : (
-                    <DeleteOutlined
-                      className="list-item-icons"
-                      onClick={() => removeResponse({} ,ele)}
-                    />
-                  )
-                }
-              />
-            </Col>
-          ))}
-        <Row
-          className="Question__actions"
-          gutter={[0, 15]}
-          justify="end"
-          style={{ width: "100%" }}
-        >
-          <Col>
-            <Button
-              onClick={() => setIsAddingNewQuestion(false)}
-              className="Question__actions-abort"
-              style={{
-                fontFamily: "SF Pro Display",
-                fontWeight: "normal",
-                color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                background:
-                  darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                border:
-                  darkMode === false
-                    ? ""
-                    : "1px solid rgba(255, 255, 255, 0.15)",
-              }}
-            >
-              {t("ShowVideo.Cancel")}
-            </Button>
-            <Button
-              className={
-                Inputs && Inputs.question && Inputs.question.trim().length !== 0 && checkResponseStatus(Inputs.nsp, Inputs.choices)
-                  ? ""
-                  : "Question__actions-disabled"
-              }
-              onClick={handleAddQuestion}
-              type={"primary"}
-              style={{
-                fontFamily: "SF Pro Display",
-                fontWeight: "normal",
-                color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                background:
-                  darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                border:
-                  darkMode === false
-                    ? ""
-                    : "1px solid rgba(255, 255, 255, 0.15)",
-              }}
-            >
-              {t("ShowVideo.Add")}
-            </Button>
+                name="question"
+            />
           </Col>
+          <Col span={24}>
+            <Radio.Group
+                name="nsp"
+                onChange={handleChange}
+                value={Inputs && Inputs.nsp}
+                className="Question__grp-radio"
+            >
+              <Radio value={1}>
+                {t("formDirectVideo.questionsTab.radioBox.span1")}
+              </Radio>
+              <Radio value={2}>
+                {t("formDirectVideo.questionsTab.radioBox.span2")}
+              </Radio>
+              <Radio value={3}>
+                {t("formDirectVideo.questionsTab.radioBox.span3")}
+              </Radio>
+              <Radio value={4}>
+                {t("formDirectVideo.questionsTab.radioBox.span4")}
+              </Radio>
+            </Radio.Group>
+          </Col>
+          {Inputs &&
+          Inputs.choices.map((ele, o) => (
+              <Col
+                  key={o}
+                  span={24}
+                  style={{ display: Inputs && Inputs.nsp > 2 ? "flex" : "none" }}
+              >
+                <Input
+                    value={ele.response}
+                    onChange={(e) => handleChangeResponse(e, o)}
+                    placeholder={t(
+                        "formDirectVideo.questionsTab.inputResponsePlaceholder"
+                    )}
+                    className="Question__input"
+                    name="response"
+                    suffix={
+                      responseList.length === o + 1 ? (
+                          <PlusCircleOutlined
+                              className={"list-item-icons " + (ele.response.trim().length === 0 ? "d-none" : "d-block")}
+                              onClick={addNewResponse}
+                          />
+                      ) : (
+                          <DeleteOutlined
+                              className="list-item-icons"
+                              onClick={() => removeResponse({} ,ele)}
+                          />
+                      )
+                    }
+                />
+              </Col>
+          ))}
+          <Row
+              className="Question__actions"
+              gutter={[0, 15]}
+              justify="end"
+              style={{ width: "100%" }}
+          >
+            <Col>
+              <Button
+                  onClick={() => setIsAddingNewQuestion(false)}
+                  className="Question__actions-abort"
+                  style={{
+                    fontFamily: "SF Pro Display",
+                    fontWeight: "normal",
+                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
+                    background:
+                        darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
+                    border:
+                        darkMode === false
+                            ? ""
+                            : "1px solid rgba(255, 255, 255, 0.15)",
+                  }}
+              >
+                {t("ShowVideo.Cancel")}
+              </Button>
+              <Button
+                  className={
+                    Inputs && Inputs.question && Inputs.question.trim().length !== 0 && checkResponseStatus(Inputs.nsp, Inputs.choices)
+                        ? ""
+                        : "Question__actions-disabled"
+                  }
+                  onClick={handleAddQuestion}
+                  type={"primary"}
+                  style={{
+                    fontFamily: "SF Pro Display",
+                    fontWeight: "normal",
+                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
+                    background:
+                        darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
+                    border:
+                        darkMode === false
+                            ? ""
+                            : "1px solid rgba(255, 255, 255, 0.15)",
+                  }}
+              >
+                {t("ShowVideo.Add")}
+              </Button>
+            </Col>
+          </Row>
         </Row>
       </Row>
-    </Row>
   );
 };

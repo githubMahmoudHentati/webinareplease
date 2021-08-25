@@ -21,7 +21,8 @@ export const ShowVideosList = ()=>{
                 columnKey:0,
                 current:1,
                 id:[],
-                idLive:0
+                idLive:0,
+                idDiffusion:null
             }
         )
     }

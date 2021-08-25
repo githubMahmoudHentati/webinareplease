@@ -7,12 +7,9 @@ import moment from "moment";
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
-import {setAppSetLogin} from "../../utils/redux/actions";
 import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction"
 import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
-import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
-import defaultImg from '../../assets/webinarplease-thumb.jpg';
 import {setDirectSetting} from "../../utils/redux/actions";
 import {StatusMessages} from "./StatusMessages";
 import {v4 as uuidv4} from "uuid";
@@ -26,6 +23,10 @@ export const GraphQLFetchDataForm = (values) => {
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
     let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
+    let TitleChapters = values.configuration.listChapter.map(item=>item.title)
+    let richeMediaDiffusion=values.configuration.richeMediaDiffusion
+    let attachements = values.configuration.attachments
+    console.log("titleeeee",TitleChapters)
     let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
         data: dataCreate,
@@ -42,13 +43,13 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
+                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ ":00Z":"",
                         duration: values.general.period,
 
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
                     pwd: values.general.pwd,
-                    securedPasswordOption: false
+                    securedPasswordOption: values.general.securedPasswordOption,
                 },
                 configuration: {
                     liveProgram: values.configuration.directProgram,
@@ -71,8 +72,9 @@ export const GraphQLFetchDataForm = (values) => {
                     tags: values.configuration.tags,
                     addSpeaker: values.configuration.addSpeakerList,
                     themes: values.configuration.theme,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
+                    slides: richeMediaDiffusion === true ? DiapositivesFile : [],
                 },
                 social: [
                     {
@@ -135,7 +137,7 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
+                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ ":00Z":"",
                         duration: values.general.period,
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
@@ -164,8 +166,9 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     tags: values.configuration.tags,
                     themes: values.configuration.theme,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
+                    slides: richeMediaDiffusion === true ? DiapositivesFile : [],
                 },
                 social: [
                     {
@@ -243,7 +246,7 @@ export const GraphQLFetchDataForm = (values) => {
         fetchPolicy:  "cache-and-network",
         onCompleted: async (data)=>{
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
-            let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
+            let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm")
 
             console.log("startDate",startDate,"startHour",startHour)
             let speakerList=[...data.getlive.configurationOut.speakers]
@@ -283,7 +286,13 @@ export const GraphQLFetchDataForm = (values) => {
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
                     SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
-                        logoSpeaker:[],email,title,id:index+1,
+                        logoSpeaker:[{
+                            uid: '-1',
+                            name: speakerList[index].avatar.substring(speakerList[index].avatar.lastIndexOf("/")+1,speakerList[index].avatar.length),
+                            status: 'done',
+                            url: speakerList[index].avatar,
+                            thumbUrl:speakerList[index].avatar,
+                        }],email,title,id:index+1,
                         ...rest
                     })),
                     addSpeakerList:values.configuration.addSpeakerList,
@@ -298,6 +307,12 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
+                    listChapter:data.getlive.configurationOut.chapters.map((item)=>{
+                        return({
+                            id:item.chapterOrder,
+                            title:item.chapterTitle
+                        })
+                    }),
                     diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
                         return({
                             uid: uuidv4(),
@@ -316,7 +331,6 @@ export const GraphQLFetchDataForm = (values) => {
                                thumbUrl: item,
                            })
                     }),
-                    listChapter: [],
                     listQuestion: [],
                 },
                 socialTools:[

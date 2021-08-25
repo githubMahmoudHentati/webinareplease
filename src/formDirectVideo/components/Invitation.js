@@ -1,29 +1,35 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu , Select , Divider , Tag , Tooltip , Popover , Checkbox , Form , message} from 'antd'
+import React, {useState, useEffect} from 'react';
+import {Input,Button,Select , Divider  , Tooltip , Popover , Checkbox , Form , message} from 'antd'
 import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , ExportOutlined , DiffOutlined , PlusSquareOutlined  } from '@ant-design/icons';
-import EditableTagGroup from "./EditableTagGroup";
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
-import {setConfigurationOnchange} from "../store/formDirectVideoAction";
 import Hooks from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
-const { Option } = Select;
-let index = 0;
-
-
-
+import moment from "moment";
+import 'moment-timezone';
 
 function Invitation(){
+    const { Option } = Select;
     const [name , SetName] = useState('')
     const { t, i18n } = useTranslation();
     const [items , SetItems] = useState([t("formDirectVideo.Group01") , t("formDirectVideo.Group02") , t("formDirectVideo.Group03") , t("formDirectVideo.Group04")])
     const [visible , SetVisible] = useState(false)
     const [visbleRegle , SetVisibleRegle] = useState(false);
-
-    const [emails , SetEmails] = useState(false);
+    const [hoursDiffCalls , SetHoursDiffCalls] = useState(null);
+    const [daysDiffCalls, SetDaysDiffCalls] = useState(null);
 
     const {values,InvitationOnChangeChecked,invitationOnChangeSelect ,handleClickDelete }=Hooks()
     console.log("invitation",values)
+    let ParisMoment = moment().tz("Europe/Paris")
+    useEffect(() => {
+
+            SetHoursDiffCalls(values.general.startHour?moment(values.general.startHour,'HH:mm').diff(ParisMoment,"hours"):0)
+            SetDaysDiffCalls(values.general.startDate&&values.general.startHour?moment(values.general.startDate+"Z"+values.general.startHour,'YYYY-MM-DDZHH:mm').diff(ParisMoment,"days"):0)
+    }, []);
+
+    // console.log(ParisMoment,"hoursDiffCalls",moment(values.general.startHour,'HH:mm'))
+    // console.log("diff",moment(values.general.startHour,'HH:mm').diff(ParisMoment,"hours"))
+
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
@@ -74,9 +80,7 @@ function Invitation(){
     const isValidEmail = function(mail){
         return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+((?:\.[a-zA-Z0-9-]+)(?:\.[a-zA-Z0-9-]+)*)+(?:[a-zA-Z0-9-]+)*$/.test(mail)
     }
-    const handleChangeEmailsInvitation = (value) =>{
-        SetEmails(value);
-    }
+
     // Validation des emails
 
 
@@ -195,9 +199,9 @@ function Invitation(){
                             content={
                                 <div className={"popoverCheckbox"}>
                                     <Checkbox checked={values.invitation.addRules.visibleInscription === true} value="visibleInscription"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.RegistrationInv")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ7 === true} value="visibleRappelJ7"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ7")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ1 === true} value="visibleRappelJ1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ1")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.visibleRappelH1 === true} value="visibleRappelH1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderH1")}</Checkbox>
+                                    <Checkbox disabled={daysDiffCalls<7} checked={values.invitation.addRules.visibleRappelJ7 === true} value="visibleRappelJ7"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ7")}</Checkbox>
+                                    <Checkbox disabled={daysDiffCalls<1} checked={values.invitation.addRules.visibleRappelJ1 === true} value="visibleRappelJ1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ1")}</Checkbox>
+                                    <Checkbox disabled={hoursDiffCalls<1}checked={values.invitation.addRules.visibleRappelH1 === true} value="visibleRappelH1"style={{color:darkMode===false?"RGBA(0, 0, 0, 0.65)":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderH1")}</Checkbox>
                                 </div>
                             }
                             trigger="click"
@@ -254,8 +258,8 @@ function Invitation(){
                             values.invitation.addRules.visibleRappelH12 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
-                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.NoCome")}</span></div>
-                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.AfterTheEnd")}</p></div>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Replay")}</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.JustAfterTheEnd")}</p></div>
                                     <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(8)}/></div>
                                 </div>
                                 :
@@ -269,10 +273,10 @@ function Invitation(){
                             className={"popover popover2"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox checked={values.invitation.addRules.visibleInscription2 === true} value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.RegistrationInv")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ72 === true} value = "visibleRappelJ72" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ7")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ12 === true} value = "visibleRappelJ12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ1")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.visibleRappelH12 === true} value = "visibleRappelH12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderH1")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleInscription2 === true} value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.confirmInscription")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ72 === true} value = "visibleRappelJ72" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.paticipated")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ12 === true} value = "visibleRappelJ12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.notCome")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleRappelH12 === true} value = "visibleRappelH12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Replay")}</Checkbox>
                                 </div>
                             }
                             trigger="click"

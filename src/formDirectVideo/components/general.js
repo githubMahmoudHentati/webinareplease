@@ -16,7 +16,7 @@ import i18n from '../../i18n/index';
 export const Generals =({})=>{
 
     const dispatch = useDispatch()
-
+    const [form] = Form.useForm();
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t, i18n } = useTranslation();
     const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
@@ -25,7 +25,7 @@ export const Generals =({})=>{
 console.log("pwd",values.general.pwd)
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_`!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(values.general.pwd)
     }
-    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks()
+    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks(form)
     console.log("valuespass",values)
 
     const {copied, copy, reset} = useCopy(
@@ -135,7 +135,7 @@ console.log("pwd",values.general.pwd)
                         >
                             <Switch checked={values.general.liveAction} name="liveAction" value="liveAction"
                                     onChange={(checked, event) => {
-                                        generalOnChangeByName(checked, event, "liveAction")
+                                        generalOnChangeByName(checked, checked, "liveAction")
                                     }}/>
 
                         </Form.Item>
@@ -179,6 +179,7 @@ console.log("pwd",values.general.pwd)
                             <TimePicker getPopupContainer={() => document.querySelector(".timePicker1")} className={"timePicker1"} placeholder={t("formDirectVideo.ChooseStartTime")} name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
                                         disabledHours={()=>startGetDisabledHours(values)}
                                         disabledMinutes={startGetDisabledMinutes}
+                                        format = {'HH:mm'}
                             ></TimePicker>
                         </Form.Item>
                     </Col>

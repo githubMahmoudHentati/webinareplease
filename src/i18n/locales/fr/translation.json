@@ -212,13 +212,14 @@
     "1HBeforeTheStart": "1 Heure avant le début",
     "ReminderH1": "Rappel H-1",
     "AddRule": "Ajouter une règle",
-    "RegistrationInv": "Invitation pour inscription",
+    "RegistrationInv": "inscription",
     "RegEmail": "Emails pour les inscrits",
     "ConfirmReg": "Confirmation d'inscription",
     "AfterReg": "Juste après l'inscription",
     "Participated": "A participé",
     "AfterTheEnd": "Juste après la fin",
     "NoCome": "Non venu",
+    "JustAfterTheEnd": "Après 48h de la fin",
     "OptionalSettings": "Paramètres optionnels",
     "Photo": "Photo",
     "ClickToUpload": "Cliquez pour télécharger",
@@ -231,6 +232,10 @@
     "AddingPlanning": "Ajouter une planification",
     "AboutOneMn": "Environ 1mn",
     "BaseWebinaire": "Principes de base du webinaire",
+    "confirmInscription": "Confirmation d'inscription",
+    "paticipated": "Participé",
+    "notCome": "Non venu",
+    "Replay": "Replay",
     "chaptersTab": {
       "title": "Chapitres",
       "emptyList": "Pas de chapitres",
@@ -359,6 +364,7 @@
     "SuccessMsg":"cet vidéo a été supprimée avec succès",
     "ErrorDelOne": "Oops!!! il y'a un erreur se produit",
     "ErrorDelTwo": "Oops!!! cet vidéo n'existe pas",
-    "SuccessPassMsg": "Votre mot de passe a été modifié avec succès"
+    "SuccessPassMsg": "Votre mot de passe a été modifié avec succès",
+    "AjoutLive": "Ajouter un direct"
   }
 }

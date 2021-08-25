@@ -104,7 +104,7 @@ export const BarHeader = () => {
             <Col>
                 <Row gutter={[15, 0]}>
                     <Col>
-                        <Button onClick={cancelButton} className={"btn_add_live"} style={{fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseOutlined className={"icon_add_live"}/>}> <span className={"spn_add_live"}>{t("formDirectVideo.Cancel")}</span></Button>
+                        <Button  onClick={cancelButton} className={"btn_add_live"} style={{fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseOutlined className={"icon_add_live"}/>}> <span className={"spn_add_live"}>{t("formDirectVideo.Cancel")}</span></Button>
                     </Col>
                     <Col>
                         <Button loading={values.constraintData.loadingCreateEditLive} className={"btn_add_live"} htmlType="submit"  icon={values.general.liveAction?<CheckOutlined />: isAddedForm ? <VideoCameraOutlined />: <EditOutlined />} type={"primary"}>{values.general.liveAction?<span className={"spn_add_live"}>{t("formDirectVideo.Validate")}</span>:<span className={"spn_add_live"}>{isAddedForm ? t("formDirectVideo.Diffuser"): t("formDirectVideo.Update")}</span>}</Button>

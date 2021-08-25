@@ -34,6 +34,7 @@ import {TabMenu} from './RichMedia/TabMenu'
 import {AttachedFile} from "./attachedFile";
 
 export const Configuration = () => {
+    const [form] = Form.useForm();
     const dispatch = useDispatch()
     const [itemListHeight, setItemListHeight] = useState(null);
     const values = useSelector((state) => state.FormDirectVideoReducer)
@@ -54,7 +55,7 @@ export const Configuration = () => {
         ConfigurationOnChangeSelect,
         displayThemes,
         getFirstCharacter
-    } = Hooks()
+    } = Hooks(form)
 
     console.log("values", values)
     // use Selector redux
@@ -321,10 +322,9 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
                             <Col offset={1} span={23}>
-                                <Form.Item name="theme" className={"form-item-style"}
-                                >
                                     <Select
-                                         mode="multiple"
+                                        value={values.configuration.theme}
+                                        mode="multiple"
                                         className={"spn2"}
                                         name="theme" onChange={(value,action)=>{ConfigurationOnChangeSelect(value,action,"theme")}}
                                         showSearch
@@ -342,7 +342,6 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                                             )
                                         })}
                                     </Select>
-                                </Form.Item>
                             </Col>
                             }
                         </Row>
