@@ -282,6 +282,8 @@
     "ResetPassword": "Reset password"
   },
   "ShowVideo": {
+    "Today": "Today",
+    "ThisMonth": "This month",
     "infos": "Info",
     "Modifier": "Edit",
     "Templates": "Templates",

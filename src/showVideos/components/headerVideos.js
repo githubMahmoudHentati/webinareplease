@@ -1,6 +1,6 @@
 import React , {useState,useEffect} from 'react';
-import { Breadcrumb,Button, Tooltip , Select , Input  , Checkbox , DatePicker, Space , Alert} from "antd";
-import {  HourglassOutlined ,DownloadOutlined ,PlayCircleOutlined ,ImportOutlined ,BorderInnerOutlined , CalendarOutlined , DeleteOutlined , DownOutlined ,RightOutlined ,HomeOutlined , PlusSquareOutlined , MenuOutlined , TableOutlined  ,AppstoreOutlined , FilterOutlined , FolderOutlined , FolderOpenOutlined , SearchOutlined } from '@ant-design/icons';
+import { Breadcrumb,Button, Tooltip , Select , Input  , DatePicker, Alert} from "antd";
+import {  HourglassOutlined , CalendarOutlined , DeleteOutlined , PlusSquareOutlined , FilterOutlined , SearchOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
@@ -12,18 +12,16 @@ const { Option } = Select;
 let clicked = false;
 
 const { RangePicker } = DatePicker;
-const dateFormat = 'YYYY/MM/DD';
 
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , paginationProps , values}=Hooks()
+    const {handleSearchRow , handleHeaderSelect , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive , paginationProps , values}=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const [rangeDate, setDateRange] = useState(null)
-    const [searchFake, setSearchFake] = useState(null)
     const [selectedContributor, setContributor] = useState(null)
     const history = useHistory();
-    const { t, i18n } = useTranslation();
+    const {t} = useTranslation();
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -43,9 +41,7 @@ function HeaderVideos() {
     },[]);
 
     // fonction pour la selection des dossiers
-    function onChange(value) {
-        console.log(`selected ${value}`);
-    }
+
     // fonction de clique sur l'icone de filtrage
     const handlClickSuffix = () =>{
         SetShowFilter(!ShowFilter)
@@ -71,9 +67,7 @@ function HeaderVideos() {
         console.log("loggggggggggg",datesValue)
         setDateRange(datesValue)
     }
-    const onChangeContributor = (value,action) =>{
-        setContributor(action.value)
-    }
+
 
     const handleResetFilter = ()=>{
         setDateRange(null)
@@ -194,8 +188,8 @@ function HeaderVideos() {
                           <RangePicker
                               className="range_div1_div_Filter"
                               ranges={{
-                                  Today: [moment(), moment()],
-                                  'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                  [t("ShowVideo.Today")]: [moment(), moment()],
+                                  [t("ShowVideo.ThisMonth")]: [moment().startOf('month'), moment().endOf('month')],
                               }}
                               onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
                               value={[rangeDate && moment(rangeDate[0], 'YYYY-MM-DD'), rangeDate && moment(rangeDate[1], 'YYYY-MM-DD')]}

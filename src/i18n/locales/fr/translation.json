@@ -309,6 +309,8 @@
     "ResetPassword": "Réinitialiser le mot de passe"
   },
   "ShowVideo": {
+    "Today": "Aujourd'hui",
+    "ThisMonth": "ce mois-ci",
     "infos": "Infos",
     "Modifier": "Modifier",
     "Templates": "Templates",
