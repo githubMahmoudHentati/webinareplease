@@ -1372,9 +1372,13 @@ input:checked + .slider:before {
 .div_image img{
     max-width: 100% !important;
 }
-
+.App{
+    height:100%
+}
 /*WebinairePlease*/
-
+.WebinairePlease{
+    height:100%
+}
 /*ChoicePackage*/
 .ChoicePackage{
     width: 75%;
@@ -1936,9 +1940,7 @@ input:checked + .slider:before {
 
 }
 @media (max-width:575px) {
-    .menu{
-        display: none;
-    }
+    
     .header_Forfait{
         width:90%;}
     .div_alert{
@@ -2131,7 +2133,7 @@ input:checked + .slider:before {
 .divsignup{
     //background-color: #e74c3c !important;
     height: 100%;
-    width: 100%;
+    width: 80%;
     position: relative;
     display: flex;
     align-items: flex-end;
