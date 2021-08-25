@@ -288,9 +288,9 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 }
 
             case "SET_QUESTION_LIST":
-                    const {nsp, question, response, questionId}=action.payload;
+                    const {nsp, question, choices, questionId}=action.payload;
                     return{
-                        ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, response, id: questionId}]}
+                        ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, choices, id: questionId}]}
         
                     }
             case "REMOVE_QUESTION":

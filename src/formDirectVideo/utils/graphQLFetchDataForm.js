@@ -24,6 +24,8 @@ export const GraphQLFetchDataForm = (values) => {
     let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
     let TitleChapters = values.configuration.listChapter.map(item=>item.title)
+    let richeMediaDiffusion=values.configuration.richeMediaDiffusion
+    let attachements = values.configuration.attachments
     console.log("titleeeee",TitleChapters)
     let {success_submit , error_submit}=StatusMessages(idLive)
     const [CreateLive, {
@@ -70,9 +72,9 @@ export const GraphQLFetchDataForm = (values) => {
                     tags: values.configuration.tags,
                     addSpeaker: values.configuration.addSpeakerList,
                     themes: values.configuration.theme,
-                    chapters:TitleChapters,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
+                    slides: richeMediaDiffusion === true ? DiapositivesFile : [],
                 },
                 social: [
                     {
@@ -164,8 +166,9 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     tags: values.configuration.tags,
                     themes: values.configuration.theme,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
+                    slides: richeMediaDiffusion === true ? DiapositivesFile : [],
                 },
                 social: [
                     {
