@@ -258,8 +258,8 @@ function Invitation(){
                             values.invitation.addRules.visibleRappelH12 === true
                                 ?
                                 <div className={"infos_ajout_régle"}>
-                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.NoCome")}</span></div>
-                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.AfterTheEnd")}</p></div>
+                                    <div className={"title_ajout_régle"}><ExportOutlined  className={"icon_ajout_régle"}/><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Replay")}</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.JustAfterTheEnd")}</p></div>
                                     <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(8)}/></div>
                                 </div>
                                 :
@@ -273,10 +273,10 @@ function Invitation(){
                             className={"popover popover2"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox checked={values.invitation.addRules.visibleInscription2 === true} value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.RegistrationInv")}</Checkbox>
-                                    <Checkbox disabled={daysDiffCalls<7}  checked={values.invitation.addRules.visibleRappelJ72 === true} value = "visibleRappelJ72" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ7")}</Checkbox>
-                                    <Checkbox disabled={daysDiffCalls<1} checked={values.invitation.addRules.visibleRappelJ12 === true} value = "visibleRappelJ12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderJ1")}</Checkbox>
-                                    <Checkbox disabled={hoursDiffCalls<1} checked={values.invitation.addRules.visibleRappelH12 === true} value = "visibleRappelH12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.ReminderH1")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleInscription2 === true} value = "visibleInscription2" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.confirmInscription")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ72 === true} value = "visibleRappelJ72" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.paticipated")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleRappelJ12 === true} value = "visibleRappelJ12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.notCome")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.visibleRappelH12 === true} value = "visibleRappelH12" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Replay")}</Checkbox>
                                 </div>
                             }
                             trigger="click"

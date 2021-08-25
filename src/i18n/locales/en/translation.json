@@ -207,13 +207,14 @@
     "1HBeforeTheStart": "1 Hour before the start",
     "ReminderH1": "Reminder H-1",
     "AddRule": "Add a rule",
-    "RegistrationInv": "Invitation for registration",
+    "RegistrationInv": "registration",
     "RegEmail": "Emails for registrants",
     "ConfirmReg": "Registration Confirmation",
     "AfterReg": "Right after registration",
     "Participated": "Participated",
     "AfterTheEnd": "Just after the end",
     "NoCome": "Didn't come",
+    "JustAfterTheEnd": "After 48 hours from the end",
     "OptionalSettings": "Optional settings",
     "Photo": "Picture",
     "ClickToUpload": "Click to Upload",
@@ -225,7 +226,11 @@
     "EndingDate": "Ending date",
     "AddingPlanning": "Adding a planning",
     "AboutOneMn": "About 1mn",
-    "BaseWebinaire": "Fundamentals of Webinar"
+    "BaseWebinaire": "Fundamentals of Webinar",
+    "confirmInscription": "Confirmation of registration",
+    "paticipated": "participated",
+    "notCome": "Not come",
+    "Replay": "Replay"
   },
   "PackagePayment": {
     "Packages": "Packages",
@@ -331,7 +336,7 @@
     "SuccessMsg": "This video has been successfully deleted",
     "ErrorDelOne":"Oops!!! an error has occurred",
     "ErrorDelTwo": "Oops!!! this video does not exist",
-    "SuccessPassMsg": "Your password has been successfully changed"
-
+    "SuccessPassMsg": "Your password has been successfully changed",
+    "AjoutLive": "Add live"
   }
 }
