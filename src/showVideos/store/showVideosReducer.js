@@ -84,7 +84,6 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
                     .filter((item) => {
                         return !(deletedItems).includes(item.id);
                     })
-console.log('kkkkkkkkkkkkkk', indexes1)
             return{
                 ...state,
                 paginationProps: {...state.paginationProps, id:indexes1}

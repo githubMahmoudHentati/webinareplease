@@ -64,7 +64,6 @@ function HeaderVideos() {
     }
 
     const onChangeRange = (name,datesValue,dateStringsValue) =>{
-        console.log("loggggggggggg",datesValue)
         setDateRange(datesValue)
     }
 

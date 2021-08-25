@@ -1,19 +1,16 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Form} from 'antd'
+import React, { useState} from 'react';
+import {Row, Col} from 'antd'
 import '../formDirectVideo.scss'
-import {ArrowLeftOutlined,CloseOutlined,CheckOutlined} from '@ant-design/icons';
-import history from '../../router/history';
+
 import {MenuForms} from './menuforms'
 import {Generals} from "./general";
 import {Configuration} from "./configuration";
 import Invitation from "./Invitation";
-import {useDispatch, useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
+import { useSelector} from "react-redux";
+
 import {SocialTools} from "./socialTools";
 import {Templetes} from "./Templetes";
-import {setDarkMode} from "../../utils/redux/actions";
 import {LiveSubmit} from "./liveSubmit.js";
-import { useTranslation } from 'react-i18next';
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 
@@ -24,7 +21,6 @@ export const IframeDirectVideo =()=>{
     const setFormLiveAction=(e)=>{
         setFormLive(e)
     }
-    console.log("directMenu",directMenu)
     const SelectMenu = ()=>{
         switch(directMenu){
             case 0:
@@ -41,7 +37,6 @@ export const IframeDirectVideo =()=>{
                 return <Generals/>
         }
     }
-    const { t, i18n } = useTranslation();
 
     return(
         <LiveSubmit  setFormLiveAction={setFormLiveAction}>

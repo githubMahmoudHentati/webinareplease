@@ -1,11 +1,11 @@
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
 import {setEmptyContactInput , setLoadingEnvoieMail} from "../store/ContactClientAction";
 import {ContactClientConstraints} from "./ContactClientConstraints";
 import {StatusMessages} from "./StatusMessages";
-import {setShowVideoConstraintDataOnchange} from "../../showVideos/store/showVideosAction";
+
 
 export const GraphQLFetchData=(form)=> {
     const dispatch = useDispatch()

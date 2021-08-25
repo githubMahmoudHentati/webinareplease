@@ -1,8 +1,7 @@
-import {useQuery,useMutation,useLazyQuery} from "@apollo/react-hooks";
+import {useMutation,useLazyQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useHistory} from "react-router-dom";
-import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {useDispatch,useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import moment from "moment";
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
@@ -16,7 +15,6 @@ import {v4 as uuidv4} from "uuid";
 
 
 export const GraphQLFetchDataForm = (values) => {
-    const directMenu = useSelector((state)=>state.Reducer.directMenu)
     const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -26,13 +24,8 @@ export const GraphQLFetchDataForm = (values) => {
     let TitleChapters = values.configuration.listChapter.map(item=>item.title)
     let richeMediaDiffusion=values.configuration.richeMediaDiffusion
     let attachements = values.configuration.attachments
-    console.log("titleeeee",TitleChapters)
     let {success_submit , error_submit}=StatusMessages(idLive)
-    const [CreateLive, {
-        data: dataCreate,
-        loading: loading_EventCreated,
-        error: error_EventCreated,
-    }] = useMutation(graphQL_shema().createLive, {
+    const [CreateLive] = useMutation(graphQL_shema().createLive, {
         context: { clientName: "second" },
         variables: {
             input: {
@@ -122,10 +115,7 @@ export const GraphQLFetchDataForm = (values) => {
         }
     });
 
-    const [UpdateLive, {
-        data: liveUpdate,
-        loading: loadingLiveUpdated,
-    }] = useMutation(graphQL_shema().UpdateLive, {
+    const [UpdateLive] = useMutation(graphQL_shema().UpdateLive, {
         context: { clientName: "second" },
         variables: {
             id: idLive,
@@ -231,7 +221,7 @@ export const GraphQLFetchDataForm = (values) => {
         }
     })
 
-    const [themesDisplayQueryAction,{loading: loading_themesDisplay, data: ThemesDisplayData}]
+    const [themesDisplayQueryAction]
         = useMutation(graphQL_shema().themesDisplayQuery, {
         context: { clientName: "second" },
         onCompleted: async (data) => {
@@ -239,7 +229,7 @@ export const GraphQLFetchDataForm = (values) => {
         }
     })
 
-    const [getLiveData,{loading:LiveUpdated_Info, data: LiveUpdatedInfData}]
+    const [getLiveData]
         = useLazyQuery(graphQL_shema().Get_UpdatedLive_Info, {
         variables: { "id":idLive  },
         skip:!idLive||values.constraintData.loadingLiveFetchData?true:false,
@@ -340,7 +330,7 @@ export const GraphQLFetchDataForm = (values) => {
                         type: "Facebook post",
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[0].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[0].link:"",
-                        logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
+                        logo: <img src={fbPost} style={{width: "24px", height: "24px"}} alt={""}/>,
                         plan: data.getlive.socialOut.length>0 && data.getlive.socialOut[0].planifications ?data.getlive.socialOut[0].planifications:[{id:0,active: true, startDate: "", endDate: ""}]
                     },
                     {
@@ -350,7 +340,7 @@ export const GraphQLFetchDataForm = (values) => {
                         type: "Youtube post",
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[1].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[1].link:"",
-                        logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
+                        logo: <img src={youtubePost} style={{width: "24px", height: "24px"}} alt={""}/>,
                         plan: data.getlive.socialOut.length>0 && data.getlive.socialOut[1].planifications ?data.getlive.socialOut[1].planifications:[{id:1,active: true, startDate: "", endDate: ""}]
                     },
                     {
@@ -360,7 +350,7 @@ export const GraphQLFetchDataForm = (values) => {
                         type: "Linkdln post",
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[2].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[2].link:"",
-                        logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
+                        logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}} alt={""}/>,
                         plan: data.getlive.socialOut.length>0 &&  data.getlive.socialOut[2].planifications ?data.getlive.socialOut[2].planifications:[{id:2,active: true, startDate: "", endDate: ""}]
                     },
                 ]

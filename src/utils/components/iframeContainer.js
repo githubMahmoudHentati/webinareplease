@@ -1,16 +1,9 @@
-import React,{useState , useEffect} from 'react';
-import GlobalHeader from "./header";
-import {Card} from "antd";
+import React from 'react';
 import {useSelector} from "react-redux";
-import {Reducer} from "../redux/reducer";
-import {useDispatch} from "react-redux";
-import {SecurityAccount} from "../../compteSettings/components/securityAccount";
-import {PasswordEdit} from "../../compteSettings/components/passwordEdit";
-import {setIframeStyle} from "../redux/actions";
+
 
 
 export const IframeContainer =(props)=>{
-    const dispatch = useDispatch()
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
     // use Selector redux
@@ -27,7 +20,6 @@ export const IframeContainer =(props)=>{
                 return <div className="showVideosDiv" style={iframeStyle}>{props.children}</div>
             } else if (directMenu === 3) {
                 let numberRulesAdded = values.socialTools.filter(element => element.switch === true).length
-                console.log("numberRulesAdded",numberRulesAdded)
                 return <div className="showVideosDiv" style={{height:numberRulesAdded>0?"100%":"100vh"}}>{props.children}</div>
             } else
                 return <div className="showVideosDiv" style={{height: "100%"}}>{props.children}</div>

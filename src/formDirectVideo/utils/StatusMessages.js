@@ -1,7 +1,6 @@
-import React,{useState} from 'react';
+
 import {message} from "antd";
-import i18n from '../../i18n/index';
-import {setConfirmAccountConstraintDataOnchange} from "../../confirmAccount/store/forgetPasswordAction";
+
 import {useDispatch} from "react-redux";
 import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 

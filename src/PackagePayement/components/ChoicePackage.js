@@ -1,5 +1,5 @@
 
-import React,{useState , useEffect , useMemo} from 'react';
+import React from 'react';
 import { Steps, Button, message , Select , Radio  , Form, Input} from 'antd';
 import {AppleFilled } from '@ant-design/icons';
 import {FormSignUp} from "../../signUp/components/formSignUp";
@@ -17,7 +17,7 @@ const { Option } = Select;
 
 
 function ChoicePackage(){
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
     const steps = [
         {
             title: t("PackagePayment.Packages"),
@@ -36,20 +36,10 @@ function ChoicePackage(){
     const history = useHistory();
     const { handleClickCardZero, handleClickCardOne , handleClickCardTwo , values , handlePackagePayementInput , handlePackagePayementSelect} = Hooks()
     const dispatch = useDispatch()
-
-
     const stripe = useStripe(); // Stripe Hooks
     const elements = useElements(); // Stripe Hooks
-
     const {valuesSignUp,handleSubmitSignUp} = HooksSignUp()
-
-    console.log("valuesSikjfhkfdsjhfksdjfhgnUp",values)
-
-
-        const subscriptionId = valuesSignUp.constSubscription.subscriptionId;
-        const clientSecret = valuesSignUp.constSubscription.clientSecret;
-
-
+    const clientSecret = valuesSignUp.constSubscription.clientSecret;
     // next step
     const nextToSignUp = () => {
         dispatch(setSignUpOnchange({
@@ -79,11 +69,6 @@ function ChoicePackage(){
             constraintDataValueChange: false
         }))
     };
-
-    const handlechange =(e)=>{
-        console.log("handlechange",e)
-    }
-
     // handle Payement
     const handlePayer = async () =>{
 

@@ -1,7 +1,6 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
+import React from 'react';
+import {Row,Col,Menu} from 'antd'
 import '../compteSettings.scss'
-import {MailOutlined} from '@ant-design/icons';
 import {useDispatch , useSelector} from "react-redux";
 import {setAccountSetting} from "../../utils/redux/actions";
 import { useTranslation } from 'react-i18next';
@@ -10,7 +9,7 @@ export const MenuForms =()=>{
     const dispatch = useDispatch()
     const selectedkey = useSelector((state)=> state.Reducer.accountMenu)
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     return (
         <Row>

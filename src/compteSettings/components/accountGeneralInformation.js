@@ -1,32 +1,29 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {Row, Col, Input, Button, Avatar, Select, Spin, Form} from 'antd'
 import '../compteSettings.scss'
-import {UserOutlined, UploadOutlined, LoadingOutlined, PlusOutlined} from '@ant-design/icons';
-import {useDispatch, useSelector} from "react-redux";
+import {UserOutlined,LoadingOutlined} from '@ant-design/icons';
+import {useDispatch} from "react-redux";
 import Hooks from "../utils/hooks";
 import {AvatarUpload} from "./avatarUpload"
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
-import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../../connexion/store/connexionAction";
 import {
     setConstraintDataOnchange,
     setErrorVisibility,
     setGeneralInformationOnchange
 } from "../store/accountSettingsAction";
 import {useHistory} from "react-router-dom";
-import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
+
 import {useTranslation} from 'react-i18next';
 import axios from 'axios';
-import {StatusMessages} from "../utils/StatusMessages";
-import {AccountSettingsReducer} from "../store/accountSettingsReducer";
+
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 
 const {Option} = Select;
 
 export const AccountGeneralInformation = ({form}) => {
     const history = useHistory()
-    const [phoneNumber, setPhoneNumber] = useState()
 
-    const {success_message_update_password , error_message_update_password}=StatusMessages()
+
     const dispatch = useDispatch()
     const {UpdateAccountSetting} = GraphQLFetchData(form)
     const {
@@ -56,7 +53,6 @@ export const AccountGeneralInformation = ({form}) => {
             },
             data: file
         }).then((result) => {
-            console.log("result",result.data.data.uploadLogo);
          let value=result.data.data.uploadLogo;
            if (result.data.data.uploadLogo){
                dispatch(setErrorVisibility({
@@ -78,7 +74,7 @@ export const AccountGeneralInformation = ({form}) => {
     const handleChange = async info => {
 
         if (info.file.status === 'uploading') {
-            console.log("info.file.status",info.file.status)
+
             await dispatch(setConstraintDataOnchange({
                 constraintDataNameChange: "avatarLoading",
                 constraintDataValueChange: true
@@ -122,18 +118,13 @@ export const AccountGeneralInformation = ({form}) => {
         fileList = fileList.slice(-1);
         await fileList.filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
             const file = e.originFileObj;
-            console.log("*******************", file);
             return formData.append("0", file);
         })
 
-        for (let p of formData) {
-            console.log("ppppppppppp",p);
-        }
         onSave(formData)
     }
 
-    console.log("generalInformation", values)
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
 
     const isValidEmail = (email) => {
@@ -144,15 +135,12 @@ export const AccountGeneralInformation = ({form}) => {
         }))
         return re.test(email)
     }
-console.log("vignette", values.generalInformation.vignette)
     useEffect(() => {
         if (values.constraintData.isMailValid === true) {
             document.documentElement.style.setProperty('--inputErrorForm', 'rgba(0 , 0 , 0 , 0.15)');
             document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
         }
         if (values.constraintData.isMailValid === false) {
-            console.log(values.constraintData.isMailValid)
-
             document.documentElement.style.setProperty('--inputErrorForm', "red");
             document.documentElement.style.setProperty('--inputBorderErrorForm', "red");
         }
@@ -163,7 +151,6 @@ console.log("vignette", values.generalInformation.vignette)
     dispatch(setGeneralInformationOnchange({generalInformationNameChange: 'phone', generalInformationValueChange: value}));
       
   }
-    {console.log("SettingError",values.constraintData.updateAccountSettingError)}
     return (
         <Form
             form={form}

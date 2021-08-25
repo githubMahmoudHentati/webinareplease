@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+
 import {useDispatch, useSelector} from "react-redux";
 import moment from "moment";
 import 'moment-timezone';
@@ -11,29 +11,25 @@ import {
     setConfigurationSpeakerList,
     setGeneralOnchange,
     setInvitationOnchange,
-    setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat, setGeneralCleanDate
+    setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat
 } from "../store/formDirectVideoAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
+
 const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
-    // values.form&&console.log("hooks-form",values.form.getFieldValue())
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
     let matchesMedia   = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
 
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
-
-        console.log("eventswitch",event)
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:event}));
-
     }
 
     const generalOnChange = (event) => {
-        console.log("event",event.target.value,event.target.name)
         dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}))
         if(event.target.name==="pwd"){
             dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
@@ -45,7 +41,6 @@ const Hooks=()=>{
     }
 
     const generalOnChangeButton = async (event) => {
-        console.log("event",event.target)
         await dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.checked}))&&dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
         if(event.target.name==="securedPasswordOption")
         {
@@ -59,7 +54,6 @@ const Hooks=()=>{
     }
     const disablePastDate=(current,indexPost,indexPlan,dateType)=>{
         // Can not select days before today and today
-         console.log("currenttt",moment().startOf('day') )
         if (indexPost===indexPost && values.socialTools[indexPost]&&values.socialTools[indexPost].plan){
             if (values.socialTools[indexPost].plan[indexPlan].startDate&&dateType==="endDate")
                 return  moment(values.socialTools[indexPost].plan[indexPlan].startDate,"YYYY-MM-DDTHH:mm:ss+01:00").isAfter(current)
@@ -68,7 +62,6 @@ const Hooks=()=>{
             else
                 return current && current < moment().startOf('day')
         }
-        console.log("values.general.startHour",(values.general.startHour&&moment(values.general.startHour,'HH:mm').isSameOrBefore(moment().tz("Europe/Paris"))))
         if (values.general.startHour&&moment(values.general.startHour,'HH:mm').isSameOrBefore(moment().tz("Europe/Paris"))) {
             return  current.isSameOrBefore(moment())
         } else
@@ -77,7 +70,6 @@ const Hooks=()=>{
 
     const startGetDisabledHours = () => {
         let hours = [];
-        console.log("values.general.startDate",values.general.startDate)
         if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
             for (let i = 0; i < moment().tz("Europe/Paris").hour(); i++) {
                 hours.push(i);
@@ -91,7 +83,6 @@ const Hooks=()=>{
     }
 
     const startGetDisabledMinutes = (selectedHour) => {
-        console.log("hel123654oo",selectedHour)
         let minutes= [];
         if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
             if (selectedHour===-1) {

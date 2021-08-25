@@ -1,13 +1,12 @@
 import React  from 'react';
-import {Button, Col, Row} from "antd";
-import {useHistory} from "react-router-dom";
+import { Col, Row} from "antd";
 import {Hooks} from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
 
 export const FormConfirmAccount =()=> {
-    const history = useHistory()
+
     const {ResendConfirmAccount}=Hooks()
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
@@ -28,7 +27,7 @@ export const FormConfirmAccount =()=> {
             </Col>
             <Col span={24}>
                 <span>{t("ConfirmAccount.EmailNotFound")}     </span>
-                <a className={"spn_chbx"} onClick={ResendConfirmAccount}>
+                <a href="#/" className={"spn_chbx"} onClick={ResendConfirmAccount}>
                     {t("ConfirmAccount.ResendEmail")}</a>
             </Col>
         </Row>

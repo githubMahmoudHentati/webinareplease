@@ -5,13 +5,19 @@ import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
+
 import moment from "moment";
 import 'moment-timezone';
+
+
+
+
+
 
 function Invitation(){
     const { Option } = Select;
     const [name , SetName] = useState('')
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
     const [items , SetItems] = useState([t("formDirectVideo.Group01") , t("formDirectVideo.Group02") , t("formDirectVideo.Group03") , t("formDirectVideo.Group04")])
     const [visible , SetVisible] = useState(false)
     const [visbleRegle , SetVisibleRegle] = useState(false);
@@ -19,16 +25,12 @@ function Invitation(){
     const [daysDiffCalls, SetDaysDiffCalls] = useState(null);
 
     const {values,InvitationOnChangeChecked,invitationOnChangeSelect ,handleClickDelete }=Hooks()
-    console.log("invitation",values)
     let ParisMoment = moment().tz("Europe/Paris")
     useEffect(() => {
 
             SetHoursDiffCalls(values.general.startHour?moment(values.general.startHour,'HH:mm').diff(ParisMoment,"hours"):0)
             SetDaysDiffCalls(values.general.startDate&&values.general.startHour?moment(values.general.startDate+"Z"+values.general.startHour,'YYYY-MM-DDZHH:mm').diff(ParisMoment,"days"):0)
     }, []);
-
-    // console.log(ParisMoment,"hoursDiffCalls",moment(values.general.startHour,'HH:mm'))
-    // console.log("diff",moment(values.general.startHour,'HH:mm').diff(ParisMoment,"hours"))
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -61,10 +63,9 @@ function Invitation(){
 
     // Validation des emails
     const checkEmail = (rule, value, callback) => {
-        let isValid = []
+
         if (value.length) {
             value.map(ele => {
-                console.log("isValidEmail(ele)",isValidEmail(ele))
                 isValidEmail(ele) === false &&
                     callback(t("formDirectVideo.EnterValidEmailAddress"));
             })
@@ -110,7 +111,7 @@ function Invitation(){
                                 <Divider style={{margin: '4px 0'}}/>
                                 <div style={{display: 'flex', flexWrap: 'nowrap', padding: 8}}>
                                     <Input style={{flex: 'auto'}} value={name} onChange={onNameChange}/>
-                                    <a
+                                    <a href="#/"
                                         style={{flex: 'none', padding: '8px', display: 'block', cursor: 'pointer'}}
                                         onClick={addItem}
                                     >

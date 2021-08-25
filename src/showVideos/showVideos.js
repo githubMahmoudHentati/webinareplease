@@ -44,7 +44,6 @@ function ShowVideos() {
         return(<><span> {date.split(' ')[0]}</span><br /><span>{date.split(' ')[1]}</span></>)
         else return ""
     }
-    console.log("valuesCredentiels-showVideos",localStorage.getItem('jwtToken'))
 
     // Column AND DATA Table
      const columns = [

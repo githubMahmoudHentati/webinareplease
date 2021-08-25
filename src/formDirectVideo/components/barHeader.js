@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu} from 'antd'
+import React from 'react';
+import {Row, Col,Button} from 'antd'
 import '../formDirectVideo.scss'
 import {ArrowLeftOutlined, CloseOutlined, CheckOutlined, VideoCameraOutlined,EditOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from "react-redux";
@@ -13,14 +13,13 @@ import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 
 export const BarHeader = () => {
-    const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
+    const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
     const directMenu = useSelector((state) => state.Reducer.directMenu)
     const history = useHistory()
     const {values, matchesMedia} = Hooks()
     const dispatch = useDispatch()
-    const {t, i18n} = useTranslation();
-    const formPage= useSelector((state)=>state.ShowVideosReducerReducer.formPage)
+    const {t} = useTranslation();
     var  x  = useWindowDimensions();
     const cancelButton = async ()=>
     {

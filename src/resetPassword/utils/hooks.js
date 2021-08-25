@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
     setResetPasswordConstraintDataOnchange,
     setResetPasswordOnchange
 } from "../store/resetPasswordAction";
 import {GraphQLFetchData} from "./graphQLFetchData";
-import {ResetPasswordReducer} from "../store/resetPasswordReducer";
+
 
 
 export  const Hooks=()=> {

@@ -1,13 +1,5 @@
 import React from 'react';
-import { Select } from 'antd';
 import { Tag } from 'antd';
-
-
-const { Option } = Select;
-
-function handleChange(value) {
-    console.log(`selected ${value}`);
-}
 export const columns = [
 
     {
@@ -22,7 +14,7 @@ export const columns = [
         title: 'Aperçu',
         dataIndex: 'logo',
         key:1,
-        render: image => <img  src={image} className={"img_aperçu"}/>,
+        render: image => <img  src={image} className={"img_aperçu"} alt={""}/>,
     },
     {
         title: 'Titre',
@@ -47,7 +39,6 @@ export const columns = [
         render: tags => (
             <span>
         {tags.map(tag => {
-            //console.log("taaatgs",tag)
             let color = tag.length > 5 ? 'green' : 'green';
             if (tag === 'En cours') {
                 color = 'green';

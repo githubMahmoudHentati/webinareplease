@@ -1,7 +1,7 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox,Form} from 'antd'
+import React from 'react';
+import {Row,Col,Button,Form} from 'antd'
 import './signUp.scss'
-import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
+
 import WebinairePlease from "../utils/components/WebinairePlease";
 import {FormSignUp} from './components/formSignUp'
 import logo from "../assets/logoWebinaireplease.svg"
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 export const SignUp =()=>{
     const [form] = Form.useForm();
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     const history = useHistory()
     const {handleSubmitSignUp,valuesSignUp}=HooksSignUp()

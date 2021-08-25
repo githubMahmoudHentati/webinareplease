@@ -1,8 +1,8 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React from 'react';
 import fbPost from "../../assets/facebookPost.svg";
 import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
-import {Form} from "antd";
+
 
 
 export const FormDirectConstraints = ()=>{
@@ -71,7 +71,7 @@ export const FormDirectConstraints = ()=>{
                 type: "Facebook post",
                 switch: true,
                 link:"",
-                logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
+                logo: <img src={fbPost} style={{width: "24px", height: "24px"}} alt={""}/>,
                 plan: []
             },
             {
@@ -80,7 +80,7 @@ export const FormDirectConstraints = ()=>{
                 title:"",
                 link:"",
                 switch: false,
-                logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
+                logo: <img src={youtubePost} style={{width: "24px", height: "24px"}} alt={""}/>,
                 plan: []
             },
             {
@@ -89,7 +89,7 @@ export const FormDirectConstraints = ()=>{
                 title:"",
                 link:"",
                 switch: false,
-                logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
+                logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}} alt={""}/>,
                 plan: []
             },
         ]

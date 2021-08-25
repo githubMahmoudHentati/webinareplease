@@ -1,11 +1,11 @@
-import {useLazyQuery, useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setConnexionConstraintDataOnchange, setConnexionOnchange} from "../store/connexionAction";
+import {setConnexionConstraintDataOnchange} from "../store/connexionAction";
 import {setAppSetLogin} from "../../utils/redux/actions";
-import {setAccountSetting, setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
+
 
 
 export const GraphQLFetchData=(form)=> {
@@ -15,7 +15,7 @@ export const GraphQLFetchData=(form)=> {
     const token = new URLSearchParams(window.location.search).get('token')
 
 
-    const {loading: confirmAccount_loading, data: confirmAccountData}
+    const { data: confirmAccountData}
         = useQuery(graphQL_shema().confirmAccountQuery, {
         fetchPolicy: 'cache-and-network',
         variables: { token : token },
@@ -29,11 +29,7 @@ export const GraphQLFetchData=(form)=> {
         }
     })
 
-    const [Connexion, {
-        data: dataUpdate,
-        loading: loading_Connexion,
-        error: error_EventUpdated,
-    }] = useMutation(graphQL_shema().Connexion, {
+    const [Connexion] = useMutation(graphQL_shema().Connexion, {
         variables: {input:values.connexion,
         },
         fetchPolicy: "no-cache",

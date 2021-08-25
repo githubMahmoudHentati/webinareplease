@@ -1,26 +1,18 @@
-import {useQuery,useMutation} from "@apollo/react-hooks";
+import {useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
-import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
-import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
+
 import {useDispatch, useSelector} from "react-redux";
-import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 import {setConstSubscription, setSignUpConstraintDataOnchange} from "../store/signUpAction";
-import {setPackagePayementAction} from "../../PackagePayement/store/PackagePayementAction";
+
 
 
 export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
 
     const valuesPrices = useSelector((state) => state.PackagePayementReducer.packagePayement)// reducer PackagePayement
-
-    console.log("jhgjhgjhgjhgjhgjhkjhkjhkjchkjhfkd",valuesSignUp)
     const history = useHistory()
     const dispatch = useDispatch()
-    const [CreateAccount, {
-        data: dataUpdate,
-        loading: loading_EventUpdated,
-        error: error_EventUpdated,
-    }] = useMutation(graphQL_shema().SignUp, {
+    const [CreateAccount] = useMutation(graphQL_shema().SignUp, {
         variables: {
             input: valuesSignUp.signUp
         },
@@ -71,7 +63,6 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
         variables : {email:valuesSignUp.signUp.email},
         context: { clientName: "first" },
         onCompleted:  (data)=>{
-            console.log("123456789654123654789",data)
             dispatch(setConstSubscription({
                 ConstSubscriptionOnchangeNameChange: "customerId",
                 ConstSubscriptionOnchangeValueChange: data.createCustomer.customerId
@@ -89,7 +80,6 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
         },
         context: { clientName: "first" },
         onCompleted:  (data)=>{
-            console.log("azerfdsqwxcvbgty123",data)
             dispatch(setConstSubscription({
                 ConstSubscriptionOnchangeNameChange: "clientSecret",
                 ConstSubscriptionOnchangeValueChange: data.createSubscription.clientSecret
@@ -111,7 +101,6 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
         },
         context: { clientName: "first" },
         onCompleted:  (data)=>{
-            console.log("azerfdsqwxcvbgt54654654654654y123",data)
             dispatch(setConstSubscription({
                 ConstSubscriptionOnchangeNameChange: "clientSecret",
                 ConstSubscriptionOnchangeValueChange: data.createPaymentIntent.clientSecret
