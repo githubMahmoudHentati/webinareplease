@@ -236,8 +236,8 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             }
 
         case 'SET_LiveInfo' :
-            const {general,configuration,socialTools}= action.payload
-            return  {...state,general,configuration,socialTools}
+            const {general,configuration,invitation,socialTools}= action.payload
+            return  {...state,general,configuration,invitation,socialTools}
 
         case "SET_FormDirectLiveConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
@@ -284,9 +284,9 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 }
 
             case "SET_QUESTION_LIST":
-                    const {nsp, question, choices, questionId}=action.payload;
+                    const {nsp, question, choices}=action.payload;
                     return{
-                        ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, choices, id: questionId}]}
+                        ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, choices}]}
         
                     }
             case "REMOVE_QUESTION":

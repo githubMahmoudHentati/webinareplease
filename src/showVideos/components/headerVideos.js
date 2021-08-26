@@ -132,10 +132,10 @@ function HeaderVideos() {
                           }
                           getPopupContainer={() => document.querySelector(".selectFilter")}
                       >
-                          <Option name="type"   value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
-                          <Option name="type"  value="archived"><span className="icon-Archive"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
-                          <Option name="type"  value="live"><span className="icon-Current"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
-                          <Option name="type"  value="upcoming"><HourglassOutlined />  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
+                          <Option name="type"   value=""><span className="icon-select-all-line select-icon"></span> <span  style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
+                          <Option name="type"  value="archived"><span className="icon-Archive select-icon"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
+                          <Option name="type"  value="live"><span className="icon-Current select-icon"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
+                          <Option name="type"  value="upcoming"><HourglassOutlined className={"select-icon"}/>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
                       </Select>
                   </div>
 
