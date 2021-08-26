@@ -196,7 +196,6 @@ const Hooks=()=>{
 
 
     const handleSubmit =async ()=>{
-        debugger
         console.log("values.general.period",values.general.period)
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:true}));
         dispatch(setConfigurationOnchange({
