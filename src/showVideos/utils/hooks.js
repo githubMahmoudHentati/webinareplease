@@ -249,6 +249,22 @@ export  const Hooks=()=> {
             })
           );
         if(action.name === 'type')  dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));
+
+        // lazy query if select run
+        GETDATEVIDEO({
+            variables:
+                {
+                    input : {
+                        "limit": paginationProps.pageSize,
+                        "offset": 0,
+                        "order_dir": paginationProps.order,
+                        "order_column": parseInt(paginationProps.columnKey),
+                        "search_word":values.searchFake,
+                        "date": (values.date && values.date.length && [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] )|| ["", ""],
+                        "status":value
+                    }
+                },
+        })
     };
     /*Function DatePicker */
     const handleChangeDatePicker = (name, momentValue , dateStringValue) => {
@@ -509,6 +525,6 @@ export  const Hooks=()=> {
         handleCancelModalExport,
         exportLives,
         resetFilterVideos,
-        handleClickStreamin
+        handleClickStreamin,
     })
 }

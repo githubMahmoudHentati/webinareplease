@@ -203,7 +203,8 @@ export const FormSignUp =({child1,child2})=>{
                                                label={t("CompteSettings.NumberOfEmployees")}
                                     >
                                             <Select
-                                                className={"spn2"}
+                                                getPopupContainer={() => document.querySelector(".slect-nbr-empl")}
+                                                className={"spn2 slect-nbr-empl"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
                                                 defaultValue={t("CompteSettings.choiceOne")}
                                                 showSearch
