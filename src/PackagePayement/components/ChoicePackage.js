@@ -247,7 +247,6 @@ function ChoicePackage(){
                                                     >
                                                         <CardElement
                                                             id={"card-element"} name="carddetails" className={"input"}
-                                                            onChange={handlechange}
                                                             options={{
                                                                 hidePostalCode:true
                                                             }}
