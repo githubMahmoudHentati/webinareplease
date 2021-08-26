@@ -13,7 +13,9 @@ import {
     PieChartOutlined,
     GlobalOutlined,
     CaretRightOutlined ,
-    CaretDownOutlined
+    CaretDownOutlined,
+    DownOutlined,
+    RightOutlined
 } from '@ant-design/icons';
 import {Menu, Dropdown, Avatar} from 'antd';
 import {setAccountSetting, setAppSetLogout} from "../redux/actions";
@@ -25,24 +27,23 @@ import {setConstraintDataOnchange} from "../../compteSettings/store/accountSetti
 import {useTranslation} from "react-i18next";
 
 function GlobalHeader() {
-
+    const [activeSideMenuState, SetActiveSideMenuState] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
-    const [arrowSideMenu ,  setArrowSideMenu] = useState(false)
-   
-    const [activeSideMenuState, SetActiveSideMenuState] = useState(false)
+    const [arrow ,  setArrow] = useState(false)
+
     // Clic outside Side Bar
     useEffect(() => {
         function HEADERGOTO(event) {
 
-            var noRedirect = '.side-nav * , .hambg_button * '
+            var noRedirect = '.side-nav * , .hambg_button * , .side-nav , .anticon , .div_caretDownOutlined , .div_caretRightOutlined '
             if (!event.target.matches(noRedirect)) {
                 SetActiveSideMenuState(false)
             }
         };
         document.body.addEventListener('click', HEADERGOTO);
-    }, [darkMode, dispatch]);
+    }, [activeSideMenuState , dispatch]);
 
     //fonction checkbox
     const onChange = (e) => {
@@ -112,7 +113,7 @@ function GlobalHeader() {
         </Menu>
     );
     const Menulang = (
-        <Menu className="menu">
+        <Menu className="menu menu-lang">
             <Menu.Item  onClick={() => changeLanguage('fr')}>
                 <div className={"menuItemLang"}>
                  <span className="icon-fr">
@@ -133,6 +134,10 @@ function GlobalHeader() {
         </Menu>
 
     );
+
+    const handleClickLang = ()=>{
+        setArrow(!arrow)
+    }
 
     return (
         <div className={"div_Header"}>
@@ -187,7 +192,7 @@ function GlobalHeader() {
                         </a>
                     </Dropdown>
 
-                    <Dropdown getPopupContainer={() => document.querySelector(".drp_lang")} className={"drp_lang"} overlay={Menulang} trigger={['click']}>
+                    <Dropdown getPopupContainer={() => document.querySelector(".drp_lang")} className={"drp_lang drp-lang-size"} overlay={Menulang} trigger={['click']}>
                         <GlobalOutlined style={{color: darkMode === false ? "" : "white"}}/>
                     </Dropdown>
 
@@ -264,23 +269,22 @@ function GlobalHeader() {
 
                             <div className={"div3_div2_side_nav"}>
 
-                                <div className={"lang_div"} onClick={()=> setArrowSideMenu(!arrowSideMenu)}>
-                                <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']} >
-                                    <div><GlobalOutlined style={{color: darkMode === false ? "" : "white"}}
-                                                         className={"avtr"}/> <span
-                                        className={"titleLang"}>{t("description.Language")}</span></div>
-                                </Dropdown>
+                                <div className={"lang_div"} onClick={()=> setArrow(!arrow)}>
+                                    <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']} >
+                                        <div><GlobalOutlined style={{color: darkMode === false ? "" : "white"}}
+                                                             className={"avtr"}/> <span
+                                            className={"titleLang"}>{t("description.Language")}</span></div>
+                                    </Dropdown>
                                     {
-                                        arrowSideMenu
+                                        arrow
                                             ?
-                                            <CaretDownOutlined className={"caretDownOutlined"}/>
+                                            <div className={"div_caretDownOutlined"}><span className={"arrow-lang1"}>▼</span></div>
                                             :
-                                            <CaretRightOutlined className={"caretRightOutlined"}/>
+                                            <div className={"div_caretRightOutlined"}><span className={"arrow-lang"}>►</span></div>
                                     }
                                 </div>{/*Div-Langue*/}
-
                                 {
-                                    arrowSideMenu
+                                    arrow
                                         ?
                                     <div className={"langIconDiv"}>
                                         <div className={"langIconDiv1"} onClick={() => changeLanguage('fr')}>
@@ -304,9 +308,11 @@ function GlobalHeader() {
 
                                 }
 
-                                <div className={"aide_div"}><QuestionCircleOutlined className={"avtr"} style={{color: darkMode === false ? "" : "white"}}/><span
-                                    className={"titleLang"}>{t("description.aide")}</span></div>
-                                </div> {/*div-aide*/}
+                                {/*<div className={"aide_div"}><QuestionCircleOutlined className={"avtr"} style={{color: darkMode === false ? "" : "white"}}/><span*/}
+                                {/*    className={"titleLang"}>{t("description.aide")}</span>*/}
+                                {/*</div>*/}
+
+                                </div>
 
                             <div className={"div4_div2_side_nav"}>
                                 <a href="#/" className="ant-dropdown-link link_drp" onClick={logOut}

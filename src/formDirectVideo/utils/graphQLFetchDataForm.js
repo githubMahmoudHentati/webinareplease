@@ -26,6 +26,7 @@ export const GraphQLFetchDataForm = (values) => {
     let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
     let TitleChapters = values.configuration.listChapter.map(item=>item.title)
+    let Questions = values.configuration.listQuestion
     let richeMediaDiffusion=values.configuration.richeMediaDiffusion
     let attachements = values.configuration.attachments
     let {success_submit , error_submit}=StatusMessages(idLive)
@@ -70,6 +71,7 @@ export const GraphQLFetchDataForm = (values) => {
                     addSpeaker: values.configuration.switchSpeaker?values.configuration.addSpeakerList:[],
                     themes: values.configuration.theme,
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    questions:richeMediaDiffusion === true ? Questions : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
                     slides: richeMediaDiffusion === true ? DiapositivesFile : [],
                 },
