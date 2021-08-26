@@ -102,7 +102,7 @@ function useActionMenu({record}) {
                                        title={t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser"))}>
                     <Button className={"btn_Visualiser_diffuser "} style={{
                         backgroundColor: darkMode === false ? "" : "#1D1D1D",
-                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
+                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.25)",
                         border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                     }} onClick={() => handleClickStreamin(record)}>
                         {
