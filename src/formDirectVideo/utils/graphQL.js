@@ -104,6 +104,15 @@ export const graphQL_shema = ()=> {
             }
         }
     `
+    const Get_MailsGroupList = gql`
+        query{
+            getGroupList{
+                id
+                name
+            }
+        }
+        `
+
     //
 
     return({
@@ -111,6 +120,7 @@ export const graphQL_shema = ()=> {
         UpdateLive,
         generateSecuredPassword,
         themesDisplayQuery,
-        Get_UpdatedLive_Info
+        Get_UpdatedLive_Info,
+        Get_MailsGroupList
     })
 }
