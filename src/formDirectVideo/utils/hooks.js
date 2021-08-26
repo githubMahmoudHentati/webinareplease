@@ -227,21 +227,21 @@ const Hooks=()=>{
 
     const handleClickDelete =(name)=>{
         if(name === 1){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"afterPrograming", invitationValueChangeRules:false}));
         }else if(name === 2){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ7", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"beforeWeek", invitationValueChangeRules:false}));
         } else if(name === 3){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ1", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"beforeDay", invitationValueChangeRules:false}));
         }else if(name === 4){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH1", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"beforeHour", invitationValueChangeRules:false}));
         }else if(name === 5){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription2", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"afterSubscription", invitationValueChangeRules:false}));
         }else if(name === 6){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ72", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"isParticiped", invitationValueChangeRules:false}));
         } else if(name === 7){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ12", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"notVisualized", invitationValueChangeRules:false}));
         }else if(name === 8){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH12", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"replay", invitationValueChangeRules:false}));
         }
     }
 
