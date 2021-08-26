@@ -459,7 +459,13 @@
 .ant-select-multiple .ant-select-selection-item{
   height: 28px !important;
   background: transparent;
+  border: 1px solid var(--Switch-Color);
+ .anticon{
+    color: var(--item-menu-color);
+  }
 }
+
+
 .Paramétres{
   font-family: 'SF Pro Display';
   font-weight: 900 ;
