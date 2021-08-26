@@ -107,7 +107,7 @@ export const FormDirectConstraints = ()=>{
                     afterSubscription: false,
                     isParticiped: false,
                     notVisualized: false,
-                    // replay: false
+                    replay: false
                 },
                 emails:[],
                 emailsGroup:[],

@@ -122,6 +122,7 @@ export const GraphQLFetchDataForm = (values) => {
 
             } else if (data.addLive.code === 400) {
                 values.constraintData.leaveToast && await error_submit(400)
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
             }
         }
     });
@@ -216,6 +217,7 @@ export const GraphQLFetchDataForm = (values) => {
                 values.constraintData.leaveToast&&success_submit(200)
             } else if (data.editLive.code === "403") {
                 values.constraintData.leaveToast&&error_submit(400)
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
             }
         }
     });
