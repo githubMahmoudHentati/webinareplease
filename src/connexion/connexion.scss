@@ -116,7 +116,18 @@
     left: 50%;
     transform: translate(-50%,-50%);
   }
+  .col-connexion-sign{
+    width: 100%;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-form-sign{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 @media (max-width:320px) and (min-height: 320px) {
   .col-connexion{
@@ -125,10 +136,11 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top:62% !important;
+    top:62% ;
     left: 50%;
     transform: translate(-50%,-50%);
   }
+
 }
 @media (max-width:240px) and (max-height: 320px) {
   .col-connexion{
@@ -141,6 +153,7 @@
     left: 50%;
     transform: translate(-50%,-50%);
   }
+
 }
 
 //********** Tablette *********************//

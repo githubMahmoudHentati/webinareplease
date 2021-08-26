@@ -1,17 +1,17 @@
-import React, {useState, useEffect, useRef, useSelector} from 'react';
+import React, {useEffect} from 'react';
 import {Row, Col, Input, Button, Modal, Upload, Form,Spin} from 'antd'
 import '../formDirectVideo.scss'
 import {UploadOutlined} from '@ant-design/icons';
 import Hooks from "../utils/hooks";
 import {UploadLogoSpeaker} from "../utils/uploadLogoSpeaker"
-import {setSignUpConstraintDataOnchange} from "../../signUp/store/signUpAction";
+
 import {useTranslation} from 'react-i18next';
 import { LoadingOutlined } from '@ant-design/icons';
-import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
+
 
 export const ModalSpeaker = ({isVisible}) => {
     const [form] = Form.useForm();
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
 
     const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
@@ -36,11 +36,9 @@ export const ModalSpeaker = ({isVisible}) => {
 
     const {handleOk, handleCancel, onChangeSpeaker, values} = Hooks()
     let {onChangeFile, beforeUpload, removeLogoSpeaker} = UploadLogoSpeaker()
-    console.log("values.configuration.speaker.id",values.configuration.speaker.id)
-    console.log("values.configuration.speaker.id",values.configuration.SpeakerList)
     useEffect(() => {
         form.setFieldsValue(values.configuration.speaker)
-    }, []);
+    });
 
     return (
         <Modal className="modal-speaker" title={values.configuration.speaker.id?t("formDirectVideo.UpdateParticipant"):t("formDirectVideo.AddParticipant")} visible={isVisible}

@@ -1,18 +1,18 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row, Col, Input,Button} from 'antd'
+import React from 'react';
+import {Row, Col,Button} from 'antd'
 import '../compteSettings.scss'
 import strip from "../../assets/stripe.png"
-import {AccountGeneralInformation} from "./accountGeneralInformation";
+
 import{SubscriptionTable} from "./subscriptionTable";
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
-import {setAccountSetting} from "../../utils/redux/actions";
+
 import {useHistory} from "react-router-dom";
 
 export const AccountSubscription=()=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
     const {values}=Hooks();
     const history = useHistory()
     return(
@@ -62,7 +62,7 @@ export const AccountSubscription=()=>{
                     <Col span={24}>
                         <span className={"spn_limite"} style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                             {t("CompteSettings.Quotes")} <br/> {t("CompteSettings.limits")}</span>
-                        <a className={"spn_limite"} onClick={()=>{history.push("/contactClient") ;  document.querySelector(':root').classList.remove('dark')}}> {t("CompteSettings.ContactUs")}</a>
+                        <a href="#/" className={"spn_limite"} onClick={()=>{history.push("/contactClient") ;  document.querySelector(':root').classList.remove('dark')}}> {t("CompteSettings.ContactUs")}</a>
                     </Col>
                 </Row>
             </Col>
@@ -71,7 +71,7 @@ export const AccountSubscription=()=>{
                     <Col span={24}>
                         <span className={"spn_abonnement"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.PaymentMethod")}</span>
                     </Col>
-                    <Col><img className={"img-strip"} src={strip}/></Col>
+                    <Col><img className={"img-strip"} src={strip} alt={""}/></Col>
                     <Col  className={"parag_abonnement"} offset={1} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" }}> {values.subscription.paymentMode}</Col>
                     <Col span={24}>
                         <Button className={"parag_abonnement"} disabled style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}> {t("CompteSettings.NewPaymentMeth")}</Button>

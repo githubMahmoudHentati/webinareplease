@@ -1,5 +1,5 @@
-import React from 'react';
 import gql from "graphql-tag";
+
 
 export const graphQL_shema = ()=> {
     const Get_UserInfoData = gql`

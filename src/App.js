@@ -1,7 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {useState} from 'react'
 import history from './router/history';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import ShowVideos from "./showVideos/showVideos";

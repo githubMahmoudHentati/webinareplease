@@ -1,4 +1,3 @@
-import React from 'react';
 import {message} from "antd";
 import i18n from '../../i18n/index';
 export const StatusMessages = () =>{

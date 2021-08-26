@@ -1,22 +1,20 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Form,Spin} from 'antd'
+import React, {useEffect} from 'react';
+import {Row, Col,Breadcrumb,Form,Spin} from 'antd'
 import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import Hooks from "../utils/hooks";
-import {setLiveForm} from "../store/formDirectVideoAction";
 import moment from "moment";
 import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
-import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction"
+
 
 export const LiveSubmit=(props)=>{
     const history = useHistory()
-    const dispatch = useDispatch()
     const [form] = Form.useForm();
     const {handleSubmit,values}=Hooks()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
     const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
 
 
@@ -33,7 +31,6 @@ export const LiveSubmit=(props)=>{
     useEffect(async () => {
         if (values.constraintData.loadingLiveFetchData&&localStorage.getItem('idLive'))
         {
-            console.log("enteer-field")
             await form.setFieldsValue(Object.assign(form.getFieldsValue(),
                 {
                     //**********general live info***********/////
@@ -69,7 +66,6 @@ export const LiveSubmit=(props)=>{
             // dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
         }
     }, [values.constraintData.loadingLiveFetchData]);
-    console.log("form.getFieldsValue()",form.getFieldsValue())
 
     const values_data = useSelector((state)=> state.FormDirectVideoReducer)
     const {getLiveData} = GraphQLFetchDataForm(values_data)
@@ -89,7 +85,7 @@ export const LiveSubmit=(props)=>{
                 <Spin spinning={localStorage.getItem('idLive')?!values.constraintData.loadingLiveFetchData:false}>
                     <Row gutter={[0, 10]}>
                         <Col span={24} className={"header-col"}>
-                            <Breadcrumb className={"header-col-breadcrumb"} style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                            <Breadcrumb className={"header-col-breadcrumb"} style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                                     <span >Accueil</span>
                                 </Breadcrumb.Item>

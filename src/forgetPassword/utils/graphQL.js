@@ -1,5 +1,8 @@
-import React from 'react';
 import gql from "graphql-tag";
+
+
+
+
 
 export const graphQL_shema = ()=> {
 
@@ -10,7 +13,6 @@ export const graphQL_shema = ()=> {
             }
         }
     `;
-
     return({
         forgetPassword,
     })

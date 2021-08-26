@@ -1,8 +1,7 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React from 'react';
 import {MenuForms} from './components/menuforms'
-import {Breadcrumb, Card, Col, Row, Form} from "antd";
+import {Breadcrumb, Col, Row, Form} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
-import history from "../router/history";
 import {AccountGeneralInformation} from "./components/accountGeneralInformation";
 import {SecurityAccount} from "./components/securityAccount"
 import {PrincipalPage} from "../utils/components/principalPage";
@@ -13,20 +12,19 @@ import {useHistory} from "react-router-dom";
 import {setAccountSetting, setConstraintDataOnchange} from "./store/accountSettingsAction";
 import { useTranslation } from 'react-i18next';
 import {graphQL_shema} from "./utils/graphQL";
-import {useQuery,useMutation} from "@apollo/react-hooks";
+import {useQuery} from "@apollo/react-hooks";
 
 
 export const CompteSettings=()=>{
     const dispatch = useDispatch()
     const history = useHistory()
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
-    console.log("accountMenu",accountMenu)
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [form] = Form.useForm();
-    const {loading: GetUserInfoData_loading, data: GetUserInfoData}
+    const {data: GetUserInfoData}
         = useQuery(graphQL_shema().Get_UserInfoData, {
         fetchPolicy: 'cache-and-network',
         variables: { pagination : {
@@ -60,7 +58,7 @@ export const CompteSettings=()=>{
             <PrincipalPage menuType={"accountSetting"}>
                 <Row gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
-                        <Breadcrumb style={{fontSize:"14px"}} style={{color:darkMode===false?"":"#ffffff"}}>
+                        <Breadcrumb style={{fontSize:"14px", color:darkMode===false?"":"#ffffff"}}>
                             <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
                                 <span
                                     onClick={()=>{

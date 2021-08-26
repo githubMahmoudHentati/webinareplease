@@ -1,8 +1,6 @@
-import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setConnexionConstraintDataOnchange, setConnexionOnchange} from "../store/connexionAction";
-import {ConnexionReducer} from "../store/connexionReducer";
-import {GraphQLFetchData} from "./graphQLFetchData";
+
 
 
 export  const Hooks=(connexionAction)=> {
@@ -10,7 +8,6 @@ export  const Hooks=(connexionAction)=> {
     const values = useSelector((state) => state.ConnexionReducer)
 //******************connexion************************//
     const connexionOnChange = async (event) => {
-        console.log("event", event.target.value, event.target.name)
         await dispatch(setConnexionOnchange({
             ConnexionNameChange: event.target.name,
             ConnexionValueChange: event.target.value

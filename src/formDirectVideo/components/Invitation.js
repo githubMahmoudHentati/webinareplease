@@ -5,14 +5,20 @@ import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
+
 import moment from "moment";
 import 'moment-timezone';
 import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 
+
+
+
+
+
 function Invitation(){
     const { Option } = Select;
     const [name , SetName] = useState('')
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
     const [items , SetItems] = useState([t("formDirectVideo.Group01") , t("formDirectVideo.Group02") , t("formDirectVideo.Group03") , t("formDirectVideo.Group04")])
     const [visible , SetVisible] = useState(false)
     const [visbleRegle , SetVisibleRegle] = useState(false);
@@ -21,14 +27,12 @@ function Invitation(){
 
     const {values,InvitationOnChangeChecked,invitationOnChangeSelect ,handleClickDelete }=Hooks()
     const {getMailsGroupList}=GraphQLFetchDataForm(values)
-    console.log("invitation",values)
     let ParisMoment = moment().tz("Europe/Paris")
     useEffect(() => {
 
             SetHoursDiffCalls(values.general.startHour?moment(values.general.startHour,'HH:mm').diff(ParisMoment,"hours"):0)
             SetDaysDiffCalls(values.general.startDate&&values.general.startHour?moment(values.general.startDate+"Z"+values.general.startHour,'YYYY-MM-DDZHH:mm').diff(ParisMoment,"days"):0)
             getMailsGroupList()
-
     }, []);
 
     // use Selector redux
@@ -61,7 +65,9 @@ function Invitation(){
     };
 
     // Validation des emails
+
     const checkEmail = () => {
+
         let verificationMails=[]
         if (values.invitation.emails.length>0) {
             values.invitation.emails.map(ele => {
@@ -74,9 +80,12 @@ function Invitation(){
                 return false
             else
                 return true
+
         }else
             return true
+
     }
+
 
     const selectProps = {
         mode:"tags",
@@ -117,7 +126,7 @@ function Invitation(){
                                 <Divider style={{margin: '4px 0'}}/>
                                 <div style={{display: 'flex', flexWrap: 'nowrap', padding: 8}}>
                                     <Input style={{flex: 'auto'}} value={name} onChange={onNameChange}/>
-                                    <a
+                                    <a href="#/"
                                         style={{flex: 'none', padding: '8px', display: 'block', cursor: 'pointer'}}
                                         onClick={addItem}
                                     >

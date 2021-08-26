@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React from 'react';
 import {Row, Col} from 'antd'
 import '../compteSettings.scss'
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,7 @@ export const SecurityAccount = () => {
     const dispatch = useDispatch()
     // dark mode from redux
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     return (
         <Row gutter={[0, 25]}>
@@ -34,7 +34,7 @@ export const SecurityAccount = () => {
                     </Col>
                     <Col style={{display: "flex ", alignItems: "center"}} xs={{span: 24}} sm={{span: 24}} md={{span: 2}}
                          lg={{span: 2}}>
-                        <a className={"spn2_motDePasse"} onClick={() => dispatch(setAccountSetting(2))}>{t("CompteSettings.Modifier")}</a>
+                        <a href="#/" className={"spn2_motDePasse"} onClick={() => dispatch(setAccountSetting(2))}>{t("CompteSettings.Modifier")}</a>
                     </Col>
                 </Row>
             </Col>

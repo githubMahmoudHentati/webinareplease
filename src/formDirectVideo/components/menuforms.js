@@ -1,17 +1,17 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
+import React from 'react';
+import {Row,Col,Menu} from 'antd'
 import '../formDirectVideo.scss'
-import {MailOutlined} from '@ant-design/icons';
 import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 import { useTranslation } from 'react-i18next';
+
 
 export const MenuForms =()=>{
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const selectedkey = useSelector((state)=> state.Reducer.directMenu)
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <Row className={"row_menu"}>

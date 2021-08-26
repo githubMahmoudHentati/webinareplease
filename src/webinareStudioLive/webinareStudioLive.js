@@ -1,13 +1,11 @@
-import React,{useState , useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-
+import React from 'react';
 import {PrincipalPage} from "../utils/components/principalPage";
 import './webinareStudioLive.scss'
 
 function IframeStudioLive(){
 
     // Diffusion Link
-    const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
+    //const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
 
     return(
         <PrincipalPage>

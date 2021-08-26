@@ -15,6 +15,7 @@ export const FormForgetPassword =()=>{
             form={form}
             layout="horizontal"
             name="product-form"
+            className={"product-form-forget-pass"}
             onFinish={handleSubmit}
         >
             {!values.constraintData.passwordSent ?
