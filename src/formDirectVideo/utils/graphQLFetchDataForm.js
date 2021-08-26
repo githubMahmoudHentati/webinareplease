@@ -331,6 +331,12 @@ export const GraphQLFetchDataForm = (values) => {
                     }),
                     listQuestion: [],
                 },
+                invitation:{
+                    emailsGroup:data.getlive.invitationOut.mailsGroup,
+                    emails:data.getlive.invitationOut.mails,
+                    listMailsGroup:[],
+                    addRules:data.getlive.invitationOut.mailRule
+                },
                 socialTools:[
                     {
                         id: 0,

@@ -86,6 +86,12 @@ export const graphQL_shema = ()=> {
                       chapterTitle
                      }
                 }
+                invitationOut{
+                    mailsGroup
+                    mails
+                    mailRule
+                    { beforeDay beforeHour beforeWeek isParticiped afterSubscription afterPrograming notVisualized }
+                }
                 socialOut{
                     id
                     title

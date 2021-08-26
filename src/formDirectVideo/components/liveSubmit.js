@@ -16,7 +16,7 @@ export const LiveSubmit=(props)=>{
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const {t} = useTranslation();
     const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
-
+    console.log("values",values)
 
     useEffect(async () => {
         if (values.general.loadingSecuredPassword)
@@ -61,6 +61,9 @@ export const LiveSubmit=(props)=>{
                     videoMode: values.configuration.videoMode,
                     theme: values.configuration.theme,
                     tags: values.configuration.tags,
+                    //**********configuration live info***********/////
+                    emails:values.invitation.emails,
+                    emailsGroup:values.invitation.emailsGroup,
                 }
             ))
             // dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
