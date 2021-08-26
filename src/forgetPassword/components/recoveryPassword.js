@@ -8,7 +8,7 @@ export const RecoveryPassword =()=> {
     const { t} = useTranslation();
 
     return(
-        <Row gutter={[0, 40]} className={'col-connexion_recovery-pass'}>
+        <Row gutter={[0, 35]} className={'col-connexion_recovery-pass'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
                     {t("forgetPassword.RecoveryEmail")}

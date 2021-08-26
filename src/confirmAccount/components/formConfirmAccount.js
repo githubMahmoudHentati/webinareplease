@@ -9,7 +9,7 @@ export const FormConfirmAccount =()=> {
     const { t} = useTranslation();
 
     return(
-        <Row gutter={[0, 40]} className={'col-connexion'}>
+        <Row gutter={[0, 30]} className={'col-connexion'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
                     {t("ConfirmAccount.ConfirmationSend")}

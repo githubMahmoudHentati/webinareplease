@@ -74,6 +74,7 @@
     justify-content: center;
     height: 100%;
     padding: 5%;
+    min-height: 320px;
   }
   .col-connexion_recovery-pass{
     width: 90%;
@@ -89,6 +90,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    top: 50%;
   }
 
 }

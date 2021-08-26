@@ -36,7 +36,7 @@ export const FormContactClient =()=> {
             onFinish={handleSubmitContactClient}
         >
         <Row gutter={[0, 40]} className={'col-contact'}>
-            <Col style={{textAlign: 'center'}} span={24}>
+            <Col  span={24}>
                 <span className={"spn1"}>{t("contactClient.ContactUsWithReq")}</span>
             </Col>
             <Col span={24} >
