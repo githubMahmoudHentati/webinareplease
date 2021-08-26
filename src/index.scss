@@ -105,7 +105,11 @@ body{
     --box-signup:#d9d9d9;
     --bg-card-question: #f1f3f4;
 
-    --ant-empty-img:#CCCCCC
+    --ant-empty-img:#CCCCCC;
+
+    --invitation-border:rgba(0, 0, 0, 0.06);
+
+    --icon-color:rgba(0, 0, 0, 0.25)
 }
 :root.dark{
     --lang-help-color:rgba(255, 255, 255, 0.85);
@@ -143,8 +147,18 @@ body{
     --separator-color:rgba(255, 255, 255, 0.85);
     --bg-card-question: rgba(0, 0, 0, 0.04);
 
-    --ant-empty-img:#434343
+    --ant-empty-img:#434343;
 
+    --invitation-border:rgba(255, 255, 255, 0.06);
+
+    --icon-color:rgba(255, 255, 255, 0.25)
+
+}
+.form-item-style .spn2_motDePasse{
+    border: 1px solid var(--border_color) !important;
+}
+.select-icon{
+    margin-right: 5px;
 }
 .disabled-row {
     background-color: #dcdcdc;
@@ -349,6 +363,9 @@ body{
     color: var(--menu-color) !important;
     border-right:3px solid var(--menu-border) !important;
 }
+.ant-menu-item-selected .ant-menu-title-content{
+    color: var(--menu-color) !important;
+}
 .ant-dropdown-menu{
     background-color: var(--card_color) !important;
     margin-top: 12px;
@@ -428,11 +445,26 @@ body{
 .ant-select-arrow{
     color: var(--white_color) !important;
 }
-.ant-select-selection-placeholder{
-    color: var(--white_color) !important;
+::placeholder {
+    color: var(--icon-color) !important;
+    opacity: 1 !important; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--icon-color) !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--icon-color) !important;
+}
+.anticon:not(.anticon-close , .anticon-arrow-left , .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload , .anticon-global) , .dropdownIconTemp{
+    color: var(--icon-color) !important;
+}
+.ant-btn-primary .anticon{
+    color: white !important;
 }
 .ant-select-suffix{
-    color: var(--white_color) !important;
+    color: var(--icon-color) !important;
 }
 
 .ant-select-dropdown{
@@ -1043,7 +1075,7 @@ color: var(--white_color) !important;
     height: 100%;
     width: 295px;
     position: fixed;
-    z-index: 100000000000000;
+    z-index: 99999999999999999999999999999999999999999;
     top: 0;
     right: 0;
     opacity: 1;
@@ -1179,11 +1211,26 @@ color: var(--white_color) !important;
     color: rgba(0, 0, 0, 0.65);
 }
 .drp_lang{
+    z-index: 99999999999999999999999999999999999999999;
     padding: 5px;
     font-family: "SF Pro Display";
     font-weight: 400;
     font-size: 14px;
     color: RGBA(0, 0, 0, 0.65);
+}
+.drp-lang-size{
+    font-size: 16px !important;
+}
+.arrow-lang{
+    font-size: 16px;
+    color: var(--icon-color);
+}
+.arrow-lang1{
+    font-size: 14px;
+    color: var(--icon-color);
+}
+.div_caretDownOutlined , .div_caretRightOutlined{
+    width: 10%;
 }
 .drp_lang:hover {
     color: var(--menu-color) !important;
@@ -1316,7 +1363,7 @@ input:checked + .slider:before {
 .switch {
     position: relative;
     display: inline-block;
-    height: 25px;
+    height: 28px;
     width: 75px;
 }
 .switch input {
@@ -1620,9 +1667,7 @@ input:checked + .slider:before {
     padding: 24px !important;
     min-height: 90.1vh !important;
 }
-.ant-select-selection-placeholder{
-    color: #bfbfbf !important;
-}
+
 .Paramétres{
     font-family: 'SF Pro Display' !important;
     font-weight: 900 !important;
@@ -2143,6 +2188,9 @@ input:checked + .slider:before {
     overflow-x: hidden;
 }
 @media screen and (max-width: 767px){
+    .menu-lang{
+        display: none !important;
+    }
     .Filter{
         height: 80px;
         flex-direction: column !important;
