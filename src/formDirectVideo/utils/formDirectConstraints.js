@@ -100,17 +100,18 @@ export const FormDirectConstraints = ()=>{
         return (
             {
                 addRules: {
-                    visibleInscription: false,
-                    visibleRappelJ7: false,
-                    visibleRappelJ1: false,
-                    visibleRappelH1: false,
-                    visibleInscription2: false,
-                    visibleRappelJ72: false,
-                    visibleRappelJ12: false,
-                    visibleRappelH12: false
+                    afterPrograming: false,
+                    beforeWeek: false,
+                    beforeDay: false,
+                    beforeHour: false,
+                    afterSubscription: false,
+                    isParticiped: false,
+                    notVisualized: false,
+                    // replay: false
                 },
                 emails:[],
-                emailsGroup:[]
+                emailsGroup:[],
+                listMailsGroup:[]
             }
         )
     }

@@ -7,7 +7,11 @@ import moment from "moment";
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
-import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction"
+import {
+    setLiveInfo,
+    setFormDirectLiveConstraintDataOnchange,
+    setInvitationOnchange
+} from "../store/formDirectVideoAction"
 import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import {setDirectSetting} from "../../utils/redux/actions";
@@ -16,7 +20,6 @@ import {v4 as uuidv4} from "uuid";
 
 
 export const GraphQLFetchDataForm = (values) => {
-    const directMenu = useSelector((state)=>state.Reducer.directMenu)
     const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -75,6 +78,11 @@ export const GraphQLFetchDataForm = (values) => {
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
                     slides: richeMediaDiffusion === true ? DiapositivesFile : [],
+                },
+                invitation:{
+                    mailsGroup:values.invitation.emailsGroup,
+                    mails:values.invitation.emails,
+                    mailRule:values.invitation.addRules,
                 },
                 social: [
                     {
@@ -370,6 +378,14 @@ export const GraphQLFetchDataForm = (values) => {
         }
     })
 
+    const [getMailsGroupList]
+        = useLazyQuery(graphQL_shema().Get_MailsGroupList, {
+        fetchPolicy:  "cache-and-network",
+        onCompleted: async (data)=>{
+            dispatch(setInvitationOnchange({invitationNameChange:"listMailsGroup",invitationValueChange:data.getGroupList}))
+        }
+    })
+
 
     return ({
         CreateLive,
@@ -379,7 +395,8 @@ export const GraphQLFetchDataForm = (values) => {
         data_securedPassword,
         themesDisplayQueryAction,
         idLive,
-        getLiveData
+        getLiveData,
+        getMailsGroupList
     })
 }
 
