@@ -1,12 +1,12 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
+import React from 'react';
+import {Row,Col,Menu} from 'antd'
 import '../formDirectVideo.scss'
-import {MailOutlined} from '@ant-design/icons';
+
 import { useTranslation } from 'react-i18next';
 
 export const Forms =()=>{
-    const { TabPane } = Tabs;
-    const { t, i18n } = useTranslation();
+
+    const { t } = useTranslation();
 
     return (
         <Row>

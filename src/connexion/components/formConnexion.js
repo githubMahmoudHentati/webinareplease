@@ -1,5 +1,5 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Checkbox, Form} from 'antd'
+import React, {useEffect} from 'react';
+import {Row, Col, Input, Button,Checkbox, Form} from 'antd'
 import '../connexion.scss'
 import {UserOutlined,LockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import {useHistory} from 'react-router-dom';
@@ -15,12 +15,9 @@ export const FormConnexion =()=>{
     const [form] = Form.useForm();
     const history = useHistory()
     dispatch(setForgetPasswordConstraintDataOnchange({constraintDataNameChange:"passwordSent",constraintDataValueChange:false}))
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
-    const isValidPassword = (password) => {
 
-        return !values.constraintData.connexionError
-    }
 
     useEffect(() => {
         const isRememberMe = localStorage.getItem('isRememberMe')?localStorage.getItem('isRememberMe'):false;
@@ -44,13 +41,8 @@ export const FormConnexion =()=>{
     }, []);
 
     const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
-
     const {Connexion}=GraphQLFetchData(form)
-
     const{handleSubmit,values,connexionOnChange,connexionOnChangeButton}=Hooks(Connexion)
-
-    console.log(values)
-
     const toForgotPassword=()=>{
         document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
         document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
@@ -76,9 +68,10 @@ export const FormConnexion =()=>{
             form={form}
             layout="horizontal"
             name="product-form"
+            className={"product-form-sign"}
             onFinish={handleSubmit}
         >
-        <Row gutter={[0, 40]} className={'col-connexion'}>
+        <Row gutter={[0, 40]} className={'col-connexion-sign'}>
             <Col span={24}>
                 <span className={"span_connexion"}>{t("FormConnexion.Connexion")}</span>
             </Col>
@@ -126,7 +119,7 @@ export const FormConnexion =()=>{
                                 </Form.Item>
                             </Col>
                             <Col>
-                                <a  onClick={()=>{toForgotPassword()}} className={"spn_chbx"}> {t("FormConnexion.ForgotPassword")}</a>
+                                <a href="#/" onClick={()=>{toForgotPassword()}} className={"spn_chbx"}> {t("FormConnexion.ForgotPassword")}</a>
                             </Col>
                         </Row>
                     </Col>
@@ -146,7 +139,7 @@ export const FormConnexion =()=>{
                         <span className={"spn_chbx"}>{t("FormConnexion.NotYetMem")}</span>
                     </Col>
                     <Col onClick={()=>{toSignUp()}}>
-                        <a className={"spn_chbx"}>{t("FormConnexion.SignUp")}</a>
+                        <a href="#/" className={"spn_chbx"}>{t("FormConnexion.SignUp")}</a>
                     </Col>
                 </Row>
             </Col>

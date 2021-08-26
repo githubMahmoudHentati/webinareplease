@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React from 'react';
 import {Button, Col, Form, Input, Row} from "antd";
 import {useHistory} from "react-router-dom";
 import {UserOutlined} from "@ant-design/icons";
@@ -7,13 +7,13 @@ import { useTranslation } from 'react-i18next';
 
 export const ForgetPassword =()=> {
     const history = useHistory()
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
     const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
     const {forgetPasswordOnChange,values}=Hooks()
 
 
     return(
-        <Row gutter={[0, 40]} className={'col-connexion'}>
+        <Row gutter={[0, 40]} className={'col-connexion-forget-pass'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
                     {t("forgetPassword.ResetPass")}
@@ -41,7 +41,7 @@ export const ForgetPassword =()=> {
                         <Button loading={values.constraintData.loadingForgetPassword}  className={"spn_chbx"} style={{width:"100%"}}type="primary" htmlType="submit">{t("forgetPassword.SendResetMail")}</Button>
                     </Col>
                     <Col onClick={()=>{history.push("/connexion")}}>
-                        <a className={"spn_chbx"}>
+                        <a className={"spn_chbx"} href="#/">
                             {t("forgetPassword.LoginRedirect")}</a>
                     </Col>
                 </Row>

@@ -8,8 +8,6 @@ import {ErrorResetPassword} from "./errorResetPassword";
 
 export const FormResetPassword =()=>{
     const [form] = Form.useForm();
-    const token = new URLSearchParams(window.location.search).get('token') // id=123
-    console.log("token",token)
     const{handleSubmit,values}=Hooks()
 
     return(

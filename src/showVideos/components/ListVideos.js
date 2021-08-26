@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Table } from "antd";
-import { useHistory } from "react-router-dom";
+
 import UseActionMenu from "./ActionMenuVideosTable";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -13,9 +13,9 @@ import { Hooks } from "../utils/hooks";
 const DEFAULT_PAGE_SIZE = 10;
 const DEFAULT_PAGE_NUMBER = 1;
 
-function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
+function UseDataTableVideos({ columns, dataSource }) {
   // Read Data from Hooks
-  const { DataVideos, paginationProps, conditions } = Hooks();
+  const {paginationProps } = Hooks();
 
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
@@ -89,7 +89,6 @@ function UseDataTableVideos({ columns, dataSource, updateEntityPath }) {
   };
 
   const handleTableChange = async(pagination, filters, sorter, extra) => {
-    console.log("paginationLives:", pagination, filters, sorter, extra);
   //  setCurrentPage(pagination.current);
    // SetOrder(sorter.order);
   //  setPageSize(pagination.pageSize);

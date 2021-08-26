@@ -1,4 +1,4 @@
-import React  from 'react';
+
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useHistory} from "react-router-dom";
@@ -12,7 +12,7 @@ export const GraphQLFetchData=(values)=> {
     const dispatch = useDispatch()
     const token = new URLSearchParams(window.location.search).get('token')?new URLSearchParams(window.location.search).get('token'):""
 
-    const {loading: loading_verificationToken, data: VerificationTokenResetPasswordData}
+    const {data: VerificationTokenResetPasswordData}
         = useQuery(graphQL_shema().verificationTokenPasswordResetQuery, {
         fetchPolicy: 'cache-and-network',
         variables: { token : token },
@@ -26,11 +26,7 @@ export const GraphQLFetchData=(values)=> {
         }
     })
 
-    const [ResetPassword, {
-        data: dataUpdate,
-        loading: loading_EventUpdated,
-        error: error_EventUpdated,
-    }] = useMutation(graphQL_shema().resetPassword, {
+    const [ResetPassword] = useMutation(graphQL_shema().resetPassword, {
         variables: { token: token,
             "input":
                 values.resetPassword

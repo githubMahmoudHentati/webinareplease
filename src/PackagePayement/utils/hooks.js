@@ -1,15 +1,12 @@
-import React, {useEffect} from 'react';
+
 import {useDispatch, useSelector} from "react-redux";
 import {setPackagePayementAction , setPackagePayementActionInput} from "../store/PackagePayementAction";
-import {PackagePayementReducer} from "../store/PackagePayementReducer";
-import { useTranslation } from 'react-i18next';
+
 
 
 export  const Hooks=( )=> {
     const dispatch = useDispatch()
-    const { t, i18n } = useTranslation();
     const values = useSelector((state) => state.PackagePayementReducer)
-    console.log("valuesPackageRducerReduce",values)
 
     const handleClickCardZero = () =>{
         // dispatch active card
@@ -81,7 +78,6 @@ export  const Hooks=( )=> {
     }
     /*Function Input*/
     const handlePackagePayementInput = (event) => {
-            console.log("handleSearchRow", event.target.value, event.target.name)
             dispatch(setPackagePayementActionInput({
                 PackagePayementInputName: event.target.name,
                 PackagePayementInputValue: event.target.value
@@ -90,7 +86,6 @@ export  const Hooks=( )=> {
     };
     /*Function select*/
     const handlePackagePayementSelect = (value,action) => {
-        console.log("handleHeaderSelect",action.name, action.value)
         dispatch(setPackagePayementActionInput({
             PackagePayementInputName: action.name,
             PackagePayementInputValue: action.value

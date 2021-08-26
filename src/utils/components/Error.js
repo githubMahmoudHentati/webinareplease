@@ -4,7 +4,8 @@ import WebinairePlease from "./WebinairePlease";
 import logo from "../../assets/logoWebinaireplease.svg"
 import {useTranslation} from "react-i18next"
 const Error = () =>{
-const {t,i18n}=useTranslation()
+const {t}=useTranslation()
+
     return(
         <WebinairePlease logo={logo}>
         <div className={"Default_Page"}>

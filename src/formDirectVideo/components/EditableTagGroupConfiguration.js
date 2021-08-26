@@ -2,7 +2,6 @@ import React  from 'react';
 import { Tag, Input } from 'antd';
 import { TweenOneGroup } from 'rc-tween-one';
 import { PlusOutlined } from '@ant-design/icons';
-import { translate } from 'react-i18next';
 
 
 class EditableTagGroupConfiguration extends React.Component {
@@ -14,7 +13,6 @@ class EditableTagGroupConfiguration extends React.Component {
 
     handleClose = removedTag => {
         const tags = this.state.tags.filter(tag => tag !== removedTag);
-        console.log(tags);
         this.setState({ tags });
     };
 
@@ -32,7 +30,6 @@ class EditableTagGroupConfiguration extends React.Component {
         if (inputValue && tags.indexOf(inputValue) === -1) {
             tags = [...tags, inputValue];
         }
-        console.log(tags);
         this.setState({
             tags,
             inputVisible: false,

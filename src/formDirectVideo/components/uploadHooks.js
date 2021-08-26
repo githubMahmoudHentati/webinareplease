@@ -1,19 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {useLazyQuery, useMutation} from "@apollo/react-hooks";
+import {useDispatch} from "react-redux";
 import axios from "axios";
 import {
     setConfigurationFileList,
-    setConfigurationSpeakerList,
     setGeneralOnchange,
     setDeleteFileList, setDiapositivesFileList, setDiapositivesDelete
 } from "../store/formDirectVideoAction";
-import Hooks from "../utils/hooks";
 import { v4 as uuidv4 } from 'uuid';
 
 export const UploadHooks = () =>{
     const dispatch = useDispatch()
-    const {values}=Hooks()
+
 
     //************************************** Start Upload General **************************************//////////////////////
 
@@ -30,7 +26,6 @@ export const UploadHooks = () =>{
             },
             data: file
         }).then((result) => {
-            console.log("resultData",result.data.data.uploadLogo);
             dispatch(setGeneralOnchange({generalNameChange:"fileList", generalValueChange:
                     [{
                         uid: '-1',
@@ -41,7 +36,6 @@ export const UploadHooks = () =>{
                     }]
             }));
         }).catch(error => {
-            console.log(error)
         });
     }
     //******************** On remove General *****************//
@@ -68,12 +62,10 @@ export const UploadHooks = () =>{
         formData.append("map", JSON.stringify(map));
         [...info.fileList].slice(-1).filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
             const file = e.originFileObj;
-            console.log("*******************", file);
             return formData.append("0", file);
         })
 
         for (let p of formData) {
-            console.log("ppppppppppp",p);
         }
         onSaveGeneral(formData, info)
     }
@@ -95,7 +87,6 @@ export const UploadHooks = () =>{
             },
             data: file
         }).then((result) => {
-            console.log("resultData",result.data.data.multipleUpload.path);
             dispatch(setConfigurationFileList({configurationNameFileList:"fileListConfiguration", configurationValueFileList:
                     {
                         uid: uuidv4(),

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import GlobalHeader from "./header";
 import {Card} from "antd";
 import {IframeContainer} from "./iframeContainer";

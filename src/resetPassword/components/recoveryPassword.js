@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 export const RecoveryPassword =()=> {
     const history = useHistory()
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
@@ -27,7 +27,7 @@ export const RecoveryPassword =()=> {
                         </Button>
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
-                        <a className={"spn_chbx"}>
+                        <a href="#/" className={"spn_chbx"}>
                             {t("resetPassword.ContactClient")}</a>
                     </Col>
                 </Row>

@@ -1,4 +1,3 @@
-import React from 'react';
 import gql from "graphql-tag";
 
 export const graphQL_shema = ()=> {
@@ -86,6 +85,12 @@ export const graphQL_shema = ()=> {
                       chapterOrder
                       chapterTitle
                      }
+                }
+                invitationOut{
+                    mailsGroup
+                    mails
+                    mailRule
+                    { beforeDay beforeHour beforeWeek isParticiped afterSubscription afterPrograming notVisualized }
                 }
                 socialOut{
                     id
