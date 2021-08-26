@@ -171,6 +171,11 @@ export const GraphQLFetchDataForm = (values) => {
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
                     slides: richeMediaDiffusion === true ? DiapositivesFile : [],
                 },
+                invitationOutput:{
+                    mailsGroup:values.invitation.emailsGroup,
+                    mails:values.invitation.emails,
+                    mailRule:values.invitation.addRules,
+                },
                 social: [
                     {
                         title: values.general.liveTitle,
