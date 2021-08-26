@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?orr39g');
-  src:  url('fonts/icomoon.eot?orr39g#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?orr39g') format('truetype'),
-    url('fonts/icomoon.woff?orr39g') format('woff'),
-    url('fonts/icomoon.svg?orr39g#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?kylqke');
+  src:  url('fonts/icomoon.eot?kylqke#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?kylqke') format('truetype'),
+    url('fonts/icomoon.woff?kylqke') format('woff'),
+    url('fonts/icomoon.svg?kylqke#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -235,6 +235,24 @@
   margin-left: -0.95703125em;
   color: rgb(79, 205, 255);
   opacity: 0.46;
+}
+.icon-replay:before {
+  content: "\e92f";
+}
+.icon-access:before {
+  content: "\e930";
+}
+.icon-applause:before {
+  content: "\e931";
+}
+.icon-like:before {
+  content: "\e932";
+}
+.icon-no_view:before {
+  content: "\e933";
+}
+.icon-sign_up:before {
+  content: "\e934";
 }
 .icon-logo-webinar:before {
   content: "\e904";
