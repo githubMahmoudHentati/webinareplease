@@ -1,12 +1,13 @@
 
 import {message} from "antd";
 import { useTranslation } from 'react-i18next';
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
 import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
 export const StatusMessages = (id) => {
     const dispatch = useDispatch()
     const {t} = useTranslation();
+    const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const success_submit = async (code) => {
         dispatch(setFormDirectLiveConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
