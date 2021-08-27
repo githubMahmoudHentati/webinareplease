@@ -216,7 +216,7 @@ export const GraphQLFetchDataForm = (values) => {
                 dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
                 dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
                 values.constraintData.leaveToast&&success_submit(200)
-            } else if (data.editLive.code === "403") {
+            } else if (data.editLive.code === "400") {
                 values.constraintData.leaveToast&&error_submit(400)
                 dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
             }
