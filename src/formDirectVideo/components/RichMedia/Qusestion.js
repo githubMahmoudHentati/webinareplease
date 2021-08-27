@@ -95,8 +95,8 @@ export const Question = ({ listQuestion }) => {
     const { nsp, question, choices } = Inputs;
 
     setLocalId(localId + 1);
-    dispatch(setQuestionList({ nsp, question, choices: [...choices.filter(ele => ele.response.trim().length > 0)], questionId: localId }));
-    setFakeList([...fakeList, { nsp, question, choices: [...choices.filter(ele => ele.response.trim().length > 0)], questionId: localId }]);
+    dispatch(setQuestionList({ nsp, question, choices: [...choices.filter(ele => ele.response.length > 0)], questionId: localId }));
+    setFakeList([...fakeList, { nsp, question, choices: [...choices.filter(ele => ele.response.length > 0)], questionId: localId }]);
     setInputs({ nsp: 1, choices: [{ response: "" }], question: "" });
     setIsAddingNewQuestion(false);
   };
@@ -154,8 +154,8 @@ export const Question = ({ listQuestion }) => {
     switch(check){
       case 1 : return true;
       case 2 : return true;
-      case 3: return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 0 ?  true : false;
-      case 4 : return responses && responses.filter(ele => ele.response.trim().length !== 0).length > 1 ?  true : false;;
+      case 3: return responses && responses.filter(ele => ele.response.length !== 0).length > 0 ?  true : false;
+      case 4 : return responses && responses.filter(ele => ele.response.length !== 0).length > 1 ?  true : false;;
       default : return
     }
   }
@@ -259,7 +259,7 @@ export const Question = ({ listQuestion }) => {
                                     ele.choices.length === o + 1 ? (
                                         <PlusCircleOutlined
                                             onClick={() => addNewResponse(index, "edit")}
-                                            className={(resp.response.trim().length === 0 ? "d-none" : "d-block")}
+                                            className={(resp.response.length === 0 ? "d-none" : "d-block")}
                                         />
                                     ) : (
                                         <DeleteOutlined
@@ -298,7 +298,7 @@ export const Question = ({ listQuestion }) => {
                             </Button>
                             <Button
                                 className={
-                                  ele.question.trim().length !== 0 && isEditing && checkResponseStatus(ele.nsp, ele.choices)
+                                  ele.question.length !== 0 && isEditing && checkResponseStatus(ele.nsp, ele.choices)
                                       ? ""
                                       : "Question__actions-disabled"
                                 }
@@ -403,7 +403,7 @@ export const Question = ({ listQuestion }) => {
                     suffix={
                       responseList.length === o + 1 ? (
                           <PlusCircleOutlined
-                              className={"list-item-icons " + (ele.response.trim().length === 0 ? "d-none" : "d-block")}
+                              className={"list-item-icons " + (ele.response.length === 0 ? "d-none" : "d-block")}
                               onClick={addNewResponse}
                           />
                       ) : (
@@ -442,7 +442,7 @@ export const Question = ({ listQuestion }) => {
               </Button>
               <Button
                   className={
-                    Inputs && Inputs.question && Inputs.question.trim().length !== 0 && checkResponseStatus(Inputs.nsp, Inputs.choices)
+                    Inputs && Inputs.question && Inputs.question.length !== 0 && checkResponseStatus(Inputs.nsp, Inputs.choices)
                         ? ""
                         : "Question__actions-disabled"
                   }
