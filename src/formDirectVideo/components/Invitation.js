@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Input,Button,Select , Divider  , Tooltip , Popover , Checkbox , Form , message} from 'antd'
-import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , ExportOutlined , DiffOutlined , PlusSquareOutlined  } from '@ant-design/icons';
+import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , PlusSquareOutlined  } from '@ant-design/icons';
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
@@ -304,7 +304,7 @@ function Invitation(){
                             content={
                                 <div className={"popoverCheckbox"}>
                                     <Checkbox checked={values.invitation.addRules.afterSubscription === true} value = "afterSubscription" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.confirmInscription")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.isParticiped === true} value = "isParticiped" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.paticipated")}</Checkbox>
+                                    <Checkbox checked={values.invitation.addRules.isParticiped === true} value = "isParticiped" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.participated")}</Checkbox>
                                     <Checkbox checked={values.invitation.addRules.notVisualized === true} value = "notVisualized" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.notCome")}</Checkbox>
                                     <Checkbox checked={values.invitation.addRules.replay === true} value = "replay" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Replay")}</Checkbox>
                                 </div>

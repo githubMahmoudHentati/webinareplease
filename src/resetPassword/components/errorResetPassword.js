@@ -31,7 +31,7 @@ export const ErrorResetPassword =()=> {
                     </Col>
                     <Col span={24}>
                                 <span style={{fontSize: "14px"}} className={"span_connexion"}>
-                            {t("resetPassword.Voulez-vous réessayer ?")}
+                            {t("resetPassword.TryAgain")}
                             </span>
                     </Col>
                 </Row>

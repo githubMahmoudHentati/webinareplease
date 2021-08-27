@@ -1,19 +1,19 @@
 
 import {message} from "antd";
-
+import { useTranslation } from 'react-i18next';
 import {useDispatch} from "react-redux";
 import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
 export const StatusMessages = (id) => {
     const dispatch = useDispatch()
-
+    const {t} = useTranslation();
     const success_submit = async (code) => {
         dispatch(setFormDirectLiveConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
             constraintDataValueChange: false
         }))
         const successMessage = {
-            200: id ? "Le direct est modifié avec success" : "Le direct est crée avec success",
+            200: id ? t("ConfirmAccount.EditedLive") : t("ConfirmAccount.CreatedLive"),
         }
         message.success({
             content: successMessage[code],
@@ -32,7 +32,7 @@ export const StatusMessages = (id) => {
 
     const error_submit = async (code) => {
         const errorMessage = {
-            400: id ? "Ooops , il y a  un problème qui s'est produit lors la modification" : "Ooops , il y a  un problème qui s'est produit lors la creation",
+            400: id ? t("ConfirmAccount.EditedLiveProblem") : t("ConfirmAccount.CreatedLiveProblem"),
         }
         dispatch(setFormDirectLiveConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",

@@ -57,7 +57,7 @@ export const ResetPassword =()=> {
                                         name="newPassword"
                                         onChange={resetPasswordOnChange}
                                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                        placeholder={t("CompteSettings.Nouveau mot de passe")}>
+                                        placeholder={t("CompteSettings.NewPassword")}>
                                     </Input.Password>
                                 </Form.Item>
                             </Col>
@@ -66,7 +66,7 @@ export const ResetPassword =()=> {
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col span={24}>
-                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>Confirmer la nouveau mot de passe</span>
+                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ConfirmNewPass")}</span>
                             </Col>
                             <Col span={24}>
                                 <Form.Item
