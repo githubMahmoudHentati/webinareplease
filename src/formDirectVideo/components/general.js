@@ -1,8 +1,8 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Switch, Radio, Checkbox, DatePicker, Form,TimePicker} from 'antd'
+import React from 'react';
+import {Row, Col, Input, Button, Switch, Radio, Checkbox, DatePicker, Form,TimePicker} from 'antd'
 import '../formDirectVideo.scss'
-import { Upload, message } from 'antd';
-import {EyeInvisibleOutlined, EyeTwoTone, InboxOutlined} from '@ant-design/icons';
+import {message } from 'antd';
+import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
 import {useSelector,useDispatch} from "react-redux";
 import Hooks from "../utils/hooks";
 import {DraggerUpload} from "./DraggerUpload";
@@ -10,25 +10,23 @@ import moment from "moment";
 import useCopy from '@react-hook/copy'
 import {setFormDirectLiveConstraintDataOnchange} from '../store/formDirectVideoAction'
 import { useTranslation } from 'react-i18next';
-import i18n from '../../i18n/index';
 
 
-export const Generals =({})=>{
+
+export const Generals =()=>{
 
     const dispatch = useDispatch()
-
+    const [form] = Form.useForm();
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t, i18n } = useTranslation();
     const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
 
     const isValidPassword = () => {
-console.log("pwd",values.general.pwd)
-        return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_`!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(values.general.pwd)
+        return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_`!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(values.general.pwd)
     }
-    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks()
-    console.log("valuespass",values)
+    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks(form)
 
-    const {copied, copy, reset} = useCopy(
+    const {copy} = useCopy(
         values.general.liveLink+"/"+values.general.liveTitle
     )
 
@@ -77,7 +75,7 @@ console.log("pwd",values.general.pwd)
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveTitle")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveTitle")}</span>
                         <span className="require">*</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
@@ -92,7 +90,7 @@ console.log("pwd",values.general.pwd)
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveFeedDescription")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveFeedDescription")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Form.Item name="liveDescription" className={"form-item-style"}
@@ -106,7 +104,7 @@ console.log("pwd",values.general.pwd)
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold"}} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ShareLiveLink")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "bold",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ShareLiveLink")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Row justify={"space-between"} className={"row-copy-btn"}>
@@ -179,6 +177,7 @@ console.log("pwd",values.general.pwd)
                             <TimePicker getPopupContainer={() => document.querySelector(".timePicker1")} className={"timePicker1"} placeholder={t("formDirectVideo.ChooseStartTime")} name="startHour" onChange={(value,event)=>{generalOnChangeByName(value,event,"startHour")}}  style={{width: "100%"}}
                                         disabledHours={()=>startGetDisabledHours(values)}
                                         disabledMinutes={startGetDisabledMinutes}
+                                        format = {'HH:mm'}
                             ></TimePicker>
                         </Form.Item>
                     </Col>

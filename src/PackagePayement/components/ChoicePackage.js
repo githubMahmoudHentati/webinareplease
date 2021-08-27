@@ -1,5 +1,5 @@
 
-import React,{useState , useEffect , useMemo} from 'react';
+import React, {useEffect} from 'react';
 import { Steps, Button, message , Select , Radio  , Form, Input} from 'antd';
 import {AppleFilled } from '@ant-design/icons';
 import {FormSignUp} from "../../signUp/components/formSignUp";
@@ -17,7 +17,7 @@ const { Option } = Select;
 
 
 function ChoicePackage(){
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
     const steps = [
         {
             title: t("PackagePayment.Packages"),
@@ -36,19 +36,15 @@ function ChoicePackage(){
     const history = useHistory();
     const { handleClickCardZero, handleClickCardOne , handleClickCardTwo , values , handlePackagePayementInput , handlePackagePayementSelect} = Hooks()
     const dispatch = useDispatch()
-
-
     const stripe = useStripe(); // Stripe Hooks
     const elements = useElements(); // Stripe Hooks
-
     const {valuesSignUp,handleSubmitSignUp} = HooksSignUp()
+    const clientSecret = valuesSignUp.constSubscription.clientSecret;
 
-    console.log("valuesSikjfhkfdsjhfksdjfhgnUp",values)
-
-
-        const subscriptionId = valuesSignUp.constSubscription.subscriptionId;
-        const clientSecret = valuesSignUp.constSubscription.clientSecret;
-
+    useEffect(()=>{
+        const root = document.querySelector(':root')
+        root.classList.add('light')
+    },[])
 
     // next step
     const nextToSignUp = () => {
@@ -79,11 +75,6 @@ function ChoicePackage(){
             constraintDataValueChange: false
         }))
     };
-
-    const handlechange =(e)=>{
-        console.log("handlechange",e)
-    }
-
     // handle Payement
     const handlePayer = async () =>{
 
@@ -123,7 +114,6 @@ function ChoicePackage(){
 
 
     }
-
     return(
         <Form
             form={form}
@@ -131,10 +121,11 @@ function ChoicePackage(){
             wrapperCol={{ span: 16 }}
             layout="horizontal"
             name="product-form"
+            className={"product-form-payment"}
             onFinish={handleSubmitSignUp}
         >
-            <div className="ChoicePackage">
-                <Steps current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>
+            <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "ChoicePackage-form" : "ChoicePackage"}>
+                <Steps className={"steps-choice"} current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>
                     {steps.map(item => (
                         <Step key={item.title} title={item.title}/>
                     ))}
@@ -188,13 +179,13 @@ function ChoicePackage(){
                                         <h2 >{values.packagePayement.packASYouGo}€</h2>
                                         <div>
                                             <h5 >{t("PackagePayment.MeetingDuration")}</h5>
-                                            <Select defaultValue="1 Heure" >
+                                            <Select defaultValue="1 Heure" getPopupContainer={() => document.querySelector(".slct-heure")} className={"slct-heure"}>
                                                 <Option value="1 Heure">1 {t("PackagePayment.Hour")}</Option>
                                             </Select>
                                         </div>
                                         <div>
                                             <h5 >{t("PackagePayment.PartiNumber")}</h5>
-                                            <Select defaultValue="20 Participants" >
+                                            <Select defaultValue="20 Participants" getPopupContainer={() => document.querySelector(".slct-Intervenant")} className={"slct-Intervenant"}>
                                                 <Option value="20 Participants">20 {t("formDirectVideo.Participants")}</Option>
                                             </Select>
                                         </div>
@@ -261,7 +252,7 @@ function ChoicePackage(){
                                                     >
                                                         <CardElement
                                                             id={"card-element"} name="carddetails" className={"input"}
-                                                            onChange={handlechange}
+
                                                             options={{
                                                                 hidePostalCode:true
                                                             }}
@@ -324,40 +315,41 @@ function ChoicePackage(){
 
                     }
 
-
-                </div>
-                {/*./steps-content*/}
-                <div className="steps-action">
-                    {valuesSignUp.constraintData.current === 0 && (
-                        <Button onClick={()=>{history.push("/")}} style={{margin: '0 8px'}}>
-                            {t("CompteSettings.Cancel")}
-                        </Button>
-                    )}
-                    {valuesSignUp.constraintData.current > 0 && (
-                        <Button style={{margin: '0 8px'}} onClick={() => prev()}>
-                            {t("PackagePayment.Back")}
-                        </Button>
-                    )}
-                    {valuesSignUp.constraintData.current === 1 && (
-                        <Button  onClick={()=>{
-                            !valuesSignUp.constraintData.confidentialityOption?document.documentElement.style.setProperty('--box-signup', "red"):
-                                document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
-                        }} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("PackagePayment.RegisterNow")}</Button>
-                    )}
-                    {valuesSignUp.constraintData.current ===0 && (
-                        <Button
-                            type="primary" onClick={nextToSignUp}
+                    <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "steps-action-form" : "steps-action"}>
+                        {valuesSignUp.constraintData.current === 0 && (
+                            <Button onClick={()=>{history.push("/")}} style={{margin: '0 8px'}}>
+                                {t("CompteSettings.Cancel")}
+                            </Button>
+                        )}
+                        {valuesSignUp.constraintData.current > 0 && (
+                            <Button style={{margin: '0 8px'}} onClick={() => prev()}>
+                                {t("PackagePayment.Back")}
+                            </Button>
+                        )}
+                        {valuesSignUp.constraintData.current === 1 && (
+                            <Button  onClick={()=>{
+                                !valuesSignUp.constraintData.confidentialityOption?document.documentElement.style.setProperty('--box-signup', "red"):
+                                    document.documentElement.style.setProperty('--box-signup', "#d9d9d9")
+                            }} loading={valuesSignUp.constraintData.loadingSignUp} type="primary" htmlType="submit">{t("PackagePayment.RegisterNow")}</Button>
+                        )}
+                        {valuesSignUp.constraintData.current ===0 && (
+                            <Button
+                                type="primary" onClick={nextToSignUp}
                                 disabled={values.packagePayement.activeCard === 0}>
-                            {t("PackagePayment.SaveAndContinue")}
-                        </Button>
-                    )}
-                    {valuesSignUp.constraintData.current === steps.length - 1 && (
-                        <Button type="primary" onClick={() =>handlePayer()}>
-                            {t("PackagePayment.Payer")}
-                        </Button>
-                    )}
+                                {t("PackagePayment.SaveAndContinue")}
+                            </Button>
+                        )}
+                        {valuesSignUp.constraintData.current === steps.length - 1 && (
+                            <Button type="primary" onClick={() =>handlePayer()}>
+                                {t("PackagePayment.Payer")}
+                            </Button>
+                        )}
 
+                    </div>
                 </div>
+
+                {/*./steps-content*/}
+
             </div>
         </Form>
     );

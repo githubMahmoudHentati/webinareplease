@@ -1,5 +1,5 @@
-import React,{useState , useEffect} from 'react';
-import { Card } from 'antd';
+import React from 'react';
+
 
 
 
@@ -19,7 +19,7 @@ function WebinairePlease(props){
                   </div>
 
                   <div className="div_image">
-                      <img src={props.logo}/>
+                      <img src={props.logo} alt={""}/>
                     </div>
 
               </div>

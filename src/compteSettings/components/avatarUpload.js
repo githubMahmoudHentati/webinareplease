@@ -1,22 +1,18 @@
-import {Upload, message, Avatar, Button,Form} from 'antd';
-import {LoadingOutlined, PlusOutlined, UploadOutlined, UserOutlined} from '@ant-design/icons';
-import React ,{useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setConstraintDataOnchange, setGeneralInformationOnchange} from "../store/accountSettingsAction";
-import Hooks from "../utils/hooks";
-import axios from 'axios';
+import {Upload,Button} from 'antd';
+import {UploadOutlined} from '@ant-design/icons';
+import React from "react";
+import {useSelector} from "react-redux";
 import { useTranslation } from 'react-i18next';
 import ImgCrop from 'antd-img-crop';
 
-export const AvatarUpload = ({beforeUpload,visible, handleChange, darkMode}) => {
-    const {t, i18n} = useTranslation();
-    const errorVisibility = useSelector((state) => state.AccountSettingsReducer.visible.errorVisibility)
 
-
+export const AvatarUpload = ({beforeUpload, handleChange, darkMode}) => {
+    const {t} = useTranslation();
+    const errorVisibility = useSelector((state) => state.AccountSettingsReducer.visible.errorVisibility);
     //***********************End of Upload***********************////////
     return (
         <>
-            <ImgCrop rotate fillColor modalTitle={t("CompteSettings.MoadalTitle")}>
+            <ImgCrop rotate fillColor modalTitle={t("CompteSettings.ModalTitle")}>
         <Upload
             accept="image/jpeg,image/png"
             name="avatar"

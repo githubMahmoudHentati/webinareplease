@@ -1,4 +1,3 @@
-import React from 'react';
 import gql from "graphql-tag";
 
 export const graphQL_shema = ()=> {
@@ -82,6 +81,22 @@ export const graphQL_shema = ()=> {
                     themes
                     attachedFiles
                     slides
+                    chapters{
+                      chapterOrder
+                      chapterTitle
+                     }
+                     questions{
+                     nsp
+                     question
+                     order
+                     choices
+                     }
+                }
+                invitationOut{
+                    mailsGroup
+                    mails
+                    mailRule
+                    { beforeDay beforeHour beforeWeek isParticiped afterSubscription afterPrograming notVisualized }
                 }
                 socialOut{
                     id
@@ -100,6 +115,15 @@ export const graphQL_shema = ()=> {
             }
         }
     `
+    const Get_MailsGroupList = gql`
+        query{
+            getGroupList{
+                id
+                name
+            }
+        }
+        `
+
     //
 
     return({
@@ -107,6 +131,7 @@ export const graphQL_shema = ()=> {
         UpdateLive,
         generateSecuredPassword,
         themesDisplayQuery,
-        Get_UpdatedLive_Info
+        Get_UpdatedLive_Info,
+        Get_MailsGroupList
     })
 }

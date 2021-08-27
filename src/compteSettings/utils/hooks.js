@@ -1,14 +1,10 @@
-import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
     setConstraintDataOnchange,
-    setErrorVisibility,
     setGeneralInformationOnchange,
     setLoadingUpdatePassword,
     setSecurityAccountPassword
 } from "../store/accountSettingsAction";
-import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {setCalendarVisibleOnchange} from "../../Calendar/store/calendarAction";
 
 
 
@@ -19,11 +15,9 @@ const Hooks=(callback)=> {
     const values = useSelector((state) => state.AccountSettingsReducer)
     const valuesCredentiels = useSelector((state) => state.Reducer)
 
-    console.log("valuesssskjfdghkjfdghkhdfjs",values)
 
 //******************generalInformation************************//
     const generalInformationOnChange = (event) => {
-        console.log("event", event.target.value, event.target.name)
         dispatch(setGeneralInformationOnchange({generalInformationNameChange: event.target.name, generalInformationValueChange: event.target.value}));
 
         dispatch(setConstraintDataOnchange({
@@ -35,7 +29,6 @@ const Hooks=(callback)=> {
     };
 
     const generalInformationOnChangeSelect = (value,action) => {
-        console.log("event",action.name, action.value)
         dispatch(setGeneralInformationOnchange({generalInformationNameChange: action.name, generalInformationValueChange: action.value}));
     };
 
@@ -47,7 +40,6 @@ const Hooks=(callback)=> {
 
 //*******************Password************************//
     const securityAccountPassword = (event) => {
-        console.log("eventSecurityAccount", event.target.value, event.target.name)
         dispatch(setSecurityAccountPassword({securityAccountNameChange: event.target.name, securityAccountValueChange: event.target.value}));
     }
     const handleSubmit = async ()=>{
@@ -76,9 +68,12 @@ const Hooks=(callback)=> {
             generalInformationNameChange: "vignette",
             generalInformationValueChange: avatar
         }))
+        dispatch(setConstraintDataOnchange({
+            constraintDataNameChange: "avatarLoading",
+            constraintDataValueChange: false
+        }))
     };
 
-    console.log("valuesPassword",values)
     return({
         generalInformationOnChangeSelect,
         generalInformationOnChange,

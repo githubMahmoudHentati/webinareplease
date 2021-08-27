@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 export const ErrorResetPassword =()=> {
     const history = useHistory()
     const {values}=Hooks()
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     return(
         <Row gutter={[0, 40]} className={'col-connexion'}>
@@ -31,7 +31,7 @@ export const ErrorResetPassword =()=> {
                     </Col>
                     <Col span={24}>
                                 <span style={{fontSize: "14px"}} className={"span_connexion"}>
-                            {t("resetPassword.Voulez-vous réessayer ?")}
+                            {t("resetPassword.TryAgain")}
                             </span>
                     </Col>
                 </Row>
@@ -45,7 +45,7 @@ export const ErrorResetPassword =()=> {
                         </Button>
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
-                        <a className={"spn_chbx"}>
+                        <a href="#/" className={"spn_chbx"}>
                             {t("resetPassword.ContactClient")}</a>
                     </Col>
                 </Row>

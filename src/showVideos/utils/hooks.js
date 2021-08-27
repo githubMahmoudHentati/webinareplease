@@ -1,16 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import { useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
     setFilterVideosActions, setInfosLive, setLoadingDeleteShowVideo,
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange, setExportLive, setFilter, setDiffusionLink
+    setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink
 } from "../store/showVideosAction"
-import fbPost from  "../../assets/facebookPost.svg"
-import linkedinPost from  "../../assets/linkedinPost.svg"
-import youtubePost from  "../../assets/youtubePost.svg"
-import {ShowVideosReducerReducer} from "../store/showVideosReducer";
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {StatusMessage} from "./StatusMessage";
@@ -18,22 +14,22 @@ import {useHistory} from "react-router-dom";
 import {setDirectSetting} from "../../utils/redux/actions";
 import moment from "moment";
 import {
-    setFilteredData,
+
     setFormDirectLiveConstraintDataOnchange,
     setLiveInfo
 } from "../../formDirectVideo/store/formDirectVideoAction"
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
-import {Reducer} from "../../utils/redux/reducer";
+
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
-import query from "apollo-cache-inmemory/lib/fragmentMatcherIntrospectionQuery";
-const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
+
+const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 
 
-let itemsRunAPI , itemsDeleted
+let itemsRunAPI
 const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
     let idLiveToDelete = []
-    const [visible , setVisible] = useState(false)
+
     const [liveObj , setLiveObj] = useState({
         order:'ascend',
         pageSize:10,
@@ -45,7 +41,7 @@ export  const Hooks=()=> {
     const history = useHistory();
     const dispatch = useDispatch()
 
-    const {success_Delete , error_Delete , error_Filter ,  error_getLives}=StatusMessage()
+    const {success_Delete , error_Delete ,  error_getLives}=StatusMessage()
 
     //Filter Data
     const values = useSelector((state) => state.ShowVideosReducerReducer.FilterVideos)
@@ -66,21 +62,16 @@ export  const Hooks=()=> {
     //Reducer export lives
     const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
     //Reducer
-    const valuesReducer = useSelector((state)=> state.Reducer)
+
     // Diffusion Link
-    const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
+    //const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
 
     // matches Media query
     let matchesMedia = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
-       console.log("paginatioklklsdjfhksdjhfksdjfhnProps",diffusionLink)
-    if(DataVideos.data){
-        console.log("paginationPropsHeloo",DataVideos.data.map(item=>item.status))
-    }
-
     //use Lazy Query
     //query getVideosLinks for embed Code
-    const [GETDATEVIDEO ,{error,refetch,data: GetlIVES}]
+    const [GETDATEVIDEO]
         = useLazyQuery(graphQL_shema().Get_Lives,{
             fetchPolicy:  "cache-and-network",
             variables: { input : {
@@ -163,7 +154,6 @@ export  const Hooks=()=> {
         context: { clientName: "second" },
         onCompleted:  (data)=>{
             if(data.getliveInfo.code === 200) {
-                console.log("ajhdkfjhdksjfhksdjfhksdjfhksdj", data)
                 dispatch(setInfosLive({
                     infosLivesName: "inputUrlDiffusion",
                     infosLivesValue: data.getliveInfo.urlDiffusion
@@ -181,7 +171,7 @@ export  const Hooks=()=> {
     })
 
     //LazyQuery Export Live
-    const [EXPORTlIVE ,{data: eXPORTlIVE}]
+    const [EXPORTlIVE]
         = useLazyQuery(graphQL_shema().Export_Live,{
         fetchPolicy:  "cache-and-network",
         variables : {id:(paginationProps.idLive ? paginationProps.idLive : liveObj.idLive)},
@@ -209,7 +199,6 @@ export  const Hooks=()=> {
     const [getDiffusionLink] = useMutation(graphQL_shema().diffusion_link,{
         context: { clientName: "second" },
         onCompleted: (data)=>{
-            console.log("getDiffusionLinkkkkkkkkkkkkk",data)
             dispatch(setDiffusionLink(data.getDiffusionLink));
         }
     })
@@ -260,10 +249,25 @@ export  const Hooks=()=> {
             })
           );
         if(action.name === 'type')  dispatch(setPaginationProps({PaginationPropsNameChange:"id",PaginationPropsValueChange:[]}));
+
+        // lazy query if select run
+        GETDATEVIDEO({
+            variables:
+                {
+                    input : {
+                        "limit": paginationProps.pageSize,
+                        "offset": 0,
+                        "order_dir": paginationProps.order,
+                        "order_column": parseInt(paginationProps.columnKey),
+                        "search_word":values.searchFake,
+                        "date": (values.date && values.date.length && [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] )|| ["", ""],
+                        "status":value
+                    }
+                },
+        })
     };
     /*Function DatePicker */
     const handleChangeDatePicker = (name, momentValue , dateStringValue) => {
-        console.log("handleChangeDatePicker",name ,dateStringValue )
         dispatch(setFilterVideosActions({
             FilterVideosNameChange: name,
             FilterVideosValueChange: dateStringValue
@@ -271,8 +275,6 @@ export  const Hooks=()=> {
     }
     /* Function change RangePicker */
     const onChangeRange = (name,datesValue,dateStringsValue) =>{
-        //console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
-        console.log("handleChangeValuesRanges",name, dateStringsValue)
         dispatch(setFilterVideosActions({
             FilterVideosNameChange: name,
             FilterVideosValueChange: datesValue
@@ -371,7 +373,7 @@ export  const Hooks=()=> {
     //fonction pour supprimer un live
     const handleDeleteOneRow =  async(liveId) =>{
         let filterListVid = [];
-        let indexes = paginationProps.id
+
         // dispatch show Alert
         idLiveToDelete.push(liveId)
 
@@ -523,6 +525,6 @@ export  const Hooks=()=> {
         handleCancelModalExport,
         exportLives,
         resetFilterVideos,
-        handleClickStreamin
+        handleClickStreamin,
     })
 }

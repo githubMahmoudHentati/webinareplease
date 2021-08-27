@@ -72,7 +72,7 @@
     "Modifier": "Edit",
     "EditPass": "Change your password",
     "Ancien mot de passe": "Old password",
-    "Nouveau mot de passe": "New password",
+    "NewPassword": "New password",
     "Save": "Save",
     "Facture": "Bill",
     "IssuedOn": "Issued on",
@@ -86,14 +86,21 @@
     "MyAccount": "My Account",
     "InvalidPhone": "Phone number is invalid",
     "EnterPhone": "Enter a phone number",
-    "MoadalTitle": "Edit image"
+    "ModalTitle": "Edit image"
   },
   "ConfirmAccount": {
     "ConfirmationSend": " Confirmation e-mail sent!",
     "EmailCheck": "Please check your email to validate the registration.",
     "NotFoundEmailMsg": "If you do not see the email, it may be in your spam folder or your Webinarplease account may be under a different email address.",
     "EmailNotFound": "you didn't find the email? ",
-    "ResendEmail": "Resend the confirmation email"
+    "ResendEmail": "Resend the confirmation email",
+    "ResendMailConfirmation":"A confirmation email is sent, please check your email to validate the registration.",
+    "InvalidAccessPoint":"Invalid access point, please register again",
+    "EditedLive": "The live feed is successfully modified",
+    "CreatedLive": "Direct is successfully created",
+    "EditedLiveProblem": "Ooops, there is a problem that occurred during the modification",
+    "CreatedLiveProblem": "Ooops, there is a problem that occurred during the creation"
+
   },
   "FormConnexion": {
     "Connexion": "Login",
@@ -214,6 +221,7 @@
     "Participated": "Participated",
     "AfterTheEnd": "Just after the end",
     "NoCome": "Didn't come",
+    "JustAfterTheEnd": "After 48 hours from the end",
     "OptionalSettings": "Optional settings",
     "Photo": "Picture",
     "ClickToUpload": "Click to Upload",
@@ -225,7 +233,34 @@
     "EndingDate": "Ending date",
     "AddingPlanning": "Adding a planning",
     "AboutOneMn": "About 1mn",
-    "BaseWebinaire": "Fundamentals of Webinar"
+    "BaseWebinaire": "Fundamentals of Webinar",
+    "confirmInscription": "Confirmation of registration",
+    "participated": "participated",
+    "notCome": "Not come",
+    "Replay": "Replay",
+    "chaptersTab": {
+      "title": "Chapters",
+      "emptyList": "No chapters",
+      "inputPlaceholder": "New chapter"
+    },
+    "questionsTab":{
+      "title": "Question",
+      "emptyList": "No questions",
+      "inputQuestionLabel": "New Question",
+      "addQuestion": "Add a question",
+      "inputQuestionPlaceholder": "Question",
+      "inputResponsePlaceholder": "Answer",
+      "radioBox":{
+        "span1": "Yes-No",
+        "span2": "Yes-No DNK",
+        "span3": "Simple choice",
+        "span4": "Multiple choice"
+      }
+    },
+    "slidesTab":{
+      "title": "Slides"
+    }
+
   },
   "PackagePayment": {
     "Packages": "Packages",
@@ -277,6 +312,8 @@
     "ResetPassword": "Reset password"
   },
   "ShowVideo": {
+    "Today": "Today",
+    "ThisMonth": "This month",
     "infos": "Info",
     "Modifier": "Edit",
     "Templates": "Templates",
@@ -331,7 +368,8 @@
     "SuccessMsg": "This video has been successfully deleted",
     "ErrorDelOne":"Oops!!! an error has occurred",
     "ErrorDelTwo": "Oops!!! this video does not exist",
-    "SuccessPassMsg": "Your password has been successfully changed"
-
+    "SuccessPassMsg": "Your password has been successfully changed",
+    "AddLive": "Add live"
   }
+
 }

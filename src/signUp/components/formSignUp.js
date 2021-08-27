@@ -1,10 +1,10 @@
 import React  from 'react';
 import {useEffect} from 'react'
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu,Checkbox , Select,Form} from 'antd'
+import {Row,Col,Input,Checkbox , Select,Form} from 'antd'
 import '../signUp.scss'
-import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
+import {EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
 import {HooksSignUp} from "../utils/hooks";
-import {GraphQLFetchData} from "../utils/graphQLFetchData";
+
 import {setSignUpConstraintDataOnchange} from "../store/signUpAction";
 import {useDispatch} from "react-redux";
 import { useTranslation } from 'react-i18next';
@@ -15,19 +15,16 @@ const { Option } = Select;
 
 export const FormSignUp =({child1,child2})=>{
     const dispatch = useDispatch()
-    const [form] = Form.useForm();
-    const layout = {
-        labelCol: { span: 2 },
-        wrapperCol: { span: 20 },
-    };
 
-    const { t, i18n } = useTranslation();
+
+
+    const { t} = useTranslation();
 
     const {signUpOnChange, handleChangePhone,signUpOnChangeSelect,valuesSignUp,SignUpOnChangeButton}= HooksSignUp()
 
-    const isValidPhone= (phone) => {
-        return phone.match( /^-?[\d.]+(?:e-?\d+)?$/)
-    }
+    // const isValidPhone= (phone) => {
+    //     return phone.match( /^-?[\d.]+(?:e-?\d+)?$/)
+    // }
 
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -43,8 +40,6 @@ export const FormSignUp =({child1,child2})=>{
         }
         if (valuesSignUp.constraintData.isMailValid===false)
         {
-            console.log(valuesSignUp.constraintData.isMailValid)
-
             document.documentElement.style.setProperty('--inputErrorForm', "red");
             document.documentElement.style.setProperty('--inputBorderErrorForm', "red");
         }
@@ -53,11 +48,9 @@ export const FormSignUp =({child1,child2})=>{
 
     const isValidPassword = (password) => {
 
-        return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/\◊♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
+        return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(password)
     }
     const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
-
-    console.log("signUp",valuesSignUp)
     return(
 
             <Row gutter={[0, 40]} className={'col-signUp'}>
@@ -210,7 +203,8 @@ export const FormSignUp =({child1,child2})=>{
                                                label={t("CompteSettings.NumberOfEmployees")}
                                     >
                                             <Select
-                                                className={"spn2"}
+                                                getPopupContainer={() => document.querySelector(".slect-nbr-empl")}
+                                                className={"spn2 slect-nbr-empl"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
                                                 defaultValue={t("CompteSettings.choiceOne")}
                                                 showSearch
@@ -243,9 +237,9 @@ export const FormSignUp =({child1,child2})=>{
                                 <Col className={"col-politique"} style={{color: "RGB(185, 185, 185)"}} span={15}>
                                     <span
                                         className={"spn2"}>{t("CompteSettings.WebinarDataProcess")}</span>
-                                    <a> {t("CompteSettings.PrivacyPolicy")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a className={"pol"}> {t("CompteSettings.Service condition,")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.the")}</span><a className={"pol"}> {t("CompteSettings.Politique de confidentialité")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a className={"pol"}> {t("CompteSettings.l'Accord de traitement des donnèes")} </a>
+                                    <a href="#/"> {t("CompteSettings.PrivacyPolicy")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a href="#/" className={"pol"}> {t("CompteSettings.Service condition,")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.the")}</span><a href="#/" className={"pol"}> {t("CompteSettings.Politique de confidentialité")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a href="#/" className={"pol"}> {t("CompteSettings.l'Accord de traitement des donnèes")} </a>
                                     <span className={"pol"}>{t("CompteSettings.ConfirmOrder")}</span>
                                 </Col>
                             </Row>

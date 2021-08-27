@@ -36,6 +36,13 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 general:generalOnOnchangeObj
             }
 
+        // case "SET_GeneralCleanDate":
+        //     const generalCleanDateObj = {...state.general, startDate:"",startHour:"",period:""}
+        //     return{
+        //         ...state,
+        //         general:generalCleanDateObj
+        //     }
+
         //******** configuration reducer case************//
 
         case "SET_ConfigurationModalSpeaker":
@@ -70,8 +77,6 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
 
         case "SET_ConfigurationSpeakerList":
             const {id, name, lastName, title, email,logoSpeaker} = action.payload
-            console.log("logoSpeaker",logoSpeaker)
-            console.log("bool",id)
             let newArr = state.configuration.SpeakerList.map((item, index) => (id === index+1 ? {
                     ...item,
                     name: name,
@@ -81,8 +86,6 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                     logoSpeaker: logoSpeaker
                     } : item
             ))
-            console.log("newArr",newArr)
-            console.log("newArridone",state.configuration.SpeakerList)
             const configurationSpeakerListObj=!id ?{...state.configuration,SpeakerList: [...state.configuration.SpeakerList, {...action.payload, id: state.configuration.SpeakerList.length+1 }]}:{...state.configuration,SpeakerList:newArr}
 
             return (
@@ -93,7 +96,7 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             )
         //************* Add File List Configuration ********//
         case "SET_ConfigurationFileList":
-            const {configurationNameFileList , configurationValueFileList}=action.payload
+            const {configurationValueFileList}=action.payload
             const newArrayUploadList =  [...state.configuration.fileListConfiguration,configurationValueFileList]
             console.log("fileeeeeeeeeeeeeeList",newArrayUploadList)
             const ConfigurationFileListObj = {...state.configuration,fileListConfiguration:newArrayUploadList}
@@ -103,7 +106,7 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             }
             //***************** Delete File Lists ************//
         case "SET_DeleteFileList":
-            const {deleteFileListsName , deleteFileListsValue}=action.payload
+            const {deleteFileListsValue}=action.payload
             const newArrDelete = state.configuration.fileListConfiguration
             const deleteFileListArr = newArrDelete.filter(item => item.uid !== deleteFileListsValue.uid)
             const deleteFileListOBJ = {...state.configuration,fileListConfiguration: deleteFileListArr}
@@ -113,7 +116,7 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             }
         //************* Add File List Configuration ********//
         case "SET_DiapositivesFileList":
-            const {diapositiveNameFileList , diapositivesValueFileList}=action.payload
+            const {diapositivesValueFileList}=action.payload
             const newArrayUploadDiapositivesList =  [...state.configuration.diapositivesFileLists,diapositivesValueFileList]
             console.log("fileeeeeeeeeeeeeeList",newArrayUploadDiapositivesList)
             const diapositivesFileListObj = {...state.configuration,diapositivesFileLists:newArrayUploadDiapositivesList}
@@ -123,7 +126,7 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             }
         //***************** Delete File Lists ************//
         case "SET_DiapositivesDelete":
-            const {diapositiveDeleteName , diapositivesDeleteValue}=action.payload
+            const {diapositivesDeleteValue}=action.payload
             const newArrDeleteDiapositives = state.configuration.diapositivesFileLists
             const deleteFileListArrDiapositives = newArrDeleteDiapositives.filter(item => item.uid !== diapositivesDeleteValue.uid)
             const deleteDiapositivesFileListOBJ = {...state.configuration,diapositivesFileLists: deleteFileListArrDiapositives}
@@ -207,6 +210,16 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 socialTools: socialToolsDatePlan
             }
 
+        case 'SET_DatePlanByPost':
+            const {dateIndexByPost}=action.payload
+            const socialToolsDatePlanByPost =state.socialTools.map(el => (el.id === dateIndexByPost ? {...el,
+                plan: []
+            } : el))
+            return{
+                ...state,
+                socialTools: socialToolsDatePlanByPost
+            }
+
         case 'SET_DatePlanFormat':
             let DatePlanFormatNewArr=state.socialTools.map((element,index)=>(element.plan.map((el,i) => (!el.startDate?el.endDate?{...el,startDate:moment().format("YYYY-MM-DDTHH:mm:ssZ")}:{...el,startDate:moment().format("YYYY-MM-DDTHH:mm:ssZ"),endDate:moment().format("YYYY-MM-DDTHH:mm:ssZ")}:!el.endDate?{...el,endDate:el.startDate}:el))))
             const socialToolsDatePlanFormat =state.socialTools.map((el,i) => ( {...el,
@@ -223,8 +236,8 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
             }
 
         case 'SET_LiveInfo' :
-            const {general,configuration,socialTools}= action.payload
-            return  {...state,general,configuration,socialTools}
+            const {general,configuration,invitation,socialTools}= action.payload
+            return  {...state,general,configuration,invitation,socialTools}
 
         case "SET_FormDirectLiveConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
@@ -271,9 +284,9 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                 }
 
             case "SET_QUESTION_LIST":
-                    const {nsp, question, choices, questionId}=action.payload;
+                    const {nsp, question, choices}=action.payload;
                     return{
-                        ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, choices, id: questionId}]}
+                        ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, choices}]}
         
                     }
             case "REMOVE_QUESTION":

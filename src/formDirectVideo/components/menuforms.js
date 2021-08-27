@@ -1,23 +1,24 @@
-import React, { useState,useEffect,useRef } from 'react';
-import {Row,Col,Input,Button,Card,Tabs,Breadcrumb,Menu} from 'antd'
+import React from 'react';
+import {Row,Col,Menu} from 'antd'
 import '../formDirectVideo.scss'
-import {MailOutlined} from '@ant-design/icons';
 import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 import { useTranslation } from 'react-i18next';
+
 
 export const MenuForms =()=>{
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const { t, i18n } = useTranslation();
+    const selectedkey = useSelector((state)=> state.Reducer.directMenu)
+    const { t } = useTranslation();
 
     return (
         <Row className={"row_menu"}>
             <Col span={24} >
                 <Menu
                     style={{width:'100%',height:"100%" , backgroundColor:darkMode===false?"":"#141414" , borderRight:darkMode===false?"":"2px solid #1D1D1D"}}
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={[selectedkey===0?'1':selectedkey===1?'2':selectedkey===2?'3':selectedkey===3?'4':selectedkey===4?'5':'']}
                     defaultOpenKeys={['sub1']}
                     className="TabMenuForm"
                 >

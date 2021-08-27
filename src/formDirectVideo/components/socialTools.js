@@ -1,15 +1,18 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React from 'react';
 import {Row,Col,Switch,List,DatePicker,Button} from 'antd'
-import {DownOutlined,CloseOutlined,PlusOutlined,TwitterOutlined,InstagramOutlined} from '@ant-design/icons';
+import {DownOutlined,CloseOutlined,PlusOutlined} from '@ant-design/icons';
 import empreint from "../../assets/logo-empreinte.svg"
-import fb from "../../assets/fb.svg"
-import fbPost from  "../../assets/facebookPost.svg"
-import linkedinPost from  "../../assets/linkedinPost.svg"
-import youtubePost from  "../../assets/youtubePost.svg"
 import {useDispatch, useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import moment from "moment";
-import {setActivePlan, setActivePost, setAddPlan, setClosePlan,setDatePlan} from "../store/formDirectVideoAction";
+import {
+    setActivePlan,
+    setActivePost,
+    setAddPlan,
+    setClosePlan,
+    setDatePlan,
+    setDatePlanByPost
+} from "../store/formDirectVideoAction";
 import { useTranslation } from 'react-i18next';
 import defaultImg from '../../assets/webinarplease-thumb.jpg'
 
@@ -18,14 +21,15 @@ export const SocialTools=()=>{
     const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const {values,disablePastDate}=Hooks()
-    console.log("socialTools",values.socialTools)
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     const addPlan =async (index)=>{
         dispatch(setAddPlan({addPlanIndex:index}))
     }
     const activePost=(checked,index)=>{
         dispatch(setActivePost({activePostChecked:checked,activePostIndex:index}))
+        !checked && dispatch(setDatePlanByPost({dateIndexByPost:index}))
+
     }
 
     const activePlan=(indexPost,indexPlan)=>{
@@ -40,7 +44,6 @@ export const SocialTools=()=>{
         dispatch(setDatePlan({dateIndexPost:indexPost,dateIndexPlan:indexPlan,typeDate:typeDate,dateValue:moment}))
     }
 
-    console.log("values-socialTools",values)
     return(
         <Row  gutter={[0, 0]}>
             <Col span={24}>
@@ -155,7 +158,7 @@ export const SocialTools=()=>{
                                                                  style={{display: "flex", alignItems: "center"}}>
                                                                 <Col style={{background:darkMode===false?"":"rgba(255, 255, 255, 0.85)",padding:"5px",border:darkMode===false?" solid 1px rgba(0, 0, 0, 0.15)":" solid 1px rgba(255, 255, 255, 0.15)"}}>
                                                                     <img style={{width: "24px", height: "24px"}}
-                                                                         src={empreint}/>
+                                                                         src={empreint} alt={""}/>
                                                                 </Col>
                                                                 <Col offset={1} className={"col_Empreinte"}>
                                                                     <span className={"spn1"} style={{
@@ -175,11 +178,10 @@ export const SocialTools=()=>{
                                                     {values.general.liveDescription}
                                                 </Col>
                                                 <Col span={24} style={{display: "flex", justifyContent: "center"}}>
-                                                    {console.log("fileList social",values.general.fileList)}
                                                     <img
                                                         src={values.general.fileList && values.general.fileList.length ?
                                                             values.general.fileList[0].thumbUrl : defaultImg }
-                                                        style={{height: "100%", width: "100%"}}/>
+                                                        style={{height: "100%", width: "100%"}} alt={""}/>
                                                 </Col>
                                                 <Col span={24}  className={"social-description"}>
                                                     <span className={"FundamentalsofWebinar social-description-text"} >{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>

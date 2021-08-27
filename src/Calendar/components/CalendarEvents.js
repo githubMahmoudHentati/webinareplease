@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import moment from "moment";
-import {Badge, Tag} from "antd";
-import { useTranslation } from 'react-i18next';
+
 import {useSelector} from "react-redux";
-import CalendarModal from "./CalendarModal";
+
 import HooksCalendar from "../utils/hooks";
 
 function CalendarEvents() {

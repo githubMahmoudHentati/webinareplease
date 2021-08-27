@@ -1,4 +1,3 @@
-import React from 'react';
 import gql from "graphql-tag";
 
 export const graphQL_shema = () => {
@@ -12,22 +11,32 @@ export const graphQL_shema = () => {
                     date
                     isAMomentObject
                 }
-                 thumbnail
-                 status
+                thumbnail
+                status
             }
         }
     `;
     const Delete_Items = gql`
-    mutation($idLive:[Int!]!) {
-    deleteLive(idLive:$idLive){
-        deleteditems
-        undeleteditems
-        code
-       }
-     }
+        mutation($idLive:[Int!]!) {
+            deleteLive(idLive:$idLive){
+                deleteditems
+                undeleteditems
+                code
+            }
+        }
+    `;
+    const Get_Diffusion_Live = gql`
+        mutation($id:Int!) {
+            getDiffusionLink(id:$id){
+                code
+                diffLink
+                visLink
+            }
+        }
     `;
     return ({
         Get_Calendar_Data,
-        Delete_Items
+        Delete_Items,
+        Get_Diffusion_Live
     })
 }

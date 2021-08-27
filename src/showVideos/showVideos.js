@@ -1,32 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import UseDataTableVideos from "./components/ListVideos";
 import HeaderVideos from "./components/headerVideos";
-import GlobalHeader from "../utils/components/header"
-import {Card, Tag , message, Tooltip,Button} from "antd";
-import * as constantMedia from './utils/data';
+
+import {Tag , Tooltip,Button} from "antd";
+
 import{PrincipalPage} from "../utils/components/principalPage";
-import {useSelector , useDispatch} from "react-redux";
-import {setDarkMode} from "../utils/redux/actions";
-import {setshowVideosActions, setShowVideoConstraintDataOnchange} from "./store/showVideosAction";
-import {ShowVideosReducerReducer} from "./store/showVideosReducer";
-import {graphQL_shema} from "./utils/graphQL";
+import {useSelector} from "react-redux";
+
 import {Hooks} from "./utils/hooks";
 import { Spin } from 'antd';
 import './showVideos.scss'
-import { useQuery } from "@apollo/react-hooks";
+
 import { useTranslation } from 'react-i18next';
 
-import {EyeOutlined , InsertRowLeftOutlined , VideoCameraOutlined } from '@ant-design/icons';
+import {EyeOutlined , VideoCameraOutlined } from '@ant-design/icons';
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
 import useWindowDimensions from "../utils/components/getWindowDimensions";
 
 function ShowVideos() {
-    const { t, i18n } = useTranslation();
-    const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
-    const {paginationProps ,  values, GETDATEVIDEO }=Hooks()
+    const { t} = useTranslation();
+    //const sorter = (a, b) => (isNaN(a) && isNaN(b) ? (a || '').localeCompare(b || '') : a - b);
+    const {paginationProps}=Hooks()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const {DeleteItemsMutation}=GraphQLFetchData()
-
+    const {handleClickStreamin} = Hooks()
     function DeleteItemsAPIFunction(){
         DeleteItemsMutation()
     }
@@ -34,20 +31,19 @@ function ShowVideos() {
 
     // Read Data from Hooks
     const {DataVideos, loadingSpinner , conditions}=Hooks(DeleteItemsAPIFunction)
-    const dispatch = useDispatch()
-    const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
+
+    //const [selectedRow, SetSelectedRow] = useState(0); //state pour compter le nombre de ligne séléctionner
 
     // fonction pour compter les lignes sélectionnées de tableau
-    const fetch_element_selected = (selected) => {
-        SetSelectedRow(selected);
-    }
+    // const fetch_element_selected = (selected) => {
+    //     SetSelectedRow(selected);
+    // }
 
     const displayDate = (date) =>{
         if(date)
         return(<><span> {date.split(' ')[0]}</span><br /><span>{date.split(' ')[1]}</span></>)
         else return ""
     }
-    console.log("valuesCredentiels-showVideos",localStorage.getItem('jwtToken'))
 
     // Column AND DATA Table
      const columns = [
@@ -67,7 +63,7 @@ function ShowVideos() {
             className: "columnFeed",
             render: image =>
                 <div className={"div_apercu"}>
-                <img  src={image} className={"img_aperçu"}/>
+                <img  src={image} className={"img_aperçu"} alt={""}/>
                 </div>,
         },
         {
@@ -126,7 +122,7 @@ function ShowVideos() {
                                 backgroundColor: darkMode === false ? "" : "#1D1D1D",
                                 color: darkMode === false ? "" : "rgba(255, 255, 255, 0.65)",
                                 border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                            }}>
+                            }} onClick={()=>handleClickStreamin(record)}>
                                 {
                                     record.status === -1 ? <VideoCameraOutlined id={"icon_vs"}/> : <EyeOutlined id={"icon_vs"}/>
                                 }
@@ -152,9 +148,6 @@ function ShowVideos() {
     // fontion pour afficher le tableau de n'interface
     const {
         DataTable,
-        currentPage,
-        pageSize,
-        resetPagination,
     } = UseDataTableVideos({
         columns: columns,
         dataSource: data,

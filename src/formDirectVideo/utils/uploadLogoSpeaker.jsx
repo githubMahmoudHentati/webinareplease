@@ -1,21 +1,16 @@
 import axios from 'axios';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {
-    setConfigurationOnchange,
     setConfigurationSpeaker,
-    setGeneralOnchange,
     setErrorUpload,
-    setLoadingUpload, setFormDirectLiveConstraintDataOnchange
-} from "../store/formDirectVideoAction";
+    setLoadingUpload} from "../store/formDirectVideoAction";
 import {useDispatch} from "react-redux";
-import Hooks from "./hooks";
+
 
 
 export const UploadLogoSpeaker = () => {
     const [fileList, setFileList] = useState([])
     const dispatch = useDispatch()
-    const[removeAction,setRemoveAction]=useState(false)
-    const {values}=Hooks()
 
 
     const beforeUpload=(info)=>{
@@ -31,7 +26,6 @@ export const UploadLogoSpeaker = () => {
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
 
-        console.log("remove",values.constraintData.removeAction)
         dispatch(setLoadingUpload(true))
         axios({
             url: url,
@@ -42,7 +36,6 @@ export const UploadLogoSpeaker = () => {
             },
             data: file
         }).then((result) => {
-            console.log("result",result.data.data.uploadLogo);
             let value=result.data.data.uploadLogo;
             dispatch(setLoadingUpload(false))
             if (result.data.data.uploadLogo){
@@ -100,9 +93,6 @@ export const UploadLogoSpeaker = () => {
         onSave(formData, info)
     }
 
-    useEffect(async () => {
-
-    }, []);
 
 
     return {

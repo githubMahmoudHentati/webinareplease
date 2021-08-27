@@ -1,13 +1,16 @@
-import {useQuery,useMutation,useLazyQuery} from "@apollo/react-hooks";
+import {useMutation,useLazyQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useHistory} from "react-router-dom";
-import {setConnexionConstraintDataOnchange} from "../../connexion/store/connexionAction";
-import {useDispatch,useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import moment from "moment";
 import fbPost from  "../../assets/facebookPost.svg"
 import linkedinPost from  "../../assets/linkedinPost.svg"
 import youtubePost from  "../../assets/youtubePost.svg"
-import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction"
+import {
+    setLiveInfo,
+    setFormDirectLiveConstraintDataOnchange,
+    setInvitationOnchange
+} from "../store/formDirectVideoAction"
 import {setConfigurationOnchange, setGeneralOnchange} from "../store/formDirectVideoAction";
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import {setDirectSetting} from "../../utils/redux/actions";
@@ -16,19 +19,18 @@ import {v4 as uuidv4} from "uuid";
 
 
 export const GraphQLFetchDataForm = (values) => {
-    const directMenu = useSelector((state)=>state.Reducer.directMenu)
     const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
     const history = useHistory()
     const dispatch = useDispatch()
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
     let ThumbUrlAttachementFile =values.configuration.fileListConfiguration.map(item=>item.url)
     let DiapositivesFile=values.configuration.diapositivesFileLists.map(item=>item.url)
+    let TitleChapters = values.configuration.listChapter.map(item=>item.title)
+    let Questions = values.configuration.listQuestion
+    let richeMediaDiffusion=values.configuration.richeMediaDiffusion
+    let attachements = values.configuration.attachments
     let {success_submit , error_submit}=StatusMessages(idLive)
-    const [CreateLive, {
-        data: dataCreate,
-        loading: loading_EventCreated,
-        error: error_EventCreated,
-    }] = useMutation(graphQL_shema().createLive, {
+    const [CreateLive] = useMutation(graphQL_shema().createLive, {
         context: { clientName: "second" },
         variables: {
             input: {
@@ -39,13 +41,13 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
+                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ ":00Z":"",
                         duration: values.general.period,
 
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
                     pwd: values.general.pwd,
-                    securedPasswordOption: false
+                    securedPasswordOption: values.general.securedPasswordOption,
                 },
                 configuration: {
                     liveProgram: values.configuration.directProgram,
@@ -66,10 +68,17 @@ export const GraphQLFetchDataForm = (values) => {
                         theme: "themeX"
                     },
                     tags: values.configuration.tags,
-                    addSpeaker: values.configuration.addSpeakerList,
+                    addSpeaker: values.configuration.switchSpeaker?values.configuration.addSpeakerList:[],
                     themes: values.configuration.theme,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    questions:richeMediaDiffusion === true ? Questions : [],
+                    attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
+                    slides: richeMediaDiffusion === true ? DiapositivesFile : [],
+                },
+                invitation:{
+                    mailsGroup:values.invitation.emailsGroup,
+                    mails:values.invitation.emails,
+                    mailRule:values.invitation.addRules,
                 },
                 social: [
                     {
@@ -113,14 +122,12 @@ export const GraphQLFetchDataForm = (values) => {
 
             } else if (data.addLive.code === 400) {
                 values.constraintData.leaveToast && await error_submit(400)
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
             }
         }
     });
 
-    const [UpdateLive, {
-        data: liveUpdate,
-        loading: loadingLiveUpdated,
-    }] = useMutation(graphQL_shema().UpdateLive, {
+    const [UpdateLive] = useMutation(graphQL_shema().UpdateLive, {
         context: { clientName: "second" },
         variables: {
             id: idLive,
@@ -132,7 +139,7 @@ export const GraphQLFetchDataForm = (values) => {
                     liveDescription: values.general.liveDescription,
                     livePlan: {
                         plan: values.general.liveAction,
-                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ "Z":"",
+                        startDate: values.general.startDate&&values.general.startHour?values.general.startDate+ "T" + values.general.startHour+ ":00Z":"",
                         duration: values.general.period,
                     },
                     liveAccess: values.general.directAccessMode !== "freeAccess",
@@ -142,7 +149,7 @@ export const GraphQLFetchDataForm = (values) => {
                 configurationOutput: {
                     liveProgram: values.configuration.directProgram,
 
-                    speakers: values.configuration.addSpeakerList,
+                    speakers: values.configuration.switchSpeaker?values.configuration.addSpeakerList:[],
 
                     interOption: {
                         chat: values.configuration.chat,
@@ -161,8 +168,15 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     tags: values.configuration.tags,
                     themes: values.configuration.theme,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    questions:richeMediaDiffusion === true ? Questions : [],
+                    attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
+                    slides: richeMediaDiffusion === true ? DiapositivesFile : [],
+                },
+                invitationOutput:{
+                    mailsGroup:values.invitation.emailsGroup,
+                    mails:values.invitation.emails,
+                    mailRule:values.invitation.addRules,
                 },
                 social: [
                     {
@@ -202,8 +216,9 @@ export const GraphQLFetchDataForm = (values) => {
                 dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools(),constraintData:constraintData()}))
                 dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
                 values.constraintData.leaveToast&&success_submit(200)
-            } else if (data.editLive.code === "403") {
+            } else if (data.editLive.code === "400") {
                 values.constraintData.leaveToast&&error_submit(400)
+                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:false}));
             }
         }
     });
@@ -225,7 +240,7 @@ export const GraphQLFetchDataForm = (values) => {
         }
     })
 
-    const [themesDisplayQueryAction,{loading: loading_themesDisplay, data: ThemesDisplayData}]
+    const [themesDisplayQueryAction]
         = useMutation(graphQL_shema().themesDisplayQuery, {
         context: { clientName: "second" },
         onCompleted: async (data) => {
@@ -233,17 +248,16 @@ export const GraphQLFetchDataForm = (values) => {
         }
     })
 
-    const [getLiveData,{loading:LiveUpdated_Info, data: LiveUpdatedInfData}]
+    const [getLiveData]
         = useLazyQuery(graphQL_shema().Get_UpdatedLive_Info, {
         variables: { "id":idLive  },
         skip:!idLive||values.constraintData.loadingLiveFetchData?true:false,
         fetchPolicy:  "cache-and-network",
         onCompleted: async (data)=>{
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
-            let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm:ss")
-
-            console.log("startDate",startDate,"startHour",startHour)
+            let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm")
             let speakerList=[...data.getlive.configurationOut.speakers]
+             console.log("dataLives",data)
             dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
@@ -276,7 +290,7 @@ export const GraphQLFetchDataForm = (values) => {
                 configuration:{
                     directProgram: data.getlive.configurationOut.liveProgram,
                     modalSpeaker: values.configuration.modalSpeaker,
-                    switchSpeaker: values.configuration.switchSpeaker,
+                    switchSpeaker:speakerList.length > 0,
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
                     SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
@@ -301,6 +315,12 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
+                    listChapter:data.getlive.configurationOut.chapters.map((item)=>{
+                        return({
+                            id:item.chapterOrder,
+                            title:item.chapterTitle
+                        })
+                    }),
                     diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
                         return({
                             uid: uuidv4(),
@@ -319,8 +339,24 @@ export const GraphQLFetchDataForm = (values) => {
                                thumbUrl: item,
                            })
                     }),
-                    listChapter: [],
-                    listQuestion: [],
+                    listQuestion: data.getlive.configurationOut.questions.map((item)=>{
+                        return({
+                            nsp:item.nsp,
+                            question:item.question,
+                            //order:item.order,
+                            choices:item.choices.split('♠♣♥♦').map((item) => {
+                                return{
+                                    "response": item
+                                }
+                            }),
+                        })
+                    }),
+                },
+                invitation:{
+                    emailsGroup:data.getlive.invitationOut.mailsGroup,
+                    emails:data.getlive.invitationOut.mails,
+                    listMailsGroup:[],
+                    addRules:data.getlive.invitationOut.mailRule
                 },
                 socialTools:[
                     {
@@ -330,7 +366,7 @@ export const GraphQLFetchDataForm = (values) => {
                         type: "Facebook post",
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[0].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[0].link:"",
-                        logo: <img src={fbPost} style={{width: "24px", height: "24px"}}/>,
+                        logo: <img src={fbPost} style={{width: "24px", height: "24px"}} alt={""}/>,
                         plan: data.getlive.socialOut.length>0 && data.getlive.socialOut[0].planifications ?data.getlive.socialOut[0].planifications:[{id:0,active: true, startDate: "", endDate: ""}]
                     },
                     {
@@ -340,7 +376,7 @@ export const GraphQLFetchDataForm = (values) => {
                         type: "Youtube post",
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[1].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[1].link:"",
-                        logo: <img src={youtubePost} style={{width: "24px", height: "24px"}}/>,
+                        logo: <img src={youtubePost} style={{width: "24px", height: "24px"}} alt={""}/>,
                         plan: data.getlive.socialOut.length>0 && data.getlive.socialOut[1].planifications ?data.getlive.socialOut[1].planifications:[{id:1,active: true, startDate: "", endDate: ""}]
                     },
                     {
@@ -350,13 +386,21 @@ export const GraphQLFetchDataForm = (values) => {
                         type: "Linkdln post",
                         switch: data.getlive.socialOut.length>0?data.getlive.socialOut[2].active:false,
                         link:data.getlive.socialOut.length>0?data.getlive.socialOut[2].link:"",
-                        logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}}/>,
+                        logo: <img src={linkedinPost} style={{width: "24px", height: "24px"}} alt={""}/>,
                         plan: data.getlive.socialOut.length>0 &&  data.getlive.socialOut[2].planifications ?data.getlive.socialOut[2].planifications:[{id:2,active: true, startDate: "", endDate: ""}]
                     },
                 ]
             }));
             dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:true}))
 
+        }
+    })
+
+    const [getMailsGroupList]
+        = useLazyQuery(graphQL_shema().Get_MailsGroupList, {
+        fetchPolicy:  "cache-and-network",
+        onCompleted: async (data)=>{
+            dispatch(setInvitationOnchange({invitationNameChange:"listMailsGroup",invitationValueChange:data.getGroupList}))
         }
     })
 
@@ -369,7 +413,8 @@ export const GraphQLFetchDataForm = (values) => {
         data_securedPassword,
         themesDisplayQueryAction,
         idLive,
-        getLiveData
+        getLiveData,
+        getMailsGroupList
     })
 }
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+
 import {useDispatch, useSelector} from "react-redux";
 import moment from "moment";
 import 'moment-timezone';
@@ -13,34 +13,32 @@ import {
     setInvitationOnchange,
     setInvitationOnchangeRules, setFormDirectLiveConstraintDataOnchange, setDatePlanFormat
 } from "../store/formDirectVideoAction";
-import {setSignUpOnchange} from "../../signUp/store/signUpAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
-    // values.form&&console.log("hooks-form",values.form.getFieldValue())
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
     let matchesMedia   = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
-
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
-        console.log("testtest",name,value)
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:event}));
     }
+
     const generalOnChange = (event) => {
-        console.log("event",event.target.value,event.target.name)
         dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.value}))
         if(event.target.name==="pwd"){
-            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false})) ;}
-
-
-    };
+            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
+        }
+        if(event.target.value==="freeAccess"){
+            dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
+            dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
+        }
+    }
 
     const generalOnChangeButton = async (event) => {
-        console.log("event",event.target)
         await dispatch(setGeneralOnchange({generalNameChange:event.target.name, generalValueChange:event.target.checked}))&&dispatch(setGeneralOnchange({generalNameChange:"loadingSecuredPassword", generalValueChange:false}));
         if(event.target.name==="securedPasswordOption")
         {
@@ -54,7 +52,6 @@ const Hooks=()=>{
     }
     const disablePastDate=(current,indexPost,indexPlan,dateType)=>{
         // Can not select days before today and today
-         console.log("currenttt",indexPost )
         if (indexPost===indexPost && values.socialTools[indexPost]&&values.socialTools[indexPost].plan){
             if (values.socialTools[indexPost].plan[indexPlan].startDate&&dateType==="endDate")
                 return  moment(values.socialTools[indexPost].plan[indexPlan].startDate,"YYYY-MM-DDTHH:mm:ss+01:00").isAfter(current)
@@ -63,12 +60,14 @@ const Hooks=()=>{
             else
                 return current && current < moment().startOf('day')
         }
-        return current && current < moment().startOf('day');
+        if (values.general.startHour&&moment(values.general.startHour,'HH:mm').isSameOrBefore(moment().tz("Europe/Paris"))) {
+            return  current.isSameOrBefore(moment())
+        } else
+            return current && current < moment().startOf('day');
     }
 
     const startGetDisabledHours = () => {
         let hours = [];
-        console.log("values.general.startDate",values.general.startDate)
         if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
             for (let i = 0; i < moment().tz("Europe/Paris").hour(); i++) {
                 hours.push(i);
@@ -84,7 +83,12 @@ const Hooks=()=>{
     const startGetDisabledMinutes = (selectedHour) => {
         let minutes= [];
         if (values.general.startDate&&moment(values.general.startDate).format('YYYY-MM-DD') === moment().tz("Europe/Paris").format('YYYY-MM-DD')) {
-            if (selectedHour === moment().tz("Europe/Paris").hour()) {
+            if (selectedHour===-1) {
+                for (let i = 0; i < 60; i++) {
+                    minutes.push(i);
+                }
+            }
+            else if (selectedHour === moment().tz("Europe/Paris").hour()) {
                 for (let i = 0; i < moment().minute(); i++) {
                     minutes.push(i);
                 }
@@ -100,6 +104,7 @@ const Hooks=()=>{
 
     //*****************Configuration************//
     const configurationOnChangeByName =(value,name)=>{
+
         dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
         values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
     }
@@ -115,12 +120,18 @@ const Hooks=()=>{
         console.log("event",event.target.value,event.target.name)
         dispatch(setConfigurationOnchange({configurationNameChange:event.target.name, configurationValueChange:event.target.value}));
         event.target.value==="visibleVideo" && themesDisplayQueryAction()
+
+        if(event.target.value==="notVisibleVideo"){
+            dispatch(setConfigurationOnchange({configurationNameChange:"theme", configurationValueChange:[]}))
+        }
+
     };
 
     const ConfigurationOnChangeSelect = (value,action,name) => {
 
         console.log("event-select",action)
         dispatch(setConfigurationOnchange({configurationNameChange: name, configurationValueChange: value}));
+
     };
 
     const displayThemes=()=>{
@@ -198,37 +209,38 @@ const Hooks=()=>{
                     }
                 ))
         }));
-        let newStartDate= typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
-        let newStartHour= typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm:ss'):values.general.startHour
+        let newStartDate= !values.general.liveAction?"":typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
+        let newStartHour= !values.general.liveAction?"":typeof values.general.startHour!="string"?(values.general.startHour).format('HH:mm'):values.general.startHour
         // let period = typeof values.general.period!="string"? values.general.period.format('HH:mm:ss'):values.general.period;
         dispatch(setGeneralOnchange({generalNameChange:"startDate", generalValueChange:newStartDate}));
         dispatch(setGeneralOnchange({generalNameChange:"startHour", generalValueChange:newStartHour}));
 
         dispatch(setDatePlanFormat());
 
-        dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:typeof values.general.period!="string"&&values.general.period===!null? moment(values.general.period).format('HH'):values.general.period===null?"":values.general.period}));
+        dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:!values.general.liveAction?"":typeof values.general.period!="string"&&values.general.period===!null? moment(values.general.period).format('HH'):values.general.period===null?"":values.general.period}));
         idLive?UpdateLive():CreateLive()
+
     }
 
     // Suppression des régles invitations
 
     const handleClickDelete =(name)=>{
         if(name === 1){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"afterPrograming", invitationValueChangeRules:false}));
         }else if(name === 2){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ7", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"beforeWeek", invitationValueChangeRules:false}));
         } else if(name === 3){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ1", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"beforeDay", invitationValueChangeRules:false}));
         }else if(name === 4){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH1", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"beforeHour", invitationValueChangeRules:false}));
         }else if(name === 5){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleInscription2", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"afterSubscription", invitationValueChangeRules:false}));
         }else if(name === 6){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ72", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"isParticiped", invitationValueChangeRules:false}));
         } else if(name === 7){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelJ12", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"notVisualized", invitationValueChangeRules:false}));
         }else if(name === 8){
-            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"visibleRappelH12", invitationValueChangeRules:false}));
+            dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"replay", invitationValueChangeRules:false}));
         }
     }
 

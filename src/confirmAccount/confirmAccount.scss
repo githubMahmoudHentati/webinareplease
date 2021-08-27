@@ -25,15 +25,75 @@
   font-style: normal;
   font-display: swap;
 }
+.col-connexion-sign{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.col-connexion-forget-pass{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.col-connexion_recovery-pass{
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .col-connexion{
   width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top:50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+}
+@media (min-width:280px) and (max-width:576px){
+  .col-connexion-confirm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .col-connexion-forget-pass{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .col-connexion-sign{
+    width:90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-form-sign{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5%;
+    min-height: 320px;
+  }
+  .col-connexion_recovery-pass{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width:576px) and (max-width:1080px){
+  .col-connexion{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+  }
+
 }
 .span_connexion{
     font-family: "SF Pro Display";
@@ -49,4 +109,18 @@
   font-family: "SF Pro Display";
   font-size: 14px;
   font-weight: normal;
+}
+@media (min-width:576px)and (max-width: 767px){
+  .col-connexion-forget-pass{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .col-connexion_recovery-pass{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

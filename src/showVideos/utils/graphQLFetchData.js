@@ -1,4 +1,4 @@
-import {useMutation, useQuery , useLazyQuery} from "@apollo/react-hooks";
+import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
@@ -16,16 +16,14 @@ const dateFormat = 'YYYY-MM-DD';
 export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
 
-    const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
+    const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 
     // Read Data from Hooks
     const {paginationProps ,  values }=Hooks()
-
-    console.log("paginationProps654654654654", paginationProps)
     const {error_getLives}=StatusMessage()
 
     // use Query to fetch Data
-    const {loading:calendar_loadingNow, refetch:refetchLives ,  data:dataLives}
+    const {data:dataLives}
         = useQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
@@ -35,7 +33,7 @@ export const GraphQLFetchData=()=> {
                 "order_column": parseInt(paginationProps.columnKey),
                 "search_word":values.search,
                 "date":  values.date && values.date.length ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
-                "status":values.type
+                "status":""
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{
@@ -60,7 +58,6 @@ export const GraphQLFetchData=()=> {
         variables : {idLive:paginationProps.id},
         context: { clientName: "second" },
         onCompleted: (data)=>{
-           console.log("dataDelete",data)
         }
     })
 

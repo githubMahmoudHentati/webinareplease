@@ -1,6 +1,6 @@
 import React , {useState,useEffect} from 'react';
-import { Breadcrumb,Button, Tooltip , Select , Input  , Checkbox , DatePicker, Space , Alert} from "antd";
-import {  HourglassOutlined ,DownloadOutlined ,PlayCircleOutlined ,ImportOutlined ,BorderInnerOutlined , CalendarOutlined , DeleteOutlined , DownOutlined ,RightOutlined ,HomeOutlined , PlusSquareOutlined , MenuOutlined , TableOutlined  ,AppstoreOutlined , FilterOutlined , FolderOutlined , FolderOpenOutlined , SearchOutlined } from '@ant-design/icons';
+import { Breadcrumb,Button, Tooltip , Select , Input  , DatePicker, Alert} from "antd";
+import {  HourglassOutlined , CalendarOutlined , DeleteOutlined , PlusSquareOutlined , FilterOutlined , SearchOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
@@ -12,29 +12,26 @@ const { Option } = Select;
 let clicked = false;
 
 const { RangePicker } = DatePicker;
-const dateFormat = 'YYYY/MM/DD';
 
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleChangeDatePicker , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive ,matchesMedia , paginationProps , values}=Hooks()
+    const {handleSearchRow , handleHeaderSelect , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive , paginationProps , values}=Hooks()
 
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const [rangeDate, setDateRange] = useState(null)
-    const [searchFake, setSearchFake] = useState(null)
     const [selectedContributor, setContributor] = useState(null)
     const history = useHistory();
-    const { t, i18n } = useTranslation();
+    const {t} = useTranslation();
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
     useEffect(() => {
         function goto(event) {
-
             var noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
                 ', .ant-select-selector * , .ant-select-dropdown * ,' +
                 ' .ant-select-item-option-content , .ant-picker-cell-inner , .ant-picker-dropdown * , ' +
-                '.div_filter_avance * , .div_Filter_global * '  ;
+                '.div_filter_avance * , .div_Filter_global , .div_Filter , .div1_div_Filter * , .div_button_filter , .btn_1'  ;
             if (!event.target.matches(noRedirect)) {
                 SetShowFilter(false);
                 SetActiveIcon(false)
@@ -44,9 +41,7 @@ function HeaderVideos() {
     },[]);
 
     // fonction pour la selection des dossiers
-    function onChange(value) {
-        console.log(`selected ${value}`);
-    }
+
     // fonction de clique sur l'icone de filtrage
     const handlClickSuffix = () =>{
         SetShowFilter(!ShowFilter)
@@ -69,12 +64,9 @@ function HeaderVideos() {
     }
 
     const onChangeRange = (name,datesValue,dateStringsValue) =>{
-        console.log("loggggggggggg",datesValue)
         setDateRange(datesValue)
     }
-    const onChangeContributor = (value,action) =>{
-        setContributor(action.value)
-    }
+
 
     const handleResetFilter = ()=>{
         setDateRange(null)
@@ -100,7 +92,7 @@ function HeaderVideos() {
 
           <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
               <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
-              <Button  onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button>
+              <Tooltip getPopupContainer={() => document.querySelector(".btn_add_media")} title={t("ShowVideo.AddLive")}><Button  onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button></Tooltip>
           </div>{/*./TousMedia*/}
 
           <div className="Filter">
@@ -121,7 +113,7 @@ function HeaderVideos() {
                   }
 
                   <div className="Calendrier" onClick={()=>handleClickCalendar()} style={{backgroundColor:darkMode===false?"":"#141414", color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid RGBA(255, 255, 255, 0.15)"}}>
-                      <Tooltip className="tooltip_calendrier" title={t("ShowVideo.ViewCalendar")}>
+                      <Tooltip getPopupContainer={() => document.querySelector(".Calendrier")} className="tooltip_calendrier" title={t("ShowVideo.ViewCalendar")}>
                       <CalendarOutlined  className="IconCalendrier" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.65)"}}/>
                       <span id={"Text_Calendar"}>{t("ShowVideo.Calendar")}</span>
                       </Tooltip>
@@ -140,10 +132,10 @@ function HeaderVideos() {
                           }
                           getPopupContainer={() => document.querySelector(".selectFilter")}
                       >
-                          <Option name="type"   value=""><span className="icon-select-all-line"></span> <span  style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
-                          <Option name="type"  value="archived"><span className="icon-Archive"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
-                          <Option name="type"  value="live"><span className="icon-Current"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
-                          <Option name="type"  value="upcoming"><HourglassOutlined />  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
+                          <Option name="type"   value=""><span className="icon-select-all-line select-icon"></span> <span  style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.All")}</span> </Option>
+                          <Option name="type"  value="archived"><span className="icon-Archive select-icon"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.Archived")}</span></Option>
+                          <Option name="type"  value="live"><span className="icon-Current select-icon"></span>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.InProgress")}</span></Option>
+                          <Option name="type"  value="upcoming"><HourglassOutlined className={"select-icon"}/>  <span style={{ padding: "1%" }} id={'spn_option'}>{t("ShowVideo.ComingSoon")}</span></Option>
                       </Select>
                   </div>
 
@@ -156,7 +148,7 @@ function HeaderVideos() {
                       placeholder={t("ShowVideo.Search")}
                       prefix={<SearchOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.85)", marginLeft: "10px" }}/>}
                       suffix={
-                          <Tooltip title={t("ShowVideo.Filter")}>
+                          <Tooltip getPopupContainer={() => document.querySelector(".inputFilter")} title={t("ShowVideo.Filter")}>
                           <div
                               onClick={handlClickSuffix}
                               className="filter_icon"
@@ -195,8 +187,8 @@ function HeaderVideos() {
                           <RangePicker
                               className="range_div1_div_Filter"
                               ranges={{
-                                  Today: [moment(), moment()],
-                                  'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                  [t("ShowVideo.Today")]: [moment(), moment()],
+                                  [t("ShowVideo.ThisMonth")]: [moment().startOf('month'), moment().endOf('month')],
                               }}
                               onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
                               value={[rangeDate && moment(rangeDate[0], 'YYYY-MM-DD'), rangeDate && moment(rangeDate[1], 'YYYY-MM-DD')]}

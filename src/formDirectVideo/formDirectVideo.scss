@@ -59,7 +59,7 @@
 
 .titre-menu{
   padding: 8% 5%;
-  border-bottom: 1px solid RGBA(0, 0, 0, 0.06);
+  border-bottom: 1px solid var(--icon-color);
   margin-bottom: 5%;
 }
 .config_direct{
@@ -314,7 +314,7 @@
   width: 100%;
   height: 65px;
   padding: 15px 0 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);;
+  border-bottom: 1px solid var(--invitation-border);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -327,7 +327,7 @@
   align-items: center;
 }
 .p_ajout_régle{
-  width: 55%;
+  width: 70%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -355,8 +355,7 @@
 }
 .icon_ajout_régle{
   margin-right: 10px ;
-  font-size: 28px !important;
-  color: #DDDDDD !important;
+  font-size: 40px !important;
 }
 .p_ajout_régle{
   margin-top: 5px;
@@ -414,7 +413,7 @@
   margin-top: 2%;
 }
 .popoverCheckbox{
-  width: 100%;
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -460,7 +459,13 @@
 .ant-select-multiple .ant-select-selection-item{
   height: 28px !important;
   background: transparent;
+  border: 1px solid var(--Switch-Color);
+ .anticon{
+    color: var(--item-menu-color);
+  }
 }
+
+
 .Paramétres{
   font-family: 'SF Pro Display';
   font-weight: 900 ;
@@ -653,6 +658,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  .icon_ajout_régle{
+    margin-right: 5px ;
+    font-size: 30px !important;
+  }
   .ant-menu-item , .ant-menu-item-selected , .ant-menu-item-only-child{
     &:focus{
       border-right: none !important;

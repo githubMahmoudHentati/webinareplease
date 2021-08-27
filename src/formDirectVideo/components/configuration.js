@@ -4,10 +4,6 @@ import {
     Col,
     Input,
     Button,
-    Card,
-    Tabs,
-    Breadcrumb,
-    Menu,
     Switch,
     Radio,
     Checkbox,
@@ -19,29 +15,29 @@ import {
     Tooltip
 } from 'antd'
 import '../formDirectVideo.scss'
-import { Upload, message } from 'antd';
-import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled, SettingOutlined } from '@ant-design/icons';
+
+import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled } from '@ant-design/icons';
 import Hooks from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
-import {useDispatch, useSelector} from "react-redux";
-import {setConfigurationOnchange, setModalSpeaker, setOnchange, setTabRichmedia} from "../store/formDirectVideoAction";
-import EditableTagGroupConfiguration from "./EditableTagGroupConfiguration";
+import {useSelector} from "react-redux";
 
-import moment from "moment";
+
+
 import {useTranslation} from 'react-i18next';
 import {TabMenu} from './RichMedia/TabMenu'
 
 import {AttachedFile} from "./attachedFile";
 
 export const Configuration = () => {
-    const dispatch = useDispatch()
+    const [form] = Form.useForm();
+
     const [itemListHeight, setItemListHeight] = useState(null);
     const values = useSelector((state) => state.FormDirectVideoReducer)
     const { listQuestion } = useSelector(
         (state) => state.FormDirectVideoReducer.configuration
       );
     const itemListRef = useRef(null);
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
 
     const {
@@ -52,19 +48,16 @@ export const Configuration = () => {
         configurationOnChange,
         configurationOnChangeButton,
         ConfigurationOnChangeSelect,
-        displayThemes,
         getFirstCharacter
-    } = Hooks()
+    } = Hooks(form)
 
-    console.log("values", values)
     // use Selector redux
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
 
-    const CheckboxGroup = Checkbox.Group;
     const {Option} = Select;
     const children = [];
     for (let i = 10; i < 36; i++) {
-        children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+        children.push(<Option key={i.toString(36) + i}></Option>);
     }
 
     const selectProps = {
@@ -78,12 +71,10 @@ export const Configuration = () => {
         itemListRef.current && setItemListHeight(itemListRef.current.offsetHeight)
     }, [itemListRef]);
 
-    useEffect(async () => {
-        console.log("testswitch", values.configuration.SpeakerList.length > 0)
-        values.configuration.SpeakerList.length > 0 &&
-        dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
-    }, []);
-console.log("SpeakerList",values.configuration.SpeakerList)
+    // useEffect(async () => {
+    //     values.configuration.SpeakerList.length > 0 &&
+    //     dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
+    // }, []);
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
@@ -135,7 +126,7 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                                         dataSource={values.configuration.SpeakerList}
                                         renderItem={(item, indexItem) => (
                                             <List.Item actions={[
-                                                    <span key="list-loadmore-edit"><EditOutlined
+                                                <span key="list-loadmore-edit"><EditOutlined
                                                         onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem+1)}
                                                         style={{fontSize: "21px", color: darkMode === false}}/></span>,
                                                     <span key="list-loadmore-more"><MinusCircleOutlined
@@ -321,10 +312,9 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
                             <Col offset={1} span={23}>
-                                <Form.Item name="theme" className={"form-item-style"}
-                                >
                                     <Select
-                                         mode="multiple"
+                                        value={values.configuration.theme}
+                                        mode="multiple"
                                         className={"spn2"}
                                         name="theme" onChange={(value,action)=>{ConfigurationOnChangeSelect(value,action,"theme")}}
                                         showSearch
@@ -342,7 +332,6 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                                             )
                                         })}
                                     </Select>
-                                </Form.Item>
                             </Col>
                             }
                         </Row>
@@ -355,11 +344,20 @@ console.log("SpeakerList",values.configuration.SpeakerList)
                             <Col span={24} className={"col-forms"}>
                                 <Form.Item name="tags" className={"form-item-style"}
                                 >
-                                    <Select name="tags" className={"selectTags"} mode="tags"
+                                    <Select
+                                        onInputKeyDown={(e) => {
+                                            if (e.target.value.length === 0) {
+                                                e.stopPropagation()
+                                            }
+                                        }}
+                                           name="tags" className={"selectTags"} mode="tags"
                                             style={{width: '100%', minHeight: "32px"}} placeholder={t("formDirectVideo.ModeTags")}
                                             onChange={(value, event) => {
                                                 configurationOnChangeByName(value, "tags")
-                                            }}  {...selectProps} />
+                                            }}
+                                            {...selectProps}
+
+                                    />
                                 </Form.Item>
                             </Col>
                         </Row>

@@ -1,28 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import {Breadcrumb, Button,Alert} from "antd";
+import React from 'react';
+import {Breadcrumb,Alert} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import "../Calendar.scss"
-import {CalendarReducer} from "../store/calendarReducer";
-import Calendar from "../Calendar";
-import {setCalendarOnchange, setCalendarVisibleOnchange,setLoadingDeleteCalendarVideo,setShowDivsConditions} from "../store/calendarAction";
 import { useTranslation } from 'react-i18next';
-import Hooks from '../utils/hooks.js'
 import HooksCalendar from "../utils/hooks";
 
 
 function HeaderCalendar() {
-    const dispatch = useDispatch()
+
     const history = useHistory();
     // use Selector redux
-    const {itemsRunAPI}=Hooks();
+
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
     // use Selector redux
-    const calendarProps = useSelector((state) => state.CalendarReducer)
     const conditions = useSelector((state) => state.ShowVideosReducerReducer.showdivscondition)
-    console.log("calendarProps", calendarProps)
-    const {t, i18n} = useTranslation();
+
+    const {t} = useTranslation();
     // handle click arrow calendar
     const {handleClickArrowCalendar,handleClickAnnulerAlert} = HooksCalendar()
     return (
@@ -59,7 +54,7 @@ function HeaderCalendar() {
                     style={{color: darkMode === false ? "" : "white"}} className={"h4"}>{t("Calendar.Calendar")}</h4></div>
             </div>
             {/*./TousMedia*/}
-            {console.log("conditions.clickDeleteIcon",conditions.clickDeleteIcon)}
+
             {
                 conditions.clickDeleteIcon === false
                     ?
@@ -69,7 +64,7 @@ function HeaderCalendar() {
                             message={t("ShowVideo.DeleteSelectedItem")}
                             banner
                             action={
-                                <a disabled={conditions.rubDeleteItems===true}  className="btn_annuler" size="small" type="text" onClick={handleClickAnnulerAlert}>
+                                <a href="#/" disabled={conditions.rubDeleteItems===true}  className="btn_annuler" size="small" type="text" onClick={handleClickAnnulerAlert}>
                                     {t("ShowVideo.Cancel")}
                                 </a>
                             }

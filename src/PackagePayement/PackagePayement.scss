@@ -1,4 +1,237 @@
-.div2_champsPayement .ant-form-item-label{
-  display: flex !important;
-  justify-content: flex-start !important;
+.PackagePayement{
+  height:100%;
+  .div2_champsPayement .ant-form-item-label{
+    display: flex !important;
+    justify-content: flex-start !important;
+  }
+  .steps-form{
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin-top: 2em;
+    top: 1em;
+  }
+  }
+  .steps-choice{
+    width: 100%;
+    align-self: center;
+    justify-content: space-around;
+    .ant-steps-item-container{
+      display: flex;
+      align-items: center;
+
+    }
+  }
+
+.ChoicePackage-form{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  .steps-choice{
+    width:80%
+  }
+}
+  .steps-content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .steps-action-form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-bottom: 1em;
+    padding-right: 10%;
+    background-color:#ffffff;
+  }
+  .ChoicePackage-form{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+  //padding-top: 3em;
+  }
+
+
+  .col-politique{
+    width:100%;
+    flex: 0 0 65%;
+    font-size:12px;
+margin-left:0.5em;
+    max-width: 90%;
+  }
+  //}
+  @media (min-width:576px) and (max-width:1080px) {
+    .steps-form {
+      height: 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+    }
+    .product-form-payment
+    {display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+    }
+    .ChoicePackage-form {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      padding-top: 0;
+      transform: translate(0, 15%);
+    }
+
+    .PackagePayement {
+      .steps-form {
+        height: 5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70%;
+        margin-top: 2em;
+        top: 1em;
+      }
+    }
+    .steps-action-form {
+      background-color: #fff;
+    }
+    .ant-col-18 {
+      display: block;
+      flex: 0 0 95%;
+      max-width: 100%;
+    }
+    .steps-choice {
+      width: 80%;
+      &.ant-steps{
+        .ant-steps-item{
+          &:last-child{
+            flex:none;
+          }
+        }
+      }
+    }
+  }
+  @media  screen and (max-width: 576px){
+    .steps-action-form{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding-bottom: 1em;
+      padding-right: 5%;
+      background-color:#ffffff;
+    }
+    .ant-col-offset-4 {
+      margin-left: 0;
+    }
+    .empty_div{
+      width: 100%;
+      position: relative !important;
+
+    }
+    .row_politique{
+      margin-bottom: 50px;
+    }
+    .col-politique{
+      width:100%;
+      flex: 0 0 95%;
+      padding-left: 20px !important;
+    }
+      .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item{
+        white-space: nowrap;
+        word-break: break-word;
+        overflow: initial;
+      }
+    .steps-choice{
+      height: 5%;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      .ant-steps-horizontal:not(.ant-steps-label-vertical) {
+        &.ant-steps{
+          .ant-steps-item {
+            &:first-child{
+              padding-left:0;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }}
+      }
+      &.ant-steps{
+          .ant-steps-item{
+            .ant-steps-item-container{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .ant-steps-item-content >.ant-steps-item-title {
+                font-size: 14px;
+                padding: 0;
+              }
+            }
+            &:last-child{
+              flex: 1 1;
+            }
+            &:not(:last-child){
+              .ant-steps-item-icon {
+              margin: 0;
+              position: relative;
+              &:after {
+                content: "";
+                height: 2px;
+                width: 20vw;
+                background-color: #f0f0f0;
+                position: absolute;
+                top: 50%;
+                left: 100%;
+                margin-left: 15px;
+                @media screen and (max-width: 380px){
+                  margin-left: 10px;
+                }
+                @media screen and (max-width: 280px){
+                  margin-left: 5px;
+                }
+              }
+            }
+          }
+            .ant-steps-item-title{
+              &:after{
+                display:none
+              }
+            }
+        }
+      }
+    }
+  }
+.product-form-sign{
+  //position: relative;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+.product-form-payment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5%;
 }

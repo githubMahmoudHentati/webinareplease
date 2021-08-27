@@ -2,15 +2,14 @@ import React,{ Suspense }  from 'react';
 import App from './App';
 import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
 //import { createHttpLink } from 'apollo-link-http';
-import {ApolloProvider, useQuery} from '@apollo/react-hooks';
+import {ApolloProvider} from '@apollo/react-hooks';
 import { setContext } from 'apollo-link-context';
 import store from "./utils/redux/store";
-import {Provider, useDispatch, useSelector} from "react-redux";
+import {Provider} from "react-redux";
 import { ApolloLink } from "apollo-link";
 import { createHttpLink } from 'apollo-link-http';
 import { Spin } from 'antd';
-import {setAppSetLogin} from "./utils/redux/actions";
-import {graphQL_shema} from "./utils/grapqhQL/shemaGraphQL";
+
 
 import './i18n'
 const firstLink = new createHttpLink({
@@ -26,6 +25,7 @@ const authLink = setContext(() => {
         }
     };
 });
+
 
 // Create Second Link
 const secondLink = new HttpLink({

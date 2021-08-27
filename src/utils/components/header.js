@@ -7,45 +7,43 @@ import {
     MenuFoldOutlined,
     HomeOutlined,
     QuestionCircleOutlined,
-    BellFilled,
-    BellOutlined,
     UserOutlined,
     UnlockOutlined,
     LogoutOutlined,
     PieChartOutlined,
     GlobalOutlined,
     CaretRightOutlined ,
-    CaretDownOutlined
+    CaretDownOutlined,
+    DownOutlined,
+    RightOutlined
 } from '@ant-design/icons';
-import {Badge, Menu, Dropdown, Avatar} from 'antd';
-import {setAccountSetting, setAppSetLogin,setAppSetLogout} from "../redux/actions";
+import {Menu, Dropdown, Avatar} from 'antd';
+import {setAccountSetting, setAppSetLogout} from "../redux/actions";
 import {changeLang} from "../redux/actions"
 import {setDarkMode} from "../redux/actions";
 import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
-import {CSSTransition} from 'react-transition-group';
 
 
 import {useTranslation} from "react-i18next";
 
 function GlobalHeader() {
-
+    const [activeSideMenuState, SetActiveSideMenuState] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
-    const [arrowSideMenu ,  setArrowSideMenu] = useState(false)
-   
-    const [activeSideMenuState, SetActiveSideMenuState] = useState(false)
+    const [arrow ,  setArrow] = useState(false)
+
     // Clic outside Side Bar
     useEffect(() => {
         function HEADERGOTO(event) {
 
-            var noRedirect = '.side-nav * , .hambg_button * '
+            var noRedirect = '.side-nav * , .hambg_button * , .side-nav , .anticon , .div_caretDownOutlined , .div_caretRightOutlined '
             if (!event.target.matches(noRedirect)) {
                 SetActiveSideMenuState(false)
             }
         };
         document.body.addEventListener('click', HEADERGOTO);
-    }, [darkMode, dispatch]);
+    }, [activeSideMenuState , dispatch]);
 
     //fonction checkbox
     const onChange = (e) => {
@@ -104,36 +102,42 @@ function GlobalHeader() {
         <Menu className="menu">
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(0)))
-            }}><UserOutlined/>{t("description.Account")}</Menu.Item>
+            }}><UserOutlined className={"dropdownIcon"}/>{t("description.Account")}</Menu.Item>
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(1)))
-            }}><UnlockOutlined/>{t("description.security")}</Menu.Item>
+            }}><UnlockOutlined className={"dropdownIcon"}/>{t("description.security")}</Menu.Item>
             <Menu.Item onClick={() => {
                 history.push("/compteSettings", dispatch(setAccountSetting(3)))
-            }}><PieChartOutlined/>{t("description.Subscription")}</Menu.Item>
-            <Menu.Item onClick={logOut}><LogoutOutlined/>{t("description.LogOut")}</Menu.Item>
+            }}><PieChartOutlined className={"dropdownIcon"}/>{t("description.Subscription")}</Menu.Item>
+            <Menu.Item onClick={logOut}><LogoutOutlined className={"dropdownIcon"}/>{t("description.LogOut")}</Menu.Item>
         </Menu>
     );
     const Menulang = (
-        <Menu className="menu">
-            <Menu.Item onClick={() => changeLanguage('fr')}>
+        <Menu className="menu menu-lang">
+            <Menu.Item  onClick={() => changeLanguage('fr')}>
+                <div className={"menuItemLang"}>
                  <span className="icon-fr">
                      <span className="path1"></span>
                      <span className="path2"></span>
                      <span className="path3"></span><span className="path4"></span>
-                 </span> {t("lang2")}
+                 </span> <span className={"dropdowlangIcon"}>{t("lang2")}</span></div>
             </Menu.Item>
-            <Menu.Item onClick={() => changeLanguage('en')}>
+            <Menu.Item className={"menuItemLang"} onClick={() => changeLanguage('en')}>
+                <div className={"menuItemLang"}>
                 <span className="icon-ang">
                     <span className="path1"></span>
                     <span className="path2"></span>
                     <span className="path3"></span><span className="path4"></span>
                     <span className="path5"></span>
-                </span> {t("lang1")}
+                </span> <span className={"dropdowlangIcon"}>{t("lang1")}</span></div>
             </Menu.Item>
         </Menu>
 
     );
+
+    const handleClickLang = ()=>{
+        setArrow(!arrow)
+    }
 
     return (
         <div className={"div_Header"}>
@@ -170,7 +174,8 @@ function GlobalHeader() {
                     {/*</Badge>*/}
 
                     <Dropdown getPopupContainer={() => document.querySelector(".drp_user")} className={"drp_user"} overlay={MenuHeader} trigger={['click']}>
-                        <a  className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
+                        <a href="#/" className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
+
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: '#419BF9'}}
                                     src={avatar}
@@ -187,7 +192,7 @@ function GlobalHeader() {
                         </a>
                     </Dropdown>
 
-                    <Dropdown getPopupContainer={() => document.querySelector(".drp_lang")} className={"drp_lang"} overlay={Menulang} trigger={['click']}>
+                    <Dropdown getPopupContainer={() => document.querySelector(".drp_lang")} className={"drp_lang drp-lang-size"} overlay={Menulang} trigger={['click']}>
                         <GlobalOutlined style={{color: darkMode === false ? "" : "white"}}/>
                     </Dropdown>
 
@@ -226,7 +231,7 @@ function GlobalHeader() {
                         </div>
                         <div className={"div2_side_nav"}>
                             <div className={"div1_div2_side_nav"}>
-                                <a className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
+                                <a href="#/" className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
                                    style={{color: darkMode === false ? "" : "white"}}>
                                     <Avatar style={{backgroundColor: '#419BF9'}}
                                             src={avatar}
@@ -245,17 +250,17 @@ function GlobalHeader() {
                             </div>
 
                             <div className={"div2_div2_side_nav"}>
-                                <a className="ant-dropdown-link link_drp" onClick={() => {
+                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(0)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <UserOutlined className={"avtr"}/><span>{t("description.Account")}</span>
                                 </a>
-                                <a className="ant-dropdown-link link_drp" onClick={() => {
+                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(1)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <UnlockOutlined className={"avtr"}/><span>{t("description.security")}</span>
                                 </a>
-                                <a className="ant-dropdown-link link_drp" onClick={() => {
+                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(3)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <PieChartOutlined className={"avtr"}/><span>{t("description.Subscription")}</span>
@@ -264,23 +269,22 @@ function GlobalHeader() {
 
                             <div className={"div3_div2_side_nav"}>
 
-                                <div className={"lang_div"} onClick={()=> setArrowSideMenu(!arrowSideMenu)}>
-                                <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']} >
-                                    <div><GlobalOutlined style={{color: darkMode === false ? "" : "white"}}
-                                                         className={"avtr"}/> <span
-                                        className={"titleLang"}>{t("description.Language")}</span></div>
-                                </Dropdown>
+                                <div className={"lang_div"} onClick={()=> setArrow(!arrow)}>
+                                    <Dropdown className={"drp_lang"} overlay={Menulang} trigger={['click']} >
+                                        <div><GlobalOutlined style={{color: darkMode === false ? "" : "white"}}
+                                                             className={"avtr"}/> <span
+                                            className={"titleLang"}>{t("description.Language")}</span></div>
+                                    </Dropdown>
                                     {
-                                        arrowSideMenu
+                                        arrow
                                             ?
-                                            <CaretDownOutlined className={"caretDownOutlined"}/>
+                                            <div className={"div_caretDownOutlined"}><span className={"arrow-lang1"}>▼</span></div>
                                             :
-                                            <CaretRightOutlined className={"caretRightOutlined"}/>
+                                            <div className={"div_caretRightOutlined"}><span className={"arrow-lang"}>►</span></div>
                                     }
                                 </div>{/*Div-Langue*/}
-
                                 {
-                                    arrowSideMenu
+                                    arrow
                                         ?
                                     <div className={"langIconDiv"}>
                                         <div className={"langIconDiv1"} onClick={() => changeLanguage('fr')}>
@@ -304,12 +308,14 @@ function GlobalHeader() {
 
                                 }
 
-                                <div className={"aide_div"}><QuestionCircleOutlined className={"avtr"} style={{color: darkMode === false ? "" : "white"}}/><span
-                                    className={"titleLang"}>{t("description.aide")}</span></div>
-                                </div> {/*div-aide*/}
+                                {/*<div className={"aide_div"}><QuestionCircleOutlined className={"avtr"} style={{color: darkMode === false ? "" : "white"}}/><span*/}
+                                {/*    className={"titleLang"}>{t("description.aide")}</span>*/}
+                                {/*</div>*/}
+
+                                </div>
 
                             <div className={"div4_div2_side_nav"}>
-                                <a className="ant-dropdown-link link_drp" onClick={logOut}
+                                <a href="#/" className="ant-dropdown-link link_drp" onClick={logOut}
                                    style={{color: darkMode === false ? "" : "white"}}>
                                     <LogoutOutlined
                                         className={"avtr"}/><span>{t("description.LogOut")}</span>

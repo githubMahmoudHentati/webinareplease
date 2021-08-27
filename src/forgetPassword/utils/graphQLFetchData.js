@@ -1,6 +1,5 @@
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
-import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {
     setForgetPasswordConstraintDataOnchange
@@ -8,14 +7,10 @@ import {
 
 
 export const GraphQLFetchData=(values)=> {
-    const history = useHistory()
+
     const dispatch = useDispatch()
 
-    const [ForgetPassword, {
-        data: dataUpdate,
-        loading: loading_EventUpdated,
-        error: error_EventUpdated,
-    }] = useMutation(graphQL_shema().forgetPassword, {
+    const [ForgetPassword] = useMutation(graphQL_shema().forgetPassword, {
         variables: values.forgetPassword
         ,
         onCompleted: async (data) => {

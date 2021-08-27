@@ -26,14 +26,20 @@
   font-display: swap;
 }
 .col-contact{
-  min-width: 70%;
+   width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top:50%;
-  left: 70%;
-  transform: translate(-80%,-50%);
+  //position: absolute;
+  //top:50%;
+  //left: 50%;
+  //transform: translate(-50%,-50%);
+  span{
+    padding-left:10%;
+  }
+  .ant-form-item textarea.ant-input{
+    max-height: 100px !important;
+  }
 }
 .text-form{
   display:flex ;
@@ -59,22 +65,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top:85% !important;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    //position: absolute;
+    //top:85% !important;
+    //left: 50%;
+   // transform: translate(0%, 10%);
   }
-}
+  }
+
 @media (min-width:320px) and (max-width:575px) {
   .col-contact{
     width: 90% !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top:55%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    //position: absolute;
+    //top:55%;
+    //left: 50%;
+    //transform: translate(0%, 10%);
+    span{
+      padding-left:0;
+    }
   }
   .text-form{
     display:flex ;
@@ -89,10 +99,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top:120% !important;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    //position: absolute;
+    //top:120% !important;
+    //left: 50%;
+    //transform: translate(-50%,-50%);
   }
   .text-form{
     display:flex ;
@@ -103,14 +113,17 @@
 //********** Tablette *********************//
 @media (min-width:576px) and (max-width:800px) {
   .col-contact{
-    width: 100% !important;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top:40%;
-    left: 57%;
-    transform: translate(-50%,-50%);
+    //position: absolute;
+    //top:40%;
+    //left: 57%;
+    //transform: translate(5%,50%);
+    span{
+      padding-left:10%;
+    }
   }
   .text-form{
     display:flex ;

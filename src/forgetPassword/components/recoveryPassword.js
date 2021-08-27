@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 
 export const RecoveryPassword =()=> {
     const history = useHistory()
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
 
     return(
-        <Row gutter={[0, 40]} className={'col-connexion'}>
+        <Row gutter={[0, 35]} className={'col-connexion_recovery-pass'}>
             <Col span={24}>
                 <span className={"span_connexion"}>
                     {t("forgetPassword.RecoveryEmail")}
@@ -31,7 +31,7 @@ export const RecoveryPassword =()=> {
                         </Button>
                     </Col>
                     <Col onClick={()=>{history.push("/contactClient")}}>
-                        <a className={"spn_chbx"}>
+                        <a className={"spn_chbx"} href="#/">
                             {t("forgetPassword.ContactClient")}</a>
                     </Col>
                 </Row>

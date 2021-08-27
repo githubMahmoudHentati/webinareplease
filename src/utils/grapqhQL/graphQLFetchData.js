@@ -1,4 +1,3 @@
-import React  from 'react';
 import {useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./shemaGraphQL";
 import {useDispatch} from "react-redux";
@@ -13,8 +12,7 @@ export const GraphQLFetchData=()=> {
     // use Query to fetch Data
     const [verificationToken, setVerificationToken] = useState(false);
     const token = localStorage.getItem('jwtToken')?localStorage.getItem('jwtToken'):'';
-    const {loading:tokenVerification_loading, data: dataVerificationToken}
-        = useQuery(graphQL_shema().tokenVerification, {
+    useQuery(graphQL_shema().tokenVerification, {
         fetchPolicy:  "cache-and-network",
         variables: { token : `Bearer ${token}`},
         onCompleted :async (data)=>{

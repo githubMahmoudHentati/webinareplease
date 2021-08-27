@@ -1,10 +1,9 @@
 import React  from 'react';
-import {Row, Col, Input, Button, Card, Tabs, Breadcrumb, Menu, Checkbox, Form} from 'antd'
+import {Row, Col, Input, Button,Form} from 'antd'
 import '../contactClient.scss'
-import {UserOutlined,UnlockOutlined,EyeTwoTone,EyeInvisibleOutlined} from '@ant-design/icons';
+
 import {Hooks} from "../utils/hooks";
-import {useMutation } from '@apollo/react-hooks';
-import {graphQL_shema} from "../utils/graphQL";
+
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import { useTranslation } from 'react-i18next';
 import {useHistory} from "react-router-dom";
@@ -18,19 +17,13 @@ export const FormContactClient =()=> {
     function ContactClientMutationAction(){
         ContactClientMutation()
     }
-
     const {ContactClientOnChange , handleSubmitContactClient,values}= Hooks(ContactClientMutationAction , form)
-    console.log("helloooo", values)
-
     const isValidEmail = (email) => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email)
     }
-    const { t, i18n } = useTranslation();
+    const { t} = useTranslation();
     const requiredFieldRule = [{required: true, message: t("contactClient.FieldsRequired")}];
-    console.log("values-contaclient",values)
-
-
 
     return (
         <Form
@@ -39,10 +32,11 @@ export const FormContactClient =()=> {
             wrapperCol={{ span: 16 }}
             layout="horizontal"
             name="product-form"
+            className={"product-form-sign"}
             onFinish={handleSubmitContactClient}
         >
         <Row gutter={[0, 40]} className={'col-contact'}>
-            <Col style={{textAlign: 'center'}} span={24}>
+            <Col  span={24}>
                 <span className={"spn1"}>{t("contactClient.ContactUsWithReq")}</span>
             </Col>
             <Col span={24} >
@@ -95,7 +89,7 @@ export const FormContactClient =()=> {
                     </Col>
                 </Row>
             </Col>
-            <Col span={16}>
+            <Col span={24}>
                 <Row  gutter={[10, 0]} className={"text-form"}>
                     <Col>
                         <Button className={"spn2"} onClick={()=>history.push("/compteSettings")}> {t("CompteSettings.Cancel")}</Button>

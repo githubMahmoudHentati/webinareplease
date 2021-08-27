@@ -48,11 +48,10 @@
   margin-bottom:0!important;
   a{
     color: var(--white_color);
-    &:focus, &:active { 
+    &:focus, &:active , &:hover {
       color: #1890ff !important;
   }
-  
-  
+
 }
 }
 .div_titre{
@@ -195,7 +194,7 @@
     #span_diffuser{
       display: none;
     }
-    .action Button{
+    .action Button:not(.btn_Visualiser_diffuser){
       width: 24px !important;
       height: 24px !important;
       display: flex;

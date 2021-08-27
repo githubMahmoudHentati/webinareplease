@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from "moment";
+
 import {Badge, Button, Modal, Tag} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {useSelector} from "react-redux";
@@ -10,7 +10,7 @@ import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleStatusEvents}) {
     var  x  = useWindowDimensions()
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
     const darkMode = useSelector((state) => state.Reducer.DarkMode);
     return (
         <Modal
@@ -43,8 +43,8 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleSt
             ]}
         >
             <div className={"body_Modal"}>
-                <div className={"div_image_modal"}><img
-                    src={modalInfo.thumbnail ? modalInfo.thumbnail : defaultImg}/>
+                <div className={"div_image_modal"} ><img
+                    src={modalInfo.thumbnail ? modalInfo.thumbnail : defaultImg} alt={""}/>
                 </div>
                 <div className={"div_time_calendar"}>
                     <div className={"type_btn"}><Tag
