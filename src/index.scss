@@ -457,7 +457,7 @@ body{
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: var(--icon-color) !important;
 }
-.anticon:not(.anticon-close , .anticon-arrow-left , .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload , .anticon-global) , .dropdownIconTemp{
+.anticon:not(.anticon-close , .anticon-arrow-left , .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ) , .dropdownIconTemp{
     color: var(--icon-color) !important;
 }
 .ant-btn-primary .anticon{
