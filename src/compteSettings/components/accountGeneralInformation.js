@@ -79,22 +79,9 @@ export const AccountGeneralInformation = ({form}) => {
                 constraintDataNameChange: "avatarLoading",
                 constraintDataValueChange: true
             }))
-
-            // dispatch(setGeneralInformationOnchange({
-            //     generalInformationNameChange: "vignette",
-            //     generalInformationValueChange: ""
-            // }))
             return;
         }
 
-        // Get this url from response in real world.
-        // GetBase64(info.file.originFileObj, imageUrl =>
-        //         // dispatch(setGeneralInformationOnchange({
-        //         //     generalInformationNameChange: "vignette",
-        //         //     generalInformationValueChange: imageUrl
-        //         // })),
-        //
-        // );
 
         //*******************Upload Avatar In Server********************/////
         let formData = new FormData();
@@ -169,7 +156,7 @@ export const AccountGeneralInformation = ({form}) => {
                                     border: darkMode === false ? "1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)",
                                     color: darkMode === false ? "RGB(0, 127, 203)" : "rgba(255, 255, 255, 0.85)"
                                 }} size={150}
-                                        src={values.generalInformation.vignette}
+                                        src={values.constraintData.avatarLoading ?<LoadingOutlined/>:values.generalInformation.vignette}
                                         icon={values.constraintData.avatarLoading ? <div>
                                             <LoadingOutlined/>
                                             <div style={{marginTop: 8}}>{t("CompteSettings.Upload")}</div>
