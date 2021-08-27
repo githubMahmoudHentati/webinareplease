@@ -1,5 +1,5 @@
-import {Upload,Button} from 'antd';
-import {UploadOutlined} from '@ant-design/icons';
+import {Upload,Button,Spin} from 'antd';
+import {UploadOutlined,LoadingOutlined} from '@ant-design/icons';
 import React from "react";
 import {useSelector} from "react-redux";
 import { useTranslation } from 'react-i18next';
@@ -8,9 +8,7 @@ import ImgCrop from 'antd-img-crop';
 
 export const AvatarUpload = ({beforeUpload, handleChange, darkMode}) => {
     const {t} = useTranslation();
-    const errorVisibility = useSelector((state) => state.AccountSettingsReducer.visible.errorVisibility)
-
-
+    const errorVisibility = useSelector((state) => state.AccountSettingsReducer.visible.errorVisibility);
     //***********************End of Upload***********************////////
     return (
         <>
