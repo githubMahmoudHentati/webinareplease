@@ -164,6 +164,9 @@ body{
     background-color: #dcdcdc;
     pointer-events: none;
 }
+.ant-checkbox-disabled + span{
+
+}
 .div_filter .ant-input-affix-wrapper{
     border:1px solid var(--border_color) !important;
 }
@@ -384,7 +387,14 @@ body{
 }
 .ant-popover-inner-content{
     background-color: var(--option_select) !important;
-}
+    .ant-checkbox-disabled + span{
+        color: #757575;
+    }
+    .ant-checkbox-disabled .ant-checkbox-inner {
+        border: 1px solid var(--border_color) !important;
+    }
+
+    }
 .ant-breadcrumb-separator{
     color: var(--separator-color) !important;
 }
@@ -1428,7 +1438,7 @@ input:checked + .slider:before {
 }
 /*ChoicePackage*/
 .ChoicePackage{
-    width: 75%;
+    width: 80%;
     height: 89%;
     display: flex;
     flex-direction: column;
@@ -1472,8 +1482,8 @@ input:checked + .slider:before {
 }
 .card_Forfait{
     width: 100%;
-    // height: 600px;
-    margin-top: 6%;
+   // height: 600px;
+    margin: 9% 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -1559,7 +1569,7 @@ input:checked + .slider:before {
 }
 .champsPayement{
     width: 100%;
-    margin-top: 10%;
+    margin-top: 9%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -1574,7 +1584,7 @@ input:checked + .slider:before {
 }
 .div2_champsPayement{
     text-align: center;
-    margin-bottom: 66px;
+   // margin-bottom: 66px;
 }
 .texte_div1_champsPayement span{
     font-family: 'SF Pro Display';
@@ -1829,7 +1839,7 @@ input:checked + .slider:before {
         height: 100%;
         // transform: translate(0, 8%);
         background-color: #fff;
-        padding-top: 2em;
+        padding-top: 3.5em;
 
     }
     .steps{
@@ -2071,7 +2081,7 @@ input:checked + .slider:before {
         // display: none !important;
     }
     .ant-steps{
-        margin:5% 0 !important;
+        margin:8% 0 !important;
     }
     .steps{
         height: 5%;
@@ -2134,7 +2144,7 @@ input:checked + .slider:before {
     }
     .champsPayement{
         width: 100%;
-        margin-top: 25%;
+        margin-top: 10%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -2148,7 +2158,7 @@ input:checked + .slider:before {
         align-items: center;
     }
     .div2_champsPayement{
-        width: 100% !important;
+        width: 90% !important;
     }
     .div2_champsPayement Button{
         width: 100% !important;
