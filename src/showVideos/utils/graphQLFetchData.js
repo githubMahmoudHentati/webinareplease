@@ -1,4 +1,4 @@
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useLazyQuery, useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
@@ -33,7 +33,7 @@ export const GraphQLFetchData=()=> {
                 "order_column": parseInt(paginationProps.columnKey),
                 "search_word":values.search,
                 "date":  values.date && values.date.length ? [moment(values.date[0]).format(dateFormat), moment(values.date[1]).format(dateFormat)] : ["", ""],
-                "status":values.type
+                "status":""
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{
