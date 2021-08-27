@@ -476,7 +476,11 @@ body{
 .ant-select-suffix{
     color: var(--icon-color) !important;
 }
+.ant-message-notice-content{
+    background-color: var(--modal_background) !important;
+    color:var(--white_color);
 
+}
 .ant-select-dropdown{
     background-color: var(--option_select) !important;
     color: var(--white_color) !important;
