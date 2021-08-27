@@ -79,7 +79,7 @@
 }
 
 .ant-input-affix-wrapper{
-  border-color: var(--errorForm) !important ;
+  border-color: var(--border_color) !important;
   &:hover{
     border-color: var(--borderErrorForm) !important;
   }
