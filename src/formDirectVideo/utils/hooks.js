@@ -16,13 +16,11 @@ import {
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
-
 const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
     let matchesMedia   = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
-
 
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
@@ -221,6 +219,7 @@ const Hooks=()=>{
 
         dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:!values.general.liveAction?"":typeof values.general.period!="string"&&values.general.period===!null? moment(values.general.period).format('HH'):values.general.period===null?"":values.general.period}));
         idLive?UpdateLive():CreateLive()
+
     }
 
     // Suppression des régles invitations

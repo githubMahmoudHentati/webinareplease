@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Steps, Button, message , Select , Radio  , Form, Input} from 'antd';
 import {AppleFilled } from '@ant-design/icons';
 import {FormSignUp} from "../../signUp/components/formSignUp";
@@ -40,6 +40,12 @@ function ChoicePackage(){
     const elements = useElements(); // Stripe Hooks
     const {valuesSignUp,handleSubmitSignUp} = HooksSignUp()
     const clientSecret = valuesSignUp.constSubscription.clientSecret;
+
+    useEffect(()=>{
+        const root = document.querySelector(':root')
+        root.classList.add('light')
+    },[])
+
     // next step
     const nextToSignUp = () => {
         dispatch(setSignUpOnchange({
@@ -108,7 +114,6 @@ function ChoicePackage(){
 
 
     }
-
     return(
         <Form
             form={form}
@@ -174,13 +179,13 @@ function ChoicePackage(){
                                         <h2 >{values.packagePayement.packASYouGo}€</h2>
                                         <div>
                                             <h5 >{t("PackagePayment.MeetingDuration")}</h5>
-                                            <Select defaultValue="1 Heure" >
+                                            <Select defaultValue="1 Heure" getPopupContainer={() => document.querySelector(".slct-heure")} className={"slct-heure"}>
                                                 <Option value="1 Heure">1 {t("PackagePayment.Hour")}</Option>
                                             </Select>
                                         </div>
                                         <div>
                                             <h5 >{t("PackagePayment.PartiNumber")}</h5>
-                                            <Select defaultValue="20 Participants" >
+                                            <Select defaultValue="20 Participants" getPopupContainer={() => document.querySelector(".slct-Intervenant")} className={"slct-Intervenant"}>
                                                 <Option value="20 Participants">20 {t("formDirectVideo.Participants")}</Option>
                                             </Select>
                                         </div>
