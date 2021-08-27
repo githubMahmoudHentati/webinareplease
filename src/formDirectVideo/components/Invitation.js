@@ -30,9 +30,10 @@ function Invitation(){
     let ParisMoment = moment().tz("Europe/Paris")
     useEffect(() => {
 
-            SetHoursDiffCalls(values.general.startHour?moment(values.general.startHour,'HH:mm').diff(ParisMoment,"hours"):0)
+            SetHoursDiffCalls(values.general.startHour && values.general.startDate?moment(values.general.startDate,"YYYY-MM-DD").diff(moment())>0?2:moment(values.general.startHour,'HH:mm').diff(ParisMoment,"hours"):0)
             SetDaysDiffCalls(values.general.startDate&&values.general.startHour?moment(values.general.startDate+"Z"+values.general.startHour,'YYYY-MM-DDZHH:mm').diff(ParisMoment,"days"):0)
             getMailsGroupList()
+
     }, []);
 
     // use Selector redux
