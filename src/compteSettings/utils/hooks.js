@@ -68,6 +68,10 @@ const Hooks=(callback)=> {
             generalInformationNameChange: "vignette",
             generalInformationValueChange: avatar
         }))
+        dispatch(setConstraintDataOnchange({
+            constraintDataNameChange: "avatarLoading",
+            constraintDataValueChange: false
+        }))
     };
 
     return({
