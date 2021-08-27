@@ -169,6 +169,7 @@ export const GraphQLFetchDataForm = (values) => {
                     tags: values.configuration.tags,
                     themes: values.configuration.theme,
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
+                    questions:richeMediaDiffusion === true ? Questions : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
                     slides: richeMediaDiffusion === true ? DiapositivesFile : [],
                 },
@@ -256,7 +257,7 @@ export const GraphQLFetchDataForm = (values) => {
             let startDate=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("YYYY-MM-DD")
             let startHour=moment(data.getlive.generalInfoOut.livePlan.startDate,"YYYY-MM-DDTHH:mm:ss+01:00").format("HH:mm")
             let speakerList=[...data.getlive.configurationOut.speakers]
-
+             console.log("dataLives",data)
             dispatch(setLiveInfo({
                 general:{
                     thumbnail:data.getlive.generalInfoOut.thumbnail,
@@ -338,7 +339,18 @@ export const GraphQLFetchDataForm = (values) => {
                                thumbUrl: item,
                            })
                     }),
-                    listQuestion: [],
+                    listQuestion: data.getlive.configurationOut.questions.map((item)=>{
+                        return({
+                            nsp:item.nsp,
+                            question:item.question,
+                            //order:item.order,
+                            choices:item.choices.split('♠♣♥♦').map((item) => {
+                                return{
+                                    "response": item
+                                }
+                            }),
+                        })
+                    }),
                 },
                 invitation:{
                     emailsGroup:data.getlive.invitationOut.mailsGroup,
