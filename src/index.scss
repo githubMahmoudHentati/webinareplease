@@ -109,7 +109,9 @@ body{
 
     --invitation-border:rgba(0, 0, 0, 0.06);
 
-    --icon-color:rgba(0, 0, 0, 0.25)
+    --icon-color:rgba(0, 0, 0, 0.25);
+
+    --menu_background_hover:#F5F5F5
 }
 :root.dark{
     --lang-help-color:rgba(255, 255, 255, 0.85);
@@ -151,7 +153,9 @@ body{
 
     --invitation-border:rgba(255, 255, 255, 0.06);
 
-    --icon-color:rgba(255, 255, 255, 0.25)
+    --icon-color:rgba(255, 255, 255, 0.25);
+
+    --menu_background_hover:#F5F5F5
 
 }
 .form-item-style .spn2_motDePasse{
@@ -467,7 +471,7 @@ body{
 ::-ms-input-placeholder { /* Microsoft Edge */
     color: var(--icon-color) !important;
 }
-.anticon:not(.anticon-close , .anticon-arrow-left , .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle) , .dropdownIconTemp{
+.anticon:not(.anticon-close , .anticon-arrow-left , .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square) , .dropdownIconTemp{
     color: var(--icon-color) !important;
 }
 .ant-btn-primary .anticon{
