@@ -88,16 +88,13 @@ export const AccountGeneralInformation = ({form}) => {
         }
 
         // Get this url from response in real world.
-        GetBase64(info.file.originFileObj, imageUrl =>
-                // dispatch(setGeneralInformationOnchange({
-                //     generalInformationNameChange: "vignette",
-                //     generalInformationValueChange: imageUrl
-                // })),
-                dispatch(setConstraintDataOnchange({
-                    constraintDataNameChange: "avatarLoading",
-                    constraintDataValueChange: false
-                })),
-        );
+        // GetBase64(info.file.originFileObj, imageUrl =>
+        //         // dispatch(setGeneralInformationOnchange({
+        //         //     generalInformationNameChange: "vignette",
+        //         //     generalInformationValueChange: imageUrl
+        //         // })),
+        //
+        // );
 
         //*******************Upload Avatar In Server********************/////
         let formData = new FormData();
