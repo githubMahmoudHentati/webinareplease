@@ -85,6 +85,12 @@ export const graphQL_shema = ()=> {
                       chapterOrder
                       chapterTitle
                      }
+                     questions{
+                     nsp
+                     question
+                     order
+                     choices
+                     }
                 }
                 invitationOut{
                     mailsGroup
