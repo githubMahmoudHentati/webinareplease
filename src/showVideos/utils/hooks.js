@@ -29,7 +29,7 @@ let itemsRunAPI
 const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
     let idLiveToDelete = []
-
+    const [keyState , setKeyState]=useState(null)
     const [liveObj , setLiveObj] = useState({
         order:'ascend',
         pageSize:10,
@@ -62,6 +62,10 @@ export  const Hooks=()=> {
     //Reducer export lives
     const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
     //Reducer
+    //Reducer export lives
+    const DiffusionLinks = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
+
+    console.log("exportLives",DiffusionLinks)
 
     // Diffusion Link
     //const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
@@ -196,12 +200,22 @@ export  const Hooks=()=> {
     //******************Function Data Table************************//
 
     // mutation Get Diffusion Link
-    const [getDiffusionLink] = useMutation(graphQL_shema().diffusion_link,{
+    const [getDiffusionLink , { data}] = useMutation(graphQL_shema().diffusion_link,{
         context: { clientName: "second" },
         onCompleted: (data)=>{
             dispatch(setDiffusionLink(data.getDiffusionLink));
+            if (data.getDiffusionLink){
+                if(data.getDiffusionLink.code === 200){
+                    if(keyState.status === -1){
+                        history.push("/webinarStudioLive")
+                    }else{
+                        window.open(data.getDiffusionLink.visLink, '_blank');
+                    }
+                }
+            }
         }
     })
+
 
     /*Function Input*/
     const handleSearchRow = async(event , dates) => {
@@ -481,20 +495,14 @@ export  const Hooks=()=> {
     const handleCancelModalExport = () =>{
         dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:false}));
     }
-
+console.log("hehehehehhehehkjhksjdhkfsjdfhksdjfh",keyState)
     // Handle Click Visualiser/Diffuser
     const handleClickStreamin = async (e) =>{
-        await dispatch(setPaginationProps({PaginationPropsNameChange:"idDiffusion",PaginationPropsValueChange:e.id}));
-
-        if(e.status === -1){
-            await getDiffusionLink({
-                variables : {id:e.id},
-            })
-            await history.push("/webinarStudioLive")
-        }else {
-           await  window.open("https://k8s-test-stream.webtv-solution.com/room/42-E1urW7hqgKHQJ2N?userName=Bou7mid Barhoum", '_blank');
-        }
-
+        //await dispatch(setPaginationProps({PaginationPropsNameChange:"idDiffusion",PaginationPropsValueChange:e.id}));
+        await setKeyState(e)
+        await getDiffusionLink({
+                 variables : {id:e.id},
+        })
     }
 
     return({
