@@ -1,10 +1,12 @@
 import {message} from 'antd';
 import {useDispatch} from "react-redux";
 import {setConfirmAccountConstraintDataOnchange} from "../store/forgetPasswordAction";
+import { useTranslation } from 'react-i18next';
 
 
 export const ToastMessage = () => {
     const dispatch = useDispatch()
+    const {t} = useTranslation();
 
     const success_submit = async (code) => {
         dispatch(setConfirmAccountConstraintDataOnchange({
@@ -12,7 +14,7 @@ export const ToastMessage = () => {
             constraintDataValueChange: false
         }))
         const successMessage = {
-            200: "mail confirmation est renvoyé, veuillez  vérifier votre courrier électronique  pour  valider l'inscription.",
+            200: t("ConfirmAccount.ResendMailConfirmation"),
         }
         message.success({
             content: successMessage[code],
@@ -31,7 +33,7 @@ export const ToastMessage = () => {
 
     const error_submit = async (code) => {
         const errorMessage = {
-            400: "Point d'accèes invalide, veuillez registrer encore une foix",
+            400:t("ConfirmAccount.InvalidAccessPoint"),
         }
          dispatch(setConfirmAccountConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
