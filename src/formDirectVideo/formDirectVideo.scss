@@ -36,7 +36,13 @@
   font-size: 20px;
   padding:1% 1.5% !important;
 }
-
+#TemplatesIframe{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  top: 0;
+}
 .header-col{
   font-family: -apple-system;
   font-size: 17px;
