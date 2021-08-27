@@ -1,5 +1,5 @@
-import {Upload,Button,Spin} from 'antd';
-import {UploadOutlined,LoadingOutlined} from '@ant-design/icons';
+import {Upload,Button} from 'antd';
+import {UploadOutlined} from '@ant-design/icons';
 import React from "react";
 import {useSelector} from "react-redux";
 import { useTranslation } from 'react-i18next';
@@ -12,7 +12,7 @@ export const AvatarUpload = ({beforeUpload, handleChange, darkMode}) => {
     //***********************End of Upload***********************////////
     return (
         <>
-            <ImgCrop rotate fillColor modalTitle={t("CompteSettings.MoadalTitle")}>
+            <ImgCrop rotate fillColor modalTitle={t("CompteSettings.ModalTitle")}>
         <Upload
             accept="image/jpeg,image/png"
             name="avatar"

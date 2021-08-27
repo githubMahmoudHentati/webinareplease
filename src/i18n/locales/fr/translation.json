@@ -77,7 +77,7 @@
     "Modifier": "Modifier",
     "EditPass": "modifier votre mot de passe",
     "Ancien mot de passe": "Ancien mot de passe",
-    "Nouveau mot de passe": "Nouveau mot de passe",
+    "NewPassword": "Nouveau mot de passe",
     "Save": "Enregistrer",
     "Facture": "Facture",
     "IssuedOn": "Emise le",
@@ -91,14 +91,21 @@
     "MyAccount": "Mon Compte",
     "InvalidPhone": "Numéro telephone est invalide",
     "EnterPhone": "Saisir un numéro télephone",
-    "MoadalTitle": "Éditer l'image"
+    "ModalTitle": "Éditer l'image"
   },
   "ConfirmAccount": {
     "ConfirmationSend": "E-mail de confirmation envoyé !",
     "EmailCheck": "Veuillez vérifier votre courrier électronique  pour  valider l'inscription.",
     "NotFoundEmailMsg": "Si vous ne voyez pas l'e-mail, il se peut qu'il se trouve dans votre dossier de courrier indésirable ou que votre compte Webinarplease se trouve sous une autre adresse e-mail.",
     "EmailNotFound": "vous n'avez pas trouvé l'email? ",
-    "ResendEmail": "Renvoyer l'e-mail de confirmation"
+    "ResendEmail": "Renvoyer l'e-mail de confirmation",
+    "ResendMailConfirmation":"Un email de  confirmation est envoyé, veuillez  vérifier votre courrier électronique  pour  valider l'inscription.",
+    "InvalidAccessPoint": "Point d’accès invalide, veuillez registre encore une fois",
+    "EditedLive":"Le direct est modifié avec succès",
+    "CreatedLive": "Le direct est crée avec succès",
+    "EditedLiveProblem": "Ooops , il y a  un problème qui s'est produit lors la modification",
+    "CreatedLiveProblem": "Ooops , il y a  un problème qui s'est produit lors la creation"
+
   },
   "FormConnexion": {
     "Connexion": "Connexion",
@@ -233,7 +240,7 @@
     "AboutOneMn": "Environ 1mn",
     "BaseWebinaire": "Principes de base du webinaire",
     "confirmInscription": "Confirmation d'inscription",
-    "paticipated": "Participé",
+    "participated": "Participé",
     "notCome": "Non venu",
     "Replay": "Replay",
     "chaptersTab": {
@@ -293,10 +300,10 @@
     "CreditCardPay": "Ou payer par carte bancaire",
     "Free": "Gratuit"
   },
-  "resetPassword": {
+  "{resetPassword}": {
     "InvalidLink": "Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?",
     "ProblemInResetPass": "Un problème est survenu lors de la réinitialisation de votre mot de passe.",
-    "TryAgain": "TryAgain",
+    "TryAgain": "Voulez-vous réessayer ?",
     "GetNewLink": "Obtenir un nouveau lien",
     "ContactClient": "Contactez notre support client",
     "UseNewPassMsg": "Votre mot de passe a été mis à jour avec succès et vous pouvez maintenant l'utiliser pour vous reconnecter à Webinarplease.",
@@ -367,6 +374,6 @@
     "ErrorDelOne": "Oops!!! il y'a un erreur se produit",
     "ErrorDelTwo": "Oops!!! cet vidéo n'existe pas",
     "SuccessPassMsg": "Votre mot de passe a été modifié avec succès",
-    "AjoutLive": "Ajouter un direct"
+    "AddLive": "Ajouter un direct"
   }
 }
