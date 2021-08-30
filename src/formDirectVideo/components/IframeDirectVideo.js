@@ -57,9 +57,14 @@ export const IframeDirectVideo =()=>{
                                        <Col  span={4} >
                                            <MenuForms />
                                        </Col>
-                                       <Col  span={20} >
+                                       {directMenu===4?
+                                           <Col  span={20} >
+                                               <SelectMenu formLive={formLive}/>
+                                           </Col>:
+                                           <Col  span={12} >
                                            <SelectMenu formLive={formLive}/>
-                                       </Col>
+                                           </Col>
+                                       }
                                    </Row>
                             }
                     </Col>
