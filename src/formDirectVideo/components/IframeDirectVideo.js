@@ -13,7 +13,6 @@ import {Templetes} from "./Templetes";
 import {LiveSubmit} from "./liveSubmit.js";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
-
 export const IframeDirectVideo =()=>{
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
     let matchesMedia = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
@@ -50,15 +49,15 @@ export const IframeDirectVideo =()=>{
                                             <MenuForms />
                                         </Col>
                                      : //directMenu=5
-                                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:12}}>
+                                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:12}} >
                                                 <SelectMenu formLive={formLive}/>
                                             </Col>
                                       : //matchesMedia.matches
                                    <Row gutter={[30, 20]}>
-                                       <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:6}} xl={{span:4}}>
+                                       <Col  span={4} >
                                            <MenuForms />
                                        </Col>
-                                       <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:12}} xl={{span:12}}>
+                                       <Col  span={20} >
                                            <SelectMenu formLive={formLive}/>
                                        </Col>
                                    </Row>

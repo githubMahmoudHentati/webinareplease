@@ -300,7 +300,7 @@
     "CreditCardPay": "Ou payer par carte bancaire",
     "Free": "Gratuit"
   },
-  "{resetPassword}": {
+  "resetPassword": {
     "InvalidLink": "Ce lien de réinitialisation de mot de passe n'était plus valide. Cela vous ennuierait-il d'en activer un nouveau ?",
     "ProblemInResetPass": "Un problème est survenu lors de la réinitialisation de votre mot de passe.",
     "TryAgain": "Voulez-vous réessayer ?",

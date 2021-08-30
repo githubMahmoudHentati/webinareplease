@@ -243,7 +243,17 @@ const Hooks=()=>{
             dispatch(setInvitationOnchangeRules({invitationNameChangeRules:"replay", invitationValueChangeRules:false}));
         }
     }
+    const sendPostMessage = (info, value)=>{
+        const iframeEl = document
+            .getElementById('TemplatesIframe');
+        if(iframeEl){
+            iframeEl.contentWindow.postMessage(
+                ({info: info , value: value }),
+                '*',
+            );
+        }
 
+    }
 
     return({
         generalOnChangeByName,
@@ -269,7 +279,8 @@ const Hooks=()=>{
         values,
         matchesMedia,
         handleClickDelete,
-        getFirstCharacter
+        getFirstCharacter,
+        sendPostMessage
     })
 }
 

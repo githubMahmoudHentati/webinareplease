@@ -19,7 +19,7 @@ const formDirectInitialState = {
 
     error:false,
     loading:false,
-    currentTab: "0"
+    currentTab: "0",
 }
 
 

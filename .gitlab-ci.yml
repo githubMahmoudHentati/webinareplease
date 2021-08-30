@@ -1,0 +1,18 @@
+image: docker:latest
+include:
+  - project: 'empreinte/gitlab-ci/template-ci'
+    ref: master
+    file: '/templates/.gitlab-ci-jsonnet-job-client.yml'
+
+
+
+services:
+  - docker:dind
+stages:
+  - build
+  - deploy
+  - deploy-ingress
+
+
+
+
