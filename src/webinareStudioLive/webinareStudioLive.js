@@ -17,7 +17,7 @@ function IframeStudioLive(){
                         frameBorder="0"
                         title="Inline Frame Example"
                         // src={diffusionLink.diffLink}
-                         src="https://k8s-test-stream.webtv-solution.com/room/42-E1urW7hqgKHQJ2N?userName=Bou7mid Barhoum"
+                         src={diffusionLink.diffLink}
                 >
                 </iframe>
             </div>
