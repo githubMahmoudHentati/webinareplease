@@ -10,7 +10,7 @@ export const AccountSettingsConstraints = ()=>{
                 LastName: "",
                 email: "",
                 city: "",
-                address:"",
+                adresse:"",
                 numberPerson:"",
                 postalCode:"",
                 phone:"",

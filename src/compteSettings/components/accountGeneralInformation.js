@@ -286,10 +286,10 @@ export const AccountGeneralInformation = ({form}) => {
                                   }}>{t("CompteSettings.Address")} </span>
                                             </Col>
                                             <Col span={24}>
-                                                <Form.Item name="address"
+                                                <Form.Item name="adresse"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.address} name='address'
+                                                    <Input value={values.generalInformation.address} name='adresse'
                                                            placeholder={t("CompteSettings.Address")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>

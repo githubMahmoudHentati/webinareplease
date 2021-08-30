@@ -10,7 +10,7 @@ export const graphQL_shema = ()=> {
                     firstName
                     lastName
                     email
-                    address
+                    adresse
                     city
                     postalCode
                     numberPerson

@@ -168,7 +168,7 @@ export const FormSignUp =({child1,child2})=>{
                                                label={"Adress"}
                                     >
                                         <Input className={"spn2"} onChange={signUpOnChange}
-                                               name="address" placeholder={t("CompteSettings.Address")}></Input>
+                                               name="adresse" placeholder={t("CompteSettings.Address")}></Input>
                                     </Form.Item>
                                 </Col>
                                 <Col span={24}>
