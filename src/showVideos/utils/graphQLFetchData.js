@@ -22,6 +22,7 @@ export const GraphQLFetchData=()=> {
     const {paginationProps ,  values }=Hooks()
     const {error_getLives}=StatusMessage()
 
+
     // use Query to fetch Data
     const {data:dataLives}
         = useQuery(graphQL_shema().Get_Lives, {
@@ -61,10 +62,9 @@ export const GraphQLFetchData=()=> {
         }
     })
 
-
     useEffect(()=>{
         if(dataLives)
-        dispatch(setshowVideosActions(dataLives.getLives));
+            dispatch(setshowVideosActions(dataLives.getLives));
     },[dataLives])
 
 
