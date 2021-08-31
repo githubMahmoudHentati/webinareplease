@@ -122,7 +122,7 @@ function useActionMenu({record}) {
     }
     // copy pwd flux
     const handleClickPasswordFlux = (e) =>{
-        console.log("kjlsdkjflsdkfj8979887",document.getElementById("idPwd").type)
+        console.log("kjlsdkjflsdkfj8979887",document.querySelector(".ant-input-password .ant-input"))
         if (document.getElementById("idPwd").value === "") {
             return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
         } else {
@@ -131,6 +131,7 @@ function useActionMenu({record}) {
             message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
         }
     }
+
 
     const actionColumnView = (
         <div className="action">
