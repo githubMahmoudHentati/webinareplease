@@ -326,6 +326,8 @@
     "Close": "Close",
     "BroadcastUrl": "Broadcast Url",
     "StreamName": "Stream name",
+    "idFlux": "Stream ID",
+    "PWDFlux": "Stream Password",
     "LiveStreamName": "Live stream name",
     "DirectID": "Direct ID",
     "DirectPassword": "Direct password",
