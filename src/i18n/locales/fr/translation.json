@@ -330,6 +330,8 @@
     "Close": "Fermer",
     "BroadcastUrl": "Url de diffusion",
     "StreamName": "Nom de flux",
+    "idFlux": "ID du flux",
+    "PWDFlux": "Mot de passe du flux",
     "LiveStreamName": "Nom de flux du direct",
     "DirectID": "Identifiant du direct",
     "DirectPassword": "Mot de passe du direct",
