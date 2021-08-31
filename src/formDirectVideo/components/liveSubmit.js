@@ -12,7 +12,7 @@ import {useTranslation} from 'react-i18next';
 export const LiveSubmit=(props)=>{
     const history = useHistory()
     const [form] = Form.useForm();
-    const {handleSubmit,values}=Hooks()
+    const {handleSubmit,checkKeyDown,values}=Hooks()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const {t} = useTranslation();
     const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
@@ -84,6 +84,7 @@ export const LiveSubmit=(props)=>{
                 layout="horizontal"
                 name="product-form"
                 onFinish={handleSubmit}
+                onKeyDown={(e) => checkKeyDown(e)}
             >
                 <Spin spinning={localStorage.getItem('idLive')?!values.constraintData.loadingLiveFetchData:false}>
                     <Row gutter={[0, 10]}>
