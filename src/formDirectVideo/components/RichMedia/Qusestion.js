@@ -193,7 +193,7 @@ export const Question = ({ listQuestion }) => {
                                 <EditOutlined className="list-item-icons" />
                               </div>
                             }
-                            <div onClick={() => onRemove(ele.id)}>
+                            <div onClick={() => onRemove(ele)}>
                               <DeleteOutlined className="list-item-icons" />
                             </div>
                           </Col>

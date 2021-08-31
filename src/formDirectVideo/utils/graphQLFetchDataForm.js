@@ -323,11 +323,11 @@ export const GraphQLFetchDataForm = (values) => {
                     }),
                     diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
                         return({
-                            uid: uuidv4(),
-                            name:item.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
+                            uid: item.slideOrder,
+                            //name:item.slide.replace((item.slide.substring(0,item.slide.lastIndexOf("/")+6)),''),
                             status: 'done',
-                            url: item,
-                            thumbUrl: item,
+                            url: item.slide,
+                            thumbUrl: item.slide,
                         })
                     }),
                     fileListConfiguration:data.getlive.configurationOut.attachedFiles.map((item)=>{

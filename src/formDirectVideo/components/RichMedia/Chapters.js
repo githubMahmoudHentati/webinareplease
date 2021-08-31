@@ -114,6 +114,7 @@ const handleAdd = ()=>{
           value={newChap}
           onChange={handleChange}
           onKeyPress={(event) => {
+            console.log("sssssssssssssssssss",event.key)
             if (event.key === "Enter" && newChap.trim().length !== 0) {
               setLocalId(localId + 1);
               dispatch(setChapterList({ newChap, localId }))
