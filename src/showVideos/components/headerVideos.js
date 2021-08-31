@@ -106,7 +106,7 @@ function HeaderVideos() {
                           :
                           <div className="delete_number">
                               <Tooltip title={t("Calendar.Delete")}>
-                                  <Button style={{backgroundColor:darkMode===false?"":"#141414"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} onClick={()=>handleClickDeleteIcon()} loading={loadingDelete.loadingDelete}/>
+                                  <Button style={{backgroundColor:darkMode===false?"":"#141414" , border:darkMode===false?"1px solid rgba(0 , 0 , 0 , 0.15)":"1px solid rgba(255 , 255 , 255 , 0.15)"}}  icon={<DeleteOutlined style={{color:darkMode===false?"":"white"}}/>} onClick={()=>handleClickDeleteIcon()} loading={loadingDelete.loadingDelete}/>
                               </Tooltip>
                               <p style={{color:darkMode===false?"":"white"}}><span>{paginationProps.id.length || ""}</span> <span id={"text_selection"}>{t("ShowVideo.SelectedItem")}</span></p>
                           </div>
