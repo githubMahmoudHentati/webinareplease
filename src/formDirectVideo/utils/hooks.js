@@ -193,8 +193,8 @@ const Hooks=()=>{
     };
 
 
-    const handleSubmit =async ()=>{
-        console.log("values.general.period",values.general.period)
+    const handleSubmit =async (e)=>{
+        if (e.code === 'Enter') debugger;
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingCreateEditLive",constraintDataValueChange:true}));
         dispatch(setConfigurationOnchange({
             configurationNameChange: "addSpeakerList", configurationValueChange:
@@ -220,6 +220,10 @@ const Hooks=()=>{
         dispatch(setGeneralOnchange({generalNameChange:"period", generalValueChange:!values.general.liveAction?"":typeof values.general.period!="string"&&values.general.period===!null? moment(values.general.period).format('HH'):values.general.period===null?"":values.general.period}));
         idLive?UpdateLive():CreateLive()
 
+    }
+
+    const checkKeyDown =(e)=>{
+        if (e.code === 'NumpadEnter') e.preventDefault();
     }
 
     // Suppression des régles invitations
@@ -280,7 +284,8 @@ const Hooks=()=>{
         matchesMedia,
         handleClickDelete,
         getFirstCharacter,
-        sendPostMessage
+        sendPostMessage,
+        checkKeyDown
     })
 }
 
