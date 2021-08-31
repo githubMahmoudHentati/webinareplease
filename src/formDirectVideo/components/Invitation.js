@@ -106,43 +106,43 @@ function Invitation(){
         <div className={"Invitation"}>
             <div className={"title_invitation"}><h3 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.SendInvitations")}</h3></div>{/*./title_invitation*/}
 
-            <div className={"groupEmail"}>
-                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.EmailsGroup")}<InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
-                <Form.Item name="emailsGroup" className={"form-item-style"}
-                >
-                    <Select
-                        name="emailsGroup"
-                        onChange={(value, event) => {
-                            invitationOnChangeSelect(value, event, "emailsGroup")
-                        }}
-                        showArrow
-                        className={"selectGroupGmail"}
-                        getPopupContainer={() => document.querySelector(".selectGroupGmail")}
-                        mode="multiple"
-                        style={{width: 240}}
-                        placeholder={t("formDirectVideo.ChooseGroup")}
-                        dropdownRender={menu => (
-                            <div>
-                                {menu}
-                                <Divider style={{margin: '4px 0'}}/>
-                                <div style={{display: 'flex', flexWrap: 'nowrap', padding: 8}}>
-                                    <Input style={{flex: 'auto'}} value={name} onChange={onNameChange}/>
-                                    <a href="#/"
-                                        style={{flex: 'none', padding: '8px', display: 'block', cursor: 'pointer'}}
-                                        onClick={addItem}
-                                    >
-                                        <PlusOutlined/> {t("formDirectVideo.Add")}
-                                    </a>
-                                </div>
-                            </div>
-                        )}
-                    >
-                        {values.invitation.listMailsGroup.map(item => (
-                            <Option value={item.name}key={item.id}>{item.name}</Option>
-                        ))}
-                    </Select>
-                </Form.Item>
-            </div>{/*./groupEmail*/}
+            {/*<div className={"groupEmail"}>*/}
+            {/*    <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.EmailsGroup")}<InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>*/}
+            {/*    <Form.Item name="emailsGroup" className={"form-item-style"}*/}
+            {/*    >*/}
+            {/*        <Select*/}
+            {/*            name="emailsGroup"*/}
+            {/*            onChange={(value, event) => {*/}
+            {/*                invitationOnChangeSelect(value, event, "emailsGroup")*/}
+            {/*            }}*/}
+            {/*            showArrow*/}
+            {/*            className={"selectGroupGmail"}*/}
+            {/*            getPopupContainer={() => document.querySelector(".selectGroupGmail")}*/}
+            {/*            mode="multiple"*/}
+            {/*            style={{width: 240}}*/}
+            {/*            placeholder={t("formDirectVideo.ChooseGroup")}*/}
+            {/*            // dropdownRender={menu => (*/}
+            {/*            //     <div>*/}
+            {/*            //         {menu}*/}
+            {/*            //         <Divider style={{margin: '4px 0'}}/>*/}
+            {/*            //         <div style={{display: 'flex', flexWrap: 'nowrap', padding: 8}}>*/}
+            {/*            //             <Input style={{flex: 'auto'}} value={name} onChange={onNameChange}/>*/}
+            {/*            //             <a href="#/"*/}
+            {/*            //                 style={{flex: 'none', padding: '8px', display: 'block', cursor: 'pointer'}}*/}
+            {/*            //                 onClick={addItem}*/}
+            {/*            //             >*/}
+            {/*            //                 <PlusOutlined disabled={true}/> {t("formDirectVideo.Add")}*/}
+            {/*            //             </a>*/}
+            {/*            //         </div>*/}
+            {/*            //     </div>*/}
+            {/*            // )}*/}
+            {/*        >*/}
+            {/*            {values.invitation.listMailsGroup.map(item => (*/}
+            {/*                <Option value={item.name}key={item.id}>{item.name}</Option>*/}
+            {/*            ))}*/}
+            {/*        </Select>*/}
+            {/*    </Form.Item>*/}
+            {/*</div>/!*./groupEmail*!/*/}
 
             <div className={"groupEmail div2"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.Emails")}  <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
@@ -304,10 +304,10 @@ function Invitation(){
                             className={"popover popover2"}
                             content={
                                 <div className={"popoverCheckbox"}>
-                                    <Checkbox checked={values.invitation.addRules.afterSubscription === true} value = "afterSubscription" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.confirmInscription")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.isParticiped === true} value = "isParticiped" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.participated")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.notVisualized === true} value = "notVisualized" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.notCome")}</Checkbox>
-                                    <Checkbox checked={values.invitation.addRules.replay === true} value = "replay" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Replay")}</Checkbox>
+                                    <Checkbox disabled={!values.invitation.addRules.afterPrograming}checked={values.invitation.addRules.afterSubscription === true} value = "afterSubscription" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbx1"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.confirmInscription")}</Checkbox>
+                                    <Checkbox disabled={!values.invitation.addRules.afterPrograming}checked={values.invitation.addRules.isParticiped === true} value = "isParticiped" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.participated")}</Checkbox>
+                                    <Checkbox disabled={!values.invitation.addRules.afterPrograming}checked={values.invitation.addRules.notVisualized === true} value = "notVisualized" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.notCome")}</Checkbox>
+                                    <Checkbox disabled={!values.invitation.addRules.afterPrograming}checked={values.invitation.addRules.replay === true} value = "replay" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"chbox2"} onChange={InvitationOnChangeChecked}>{t("formDirectVideo.Replay")}</Checkbox>
                                 </div>
                             }
                             trigger="click"
