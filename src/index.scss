@@ -171,6 +171,12 @@ body{
 .ant-checkbox-disabled + span{
 
 }
+.div_Url_diffusion .ant-input-affix-wrapper{
+   background-color: var(--cell-color) !important;
+}
+.ant-modal-close-icon{
+    color: var(--icon-color) !important;
+}
 .div_filter .ant-input-affix-wrapper{
     border:1px solid var(--border_color) !important;
 }
@@ -474,6 +480,22 @@ body{
 
 .anticon:not(.anticon-close , .anticon-arrow-left , .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle) , .dropdownIconTemp{
     color: var(--icon-color) !important;
+}
+.copy_icon{
+    color: var(--icon-color) !important;
+    font-size: 16px !important;
+}
+.myLienIntegration{
+    position: relative;
+}
+#myLienIntegration{
+   padding-right: 5%;
+}
+.iconTextArea{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    z-index: 99999999999;
 }
 .ant-btn-primary .anticon{
     color: white !important;
@@ -998,12 +1020,26 @@ body{
 
 /*Modals*/
 .div_Url_diffusion{
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 4%;
 }
+.PasswordInfosDiv{
+    position: relative !important;
+}
+ .div_Url_diffusion .ant-input-password .ant-input-suffix{
+     margin-right: 30px !important;
+ }
+ .copy_icon_pwd{
+     position: absolute;
+     right: 13px;
+     top: 35px;
+     z-index: 999999999999999999;
+ }
+
 .div_Url_diffusion span{
     font-family: 'SF Pro Display';
     font-size: 14px;
@@ -1035,8 +1071,8 @@ body{
     font-size: 14px;
     font-weight: normal;
     color: rgba(0, 0, 0, 0.25);
-    height: 32px !important;
-    margin-bottom: 2%;
+    //height: 32px !important;
+    //margin-bottom: 2%;
 }
 .div_Copier{
     width: 100%;
