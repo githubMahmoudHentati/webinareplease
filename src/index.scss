@@ -978,6 +978,10 @@ body{
 .btn_1{
     margin-right: 1%;
 }
+.div_apercu{
+    width: 93px !important;
+    height: 54px !important;
+}
 .img_aperçu{
     width: 93px !important;
     height: 54px !important;
@@ -1135,14 +1139,14 @@ body{
     color: var(--menu-color) !important;
 }
 .side-nav{
-    z-index: 99999999999999999999999999999999999999999;
+    z-index: 12;
 }
 #side-menu{
     background-color: var(--card_color) !important;
     height: 100%;
     width: 295px;
     position: fixed;
-    z-index: 99999999999999999999999999999999999999999;
+    z-index: 12;
     top: 0;
     right: 0;
     opacity: 1;

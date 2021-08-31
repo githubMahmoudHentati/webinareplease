@@ -290,7 +290,7 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
         
                     }
             case "REMOVE_QUESTION":
-                        let filteredListQuestion = state.configuration.listQuestion.filter((ele) => ele.id !== action.payload)
+                        let filteredListQuestion = state.configuration.listQuestion.filter((ele) => ele !== action.payload)
                         return{
                             ...state, configuration: {...state.configuration,listQuestion: filteredListQuestion}
         

@@ -2,7 +2,11 @@ import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch} from "react-redux";
 import {Hooks} from "./hooks";
-import {setshowVideosActions , setShowVideoConstraintDataOnchange} from "../store/showVideosAction";
+import {
+    setshowVideosActions,
+    setShowVideoConstraintDataOnchange,
+    setFilterVideosActions
+} from "../store/showVideosAction";
 import {StatusMessage} from "./StatusMessage";
 import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../../formDirectVideo/store/formDirectVideoAction"
 import {setDirectSetting} from "../../utils/redux/actions";
@@ -34,7 +38,7 @@ export const GraphQLFetchData=()=> {
                 "order_column": parseInt(paginationProps.columnKey),
                 "search_word":values.search,
                 "date":["", ""],
-                "status":""
+                "status":values.type
             } },
         context: { clientName: "second" },
         onCompleted :(data)=>{
@@ -63,8 +67,9 @@ export const GraphQLFetchData=()=> {
     })
 
     useEffect(()=>{
-        if(dataLives)
+        if(dataLives){
             dispatch(setshowVideosActions(dataLives.getLives));
+        }
     },[dataLives])
 
 
