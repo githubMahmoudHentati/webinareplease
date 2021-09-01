@@ -16,11 +16,13 @@ import {
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
-const Hooks=()=>{
+const Hooks=(attachedFilesRef)=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
     let matchesMedia   = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
+
+    const scrollToRef = (ref) => ref.current.scrollIntoView({ behavior: "smooth" })
 
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
@@ -109,9 +111,9 @@ const Hooks=()=>{
         values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
     }
 
-    const configurationOnChangeButton = (event) => {
+    const configurationOnChangeButton = async (event) => {
 
-        dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
+        await dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
 
     };
 
@@ -191,6 +193,9 @@ const Hooks=()=>{
         //let listTags= (...[],option)
         dispatch(setInvitationOnchange({invitationNameChange:name, invitationValueChange:value}));
     };
+
+    //************************Common Function***********************//
+
 
 
     const handleSubmit =async (e)=>{
@@ -285,7 +290,8 @@ const Hooks=()=>{
         handleClickDelete,
         getFirstCharacter,
         sendPostMessage,
-        checkKeyDown
+        checkKeyDown,
+        scrollToRef
     })
 }
 
