@@ -123,7 +123,7 @@ function HeaderVideos() {
                           style={{ width: 120 }}
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
-                          defaultValue=""
+                          defaultValue={values.type}
                           optionFilterProp="children"
                           name="type" onChange={handleHeaderSelect}
 

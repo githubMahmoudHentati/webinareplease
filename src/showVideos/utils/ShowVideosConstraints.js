@@ -9,7 +9,7 @@ export const ShowVideosList = ()=>{
                 periode:"",
                 date:[],
                 contributeur: null,
-                type:"tous"
+                type:"",
             }
         )
     }
