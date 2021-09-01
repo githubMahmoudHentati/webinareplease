@@ -69,7 +69,7 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     tags: values.configuration.tags,
                     addSpeaker: values.configuration.switchSpeaker?values.configuration.addSpeakerList:[],
-                    themes: values.configuration.theme,
+                    themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
                     questions:richeMediaDiffusion === true ? Questions : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
@@ -167,7 +167,7 @@ export const GraphQLFetchDataForm = (values) => {
                         theme: "themeX"
                     },
                     tags: values.configuration.tags,
-                    themes: values.configuration.theme,
+                    themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
                     questions:richeMediaDiffusion === true ? Questions : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,

@@ -177,7 +177,7 @@ function GlobalHeader() {
                         <a href="#/" className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
 
                            style={{color: darkMode === false ? "" : "white"}}>
-                            <Avatar style={{backgroundColor: '#419BF9'}}
+                            <Avatar style={{backgroundColor: darkMode?"#1D1D1D":'#F0F1F4'}}
                                     src={avatar}
                                     icon={!avatar ? <UserOutlined/> : ""} />
                             {
