@@ -80,7 +80,10 @@ export const graphQL_shema = ()=> {
                     tags
                     themes
                     attachedFiles
-                    slides
+                    slides{
+                    slideOrder
+                    slide
+                    }
                     chapters{
                       chapterOrder
                       chapterTitle

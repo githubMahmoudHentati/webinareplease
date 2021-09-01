@@ -111,7 +111,7 @@ export  const Hooks=()=> {
                     "order_column": parseInt(paginationProps.columnKey),
                     "search_word":values.search,
                     "date": ["", ""],
-                    "status":""
+                    "status":values.type
                 },
 
             },
