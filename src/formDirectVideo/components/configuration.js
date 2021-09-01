@@ -30,7 +30,8 @@ import {AttachedFile} from "./attachedFile";
 
 export const Configuration = () => {
     const [form] = Form.useForm();
-
+    const visibleLiveRef = useRef(null)
+    const themesRef = useRef(null)
     const [itemListHeight, setItemListHeight] = useState(null);
     const values = useSelector((state) => state.FormDirectVideoReducer)
     const { listQuestion } = useSelector(
@@ -38,7 +39,6 @@ export const Configuration = () => {
       );
     const itemListRef = useRef(null);
     const {t} = useTranslation();
-
 
     const {
         configurationOnChangeByName,
@@ -48,7 +48,8 @@ export const Configuration = () => {
         configurationOnChange,
         configurationOnChangeButton,
         ConfigurationOnChangeSelect,
-        getFirstCharacter
+        getFirstCharacter,
+        scrollToRef
     } = Hooks(form)
 
     // use Selector redux
@@ -71,10 +72,13 @@ export const Configuration = () => {
         itemListRef.current && setItemListHeight(itemListRef.current.offsetHeight)
     }, [itemListRef]);
 
-    // useEffect(async () => {
-    //     values.configuration.SpeakerList.length > 0 &&
-    //     dispatch(setConfigurationOnchange({configurationNameChange: "switchSpeaker", configurationValueChange: true}));
-    // }, []);
+    useEffect(() => {
+        values.configuration.liveAutomaticArchiving&&scrollToRef(visibleLiveRef)
+    }, [values.configuration.liveAutomaticArchiving]);
+
+    useEffect(() => {
+        values.configuration.videoMode === "visibleVideo"&&scrollToRef(themesRef)
+    }, [values.configuration.videoMode]);
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
@@ -208,14 +212,14 @@ export const Configuration = () => {
                                     color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
                                 }}>{t("formDirectVideo.LiveMultimediaOptions")}</span>
                             </Col>
-                            <Col span={24} >
+                            <Col span={24}>
                                 <Row gutter={[0, 15]}>
-                                    <Col span={24}  className={"col-forms"}>
-                                    <Checkbox onChange={configurationOnChangeButton}
-                                          name="richeMediaDiffusion"
-                                          value="richeMediaDiffusion"
-                                          style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
-                                          checked={values.configuration.richeMediaDiffusion}>
+                                    <Col span={24} className={"col-forms"}>
+                                        <Checkbox onChange={configurationOnChangeButton}
+                                                  name="richeMediaDiffusion"
+                                                  value="richeMediaDiffusion"
+                                                  style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                                                  checked={values.configuration.richeMediaDiffusion}>
                                             <p style={{margin: 0}}>{t("formDirectVideo.Richmedia")}
                                                 <InfoCircleFilled
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
@@ -223,10 +227,11 @@ export const Configuration = () => {
                                         </Checkbox>
                                         <br/>
                                     </Col>
-                                    <Col span={24} className={values.configuration.richeMediaDiffusion ? "bordered-col d-block" : "d-none"}>
-                                        <TabMenu listQuestion={listQuestion} />
+                                    <Col span={24}
+                                         className={values.configuration.richeMediaDiffusion ? "bordered-col d-block" : "d-none"}>
+                                        <TabMenu listQuestion={listQuestion}/>
                                     </Col>
-                                    <Col span={24}  className={"col-forms"}>
+                                    <Col span={24} className={"col-forms"}>
 
                                         <Checkbox onChange={configurationOnChangeButton}
                                                   name="attachments"
@@ -238,11 +243,11 @@ export const Configuration = () => {
                                                     style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
                                                     className={"infosIcon"}/></p></Checkbox>
                                     </Col>
-                                            <Col span={24}  className={""}>
+                                    <Col span={24} className={""}>
                                                 {
                                                     values.configuration.attachments
                                                         ?
-                                                      <AttachedFile/>
+                                                      <AttachedFile />
                                                         :
                                                         null
                                                 }
@@ -286,7 +291,7 @@ export const Configuration = () => {
                                 </Row>
                             </Col>
                             {values.configuration.liveAutomaticArchiving &&
-                            <Col span={24} className={"col-forms"}>
+                            <Col span={24} className={"col-forms"} ref={visibleLiveRef}>
                                 <Form.Item name="videoMode" className={"form-item-style"}
                                 >
                                     <Radio.Group value={values.configuration.videoMode} name="videoMode"
@@ -305,7 +310,7 @@ export const Configuration = () => {
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
-                            <Col span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
+                            <Col ref={themesRef} span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
                                  className={"col-forms"}>
                                 <span>{t("formDirectVideo.Themes")}</span>
                             </Col>
