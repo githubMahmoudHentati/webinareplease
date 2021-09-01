@@ -6,6 +6,8 @@ import { Chapter } from "../RichMedia/Chapters";
 import { useTranslation } from "react-i18next";
 import { setTab } from "../../store/formDirectVideoAction";
 import { useDispatch, useSelector } from "react-redux";
+import {useEffect, useRef} from "react";
+import Hooks from "../../utils/hooks";
 
 const { TabPane } = Tabs;
 
@@ -16,7 +18,15 @@ export const TabMenu = ({ listQuestion }) => {
   const onChangeTab = (key) => {
     dispatch(setTab(key));
   };
+  const richMediaRef = useRef(null)
+  const {values,scrollToRef}=Hooks()
+
+  useEffect(() => {
+    values.configuration.richeMediaDiffusion&&scrollToRef(richMediaRef)
+  }, [values.configuration.richeMediaDiffusion]);
+
   return (
+      <div ref={richMediaRef}>
     <Tabs
       onChange={onChangeTab}
       activeKey={currentTab}
@@ -56,5 +66,6 @@ export const TabMenu = ({ listQuestion }) => {
         <Slides />
       </TabPane>
     </Tabs>
+      </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect,useRef} from 'react';
 import {Row, Col, Input, Button, Switch, Radio, Checkbox, DatePicker, Form,TimePicker} from 'antd'
 import '../formDirectVideo.scss'
 import {message } from 'antd';
@@ -15,6 +15,9 @@ import { useTranslation } from 'react-i18next';
 
 export const Generals =()=>{
 
+    const livePlanRef = useRef(null);
+    const pwdShowRef = useRef(null);
+
     const dispatch = useDispatch()
     const [form] = Form.useForm();
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
@@ -24,7 +27,7 @@ export const Generals =()=>{
     const isValidPassword = () => {
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_`!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(values.general.pwd)
     }
-    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values}= Hooks(form)
+    const {generalOnChangeByName,generalOnChange,generalOnChangeButton,startGetDisabledMinutes,startGetDisabledHours,disablePastDate,values,scrollToRef}= Hooks(form)
 
     const {copy} = useCopy(
         values.general.liveLink+"/"+values.general.liveTitle
@@ -32,11 +35,11 @@ export const Generals =()=>{
 
     const copySuccess =async ()=>
     {
-        await dispatch(setFormDirectLiveConstraintDataOnchange({
+          dispatch(setFormDirectLiveConstraintDataOnchange({
             constraintDataNameChange: "leaveToast",
             constraintDataValueChange: false
         }))
-        copy()
+        await copy()
         values.constraintData.leaveToast&&await message.success({
             content: i18n.t('formDirectVideo.SuccessCopyMsg'),
             duration: 2,
@@ -45,12 +48,20 @@ export const Generals =()=>{
             },
         })
             .then(async () =>
-                await dispatch(setFormDirectLiveConstraintDataOnchange({
+                 dispatch(setFormDirectLiveConstraintDataOnchange({
                     constraintDataNameChange: "leaveToast",
                     constraintDataValueChange: true
                 }))
             )
     }
+
+    useEffect(() => {
+        values.general.liveAction &&scrollToRef(livePlanRef)
+    }, [values.general.liveAction]);
+
+    useEffect(() => {
+        values.general.directAccessMode === "liveAccess" &&scrollToRef(pwdShowRef)
+    }, [values.general.directAccessMode]);
 
     return(
         <Row gutter={[0, 30]}>
@@ -141,7 +152,7 @@ export const Generals =()=>{
                 </Row>
             </Col>
             {values.general.liveAction &&
-            <Col span={24}>
+            <Col span={24} ref={livePlanRef}>
                 <Row gutter={[20, 10]}>
                     <Col span={8} className={"col_planification"}>
                         <span style={{
@@ -204,7 +215,7 @@ export const Generals =()=>{
                                 </Radio.Group>
                             </Col>
                             {values.general.directAccessMode === "liveAccess" &&
-                            <Col offset={3} span={21}>
+                            <Col offset={3} span={21} ref={pwdShowRef}>
                                 <Form.Item
                                     className={"form-item-style"}
                                     name="pwd"

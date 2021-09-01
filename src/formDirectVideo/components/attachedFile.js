@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Row ,Col} from 'antd'
 import { Upload} from "antd";
 import { InboxOutlined  } from '@ant-design/icons';
@@ -12,15 +12,20 @@ const { Dragger } = Upload;
 
 export const AttachedFile = () => {
 
-    const {values}=Hooks()
+    const attachedFilesRef = useRef(null)
+
+    const {values,scrollToRef}=Hooks()
     const { removeThumbnailConfiguration , handleChangeConfiguration }=UploadHooks()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t} = useTranslation();
 
+    useEffect(() => {
+        values.configuration.attachments&&scrollToRef(attachedFilesRef)
+    }, [values.configuration.attachments]);
 
     return(
-        <Row >
+        <Row ref={attachedFilesRef}>
 
          <Col  xs={{span:24}} sm={{span:24}} md={{span:24}} lg={{span:24}} className={"draggerAttachedFile"}>
              <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
