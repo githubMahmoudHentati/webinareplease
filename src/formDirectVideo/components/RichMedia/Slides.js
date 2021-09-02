@@ -28,6 +28,7 @@ export const Slides = () => {
                    name="fileList" listType="picture-card"
                    accept="image/jpeg,image/png,image/webp,image/gif,image/bmp"
                    fileList={[...values.configuration.diapositivesFileLists]}
+                   multiple={true}
               //beforeUpload={beforeUpload}
                    onChange={handleChangeDiapositives}
                    onRemove={removeThumbnailDiapositives}

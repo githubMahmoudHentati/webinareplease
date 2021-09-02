@@ -3475,6 +3475,11 @@
     "get-intrinsic" "^1.1.1"
     "is-string" "^1.0.5"
 
+"array-move@^3.0.1":
+  "integrity" "sha512-H3Of6NIn2nNU1gsVDqDnYKY/LCdWvCMMOWifNGhKcVQgiZ6nOek39aESOvro6zmueP07exSl93YLvkN4fZOkSg=="
+  "resolved" "https://registry.npmjs.org/array-move/-/array-move-3.0.1.tgz"
+  "version" "3.0.1"
+
 "array-move@^4.0.0":
   "integrity" "sha512-+RY54S8OuVvg94THpneQvFRmqWdAHeqtMzgMW6JNurHxe8rsS07cHQdfGkXnTUXiBcyZ0j3SiDIxxj0RPiqCkQ=="
   "resolved" "https://registry.npmjs.org/array-move/-/array-move-4.0.0.tgz"
@@ -12864,6 +12869,14 @@
   "version" "3.5.2"
   dependencies:
     "normalize-wheel" "^1.0.1"
+    "tslib" "2.0.1"
+
+"react-easy-sort@^1.3.1":
+  "integrity" "sha512-sU+ICvD/oHGdJk1t/gUOdHET2BU0fZYV5QM8CINeB55i3tJyPKu3c/Bbf284AnJbPGDkMiQbmAXQ7LIf2OMEMA=="
+  "resolved" "https://registry.npmjs.org/react-easy-sort/-/react-easy-sort-1.3.1.tgz"
+  "version" "1.3.1"
+  dependencies:
+    "array-move" "^3.0.1"
     "tslib" "2.0.1"
 
 "react-error-overlay@^6.0.9":
