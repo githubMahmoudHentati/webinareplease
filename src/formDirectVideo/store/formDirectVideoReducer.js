@@ -1,5 +1,6 @@
 import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import moment from "moment";
+import {arrayMoveImmutable} from "array-move";
 
 const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
 
@@ -289,6 +290,18 @@ export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
                         ...state, configuration: {...state.configuration,listQuestion:[...state.configuration.listQuestion,{nsp, question, choices}]}
         
                     }
+           case "SET_SortQuestions":
+            const {oldIndex, newIndex}=action.payload;
+            return{
+                ...state, configuration: {...state.configuration,listQuestion: arrayMoveImmutable(state.configuration.listQuestion, oldIndex, newIndex)}
+
+            }
+          case "SET_SortChapters":
+            const {oldIndexChapters, newIndexChapters}=action.payload;
+            return{
+                ...state, configuration: {...state.configuration,listChapter: arrayMoveImmutable(state.configuration.listChapter, oldIndexChapters, newIndexChapters)}
+
+            }
             case "REMOVE_QUESTION":
                         let filteredListQuestion = state.configuration.listQuestion.filter((ele) => ele !== action.payload)
                         return{

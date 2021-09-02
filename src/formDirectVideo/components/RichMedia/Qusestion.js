@@ -11,11 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setQuestionList,
   removeQuestion,
-  editQuestion,
+  editQuestion, sortQuestion,
 } from "../../store/formDirectVideoAction";
 import { useTranslation } from "react-i18next";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-
+import SortableList, { SortableItem } from "react-easy-sort";
+import {arrayMoveImmutable} from "array-move";
 export const Question = ({ listQuestion }) => {
   const inputRef = React.useRef(null);
 
@@ -41,7 +41,6 @@ export const Question = ({ listQuestion }) => {
   useEffect(() => {
     if (inputRef && isAddingNewQuestion) inputRef.current.focus();
   }, [isAddingNewQuestion]);
-
 
   const handleChange = (e) => {
     setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
@@ -208,20 +207,28 @@ export const Question = ({ listQuestion }) => {
   }
   const responseList = Inputs.choices;
 
+  const onSortEnd = async (oldIndex, newIndex) => {
+     await setFakeList((array) => arrayMoveImmutable(array, oldIndex, newIndex));
+     await dispatch(sortQuestion({oldIndex, newIndex }));
+  };
+
   return (
       <Row gutter={[0, 15]} className="Question">
         <Col span={24}>
+          <SortableList
+              onSortEnd={onSortEnd}
+          >
           {fakeList.length ? (
               fakeList.map((ele, index) =>
                   questionToEdit !== index  ? (
-
+                      <SortableItem key={ele.id}>
                       <div className="Question__list-item">
                         <Row
                             className="Question__list-item__content"
                             style={{ width: "100%" }}
                         >
                           <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
-                            <MenuOutlined />
+                            <MenuOutlined className={"menuOutlinedIcon"}/>
                             <span>
                       {index + 1}
                               {"."}
@@ -247,6 +254,7 @@ export const Question = ({ listQuestion }) => {
                           </Col>
                         </Row>
                       </div>
+                      </SortableItem>
                   ) : (
                       <Row className="Question__new-question" gutter={[0, 15]}
                       style={{display:isAddingNewQuestion === true && isEditQuestion === false ? "none" : "flex"}}
@@ -381,6 +389,7 @@ export const Question = ({ listQuestion }) => {
                 <span>{t("formDirectVideo.questionsTab.emptyList")}</span>
               </div>
           )}
+          </SortableList>
         </Col>
         <Col
             className="Question__add-question"

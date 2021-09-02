@@ -113,6 +113,19 @@
                 payload:e,
             }
         }
+          export function sortQuestion(e){
+
+                return{
+                 type: "SET_SortQuestions",
+                 payload:e,
+               }
+          }
+          export function sortChapters(e){
+            return{
+              type: "SET_SortChapters",
+              payload:e,
+           }
+          }
         export function editQuestion(e){
 
             return{

@@ -62,6 +62,18 @@
     }
   }
 }
+.menuOutlinedIcon{
+  &:hover {
+    cursor: move !important;
+    cursor: grab !important;
+    //cursor: -webkit-grab;
+    color: var(--white_color) !important;
+  }
+  &:active{
+    cursor: grabbing !important;
+    color: var(--white_color) !important;
+  }
+}
 
 .titre-menu{
   padding: 8% 5%;
