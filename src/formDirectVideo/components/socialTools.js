@@ -138,12 +138,11 @@ export const SocialTools=()=>{
                                                     }
                                                 )}
                                                 <Col style={{
-                                                    border: "1px solid RGBA(0, 0, 0, 0.15)",
                                                     display: "flex",
                                                     alignItems: "center",
                                                     justifyContent: "center"
-                                                }} span={24} className={"col-planification"}>
-                                                    <Button  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
+                                                }} span={24} className={"col-planification_button"}>
+                                                    <Button className={"btn_add_planning"}  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"dashed 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
                                                         {t("formDirectVideo.AddingPlanning")}
                                                     </Button>
                                                 </Col>

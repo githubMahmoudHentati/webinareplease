@@ -453,9 +453,18 @@
   border:1px solid RGBA(0, 0, 0, 0.15);
   padding:4% 4%
 }
+.btn_add_planning{
+  border: 1px dashed var(--icon-color) !important;
+}
 
 .ant-list-split .ant-list-item {
-  border-bottom: 1px solid RGBA(0, 0, 0, 0.15)!important;
+  //border-bottom: 1px solid RGBA(0, 0, 0, 0.15)!important;
+}
+.ant-list-item-action-split{
+ background-color: var(--icon-color) !important;
+}
+.EditOutlined:hover{
+  color: RGB(0, 127, 203) !important;
 }
 
 .list-speaker{

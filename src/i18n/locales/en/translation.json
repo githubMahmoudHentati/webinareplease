@@ -244,7 +244,7 @@
       "inputPlaceholder": "New chapter"
     },
     "questionsTab":{
-      "title": "Question",
+      "title": "Questions",
       "emptyList": "No questions",
       "inputQuestionLabel": "New Question",
       "addQuestion": "Add a question",
