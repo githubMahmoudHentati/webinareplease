@@ -9,7 +9,7 @@ export const ShowVideosList = ()=>{
                 periode:"",
                 date:[],
                 contributeur: null,
-                type:"tous"
+                type:"",
             }
         )
     }
@@ -22,7 +22,8 @@ export const ShowVideosList = ()=>{
                 current:1,
                 id:[],
                 idLive:0,
-                idDiffusion:null
+                idDiffusion:null,
+                statusMessages:true
             }
         )
     }

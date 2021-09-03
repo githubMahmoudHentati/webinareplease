@@ -73,7 +73,6 @@ function HeaderVideos() {
         setContributor(null)
         resetFilterVideos()
     }
-
     return(
       <div className="HeaderVideo">
 
@@ -123,7 +122,7 @@ function HeaderVideos() {
                           style={{ width: 120 }}
                           className="selectFilter"
                           placeholder={"Selecter un Type"}
-                          defaultValue=""
+                          defaultValue={values.type}
                           optionFilterProp="children"
                           name="type" onChange={handleHeaderSelect}
 
@@ -218,7 +217,7 @@ function HeaderVideos() {
 
                       <div className="div_button_filter">
                           <Tooltip title={t("ShowVideo.ResetMedia")}><Button onClick={handleResetFilter} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
-                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={() => handleFiltrerVideos(rangeDate, selectedContributor )}>{t("ShowVideo.Filter")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={() => handleFiltrerVideos(rangeDate, selectedContributor )} >{t("ShowVideo.Filter")}</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
 

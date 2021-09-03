@@ -8,7 +8,6 @@ export const StatusMessage = () => {
     //succes delete lang
     const success_Delete = () => {
 
-
         message.success({
             content:i18n.t("ShowVideo.SuccessMsg"),
             className: 'message-event',

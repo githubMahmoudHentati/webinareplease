@@ -1,7 +1,7 @@
 /**chapter component*****/
 .Chapters {
   &__list-item {
-    border-bottom: 1px solid #cdd3d9;
+    border-bottom: 1px solid var(--icon-color);
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,7 @@
 /**chapter component*****/
 .Question {
   &__list-item {
-    border-bottom: 1px solid #cdd3d9;
+    border-bottom: 1px solid var(--icon-color);
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
@@ -147,6 +147,7 @@
 /************common styles******************/
   .list-item-icons{
     color: var(--white_color) !important;
+    cursor: pointer !important;
   }
   .empty-list{
     width: 100%;

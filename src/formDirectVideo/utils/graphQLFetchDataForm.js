@@ -69,7 +69,7 @@ export const GraphQLFetchDataForm = (values) => {
                     },
                     tags: values.configuration.tags,
                     addSpeaker: values.configuration.switchSpeaker?values.configuration.addSpeakerList:[],
-                    themes: values.configuration.theme,
+                    themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
                     questions:richeMediaDiffusion === true ? Questions : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
@@ -167,7 +167,7 @@ export const GraphQLFetchDataForm = (values) => {
                         theme: "themeX"
                     },
                     tags: values.configuration.tags,
-                    themes: values.configuration.theme,
+                    themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:richeMediaDiffusion === true ? TitleChapters : [],
                     questions:richeMediaDiffusion === true ? Questions : [],
                     attachedFiles: attachements === true ? ThumbUrlAttachementFile:[] ,
@@ -323,11 +323,11 @@ export const GraphQLFetchDataForm = (values) => {
                     }),
                     diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
                         return({
-                            uid: uuidv4(),
-                            name:item.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
+                            uid: item.slideOrder,
+                            //name:item.slide.replace((item.slide.substring(0,item.slide.lastIndexOf("/")+6)),''),
                             status: 'done',
-                            url: item,
-                            thumbUrl: item,
+                            url: item.slide,
+                            thumbUrl: item.slide,
                         })
                     }),
                     fileListConfiguration:data.getlive.configurationOut.attachedFiles.map((item)=>{

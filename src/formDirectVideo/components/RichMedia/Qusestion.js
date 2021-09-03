@@ -11,10 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setQuestionList,
   removeQuestion,
-  editQuestion,
+  editQuestion, sortQuestion,
 } from "../../store/formDirectVideoAction";
 import { useTranslation } from "react-i18next";
-
+import SortableList, { SortableItem } from "react-easy-sort";
+import {arrayMoveImmutable} from "array-move";
 export const Question = ({ listQuestion }) => {
   const inputRef = React.useRef(null);
 
@@ -24,6 +25,8 @@ export const Question = ({ listQuestion }) => {
   const [questionToEdit, setQuestionToEdit] = useState(null);
   const [localId, setLocalId] = useState(1);
   const [isAddingNewQuestion, setIsAddingNewQuestion] = useState(false);
+  const [isEditQuestion , setIsEditQuestion] = useState(false);
+  const [isFullInput , setIsFullInput] = useState("");
   const [Inputs, setInputs] = useState({
     nsp: 1,
     choices: [{ response: "" }],
@@ -31,6 +34,7 @@ export const Question = ({ listQuestion }) => {
   });
   const [isEditing, setIsEditing] = useState(false);
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
+
   useEffect(() => {
     setFakeList(listQuestion);
   }, [listQuestion]);
@@ -40,6 +44,7 @@ export const Question = ({ listQuestion }) => {
 
   const handleChange = (e) => {
     setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
+    setIsFullInput(e.target.value)
   };
   const handleChangeResponse = (e, key) => {
     Inputs.choices[key].response = e.target.value;
@@ -98,8 +103,19 @@ export const Question = ({ listQuestion }) => {
     dispatch(setQuestionList({ nsp, question, choices: [...choices.filter(ele => ele.response.length > 0)], questionId: localId }));
     setFakeList([...fakeList, { nsp, question, choices: [...choices.filter(ele => ele.response.length > 0)], questionId: localId }]);
     setInputs({ nsp: 1, choices: [{ response: "" }], question: "" });
-    setIsAddingNewQuestion(false);
+    setIsAddingNewQuestion(true);
   };
+  const handleAddQuestionKey = (e) =>{
+    if(e.key === "Enter"){
+      const { nsp, question, choices } = Inputs;
+
+      setLocalId(localId + 1);
+      dispatch(setQuestionList({ nsp, question, choices: [...choices.filter(ele => ele.response.length > 0)], questionId: localId }));
+      setFakeList([...fakeList, { nsp, question, choices: [...choices.filter(ele => ele.response.length > 0)], questionId: localId }]);
+      setInputs({ nsp: 1, choices: [{ response: "" }], question: "" });
+      setIsAddingNewQuestion(true);
+    }
+  }
 
   const addNewResponse = (firstKey, attr) => {
     if (attr === "edit") {
@@ -114,6 +130,21 @@ export const Question = ({ listQuestion }) => {
       }));
     }
   };
+  const addNewResponseKey = (e,firstKey, attr)=>{
+    if(e.key === "Enter"){
+      if (attr === "edit") {
+        let oldArray = [...fakeList];
+        oldArray[firstKey].choices.push({ response: "" });
+        setFakeList(oldArray);
+        setIsEditing(true);
+      } else {
+        setInputs((old) => ({
+          ...old,
+          choices: [...old.choices, { response: "" }],
+        }));
+      }
+    }
+  }
 
   const removeResponse = (firstKey, resp, attr) => {
     let filtered = [...fakeList];
@@ -143,12 +174,27 @@ export const Question = ({ listQuestion }) => {
     dispatch(editQuestion({ editedListQuestion: [...fakeList] }));
     setIsEditing((old) => !old);
   };
+  const handleEditQuestionKey = (e) =>{
+    if(e.key === "Enter"){
+      setQuestionToEdit(null);
+      dispatch(editQuestion({ editedListQuestion: [...fakeList] }));
+      setIsEditing((old) => !old);
+    }
+  }
 
   const handleAbortEdit = () => {
     setQuestionToEdit(null);
     setFakeList(listQuestion);
     setIsEditing((old) => !old);
   };
+  const handleAbortEditkey = (e , index) =>{
+    console.log("iueiazueyiazuiazueyiazukjhd5646",e)
+    if(e.key === "Enter"){
+      setQuestionToEdit(null);
+      setFakeList(listQuestion);
+      setIsEditing((old) => !old);
+    }
+  }
 
   const checkResponseStatus = (check, responses) =>{
     switch(check){
@@ -161,19 +207,28 @@ export const Question = ({ listQuestion }) => {
   }
   const responseList = Inputs.choices;
 
+  const onSortEnd = async (oldIndex, newIndex) => {
+     await setFakeList((array) => arrayMoveImmutable(array, oldIndex, newIndex));
+     await dispatch(sortQuestion({oldIndex, newIndex }));
+  };
+
   return (
       <Row gutter={[0, 15]} className="Question">
         <Col span={24}>
+          <SortableList
+              onSortEnd={onSortEnd}
+          >
           {fakeList.length ? (
               fakeList.map((ele, index) =>
-                  questionToEdit !== index ? (
+                  questionToEdit !== index  ? (
+                      <SortableItem key={ele.id}>
                       <div className="Question__list-item">
                         <Row
                             className="Question__list-item__content"
                             style={{ width: "100%" }}
                         >
                           <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
-                            <MenuOutlined />
+                            <MenuOutlined className={"menuOutlinedIcon"}/>
                             <span>
                       {index + 1}
                               {"."}
@@ -190,17 +245,20 @@ export const Question = ({ listQuestion }) => {
                                     display: questionToEdit !== null ? "none" : "block",
                                   }}
                               >
-                                <EditOutlined className="list-item-icons" />
+                                <EditOutlined className="list-item-icons" onClick={()=>setIsEditQuestion(true)}/>
                               </div>
                             }
-                            <div onClick={() => onRemove(ele.id)}>
+                            <div onClick={() => onRemove(ele)}>
                               <DeleteOutlined className="list-item-icons" />
                             </div>
                           </Col>
                         </Row>
                       </div>
+                      </SortableItem>
                   ) : (
-                      <Row className="Question__new-question" gutter={[0, 15]}>
+                      <Row className="Question__new-question" gutter={[0, 15]}
+                      style={{display:isAddingNewQuestion === true && isEditQuestion === false ? "none" : "flex"}}
+                      >
                         <Row style={{width: '100%'}} className="Question__custom-column">
                           <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
                             <MenuOutlined />
@@ -212,6 +270,7 @@ export const Question = ({ listQuestion }) => {
                             <Input
                                 value={ele.question}
                                 onChange={(e) => handleChangeToEdit(e, index)}
+                                onKeyPress={(e)=>handleAbortEditkey(e,index)}
                                 placeholder="question"
                                 className="Question__input"
                                 name="question"
@@ -250,6 +309,7 @@ export const Question = ({ listQuestion }) => {
                               <Input
                                   value={resp.response}
                                   onChange={(e) => handleChangeToEditResponse(e, index, o)}
+                                  onKeyPress={(e)=>addNewResponseKey(e,index, "edit")}
                                   placeholder={t(
                                       "formDirectVideo.questionsTab.inputResponsePlaceholder"
                                   )}
@@ -329,22 +389,23 @@ export const Question = ({ listQuestion }) => {
                 <span>{t("formDirectVideo.questionsTab.emptyList")}</span>
               </div>
           )}
+          </SortableList>
         </Col>
         <Col
             className="Question__add-question"
-            style={{ display: isAddingNewQuestion ? "none" : "block" }}
+            //style={{ display: isAddingNewQuestion  ? "none" : "block" }}
         >
-        <span onClick={() => setIsAddingNewQuestion(true)}>
+        <span onClick={() => {setIsAddingNewQuestion(true);setIsEditQuestion(false);setQuestionToEdit(null)} }>
           {" "}
           <PlusCircleOutlined />{" "}
           <span>{t("formDirectVideo.questionsTab.addQuestion")}</span>
         </span>
         </Col>
         <Row
-            className="Question__new-question"
+            className="Question__new-question rowAddQuestion"
             gutter={[0, 15]}
             style={{
-              display: isAddingNewQuestion === true ? "flex" : "none",
+              display: isAddingNewQuestion === true && isEditQuestion === false  ? "flex" : "none",
               width: "100%",
             }}
         >
@@ -357,6 +418,7 @@ export const Question = ({ listQuestion }) => {
                 ref={inputRef}
                 value={Inputs && Inputs.question}
                 onChange={handleChange}
+                onKeyPress={handleAddQuestionKey}
                 placeholder={t(
                     "formDirectVideo.questionsTab.inputQuestionPlaceholder"
                 )}
@@ -395,6 +457,7 @@ export const Question = ({ listQuestion }) => {
                 <Input
                     value={ele.response}
                     onChange={(e) => handleChangeResponse(e, o)}
+                    onKeyPress={addNewResponseKey}
                     placeholder={t(
                         "formDirectVideo.questionsTab.inputResponsePlaceholder"
                     )}

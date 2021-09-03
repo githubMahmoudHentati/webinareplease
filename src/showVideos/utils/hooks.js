@@ -111,7 +111,7 @@ export  const Hooks=()=> {
                     "order_column": parseInt(paginationProps.columnKey),
                     "search_word":values.search,
                     "date": ["", ""],
-                    "status":""
+                    "status":values.type
                 },
 
             },
@@ -334,7 +334,7 @@ export  const Hooks=()=> {
    
     }
     const resetFilterVideos = async()=>{
-        if((values && values.date.length) || values.contributeur)
+        if((values && values.date) || values.contributeur)
         {
             await GETDATEVIDEO()
             await dispatch(setFilterVideosActions({

@@ -1,11 +1,13 @@
 import { Tabs } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
+import { SettingOutlined ,  UnorderedListOutlined , QuestionCircleFilled , AppstoreFilled} from "@ant-design/icons";
 import { Slides } from "../RichMedia/Slides";
 import { Question } from "../RichMedia/Qusestion";
 import { Chapter } from "../RichMedia/Chapters";
 import { useTranslation } from "react-i18next";
 import { setTab } from "../../store/formDirectVideoAction";
 import { useDispatch, useSelector } from "react-redux";
+import {useEffect, useRef} from "react";
+import Hooks from "../../utils/hooks";
 
 const { TabPane } = Tabs;
 
@@ -16,7 +18,15 @@ export const TabMenu = ({ listQuestion }) => {
   const onChangeTab = (key) => {
     dispatch(setTab(key));
   };
+  const richMediaRef = useRef(null)
+  const {values,scrollToRef}=Hooks()
+
+  useEffect(() => {
+    values.configuration.richeMediaDiffusion&&scrollToRef(richMediaRef)
+  }, [values.configuration.richeMediaDiffusion]);
+
   return (
+      <div ref={richMediaRef}>
     <Tabs
       onChange={onChangeTab}
       activeKey={currentTab}
@@ -25,7 +35,7 @@ export const TabMenu = ({ listQuestion }) => {
       <TabPane
         tab={
           <span>
-            <SettingOutlined />
+            <UnorderedListOutlined />
             {t("formDirectVideo.chaptersTab.title")}
           </span>
         }
@@ -36,7 +46,7 @@ export const TabMenu = ({ listQuestion }) => {
       <TabPane
         tab={
           <span>
-            <SettingOutlined />
+            <QuestionCircleFilled />
             {t("formDirectVideo.questionsTab.title")}
           </span>
         }
@@ -47,7 +57,7 @@ export const TabMenu = ({ listQuestion }) => {
       <TabPane
         tab={
           <span>
-            <SettingOutlined />
+            <AppstoreFilled />
             {t("formDirectVideo.slidesTab.title")}
           </span>
         }
@@ -56,5 +66,6 @@ export const TabMenu = ({ listQuestion }) => {
         <Slides />
       </TabPane>
     </Tabs>
+      </div>
   );
 };

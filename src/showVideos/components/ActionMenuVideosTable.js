@@ -18,11 +18,14 @@ import {useTranslation} from "react-i18next";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch} from 'react-redux'
-import {Row,Col} from 'antd'
 const {TextArea} = Input;
 
 function useActionMenu({record}) {
     const dispatch = useDispatch()
+
+    const [statusSuccessMessages , setStatusSuccessMessages]=useState(true)
+    const [statusErrorMessages , setStatusErrorMessages] = useState(true)
+
     const {
         handleClickStreamin,
         handleDeleteOneRow,
@@ -33,7 +36,8 @@ function useActionMenu({record}) {
         updateLive,
         handleExport,
         handleCancelModalExport,
-        exportLives
+        exportLives,
+        paginationProps
     } = Hooks()
     const {t} = useTranslation();
     var x = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
@@ -58,80 +62,163 @@ function useActionMenu({record}) {
 
 
     // fonction pour copier url participant
-    const CopyUrlParticipant = () => {
+    const CopyUrlParticipant = async () => {
         if (document.getElementById("myUrlParticipant").value === "") {
-            return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
         } else {
+
+            await setStatusSuccessMessages(false)
+
             document.getElementById("myUrlParticipant").select();
             document.execCommand("Copy");
-            message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
+            statusSuccessMessages && await message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
         }
     }
-
     // fonction pour copier url auditeur
-    const CopyUrlAuditeur = () => {
+    const CopyUrlAuditeur = async () => {
         if (document.getElementById("myUrlAuditeur").value === "") {
-            return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
         } else {
+            await setStatusSuccessMessages(false)
             document.getElementById("myUrlAuditeur").select();
             document.execCommand("Copy");
-            message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
         }
     }
 
-    const CopyLienIntegration = () => {
+    const CopyLienIntegration = async () => {
         if (document.getElementById("myLienIntegration").value === "") {
-            return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
         } else {
+            await setStatusSuccessMessages(false)
             document.getElementById("myLienIntegration").select();
             document.execCommand("Copy");
-            message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
         }
     }
 
    // Copy Input Modal Infos
     // copy url diffusion
-    const handleCopyUrlDiffusion = () =>{
+    const handleCopyUrlDiffusion = async () => {
         if (document.getElementById("urlDiffusionID").value === "") {
-            return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
         } else {
+            await setStatusSuccessMessages(false)
             document.getElementById("urlDiffusionID").select();
             document.execCommand("Copy");
-            message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
         }
     }
     // copy name of flux
-    const handleCopyNameFlux = () =>{
+    const handleCopyNameFlux = async () => {
         if (document.getElementById("nameOfFluxID").value === "") {
-            return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
         } else {
+            await setStatusSuccessMessages(false)
             document.getElementById("nameOfFluxID").select();
             document.execCommand("Copy");
-            message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
+            statusSuccessMessages && await message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
         }
     }
     // copy id flux
-    const handleCopyIdFlux = () =>{
+    const handleCopyIdFlux = async () => {
         if (document.getElementById("idfluxID").value === "") {
-            return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
         } else {
+            await setStatusSuccessMessages(false)
             document.getElementById("idfluxID").select();
             document.execCommand("Copy");
-            message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
         }
     }
     // copy pwd flux
-    const handleClickPasswordFlux = (e) =>{
-        console.log("kjlsdkjflsdkfj8979887",document.querySelector(".ant-input-password .ant-input"))
+    const handleClickPasswordFlux = async (e) => {
         if (document.getElementById("idPwd").value === "") {
-            return message.error({content: t("ShowVideo.EmptyField"), duration: 2});
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
         } else {
+            await setStatusSuccessMessages(false)
             textAreaRef.current.select();
             document.execCommand("copy");
-            message.success({content: t("ShowVideo.SuccessCopy"), duration: 2});
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
         }
     }
-
 
     const actionColumnView = (
         <div className="action">
