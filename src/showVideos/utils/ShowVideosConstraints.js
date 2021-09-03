@@ -22,7 +22,8 @@ export const ShowVideosList = ()=>{
                 current:1,
                 id:[],
                 idLive:0,
-                idDiffusion:null
+                idDiffusion:null,
+                statusMessages:true
             }
         )
     }
