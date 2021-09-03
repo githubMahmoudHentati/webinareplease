@@ -29,6 +29,7 @@ import {TabMenu} from './RichMedia/TabMenu'
 import {AttachedFile} from "./attachedFile";
 
 export const Configuration = () => {
+    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
     const [form] = Form.useForm();
     const visibleLiveRef = useRef(null)
     const themesRef = useRef(null)
@@ -73,11 +74,11 @@ export const Configuration = () => {
     }, [itemListRef]);
 
     useEffect(() => {
-        values.configuration.liveAutomaticArchiving&&scrollToRef(visibleLiveRef)
+        !idLive&&values.configuration.liveAutomaticArchiving&&scrollToRef(visibleLiveRef)
     }, [values.configuration.liveAutomaticArchiving]);
 
     useEffect(() => {
-        values.configuration.videoMode === "visibleVideo"&&scrollToRef(themesRef)
+        !idLive&&values.configuration.videoMode === "visibleVideo"&&scrollToRef(themesRef)
     }, [values.configuration.videoMode]);
 
     return (

@@ -4,9 +4,7 @@ import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {setConnexionConstraintDataOnchange} from "../store/connexionAction";
-import {setAppSetLogin} from "../../utils/redux/actions";
-
-
+import {setAppSetLogin, setStorageData} from "../../utils/redux/actions";
 
 export const GraphQLFetchData=(form)=> {
     const history = useHistory()
@@ -43,14 +41,16 @@ export const GraphQLFetchData=(form)=> {
                 localStorage.setItem('firstName',  data.login.firstName);
                 localStorage.setItem('avatar',  data.login.thumbnail);
                 if (values.constraintData.isRememberMe){
-                    localStorage.setItem('username', values.connexion.username);
-                    localStorage.setItem('password', values.connexion.password);
-                    localStorage.setItem('isRememberMe', values.constraintData.isRememberMe);
+                    dispatch(setStorageData({storageUsername:values.connexion.username,storagePassword: values.connexion.password,storageIsRememberMe: values.constraintData.isRememberMe}))
+                    // localStorage.setItem('username', values.connexion.username);
+                    // localStorage.setItem('password', values.connexion.password);
+                    // localStorage.setItem('isRememberMe', values.constraintData.isRememberMe);
                 }
                 else{
-                    localStorage.removeItem('username');
-                    localStorage.removeItem('password');
-                    localStorage.removeItem('isRememberMe');
+                    dispatch(setStorageData({storageUsername:"",storagePassword: "",storageIsRememberMe: ""}))
+                    // localStorage.removeItem('username');
+                    // localStorage.removeItem('password');
+                    // localStorage.removeItem('isRememberMe');
                 }
 
                 document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');

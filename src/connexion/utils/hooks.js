@@ -1,14 +1,16 @@
 import {useDispatch, useSelector} from "react-redux";
 import {setConnexionConstraintDataOnchange, setConnexionOnchange} from "../store/connexionAction";
+import {Reducer} from "../../utils/redux/reducer";
 
 
 
 export  const Hooks=(connexionAction)=> {
     const dispatch = useDispatch()
     const values = useSelector((state) => state.ConnexionReducer)
+    const storageValues = useSelector((state) => state.Reducer)
 //******************connexion************************//
     const connexionOnChange = async (event) => {
-        await dispatch(setConnexionOnchange({
+         dispatch(setConnexionOnchange({
             ConnexionNameChange: event.target.name,
             ConnexionValueChange: event.target.value
         }));
@@ -26,7 +28,7 @@ export  const Hooks=(connexionAction)=> {
 
 
     const handleSubmit=async ()=>{
-        await dispatch(setConnexionConstraintDataOnchange({constraintDataNameChange:"loadingConnexion",constraintDataValueChange:true}))
+        dispatch(setConnexionConstraintDataOnchange({constraintDataNameChange:"loadingConnexion",constraintDataValueChange:true}))
         connexionAction()
     }
 
@@ -34,6 +36,7 @@ export  const Hooks=(connexionAction)=> {
         connexionOnChangeButton,
         connexionOnChange,
         handleSubmit,
-        values
+        values,
+        storageValues
     })
 }
