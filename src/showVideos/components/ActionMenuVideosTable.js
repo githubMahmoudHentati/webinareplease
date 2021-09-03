@@ -18,8 +18,6 @@ import {useTranslation} from "react-i18next";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch} from 'react-redux'
-import {Row,Col} from 'antd'
-import {setPaginationProps} from "../store/showVideosAction";
 const {TextArea} = Input;
 
 function useActionMenu({record}) {
@@ -221,7 +219,6 @@ function useActionMenu({record}) {
             );
         }
     }
-
 
     const actionColumnView = (
         <div className="action">
