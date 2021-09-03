@@ -8,8 +8,6 @@ import {useSelector} from "react-redux";
 import {UploadHooks} from "../uploadHooks";
 import Hooks from "../../utils/hooks";
 
-
-
 const { Dragger } = Upload;
 
 export const Slides = () => {
@@ -19,7 +17,7 @@ export const Slides = () => {
   // use Selector redux
   const darkMode = useSelector((state)=> state.Reducer.DarkMode)
   const { t} = useTranslation();
- 
+
   return (
       <Row >
 
