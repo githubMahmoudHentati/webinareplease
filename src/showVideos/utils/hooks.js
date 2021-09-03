@@ -334,7 +334,7 @@ export  const Hooks=()=> {
    
     }
     const resetFilterVideos = async()=>{
-        if((values && values.date.length) || values.contributeur)
+        if((values && values.date) || values.contributeur)
         {
             await GETDATEVIDEO()
             await dispatch(setFilterVideosActions({
