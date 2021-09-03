@@ -86,7 +86,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveTitle")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "500",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveTitle")}</span>
                         <span className="require">*</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
@@ -101,7 +101,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveFeedDescription")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "500",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.LiveFeedDescription")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Form.Item name="liveDescription" className={"form-item-style"}
@@ -115,7 +115,7 @@ export const Generals =()=>{
             <Col span={24}>
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
-                        <span style={{fontSize:"14px",fontWeight: "bold",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ShareLiveLink")}</span>
+                        <span style={{fontSize:"14px",fontWeight: "500",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.ShareLiveLink")}</span>
                     </Col>
                     <Col span={24} className={"col-forms"}>
                         <Row justify={"space-between"} className={"row-copy-btn"}>

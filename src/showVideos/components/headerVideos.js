@@ -84,7 +84,27 @@ function HeaderVideos() {
                   <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                       <span>{t("ShowVideo.Direct")}</span>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.All")}</Breadcrumb.Item>
+                  <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
+                      {
+                          values.type === ""
+                              ?
+                              t("ShowVideo.All")
+                              :
+                              values.type === "archived"
+                                  ?
+                                  t("ShowVideo.Archived")
+                                  :
+                                  values.type === "live"
+                                      ?
+                                      t("ShowVideo.InProgress")
+                                      :
+                                      values.type === "upcoming"
+                                          ?
+                                          t("ShowVideo.ComingSoon")
+                                          :
+                                          null
+                      }
+                  </Breadcrumb.Item>
               </Breadcrumb>
 
           </div>{/*./Breadcrumb*/}

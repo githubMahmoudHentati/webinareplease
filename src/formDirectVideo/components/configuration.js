@@ -129,14 +129,16 @@ export const Configuration = () => {
                                         itemLayout="horizontal"
                                         dataSource={values.configuration.SpeakerList}
                                         renderItem={(item, indexItem) => (
-                                            <List.Item actions={[
+                                            <List.Item  actions={[
                                                 <span key="list-loadmore-edit"><EditOutlined
+                                                        className={"EditOutlined"}
                                                         onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem+1)}
-                                                        style={{fontSize: "21px", color: darkMode === false}}/></span>,
+                                                        style={{fontSize: "21px",marginRight:"8.5px" ,color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}/></span>,
                                                     <span key="list-loadmore-more"><MinusCircleOutlined
                                                         style={{
                                                             fontSize: "21px",
-                                                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"
+                                                            color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)",
+                                                            marginLeft:"8.5px"
                                                         }}
                                                         onClick={() => deleteSpeaker(indexItem)}/></span>
                                                 ]}>
