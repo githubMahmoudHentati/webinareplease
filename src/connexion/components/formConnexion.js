@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {setConnexionConstraintDataOnchange, setConnexionCredential} from "../store/connexionAction";
 import { useTranslation } from 'react-i18next';
+import {Reducer} from "../../utils/redux/reducer";
 
 export const FormConnexion =()=>{
     const dispatch = useDispatch()
@@ -17,20 +18,23 @@ export const FormConnexion =()=>{
     dispatch(setForgetPasswordConstraintDataOnchange({constraintDataNameChange:"passwordSent",constraintDataValueChange:false}))
     const { t} = useTranslation();
 
-
-
+    const {Connexion}=GraphQLFetchData(form)
+    const{handleSubmit,values,connexionOnChange,connexionOnChangeButton,storageValues}=Hooks(Connexion)
+    console.log("storageValues",storageValues)
     useEffect(() => {
-        const isRememberMe = localStorage.getItem('isRememberMe')?localStorage.getItem('isRememberMe'):false;
+        // const isRememberMe = localStorage.getItem('isRememberMe')?localStorage.getItem('isRememberMe'):false;
+        const isRememberMe = storageValues.storageData.storageIsRememberMe;
+
         if (isRememberMe){
             form.setFieldsValue( {
-                username:localStorage.getItem('username'),
-                password:localStorage.getItem('password'),
+                username:storageValues.storageData.storageUsername,
+                password:storageValues.storageData.storagePassword,
                 isRememberMe:true
             })
             dispatch(setConnexionCredential(
                 {
-                    username:localStorage.getItem('username'),
-                    password:localStorage.getItem('password'),
+                    username:storageValues.storageData.storageUsername,
+                    password:storageValues.storageData.storagePassword,
                 }
             ))
             dispatch(setConnexionConstraintDataOnchange({constraintDataNameChange:"isRememberMe", constraintDataValueChange:true}));
@@ -41,8 +45,6 @@ export const FormConnexion =()=>{
     }, []);
 
     const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
-    const {Connexion}=GraphQLFetchData(form)
-    const{handleSubmit,values,connexionOnChange,connexionOnChangeButton}=Hooks(Connexion)
     const toForgotPassword=()=>{
         document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
         document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
@@ -52,6 +54,7 @@ export const FormConnexion =()=>{
         }))
         history.push("/forgot-password")
     }
+    console.log("values",values.connexion)
 
     const toSignUp=()=>{
         document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');

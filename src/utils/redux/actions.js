@@ -1,4 +1,14 @@
 
+
+export function setStorageData(e){
+
+    return{
+        type: "SET_StorageData",
+        payload:e,
+    }
+
+}
+
 export function setAccountSetting(e){
 
     return{

@@ -1,3 +1,6 @@
+import {DataConstraints} from './dataConstraint'
+
+const {ConstraintStorageData}= DataConstraints()
 
 const INITIAL_STATE = {
     accountMenu : 0,
@@ -10,11 +13,20 @@ const INITIAL_STATE = {
     activeSideMenu:false,
     lang:localStorage.getItem("i18nextLng") ? localStorage.getItem("i18nextLng"):"fr",
     runDeleteOneRow:false,
+    storageData : ConstraintStorageData()
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
 
     switch (action.type){
+
+        case "SET_StorageData":
+            const {credentialsData}=action.payload
+            return{
+                ...state,
+                storageData: credentialsData
+            }
+
         case "SET_AccountMenu":
             return{
                 ...state,
