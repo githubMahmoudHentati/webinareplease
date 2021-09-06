@@ -31,6 +31,9 @@
   font-style: normal;
   font-display: swap;
 }
+.row_abonnement{
+  padding-right: 15px;
+}
 .img-strip{
   width: 46px;
   height: 18px;
@@ -44,6 +47,14 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.row_password{
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border_color) !important;
+}
+.col-selectMenu{
+  padding-left: 25px !important;
+  padding-right: 0 !important;
 }
 .spn_CompteSettings{
   font-family: "SF Pro Display";
@@ -83,6 +94,11 @@
   font-size: 14px;
   font-family: "SF Pro Display";
   font-weight: normal;
+}
+.col_update_infos{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
 }
 .parag_abonnement_gras{
   font-size: 14px;
@@ -138,9 +154,20 @@
    .col_avatar{
      margin-bottom: 30px;
    }
+  .row_abonnement{
+    padding-right: 0px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  .col_update_infos{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+  }
+  .row_abonnement{
+    padding-right: 0px;
+  }
  .menuCompteSettings{
    width: 100% !important;
   display: flex !important;

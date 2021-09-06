@@ -36,6 +36,17 @@
   font-size: 20px;
   padding:1% 1.5% !important;
 }
+.col_theme{
+  padding-left: 25px;
+}
+.row_plannification_social{
+  background-color: var(--table_thead-color) !important;
+  padding: 18px;
+  border-bottom: 1px solid var(--border_color) !important;
+}
+.colDatePickerSocial{
+  padding: 4% 4%;
+}
 #TemplatesIframe{
   position: absolute;
   height: 100%;
@@ -451,7 +462,7 @@
 
 .col-planification{
   border:1px solid RGBA(0, 0, 0, 0.15);
-  padding:4% 4%
+  //padding:4% 4%
 }
 .btn_add_planning{
   border: 1px dashed var(--icon-color) !important;
@@ -461,9 +472,12 @@
   //border-bottom: 1px solid RGBA(0, 0, 0, 0.15)!important;
 }
 .ant-list-item-action-split{
- background-color: var(--icon-color) !important;
+ background-color: white !important;
 }
 .EditOutlined:hover{
+  color: RGB(0, 127, 203) !important;
+}
+.MinusCircleOutlined:hover{
   color: RGB(0, 127, 203) !important;
 }
 
@@ -485,7 +499,7 @@
 }
 .ant-select-multiple .ant-select-selection-item{
   height: 28px !important;
-  background: transparent;
+  background: var(--tag-background-color) !important;
   border: 1px solid var(--Switch-Color);
  .anticon{
     color: var(--item-menu-color);
@@ -617,7 +631,7 @@
 .col-item-list{
   -webkit-transition: padding 2s !important;
   &:hover{
-    cursor: pointer !important;
+    //cursor: pointer !important;
     -webkit-transition: border-radius 2s !important;
     //background-color: grey !important;
     box-shadow: none;
