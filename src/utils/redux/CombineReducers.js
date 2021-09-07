@@ -19,7 +19,7 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
     key: 'root',
     storage: storage,
-    blacklist: ['Reducer']
+    whitelist: ['Reducer']
 };
 
 const rootReducer = combineReducers({

@@ -2,7 +2,7 @@ import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {Hooks} from "./hooks";
 import {useHistory} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setConnexionConstraintDataOnchange} from "../store/connexionAction";
 import {setAppSetLogin, setStorageData} from "../../utils/redux/actions";
 
@@ -11,7 +11,7 @@ export const GraphQLFetchData=(form)=> {
     const dispatch = useDispatch()
     const {values }=Hooks()
     const token = new URLSearchParams(window.location.search).get('token')
-
+    const credentialsValues = useSelector((state) => state.Reducer)
 
     const { data: confirmAccountData}
         = useQuery(graphQL_shema().confirmAccountQuery, {
@@ -28,6 +28,11 @@ export const GraphQLFetchData=(form)=> {
     })
 
     const [Connexion] = useMutation(graphQL_shema().Connexion, {
+        context: {
+            headers: {
+                Authorization: `Bearer ${credentialsValues.authToken}`
+            }
+        },
         variables: {input:values.connexion,
         },
         fetchPolicy: "no-cache",
@@ -41,13 +46,13 @@ export const GraphQLFetchData=(form)=> {
                 localStorage.setItem('firstName',  data.login.firstName);
                 localStorage.setItem('avatar',  data.login.thumbnail);
                 if (values.constraintData.isRememberMe){
-                    dispatch(setStorageData({storageUsername:values.connexion.username,storagePassword: values.connexion.password,storageIsRememberMe: values.constraintData.isRememberMe}))
+                    dispatch(setStorageData({credentialsData:{storageUsername:values.connexion.username,storagePassword: values.connexion.password,storageIsRememberMe: values.constraintData.isRememberMe}}))
                     // localStorage.setItem('username', values.connexion.username);
                     // localStorage.setItem('password', values.connexion.password);
                     // localStorage.setItem('isRememberMe', values.constraintData.isRememberMe);
                 }
                 else{
-                    dispatch(setStorageData({storageUsername:"",storagePassword: "",storageIsRememberMe: ""}))
+                    dispatch(setStorageData({credentialsData:{storageUsername:"",storagePassword: "",storageIsRememberMe: ""}}))
                     // localStorage.removeItem('username');
                     // localStorage.removeItem('password');
                     // localStorage.removeItem('isRememberMe');

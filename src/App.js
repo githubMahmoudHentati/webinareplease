@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import history from './router/history';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
@@ -28,11 +28,15 @@ let tabData = [
     "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"
 ]
 function App() {
-    const {verificationToken} = GraphQLFetchData()
     const credentialsValues = useSelector((state) => state.Reducer)
+    const {verificationToken,tokenAPI} = GraphQLFetchData(credentialsValues)
     const lang =useSelector((state)=>state.Reducer.lang)
     let pathName = window.location.pathname.replace('/', '')
-    
+
+    useEffect(() => {
+        tokenAPI()
+    }, []);
+
    
     React.useEffect(()=>{
         const root = document.querySelector(':root')
