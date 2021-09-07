@@ -15,6 +15,7 @@ export const graphQL_shema = ()=> {
                     postalCode
                     numberPerson
                     phone
+                    society
                 }
                 subscription{
                     subscriptionType
