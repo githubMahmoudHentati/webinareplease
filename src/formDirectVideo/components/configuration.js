@@ -226,7 +226,7 @@ export const Configuration = () => {
                                                   checked={values.configuration.richeMediaDiffusion}>
                                             <p style={{margin: 0}}>{t("formDirectVideo.Richmedia")}
                                                 <InfoCircleFilled
-                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}
                                                     className={"infosIcon"}/></p>
                                         </Checkbox>
                                         <br/>
@@ -244,7 +244,7 @@ export const Configuration = () => {
                                                   checked={values.configuration.attachments}>
                                             <p style={{margin: 0}}>{t("formDirectVideo.AttachedFiles")}
                                                 <InfoCircleFilled
-                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}
                                                     className={"infosIcon"}/></p></Checkbox>
                                     </Col>
                                     <Col span={24} className={""}>
@@ -274,7 +274,7 @@ export const Configuration = () => {
                                 <Row gutter={[10, 0]}>
                                     <Col className={"col-forms"}>
                                         <span style={{
-                                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
+                                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                         }}>{t("formDirectVideo.AutomaticArchiving")}</span>
                                     </Col>
                                     <Col>
@@ -287,7 +287,7 @@ export const Configuration = () => {
                                                      title={t("formDirectVideo.ArchivedAndVisualisationMsg")}>
                                                 <InfoCircleFilled style={{
                                                     cursor: "pointer",
-                                                    color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"
+                                                    color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"
                                                 }} className={"infosIcon"}/>
                                             </Tooltip>
                                         </Form.Item>

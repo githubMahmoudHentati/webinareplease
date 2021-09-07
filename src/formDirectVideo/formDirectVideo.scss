@@ -505,8 +505,9 @@
     color: var(--item-menu-color);
   }
 }
-
-
+.row_plannification_social .anticon-close svg{
+  color: var(--icon-color) !important;
+}
 .Paramétres{
   font-family: 'SF Pro Display';
   font-weight: 900 ;
