@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
 import {ApolloProvider} from '@apollo/react-hooks';
 import { setContext } from 'apollo-link-context';
 import {store,persistor} from "./utils/redux/store";
-import {Provider} from "react-redux";
+import {Provider, useSelector} from "react-redux";
 import { ApolloLink } from "apollo-link";
 import { createHttpLink } from 'apollo-link-http';
 import { Spin } from 'antd';
@@ -26,10 +26,12 @@ const authLink = setContext(() => {
 });
 
 
+
 // Create Second Link
 const secondLink = new HttpLink({
     uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST
 });
+
 
 const authLink2 = setContext(() => {
     const token2 = localStorage.getItem('jwtToken')
@@ -39,6 +41,7 @@ const authLink2 = setContext(() => {
         }
     };
 });
+
 
 
 const client = new ApolloClient({

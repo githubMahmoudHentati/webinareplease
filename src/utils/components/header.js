@@ -174,7 +174,7 @@ function GlobalHeader() {
                     {/*</Badge>*/}
 
                     <Dropdown getPopupContainer={() => document.querySelector(".drp_user")} className={"drp_user"} overlay={MenuHeader} trigger={['click']}>
-                        <a href="#/" className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
+                        <a  className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
 
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: darkMode?"#1D1D1D":'#F0F1F4'}}
@@ -250,17 +250,17 @@ function GlobalHeader() {
                             </div>
 
                             <div className={"div2_div2_side_nav"}>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
+                                <a className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(0)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <UserOutlined className={"avtr"}/><span>{t("description.Account")}</span>
                                 </a>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
+                                <a  className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(1)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <UnlockOutlined className={"avtr"}/><span>{t("description.security")}</span>
                                 </a>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
+                                <a  className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(3)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <PieChartOutlined className={"avtr"}/><span>{t("description.Subscription")}</span>
@@ -315,7 +315,7 @@ function GlobalHeader() {
                                 </div>
 
                             <div className={"div4_div2_side_nav"}>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={logOut}
+                                <a  className="ant-dropdown-link link_drp" onClick={logOut}
                                    style={{color: darkMode === false ? "" : "white"}}>
                                     <LogoutOutlined
                                         className={"avtr"}/><span>{t("description.LogOut")}</span>
