@@ -91,7 +91,8 @@
     "MyAccount": "Mon Compte",
     "InvalidPhone": "Numéro telephone est invalide",
     "EnterPhone": "Saisir un numéro télephone",
-    "ModalTitle": "Éditer l'image"
+    "ModalTitle": "Éditer l'image",
+    "Society": "societé"
   },
   "ConfirmAccount": {
     "ConfirmationSend": "E-mail de confirmation envoyé !",

@@ -301,6 +301,24 @@ export const AccountGeneralInformation = ({form}) => {
                                             <Col span={24}>
                                   <span className={"spn_CompteSettings"} style={{
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
+                                  }}>{t("CompteSettings.Society")}  </span>
+                                            </Col>
+                                            <Col span={23}>
+                                                <Form.Item name="society"
+                                                           style={{marginBottom: 0}}
+                                                >
+                                                    <Input value={values.generalInformation.society} name="society"
+                                                           placeholder={t("CompteSettings.Society")}
+                                                           onChange={generalInformationOnChange}></Input>
+                                                </Form.Item>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col span={24}>
+                                        <Row gutter={[0, 10]}>
+                                            <Col span={24}>
+                                  <span className={"spn_CompteSettings"} style={{
+                                      color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.NumberOfEmployees")} </span>
                                             </Col>
                                             <Col span={23}>

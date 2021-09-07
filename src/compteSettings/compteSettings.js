@@ -32,8 +32,8 @@ export const CompteSettings=()=>{
                 "offset": 0,
             } },
         onCompleted: async (data) => {
-            await dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
-            await dispatch(setConstraintDataOnchange({
+             dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
+             dispatch(setConstraintDataOnchange({
                 constraintDataNameChange: "loadingGeneralInformation",
                 constraintDataValueChange: false
             }))
