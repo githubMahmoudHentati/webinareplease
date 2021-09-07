@@ -13,13 +13,13 @@ export const SecurityAccount = () => {
 
     return (
         <Row gutter={[0, 25]}>
-            <Col offset={1} span={24}>
+            <Col offset={0} span={24}>
                 <span className={"spn1_securité"}
                       style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.SecurityAndAccess")}</span>
             </Col>
-            <Col offset={1} span={24}>
-                <Row justify={"space-between"} gutter={[0, 15]}>
-                    <Col xs={{span: 24}} sm={{span: 24}} md={{span: 5}} lg={{span: 5}}>
+            <Col offset={0} xs={{span: 20}} sm={{span: 20}} md={{span: 24}} lg={{span: 16}} className={"col_security"}>
+                <Row justify={"space-between"} gutter={[0, 15]} className={"row_password"}>
+                    <Col xs={{span: 24}} sm={{span: 24}} md={{span: 20}} lg={{span: 20}}>
                         <Row>
                             <Col span={24}>
                                 <span className={"spn2_motDePasse"}
@@ -33,7 +33,7 @@ export const SecurityAccount = () => {
                         </Row>
                     </Col>
                     <Col style={{display: "flex ", alignItems: "center"}} xs={{span: 24}} sm={{span: 24}} md={{span: 2}}
-                         lg={{span: 2}}>
+                         lg={{span: 1}}>
                         <a href="#/" className={"spn2_motDePasse"} onClick={() => dispatch(setAccountSetting(2))}>{t("CompteSettings.Modifier")}</a>
                     </Col>
                 </Row>

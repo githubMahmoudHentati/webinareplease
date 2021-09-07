@@ -114,7 +114,11 @@ body{
 
     --menu_background_hover:#F5F5F5;
 
-    --breadcrumb_color:(0 , 0 , 0 , 0.25)
+    --breadcrumb_color:(0 , 0 , 0 , 0.25);
+
+    --table_thead-color:#FAFAFA;
+
+    --tag-background-color:RGBA(0, 0, 0, 0.04);
 }
 :root.dark{
     --lang-help-color:rgba(255, 255, 255, 0.85);
@@ -163,6 +167,10 @@ body{
 
     --breadcrumb_color:(255 , 255 , 255 , 0.25);
     --breadcrumb_color_lastchild: (255 , 255 , 255 , 0.85);
+
+    --table_thead-color:#1D1D1D;
+
+    --tag-background-color:RGBA(255, 255, 255, 0.04);
 
 }
 .form-item-style .spn2_motDePasse{
@@ -283,14 +291,17 @@ body{
     color: var(--tag-Geekblue-color) !important;
 }
 .ant-list-split , .ant-list-item{
-    border-bottom: 1px solid var(--border_color) !important;
+    //border-bottom: 1px solid var(--border_color) !important;
     transition: all 0.3s ease-in-out;
     -webkit-transition: padding 2s !important;
     padding-left: 5px;
 }
+.ant-picker-suffix .anticon-calendar{
+    color: var(--icon-color) !important;
+}
 .ant-list-item:hover{
     -webkit-transition: border-radius 2s !important;
-    background-color: var(--dark_color) !important;
+    //background-color: var(--dark_color) !important;
 }
 .ant-list-items .ant-list-item{
     border-bottom: 1px solid var(--border_color) !important;
@@ -307,7 +318,7 @@ body{
     border: 1px solid var(--border_color) !important;
 }
 .ant-upload-select-picture .ant-btn{
-    background-color: var(--dark_color) !important;
+    background-color: var(--modal_background) !important;
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
 }
@@ -324,11 +335,12 @@ body{
     color: var(--white_color) !important;
 }
 .ant-upload-list-item , .ant-upload-list-item-done{
-    background-color: var(--option-background) !important;
+    background-color: var(--modal_background) !important;
     border: 1px solid var(--border_color) !important;
+    color: var(--tag-blue-background) !important;
 }
 .ant-upload-list-item-name{
-    color: var(--white_color) !important;
+    color: RGB(0, 127, 203) !important;
     flex: none !important;
     padding: 0 8px!important;
     min-width: 100px!important;;
@@ -453,7 +465,7 @@ body{
     color: var(--white_color) !important;
 }
 .ant-table-thead tr th{
-    background-color: var(--cell-color) !important;
+    background-color: var(--table_thead-color) !important;
     color: var(--white_color) !important;
     border-bottom: 1px solid var(--border_color);
 }
@@ -468,7 +480,11 @@ body{
     background-color: var(--card_color) !important;
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
+    &:hover{
+        border-color: #40a9ff !important;
+    }
 }
+
 .ant-select-arrow{
     color: var(--white_color) !important;
 }
@@ -485,8 +501,11 @@ body{
     color: var(--icon-color) !important;
 }
 
-.anticon:not(.anticon-close , .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
+.anticon:not(.anticon-appstore,.anticon-question-circle,.anticon-unordered-list,.modal-div2_time_calendar .anticon-clock-circle,.ant-avatar,.ant-avatar-string,.ant-avatar-circle,.anticon-logout,.anticon-pie-chart,.anticon-unlock,.anticon-user ,.anticon-caret-up,.anticon-caret-down, .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
     color: var(--icon-color) !important;
+}
+.UserOutlined{
+    color: #1D1D1D !important;
 }
 .copy_icon{
     color: var(--icon-color) !important;
@@ -640,7 +659,7 @@ body{
 .ant-modal-footer{
     border-top: 1px solid var(--border_color) !important;
 }
-.ant-modal-footer Button{
+.ant-modal-footer Button:not(.input_modal_button , .ModalButtonPrimary){
     background-color: var(--modal_background) !important;
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
@@ -651,7 +670,7 @@ body{
     color: #ffff !important;
 
 }
-.ant-modal-footer Button:hover:not(.ModalButtonPrimary){
+.ant-modal-footer Button:hover:not(.ModalButtonPrimary , .input_modal_button){
     background-color: var(--modal_background) !important;
     color: var(--white_color) !important;
     border: 1px solid var(--border_color);
@@ -677,9 +696,9 @@ body{
     font-size: 16px !important;
     font-weight: 500 !important;
 }
-//.anticon-close svg{
-//    color: var(--white_color) !important;
-//}
+.anticon-close svg{
+   color: var(--white_color) !important;
+}
 .div_Url_diffusion .div_Copier Button{
     background-color: var(--modal_background) !important;
     color: var(--white_color) !important;
@@ -859,12 +878,16 @@ body{
     margin-right: 5%;
     color: rgba(0, 0, 0, 0.65);
 }
+.selectDiv{
+    width: 25%;
+}
 .selectDiv .ant-select-selector{
     height: 40px !important;
     display: flex !important;
     align-items: center !important;
 }
 .selectFilter{
+    width: 100% !important;
     font-family: 'SF Pro Display';
     font-size: 16px;
     font-weight: normal;
@@ -1118,6 +1141,11 @@ body{
     align-items: center;
     z-index: 999999999999 !important;
 }
+.scrolled{
+    background-color: red !important;
+    position: fixed !important;
+    top: 0;
+}
 
 .overley{
     width: 100%;
@@ -1325,20 +1353,20 @@ body{
 }
 .icon_webinaire{
     height: 100%;
-    width: 20%;
+    width: 25%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     border-right: 1px solid var(--invitation-border);
-    margin-right: 2%;
+    //margin-right: 2%;
 }
 .icon_Webinaire_svg{
     font-size: 43px;
     cursor: pointer;
 }
 .Home_Icon{
-    width: 10%;
+    width: 5%;
     font-size: 18px;
     cursor: pointer;
     margin-left: 2%;
@@ -1735,7 +1763,7 @@ input:checked + .slider:before {
     min-height: 93vh !important;
 }
 .showVideosDiv .card2 .ant-card-body{
-    padding: 24px !important;
+    padding: 24px 24px 45px 24px !important;
     min-height: 90.1vh !important;
 }
 
@@ -1813,6 +1841,9 @@ input:checked + .slider:before {
 
 /********** Tablette *********************/
 @media (min-width:576px) and (max-width:1080px) {
+    .selectDiv{
+        width: 60%;
+    }
     /***** Package Payement Tab *****/
     .div1_WebinairePlease{
         //width: 100%;
@@ -2056,7 +2087,9 @@ input:checked + .slider:before {
 
 }
 @media (max-width:575px) {
-
+    .selectDiv{
+        width: 60%;
+    }
     .header_Forfait{
         width:90%;}
     .div_alert{

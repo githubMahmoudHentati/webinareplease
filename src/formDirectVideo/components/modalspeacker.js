@@ -48,7 +48,7 @@ export const ModalSpeaker = ({isVisible}) => {
                    <Button className={"input_modal"} onClick={handleCancel} key="back">
                        {t("formDirectVideo.Cancel")}
                    </Button>,
-                   <Button onClick={form.submit} key='submit' htmlType='submit' className={"input_modal"}
+                   <Button onClick={form.submit} key='submit' htmlType='submit' className={"input_modal input_modal_button"}
                            type="primary">
                        {values.configuration.speaker.id?t("formDirectVideo.Update"):t("formDirectVideo.Add")}
                    </Button>,

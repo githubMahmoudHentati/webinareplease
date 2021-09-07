@@ -9,9 +9,11 @@ import {
 } from "@ant-design/icons";
 import {useDispatch, useSelector} from "react-redux";
 import {
-  setChapterList, removeChapter, editChapter
+  setChapterList, removeChapter, editChapter, sortChapters
 } from "../../store/formDirectVideoAction";
 import { useTranslation } from 'react-i18next';
+import SortableList, { SortableItem } from "react-easy-sort";
+import {arrayMoveImmutable} from "array-move";
 
 export const Chapter = () => {
   const [newChap, setNewChap] = useState("");
@@ -43,15 +45,23 @@ const handleAdd = ()=>{
     setNewChap("");
   }
 }
+  const onSortEnd = async (oldIndex, newIndex) => {
+    //await setFakeList((array) => arrayMoveImmutable(array, oldIndex, newIndex));
+    await dispatch(sortChapters({"oldIndexChapters":oldIndex, "newIndexChapters":newIndex }));
+  };
   return (
     <Row gutter={[0, 15]} className="Chapters">
       <Col span={24}>
+        <SortableList
+            onSortEnd={onSortEnd}
+        >
         {listChapter.length ? listChapter.map((ele, index) =>
           chapterToEdit !== ele ? (
+              <SortableItem key={ele.id}>
             <div className="Chapters__list-item">
               <Row className="Chapters__list-item__content" style={{ width: "100%" }}>
               <Col xs={{ span: 5 }} lg={{ span: 2}} md={{span: 3}} xxl={{span: 2}}>
-                <MenuOutlined />{" "}
+                <MenuOutlined className={"menuOutlinedIcon"}/>{" "}
                 <span>
                   {index + 1}
                   {"."}
@@ -76,6 +86,7 @@ const handleAdd = ()=>{
                 </Col> 
                            </Row>
                            </div>
+              </SortableItem>
           ) : (
             <div className="Chapters__list-item">
               <Row className="Chapters__list-item__contentToEdit" style={{ width: "100%" }}>
@@ -108,6 +119,7 @@ const handleAdd = ()=>{
             </div>
           )
         ) : <div className="empty-list"><span>{t("formDirectVideo.chaptersTab.emptyList")}</span></div>}
+        </SortableList>
       </Col>
       <Col span={24} className="custom-column">
         <Input

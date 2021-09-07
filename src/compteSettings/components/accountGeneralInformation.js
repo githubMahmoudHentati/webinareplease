@@ -143,14 +143,14 @@ export const AccountGeneralInformation = ({form}) => {
             onFinish={handleSubmit}
         >
             <Spin spinning={values.constraintData.loadingGeneralInformation}>
-                <Row gutter={[20, 0]}>
-                    <Col className={"col_avatar"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}} lg={{span: 6}}>
+                <Row gutter={[10, 0]}>
+                    <Col className={"col_avatar"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}} lg={{span: 6}} xl={{span:4}}>
                         <Row justify={"space-around"} gutter={[0, 10]}>
-                            <Col offset={0} span={22}>
+                            <Col offset={2} span={22}>
                              <span className={"spn_CompteSettings"}
                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Avatar")}</span>
                             </Col>
-                            <Col span={24}>
+                            <Col offset={0} span={24}>
                                 <Avatar style={{
                                     background: darkMode === false ? "RGB(231, 247, 255)" : "#141414",
                                     border: darkMode === false ? "1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)",
@@ -163,13 +163,13 @@ export const AccountGeneralInformation = ({form}) => {
                                         </div> : !values.generalInformation.vignette ? <UserOutlined/>  : ""}
                                 />
                             </Col>
-                            <Col span={24}>
+                            <Col offset={0} span={24}>
                                 <AvatarUpload handleChange={handleChange} darkMode={darkMode}/>
                             </Col>
                         </Row>
                     </Col>
                     <Col className={"col_infos-générale"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}}
-                         lg={{span: 12}}>
+                         lg={{span: 12}} xl={{span:14}}>
                         <Row gutter={[0, 30]}>
                             <Col span={24} className={"col-forms"}>
                          <span style={{
@@ -189,7 +189,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.LastName")}<span className="require">*</span></span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Form.Item name="lastName"
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
@@ -210,7 +210,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.FirstName")}<span className="require">*</span> </span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Form.Item name="firstName"
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
@@ -231,7 +231,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.Email")}<span className="require">*</span> </span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Form.Item
                                                     className={"form-item-style"}
                                                     name="email"
@@ -267,7 +267,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.City")}  </span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Form.Item name="city"
                                                            style={{marginBottom: 0}}
                                                 >
@@ -285,7 +285,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.Address")} </span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Form.Item name="adresse"
                                                            style={{marginBottom: 0}}
                                                 >
@@ -303,7 +303,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.NumberOfEmployees")} </span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Select
                                                     className={"selectCompte"}
                                                     showSearch
@@ -335,7 +335,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.ZipCode")} </span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Form.Item name="postalCode"
                                                            style={{marginBottom: 0}}
                                                 >
@@ -354,7 +354,7 @@ export const AccountGeneralInformation = ({form}) => {
                                       color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"
                                   }}>{t("CompteSettings.Phone")}<span className="require">*</span> </span>
                                             </Col>
-                                            <Col span={24}>
+                                            <Col span={23}>
                                                 <Form.Item name="phone"
                                                  rules={[
                                                     ({_}) => ({
@@ -390,7 +390,7 @@ export const AccountGeneralInformation = ({form}) => {
                                             </Col>
                                         </Row>
                                     </Col>
-                                    <Col span={24}>
+                                    <Col span={23}>
                                         <Row justify={"end"} gutter={[10, 0]}>
                                             <Col>
                                                 <Button onClick={() => {

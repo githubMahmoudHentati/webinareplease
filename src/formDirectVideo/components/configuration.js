@@ -130,14 +130,17 @@ export const Configuration = () => {
                                         itemLayout="horizontal"
                                         dataSource={values.configuration.SpeakerList}
                                         renderItem={(item, indexItem) => (
-                                            <List.Item actions={[
+                                            <List.Item  actions={[
                                                 <span key="list-loadmore-edit"><EditOutlined
+                                                        className={"EditOutlined"}
                                                         onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem+1)}
-                                                        style={{fontSize: "21px", color: darkMode === false}}/></span>,
+                                                        style={{fontSize: "21px",marginRight:"5px" ,color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}/></span>,
                                                     <span key="list-loadmore-more"><MinusCircleOutlined
+                                                        className={"MinusCircleOutlined"}
                                                         style={{
                                                             fontSize: "21px",
-                                                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"
+                                                            color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)",
+                                                            marginLeft:"5px"
                                                         }}
                                                         onClick={() => deleteSpeaker(indexItem)}/></span>
                                                 ]}>
@@ -311,15 +314,16 @@ export const Configuration = () => {
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
-                            <Col ref={themesRef} span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
-                                 className={"col-forms"}>
+                            <Col  ref={themesRef} span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85" }}
+                                 className={"col-forms col_theme"}>
                                 <span>{t("formDirectVideo.Themes")}</span>
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
-                            <Col offset={1} span={23}>
+                            <Col offset={0} span={24} className={"col_theme"}>
                                     <Select
                                         value={values.configuration.theme}
+                                        showArrow={true}
                                         mode="multiple"
                                         className={"spn2"}
                                         name="theme" onChange={(value,action)=>{ConfigurationOnChangeSelect(value,action,"theme")}}

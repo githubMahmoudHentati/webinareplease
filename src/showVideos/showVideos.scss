@@ -14,7 +14,7 @@
 .DataTable{
 &__custom-row {
   &:hover td{
-    background:  var(--tag-blue-background)!important;
+    background:  var(--table_thead-color)!important;
   }
 }
 }

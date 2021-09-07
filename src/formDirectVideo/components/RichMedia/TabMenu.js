@@ -1,5 +1,5 @@
 import { Tabs } from "antd";
-import { SettingOutlined } from "@ant-design/icons";
+import { SettingOutlined ,  UnorderedListOutlined , QuestionCircleFilled , AppstoreFilled} from "@ant-design/icons";
 import { Slides } from "../RichMedia/Slides";
 import { Question } from "../RichMedia/Qusestion";
 import { Chapter } from "../RichMedia/Chapters";
@@ -34,8 +34,8 @@ export const TabMenu = ({ listQuestion }) => {
     >
       <TabPane
         tab={
-          <span>
-            <SettingOutlined />
+          <span className={"tabMenu"}>
+            <UnorderedListOutlined />
             {t("formDirectVideo.chaptersTab.title")}
           </span>
         }
@@ -45,8 +45,8 @@ export const TabMenu = ({ listQuestion }) => {
       </TabPane>
       <TabPane
         tab={
-          <span>
-            <SettingOutlined />
+          <span className={"tabMenu"}>
+            <QuestionCircleFilled />
             {t("formDirectVideo.questionsTab.title")}
           </span>
         }
@@ -56,8 +56,8 @@ export const TabMenu = ({ listQuestion }) => {
       </TabPane>
       <TabPane
         tab={
-          <span>
-            <SettingOutlined />
+          <span className={"tabMenu"}>
+            <AppstoreFilled />
             {t("formDirectVideo.slidesTab.title")}
           </span>
         }

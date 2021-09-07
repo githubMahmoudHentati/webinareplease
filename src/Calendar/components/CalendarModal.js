@@ -30,9 +30,9 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleSt
                             }</Button>
                     }
                     <div>
-                        <Button key="back" onClick={handleCancel}>
-                            {t("Calendar.Cancel")}
-                        </Button>
+                        {/*<Button key="back" onClick={handleCancel}>*/}
+                        {/*    {t("Calendar.Cancel")}*/}
+                        {/*</Button>*/}
                         <Button className={"ModalButtonPrimary"} type="primary" key="submit"
                                 onClick={() => handleStatusEvents(modalInfo)}>
                             {modalInfo.status == -1 ? t("Calendar.Edit") : modalInfo.status == 0 ? t("Calendar.Visualize") : t("Calendar.Broadcast")}
