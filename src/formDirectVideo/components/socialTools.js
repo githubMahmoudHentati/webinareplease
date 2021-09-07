@@ -99,7 +99,7 @@ export const SocialTools=()=>{
                                                                                 </Row>
                                                                             </Col>
                                                                             <Col>
-                                                                                <CloseOutlined onClick={()=>closePlan(index,indexPlan)}/>
+                                                                                <CloseOutlined onClick={()=>closePlan(index,indexPlan)} className={"close_icon_planification"}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>

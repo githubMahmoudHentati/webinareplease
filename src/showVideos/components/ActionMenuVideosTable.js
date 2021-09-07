@@ -229,8 +229,8 @@ function useActionMenu({record}) {
                 !x.matches && <Tooltip getPopupContainer={() => document.querySelector(".btn_Visualiser_diffuser")}
                                        title={t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser"))}>
                     <Button className={"btn_Visualiser_diffuser "} style={{
-                        backgroundColor: darkMode === false ? "" : "#1D1D1D",
-                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.25)",
+                        backgroundColor: darkMode === false ? "" : "#141414",
+                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                         border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                     }} onClick={() => handleClickStreamin(record)}>
                         {
