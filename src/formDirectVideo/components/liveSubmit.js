@@ -77,11 +77,8 @@ export const LiveSubmit=(props)=>{
 
     useEffect(async () => {
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:false}));
-    }, []);
-
-    useEffect(async () => {
-
     }, [values.general]);
+
 
     return(
         <div>
