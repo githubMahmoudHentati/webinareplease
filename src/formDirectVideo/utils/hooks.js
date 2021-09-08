@@ -15,8 +15,9 @@ import {
 } from "../store/formDirectVideoAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+import {setDirectSetting} from "../../utils/redux/actions";
 
-const Hooks=(attachedFilesRef)=>{
+const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)

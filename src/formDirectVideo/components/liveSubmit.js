@@ -4,12 +4,14 @@ import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import Hooks from "../utils/hooks";
 import moment from "moment";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
 
 export const LiveSubmit=(props)=>{
+    const dispatch = useDispatch()
     const history = useHistory()
     const [form] = Form.useForm();
     const {handleSubmit,checkKeyDown,values}=Hooks()
@@ -74,8 +76,12 @@ export const LiveSubmit=(props)=>{
     const {getLiveData} = GraphQLFetchDataForm(values_data)
 
     useEffect(async () => {
-        getLiveData()
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:false}));
     }, []);
+
+    useEffect(async () => {
+
+    }, [values.general]);
 
     return(
         <div>
