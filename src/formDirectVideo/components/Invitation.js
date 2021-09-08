@@ -145,7 +145,7 @@ function Invitation(){
             {/*</div>/!*./groupEmail*!/*/}
 
             <div className={"groupEmail div2"}>
-                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.Emails")}  <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
+                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.Emails")}  <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"infosIcon"}/></span>
                        <Form.Item
                            style={{width:"100%"}}
                            name="emails"
@@ -177,7 +177,7 @@ function Invitation(){
             <div className={"groupEmail div3"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.SendingRules")} </span>
                 <div className={"div_Email_accée"}>
-                     <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.RegistrationAccessEmails")}</p>
+                     <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.25)"}}>{t("formDirectVideo.RegistrationAccessEmails")}</p>
                     <div className={"div_ajout_régle"}>
 
                         {values.invitation.addRules.afterPrograming === true
@@ -248,7 +248,7 @@ function Invitation(){
 
 
                 <div className={"div_Email_accée list2"}>
-                    <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.RegEmail")}</p>
+                    <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.25)"}}>{t("formDirectVideo.RegEmail")}</p>
                     <div className={"div_ajout_régle"}>
 
                         {values.invitation.addRules.afterSubscription === true
