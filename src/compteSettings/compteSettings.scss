@@ -31,6 +31,9 @@
   font-style: normal;
   font-display: swap;
 }
+.ant-table-cell-scrollbar{
+  box-shadow: none !important;
+}
 .row_abonnement{
   padding-right: 15px;
 }
@@ -110,7 +113,9 @@
   font-family: "SF Pro Display";
   font-weight: 500;
 }
-
+.ant-badge-status-text{
+    color: var(--white_color) !important;
+}
 
 #product-form_email{
   border-color: var(--border_color) !important ;

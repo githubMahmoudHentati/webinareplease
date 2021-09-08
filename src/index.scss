@@ -124,9 +124,12 @@ body{
 
     --befor-cell-picker-color : #e6f7ff;
 
+    --pagination-item-color:rgba(0, 0, 0, 0.25);
+
     --text-menu : #F90001;
 
     --background-color-menu : #fff1f0;
+
 }
 :root.dark{
     --lang-help-color:rgba(255, 255, 255, 0.85);
@@ -182,12 +185,21 @@ body{
 
     --input-filter-background : rgba(0, 0, 0, 0.04);
 
+    --pagination-item-color:rgba(0, 0, 0, 0.65);
+
     --befor-cell-picker-color : #111d2c;
 
     --text-menu : #a61d24;
 
     --background-color-menu: #1D1D1D;
 
+}
+.ant-table{
+    background-color: transparent !important;
+}
+.ant-table-container table > thead > tr:first-child th:first-child{
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
 }
 .ant-select-selection-placeholder{
     color: var(--icon-color) !important;
@@ -233,11 +245,6 @@ body{
 }
 .ant-picker-range-separator .anticon{
     color: var(--white_color) !important;
-}
-.ant-breadcrumb-link{
-    font-family: "SF Pro Display";
-    font-size: 14px;
-    font-weight: normal;
 }
 
 .ant-checkbox-inner , .ant-radio-inner{
@@ -444,7 +451,16 @@ body{
 
     }
 .ant-breadcrumb-separator{
-    color: var(--separator-color) !important;
+    color: var(--icon-color) !important;
+}
+.ant-breadcrumb-link{
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--icon-color) !important;
+}
+.ant-breadcrumb > span:last-child .ant-breadcrumb-link{
+    color: var(--white_color) !important;
 }
 .selectFilter .ant-select-selector{
     background-color: var(--card_color) !important;
@@ -462,10 +478,24 @@ body{
 .ant-pagination-item-link{
     background-color: var(--card_color) !important;
     color: var(--white_color) !important;
+    border-color: var(--icon-color) !important;
     .ant-pagination-item-ellipsis{
         color:var(--white_color) !important;
     }
+    &:disabled{
+        color: var(--icon-color) !important;
+    }
 }
+.ant-pagination-item{
+    border-color: var(--pagination-item-color) !important;
+    &:hover{
+        border-color: #1890ff !important;
+    }
+}
+.ant-pagination-item-active{
+    border: 1px solid #1890ff !important;
+}
+
 .ant-pagination-item a{
     background-color: var(--card_color) !important;
     color: var(--white_color) !important;
@@ -520,7 +550,7 @@ body{
     color: var(--icon-color) !important;
 }
 
-.anticon:not(.anticon-check,.anticon-appstore,.anticon-question-circle,.anticon-unordered-list,.modal-div2_time_calendar .anticon-clock-circle,.ant-avatar,.ant-avatar-string,.ant-avatar-circle,.anticon-logout,.anticon-pie-chart,.anticon-unlock,.anticon-user ,.anticon-caret-up,.anticon-caret-down, .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
+.anticon:not(.anticon-left,.anticon-right,.anticon-check,.anticon-appstore,.anticon-question-circle,.anticon-unordered-list,.modal-div2_time_calendar .anticon-clock-circle,.ant-avatar,.ant-avatar-string,.ant-avatar-circle,.anticon-logout,.anticon-pie-chart,.anticon-unlock,.anticon-user ,.anticon-caret-up,.anticon-caret-down, .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
     color: var(--icon-color) !important;
 }
 .UserOutlined{
@@ -628,10 +658,13 @@ body{
 
 .ant-table-body::-webkit-scrollbar{
     width: 4px !important;
-    height: 2px;
+    height: 4px;
 }
 .ant-table-body::-webkit-scrollbar-track{
-    background: var(--card_color) !important;
+    background-color: var(--card_color) !important;
+    z-index: 999;
+    border: none !important;
+    box-shadow: none !important;
 }
 .ant-table-body::-webkit-scrollbar-thumb{
     background-color: var(--icon-color);    /* color of the scroll thumb */

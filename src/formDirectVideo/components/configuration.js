@@ -314,9 +314,9 @@ export const Configuration = () => {
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
-                            <Col  ref={themesRef} span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85" }}
+                            <Col  ref={themesRef} span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)" }}
                                  className={"col-forms col_theme"}>
-                                <span>{t("formDirectVideo.Themes")}</span>
+                                <span className={"span-theme"}>{t("formDirectVideo.Themes")}</span>
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&

@@ -78,7 +78,7 @@ export const CompteSettings=()=>{
                             <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>{t("CompteSettings.MyAccount")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
-                    <Col  span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#141414" , marginBottom:"25px"}}>
+                    <Col  span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"RGBA(255, 255, 255, 0.04)" , marginBottom:"25px"}}>
                         <ArrowLeftOutlined
                             style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium' , color:darkMode===false?"":"white"}}
                             onClick={()=>{

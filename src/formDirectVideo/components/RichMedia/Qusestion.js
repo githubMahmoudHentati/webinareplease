@@ -364,18 +364,6 @@ export const Question = ({ listQuestion }) => {
                                 }
                                 onClick={handleEditQuestion}
                                 type={"primary"}
-                                style={{
-                                  fontFamily: "SF Pro Display",
-                                  fontWeight: "normal",
-                                  color:
-                                      darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                                  background:
-                                      darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                                  border:
-                                      darkMode === false
-                                          ? ""
-                                          : "1px solid rgba(255, 255, 255, 0.15)",
-                                }}
                             >
                               {t("formDirectVideo.Update")}
                             </Button>
@@ -511,17 +499,6 @@ export const Question = ({ listQuestion }) => {
                   }
                   onClick={handleAddQuestion}
                   type={"primary"}
-                  style={{
-                    fontFamily: "SF Pro Display",
-                    fontWeight: "normal",
-                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                    background:
-                        darkMode === false ? "" : "rgba(255, 255, 255, 0.04)",
-                    border:
-                        darkMode === false
-                            ? ""
-                            : "1px solid rgba(255, 255, 255, 0.15)",
-                  }}
               >
                 {t("ShowVideo.Add")}
               </Button>

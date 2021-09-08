@@ -85,7 +85,7 @@ export const SocialTools=()=>{
                                                 {values.socialTools[index].plan.map((element, indexPlan) => {
                                                         return (
                                                             <Col className={"col-planification"} span={24} style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
-                                                                <Row gutter={[0, 20]}>
+                                                                <Row gutter={[0, 2]}>
                                                                     <Col span={24}>
                                                                         <Row justify={"space-between"} className={"row_plannification_social"}>
                                                                             <Col span={12}>
@@ -162,8 +162,8 @@ export const SocialTools=()=>{
                                                                 <Col offset={1} className={"col_Empreinte"}>
                                                                     <span className={"spn1"} style={{
                                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
-                                                                    }}>Empreinte</span><br/><span className={"spn2"} style={{
-                                                                    color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
+                                                                    }}>Empreinte.com</span><br/><span className={"spn2"} style={{
+                                                                    color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"
                                                                 }}>{t("formDirectVideo.AboutOneMn")}</span>
                                                                 </Col>
                                                             </Row>
