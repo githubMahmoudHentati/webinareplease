@@ -71,7 +71,7 @@ export const PasswordEdit =()=>{
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col span={24}>
-                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Nouveau mot de passe")} :</span>
+                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.NewPassword")} :</span>
                             </Col>
                             <Col xs={{span: 22}} sm={{span: 22}} md={{span: 20}} lg={{span: 10}}>
                                 <Form.Item

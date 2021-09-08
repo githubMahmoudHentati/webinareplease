@@ -28,6 +28,17 @@
 :root{
   --display-emails: none;
 }
+.ant-popover-content{
+  margin-left: 70px !important;
+  .ant-popover-arrow{
+      display: none !important;
+
+  }
+  @media screen and (max-width: 767px){
+    margin-left: 10px !important;
+  }
+}
+
 .title-col{
   background: RGBA(0, 0, 0, 0.04);
   text-align: left;
@@ -38,6 +49,11 @@
 }
 .col_theme{
   padding-left: 25px;
+  margin-top: -20px;
+  margin-bottom: 10px;
+}
+.span-theme{
+  font-weight: normal !important;
 }
 .row_plannification_social{
   background-color: var(--table_thead-color) !important;
@@ -204,6 +220,15 @@
   }
 }
 
+.ant-btn-primary[disabled]{
+  background-color: var(--cell-color) !important;
+  color: var(--white_color) !important;
+  border-color: var(--icon-color) !important;
+}
+.ant-input[disabled]:hover{
+  border-color: var(--icon-color) !important;
+}
+
 .list-speaker{
   margin-left: 3%;
   width: 100%;
@@ -329,6 +354,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 15px;
 }
 .div_Email_accée p{
   font-family: "SF Pro Display";
@@ -339,10 +365,13 @@
   letter-spacing: normal;
   color: rgba(0, 0, 0, 0.65);
 }
+.div_ajout_régle{
+ margin-top: -20px;
+}
 .infos_ajout_régle{
   width: 100%;
   height: 65px;
-  padding: 15px 0 0;
+  padding: 0px 0 0;
   border-bottom: 1px solid var(--invitation-border);
   display: flex;
   flex-direction: row;
