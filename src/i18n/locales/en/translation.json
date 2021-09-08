@@ -247,7 +247,7 @@
     "questionsTab":{
       "title": "Questions",
       "emptyList": "No questions",
-      "inputQuestionLabel": "New Question",
+      "inputQuestionLabel": "New question",
       "addQuestion": "Add a question",
       "inputQuestionPlaceholder": "Question",
       "inputResponsePlaceholder": "Answer",
