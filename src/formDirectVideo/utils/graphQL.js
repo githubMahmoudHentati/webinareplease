@@ -79,7 +79,9 @@ export const graphQL_shema = ()=> {
                     }
                     tags
                     themes
-                    attachedFiles
+                    attachedFiles{
+                        fileName
+                    }
                     slides{
                     slideOrder
                     slide
