@@ -87,7 +87,7 @@ export const SocialTools=()=>{
                                                             <Col className={"col-planification"} span={24} style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
                                                                 <Row gutter={[0, 20]}>
                                                                     <Col span={24}>
-                                                                        <Row justify={"space-between"}>
+                                                                        <Row justify={"space-between"} className={"row_plannification_social"}>
                                                                             <Col span={12}>
                                                                                 <Row>
                                                                                     <Col>
@@ -104,7 +104,7 @@ export const SocialTools=()=>{
                                                                         </Row>
                                                                     </Col>
                                                                     {element.active &&
-                                                                    <Col span={24}>
+                                                                    <Col span={24} className={"colDatePickerSocial"}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.StartingDate")}</span>
@@ -119,7 +119,7 @@ export const SocialTools=()=>{
                                                                     </Col>
                                                                     }
                                                                     {element.active &&
-                                                                    <Col span={24}>
+                                                                    <Col span={24} className={"colDatePickerSocial"}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.EndingDate")}</span>
@@ -138,12 +138,11 @@ export const SocialTools=()=>{
                                                     }
                                                 )}
                                                 <Col style={{
-                                                    border: "1px solid RGBA(0, 0, 0, 0.15)",
                                                     display: "flex",
                                                     alignItems: "center",
                                                     justifyContent: "center"
-                                                }} span={24} className={"col-planification"}>
-                                                    <Button  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"solid 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
+                                                }} span={24} className={"col-planification_button"}>
+                                                    <Button className={"btn_add_planning"}  style={{width:"100%" , background:darkMode===false?"":"rgba(0, 0, 0, 0.04)" ,color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"dashed 1px rgba(255, 255, 255, 0.15)"}}  onClick={() => addPlan(index)} icon={<PlusOutlined/>}>
                                                         {t("formDirectVideo.AddingPlanning")}
                                                     </Button>
                                                 </Col>

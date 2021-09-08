@@ -34,7 +34,7 @@ export const TabMenu = ({ listQuestion }) => {
     >
       <TabPane
         tab={
-          <span>
+          <span className={"tabMenu"}>
             <UnorderedListOutlined />
             {t("formDirectVideo.chaptersTab.title")}
           </span>
@@ -45,7 +45,7 @@ export const TabMenu = ({ listQuestion }) => {
       </TabPane>
       <TabPane
         tab={
-          <span>
+          <span className={"tabMenu"}>
             <QuestionCircleFilled />
             {t("formDirectVideo.questionsTab.title")}
           </span>
@@ -56,7 +56,7 @@ export const TabMenu = ({ listQuestion }) => {
       </TabPane>
       <TabPane
         tab={
-          <span>
+          <span className={"tabMenu"}>
             <AppstoreFilled />
             {t("formDirectVideo.slidesTab.title")}
           </span>

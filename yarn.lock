@@ -41,12 +41,6 @@
   "integrity" "sha512-arvzqyh+SmcJ9jGmdP1QhboTCq6YoowidqbDTigJ8LqA4jywOvgy3GMSPKUtyyxter12rQ+42cXjGI9+ZMVuyA=="
   "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.4.5.tgz"
   "version" "3.4.5"
-=======
-"@apollo/client@^3.2.5", "@apollo/client@^3.4.1":
-  "integrity" "sha512-CT7ZBSHQD4UG1PDvMS9qOz5ACRIR0b4mBkqjCXEVjteOxA4wpFqUX3dg2bNl+Ok3LwPxFT4b3FwC3+LVcWFa6w=="
-  "resolved" "https://registry.npmjs.org/@apollo/client/-/client-3.4.1.tgz"
-  "version" "3.4.1"
->>>>>>> 5bcb88ce47083d286f9ed60c04b99b717b65b02e
   dependencies:
     "@graphql-typed-document-node/core" "^3.0.0"
     "@wry/context" "^0.6.0"

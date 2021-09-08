@@ -32,6 +32,7 @@ function GlobalHeader() {
     const history = useHistory()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
     const [arrow ,  setArrow] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false);
 
     // Clic outside Side Bar
     useEffect(() => {
@@ -141,7 +142,7 @@ function GlobalHeader() {
 
     return (
         <div className={"div_Header"}>
-            <div className={"Header"} style={{backgroundColor: darkMode === false ? "#ffffff" : "#141414"}}>
+            <div className={isScrolled ? "Header scrolled" : "Header"} style={{backgroundColor: darkMode === false ? "#ffffff" : "#141414"}}>
 
                 <div className="div_home_logo">
                     <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg"
@@ -179,7 +180,7 @@ function GlobalHeader() {
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: darkMode?"#1D1D1D":'#F0F1F4'}}
                                     src={avatar}
-                                    icon={!avatar ? <UserOutlined/> : ""} />
+                                    icon={!avatar ? <UserOutlined /> : ""} />
                             {
                                 firstName || lastName ?
                                     <div className={"avatar-userName"}>
