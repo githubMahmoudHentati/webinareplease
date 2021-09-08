@@ -122,7 +122,11 @@ body{
 
     --input-filter-background : rgba(255, 255, 255, 0.65);
 
-    --befor-cell-picker-color : #e6f7ff
+    --befor-cell-picker-color : #e6f7ff;
+
+    --text-menu : #F90001;
+
+    --background-color-menu : #fff1f0;
 }
 :root.dark{
     --lang-help-color:rgba(255, 255, 255, 0.85);
@@ -178,7 +182,11 @@ body{
 
     --input-filter-background : rgba(0, 0, 0, 0.04);
 
-    --befor-cell-picker-color : #111d2c
+    --befor-cell-picker-color : #111d2c;
+
+    --text-menu : #a61d24;
+
+    --background-color-menu: #1D1D1D;
 
 }
 .ant-select-selection-placeholder{
@@ -768,27 +776,53 @@ body{
     color: var(--white_color) !important;
     border: 1px solid var(--border_color) !important;
 }
-.menuItem{
-    color: var(--item-menu-color) !important;
-}
+
+/////*************form menu**********//////
 .menuItem {
+    color: var(--item-menu-color) !important;
     font-family: "SF Pro Display" !important;
     font-size: 14px !important;
     font-weight: normal !important;
+
+    &:focus {
+        background-color: var(--menu-background) !important;
+
+        &.ant-menu-title-content {
+            color: #1890ff !important;
+        }
+    }
+
+    &.itemMenu {
+        border-bottom: none !important;
+
+        &:hover {
+            background-color: var(--table_thead-color) !important;
+            color: var(--menu-color) !important;
+            border-right: 3px solid var(--menu-border) !important;
+        }
+
+        &.error-submit {
+            background-color: var(--background-color-menu) !important;
+            border-right-color: var(--text-menu) !important;
+
+            span {
+                color: var(--text-menu) !important;
+            }
+        }
+    }
+    @media screen and (max-width: 767px) {
+        .itemMenu {
+            border-bottom: none !important;
+
+            :hover {
+                background-color: var(--menu-background) !important;
+                color: var(--menu-color) !important;
+                border-right: 2px solid var(--menu-border) !important;
+            }
+        }
+    }
 }
-.menuItem:hover{
-    background-color: var(--table_thead-color) !important;
-    color: var(--white_color) !important;
-}
-.menuItem:hover .ant-menu-title-content{
-    color: #1890ff  !important;
-}
-.menuItem:focus{
-    background-color: var(--menu-background) !important;
-}
-.menuItem:focus .ant-menu-title-content{
-    color: #1890ff  !important;
-}
+
 .ant-picker-cell-selected{
     background-color: var(--option-background) !important;
 }
