@@ -333,10 +333,10 @@ export const GraphQLFetchDataForm = (values) => {
                     fileListConfiguration:data.getlive.configurationOut.attachedFiles.map((item)=>{
                            return({
                                uid: uuidv4(),
-                               name:item.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
+                               //name:item.fileName.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
                                status: 'done',
-                               url: item,
-                               thumbUrl: item,
+                               url: item.fileName,
+                               thumbUrl: item.fileName,
                            })
                     }),
                     listQuestion: data.getlive.configurationOut.questions.map((item)=>{
