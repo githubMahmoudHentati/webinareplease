@@ -344,11 +344,7 @@ export const GraphQLFetchDataForm = (values) => {
                             nsp:item.nsp,
                             question:item.question,
                             //order:item.order,
-                            choices:item.choices.split('♠♣♥♦').map((item) => {
-                                return{
-                                    "response": item
-                                }
-                            }),
+                            choices:{response : [...item.choices.response.map(item=>item)]}
                         })
                     }),
                 },
