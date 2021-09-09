@@ -94,7 +94,9 @@ export const graphQL_shema = ()=> {
                      nsp
                      question
                      order
-                     choices
+                     choices{ 
+                     response 
+                     }
                      }
                 }
                 invitationOut{
