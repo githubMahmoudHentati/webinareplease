@@ -86,7 +86,8 @@
     "MyAccount": "My Account",
     "InvalidPhone": "Phone number is invalid",
     "EnterPhone": "Enter a phone number",
-    "ModalTitle": "Edit image"
+    "ModalTitle": "Edit image",
+    "Society": "society"
   },
   "ConfirmAccount": {
     "ConfirmationSend": " Confirmation e-mail sent!",
@@ -246,7 +247,7 @@
     "questionsTab":{
       "title": "Questions",
       "emptyList": "No questions",
-      "inputQuestionLabel": "New Question",
+      "inputQuestionLabel": "New question",
       "addQuestion": "Add a question",
       "inputQuestionPlaceholder": "Question",
       "inputResponsePlaceholder": "Answer",

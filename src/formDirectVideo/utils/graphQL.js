@@ -79,7 +79,9 @@ export const graphQL_shema = ()=> {
                     }
                     tags
                     themes
-                    attachedFiles
+                    attachedFiles{
+                        fileName
+                    }
                     slides{
                     slideOrder
                     slide
@@ -92,7 +94,9 @@ export const graphQL_shema = ()=> {
                      nsp
                      question
                      order
-                     choices
+                     choices{ 
+                     response 
+                     }
                      }
                 }
                 invitationOut{

@@ -32,8 +32,8 @@ export const CompteSettings=()=>{
                 "offset": 0,
             } },
         onCompleted: async (data) => {
-            await dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
-            await dispatch(setConstraintDataOnchange({
+             dispatch(setAccountSetting({dataUserInfo: GetUserInfoData.getUserInfo}));
+             dispatch(setConstraintDataOnchange({
                 constraintDataNameChange: "loadingGeneralInformation",
                 constraintDataValueChange: false
             }))
@@ -78,7 +78,7 @@ export const CompteSettings=()=>{
                             <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>{t("CompteSettings.MyAccount")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
-                    <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#141414"}}>
+                    <Col  span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"RGBA(255, 255, 255, 0.04)" , marginBottom:"25px"}}>
                         <ArrowLeftOutlined
                             style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium' , color:darkMode===false?"":"white"}}
                             onClick={()=>{
@@ -104,7 +104,7 @@ export const CompteSettings=()=>{
                             <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:4}} >
                                 <MenuForms />
                             </Col>
-                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:18}} >
+                            <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 15}} lg={{span:20}} className={"col-selectMenu"}>
                                 <SelectMenu />
                             </Col>
                         </Row>

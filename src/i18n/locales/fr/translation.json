@@ -75,7 +75,7 @@
     "StrengthPass": "Fiabilité du mot de passe actuel",
     "Medium": "Moyen",
     "Modifier": "Modifier",
-    "EditPass": "modifier votre mot de passe",
+    "EditPass": "Modifier votre mot de passe",
     "Ancien mot de passe": "Ancien mot de passe",
     "NewPassword": "Nouveau mot de passe",
     "Save": "Enregistrer",
@@ -91,7 +91,8 @@
     "MyAccount": "Mon Compte",
     "InvalidPhone": "Numéro telephone est invalide",
     "EnterPhone": "Saisir un numéro télephone",
-    "ModalTitle": "Éditer l'image"
+    "ModalTitle": "Éditer l'image",
+    "Society": "societé"
   },
   "ConfirmAccount": {
     "ConfirmationSend": "E-mail de confirmation envoyé !",
@@ -251,7 +252,7 @@
     "questionsTab":{
       "title": "Questions",
       "emptyList": "Pas de questions",
-      "inputQuestionLabel": "Nouveau Question",
+      "inputQuestionLabel": "Nouveau question",
       "addQuestion": "Ajouter une question",
       "inputQuestionPlaceholder": "Question",
       "inputResponsePlaceholder": "Réponse",

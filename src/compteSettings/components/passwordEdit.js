@@ -52,7 +52,7 @@ export const PasswordEdit =()=>{
                             <Col span={24}>
                                 <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Ancien mot de passe")} :</span>
                             </Col>
-                            <Col span={24}>
+                            <Col xs={{span: 22}} sm={{span: 22}} md={{span: 20}} lg={{span: 10}}>
                                 <Form.Item name="oldPassWord" className={"form-item-style"}
                                            rules={requiredFieldRule}
                                 >
@@ -71,9 +71,9 @@ export const PasswordEdit =()=>{
                     <Col span={24}>
                         <Row gutter={[0, 10]}>
                             <Col span={24}>
-                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Nouveau mot de passe")} :</span>
+                                <span className={"mdp"} style={{  color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.NewPassword")} :</span>
                             </Col>
-                            <Col span={24}>
+                            <Col xs={{span: 22}} sm={{span: 22}} md={{span: 20}} lg={{span: 10}}>
                                 <Form.Item
                                     className={"form-item-style"}
                                     name="newPassWord"
@@ -100,7 +100,7 @@ export const PasswordEdit =()=>{
                             </Col>
                         </Row>
                     </Col>
-                    <Col span={24}>
+                    <Col xs={{span: 22}} sm={{span: 22}} md={{span: 20}} lg={{span: 10}}>
                         <Row gutter={[10, 0]} justify={"end"}>
                             <Col>
                                 <Button className={"spn2_motDePasse"} style={{background:darkMode===false?"":"#141414" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)", border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} onClick={()=>dispatch(setAccountSetting(1))} >{t("CompteSettings.Cancel")}</Button>

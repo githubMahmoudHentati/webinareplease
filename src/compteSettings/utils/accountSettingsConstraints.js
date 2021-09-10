@@ -14,6 +14,7 @@ export const AccountSettingsConstraints = ()=>{
                 numberPerson:"",
                 postalCode:"",
                 phone:"",
+                society:"",
             }
         )
     }

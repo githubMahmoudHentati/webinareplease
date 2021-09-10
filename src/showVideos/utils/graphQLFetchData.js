@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Hooks} from "./hooks";
 import {
     setshowVideosActions,
@@ -19,7 +19,7 @@ const dateFormat = 'YYYY-MM-DD';
 
 export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
-
+    const credentialsValues = useSelector((state) => state.Reducer)
     const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 
     // Read Data from Hooks
@@ -40,7 +40,11 @@ export const GraphQLFetchData=()=> {
                 "date":["", ""],
                 "status":values.type
             } },
-        context: { clientName: "second" },
+        context: {
+            headers: {
+                Authorization: `Bearer ${credentialsValues.authToken}`
+            }
+        },
         onCompleted :(data)=>{
             if(data.getLives.code === 200){
                 dispatch(setshowVideosActions(data.getLives));

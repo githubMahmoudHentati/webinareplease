@@ -4,12 +4,14 @@ import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import Hooks from "../utils/hooks";
 import moment from "moment";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
 
 export const LiveSubmit=(props)=>{
+    const dispatch = useDispatch()
     const history = useHistory()
     const [form] = Form.useForm();
     const {handleSubmit,checkKeyDown,values}=Hooks()
@@ -75,7 +77,12 @@ export const LiveSubmit=(props)=>{
 
     useEffect(async () => {
         getLiveData()
-    }, []);
+    },[] );
+
+    useEffect(async () => {
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:false}));
+    }, [values.general]);
+
 
     return(
         <div>
@@ -99,7 +106,7 @@ export const LiveSubmit=(props)=>{
                                 <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{localStorage.getItem('idLive') ? values.general.liveTitle :isAddedForm ? t("formDirectVideo.AddLive"): '' } </Breadcrumb.Item>
                             </Breadcrumb>
                         </Col>
-                        <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
+                        <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D" , marginBottom:"25px"}}>
                             <BarHeader/>
                         </Col>
                         {props.children}
