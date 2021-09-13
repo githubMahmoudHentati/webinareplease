@@ -3,10 +3,12 @@ import {graphQL_shema} from "./shemaGraphQL";
 import {useDispatch} from "react-redux";
 import {setAppSetLogin} from "../redux/actions";
 import {useState} from "react";
+import {useHistory} from 'react-router-dom';
 
 
 export const GraphQLFetchData=(storageData)=> {
     const dispatch = useDispatch()
+    const history = useHistory();
     // Read Data from Hooks
 
     // use Query to fetch Data
@@ -25,6 +27,8 @@ export const GraphQLFetchData=(storageData)=> {
             if (data.tokenverification.code===200)
             {
                 dispatch(setAppSetLogin(token));
+            } else {
+                history.push("/connexion")
             }
             setVerificationToken(true)
         }
