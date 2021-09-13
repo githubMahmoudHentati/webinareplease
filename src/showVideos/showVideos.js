@@ -61,10 +61,11 @@ function ShowVideos() {
             dataIndex: 'logo',
             key:'4',
             className: "columnFeed",
-            render: image =>
-                <div className={"div_apercu"}>
-                <img  src={image} className={"img_aperçu"} alt={""}/>
-                </div>,
+            render: image =>{
+                return  (<div className={"list_lives"}>
+                    <img  src={image} className={"list_lives--img"} alt={"live Image"}/>
+                </div>)
+            }
         },
         {
             title: t("ShowVideo.Titre"),

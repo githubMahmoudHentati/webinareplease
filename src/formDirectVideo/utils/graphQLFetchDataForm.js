@@ -292,7 +292,7 @@ export const GraphQLFetchDataForm = (values) => {
                     modalSpeaker: values.configuration.modalSpeaker,
                     switchSpeaker:speakerList.length > 0,
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
-                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
+                    SpeakerList:speakerList.length ? speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
                         logoSpeaker:[{
                             uid: '-1',
@@ -302,7 +302,7 @@ export const GraphQLFetchDataForm = (values) => {
                             thumbUrl:speakerList[index].avatar,
                         }],email,title,id:index+1,
                         ...rest
-                    })),
+                    }))  :[],
                     addSpeakerList:values.configuration.addSpeakerList,
                     speaker:  values.configuration.speaker,
                     loadingSpeakerInfo:false,
@@ -315,13 +315,15 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
-                    listChapter:data.getlive.configurationOut.chapters.map((item)=>{
+                    listChapter:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.chapters.length ?
+                        data.getlive.configurationOut.chapters.map((item)=>{
                         return({
                             id:item.chapterOrder,
                             title:item.chapterTitle
                         })
-                    }),
-                    diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
+                    }) : [],
+                    diapositivesFileLists:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.slides.length ?
+                        data.getlive.configurationOut.slides.map((item)=>{
                         return({
                             uid: item.slideOrder,
                             //name:item.slide.replace((item.slide.substring(0,item.slide.lastIndexOf("/")+6)),''),
@@ -329,8 +331,9 @@ export const GraphQLFetchDataForm = (values) => {
                             url: item.slide,
                             thumbUrl: item.slide,
                         })
-                    }),
-                    fileListConfiguration:data.getlive.configurationOut.attachedFiles.map((item)=>{
+                    }) : [],
+                    fileListConfiguration:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.attachedFiles.length ?
+                        data.getlive.configurationOut.attachedFiles.map((item)=>{
                            return({
                                uid: uuidv4(),
                                //name:item.fileName.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
@@ -338,15 +341,16 @@ export const GraphQLFetchDataForm = (values) => {
                                url: item.fileName,
                                thumbUrl: item.fileName,
                            })
-                    }),
-                    listQuestion: data.getlive.configurationOut.questions.map((item)=>{
+                    }) : [],
+                    listQuestion:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.questions.length ?
+                        data.getlive.configurationOut.questions.map((item)=>{
                         return({
                             nsp:item.nsp,
                             question:item.question,
                             //order:item.order,
                             choices:{response : [...item.choices.response.map(item=>item)]}
                         })
-                    }),
+                    }) : [],
                 },
                 invitation:{
                     emailsGroup:data.getlive.invitationOut.mailsGroup,
