@@ -38,9 +38,8 @@ export const Question = ({ listQuestion }) => {
   const [isEditing, setIsEditing] = useState(false);
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
   const listQustionRedux = useSelector((state) => state.FormDirectVideoReducer.configuration.listQuestion);
-
   useEffect(() => {
-    //setFakeList(listQuestion);
+    setFakeList(listQuestion);
   }, []);
   useEffect(() => {
     if (inputRef && isAddingNewQuestion) inputRef.current.focus();
@@ -54,7 +53,6 @@ export const Question = ({ listQuestion }) => {
     Inputs.choices.response[key] = e.target.value;
     setInputs({ ...Inputs });
   };
-  console.log('fakelist00000',fakeList)
   const handleChangeToEditResponse = (e, firstKey, secondKey) => {
     const newList = fakeList.map((item, index) => {
       if (index === firstKey) {

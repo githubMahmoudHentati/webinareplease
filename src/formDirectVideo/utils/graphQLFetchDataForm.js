@@ -36,7 +36,7 @@ export const GraphQLFetchDataForm = (values) => {
             input: {
                 generalInfo: {
                     thumbnail: values.general.fileList && values.general.fileList.length ?
-                        values.general.fileList[0].thumbUrl : "",
+                        values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
@@ -134,7 +134,7 @@ export const GraphQLFetchDataForm = (values) => {
             form: {
                 generalInfoOutput: {
                     thumbnail: values.general.fileList && values.general.fileList.length ?
-                        values.general.fileList[0].thumbUrl : "",
+                        values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
@@ -315,14 +315,16 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
-                    listChapter:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.chapters.length ?
+                    listChapter:data.getlive &&  data.getlive.configurationOut ?
+                        data.getlive.configurationOut.chapters && data.getlive.configurationOut.chapters.length ?
                         data.getlive.configurationOut.chapters.map((item)=>{
                         return({
                             id:item.chapterOrder,
                             title:item.chapterTitle
                         })
-                    }) : [],
-                    diapositivesFileLists:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.slides.length ?
+                    }) : [] : {},
+                    diapositivesFileLists:data.getlive &&  data.getlive.configurationOut ?
+                        data.getlive.configurationOut.slides && data.getlive.configurationOut.slides.length ?
                         data.getlive.configurationOut.slides.map((item)=>{
                         return({
                             uid: item.slideOrder,
@@ -331,8 +333,9 @@ export const GraphQLFetchDataForm = (values) => {
                             url: item.slide,
                             thumbUrl: item.slide,
                         })
-                    }) : [],
-                    fileListConfiguration:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.attachedFiles.length ?
+                    }) : [] :{},
+                    fileListConfiguration:data.getlive &&  data.getlive.configurationOut ?
+                        data.getlive.configurationOut.attachedFiles &&  data.getlive.configurationOut.attachedFiles.length ?
                         data.getlive.configurationOut.attachedFiles.map((item)=>{
                            return({
                                uid: uuidv4(),
@@ -341,8 +344,10 @@ export const GraphQLFetchDataForm = (values) => {
                                url: item.fileName,
                                thumbUrl: item.fileName,
                            })
-                    }) : [],
-                    listQuestion:data.getlive &&  data.getlive.configurationOut &&  data.getlive.configurationOut.questions.length ?
+                    }) : [] : {},
+                    listQuestion:
+                        data.getlive &&  data.getlive.configurationOut ?
+                            data.getlive.configurationOut.questions && data.getlive.configurationOut.questions.length ?
                         data.getlive.configurationOut.questions.map((item)=>{
                         return({
                             nsp:item.nsp,
@@ -350,7 +355,7 @@ export const GraphQLFetchDataForm = (values) => {
                             //order:item.order,
                             choices:{response : [...item.choices.response.map(item=>item)]}
                         })
-                    }) : [],
+                    }) : [] : {},
                 },
                 invitation:{
                     emailsGroup:data.getlive.invitationOut.mailsGroup,
