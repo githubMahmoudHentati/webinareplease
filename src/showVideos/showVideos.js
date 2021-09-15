@@ -41,7 +41,7 @@ function ShowVideos() {
 
     const displayDate = (date) =>{
         if(date)
-        return(<><span> {date.split(' ')[0]}</span><br /><span>{date.split(' ')[1]}</span></>)
+        return(<><span> {date.split(' ')[0]}</span><span>{date.split(' ')[1]}</span></>)
         else return ""
     }
 

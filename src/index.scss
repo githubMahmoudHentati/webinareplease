@@ -1494,6 +1494,9 @@ body{
     cursor: pointer;
     margin-left: 2%;
 }
+.div_home_icon{
+    margin-left: 10px;
+}
 .icon_help{
     font-size: 16px;
     color: rgba(0, 0, 0, 0.65);
@@ -2168,7 +2171,7 @@ input:checked + .slider:before {
     }
     .icon_webinaire{
         height: 100%;
-        width: 30%;
+        width: 34%;
     }
     /***** Package Payement Tab *****/
 
@@ -2399,7 +2402,8 @@ input:checked + .slider:before {
     }
     .icon_webinaire{
         height: 100%;
-        width: 30% !important;
+        width: 33% !important;
+        justify-content: flex-start;
     }
 }
 .divsignup{
