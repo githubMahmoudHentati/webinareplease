@@ -229,7 +229,9 @@ const Hooks=()=>{
     }
 
     const checkKeyDown =(e)=>{
-        if (e.code === 'NumpadEnter') e.preventDefault();
+        console.log("e.code-----",e)
+        console.log("e.code-----",e.code)
+        if (e.keyCode === 13) e.preventDefault();
     }
 
     // Suppression des régles invitations
