@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useState, useEffect } from "react";
 import { Table } from "antd";
 
 import UseActionMenu from "./ActionMenuVideosTable";
@@ -22,14 +22,16 @@ function UseDataTableVideos({ columns, dataSource }) {
   const valuePagination = useSelector(
     (state) => state.ShowVideosReducerReducer.paginationProps
   );
-
+console.log("render columns ", columns)
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   //const [actionColumnView] = useActionMenuTable({ selectedRow, updateEntityPath , record });
   // use Selector redux
-
+   useEffect(() =>{
+       console.log('render use data tavke ')
+   }, [])
   const onSelectChange = (selectedCheck) => {
     //uncheck checkbox
     let filter = [];
@@ -139,7 +141,17 @@ function UseDataTableVideos({ columns, dataSource }) {
         style={{ backgroundColor: darkMode === false ? "#ffffff" : "#011529" }}
         rowKey={(record) => record.id}
         rowSelection={rowSelection}
-        columns={updatedColumns}
+        columns={[
+            ...columns,
+        {
+            title: "Actions",
+            key: "action",
+            className: 'columnAction',
+            render: (action, record) => {
+            return <UseActionMenu record={record} />;
+        },
+        },
+            ]}
         dataSource={dataSource.content}
         rowClassName={"DataTable__custom-row"}
         onChange={handleTableChange}

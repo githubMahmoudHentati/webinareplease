@@ -376,6 +376,9 @@ body{
     background-color: var(--option-background) !important;
     cursor: pointer;
 }
+.ant-image-mask{
+    display:none;
+}
 .ant-switch{
     background-color: var(--Switch-Color) !important;
 }

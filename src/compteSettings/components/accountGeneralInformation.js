@@ -160,7 +160,7 @@ export const AccountGeneralInformation = ({form}) => {
                                         icon={values.constraintData.avatarLoading ? <div>
                                             <LoadingOutlined/>
                                             <div style={{marginTop: 8}}>{t("CompteSettings.Upload")}</div>
-                                        </div> : !values.generalInformation.vignette ? <UserOutlined/>  : ""}
+                                        </div> : <UserOutlined/> }
                                 />
                             </Col>
                             <Col offset={0} span={24}>
