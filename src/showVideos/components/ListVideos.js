@@ -101,7 +101,7 @@ console.log("render columns ", columns)
   await  dispatch(
       setPaginationProps({
         PaginationPropsNameChange: "order",
-        PaginationPropsValueChange: sorter.order === false ?  "" : sorter.order,
+        PaginationPropsValueChange: !sorter.order ?  "descend" : sorter.order,
       })
     );
     //dispatch current page

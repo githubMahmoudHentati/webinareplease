@@ -16,6 +16,10 @@ import {
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 import {setDirectSetting} from "../../utils/redux/actions";
+import {
+    setConstraintDataOnchange,
+    setGeneralInformationOnchange
+} from "../../compteSettings/store/accountSettingsAction";
 
 const Hooks=()=>{
     const dispatch = useDispatch()
@@ -266,6 +270,16 @@ const Hooks=()=>{
         }
 
     }
+    const generalInformationOnChangeAvatar= (avatar) => {
+        dispatch(setGeneralInformationOnchange({
+            generalInformationNameChange: "vignette",
+            generalInformationValueChange: avatar
+        }))
+        dispatch(setConstraintDataOnchange({
+            constraintDataNameChange: "avatarLoading",
+            constraintDataValueChange: false
+        }))
+    };
 
     return({
         generalOnChangeByName,
@@ -294,7 +308,8 @@ const Hooks=()=>{
         getFirstCharacter,
         sendPostMessage,
         checkKeyDown,
-        scrollToRef
+        scrollToRef,
+        generalInformationOnChangeAvatar
     })
 }
 
