@@ -81,9 +81,6 @@ function HeaderVideos() {
                   <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                       <span >{t("ShowVideo.Home")}</span>
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                      <span>{t("ShowVideo.Direct")}</span>
-                  </Breadcrumb.Item>
                   <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                       {
                           values.type === ""
@@ -181,6 +178,7 @@ function HeaderVideos() {
                           </Tooltip>
                       }
                       name="search"
+                      autocomplete="off"
                       onKeyDown={(event)=>handleSearchRow(event,rangeDate)}
                       onChange={(e) =>
                           // dispatch loading Delete Button

@@ -112,7 +112,7 @@ export const Generals =()=>{
                         <Form.Item name="liveTitle" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input maxLength={100} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
+                            <Input autocomplete="off" maxLength={100} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
                         </Form.Item>
                     </Col>
                 </Row>
