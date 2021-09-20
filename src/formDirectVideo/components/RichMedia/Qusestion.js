@@ -38,9 +38,10 @@ export const Question = ({ listQuestion }) => {
   const [isEditing, setIsEditing] = useState(false);
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
   const listQustionRedux = useSelector((state) => state.FormDirectVideoReducer.configuration.listQuestion);
+  console.log("listQustionRedux",listQustionRedux)
   useEffect(() => {
     setFakeList(listQuestion);
-  }, []);
+  }, [listQuestion]);
   useEffect(() => {
     if (inputRef && isAddingNewQuestion) inputRef.current.focus();
   }, [isAddingNewQuestion]);
@@ -179,6 +180,20 @@ export const Question = ({ listQuestion }) => {
       }));
     }
   };
+  const handleAbortEdit = (o) => {
+    setQuestionToEdit(null);
+    setFakeList(listQustionRedux);
+    setIsEditing((old) => !old);
+
+  };
+  const handleAbortEditkey = (e , index) =>{
+    console.log("iueiazueyiazuiazueyiazukjhd5646",e)
+    if(e.key === "Enter"){
+      setQuestionToEdit(null);
+      setFakeList(listQuestion);
+      setIsEditing((old) => !old);
+    }
+  }
   const handleEditQuestion = () => {
     setQuestionToEdit(null);
     dispatch(editQuestion({ editedListQuestion: [...fakeList] }));
@@ -188,21 +203,6 @@ export const Question = ({ listQuestion }) => {
     if(e.key === "Enter"){
       setQuestionToEdit(null);
       dispatch(editQuestion({ editedListQuestion: [...fakeList] }));
-      setIsEditing((old) => !old);
-    }
-  }
-
-  const handleAbortEdit = (o) => {
-    setQuestionToEdit(null);
-    setFakeList(listQustionRedux);
-    setIsEditing((old) => !old);
-    console.log("listQustionRedux",listQustionRedux)
-  };
-  const handleAbortEditkey = (e , index) =>{
-    console.log("iueiazueyiazuiazueyiazukjhd5646",e)
-    if(e.key === "Enter"){
-      setQuestionToEdit(null);
-      setFakeList(listQuestion);
       setIsEditing((old) => !old);
     }
   }
@@ -222,7 +222,7 @@ export const Question = ({ listQuestion }) => {
      await setFakeList((array) => arrayMoveImmutable(array, oldIndex, newIndex));
      await dispatch(sortQuestion({oldIndex, newIndex }));
   };
-
+console.log("fakeList32321321321321",fakeList)
   return (
       <Row gutter={[0, 15]} className="Question">
         <Col span={24}>
