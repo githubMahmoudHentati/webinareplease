@@ -145,15 +145,11 @@ function GlobalHeader() {
             <div className={isScrolled ? "Header scrolled" : "Header"} style={{backgroundColor: darkMode === false ? "#ffffff" : "#141414"}}>
 
                 <div className="div_home_logo">
-                    <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg"
-                                                            style={{color: darkMode === false ? "" : "white"}}
-                                                            onClick={() => {
-                                                                history.push("/")
-                                                            }}></span></div>
-                    <HomeOutlined className={"Home_Icon"} style={{color: darkMode === false ? "" : "#007fcb"}}
-                                  onClick={() => {
-                                      history.push("/")
-                                  }}/>
+                    <div className={'icon_webinaire'}><a href=" " className="icon-logo-webinar icon_Webinaire_svg"
+                                                            style={{color: darkMode === false ? "#2B333E" : "white"}}
+                                                            onClick={() => history.push("/")}></a></div>
+                    <div className="div_home_icon"><a href=" " onClick={() => history.push("/")}><HomeOutlined className={"Home_Icon"} style={{color: darkMode === false ? "" : "#007fcb"}}
+                    /></a></div>
                 </div>
                 {/*./div_home_logo*/}
 
@@ -180,7 +176,7 @@ function GlobalHeader() {
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: darkMode?"#1D1D1D":'#F0F1F4'}}
                                     src={avatar}
-                                    icon={!avatar ? <UserOutlined /> : ""} />
+                                    icon={<UserOutlined />} />
                             {
                                 firstName || lastName ?
                                     <div className={"avatar-userName"}>
