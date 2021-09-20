@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Badge, Button, Modal, Tag} from "antd";
+import {Badge, Button, Modal, Tag,Image} from "antd";
 import {CalendarOutlined, ClockCircleOutlined, DeleteOutlined} from "@ant-design/icons";
 import {useSelector} from "react-redux";
 import {useTranslation} from 'react-i18next';
@@ -43,8 +43,8 @@ function CalendarModal({modalInfo, visible, handleCancel, handleDelete, handleSt
             ]}
         >
             <div className={"body_Modal"}>
-                <div className={"div_image_modal"} ><img
-                    src={modalInfo.thumbnail ? modalInfo.thumbnail : defaultImg} alt={""}/>
+                <div className={"div_image_modal"} ><Image
+                    src={modalInfo.thumbnail} fallback={defaultImg} alt={""}/>
                 </div>
                 <div className={"div_time_calendar"}>
                     <div className={"type_btn"}><Tag

@@ -30,6 +30,8 @@ export const GraphQLFetchDataForm = (values) => {
     let richeMediaDiffusion=values.configuration.richeMediaDiffusion
     let attachements = values.configuration.attachments
     let {success_submit , error_submit}=StatusMessages(idLive)
+    console.log("SLIDES*****DiapositivesFile",DiapositivesFile)
+    console.log("ATTACHEDFILES§§§§§§§§§§§§",ThumbUrlAttachementFile)
     const [CreateLive] = useMutation(graphQL_shema().createLive, {
         context: { clientName: "second" },
         variables: {
@@ -72,8 +74,8 @@ export const GraphQLFetchDataForm = (values) => {
                     themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:TitleChapters,
                     questions:Questions,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    attachedFiles:ThumbUrlAttachementFile && ThumbUrlAttachementFile.length?ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)):[],
+                    slides:DiapositivesFile&& DiapositivesFile.length?DiapositivesFile.map(item=>item.substring(item.lastIndexOf("/")+ 1, item.length))  : [] ,
                 },
                 invitation:{
                     mailsGroup:values.invitation.emailsGroup,
@@ -170,8 +172,8 @@ export const GraphQLFetchDataForm = (values) => {
                     themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:TitleChapters,
                     questions:Questions,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile ,
+                    attachedFiles:ThumbUrlAttachementFile && ThumbUrlAttachementFile.length?ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)):[],
+                    slides:DiapositivesFile&& DiapositivesFile.length?DiapositivesFile.map(item=>item.substring(item.lastIndexOf("/")+ 1, item.length))  : [] ,
                 },
                 invitationOutput:{
                     mailsGroup:values.invitation.emailsGroup,
