@@ -182,14 +182,14 @@ console.log("FILE",fileList)
             },
             data: file
         }).then((result) => {
-            console.log("resultData",result.data.data.uploadLogo);
+            console.log("resultData",result.data.data.AddSlides);
             dispatch(setDiapositivesFileList({diapositiveNameFileList:"diapositivesFileLists", diapositivesValueFileList:
                     {
                         uid: uuidv4(),
                         name: (fileInfos && fileInfos.file.name) || "image.png",
                         status: 'done',
-                        url: result.data.data.uploadLogo,
-                        thumbUrl: result.data.data.uploadLogo,
+                        url: result.data.data.AddSlides,
+                        thumbUrl: result.data.data.AddSlides,
                     }
             }));
         }).catch(error => {
@@ -206,16 +206,16 @@ console.log("FILE",fileList)
 
         let formData = new FormData();
         const variables = {
-            avatar: null
+            slide: null
         }
         const query = `
-    mutation ($avatar:Upload!)
-        {uploadLogo(avatar:$avatar)}
+    mutation ($slide:Upload!)
+        {AddSlides(slide:$slide)}
 `;
         const operations = JSON.stringify({query, variables: {variables}});
         formData.append("operations", operations);
         const map = {
-            "0": ["variables.avatar"]
+            "0": ["variables.slide"]
         };
         formData.append("map", JSON.stringify(map));
         [...info.fileList].filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp" || file.type === "image/gif").map(async (e, index) => {
