@@ -252,7 +252,7 @@
     "questionsTab":{
       "title": "Questions",
       "emptyList": "Pas de questions",
-      "inputQuestionLabel": "Nouveau Question",
+      "inputQuestionLabel": "Nouveau question",
       "addQuestion": "Ajouter une question",
       "inputQuestionPlaceholder": "Question",
       "inputResponsePlaceholder": "Réponse",
