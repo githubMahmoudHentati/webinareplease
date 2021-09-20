@@ -3,18 +3,24 @@ import axios from "axios";
 import {
     setConfigurationFileList,
     setGeneralOnchange,
-    setDeleteFileList, setDiapositivesFileList, setDiapositivesDelete
+    setDeleteFileList, setDiapositivesFileList, setDiapositivesDelete, setLoadingUpload,
 } from "../store/formDirectVideoAction";
 import { v4 as uuidv4 } from 'uuid';
+import {setConstraintDataOnchange, setErrorVisibility} from "../../compteSettings/store/accountSettingsAction";
+import Hooks from "../../formDirectVideo/utils/hooks";
+
+
+
 
 export const UploadHooks = () =>{
     const dispatch = useDispatch()
-
+    const {generalInformationOnChangeAvatar} = Hooks()
 
     //************************************** Start Upload General **************************************//////////////////////
 
     //******************** On Save General *****************//
     const onSaveGeneral =(file, fileInfos)=>{
+       console.log("onSaveGeneral************")
         let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
@@ -26,16 +32,33 @@ export const UploadHooks = () =>{
             },
             data: file
         }).then((result) => {
+
+            let value=result.data.data.uploadLogo;
+            if (result.data.data.uploadLogo){
+                dispatch(setErrorVisibility({
+                    ErrorVisibilityName: "errorVisibility",
+                    ErrorVisibilityValue: false
+                }))
+            }else{
+                value=""
+                dispatch(setErrorVisibility({
+                    ErrorVisibilityName: "errorVisibility",
+                    ErrorVisibilityValue: true
+                }))
+            }
             dispatch(setGeneralOnchange({generalNameChange:"fileList", generalValueChange:
                     [{
                         uid: '-1',
                         name: (fileInfos && fileInfos.file.name) || "xxx.png",
                         status: 'done',
-                        url: result.data.data.uploadLogo,
-                        thumbUrl: result.data.data.uploadLogo,
+                        url:value,
+                        thumbUrl:value,
                     }]
             }));
+            console.log("CHEEEEEEEEEEEECK")
+            dispatch(setLoadingUpload(false))
         }).catch(error => {
+            console.log(error)
         });
     }
     //******************** On remove General *****************//
@@ -45,7 +68,12 @@ export const UploadHooks = () =>{
 
     //******************** handle change General *****************//
     const handleChangeGeneral = async info => {
-
+        console.log("DDDDDD",info.file.status)
+        if (info.file.status === 'uploading') {
+            await  dispatch(setLoadingUpload(true))
+            return;
+        }
+            console.log("handleChangeGeneral**********info", info)
         let formData = new FormData();
         const variables = {
             avatar: null
@@ -60,14 +88,14 @@ export const UploadHooks = () =>{
             "0": ["variables.avatar"]
         };
         formData.append("map", JSON.stringify(map));
-        [...info.fileList].slice(-1).filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
+        let fileList = [...info.fileList];
+        fileList.slice(-1);
+        await  fileList.filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
             const file = e.originFileObj;
             return formData.append("0", file);
         })
-
-        for (let p of formData) {
-        }
-        onSaveGeneral(formData, info)
+console.log("FILE",fileList)
+            onSaveGeneral(formData, info)
     }
 
     //************************************** End Upload General **************************************//////////////////////

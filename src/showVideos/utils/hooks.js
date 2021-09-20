@@ -31,7 +31,7 @@ export  const Hooks=()=> {
     let idLiveToDelete = []
     const [keyState , setKeyState]=useState(null)
     const [liveObj , setLiveObj] = useState({
-        order:'ascend',
+        order:'descend',
         pageSize:10,
         columnKey:0,
         current:1,
@@ -65,7 +65,7 @@ export  const Hooks=()=> {
     //Reducer export lives
     const DiffusionLinks = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
 
-    console.log("exportLives",DiffusionLinks)
+
 
     // Diffusion Link
     //const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
@@ -496,7 +496,6 @@ export  const Hooks=()=> {
     const handleCancelModalExport = () =>{
         dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:false}));
     }
-console.log("hehehehehhehehkjhksjdhkfsjdfhksdjfh",keyState)
     // Handle Click Visualiser/Diffuser
     const handleClickStreamin = async (e) =>{
         //await dispatch(setPaginationProps({PaginationPropsNameChange:"idDiffusion",PaginationPropsValueChange:e.id}));
@@ -534,6 +533,6 @@ console.log("hehehehehhehehkjhksjdhkfsjdfhksdjfh",keyState)
         handleCancelModalExport,
         exportLives,
         resetFilterVideos,
-        handleClickStreamin,
+        handleClickStreamin
     })
 }
