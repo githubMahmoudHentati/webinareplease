@@ -468,7 +468,6 @@ export  const Hooks=()=> {
         history.push("/FormDirectVideo")
         localStorage.setItem('formPage', 'Modifier')
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
-
     }
 
     // fonction handleInfos

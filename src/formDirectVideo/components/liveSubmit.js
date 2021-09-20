@@ -76,6 +76,10 @@ export const LiveSubmit=(props)=>{
     const {getLiveData} = GraphQLFetchDataForm(values_data)
 
     useEffect(async () => {
+        getLiveData()
+    },[] );
+
+    useEffect(async () => {
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:false}));
     }, [values.general]);
 
