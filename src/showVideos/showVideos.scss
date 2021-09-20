@@ -88,6 +88,17 @@
     }
   }
 }
+.list_lives{
+  width: 93px !important;
+  height: 54px !important;
+  position: relative;
+  &--img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
 @media screen and (min-width: 768px) and (max-width: 1600px) {
   .div_titre{
     width: 150px;
@@ -155,7 +166,7 @@
     .DataTable .ant-table tr {
       display: block;
     }
-    .div_apercu{
+    .list_lives{
       z-index: 9;
       position: absolute;
       top: 0;
