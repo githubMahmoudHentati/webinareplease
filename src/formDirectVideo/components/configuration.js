@@ -19,7 +19,7 @@ import '../formDirectVideo.scss'
 import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled } from '@ant-design/icons';
 import Hooks from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 
 
@@ -27,6 +27,7 @@ import {useTranslation} from 'react-i18next';
 import {TabMenu} from './RichMedia/TabMenu'
 
 import {AttachedFile} from "./attachedFile";
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
 export const Configuration = () => {
     const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
@@ -38,6 +39,7 @@ export const Configuration = () => {
     const { listQuestion } = useSelector(
         (state) => state.FormDirectVideoReducer.configuration
       );
+    const dispatch = useDispatch()
     const itemListRef = useRef(null);
     const {t} = useTranslation();
 
@@ -74,12 +76,18 @@ export const Configuration = () => {
     }, [itemListRef]);
 
     useEffect(() => {
-        !idLive&&values.configuration.liveAutomaticArchiving&&scrollToRef(visibleLiveRef)
+        values.constraintData.scrollIntoView&&values.configuration.liveAutomaticArchiving&&scrollToRef(visibleLiveRef)
     }, [values.configuration.liveAutomaticArchiving]);
 
     useEffect(() => {
-        !idLive&&values.configuration.videoMode === "visibleVideo"&&scrollToRef(themesRef)
+        values.constraintData.scrollIntoView&&values.configuration.videoMode === "visibleVideo"&&scrollToRef(themesRef)
     }, [values.configuration.videoMode]);
+
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
+    //     }
+    // }, []);
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>

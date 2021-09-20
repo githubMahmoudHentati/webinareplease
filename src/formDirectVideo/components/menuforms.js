@@ -45,7 +45,8 @@ export const MenuForms =()=>{
 
                     </div>
 
-                    <Menu.Item className={`menuItem itemMenu ${values.constraintData.errorMenuFormStyle&&!values.general.liveTitle||values.constraintData.errorMenuFormStyle&&values.general.liveAction&&!values.general.startDate||values.constraintData.errorMenuFormStyle&&values.general.liveAction&&!values.general.startHour?"error-submit":""}`} onClick={()=>{dispatch(setDirectSetting(0))}} key="1">
+                    <Menu.Item className={`menuItem itemMenu ${values.constraintData.errorMenuFormStyle&&!values.general.liveTitle||values.constraintData.errorMenuFormStyle&&values.general.liveAction&&!values.general.startDate||values.constraintData.errorMenuFormStyle&&values.general.liveAction&&!values.general.startHour?"error-submit":""}`}
+                               onClick={()=>{dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}));dispatch(setDirectSetting(0))}} key="1">
                         {t("formDirectVideo.General")}
                     </Menu.Item>
                     <div className={"titre-menu"}>
@@ -57,7 +58,7 @@ export const MenuForms =()=>{
                         fontWeight: "500"
                     }}>{t("formDirectVideo.OptionalSettings")}</span>
                     </div>
-                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(1))}} key="2">
+                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}));dispatch(setDirectSetting(1))}} key="2">
                         {t("formDirectVideo.Configuration")}
                     </Menu.Item>
 

@@ -32,6 +32,7 @@ const Hooks=()=>{
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:event}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const generalOnChange = (event) => {
@@ -43,6 +44,7 @@ const Hooks=()=>{
             dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
             dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
         }
+        event.target.value==="liveAccess"&&dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const generalOnChangeButton = async (event) => {
@@ -114,11 +116,14 @@ const Hooks=()=>{
 
         dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
         values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
+        name==="liveAutomaticArchiving"&&dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const configurationOnChangeButton = async (event) => {
 
         await dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
+
 
     };
 
