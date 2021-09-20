@@ -146,7 +146,7 @@ export const AccountGeneralInformation = ({form}) => {
                 <Row gutter={[10, 0]}>
                     <Col className={"col_avatar"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}} lg={{span: 6}} xl={{span:4}}>
                         <Row justify={"space-around"} gutter={[0, 10]}>
-                            <Col offset={2} span={22}>
+                            <Col offset={0} span={24}>
                              <span className={"spn_CompteSettings"}
                                    style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.Avatar")}</span>
                             </Col>
@@ -194,7 +194,7 @@ export const AccountGeneralInformation = ({form}) => {
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.lastName}
+                                                    <Input autocomplete="off" value={values.generalInformation.lastName}
                                                            name="lastName"
                                                            placeholder={t("CompteSettings.LastName")}
                                                            maxLength={16}
@@ -215,7 +215,7 @@ export const AccountGeneralInformation = ({form}) => {
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.firstName}
+                                                    <Input autocomplete="off" value={values.generalInformation.firstName}
                                                            name="firstName"
                                                            placeholder={t("CompteSettings.FirstName")}
                                                            maxLength={16}
@@ -246,7 +246,7 @@ export const AccountGeneralInformation = ({form}) => {
                                                         }),
                                                     ]}
                                                 >
-                                                    <Input value={values.generalInformation.email} name="email"
+                                                    <Input autocomplete="off" value={values.generalInformation.email} name="email"
                                                            placeholder={"Email"}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
@@ -271,7 +271,7 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="city"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.city} name="city"
+                                                    <Input autocomplete="off" value={values.generalInformation.city} name="city"
                                                            placeholder={t("CompteSettings.City")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
@@ -289,7 +289,7 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="adresse"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.address} name='adresse'
+                                                    <Input autocomplete="off" value={values.generalInformation.address} name='adresse'
                                                            placeholder={t("CompteSettings.Address")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
@@ -307,7 +307,7 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="society"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.society} name="society"
+                                                    <Input autocomplete="off" value={values.generalInformation.society} name="society"
                                                            placeholder={t("CompteSettings.Society")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
@@ -357,7 +357,7 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="postalCode"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input value={values.generalInformation.postalCode}
+                                                    <Input autocomplete="off" value={values.generalInformation.postalCode}
                                                            name="postalCode"
                                                            placeholder={t("CompteSettings.ZipCode")}
                                                            onChange={generalInformationOnChange}></Input>
