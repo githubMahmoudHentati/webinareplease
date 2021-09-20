@@ -91,6 +91,7 @@ console.log("render columns ", columns)
   };
 
   const handleTableChange = async(pagination, filters, sorter, extra) => {
+      console.log("paginationProps",pagination,sorter)
   //  setCurrentPage(pagination.current);
    // SetOrder(sorter.order);
   //  setPageSize(pagination.pageSize);
@@ -101,7 +102,7 @@ console.log("render columns ", columns)
   await  dispatch(
       setPaginationProps({
         PaginationPropsNameChange: "order",
-        PaginationPropsValueChange: !sorter.order ?  "descend" : sorter.order,
+        PaginationPropsValueChange: !sorter.order ?  "" : sorter.order,
       })
     );
     //dispatch current page

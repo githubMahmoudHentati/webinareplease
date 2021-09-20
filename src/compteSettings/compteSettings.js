@@ -72,15 +72,12 @@ export const CompteSettings=()=>{
                                     }}
                                 >{t("CompteSettings.Home")}</span>
                             </Breadcrumb.Item >
-                            <Breadcrumb.Item href="" style={{color:darkMode===false?"":"#ffffff"}} onClick={()=>{history.push("/")}}>
-                                <span>{t("CompteSettings.direct")}</span>
-                            </Breadcrumb.Item>
                             <Breadcrumb.Item style={{color:darkMode===false?"":"#ffffff"}}>{t("CompteSettings.MyAccount")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
-                    <Col  span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"RGBA(255, 255, 255, 0.04)" , marginBottom:"25px"}}>
+                    <Col  span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"RGBA(255, 255, 255, 0.04)" , marginBottom:"25px" , padding:"1.8% 1.5%"}}>
                         <ArrowLeftOutlined
-                            style={{display: "flex", alignItems: "center", fontSize: 'medium', cursor: 'medium' , color:darkMode===false?"":"white"}}
+                            style={{display: "flex", alignItems: "center", fontSize: '20px',fontWeight:"500",fontFamily:"SF Pro Display", cursor: 'medium' , color:darkMode===false?"":"white"}}
                             onClick={()=>{
                                 dispatch(setConstraintDataOnchange({
                                     constraintDataNameChange: "updateAccountSettingError",
@@ -92,8 +89,9 @@ export const CompteSettings=()=>{
                             }}
                         />
                         <span style={{
-                            fontSize: "medium",
-                            fontFamily: "Arial, Helvetica, sans-serif",
+                            fontSize: "20px",
+                            fontFamily: "SF Pro Display",
+                            fontWeight:"500",
                             marginLeft: "1%",
                             color:darkMode===false?"":"white"
                         }}> {t("CompteSettings.MyAccount")}
