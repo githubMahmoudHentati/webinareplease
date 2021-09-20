@@ -100,9 +100,6 @@ export const LiveSubmit=(props)=>{
                                 <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
                                     <span >Accueil</span>
                                 </Breadcrumb.Item>
-                                <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                    <span>Direct</span>
-                                </Breadcrumb.Item>
                                 <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{localStorage.getItem('idLive') ? values.general.liveTitle :isAddedForm ? t("formDirectVideo.AddLive"): '' } </Breadcrumb.Item>
                             </Breadcrumb>
                         </Col>

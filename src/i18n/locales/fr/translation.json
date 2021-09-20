@@ -47,7 +47,7 @@
     "CFreeAccount": "Créez votre compte gratuitement",
     "RegisterNow": "Inscrivez-vous maintenant",
     "City": "Ville",
-    "Address": "Addresse",
+    "Address": "Adresse",
     "NumberOfEmployees": "Nombre d'employées",
     "choiceOne": "5-10 employé(e)s",
     "choiceTwo": "10-20 employé(e)s",
@@ -92,7 +92,7 @@
     "InvalidPhone": "Numéro telephone est invalide",
     "EnterPhone": "Saisir un numéro télephone",
     "ModalTitle": "Éditer l'image",
-    "Society": "societé"
+    "Society": "Societé"
   },
   "ConfirmAccount": {
     "ConfirmationSend": "E-mail de confirmation envoyé !",

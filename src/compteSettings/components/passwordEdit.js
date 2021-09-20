@@ -94,7 +94,7 @@ export const PasswordEdit =()=>{
                                     name="newPassWord"
                                     onChange={securityAccountPassword}
                                     iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                    placeholder={t("CompteSettings.Nouveau mot de passe")}>
+                                    placeholder={t("CompteSettings.NewPassword")}>
                                 </Input.Password>
                                 </Form.Item>
                             </Col>

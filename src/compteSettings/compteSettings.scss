@@ -31,6 +31,28 @@
   font-style: normal;
   font-display: swap;
 }
+.PhoneInputCountrySelect{
+ background-color: var(--card_color) !important;
+  color: var(--white_color) !important;
+}
+.PhoneInputCountrySelect::-webkit-scrollbar{
+  width: 4px !important;
+  height: 4px;
+}
+.PhoneInputCountrySelect::-webkit-scrollbar-track{
+  background-color: var(--card_color) !important;
+  z-index: 999;
+  border: none !important;
+  box-shadow: none !important;
+}
+.PhoneInputCountrySelect::-webkit-scrollbar-thumb{
+  background-color: var(--icon-color);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+.PhoneInputCountrySelectArrow{
+  color: var(--white_color) !important;
+  font-size: 16px !important;
+}
 .ant-table-cell-scrollbar{
   box-shadow: none !important;
 }
