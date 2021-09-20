@@ -28,6 +28,7 @@ export const BarHeader = () => {
         dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
         dispatch(setDirectSetting(0))
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
     }
     const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
 
@@ -37,6 +38,7 @@ export const BarHeader = () => {
             dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:true}));
             dispatch(setDirectSetting(0))
         }
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
 
     }
     return (
@@ -46,6 +48,7 @@ export const BarHeader = () => {
                     <Col style={{display: "flex", alignItems: "center"}}>
                         <ArrowLeftOutlined
                             onClick={() => {
+                                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
                                 if (matchesMedia.matches) {
                                     dispatch(setDirectSetting(5))
                                     if (directMenu === 5) {
