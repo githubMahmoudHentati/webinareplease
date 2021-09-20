@@ -16,6 +16,10 @@ import {
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 import {setDirectSetting} from "../../utils/redux/actions";
+import {
+    setConstraintDataOnchange,
+    setGeneralInformationOnchange
+} from "../../compteSettings/store/accountSettingsAction";
 
 const Hooks=()=>{
     const dispatch = useDispatch()
@@ -229,7 +233,9 @@ const Hooks=()=>{
     }
 
     const checkKeyDown =(e)=>{
-        if (e.code === 'NumpadEnter') e.preventDefault();
+        console.log("e.code-----",e)
+        console.log("e.code-----",e.code)
+        if (e.keyCode === 13) e.preventDefault();
     }
 
     // Suppression des régles invitations
@@ -264,6 +270,16 @@ const Hooks=()=>{
         }
 
     }
+    const generalInformationOnChangeAvatar= (avatar) => {
+        dispatch(setGeneralInformationOnchange({
+            generalInformationNameChange: "vignette",
+            generalInformationValueChange: avatar
+        }))
+        dispatch(setConstraintDataOnchange({
+            constraintDataNameChange: "avatarLoading",
+            constraintDataValueChange: false
+        }))
+    };
 
     return({
         generalOnChangeByName,
@@ -292,7 +308,8 @@ const Hooks=()=>{
         getFirstCharacter,
         sendPostMessage,
         checkKeyDown,
-        scrollToRef
+        scrollToRef,
+        generalInformationOnChangeAvatar
     })
 }
 

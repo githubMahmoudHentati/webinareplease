@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import UseDataTableVideos from "./components/ListVideos";
 import HeaderVideos from "./components/headerVideos";
-
-import {Tag , Tooltip,Button} from "antd";
+import defaultThumb from "../assets/webinarplease-thumb.jpg";
+import {Tag , Tooltip,Button,Image} from "antd";
 
 import{PrincipalPage} from "../utils/components/principalPage";
 import {useSelector} from "react-redux";
@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import {EyeOutlined , VideoCameraOutlined } from '@ant-design/icons';
 import {GraphQLFetchData} from "./utils/graphQLFetchData";
 import useWindowDimensions from "../utils/components/getWindowDimensions";
+import {ShowVideosReducerReducer} from "./store/showVideosReducer";
 
 function ShowVideos() {
     const { t} = useTranslation();
@@ -27,6 +28,7 @@ function ShowVideos() {
     function DeleteItemsAPIFunction(){
         DeleteItemsMutation()
     }
+    // var srcImg= defaultThumb
     var  x  = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
 
     // Read Data from Hooks
@@ -41,9 +43,11 @@ function ShowVideos() {
 
     const displayDate = (date) =>{
         if(date)
-        return(<><span> {date.split(' ')[0]}</span><br /><span>{date.split(' ')[1]}</span></>)
+        return(<><span> {date.split(' ')[0]}</span><span>{date.split(' ')[1]}</span></>)
         else return ""
     }
+
+
 
     // Column AND DATA Table
      const columns = [
@@ -61,10 +65,11 @@ function ShowVideos() {
             dataIndex: 'logo',
             key:'4',
             className: "columnFeed",
-            render: image =>
-                <div className={"div_apercu"}>
-                <img  src={image} className={"img_aperçu"} alt={""}/>
-                </div>,
+            render: image => {
+                return (<div className={"list_lives"}>
+                    <Image  src={image} fallback={defaultThumb} preview={{ visible: false }} />
+                </div>)
+            }
         },
         {
             title: t("ShowVideo.Titre"),
@@ -139,6 +144,7 @@ function ShowVideos() {
 
     ];
 
+    console.log("columns*****",columns)
      const data = {
          totalElements:DataVideos.recordsFiltered,
          content:DataVideos.data,

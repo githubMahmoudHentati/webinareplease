@@ -1,8 +1,8 @@
 import React, {useEffect,useRef} from 'react';
 import {Row, Col, Input, Button, Switch, Radio, Checkbox, DatePicker, Form,TimePicker} from 'antd'
 import '../formDirectVideo.scss'
-import {message } from 'antd';
-import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
+import {message,Avatar } from 'antd';
+import {EyeInvisibleOutlined, EyeTwoTone,LoadingOutlined} from '@ant-design/icons';
 import {useSelector,useDispatch} from "react-redux";
 import Hooks from "../utils/hooks";
 import {DraggerUpload} from "./DraggerUpload";
@@ -10,7 +10,7 @@ import moment from "moment";
 import useCopy from '@react-hook/copy'
 import {setFormDirectLiveConstraintDataOnchange} from '../store/formDirectVideoAction'
 import { useTranslation } from 'react-i18next';
-
+import defaultThumb from "../../assets/webinarplease-thumb.jpg";
 
 
 export const Generals =()=>{
@@ -72,6 +72,18 @@ export const Generals =()=>{
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
                         <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.AddLabel")}</span>
+                    </Col>
+                    <Col className="col-upload-square">
+                        <Avatar className={"col-upload-square--avatar"} shape="square" style={{
+                            background: darkMode === false ? "RGB(231, 247, 255)" : "#141414",
+                            border: darkMode === false ? "1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)",
+                            color: darkMode === false ? "RGB(0, 127, 203)" : "rgba(255, 255, 255, 0.85)"
+                        }}
+                                src={values.loading?<LoadingOutlined style={{ fontSize: 50,marginTop:"50px" }}/>:values.general.fileList && values.general.fileList.length ?
+                                    values.general.fileList[0].thumbUrl :defaultThumb}
+
+                        />
+                        {console.log("values.general.fileList",values.general.fileList[0])}
                     </Col>
                     <Col span={24} className={"col-forms-upload"}>
                         <DraggerUpload/>

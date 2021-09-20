@@ -88,6 +88,24 @@
     }
   }
 }
+.list_lives{
+  width: 93px !important;
+  height: 54px !important;
+  position: relative;
+  .ant-image-img{
+    display: block;
+    position:relative;
+    width: 93px;
+    height: 54px;
+  }
+
+}
+.div_date{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1600px) {
   .div_titre{
     width: 150px;
@@ -109,7 +127,6 @@
     height: 100%;
   }
 
-  
 }
   @media screen and (max-width: 767px) {
     .ant-dropdown-menu{
@@ -118,12 +135,16 @@
     }
     .DataTable{
       margin-top: 1%;
+
     }
     .DataTable .ant-table-cell:nth-of-type(1){
       display: none !important;
     }
     .DataTable .ant-table-cell:nth-of-type(2) {
       display: none !important;
+    }
+    .DataTable .ant-table-cell:nth-of-type(3) {
+      padding:1.75em;
     }
     .DataTable .ant-table-row{
       border: 1px solid var(--border_color) !important;
@@ -154,13 +175,22 @@
     }
     .DataTable .ant-table tr {
       display: block;
+      font-size:12px;
     }
-    .div_apercu{
+    .list_lives{
       z-index: 9;
       position: absolute;
       top: 0;
       left: 0;
+      width: 140px !important;
+      height: 90px !important;
+      .ant-image-img{
+        display: block;
+        width: 145px;
+        height: 95px;
+      }
     }
+
     .img_aperçu{
       width: 140px !important;
       height: 120px !important;
@@ -170,6 +200,8 @@
       min-height: 10px;
       text-align: left !important;
       padding:0 20px;
+      font-weight: 500;
+      font-size:13px !important;
       position: absolute;
       top: 5px;
       left: 110px;
@@ -182,17 +214,22 @@
     .div_date{
       min-height: 10px !important;
       text-align: left !important;
-      padding:0 15px;
       position: absolute;
       top: 32px;
       left: 80px;
-      padding-left: 5px;
+      padding-left: 2px;
       padding-right: 0;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      span +span {
+        margin-left:1em;
+      }
     }
     .div-status{
       //width: 50px;
       position: absolute;
-      top: 85px;
+      top: 60px;
       left: 50px;
       display: flex;
       align-items: center;
@@ -205,7 +242,7 @@
     }
     .btn_Visualiser_diffuser{
       padding: 4px 7px;
-      height: 21px;
+      height: 22px;
       #icon_vs{
         display: flex;
         align-items: center;
