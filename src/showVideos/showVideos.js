@@ -60,16 +60,16 @@ function ShowVideos() {
             sortOrder:paginationProps.columnKey === "0" &&  paginationProps.order,
             sorter: (a, b) => a.id - b.id,
         },
-        {
-            title: t("ShowVideo.Overview"),
-            dataIndex: 'logo',
-            key:'4',
-            className: "columnFeed",
-            render: image => {
-                return (<div className={"list_lives"}>
-                    <Image  src={image} fallback={defaultThumb} preview={{ visible: false }} />
-                </div>)
-            }
+         {
+             title: t("ShowVideo.Overview"),
+             dataIndex: 'logo',
+             key: '4',
+             className: "columnFeed",
+             render: image => {
+                 return (<div className={"list_lives"}>
+                     <Image src={image} fallback={defaultThumb} preview={{visible: false}} />
+                 </div>)
+             }
         },
         {
             title: t("ShowVideo.Titre"),

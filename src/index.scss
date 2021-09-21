@@ -563,8 +563,27 @@ body{
     color: var(--icon-color) !important;
 }
 
-.anticon:not(.anticon-close,.anticon-left,.anticon-right,.anticon-check,.anticon-appstore,.anticon-question-circle,.anticon-unordered-list,.modal-div2_time_calendar .anticon-clock-circle,.ant-avatar,.ant-avatar-string,.ant-avatar-circle,.anticon-logout,.anticon-pie-chart,.anticon-unlock,.anticon-user ,.anticon-caret-up,.anticon-caret-down, .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
+.anticon:not(.anticon-filter,.anticon-global,.anticon-home,.anticon-close,.anticon-left,.anticon-right,.anticon-check,.anticon-appstore,.anticon-question-circle,.anticon-unordered-list,.modal-div2_time_calendar .anticon-clock-circle,.ant-avatar,.ant-avatar-string,.ant-avatar-circle,.anticon-logout,.anticon-pie-chart,.anticon-unlock,.anticon-user ,.anticon-caret-up,.anticon-caret-down, .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
     color: var(--icon-color) !important;
+}
+.anticon-global{
+    color: var(--icon-color) !important;
+    &:hover{
+        color: #007fcb !important;
+    }
+}
+.activeFilterIcon{
+    color: #40a9ff !important;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+}
+.notActiveFilterIcon{
+    color: var(--icon-color) !important;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        color: #40a9ff !important;
+    }
 }
 .UserOutlined{
     color: #1D1D1D !important;
@@ -1089,10 +1108,6 @@ body{
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
-.class_icon_filter{
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-}
 .filter_icon:hover .class_icon_filter{
     color: #40a9ff;
 }
@@ -1506,8 +1521,11 @@ body{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid var(--invitation-border);
+    //border-right: 1px solid var(--invitation-border);
     //margin-right: 2%;
+}
+.home_icon_header{
+    color: #007FCB !important;
 }
 .icon_Webinaire_svg{
     font-size: 43px;

@@ -148,8 +148,8 @@ function GlobalHeader() {
                     <div className={'icon_webinaire'}><a href=" " className="icon-logo-webinar icon_Webinaire_svg"
                                                             style={{color: darkMode === false ? "#2B333E" : "white"}}
                                                             onClick={() => history.push("/")}></a></div>
-                    <div className="div_home_icon"><a href=" " onClick={() => history.push("/")}><HomeOutlined className={"Home_Icon"} style={{color: darkMode === false ? "" : "#007fcb"}}
-                    /></a></div>
+                    {/*<div className="div_home_icon"><a href=" " onClick={() => history.push("/")}><HomeOutlined className={"Home_Icon"} style={{color: darkMode === false ? "" : "#007fcb"}}*/}
+                    {/*/></a></div>*/}
                 </div>
                 {/*./div_home_logo*/}
 
@@ -190,7 +190,7 @@ function GlobalHeader() {
                     </Dropdown>
 
                     <Dropdown getPopupContainer={() => document.querySelector(".drp_lang")} className={"drp_lang drp-lang-size"} overlay={Menulang} trigger={['click']}>
-                        <GlobalOutlined style={{color: darkMode === false ? "" : "white"}}/>
+                        <GlobalOutlined className={"globalOutlinedIcon"} style={{color: darkMode === false ? "" : "white"}}/>
                     </Dropdown>
 
 
