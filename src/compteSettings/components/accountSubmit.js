@@ -7,6 +7,7 @@ import Hooks from "../utils/hooks";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
+import {HomeOutlined} from "@ant-design/icons";
 
 export const AccountSubmit =({form,child1,child2,child3})=>{
     const dispatch = useDispatch()
@@ -39,10 +40,10 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                                         document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
                                         history.push("/")
                                     }}
-                                >{t("CompteSettings.Home")}</span>
+                                ><HomeOutlined className={"home_icon"} /></span>
                             </Breadcrumb.Item>
                             <Breadcrumb.Item
-                                style={{color: darkMode === false ? "" : "#ffffff"}}>{t("CompteSettings.MyAccount")}</Breadcrumb.Item>
+                                style={{color: darkMode === false ? "" : "#ffffff"}}>{t("CompteSettings.AccountSettings")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     {/*<BarHeader />*/}

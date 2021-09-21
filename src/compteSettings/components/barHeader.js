@@ -26,7 +26,7 @@ export const BarHeader = () => {
             padding: "1.8% 1.5%"
         }}>
             <Row style={{width: "100%"}} justify={"space-between"}>
-                <Col span={17}>
+                <Col span={16}>
                     <Row gutter={[15, 0]}>
                         <Col style={{display: "flex", alignItems: "center"}}>
                             <ArrowLeftOutlined
@@ -57,7 +57,7 @@ export const BarHeader = () => {
                                 fontWeight: "500",
                                 marginLeft: "1%",
                                 color: darkMode === false ? "" : "white"
-                            }}>{t("CompteSettings.MyAccount")}</span>
+                            }}>{t("CompteSettings.AccountSettings")}</span>
                         </Col>
                     </Row>
                 </Col>
