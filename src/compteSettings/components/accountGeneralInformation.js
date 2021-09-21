@@ -75,7 +75,7 @@ export const AccountGeneralInformation = ({form}) => {
 
         if (info.file.status === 'uploading') {
 
-            await dispatch(setConstraintDataOnchange({
+             dispatch(setConstraintDataOnchange({
                 constraintDataNameChange: "avatarLoading",
                 constraintDataValueChange: true
             }))
@@ -100,7 +100,7 @@ export const AccountGeneralInformation = ({form}) => {
         formData.append("map", JSON.stringify(map));
         let fileList = [...info.fileList];
         fileList = fileList.slice(-1);
-        await fileList.filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
+         fileList.filter(file => file.type === "image/jpeg" || file.type === "image/png").map(async (e, index) => {
             const file = e.originFileObj;
             return formData.append("0", file);
         })
@@ -136,15 +136,16 @@ export const AccountGeneralInformation = ({form}) => {
       
   }
     return (
-        <Form
-            form={form}
-            layout="horizontal"
-            name="product-form"
-            onFinish={handleSubmit}
-        >
+        // <Form
+        //     form={form}
+        //     layout="horizontal"
+        //     name="product-form"
+        //     onFinish={handleSubmit}
+        // >
             <Spin spinning={values.constraintData.loadingGeneralInformation}>
                 <Row gutter={[10, 0]}>
-                    <Col className={"col_avatar"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}} lg={{span: 6}} xl={{span:4}}>
+                    <Col className={"col_avatar"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}} lg={{span: 6}}
+                         xl={{span: 4}}>
                         <Row justify={"space-around"} gutter={[0, 10]}>
                             <Col offset={0} span={24}>
                              <span className={"spn_CompteSettings"}
@@ -156,11 +157,12 @@ export const AccountGeneralInformation = ({form}) => {
                                     border: darkMode === false ? "1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)",
                                     color: darkMode === false ? "RGB(0, 127, 203)" : "rgba(255, 255, 255, 0.85)"
                                 }} size={150}
-                                        src={values.constraintData.avatarLoading ?<LoadingOutlined/>:values.generalInformation.vignette}
+                                        src={values.constraintData.avatarLoading ?
+                                            <LoadingOutlined/> : values.generalInformation.vignette}
                                         icon={values.constraintData.avatarLoading ? <div>
                                             <LoadingOutlined/>
                                             <div style={{marginTop: 8}}>{t("CompteSettings.Upload")}</div>
-                                        </div> : <UserOutlined/> }
+                                        </div> : <UserOutlined/>}
                                 />
                             </Col>
                             <Col offset={0} span={24}>
@@ -169,7 +171,7 @@ export const AccountGeneralInformation = ({form}) => {
                         </Row>
                     </Col>
                     <Col className={"col_infos-générale"} xs={{span: 24}} sm={{span: 24}} md={{span: 24}}
-                         lg={{span: 12}} xl={{span:14}}>
+                         lg={{span: 12}} xl={{span: 14}}>
                         <Row gutter={[0, 30]}>
                             <Col span={24} className={"col-forms"}>
                          <span style={{
@@ -215,7 +217,8 @@ export const AccountGeneralInformation = ({form}) => {
                                                            rules={requiredFieldRule}
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input autocomplete="off" value={values.generalInformation.firstName}
+                                                    <Input autocomplete="off"
+                                                           value={values.generalInformation.firstName}
                                                            name="firstName"
                                                            placeholder={t("CompteSettings.FirstName")}
                                                            maxLength={16}
@@ -246,19 +249,20 @@ export const AccountGeneralInformation = ({form}) => {
                                                         }),
                                                     ]}
                                                 >
-                                                    <Input autocomplete="off" value={values.generalInformation.email} name="email"
+                                                    <Input autocomplete="off" value={values.generalInformation.email}
+                                                           name="email"
                                                            placeholder={"Email"}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
                                                 {values.constraintData.updateAccountSettingError &&
                                                 <Col span={20} className={"col_input"}>
-                                                    <span style={{color: "red"}}>{t("CompteSettings.UsedAddress")} </span>
+                                                    <span
+                                                        style={{color: "red"}}>{t("CompteSettings.UsedAddress")} </span>
                                                 </Col>
                                                 }
                                             </Col>
                                         </Row>
                                     </Col>
-
 
                                     <Col span={24}>
                                         <Row gutter={[0, 10]}>
@@ -271,7 +275,8 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="city"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input autocomplete="off" value={values.generalInformation.city} name="city"
+                                                    <Input autocomplete="off" value={values.generalInformation.city}
+                                                           name="city"
                                                            placeholder={t("CompteSettings.City")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
@@ -289,7 +294,8 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="adresse"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input autocomplete="off" value={values.generalInformation.address} name='adresse'
+                                                    <Input autocomplete="off" value={values.generalInformation.address}
+                                                           name='adresse'
                                                            placeholder={t("CompteSettings.Address")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
@@ -307,7 +313,8 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="society"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input autocomplete="off" value={values.generalInformation.society} name="society"
+                                                    <Input autocomplete="off" value={values.generalInformation.society}
+                                                           name="society"
                                                            placeholder={t("CompteSettings.Society")}
                                                            onChange={generalInformationOnChange}></Input>
                                                 </Form.Item>
@@ -357,7 +364,8 @@ export const AccountGeneralInformation = ({form}) => {
                                                 <Form.Item name="postalCode"
                                                            style={{marginBottom: 0}}
                                                 >
-                                                    <Input autocomplete="off" value={values.generalInformation.postalCode}
+                                                    <Input autocomplete="off"
+                                                           value={values.generalInformation.postalCode}
                                                            name="postalCode"
                                                            placeholder={t("CompteSettings.ZipCode")}
                                                            onChange={generalInformationOnChange}></Input>
@@ -374,79 +382,74 @@ export const AccountGeneralInformation = ({form}) => {
                                             </Col>
                                             <Col span={23}>
                                                 <Form.Item name="phone"
-                                                 rules={[
-                                                    ({_}) => ({
-                                                        validator(_, value) {
-                                                            if(value){
-                                                                if (isValidPhoneNumber(value)) {
-                                                                   
-                                                                    return Promise.resolve('value');
-                                                                }
-                                                                
-                                                                return Promise.reject(t('CompteSettings.InvalidPhone'));
+                                                           rules={[
+                                                               ({_}) => ({
+                                                                   validator(_, value) {
+                                                                       if (value) {
+                                                                           if (isValidPhoneNumber(value)) {
 
-                                                            }
-                                                            else return Promise.reject(t('contactClient.FieldsRequired'))
-                                                            
-                                                        },
-                                                    })
-                                                ]}
-                                                           
+                                                                               return Promise.resolve('value');
+                                                                           }
+
+                                                                           return Promise.reject(t('CompteSettings.InvalidPhone'));
+
+                                                                       } else return Promise.reject(t('contactClient.FieldsRequired'))
+
+                                                                   },
+                                                               })
+                                                           ]}
                                                            style={{marginBottom: 0}}
                                                 >
-                                           
-                                                           <PhoneInput
-                                                              international
-                                                              defaultCountry="FR"
-                                                              placeholder={t("CompteSettings.Phone")}
-                                                              value={values.generalInformation.phone || ""}
-                                                              onChange={handleChangePhone}
+                                                    <PhoneInput
+                                                        international
+                                                        defaultCountry="FR"
+                                                        placeholder={t("CompteSettings.Phone")}
+                                                        value={values.generalInformation.phone || ""}
+                                                        onChange={handleChangePhone}
 
-                                                                 />
-
+                                                    />
                                                 </Form.Item>
                                             </Col>
                                         </Row>
                                     </Col>
-                                    <Col span={23}>
-                                        <Row justify={"end"} gutter={[10, 0]}>
-                                            <Col>
-                                                <Button onClick={() => {
-                                                    dispatch(setConstraintDataOnchange({
-                                                        constraintDataNameChange: "updateAccountSettingError",
-                                                        constraintDataValueChange: false
-                                                    }))
-                                                    document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');
-                                                    document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');
-                                                    history.push("/")
-                                                }}
-                                                        className={"spn_CompteSettings"} style={{
-                                                    background: darkMode === false ? "" : "#141414",
-                                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
-                                                    border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
-                                                }}>{t("CompteSettings.Cancel")}</Button>
-                                            </Col>
-                                            <Col>
-                                                <Button loading={values.constraintData.loadingUpdateAccountSetting}
-                                                        onClick={() => {
-                                                            dispatch(setConstraintDataOnchange({
-                                                                constraintDataNameChange: "updateAccountSettingError",
-                                                                constraintDataValueChange: false
-                                                            }))
-                                                        }}
-                                                        htmlType="submit" className={"spn_CompteSettings"}
-                                                        type={"primary"}
-                                                >{t("CompteSettings.Update")}</Button>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-
+                                    {/*<Col span={23}>*/}
+                                    {/*    <Row justify={"end"} gutter={[10, 0]}>*/}
+                                    {/*        <Col>*/}
+                                    {/*            <Button onClick={() => {*/}
+                                    {/*                dispatch(setConstraintDataOnchange({*/}
+                                    {/*                    constraintDataNameChange: "updateAccountSettingError",*/}
+                                    {/*                    constraintDataValueChange: false*/}
+                                    {/*                }))*/}
+                                    {/*                document.documentElement.style.setProperty('--errorForm', 'rgba(0 , 0 , 0 , 0.15)');*/}
+                                    {/*                document.documentElement.style.setProperty('--borderErrorForm', '#40a9ff');*/}
+                                    {/*                history.push("/")*/}
+                                    {/*            }}*/}
+                                    {/*                    className={"spn_CompteSettings"} style={{*/}
+                                    {/*                background: darkMode === false ? "" : "#141414",*/}
+                                    {/*                color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",*/}
+                                    {/*                border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"*/}
+                                    {/*            }}>{t("CompteSettings.Cancel")}</Button>*/}
+                                    {/*        </Col>*/}
+                                    {/*        <Col>*/}
+                                    {/*            <Button loading={values.constraintData.loadingUpdateAccountSetting}*/}
+                                    {/*                    onClick={() => {*/}
+                                    {/*                        dispatch(setConstraintDataOnchange({*/}
+                                    {/*                            constraintDataNameChange: "updateAccountSettingError",*/}
+                                    {/*                            constraintDataValueChange: false*/}
+                                    {/*                        }))*/}
+                                    {/*                    }}*/}
+                                    {/*                    htmlType="submit" className={"spn_CompteSettings"}*/}
+                                    {/*                    type={"primary"}*/}
+                                    {/*            >{t("CompteSettings.Update")}</Button>*/}
+                                    {/*        </Col>*/}
+                                    {/*    </Row>*/}
+                                    {/*</Col>*/}
                                 </Row>
                             </Col>
                         </Row>
                     </Col>
                 </Row>
             </Spin>
-        </Form>
+        // </Form>
     )
 }
