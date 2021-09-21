@@ -1,8 +1,7 @@
 import React from 'react';
-import {Row, Col,Button} from 'antd'
+import {Row, Col,Button,Form} from 'antd'
 import '../compteSettings.scss'
 import strip from "../../assets/stripe.png"
-
 import{SubscriptionTable} from "./subscriptionTable";
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
