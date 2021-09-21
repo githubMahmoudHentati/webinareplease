@@ -18,6 +18,7 @@ import SortableList, { SortableItem } from "react-easy-sort";
 import {arrayMoveImmutable} from "array-move";
 import {FormDirectVideoReducer} from "../../store/formDirectVideoReducer";
 export const Question = ({ listQuestion }) => {
+  const listQustionRedux = useSelector((state) => state.FormDirectVideoReducer.configuration.listQuestion);
   const inputRef = React.useRef(null);
 
   const dispatch = useDispatch();
@@ -34,14 +35,17 @@ export const Question = ({ listQuestion }) => {
     choices: { response:[""] },
     question: "",
   });
+  const [fakeListBeforeEdit ,  SetFakeListBeforeEdit] = useState([]);
   const [annulerEdit , setAnnulerEdit] = useState(false)
   const [isEditing, setIsEditing] = useState(false);
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
-  const listQustionRedux = useSelector((state) => state.FormDirectVideoReducer.configuration.listQuestion);
+
   console.log("listQustionRedux",listQustionRedux)
+
   useEffect(() => {
-    setFakeList(listQuestion);
-  }, [listQuestion]);
+    setFakeList(listQustionRedux);
+  }, [listQustionRedux]);
+
   useEffect(() => {
     if (inputRef && isAddingNewQuestion) inputRef.current.focus();
   }, [isAddingNewQuestion]);
@@ -51,6 +55,7 @@ export const Question = ({ listQuestion }) => {
     setIsFullInput(e.target.value)
   };
   const handleChangeResponse = (e, key) => {
+    console.log("ertgqfsdcwxbccnc",key)
     Inputs.choices.response[key] = e.target.value;
     setInputs({ ...Inputs });
   };
@@ -206,6 +211,9 @@ export const Question = ({ listQuestion }) => {
       setIsEditing((old) => !old);
     }
   }
+  const handleEditQuestionIcon = () =>{
+     SetFakeListBeforeEdit(listQustionRedux)
+  }
 
   const checkResponseStatus = (check, responses) =>{
     switch(check){
@@ -222,7 +230,7 @@ export const Question = ({ listQuestion }) => {
      await setFakeList((array) => arrayMoveImmutable(array, oldIndex, newIndex));
      await dispatch(sortQuestion({oldIndex, newIndex }));
   };
-console.log("fakeList32321321321321",fakeList)
+
   return (
       <Row gutter={[0, 15]} className="Question">
         <Col span={24}>
@@ -256,7 +264,7 @@ console.log("fakeList32321321321321",fakeList)
                                     display: questionToEdit !== null ? "none" : "block",
                                   }}
                               >
-                                <EditOutlined className="list-item-icons" onClick={()=>setIsEditQuestion(true)}/>
+                                <EditOutlined className="list-item-icons" onClick={()=>{setIsEditQuestion(true);handleEditQuestionIcon()}}/>
                               </div>
                             }
                             <div onClick={() => onRemove(ele)}>
@@ -282,6 +290,7 @@ console.log("fakeList32321321321321",fakeList)
                                 value={ele.question}
                                 onChange={(e) => handleChangeToEdit(e, index)}
                                 onKeyPress={(e)=>handleAbortEditkey(e,index)}
+                                autocomplete="off"
                                 placeholder="question"
                                 className="Question__input"
                                 name="question"
@@ -324,6 +333,7 @@ console.log("fakeList32321321321321",fakeList)
                                   placeholder={t(
                                       "formDirectVideo.questionsTab.inputResponsePlaceholder"
                                   )}
+                                  autocomplete="off"
                                   className="Question__input"
                                   name="response"
                                   suffix={
@@ -423,6 +433,7 @@ console.log("fakeList32321321321321",fakeList)
                 )}
                 className="Question__input"
                 name="question"
+                autocomplete="off"
             />
           </Col>
           <Col span={24}>
@@ -460,6 +471,7 @@ console.log("fakeList32321321321321",fakeList)
                     placeholder={t(
                         "formDirectVideo.questionsTab.inputResponsePlaceholder"
                     )}
+                    autocomplete="off"
                     className="Question__input"
                     name="response"
                     suffix={

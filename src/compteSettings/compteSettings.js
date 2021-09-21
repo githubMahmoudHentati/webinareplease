@@ -1,7 +1,7 @@
 import React from 'react';
 import {MenuForms} from './components/menuforms'
 import {Breadcrumb, Col, Row, Form} from "antd";
-import {ArrowLeftOutlined} from "@ant-design/icons";
+import {ArrowLeftOutlined, HomeOutlined} from "@ant-design/icons";
 import {AccountGeneralInformation} from "./components/accountGeneralInformation";
 import {SecurityAccount} from "./components/securityAccount"
 import {PrincipalPage} from "../utils/components/principalPage";

@@ -1,6 +1,6 @@
 import React , {useState,useEffect} from 'react';
 import { Breadcrumb,Button, Tooltip , Select , Input  , DatePicker, Alert} from "antd";
-import {  HourglassOutlined , CalendarOutlined , DeleteOutlined , PlusSquareOutlined , FilterOutlined , SearchOutlined } from '@ant-design/icons';
+import {  HourglassOutlined , CalendarOutlined , DeleteOutlined , PlusSquareOutlined , FilterOutlined , SearchOutlined , HomeOutlined} from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import '../../assets/icomoon/style.css';
@@ -14,8 +14,8 @@ let clicked = false;
 const { RangePicker } = DatePicker;
 
 function HeaderVideos() {
-    const {handleSearchRow , handleHeaderSelect , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive , paginationProps , values}=Hooks()
-
+    const {handleSearchRow , handleHeaderSelect , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive , paginationProps , values }=Hooks()
+    const [filterIcon , setFilterIcon] = useState(false)
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const [rangeDate, setDateRange] = useState(null)
@@ -78,30 +78,30 @@ function HeaderVideos() {
 
           <div className="BreadcrumbDiv">
               <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
-                  <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                      <span >{t("ShowVideo.Home")}</span>
+                  <Breadcrumb.Item href=""  onClick={()=>{history.push("/")}}>
+                      <HomeOutlined className={"home_icon_header"} />
                   </Breadcrumb.Item>
-                  <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
-                      {
-                          values.type === ""
-                              ?
-                              t("ShowVideo.All")
-                              :
-                              values.type === "archived"
-                                  ?
-                                  t("ShowVideo.Archived")
-                                  :
-                                  values.type === "live"
-                                      ?
-                                      t("ShowVideo.InProgress")
-                                      :
-                                      values.type === "upcoming"
-                                          ?
-                                          t("ShowVideo.ComingSoon")
-                                          :
-                                          null
-                      }
-                  </Breadcrumb.Item>
+                  {/*<Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>*/}
+                  {/*    {*/}
+                  {/*        values.type === ""*/}
+                  {/*            ?*/}
+                  {/*            t("ShowVideo.All")*/}
+                  {/*            :*/}
+                  {/*            values.type === "archived"*/}
+                  {/*                ?*/}
+                  {/*                t("ShowVideo.Archived")*/}
+                  {/*                :*/}
+                  {/*                values.type === "live"*/}
+                  {/*                    ?*/}
+                  {/*                    t("ShowVideo.InProgress")*/}
+                  {/*                    :*/}
+                  {/*                    values.type === "upcoming"*/}
+                  {/*                        ?*/}
+                  {/*                        t("ShowVideo.ComingSoon")*/}
+                  {/*                        :*/}
+                  {/*                        null*/}
+                  {/*    }*/}
+                  {/*</Breadcrumb.Item>*/}
               </Breadcrumb>
 
           </div>{/*./Breadcrumb*/}
@@ -169,10 +169,7 @@ function HeaderVideos() {
                               onClick={handlClickSuffix}
                               className="filter_icon"
                           >
-
-
-                                  <FilterOutlined id={darkMode&&activeIcon===true?"activeIcon":""} style={{color: darkMode === true ? "rgba(255, 255, 255, 0.85)" : ""}} className="class_icon_filter"/>
-
+                                  <FilterOutlined  className={filterIcon === true ? "activeFilterIcon" : "notActiveFilterIcon"}/>
 
                           </div>
                           </Tooltip>
@@ -234,8 +231,8 @@ function HeaderVideos() {
                       {/*</div>/!*./div2_div_Filter*!/*/}
 
                       <div className="div_button_filter">
-                          <Tooltip title={t("ShowVideo.ResetMedia")}><Button onClick={handleResetFilter} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
-                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={() => handleFiltrerVideos(rangeDate, selectedContributor )} >{t("ShowVideo.Filter")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.ResetMedia")}><Button onClick={()=>{handleResetFilter() ; setFilterIcon(false)}} style={{backgroundColor:darkMode===false?"":"#1D1D1D" , color:darkMode===false?"":"rgba(255, 255, 255, 0.65)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} className="btn_1">{t("ShowVideo.Reset")}</Button></Tooltip>
+                          <Tooltip title={t("ShowVideo.FilterMedia")}><Button type="primary" className="btn_2" onClick={() =>{ handleFiltrerVideos(rangeDate, selectedContributor ) ; setFilterIcon(true)}} >{t("ShowVideo.Filter")}</Button></Tooltip>
                       </div>{/*./div_button_filter*/}
 
 

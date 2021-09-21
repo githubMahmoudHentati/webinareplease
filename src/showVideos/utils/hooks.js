@@ -297,7 +297,6 @@ export  const Hooks=()=> {
     }
     /*Filtrer Videos*/
     const handleFiltrerVideos = async(dates, contributor) =>{
-
             await dispatch(
                 setPaginationProps({
                   PaginationPropsNameChange: "current",
@@ -532,6 +531,6 @@ export  const Hooks=()=> {
         handleCancelModalExport,
         exportLives,
         resetFilterVideos,
-        handleClickStreamin
+        handleClickStreamin,
     })
 }
