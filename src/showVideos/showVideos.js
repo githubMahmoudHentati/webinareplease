@@ -47,8 +47,7 @@ function ShowVideos() {
         else return ""
     }
 
-
-
+    {console.log("TTTTTTTTTTTTTTTTTTTTTT",paginationProps.order)}
     // Column AND DATA Table
      const columns = [
 
@@ -57,8 +56,11 @@ function ShowVideos() {
             dataIndex: "id",
             key: '0',
             className: "columnId",
+
             sortOrder:paginationProps.columnKey === "0" &&  paginationProps.order,
             sorter: (a, b) => a.id - b.id,
+            sortDirections: ['descend','ascend', 'descend',]
+
         },
         {
             title: t("ShowVideo.Overview"),
@@ -77,6 +79,7 @@ function ShowVideos() {
             key: '1',
             className: "columnTitle",
             sorter: (a, b) => a.title - b.title,
+            sortDirections: ['descend','ascend', 'descend',],
             sortOrder:paginationProps.columnKey === "1" &&  paginationProps.order,
             render:(titre , record) =>{
                 return(
@@ -102,7 +105,8 @@ function ShowVideos() {
             dataIndex: 'status',
             key: '3',
             className: "columnState",
-            sorter: (a, b) => a.status - b.status,
+            sortDirections: ['descend','ascend', 'descend',],
+            sorter: (a, b) => (a.status+1) - b.status,
             sortOrder:paginationProps.columnKey === "3" &&  paginationProps.order,
             render: (status , record)=> (
                 <div className={"div-status"}>
