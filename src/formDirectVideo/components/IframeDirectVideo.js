@@ -54,11 +54,11 @@ export const IframeDirectVideo =()=>{
                                             </Col>
                                       : //matchesMedia.matches
                                    <Row gutter={[50, 20]}>
-                                       <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:4}} >
+                                       <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:5}} >
                                            <MenuForms />
                                        </Col>
                                        {directMenu===4?
-                                           <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 17}} lg={{span:20}}  >
+                                           <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 17}} lg={{span:19}}  >
                                                <SelectMenu formLive={formLive}/>
                                            </Col>:
                                            <Col  span={12} >

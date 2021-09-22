@@ -563,10 +563,14 @@ body{
     color: var(--icon-color) !important;
 }
 
-.anticon:not(.anticon-filter,.anticon-global,.anticon-home,.anticon-close,.anticon-left,.anticon-right,.anticon-check,.anticon-appstore,.anticon-question-circle,.anticon-unordered-list,.modal-div2_time_calendar .anticon-clock-circle,.ant-avatar,.ant-avatar-string,.ant-avatar-circle,.anticon-logout,.anticon-pie-chart,.anticon-unlock,.anticon-user ,.anticon-caret-up,.anticon-caret-down, .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
-    color: var(--icon-color) !important;
+.ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
+ background-color: var(--icon-color) !important;
 }
-.anticon-global{
+
+.anticon:not(.anticon-filter,.anticon-global,.anticon-home,.anticon-close,.anticon-left,.anticon-right,.anticon-check,.anticon-appstore,.anticon-question-circle,.anticon-unordered-list,.modal-div2_time_calendar .anticon-clock-circle,.ant-avatar,.ant-avatar-string,.ant-avatar-circle,.anticon-logout,.anticon-pie-chart,.anticon-unlock,.anticon-user ,.anticon-caret-up,.anticon-caret-down, .anticon-arrow-left ,.anticon-calendar, .anticon-hourglass , .anticon-eye , .anticon-video-camera , .anticon-upload ,.anticon-spin,.anticon-close-circle,.anticon-check-circle,.anticon-plus-square,.anticon-exclamation-circle , .anticon-info-circle , .anticon-edit , .anticon-link , .anticon-delete) {
+    color: var(--border_color) !important;
+}
+.Header .anticon-global{
     color: var(--icon-color) !important;
     &:hover{
         color: #007fcb !important;
