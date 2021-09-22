@@ -3,17 +3,19 @@ import {Row ,Col} from 'antd'
 import { Upload} from "antd";
 import { InboxOutlined  } from '@ant-design/icons';
 import Hooks from "../utils/hooks";
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { useTranslation } from 'react-i18next';
 import {UploadHooks} from "./uploadHooks";
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
-const { Dragger } = Upload;
+
 
 
 export const AttachedFile = () => {
-
+    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
+    const { Dragger } = Upload;
     const attachedFilesRef = useRef(null)
-
+    const dispatch = useDispatch();
     const {values,scrollToRef}=Hooks()
     const { removeThumbnailConfiguration , handleChangeConfiguration }=UploadHooks()
     // use Selector redux
@@ -21,8 +23,14 @@ export const AttachedFile = () => {
     const { t} = useTranslation();
 
     useEffect(() => {
-        values.configuration.attachments&&scrollToRef(attachedFilesRef)
+        values.constraintData.scrollIntoView&&values.configuration.attachments&&scrollToRef(attachedFilesRef)
     }, [values.configuration.attachments]);
+
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
+    //     }
+    // }, []);
 
     return(
         <Row ref={attachedFilesRef}>

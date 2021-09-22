@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
 import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
+import {HomeOutlined} from "@ant-design/icons";
 
 
 export const LiveSubmit=(props)=>{
@@ -98,10 +99,7 @@ export const LiveSubmit=(props)=>{
                         <Col span={24} className={"header-col"}>
                             <Breadcrumb className={"header-col-breadcrumb"} style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                    <span >Accueil</span>
-                                </Breadcrumb.Item>
-                                <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                    <span>Direct</span>
+                                    <HomeOutlined className={"home_icon"} />
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{localStorage.getItem('idLive') ? values.general.liveTitle :isAddedForm ? t("formDirectVideo.AddLive"): '' } </Breadcrumb.Item>
                             </Breadcrumb>

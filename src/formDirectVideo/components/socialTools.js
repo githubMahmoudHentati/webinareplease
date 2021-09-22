@@ -186,7 +186,7 @@ export const SocialTools=()=>{
                                                     <span className={"FundamentalsofWebinar social-description-text"} >{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
                                                     <span className={"social-description-text"} style={{
                                                         color:"var(--white_color)"
-                                                    }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empriente.com'}</span>
+                                                    }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empreinte.com'}</span>
                                                 </Col>
                                             </Row>
                                         </Col>

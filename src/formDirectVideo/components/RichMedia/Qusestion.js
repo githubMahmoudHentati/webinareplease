@@ -18,6 +18,7 @@ import SortableList, { SortableItem } from "react-easy-sort";
 import {arrayMoveImmutable} from "array-move";
 import {FormDirectVideoReducer} from "../../store/formDirectVideoReducer";
 export const Question = ({ listQuestion }) => {
+  const listQustionRedux = useSelector((state) => state.FormDirectVideoReducer.configuration.listQuestion);
   const inputRef = React.useRef(null);
 
   const dispatch = useDispatch();
@@ -34,13 +35,17 @@ export const Question = ({ listQuestion }) => {
     choices: { response:[""] },
     question: "",
   });
+  const [fakeListBeforeEdit ,  SetFakeListBeforeEdit] = useState([]);
   const [annulerEdit , setAnnulerEdit] = useState(false)
   const [isEditing, setIsEditing] = useState(false);
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
-  const listQustionRedux = useSelector((state) => state.FormDirectVideoReducer.configuration.listQuestion);
+
+  console.log("listQustionRedux",listQustionRedux)
+
   useEffect(() => {
-    setFakeList(listQuestion);
-  }, []);
+    setFakeList(listQustionRedux);
+  }, [listQustionRedux]);
+
   useEffect(() => {
     if (inputRef && isAddingNewQuestion) inputRef.current.focus();
   }, [isAddingNewQuestion]);
@@ -50,6 +55,7 @@ export const Question = ({ listQuestion }) => {
     setIsFullInput(e.target.value)
   };
   const handleChangeResponse = (e, key) => {
+    console.log("ertgqfsdcwxbccnc",key)
     Inputs.choices.response[key] = e.target.value;
     setInputs({ ...Inputs });
   };
@@ -179,6 +185,20 @@ export const Question = ({ listQuestion }) => {
       }));
     }
   };
+  const handleAbortEdit = (o) => {
+    setQuestionToEdit(null);
+    setFakeList(listQustionRedux);
+    setIsEditing((old) => !old);
+
+  };
+  const handleAbortEditkey = (e , index) =>{
+    console.log("iueiazueyiazuiazueyiazukjhd5646",e)
+    if(e.key === "Enter"){
+      setQuestionToEdit(null);
+      setFakeList(listQuestion);
+      setIsEditing((old) => !old);
+    }
+  }
   const handleEditQuestion = () => {
     setQuestionToEdit(null);
     dispatch(editQuestion({ editedListQuestion: [...fakeList] }));
@@ -191,20 +211,8 @@ export const Question = ({ listQuestion }) => {
       setIsEditing((old) => !old);
     }
   }
-
-  const handleAbortEdit = (o) => {
-    setQuestionToEdit(null);
-    setFakeList(listQustionRedux);
-    setIsEditing((old) => !old);
-    console.log("listQustionRedux",listQustionRedux)
-  };
-  const handleAbortEditkey = (e , index) =>{
-    console.log("iueiazueyiazuiazueyiazukjhd5646",e)
-    if(e.key === "Enter"){
-      setQuestionToEdit(null);
-      setFakeList(listQuestion);
-      setIsEditing((old) => !old);
-    }
+  const handleEditQuestionIcon = () =>{
+     SetFakeListBeforeEdit(listQustionRedux)
   }
 
   const checkResponseStatus = (check, responses) =>{
@@ -256,7 +264,7 @@ export const Question = ({ listQuestion }) => {
                                     display: questionToEdit !== null ? "none" : "block",
                                   }}
                               >
-                                <EditOutlined className="list-item-icons" onClick={()=>setIsEditQuestion(true)}/>
+                                <EditOutlined className="list-item-icons" onClick={()=>{setIsEditQuestion(true);handleEditQuestionIcon()}}/>
                               </div>
                             }
                             <div onClick={() => onRemove(ele)}>
@@ -282,6 +290,7 @@ export const Question = ({ listQuestion }) => {
                                 value={ele.question}
                                 onChange={(e) => handleChangeToEdit(e, index)}
                                 onKeyPress={(e)=>handleAbortEditkey(e,index)}
+                                autocomplete="off"
                                 placeholder="question"
                                 className="Question__input"
                                 name="question"
@@ -324,6 +333,7 @@ export const Question = ({ listQuestion }) => {
                                   placeholder={t(
                                       "formDirectVideo.questionsTab.inputResponsePlaceholder"
                                   )}
+                                  autocomplete="off"
                                   className="Question__input"
                                   name="response"
                                   suffix={
@@ -423,6 +433,7 @@ export const Question = ({ listQuestion }) => {
                 )}
                 className="Question__input"
                 name="question"
+                autocomplete="off"
             />
           </Col>
           <Col span={24}>
@@ -460,6 +471,7 @@ export const Question = ({ listQuestion }) => {
                     placeholder={t(
                         "formDirectVideo.questionsTab.inputResponsePlaceholder"
                     )}
+                    autocomplete="off"
                     className="Question__input"
                     name="response"
                     suffix={

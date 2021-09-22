@@ -297,7 +297,6 @@ export  const Hooks=()=> {
     }
     /*Filtrer Videos*/
     const handleFiltrerVideos = async(dates, contributor) =>{
-
             await dispatch(
                 setPaginationProps({
                   PaginationPropsNameChange: "current",
@@ -468,7 +467,6 @@ export  const Hooks=()=> {
         history.push("/FormDirectVideo")
         localStorage.setItem('formPage', 'Modifier')
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
-
     }
 
     // fonction handleInfos
@@ -533,6 +531,6 @@ export  const Hooks=()=> {
         handleCancelModalExport,
         exportLives,
         resetFilterVideos,
-        handleClickStreamin
+        handleClickStreamin,
     })
 }

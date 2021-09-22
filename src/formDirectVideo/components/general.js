@@ -17,6 +17,7 @@ export const Generals =()=>{
 
     const livePlanRef = useRef(null);
     const pwdShowRef = useRef(null);
+    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
 
     const dispatch = useDispatch()
     const [form] = Form.useForm();
@@ -56,12 +57,18 @@ export const Generals =()=>{
     }
 
     useEffect(() => {
-        values.general.liveAction &&scrollToRef(livePlanRef)
+        values.constraintData.scrollIntoView&&values.general.liveAction &&scrollToRef(livePlanRef)
     }, [values.general.liveAction]);
 
     useEffect(() => {
-        values.general.directAccessMode === "liveAccess" &&scrollToRef(pwdShowRef)
+        values.constraintData.scrollIntoView&&values.general.directAccessMode === "liveAccess" &&scrollToRef(pwdShowRef)
     }, [values.general.directAccessMode]);
+
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
+    //     }
+    // }, []);
 
     return(
         <Row gutter={[0, 30]}>
@@ -105,7 +112,7 @@ export const Generals =()=>{
                         <Form.Item name="liveTitle" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input maxLength={100} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
+                            <Input autocomplete="off" maxLength={100} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
                         </Form.Item>
                     </Col>
                 </Row>

@@ -35,7 +35,7 @@
     "Email": "Email",
     "UsedAddress": "Oops, This email address is already used by another user",
     "City": "City",
-    "adresse": "adresse",
+    "Address": "Address",
     "NumberOfEmployees": "Number of employees",
     "choiceOne": "5-10 employees",
     "choiceTwo": "10-20 employees",
@@ -83,11 +83,12 @@
     "Payer": "Pay",
     "direct": "Live",
     "Company": "Company",
-    "MyAccount": "My Account",
+    "MyAccount": "Account",
+    "AccountSettings": "Account settings",
     "InvalidPhone": "Phone number is invalid",
     "EnterPhone": "Enter a phone number",
     "ModalTitle": "Edit image",
-    "Society": "society"
+    "Society": "Society"
   },
   "ConfirmAccount": {
     "ConfirmationSend": " Confirmation e-mail sent!",
