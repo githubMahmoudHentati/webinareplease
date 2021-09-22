@@ -140,6 +140,8 @@
     "General": "General",
     "Configuration": "Setup",
     "Invitations": "Invitations",
+    "PlanificationInvitation": "Invitation planning",
+    "DisponibleProchainement": "Available soon",
     "SuccessCopyMsg":"shared link is copied",
     "SocialTools": "Social tools",
     "Templates": "Templates",
