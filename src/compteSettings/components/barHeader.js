@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect,useState}from 'react';
 import {Row, Col,Button} from 'antd'
 import '../compteSettings.scss'
 import {ArrowLeftOutlined, CloseOutlined, CheckOutlined, VideoCameraOutlined,EditOutlined} from '@ant-design/icons';
@@ -19,13 +19,16 @@ export const BarHeader = () => {
     const {t} = useTranslation();
     const selectedMenu = useSelector((state)=> state.Reducer.accountMenu)
 
+
+    console.log("colorStickyBar",values.constraintData.colorStickyBar)
     return (
         <Col span={24} className={"title-col"} style={{
-            backgroundColor: darkMode === false ? "RGBA(0, 0, 0, 0.04)" : "RGBA(255, 255, 255, 0.04)",
+            backgroundColor: darkMode === false ? values.constraintData.colorStickyBar: "RGBA(255, 255, 255, 0.04)",
             marginBottom: "25px",
-            padding: "1.8% 1.5%"
+            padding: "1.8% 1.5%",
+            width:"100%", position:"sticky", top:0, zIndex:1
         }}>
-            <Row style={{width: "100%"}} justify={"space-between"}>
+            <Row style={{width: "100%",position:"sticky", top: 0}} justify={"space-between"} >
                 <Col span={17}>
                     <Row gutter={[15, 0]}>
                         <Col style={{display: "flex", alignItems: "center"}}>

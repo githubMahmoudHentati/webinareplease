@@ -13,7 +13,8 @@ const INITIAL_STATE = {
     activeSideMenu:false,
     lang:localStorage.getItem("i18nextLng") ? localStorage.getItem("i18nextLng"):"fr",
     runDeleteOneRow:false,
-    storageData : UserCredentialStorageData()
+    storageData : UserCredentialStorageData(),
+    colorStickyBar: "RGBA(255, 255, 255, 0.04)"
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
@@ -47,6 +48,11 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 ...state,
                 DarkMode: action.payload
             }
+        case "SET_ColorStickyBar":
+            return {
+                ...state,
+                colorStickyBar: action.payload
+            }
         case "SET_AppSetLogin":
             return {
                 ...state,
@@ -65,9 +71,6 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
         default:{
             return state
         }
-
-
     }
-
 }
 

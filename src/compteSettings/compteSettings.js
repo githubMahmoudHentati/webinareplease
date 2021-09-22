@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {MenuForms} from './components/menuforms'
 import {Breadcrumb, Col, Row, Form} from "antd";
 import {ArrowLeftOutlined} from "@ant-design/icons";
@@ -20,13 +20,13 @@ import {AccountSubmit} from "./components/accountSubmit";
 
 export const CompteSettings=()=>{
     const dispatch = useDispatch()
-    const history = useHistory()
     const accountMenu = useSelector((state)=>state.Reducer.accountMenu)
 
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const { t } = useTranslation();
     const [form] = Form.useForm();
+
     const {data: GetUserInfoData}
         = useQuery(graphQL_shema().Get_UserInfoData, {
         fetchPolicy: 'cache-and-network',
@@ -43,6 +43,8 @@ export const CompteSettings=()=>{
             form.setFieldsValue(GetUserInfoData.getUserInfo.generalInformation)
         }
     })
+
+
     const SelectMenu = ()=>{
         switch(accountMenu){
             case 1:
