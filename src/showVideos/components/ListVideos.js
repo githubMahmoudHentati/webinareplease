@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import {
   setPaginationProps,
   setshowDivsConditions,
+    setPaginationPropsValue
 } from "../store/showVideosAction";
 import { Hooks } from "../utils/hooks";
 
@@ -91,46 +92,78 @@ console.log("render columns ", columns)
   };
 
   const handleTableChange = async(pagination, filters, sorter, extra) => {
-      console.log("paginationProps",pagination,sorter)
   //  setCurrentPage(pagination.current);
    // SetOrder(sorter.order);
   //  setPageSize(pagination.pageSize);
 
   /************set data to store***************** */
-    //dispath sort
-    if(valuePagination.order !== sorter.order)
-  await  dispatch(
-      setPaginationProps({
-        PaginationPropsNameChange: "order",
-        PaginationPropsValueChange: !sorter.order ?  "" : sorter.order,
-      })
-    );
+    //dispatch sort
+  console.log("sorter", sorter)
+      console.log("handleTableChange******sorter.order", sorter.order)
+      console.log("handleTableChange******valuePagination.order", valuePagination.order)
+      if(valuePagination.order !== sorter.order && sorter.order){
+            console.log("ddddddddddddddddd")
+          // if( sorter.order==='descend'){
+          //     sorter.order='ascend'
+          // }
+          paginationProps["order"] = sorter.order
+              // await dispatch(
+              //     setPaginationProps({
+              //         PaginationPropsNameChange: "order",
+              //         PaginationPropsValueChange: sorter.order,
+              //     })
+              // )
+     }
+
+
+
     //dispatch current page
     if(valuePagination.current !== pagination.current)
-   { await dispatch(
-      setPaginationProps({
-        PaginationPropsNameChange: "current",
-        PaginationPropsValueChange: pagination.current,
-      })
-    );
+   {
+       console.log("currentttttttttttttttttt")
+       valuePagination["current"] = pagination.current
+    //    await dispatch(
+    //   setPaginationProps({
+    //     PaginationPropsNameChange: "current",
+    //     PaginationPropsValueChange: pagination.current,
+    //   })
+    // )
+
     if(document.querySelector(".showVideo"))
-    document.querySelector(".showVideo").scrollIntoView();}
+    document.querySelector(".showVideo").scrollIntoView();
+
+   }
     //dispatch size page
-    if(valuePagination.pageSize !== pagination.pageSize)
-    await dispatch(
-      setPaginationProps({
-        PaginationPropsNameChange: "pageSize",
-        PaginationPropsValueChange: pagination.pageSize,
-      })
-    );
-    if(valuePagination.columnKey !== sorter.columnKey)
-    await dispatch(
-      setPaginationProps({
-        PaginationPropsNameChange: "columnKey",
-        PaginationPropsValueChange: (sorter.columnKey),
-      })
-    );
-    
+    if(valuePagination.pageSize !== pagination.pageSize && pagination.pageSize )
+        valuePagination["pageSize"] = pagination.pageSize
+
+      // await dispatch(
+    //   setPaginationProps({
+    //     PaginationPropsNameChange: "pageSize",
+    //     PaginationPropsValueChange: pagination.pageSize,
+    //   })
+    // );
+
+
+          console.log("KEYYYYYYYYYYY", valuePagination.columnKey)
+      console.log("Keyyyyy SORTER",sorter.columnKey)
+    //
+    if(valuePagination.columnKey !== sorter.columnKey && sorter.column){
+        valuePagination["columnKey"] =  sorter.column.key
+        // await dispatch(
+        //     setPaginationProps({
+        //         PaginationPropsNameChange: "columnKey",
+        //         PaginationPropsValueChange:  sorter.column.key,
+        //     }))
+    }
+        await dispatch(
+            setPaginationPropsValue((paginationProps)=>({...paginationProps,...valuePagination})));
+
+          // setPaginationProps({
+          //     PaginationPropsNameChange: "columnKey",
+          //     PaginationPropsValueChange:  sorter.column.key,
+          // }))
+
   };
   const DataTable = () => (
     <div
@@ -159,7 +192,7 @@ console.log("render columns ", columns)
         pagination={{
           pageSize: paginationProps.pageSize,
           current: valuePagination.current ,
-          total: dataSource.totalElements,
+          total:dataSource.totalElements,
           showQuickJumper: true,
           showSizeChanger: true,
         }}

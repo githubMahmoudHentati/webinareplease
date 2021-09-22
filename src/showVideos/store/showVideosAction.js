@@ -30,6 +30,12 @@ export function setPaginationProps(e){
         payload:e,
     }
 }
+export function setPaginationPropsValue(e){
+    return{
+        type:"SET_PaginationPropsValue",
+        payload:e,
+    }
+}
 
 export function setShowVideoConstraintDataOnchange(e){
     return{

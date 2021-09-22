@@ -67,7 +67,7 @@ export default (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <ApolloProvider client={client}>
-                    <App/>
+                        <App/>
                 </ApolloProvider>
             </PersistGate>
         </Provider>

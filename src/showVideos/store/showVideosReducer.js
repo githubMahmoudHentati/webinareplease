@@ -41,6 +41,12 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
                 ...state,
                 paginationProps:{...state.paginationProps, [PaginationPropsNameChange]:PaginationPropsValueChange}
             }
+        case "SET_PaginationPropsValue" :
+            return {
+                ...state,
+                paginationProps:{...state.paginationProps, ...action.payload}
+            }
+
         case "SET_ShowVideoConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
             const constraintDataOnOnchangeObj = {...state.constraintDataShowVideo,[constraintDataNameChange]: constraintDataValueChange}
