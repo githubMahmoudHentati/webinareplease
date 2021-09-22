@@ -145,6 +145,8 @@
     "General": "Général",
     "Configuration": "Configuration",
     "Invitations": "Invitations",
+    "PlanificationInvitation": "Planification d'invitation",
+    "DisponibleProchainement": "Disponible prochainement",
     "Emails": "E-mails",
     "SuccessCopyMsg": "lien partagé est copié",
     "SocialTools": "Outils sociaux",

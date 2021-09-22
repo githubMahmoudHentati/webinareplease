@@ -61,7 +61,7 @@ export const IframeDirectVideo =()=>{
                                            <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 17}} lg={{span:19}}  >
                                                <SelectMenu formLive={formLive}/>
                                            </Col>:
-                                           <Col  span={12} >
+                                           <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 17}} lg={{span:12}} >
                                            <SelectMenu formLive={formLive}/>
                                            </Col>
                                        }
