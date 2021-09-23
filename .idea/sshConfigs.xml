@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig host="mhenteti-cloud-server.sastec.dev" id="f692a4c4-b46a-4fec-9e3a-102a502463e6" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="dev" />
+      <sshConfig host="tamaidi-cloud-server.sastec.dev" id="f692a4c4-b46a-4fec-9e3a-102a502463e6" keyPath="$PROJECT_DIR$/../.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="dev" />
     </configs>
   </component>
 </project>

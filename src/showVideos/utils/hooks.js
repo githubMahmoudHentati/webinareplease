@@ -462,11 +462,13 @@ export  const Hooks=()=> {
     }
 
     /*Click Update live */
-    const updateLive= async (id)=>{
+    const updateLive= async (id , status)=>{
+        console.log("status120",status)
         localStorage.setItem('idLive', id);
         history.push("/FormDirectVideo")
         localStorage.setItem('formPage', 'Modifier')
-        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}));
+        dispatch(setPaginationProps({PaginationPropsNameChange:"statusLive",PaginationPropsValueChange:status}))
     }
 
     // fonction handleInfos

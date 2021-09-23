@@ -11,6 +11,7 @@ import useCopy from '@react-hook/copy'
 import {setFormDirectLiveConstraintDataOnchange} from '../store/formDirectVideoAction'
 import { useTranslation } from 'react-i18next';
 import defaultThumb from "../../assets/webinarplease-thumb.jpg";
+import {ShowVideosReducerReducer} from "../../showVideos/store/showVideosReducer";
 
 
 export const Generals =()=>{
@@ -22,9 +23,10 @@ export const Generals =()=>{
     const dispatch = useDispatch()
     const [form] = Form.useForm();
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const disableSwitch = useSelector((state)=> state.ShowVideosReducerReducer.paginationProps)
     const { t, i18n } = useTranslation();
     const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
-
+     console.log('hshshshshshsh45654654',disableSwitch.statusLive)
     const isValidPassword = () => {
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_`!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(values.general.pwd)
     }
@@ -57,7 +59,7 @@ export const Generals =()=>{
     }
 
     useEffect(() => {
-        values.constraintData.scrollIntoView&&values.general.liveAction &&scrollToRef(livePlanRef)
+        values.constraintData.scrollIntoView&&disableSwitch.statusLive === -1 &&values.general.liveAction &&scrollToRef(livePlanRef)
     }, [values.general.liveAction]);
 
     useEffect(() => {
@@ -161,7 +163,7 @@ export const Generals =()=>{
                     <Col >
                         <Form.Item name="liveAction" className={"form-item-style"}
                         >
-                            <Switch checked={values.general.liveAction} name="liveAction" value="liveAction"
+                            <Switch  checked={disableSwitch.statusLive === 1 || disableSwitch.statusLive === 0 ? false : values.general.liveAction} name="liveAction" value="liveAction"
                                     onChange={(checked, event) => {
                                         generalOnChangeByName(checked, checked, "liveAction")
                                     }}/>
@@ -170,7 +172,7 @@ export const Generals =()=>{
                     </Col>
                 </Row>
             </Col>
-            {values.general.liveAction &&
+            {disableSwitch.statusLive === -1  && values.general.liveAction &&
             <Col span={24} ref={livePlanRef}>
                 <Row gutter={[20, 10]}>
                     <Col span={8} className={"col_planification"}>
