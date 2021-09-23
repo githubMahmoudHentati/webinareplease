@@ -100,7 +100,7 @@ export const FormDirectConstraints = ()=>{
         return (
             {
                 addRules: {
-                    afterPrograming: false,
+                    afterPrograming: true,
                     beforeWeek: false,
                     beforeDay: false,
                     beforeHour: false,
