@@ -31,7 +31,7 @@ export const GraphQLFetchDataForm = (values) => {
     let attachements = values.configuration.attachments
     let {success_submit , error_submit}=StatusMessages(idLive)
     console.log("SLIDES*****DiapositivesFile",DiapositivesFile)
-    console.log("ATTACHEDFILES§§§§§§§§§§§§",ThumbUrlAttachementFile)
+    console.log("ATTACHEDFILES§§§§§§§§§§§§",ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)))
     const [CreateLive] = useMutation(graphQL_shema().createLive, {
         context: { clientName: "second" },
         variables: {
@@ -330,7 +330,7 @@ export const GraphQLFetchDataForm = (values) => {
                         data.getlive.configurationOut.slides.map((item)=>{
                         return({
                             uid: item.slideOrder,
-                            //name:item.slide.replace((item.slide.substring(0,item.slide.lastIndexOf("/")+6)),''),
+                            name:item.slide.substring(item.slide.lastIndexOf("/")+1,item.slide.length),
                             status: 'done',
                             url: item.slide,
                             thumbUrl: item.slide,
@@ -341,7 +341,7 @@ export const GraphQLFetchDataForm = (values) => {
                         data.getlive.configurationOut.attachedFiles.map((item)=>{
                            return({
                                uid: uuidv4(),
-                               //name:item.fileName.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
+                               name:item.fileName.substring(item.fileName.lastIndexOf("/")+1,item.fileName.length),
                                status: 'done',
                                url: item.fileName,
                                thumbUrl: item.fileName,
