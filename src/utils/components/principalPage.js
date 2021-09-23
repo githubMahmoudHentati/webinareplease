@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import GlobalHeader from "./header";
 import {Card} from "antd";
 import {IframeContainer} from "./iframeContainer";
@@ -7,6 +7,10 @@ import {useSelector} from "react-redux";
 
 export const PrincipalPage = (props) => {
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
+    const [colorStickyBar, setColorStickyBar] = useState("RGBA(255, 255, 255, 0.04)");
+
+
+
     return (
         <IframeContainer menuType={props.menuType}>
             <GlobalHeader/>

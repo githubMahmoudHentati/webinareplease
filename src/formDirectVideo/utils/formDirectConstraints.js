@@ -121,7 +121,9 @@ export const FormDirectConstraints = ()=>{
             loadingLiveFetchData:false,
             loadingCreateEditLive:false,
             crudOption:"",
-            leaveToast:true
+            leaveToast:true,
+            errorMenuFormStyle:false,
+            scrollIntoView: false,
         })
     }
 

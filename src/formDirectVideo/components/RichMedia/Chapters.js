@@ -103,6 +103,7 @@ const handleAdd = ()=>{
                   onChange={(event) => handleChangeToEdit(event, ele)}
                   placeholder="Nouveau chapitre"
                   className="Chapters__input-edit Chapters__input"
+                  autocomplete="off"
                   suffix={
                     <div onClick={onEdit}>
                       <CheckCircleOutlined className="list-item-icons" />
@@ -135,6 +136,7 @@ const handleAdd = ()=>{
           }}
           placeholder={t("formDirectVideo.chaptersTab.inputPlaceholder")}
           className="Chapters__input"
+          autocomplete="off"
           suffix={<PlusCircleOutlined onClick={handleAdd} />}
         />
       </Col>

@@ -1,8 +1,8 @@
 import React, {useEffect,useRef} from 'react';
 import {Row, Col, Input, Button, Switch, Radio, Checkbox, DatePicker, Form,TimePicker} from 'antd'
 import '../formDirectVideo.scss'
-import {message } from 'antd';
-import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
+import {message,Avatar } from 'antd';
+import {EyeInvisibleOutlined, EyeTwoTone,LoadingOutlined} from '@ant-design/icons';
 import {useSelector,useDispatch} from "react-redux";
 import Hooks from "../utils/hooks";
 import {DraggerUpload} from "./DraggerUpload";
@@ -10,20 +10,23 @@ import moment from "moment";
 import useCopy from '@react-hook/copy'
 import {setFormDirectLiveConstraintDataOnchange} from '../store/formDirectVideoAction'
 import { useTranslation } from 'react-i18next';
-
+import defaultThumb from "../../assets/webinarplease-thumb.jpg";
+import {ShowVideosReducerReducer} from "../../showVideos/store/showVideosReducer";
 
 
 export const Generals =()=>{
 
     const livePlanRef = useRef(null);
     const pwdShowRef = useRef(null);
+    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
 
     const dispatch = useDispatch()
     const [form] = Form.useForm();
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const disableSwitch = useSelector((state)=> state.ShowVideosReducerReducer.paginationProps)
     const { t, i18n } = useTranslation();
     const requiredFieldRule = [{required: true, message: t('forgetPassword.FieldsRequired')}];
-
+     console.log('hshshshshshsh45654654',disableSwitch.statusLive)
     const isValidPassword = () => {
         return /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&()^_!"#$%&'*+£,-./:;{}<>=|~?·•¯‾|¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫])[A-Za-z\d@$!%*?&()^_`!"#$%&'*+£,-./:;{}<>=|~?·•¯‾_ |¦‌‍†‡§¶©®™&@/♠♣♥♦←↑→↓↔áÁâÂàÀåÅãÃäÄæÆçÇéÉêÊèÈëËíÍîÎìÌïÏñÑóÓôÔòÒøØõÕöÖœŒšŠßðÐÞúÚûÛùÙüÜýÝÿŸ¤€$¢£¥ƒαΑβΒγΓδΔεΕζΖηΗθΘιΙκΚλΛμΜνΝξΞοΟπΠρΡσςΣτΤυΥφΦχΧψΨωΩ°µ < >≤≥=≈≠≡±−+×÷⁄%‰¼½¾¹²³ºªƒ″∂∏∑√∞¬∩∫]{8,}$/.test(values.general.pwd)
     }
@@ -56,12 +59,18 @@ export const Generals =()=>{
     }
 
     useEffect(() => {
-        values.general.liveAction &&scrollToRef(livePlanRef)
+        values.constraintData.scrollIntoView&&disableSwitch.statusLive === -1 &&values.general.liveAction &&scrollToRef(livePlanRef)
     }, [values.general.liveAction]);
 
     useEffect(() => {
-        values.general.directAccessMode === "liveAccess" &&scrollToRef(pwdShowRef)
+        values.constraintData.scrollIntoView&&values.general.directAccessMode === "liveAccess" &&scrollToRef(pwdShowRef)
     }, [values.general.directAccessMode]);
+
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
+    //     }
+    // }, []);
 
     return(
         <Row gutter={[0, 30]}>
@@ -72,6 +81,18 @@ export const Generals =()=>{
                 <Row gutter={[0, 10]} >
                     <Col className={"col-forms"} span={24}>
                         <span style={{ color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.AddLabel")}</span>
+                    </Col>
+                    <Col className="col-upload-square">
+                        <Avatar className={"col-upload-square--avatar"} shape="square" style={{
+                            background: darkMode === false ? "RGB(231, 247, 255)" : "#141414",
+                            border: darkMode === false ? "1px solid RGB(231, 247, 255)" : "1px solid rgba(255, 255, 255, 0.15)",
+                            color: darkMode === false ? "RGB(0, 127, 203)" : "rgba(255, 255, 255, 0.85)"
+                        }}
+                                src={values.loading?<LoadingOutlined style={{ fontSize: 50,marginTop:"50px" }}/>:values.general.fileList && values.general.fileList.length ?
+                                    values.general.fileList[0].thumbUrl :defaultThumb}
+
+                        />
+                        {console.log("values.general.fileList",values.general.fileList[0])}
                     </Col>
                     <Col span={24} className={"col-forms-upload"}>
                         <DraggerUpload/>
@@ -93,7 +114,7 @@ export const Generals =()=>{
                         <Form.Item name="liveTitle" className={"form-item-style"}
                                    rules={requiredFieldRule}
                         >
-                            <Input maxLength={100} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
+                            <Input autocomplete="off" maxLength={100} name="liveTitle" onChange={generalOnChange} placeholder={t("formDirectVideo.VideoTitle")}></Input>
                         </Form.Item>
                     </Col>
                 </Row>
@@ -142,7 +163,7 @@ export const Generals =()=>{
                     <Col >
                         <Form.Item name="liveAction" className={"form-item-style"}
                         >
-                            <Switch checked={values.general.liveAction} name="liveAction" value="liveAction"
+                            <Switch  checked={disableSwitch.statusLive === 1 || disableSwitch.statusLive === 0 ? false : values.general.liveAction} name="liveAction" value="liveAction"
                                     onChange={(checked, event) => {
                                         generalOnChangeByName(checked, checked, "liveAction")
                                     }}/>
@@ -151,7 +172,7 @@ export const Generals =()=>{
                     </Col>
                 </Row>
             </Col>
-            {values.general.liveAction &&
+            {disableSwitch.statusLive === -1  && values.general.liveAction &&
             <Col span={24} ref={livePlanRef}>
                 <Row gutter={[20, 10]}>
                     <Col span={8} className={"col_planification"}>

@@ -15,8 +15,13 @@ import {
 } from "../store/formDirectVideoAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+import {setDirectSetting} from "../../utils/redux/actions";
+import {
+    setConstraintDataOnchange,
+    setGeneralInformationOnchange
+} from "../../compteSettings/store/accountSettingsAction";
 
-const Hooks=(attachedFilesRef)=>{
+const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
@@ -27,6 +32,7 @@ const Hooks=(attachedFilesRef)=>{
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:event}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const generalOnChange = (event) => {
@@ -38,6 +44,7 @@ const Hooks=(attachedFilesRef)=>{
             dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
             dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
         }
+        event.target.value==="liveAccess"&&dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const generalOnChangeButton = async (event) => {
@@ -109,11 +116,14 @@ const Hooks=(attachedFilesRef)=>{
 
         dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
         values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
+        name==="liveAutomaticArchiving"&&dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const configurationOnChangeButton = async (event) => {
 
         await dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
+
 
     };
 
@@ -209,9 +219,10 @@ const Hooks=(attachedFilesRef)=>{
                         name: el.name,
                         lastName: el.lastName,
                         function: el.title,
-                        avatar: el.logoSpeaker && el.logoSpeaker.length ? el.logoSpeaker[0].thumbUrl : '',
+                        avatar: el.logoSpeaker && el.logoSpeaker.length ? el.logoSpeaker[0].thumbUrl.substring(el.logoSpeaker[0].thumbUrl.lastIndexOf("/")+ 1,el.logoSpeaker[0].thumbUrl.length) : '',
                         mail: el.email,
-                    }
+
+            }
                 ))
         }));
         let newStartDate= !values.general.liveAction?"":typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
@@ -228,7 +239,9 @@ const Hooks=(attachedFilesRef)=>{
     }
 
     const checkKeyDown =(e)=>{
-        if (e.code === 'NumpadEnter') e.preventDefault();
+        console.log("e.code-----",e)
+        console.log("e.code-----",e.code)
+        if (e.keyCode === 13) e.preventDefault();
     }
 
     // Suppression des régles invitations
@@ -263,6 +276,16 @@ const Hooks=(attachedFilesRef)=>{
         }
 
     }
+    const generalInformationOnChangeAvatar= (avatar) => {
+        dispatch(setGeneralInformationOnchange({
+            generalInformationNameChange: "vignette",
+            generalInformationValueChange: avatar
+        }))
+        dispatch(setConstraintDataOnchange({
+            constraintDataNameChange: "avatarLoading",
+            constraintDataValueChange: false
+        }))
+    };
 
     return({
         generalOnChangeByName,
@@ -291,7 +314,8 @@ const Hooks=(attachedFilesRef)=>{
         getFirstCharacter,
         sendPostMessage,
         checkKeyDown,
-        scrollToRef
+        scrollToRef,
+        generalInformationOnChangeAvatar
     })
 }
 

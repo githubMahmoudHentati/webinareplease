@@ -31,6 +31,34 @@
   font-style: normal;
   font-display: swap;
 }
+.PhoneInputCountrySelect{
+ background-color: var(--card_color) !important;
+  color: var(--white_color) !important;
+}
+.PhoneInputCountrySelect::-webkit-scrollbar{
+  width: 4px !important;
+  height: 4px;
+}
+.PhoneInputCountrySelect::-webkit-scrollbar-track{
+  background-color: var(--card_color) !important;
+  z-index: 999;
+  border: none !important;
+  box-shadow: none !important;
+}
+.PhoneInputCountrySelect::-webkit-scrollbar-thumb{
+  background-color: var(--icon-color);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+.PhoneInputCountrySelectArrow{
+  color: var(--white_color) !important;
+  font-size: 16px !important;
+}
+.ant-table-cell-scrollbar{
+  box-shadow: none !important;
+}
+.row_abonnement{
+  padding-right: 15px;
+}
 .img-strip{
   width: 46px;
   height: 18px;
@@ -44,6 +72,14 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.row_password{
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border_color) !important;
+}
+.col-selectMenu{
+  padding-left: 25px !important;
+  padding-right: 0 !important;
 }
 .spn_CompteSettings{
   font-family: "SF Pro Display";
@@ -84,6 +120,11 @@
   font-family: "SF Pro Display";
   font-weight: normal;
 }
+.col_update_infos{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+}
 .parag_abonnement_gras{
   font-size: 14px;
   font-family: "SF Pro Display";
@@ -94,7 +135,9 @@
   font-family: "SF Pro Display";
   font-weight: 500;
 }
-
+.ant-badge-status-text{
+    color: var(--white_color) !important;
+}
 
 #product-form_email{
   border-color: var(--border_color) !important ;
@@ -138,9 +181,22 @@
    .col_avatar{
      margin-bottom: 30px;
    }
+  .row_abonnement{
+    padding-right: 0px;
+  }
 }
 
+
+
 @media screen and (max-width: 767px) {
+  .col_update_infos{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+  }
+  .row_abonnement{
+    padding-right: 0px;
+  }
  .menuCompteSettings{
    width: 100% !important;
   display: flex !important;
@@ -159,8 +215,21 @@
     text-align: center !important;
   }
 
+  .account-Setting-Title{
+    font-size: 15px !important;
+  }
 
+}
 
+@media screen and (max-width: 320px) {
+  .account-Setting-Title{
+    font-size: 11px !important;
+  }
+}
+@media screen and (max-width: 280px) {
+  .account-Setting-Title{
+    font-size: 10px !important;
+  }
 }
 
 /**************react phone number input*****************************/

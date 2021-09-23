@@ -164,8 +164,8 @@ const HooksCalendar = (callback) => {
     const getListData = (value) => {
         let listData = [];
         if (value && Object.keys(value).length > 0) {
-
-            if (calendarValues) {
+            console.log("calendarValuesTHUMMMB",calendarValues &&calendarValues.length?calendarValues[0].thumbnail:[])
+            if (calendarValues && calendarValues.length) {
                 calendarValues.forEach((element) => {
                     switch ((value.year() + "-" + value.month() + "-" + value.date())) {
 

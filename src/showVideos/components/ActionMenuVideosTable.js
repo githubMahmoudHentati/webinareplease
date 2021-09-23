@@ -50,11 +50,11 @@ function useActionMenu({record}) {
         <Menu className="menu">
             <Menu.Item onClick={() => handleInfos()}><InfoCircleOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.infos")}</Menu.Item>
-            {record.owner ? <Menu.Item onClick={() => updateLive(record.id)}><EditOutlined
+            {record.owner ? <Menu.Item onClick={() => updateLive(record.id,record.status)}><EditOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.Modifier")}</Menu.Item> : null}
             <Menu.Item onClick={() => handleExport()}><LinkOutlined className={"dropdownIcon"}/>Export</Menu.Item>
-            <Menu.Item onClick={() => history.push("/FormDirectVideo", dispatch(setDirectSetting(4)))}><span
-                className="icon-Templates dropdownIconTemp"></span> {t("ShowVideo.Templates")}</Menu.Item>
+            {/*<Menu.Item onClick={() => history.push("/FormDirectVideo", dispatch(setDirectSetting(4)))}><span*/}
+            {/*    className="icon-Templates dropdownIconTemp"></span> {t("ShowVideo.Templates")}</Menu.Item>*/}
             {record.owner ? <Menu.Item onClick={() => handleDeleteOneRow(record.id)}><DeleteOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.Delete")}</Menu.Item> : null}
         </Menu>
@@ -226,8 +226,8 @@ function useActionMenu({record}) {
                 !x.matches && <Tooltip getPopupContainer={() => document.querySelector(".btn_Visualiser_diffuser")}
                                        title={t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser"))}>
                     <Button className={"btn_Visualiser_diffuser "} style={{
-                        backgroundColor: darkMode === false ? "" : "#1D1D1D",
-                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.25)",
+                        backgroundColor: darkMode === false ? "" : "#141414",
+                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                         border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                     }} onClick={() => handleClickStreamin(record)}>
                         {

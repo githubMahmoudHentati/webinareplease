@@ -207,7 +207,7 @@ export const FormSignUp =({child1,child2})=>{
                                                 getPopupContainer={() => document.querySelector(".slect-nbr-empl")}
                                                 className={"spn2 slect-nbr-empl"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
-                                                defaultValue={t("CompteSettings.choiceOne")}
+                                                defaultValue= {1}
                                                 showSearch
                                                 style={{width: "100%"}}
                                                 placeholder={t("CompteSettings.choiceOne")}
@@ -216,9 +216,15 @@ export const FormSignUp =({child1,child2})=>{
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                 }
                                             >
-                                                <Option name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
-                                                <Option name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
-                                                <Option name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
+                                                <Option name="numberPerson" key={1} value="1">1</Option>
+                                                <Option name="numberPerson" key={2} value="2">2 <span style={{fontSize:"16px"}}>to</span> 5</Option>
+                                                <Option name="numberPerson" key={3} value="3">6 <span style={{fontSize:"16px"}}>to</span> 10</Option>
+                                                <Option name="numberPerson" key={4} value="4">11 <span style={{fontSize:"16px"}}>to</span> 25</Option>
+                                                <Option name="numberPerson" key={5} value="5">26 <span style={{fontSize:"16px"}}>to</span> 50</Option>
+                                                <Option name="numberPerson" key={6} value="6">51 <span style={{fontSize:"16px"}}>to</span> 200</Option>
+                                                <Option name="numberPerson" key={7} value="7">201 <span style={{fontSize:"16px"}}>to</span> 1,000</Option>
+                                                <Option name="numberPerson" key={8} value="8">1,001 <span style={{fontSize:"16px"}}>to</span> 10,000</Option>
+                                                <Option name="numberPerson" key={9} value="9">10,0001 <span style={{fontSize:"16px"}}>or more</span></Option>
                                             </Select>
                                     </Form.Item>
                                 </Col>

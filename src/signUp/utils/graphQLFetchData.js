@@ -29,7 +29,7 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
                     constraintDataValueChange: true
                 }))
 
-                if (valuesSignUp.signUp.subscriptionId === 0) {
+                if (valuesSignUp.signUp.subscriptionId === 1) {
 
                     history.push("/ConfirmAccount")
 

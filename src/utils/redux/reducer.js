@@ -1,3 +1,6 @@
+import {DataConstraints} from './dataConstraint'
+
+const {UserCredentialStorageData,}= DataConstraints()
 
 const INITIAL_STATE = {
     accountMenu : 0,
@@ -10,11 +13,21 @@ const INITIAL_STATE = {
     activeSideMenu:false,
     lang:localStorage.getItem("i18nextLng") ? localStorage.getItem("i18nextLng"):"fr",
     runDeleteOneRow:false,
+    storageData : UserCredentialStorageData(),
+    colorStickyBar: "RGBA(255, 255, 255, 0.04)"
 }
 
 export const  Reducer=(state=INITIAL_STATE , action)=>{
 
     switch (action.type){
+
+        case "SET_StorageData":
+            const {credentialsData}=action.payload
+            return{
+                ...state,
+                storageData: credentialsData
+            }
+
         case "SET_AccountMenu":
             return{
                 ...state,
@@ -35,6 +48,11 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
                 ...state,
                 DarkMode: action.payload
             }
+        case "SET_ColorStickyBar":
+            return {
+                ...state,
+                colorStickyBar: action.payload
+            }
         case "SET_AppSetLogin":
             return {
                 ...state,
@@ -53,9 +71,6 @@ export const  Reducer=(state=INITIAL_STATE , action)=>{
         default:{
             return state
         }
-
-
     }
-
 }
 

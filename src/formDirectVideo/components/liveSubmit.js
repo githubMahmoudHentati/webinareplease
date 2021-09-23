@@ -4,12 +4,15 @@ import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import Hooks from "../utils/hooks";
 import moment from "moment";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
+import {HomeOutlined} from "@ant-design/icons";
 
 
 export const LiveSubmit=(props)=>{
+    const dispatch = useDispatch()
     const history = useHistory()
     const [form] = Form.useForm();
     const {handleSubmit,checkKeyDown,values}=Hooks()
@@ -75,7 +78,25 @@ export const LiveSubmit=(props)=>{
 
     useEffect(async () => {
         getLiveData()
-    }, []);
+    },[] );
+
+    useEffect(async () => {
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:false}));
+    }, [values.general]);
+
+    const stickyElm = document.querySelector('.title-col')
+    const observer = new IntersectionObserver(
+        ([e]) => e.target.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        {threshold: [1]}
+    );
+
+    useEffect(() => {
+        if(stickyElm) {
+            // debugger
+            observer.observe(stickyElm)
+        }
+    }, );
+
 
     return(
         <div>
@@ -91,17 +112,12 @@ export const LiveSubmit=(props)=>{
                         <Col span={24} className={"header-col"}>
                             <Breadcrumb className={"header-col-breadcrumb"} style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                    <span >Accueil</span>
-                                </Breadcrumb.Item>
-                                <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                    <span>Direct</span>
+                                    <HomeOutlined className={"home_icon"} />
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{localStorage.getItem('idLive') ? values.general.liveTitle :isAddedForm ? t("formDirectVideo.AddLive"): '' } </Breadcrumb.Item>
                             </Breadcrumb>
                         </Col>
-                        <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
                             <BarHeader/>
-                        </Col>
                         {props.children}
                     </Row>
                 </Spin>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Input,Button,Select , Divider  , Tooltip , Popover , Checkbox , Form , message} from 'antd'
-import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , PlusSquareOutlined  } from '@ant-design/icons';
+import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , PlusSquareOutlined  , LockOutlined} from '@ant-design/icons';
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
@@ -145,7 +145,7 @@ function Invitation(){
             {/*</div>/!*./groupEmail*!/*/}
 
             <div className={"groupEmail div2"}>
-                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.Emails")}  <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.15)":"rgba(255, 255, 255, 0.85"}} className={"infosIcon"}/></span>
+                <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.Emails")}  <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"infosIcon"}/></span>
                        <Form.Item
                            style={{width:"100%"}}
                            name="emails"
@@ -174,10 +174,19 @@ function Invitation(){
                        </Form.Item>
             </div>{/*./groupEmail*/}
 
+            <div className={"div_overley"}>
+                <div className={"div-border-blocked"}>
+                    <div className={"div_planificationInvitation"}>
+
+                        <LockOutlined className={"lockoutlined"} />
+                        <span className={"spn_planificationInvitation"}>{t("formDirectVideo.PlanificationInvitation")}</span>
+                        <span className={"spn_disponibile"}>{t("formDirectVideo.DisponibleProchainement")}</span>
+
+                    </div>
             <div className={"groupEmail div3"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.SendingRules")} </span>
                 <div className={"div_Email_accée"}>
-                     <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.RegistrationAccessEmails")}</p>
+                     <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.25)"}}>{t("formDirectVideo.RegistrationAccessEmails")}</p>
                     <div className={"div_ajout_régle"}>
 
                         {values.invitation.addRules.afterPrograming === true
@@ -188,7 +197,11 @@ function Invitation(){
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} name={"minusDelete"}  onClick={()=>handleClickDelete(1)}/></div>
                             </div>
                             :
-                            null
+                             <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><span className="icon-sign_up icon_ajout_régle" style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}></span><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Inscription")}</span></div>
+                                <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.WebinarIsScheduled")}</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} name={"minusDelete"}  onClick={()=>handleClickDelete(1)}/></div>
+                            </div>
                         }
 
                         {values.invitation.addRules.beforeWeek === true
@@ -199,7 +212,11 @@ function Invitation(){
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"}  onClick={()=>handleClickDelete(2)}/></div>
                             </div>
                             :
-                            null
+                            <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><span className="icon-access icon_ajout_régle" style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}></span><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.ReminderJ7")}</span></div>
+                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"p_ajout_régle"}>{t("formDirectVideo.7DBeforeTheStart")}</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"}  onClick={()=>handleClickDelete(2)}/></div>
+                            </div>
                         }
 
                         {values.invitation.addRules.beforeDay === true
@@ -248,7 +265,7 @@ function Invitation(){
 
 
                 <div className={"div_Email_accée list2"}>
-                    <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.RegEmail")}</p>
+                    <p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.25)"}}>{t("formDirectVideo.RegEmail")}</p>
                     <div className={"div_ajout_régle"}>
 
                         {values.invitation.addRules.afterSubscription === true
@@ -259,7 +276,11 @@ function Invitation(){
                                 <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(5)}/></div>
                             </div>
                             :
-                            null
+                            <div className={"infos_ajout_régle"}>
+                                <div className={"title_ajout_régle"}><span className="icon-like icon_ajout_régle" style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}></span><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.ConfirmReg")}</span></div>
+                                <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"p_ajout_régle"}>{t("formDirectVideo.AfterReg")}</p></div>
+                                <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(5)}/></div>
+                            </div>
                         }
                         {
                             values.invitation.addRules.isParticiped === true
@@ -270,7 +291,11 @@ function Invitation(){
                                     <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(6)}/></div>
                                 </div>
                                 :
-                                null
+                                <div className={"infos_ajout_régle"}>
+                                    <div className={"title_ajout_régle"}><span className="icon-applause icon_ajout_régle" style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}></span><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.Participated")}</span></div>
+                                    <div className={"p_ajout_régle"}><p className={"p_ajout_régle"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.AfterTheEnd")}</p></div>
+                                    <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(6)}/></div>
+                                </div>
                         }
 
                         {
@@ -282,7 +307,11 @@ function Invitation(){
                                     <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(7)}/></div>
                                 </div>
                                 :
-                                null
+                                <div className={"infos_ajout_régle"}>
+                                    <div className={"title_ajout_régle"}><span className="icon-no_view icon_ajout_régle" style={{color:darkMode===false? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}></span><span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85"}}>{t("formDirectVideo.NoCome")}</span></div>
+                                    <div className={"p_ajout_régle"}><p style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} className={"p_ajout_régle"}>{t("formDirectVideo.AfterTheEnd")}n</p></div>
+                                    <div className={"div_icon_ajout_régle"}><MinusCircleOutlined style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"icon2_ajout_régle"} onClick={()=>handleClickDelete(7)}/></div>
+                                </div>
                         }
 
                         {
@@ -324,6 +353,8 @@ function Invitation(){
 
 
             </div>{/*./groupEmail*/}
+                </div>{/*./div-border-blocked*/}
+            </div>{/*./div-overley*/}
 
 
         </div>

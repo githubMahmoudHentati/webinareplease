@@ -30,13 +30,15 @@ export const GraphQLFetchDataForm = (values) => {
     let richeMediaDiffusion=values.configuration.richeMediaDiffusion
     let attachements = values.configuration.attachments
     let {success_submit , error_submit}=StatusMessages(idLive)
+    console.log("SLIDES*****DiapositivesFile",DiapositivesFile)
+    console.log("ATTACHEDFILES§§§§§§§§§§§§",ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)))
     const [CreateLive] = useMutation(graphQL_shema().createLive, {
         context: { clientName: "second" },
         variables: {
             input: {
                 generalInfo: {
                     thumbnail: values.general.fileList && values.general.fileList.length ?
-                        values.general.fileList[0].thumbUrl : "",
+                        values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
@@ -72,8 +74,8 @@ export const GraphQLFetchDataForm = (values) => {
                     themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:TitleChapters,
                     questions:Questions,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile,
+                    attachedFiles:ThumbUrlAttachementFile && ThumbUrlAttachementFile.length?ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)):[],
+                    slides:DiapositivesFile&& DiapositivesFile.length?DiapositivesFile.map(item=>item.substring(item.lastIndexOf("/")+ 1, item.length))  : [] ,
                 },
                 invitation:{
                     mailsGroup:values.invitation.emailsGroup,
@@ -84,7 +86,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : "",
+                            values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                         Type: "Facebook Post",
                         link: values.general.liveLink,
                         active: values.socialTools[0].switch,
@@ -134,7 +136,7 @@ export const GraphQLFetchDataForm = (values) => {
             form: {
                 generalInfoOutput: {
                     thumbnail: values.general.fileList && values.general.fileList.length ?
-                        values.general.fileList[0].thumbUrl : "",
+                        values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                     liveTitle: values.general.liveTitle,
                     liveDescription: values.general.liveDescription,
                     livePlan: {
@@ -170,8 +172,8 @@ export const GraphQLFetchDataForm = (values) => {
                     themes: values.configuration.liveAutomaticArchiving?values.configuration.theme:[],
                     chapters:TitleChapters,
                     questions:Questions,
-                    attachedFiles:ThumbUrlAttachementFile,
-                    slides:DiapositivesFile ,
+                    attachedFiles:ThumbUrlAttachementFile && ThumbUrlAttachementFile.length?ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)):[],
+                    slides:DiapositivesFile&& DiapositivesFile.length?DiapositivesFile.map(item=>item.substring(item.lastIndexOf("/")+ 1, item.length))  : [] ,
                 },
                 invitationOutput:{
                     mailsGroup:values.invitation.emailsGroup,
@@ -182,7 +184,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : "",
+                            values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                         Type: "Facebook Post",
                         link: values.general.liveLink,
                         active: values.socialTools[0].switch,
@@ -292,7 +294,7 @@ export const GraphQLFetchDataForm = (values) => {
                     modalSpeaker: values.configuration.modalSpeaker,
                     switchSpeaker:speakerList.length > 0,
                     liveAutomaticArchiving: data.getlive.configurationOut.autoArchLive.auto,
-                    SpeakerList:speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
+                    SpeakerList:speakerList.length ? speakerList.map(({avatar: logoSpeaker,mail : email,function:title,id:id, ...rest
                                                  },index)  => ({
                         logoSpeaker:[{
                             uid: '-1',
@@ -302,7 +304,7 @@ export const GraphQLFetchDataForm = (values) => {
                             thumbUrl:speakerList[index].avatar,
                         }],email,title,id:index+1,
                         ...rest
-                    })),
+                    }))  :[],
                     addSpeakerList:values.configuration.addSpeakerList,
                     speaker:  values.configuration.speaker,
                     loadingSpeakerInfo:false,
@@ -315,42 +317,47 @@ export const GraphQLFetchDataForm = (values) => {
                     theme: data.getlive.configurationOut.themes,
                     themesList:[],
                     tags:data.getlive.configurationOut.tags,
-                    listChapter:data.getlive.configurationOut.chapters.map((item)=>{
+                    listChapter:data.getlive &&  data.getlive.configurationOut ?
+                        data.getlive.configurationOut.chapters && data.getlive.configurationOut.chapters.length ?
+                        data.getlive.configurationOut.chapters.map((item)=>{
                         return({
                             id:item.chapterOrder,
                             title:item.chapterTitle
                         })
-                    }),
-                    diapositivesFileLists:data.getlive.configurationOut.slides.map((item)=>{
+                    }) : [] : {},
+                    diapositivesFileLists:data.getlive &&  data.getlive.configurationOut ?
+                        data.getlive.configurationOut.slides && data.getlive.configurationOut.slides.length ?
+                        data.getlive.configurationOut.slides.map((item)=>{
                         return({
                             uid: item.slideOrder,
-                            //name:item.slide.replace((item.slide.substring(0,item.slide.lastIndexOf("/")+6)),''),
+                            name:item.slide.substring(item.slide.lastIndexOf("/")+1,item.slide.length),
                             status: 'done',
                             url: item.slide,
                             thumbUrl: item.slide,
                         })
-                    }),
-                    fileListConfiguration:data.getlive.configurationOut.attachedFiles.map((item)=>{
+                    }) : [] :{},
+                    fileListConfiguration:data.getlive &&  data.getlive.configurationOut ?
+                        data.getlive.configurationOut.attachedFiles &&  data.getlive.configurationOut.attachedFiles.length ?
+                        data.getlive.configurationOut.attachedFiles.map((item)=>{
                            return({
                                uid: uuidv4(),
-                               name:item.replace((item.substring(0,item.lastIndexOf("/")+6)),''),
+                               name:item.fileName.substring(item.fileName.lastIndexOf("/")+1,item.fileName.length),
                                status: 'done',
-                               url: item,
-                               thumbUrl: item,
+                               url: item.fileName,
+                               thumbUrl: item.fileName,
                            })
-                    }),
-                    listQuestion: data.getlive.configurationOut.questions.map((item)=>{
+                    }) : [] : {},
+                    listQuestion:
+                        data.getlive &&  data.getlive.configurationOut ?
+                            data.getlive.configurationOut.questions && data.getlive.configurationOut.questions.length ?
+                        data.getlive.configurationOut.questions.map((item)=>{
                         return({
                             nsp:item.nsp,
                             question:item.question,
                             //order:item.order,
-                            choices:item.choices.split('♠♣♥♦').map((item) => {
-                                return{
-                                    "response": item
-                                }
-                            }),
+                            choices:{response : [...item.choices.response.map(item=>item)]}
                         })
-                    }),
+                    }) : [] : {},
                 },
                 invitation:{
                     emailsGroup:data.getlive.invitationOut.mailsGroup,

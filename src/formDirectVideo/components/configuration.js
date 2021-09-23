@@ -19,7 +19,7 @@ import '../formDirectVideo.scss'
 import { PlusSquareOutlined,EditOutlined,MinusCircleOutlined , InfoCircleFilled } from '@ant-design/icons';
 import Hooks from '../utils/hooks'
 import {ModalSpeaker} from './modalspeacker'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 
 
@@ -27,8 +27,10 @@ import {useTranslation} from 'react-i18next';
 import {TabMenu} from './RichMedia/TabMenu'
 
 import {AttachedFile} from "./attachedFile";
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 
 export const Configuration = () => {
+    const idLive = localStorage.getItem('idLive')?localStorage.getItem('idLive'):'';
     const [form] = Form.useForm();
     const visibleLiveRef = useRef(null)
     const themesRef = useRef(null)
@@ -37,6 +39,7 @@ export const Configuration = () => {
     const { listQuestion } = useSelector(
         (state) => state.FormDirectVideoReducer.configuration
       );
+    const dispatch = useDispatch()
     const itemListRef = useRef(null);
     const {t} = useTranslation();
 
@@ -73,12 +76,18 @@ export const Configuration = () => {
     }, [itemListRef]);
 
     useEffect(() => {
-        values.configuration.liveAutomaticArchiving&&scrollToRef(visibleLiveRef)
+        values.constraintData.scrollIntoView&&values.configuration.liveAutomaticArchiving&&scrollToRef(visibleLiveRef)
     }, [values.configuration.liveAutomaticArchiving]);
 
     useEffect(() => {
-        values.configuration.videoMode === "visibleVideo"&&scrollToRef(themesRef)
+        values.constraintData.scrollIntoView&&values.configuration.videoMode === "visibleVideo"&&scrollToRef(themesRef)
     }, [values.configuration.videoMode]);
+
+    // useEffect(() => {
+    //     return () => {
+    //         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
+    //     }
+    // }, []);
 
     return (
         <Row gutter={[0, 40]} className={"Configuration"}>
@@ -133,12 +142,13 @@ export const Configuration = () => {
                                                 <span key="list-loadmore-edit"><EditOutlined
                                                         className={"EditOutlined"}
                                                         onClick={() => editSpeaker(item.name, item.lastName, item.title, item.email, item.logoSpeaker, indexItem+1)}
-                                                        style={{fontSize: "21px",marginRight:"8.5px" ,color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}/></span>,
+                                                        style={{fontSize: "21px",marginRight:"5px" ,color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}/></span>,
                                                     <span key="list-loadmore-more"><MinusCircleOutlined
+                                                        className={"MinusCircleOutlined"}
                                                         style={{
                                                             fontSize: "21px",
                                                             color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)",
-                                                            marginLeft:"8.5px"
+                                                            marginLeft:"5px"
                                                         }}
                                                         onClick={() => deleteSpeaker(indexItem)}/></span>
                                                 ]}>
@@ -224,7 +234,7 @@ export const Configuration = () => {
                                                   checked={values.configuration.richeMediaDiffusion}>
                                             <p style={{margin: 0}}>{t("formDirectVideo.Richmedia")}
                                                 <InfoCircleFilled
-                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}
                                                     className={"infosIcon"}/></p>
                                         </Checkbox>
                                         <br/>
@@ -242,7 +252,7 @@ export const Configuration = () => {
                                                   checked={values.configuration.attachments}>
                                             <p style={{margin: 0}}>{t("formDirectVideo.AttachedFiles")}
                                                 <InfoCircleFilled
-                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"}}
+                                                    style={{color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"}}
                                                     className={"infosIcon"}/></p></Checkbox>
                                     </Col>
                                     <Col span={24} className={""}>
@@ -272,7 +282,7 @@ export const Configuration = () => {
                                 <Row gutter={[10, 0]}>
                                     <Col className={"col-forms"}>
                                         <span style={{
-                                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
+                                            color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                                         }}>{t("formDirectVideo.AutomaticArchiving")}</span>
                                     </Col>
                                     <Col>
@@ -285,7 +295,7 @@ export const Configuration = () => {
                                                      title={t("formDirectVideo.ArchivedAndVisualisationMsg")}>
                                                 <InfoCircleFilled style={{
                                                     cursor: "pointer",
-                                                    color: darkMode === false ? "rgba(0, 0, 0, 0.15)" : "rgba(255, 255, 255, 0.85"
+                                                    color: darkMode === false ? "rgba(0, 0, 0, 0.25)" : "rgba(255, 255, 255, 0.25)"
                                                 }} className={"infosIcon"}/>
                                             </Tooltip>
                                         </Form.Item>
@@ -312,15 +322,16 @@ export const Configuration = () => {
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
-                            <Col ref={themesRef} span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"}}
-                                 className={"col-forms"}>
-                                <span>{t("formDirectVideo.Themes")}</span>
+                            <Col  ref={themesRef} span={24} style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)" }}
+                                 className={"col-forms col_theme"}>
+                                <span className={"span-theme"}>{t("formDirectVideo.Themes")}</span>
                             </Col>
                             }
                             {values.configuration.liveAutomaticArchiving && values.configuration.videoMode === "visibleVideo" &&
-                            <Col offset={1} span={23}>
+                            <Col offset={0} span={24} className={"col_theme"}>
                                     <Select
                                         value={values.configuration.theme}
+                                        showArrow={true}
                                         mode="multiple"
                                         className={"spn2"}
                                         name="theme" onChange={(value,action)=>{ConfigurationOnChangeSelect(value,action,"theme")}}

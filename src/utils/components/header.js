@@ -32,6 +32,7 @@ function GlobalHeader() {
     const history = useHistory()
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
     const [arrow ,  setArrow] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false);
 
     // Clic outside Side Bar
     useEffect(() => {
@@ -141,18 +142,14 @@ function GlobalHeader() {
 
     return (
         <div className={"div_Header"}>
-            <div className={"Header"} style={{backgroundColor: darkMode === false ? "#ffffff" : "#141414"}}>
+            <div className={isScrolled ? "Header scrolled" : "Header"} style={{backgroundColor: darkMode === false ? "#ffffff" : "#141414"}}>
 
                 <div className="div_home_logo">
-                    <div className={'icon_webinaire'}><span className="icon-logo-webinar icon_Webinaire_svg"
-                                                            style={{color: darkMode === false ? "" : "white"}}
-                                                            onClick={() => {
-                                                                history.push("/")
-                                                            }}></span></div>
-                    <HomeOutlined className={"Home_Icon"} style={{color: darkMode === false ? "" : "#007fcb"}}
-                                  onClick={() => {
-                                      history.push("/")
-                                  }}/>
+                    <div className={'icon_webinaire'}><a href=" " className="icon-logo-webinar icon_Webinaire_svg"
+                                                            style={{color: darkMode === false ? "#2B333E" : "white"}}
+                                                            onClick={() => history.push("/")}></a></div>
+                    {/*<div className="div_home_icon"><a href=" " onClick={() => history.push("/")}><HomeOutlined className={"Home_Icon"} style={{color: darkMode === false ? "" : "#007fcb"}}*/}
+                    {/*/></a></div>*/}
                 </div>
                 {/*./div_home_logo*/}
 
@@ -174,12 +171,12 @@ function GlobalHeader() {
                     {/*</Badge>*/}
 
                     <Dropdown getPopupContainer={() => document.querySelector(".drp_user")} className={"drp_user"} overlay={MenuHeader} trigger={['click']}>
-                        <a href="#/" className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
+                        <a  className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
 
                            style={{color: darkMode === false ? "" : "white"}}>
                             <Avatar style={{backgroundColor: darkMode?"#1D1D1D":'#F0F1F4'}}
                                     src={avatar}
-                                    icon={!avatar ? <UserOutlined/> : ""} />
+                                    icon={<UserOutlined />} />
                             {
                                 firstName || lastName ?
                                     <div className={"avatar-userName"}>
@@ -193,7 +190,7 @@ function GlobalHeader() {
                     </Dropdown>
 
                     <Dropdown getPopupContainer={() => document.querySelector(".drp_lang")} className={"drp_lang drp-lang-size"} overlay={Menulang} trigger={['click']}>
-                        <GlobalOutlined style={{color: darkMode === false ? "" : "white"}}/>
+                        <GlobalOutlined className={"globalOutlinedIcon"} style={{color: darkMode === false ? "" : "white"}}/>
                     </Dropdown>
 
 
@@ -250,17 +247,17 @@ function GlobalHeader() {
                             </div>
 
                             <div className={"div2_div2_side_nav"}>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
+                                <a className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(0)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <UserOutlined className={"avtr"}/><span>{t("description.Account")}</span>
                                 </a>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
+                                <a  className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(1)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <UnlockOutlined className={"avtr"}/><span>{t("description.security")}</span>
                                 </a>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={() => {
+                                <a  className="ant-dropdown-link link_drp" onClick={() => {
                                     history.push("/compteSettings", dispatch(setAccountSetting(3)), SetActiveSideMenuState(false))
                                 }} style={{color: darkMode === false ? "" : "white"}}>
                                     <PieChartOutlined className={"avtr"}/><span>{t("description.Subscription")}</span>
@@ -315,7 +312,7 @@ function GlobalHeader() {
                                 </div>
 
                             <div className={"div4_div2_side_nav"}>
-                                <a href="#/" className="ant-dropdown-link link_drp" onClick={logOut}
+                                <a  className="ant-dropdown-link link_drp" onClick={logOut}
                                    style={{color: darkMode === false ? "" : "white"}}>
                                     <LogoutOutlined
                                         className={"avtr"}/><span>{t("description.LogOut")}</span>
