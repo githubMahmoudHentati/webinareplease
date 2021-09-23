@@ -1,5 +1,5 @@
-import React from 'react';
-import {Breadcrumb, Col, Form, Row} from "antd";
+import React, {useEffect, useRef, useState} from 'react';
+import {Breadcrumb, Col, Form, Row,Affix,Button} from "antd";
 import {PrincipalPage} from "../../utils/components/principalPage";
 import {setConstraintDataOnchange} from "../store/accountSettingsAction";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,6 +7,7 @@ import Hooks from "../utils/hooks";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
+import {BarHeader} from "./barHeader"
 import {HomeOutlined} from "@ant-design/icons";
 
 export const AccountSubmit =({form,child1,child2,child3})=>{
@@ -16,14 +17,16 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
     const {handleSubmit} = Hooks(UpdateAccountSetting)
     const history = useHistory()
     const {t} = useTranslation();
+
     return (
+        <div className="scrollable-container" >
             <Form
                 form={form}
                 layout="horizontal"
                 name="product-form"
                 onFinish={handleSubmit}
             >
-                <Row gutter={[0, 10]}>
+                <Row gutter={[0, 10]} >
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize: "14px", color: darkMode === false ? "" : "#ffffff"}}>
                             <Breadcrumb.Item href="" style={{color: darkMode === false ? "" : "#ffffff"}}
@@ -46,8 +49,7 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                                 style={{color: darkMode === false ? "" : "#ffffff"}}>{t("CompteSettings.AccountSettings")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
-                    {/*<BarHeader />*/}
-                    {child1}
+                        <BarHeader />
                     <Col span={24}>
                         <Row gutter={[30, 20]}>
                             <Col xs={{span: 24}} sm={{span: 24}} md={{span: 7}} lg={{span: 4}}>
@@ -63,5 +65,6 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                     </Col>
                 </Row>
             </Form>
+        </div>
     )
 }

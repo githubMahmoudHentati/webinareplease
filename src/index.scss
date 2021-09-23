@@ -1936,9 +1936,9 @@ input:checked + .slider:before {
     }
 }
 /*form_signup*/
-.showVideosDiv{
-    height: 100vh !important;
-}
+//.showVideosDiv{
+//    height: 100vh !important;
+//}
 .showVideosDiv .card .ant-card-body{
     padding: 16px !important;
     min-height: 93vh !important;
@@ -2470,9 +2470,7 @@ input:checked + .slider:before {
     align-items: flex-end;
     justify-content: center;
 }
-.showVideosDiv{
-    overflow-x: hidden;
-}
+
 @media screen and (max-width: 767px){
     .menu-lang{
         display: none !important;

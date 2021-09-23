@@ -1,14 +1,12 @@
-import React from 'react';
+import React ,{useEffect,useRef}from 'react';
 import {Row, Col,Button} from 'antd'
 import '../compteSettings.scss'
-import {ArrowLeftOutlined, CloseOutlined, CheckOutlined, VideoCameraOutlined,EditOutlined} from '@ant-design/icons';
+import {ArrowLeftOutlined, CloseOutlined,EditOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import Hooks from "../utils/hooks";
-import {setDirectSetting} from "../../utils/redux/actions";
 import {setAccountSetting, setConstraintDataOnchange} from "../store/accountSettingsAction";
 import {useTranslation} from 'react-i18next';
-import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 
 export const BarHeader = () => {
@@ -17,23 +15,31 @@ export const BarHeader = () => {
     const {values} = Hooks()
     const dispatch = useDispatch()
     const {t} = useTranslation();
+    const refBar = useRef();
     const selectedMenu = useSelector((state)=> state.Reducer.accountMenu)
+    const stickyElm = document.querySelector('.title-col')
+    const observer = new IntersectionObserver(
+        ([e]) => e.target.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        {threshold: [1]}
+    );
+
+    useEffect(() => {
+        if(stickyElm) {
+            // debugger
+            observer.observe(stickyElm)
+        }
+    }, );
 
     return (
-        <Col span={24} className={"title-col"} style={{
-            backgroundColor: darkMode === false ? "RGBA(0, 0, 0, 0.04)" : "RGBA(255, 255, 255, 0.04)",
-            marginBottom: "25px",
-            padding: "1.8% 1.5%"
-        }}>
-            <Row style={{width: "100%"}} justify={"space-between"}>
-                <Col span={16}>
-                    <Row gutter={[15, 0]}>
-                        <Col style={{display: "flex", alignItems: "center"}}>
+        <Col ref={refBar} span={24} className={`title-col ${!darkMode?"light":"dark"}`} >
+            <Row style={{width: "100%",position:"sticky", top: 0}} justify={"space-between"} >
+                <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}} span={15}>
+                    <Row style={{display: "flex", alignItems: "center",justifyContent:"center" ,width:"100%"}}className={"account-Setting-Title"} gutter={[15, 0]}>
+                        <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}}>
                             <ArrowLeftOutlined
                                 style={{
                                     display: "flex",
                                     alignItems: "center",
-                                    fontSize: '20px',
                                     fontWeight: "500",
                                     fontFamily: "SF Pro Display",
                                     cursor: 'medium',
@@ -51,7 +57,7 @@ export const BarHeader = () => {
                             />
                         </Col>
                         <Col span={20} style={{display: "flex", alignItems: "center"}}>
-                            <span style={{
+                            <span className={"account-Setting-Title"} style={{
                                 fontSize: "20px",
                                 fontFamily: "SF Pro Display",
                                 fontWeight: "500",

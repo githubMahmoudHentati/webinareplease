@@ -59,5 +59,11 @@ export function setRunDeleteOneRow(e){
         payload:e
     }
 }
+export function setColorStickyBar(){
+    return{
+        type:"SET_ColorStickyBar",
+    }
+}
+
 
 

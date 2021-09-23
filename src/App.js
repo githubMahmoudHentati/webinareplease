@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import history from './router/history';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
@@ -10,7 +10,7 @@ import {SignUp} from "./signUp/signUp";
 import {ContactClient} from "./contactClient/contactClient";
 import {CompteSettings} from "./compteSettings/compteSettings";
 import Calendar from "./Calendar/Calendar";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {GraphQLFetchData} from "./utils/grapqhQL/graphQLFetchData";
 import {ForgetPassword} from "./forgetPassword/forgetPassword";
 import {ResetPassword} from "./resetPassword/resetPassword";
@@ -23,15 +23,16 @@ import { ConfigProvider } from "antd";
 import 'moment/locale/fr';
 import 'react-phone-number-input/style.css'
 
-
 let tabData = [
     "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"
 ]
 function App() {
+    const dispatch = useDispatch()
     const credentialsValues = useSelector((state) => state.Reducer)
     const {verificationToken,tokenAPI} = GraphQLFetchData(credentialsValues)
     const lang =useSelector((state)=>state.Reducer.lang)
     let pathName = window.location.pathname.replace('/', '')
+
 
     useEffect(() => {
         tokenAPI()
@@ -47,8 +48,8 @@ function App() {
                 root.classList.add('light')
                }
         }
-
     },[pathName])
+
     return (
         <ConfigProvider locale={lang==="fr"?frFR:en_US}>
 

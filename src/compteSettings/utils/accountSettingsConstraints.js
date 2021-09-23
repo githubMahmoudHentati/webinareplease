@@ -59,7 +59,8 @@ export const AccountSettingsConstraints = ()=>{
             loadingGeneralInformation:true,
             loadingUpdateAccountSetting:false,
             updateAccountSettingError:false,
-            isMailValid:true
+            isMailValid:true,
+            colorStickyBar: "RGBA(0, 0, 0, 0.04)"
         })
     }
     const visible=()=>{
