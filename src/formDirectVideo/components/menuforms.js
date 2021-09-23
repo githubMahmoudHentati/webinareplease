@@ -66,9 +66,9 @@ export const MenuForms =()=>{
                         {t("formDirectVideo.Invitations")}
                     </Menu.Item>
 
-                    <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(3))}} key="4">
-                        {t("formDirectVideo.SocialTools")}
-                    </Menu.Item>
+                    {/*<Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(3))}} key="4">*/}
+                    {/*    {t("formDirectVideo.SocialTools")}*/}
+                    {/*</Menu.Item>*/}
 
                     <Menu.Item className={"menuItem itemMenu"} onClick={()=>{dispatch(setDirectSetting(4))}} key="5">
                         {t("formDirectVideo.Templates")}

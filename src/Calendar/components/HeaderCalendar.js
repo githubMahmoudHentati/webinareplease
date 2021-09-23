@@ -1,6 +1,6 @@
 import React from 'react';
 import {Breadcrumb,Alert} from "antd";
-import {ArrowLeftOutlined} from "@ant-design/icons";
+import {ArrowLeftOutlined, HomeOutlined} from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
 import { useSelector} from "react-redux";
 import "../Calendar.scss"
@@ -33,12 +33,7 @@ function HeaderCalendar() {
                     <Breadcrumb.Item href="" style={{color: darkMode === false ? "" : "#ffffff"}} onClick={() => {
                         history.push("/")
                     }}>
-                        <span>{t("Calendar.Home")}</span>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item href="" style={{color: darkMode === false ? "" : "#ffffff"}} onClick={() => {
-                        history.push("/")
-                    }}>
-                        <span>{t("Calendar.direct")}</span>
+                        <HomeOutlined className={"home_icon"} />
                     </Breadcrumb.Item>
                     <Breadcrumb.Item style={{color: darkMode === false ? "" : "#ffffff"}}>{t("Calendar.Calendar")}</Breadcrumb.Item>
                 </Breadcrumb>

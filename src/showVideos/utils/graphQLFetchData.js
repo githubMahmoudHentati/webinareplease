@@ -1,11 +1,11 @@
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation, useLazyQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch, useSelector} from "react-redux";
 import {Hooks} from "./hooks";
 import {
     setshowVideosActions,
     setShowVideoConstraintDataOnchange,
-    setFilterVideosActions
+    setFilterVideosActions, setPaginationProps
 } from "../store/showVideosAction";
 import {StatusMessage} from "./StatusMessage";
 import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../../formDirectVideo/store/formDirectVideoAction"
@@ -21,20 +21,23 @@ export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
     const credentialsValues = useSelector((state) => state.Reducer)
     const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
-
+    const valuePagination = useSelector(
+        (state) => state.ShowVideosReducerReducer.paginationProps
+    );
     // Read Data from Hooks
     const {paginationProps ,  values }=Hooks()
     const {error_getLives}=StatusMessage()
 
-
+    {console.log("POP§§§§§",paginationProps)}
+    {console.log("POP§§§§§SSSSS>>>>>",values)}
     // use Query to fetch Data
-    const {data:dataLives}
-        = useQuery(graphQL_shema().Get_Lives, {
+    const [dataLives]
+        = useLazyQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
                 "limit": paginationProps.pageSize,
-                "offset": (paginationProps.current-1)* (paginationProps.pageSize),
-                "order_dir": paginationProps.order,
+                "offset": (paginationProps.current-1) * (paginationProps.pageSize),
+                "order_dir": paginationProps.order ,//? 'descend' : paginationProps.order ,
                 "order_column": parseInt(paginationProps.columnKey),
                 "search_word":values.search,
                 "date":["", ""],
@@ -52,6 +55,7 @@ export const GraphQLFetchData=()=> {
                     constraintDataNameChange: "loading",
                     constraintDataValueChange: false
                 }))
+
             }else if(data.getLives.code === 400){
                 error_getLives()
             }
@@ -59,6 +63,7 @@ export const GraphQLFetchData=()=> {
             dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
             dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
             dispatch(setDirectSetting(0))
+            dispatch(setshowVideosActions(data.getLives));
         }
     })
 
@@ -71,10 +76,9 @@ export const GraphQLFetchData=()=> {
     })
 
     useEffect(()=>{
-        if(dataLives){
-            dispatch(setshowVideosActions(dataLives.getLives));
-        }
-    },[dataLives])
+
+        dataLives()
+    },[])
 
 
     return({

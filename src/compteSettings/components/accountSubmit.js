@@ -8,9 +8,7 @@ import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {GraphQLFetchData} from "../utils/graphQLFetchData";
 import {BarHeader} from "./barHeader"
-// import { StickyContainer, Sticky } from 'react-sticky';
-// import { Affix, Button } from 'rsuite';
-
+import {HomeOutlined} from "@ant-design/icons";
 
 export const AccountSubmit =({form,child1,child2,child3})=>{
     // const container = useRef(null);
@@ -82,10 +80,10 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                                         document.documentElement.style.setProperty('--inputBorderErrorForm', '#40a9ff');
                                         history.push("/")
                                     }}
-                                >{t("CompteSettings.Home")}</span>
+                                ><HomeOutlined className={"home_icon"} /></span>
                             </Breadcrumb.Item>
                             <Breadcrumb.Item
-                                style={{color: darkMode === false ? "" : "#ffffff"}}>{t("CompteSettings.MyAccount")}</Breadcrumb.Item>
+                                style={{color: darkMode === false ? "" : "#ffffff"}}>{t("CompteSettings.AccountSettings")}</Breadcrumb.Item>
                         </Breadcrumb>
                     </Col>
                     {/*<Affix target={() => container} style={{width:"100%", position:"sticky", top:0, zIndex:1}} >*/}

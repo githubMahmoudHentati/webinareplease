@@ -333,6 +333,50 @@
   letter-spacing: normal;
   color: rgba(0, 0, 0, 0.85);
 }
+.div_overley{
+  width: 100%;
+  padding: 1.5%;
+  background-color: var(--background-overley-invitation);
+  border-radius: 2px;
+}
+.div-border-blocked{
+  padding: 2%;
+  width: 100%;
+  border: 1.5px dashed var(--icon-color);
+  border-radius: 5px;
+  position: relative;
+}
+.div_planificationInvitation{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .lockoutlined{
+    color: var(--color-block-invitation) !important;
+    font-size: 40px !important;
+    margin-bottom: 20px;
+  }
+  .spn_planificationInvitation{
+    font-family: "SF Pro Display";
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--color-block-invitation);
+  }
+  .spn_disponibile{
+    font-family: "SF Pro Display";
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--color-block-invitation);
+  }
+}
+.div3{
+  opacity: 0.6;
+  filter: blur(10px);
+}
 .groupEmail{
   width: 100%;
   display: flex;

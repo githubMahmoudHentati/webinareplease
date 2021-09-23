@@ -65,7 +65,7 @@ export const BarHeader = () => {
                                 fontWeight: "500",
                                 marginLeft: "1%",
                                 color: darkMode === false ? "" : "white"
-                            }}>{t("CompteSettings.MyAccount")}</span>
+                            }}>{t("CompteSettings.AccountSettings")}</span>
                         </Col>
                     </Row>
                 </Col>
