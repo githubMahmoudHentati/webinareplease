@@ -11,7 +11,7 @@ export const AvatarUpload = ({beforeUpload, handleChange, darkMode}) => {
     const errorVisibility = useSelector((state) => state.AccountSettingsReducer.visible.errorVisibility);
     //***********************End of Upload***********************////////
     return (
-        <>
+        <div>
             <ImgCrop rotate fillColor modalTitle={t("CompteSettings.ModalTitle")}>
                 <Upload
                     accept="image/jpeg,image/png"
@@ -32,6 +32,6 @@ export const AvatarUpload = ({beforeUpload, handleChange, darkMode}) => {
             <div style={{color: "red", fontSize: "0.75rem"}}>
                 {errorVisibility ? t("CompteSettings.ErrorMsg") : ""}
             </div>
-        </>
+        </div>
     );
 }
