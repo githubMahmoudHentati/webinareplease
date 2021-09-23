@@ -86,7 +86,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : "",
+                            values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                         Type: "Facebook Post",
                         link: values.general.liveLink,
                         active: values.socialTools[0].switch,
@@ -184,7 +184,7 @@ export const GraphQLFetchDataForm = (values) => {
                     {
                         title: values.general.liveTitle,
                         logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : "",
+                            values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
                         Type: "Facebook Post",
                         link: values.general.liveLink,
                         active: values.socialTools[0].switch,

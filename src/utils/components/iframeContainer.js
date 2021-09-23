@@ -22,7 +22,7 @@ export const IframeContainer =(props)=>{
                 let numberRulesAdded = values.socialTools.filter(element => element.switch === true).length
                 return <div className="showVideosDiv" style={{height:numberRulesAdded>0?"100%":"100vh"}}>{props.children}</div>
             } else
-                return <div className="showVideosDiv" >{props.children}</div>
+                return <div className="showVideosDiv"  >{props.children}</div>
         default :
             return <div className="showVideosDiv">{props.children}</div>
     }

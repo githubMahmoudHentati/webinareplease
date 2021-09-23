@@ -219,9 +219,10 @@ const Hooks=()=>{
                         name: el.name,
                         lastName: el.lastName,
                         function: el.title,
-                        avatar: el.logoSpeaker && el.logoSpeaker.length ? el.logoSpeaker[0].thumbUrl : '',
+                        avatar: el.logoSpeaker && el.logoSpeaker.length ? el.logoSpeaker[0].thumbUrl.substring(el.logoSpeaker[0].thumbUrl.lastIndexOf("/")+ 1,el.logoSpeaker[0].thumbUrl.length) : '',
                         mail: el.email,
-                    }
+
+            }
                 ))
         }));
         let newStartDate= !values.general.liveAction?"":typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
