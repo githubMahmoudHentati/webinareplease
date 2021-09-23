@@ -1,20 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {MenuForms} from './components/menuforms'
 import {Breadcrumb, Col, Row, Form} from "antd";
-import {ArrowLeftOutlined, HomeOutlined} from "@ant-design/icons";
 import {AccountGeneralInformation} from "./components/accountGeneralInformation";
 import {SecurityAccount} from "./components/securityAccount"
 import {PrincipalPage} from "../utils/components/principalPage";
 import {useDispatch, useSelector} from "react-redux";
 import {PasswordEdit} from "./components/passwordEdit";
 import {AccountSubscription} from './components/accountSubscription'
-import {useHistory} from "react-router-dom";
 import {setAccountSetting, setConstraintDataOnchange} from "./store/accountSettingsAction";
 import { useTranslation } from 'react-i18next';
 import {graphQL_shema} from "./utils/graphQL";
 import {useQuery} from "@apollo/react-hooks";
 import {BarHeader} from "./components/barHeader"
-import Hooks from "./utils/hooks";
 import {AccountSubmit} from "./components/accountSubmit";
 
 

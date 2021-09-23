@@ -22,9 +22,6 @@ import frFR from "antd/lib/locale/fr_FR";
 import { ConfigProvider } from "antd";
 import 'moment/locale/fr';
 import 'react-phone-number-input/style.css'
-import {setColorStickyBar} from "./utils/redux/actions";
-import {setConstraintDataOnchange} from "./compteSettings/store/accountSettingsAction";
-
 
 let tabData = [
     "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"
@@ -52,26 +49,6 @@ function App() {
                }
         }
     },[pathName])
-
-    // useEffect(() => {
-    //
-    //     function setBarStickyColor(e) {
-    //         console.log("eeeeeeeeeee",e)
-    //         dispatch(setConstraintDataOnchange({
-    //             constraintDataNameChange: "colorStickyBar",
-    //             constraintDataValueChange: "#f0f0f0"
-    //         }))
-    //     }
-    //     function setBarInitialColor(e) {
-    //         dispatch(setConstraintDataOnchange({
-    //             constraintDataNameChange: "colorStickyBar",
-    //             constraintDataValueChange: "RGBA(0, 0, 0, 0.04)"
-    //         }))
-    //     }
-    //
-    //     window.addEventListener('scroll', setBarStickyColor, true);
-    //     return () => window.removeEventListener('scroll', setBarInitialColor, true);
-    // }, []);
 
     return (
         <ConfigProvider locale={lang==="fr"?frFR:en_US}>

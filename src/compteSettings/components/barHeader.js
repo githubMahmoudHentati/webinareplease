@@ -1,14 +1,12 @@
 import React ,{useEffect,useRef}from 'react';
 import {Row, Col,Button} from 'antd'
 import '../compteSettings.scss'
-import {ArrowLeftOutlined, CloseOutlined, CheckOutlined, VideoCameraOutlined,EditOutlined} from '@ant-design/icons';
+import {ArrowLeftOutlined, CloseOutlined,EditOutlined} from '@ant-design/icons';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import Hooks from "../utils/hooks";
-import {setDirectSetting} from "../../utils/redux/actions";
 import {setAccountSetting, setConstraintDataOnchange} from "../store/accountSettingsAction";
 import {useTranslation} from 'react-i18next';
-import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 
 export const BarHeader = () => {
