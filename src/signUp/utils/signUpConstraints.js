@@ -15,7 +15,7 @@ export const SignUpConstraints = ()=>{
                 numberPerson:1,
                 postalCode:"",
                 society:"",
-                subscriptionId:0
+                subscriptionId:1
             }
         )
     }
