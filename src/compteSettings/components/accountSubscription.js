@@ -16,7 +16,7 @@ export const AccountSubscription=()=>{
     const history = useHistory()
     return(
         <Row gutter={[0, 40]}>
-            <Col offset={0} xs={{ span: 24}} sm={{ span: 24}} md={{ span: 10}} lg={{span:12}}>
+            <Col offset={0} xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:12}}>
                 <Row gutter={[0, 25]} style={{borderRight:darkMode===false?"1px solid RGB(241, 241, 241)":"1px solid rgba(255, 255, 255, 0.15)"}}>
                     <Col span={24}>
                         <Row  gutter={[0, 5]}>
@@ -65,7 +65,7 @@ export const AccountSubscription=()=>{
                     </Col>
                 </Row>
             </Col>
-            <Col offset={1}  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 13}} lg={{span:11}}>
+            <Col offset={1}  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 24}} lg={{span:11}} className={"col_modePaiement"}>
                 <Row  gutter={[0, 20]}>
                     <Col span={24}>
                         <span className={"spn_abonnement"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("CompteSettings.PaymentMethod")}</span>
