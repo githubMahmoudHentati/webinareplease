@@ -2440,9 +2440,7 @@ input:checked + .slider:before {
     align-items: flex-end;
     justify-content: center;
 }
-.showVideosDiv{
-    overflow-x: hidden;
-}
+
 @media screen and (max-width: 767px){
     .menu-lang{
         display: none !important;

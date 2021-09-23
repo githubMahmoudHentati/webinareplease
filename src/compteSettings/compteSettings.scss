@@ -186,6 +186,8 @@
   }
 }
 
+
+
 @media screen and (max-width: 767px) {
   .col_update_infos{
     display: flex !important;
@@ -213,8 +215,21 @@
     text-align: center !important;
   }
 
+  .account-Setting-Title{
+    font-size: 15px !important;
+  }
 
+}
 
+@media screen and (max-width: 320px) {
+  .account-Setting-Title{
+    font-size: 11px !important;
+  }
+}
+@media screen and (max-width: 280px) {
+  .account-Setting-Title{
+    font-size: 10px !important;
+  }
 }
 
 /**************react phone number input*****************************/

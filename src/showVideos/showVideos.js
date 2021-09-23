@@ -171,7 +171,7 @@ function ShowVideos() {
                </div>
            </div>
        </PrincipalPage>
-        </Spin>
+         </Spin>
     );
 }
 

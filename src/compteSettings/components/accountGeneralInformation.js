@@ -449,7 +449,7 @@ export const AccountGeneralInformation = ({form}) => {
                         </Row>
                     </Col>
                 </Row>
-            </Spin>
+             </Spin>
         // </Form>
     )
 }

@@ -1,4 +1,4 @@
-import React ,{useEffect,useState}from 'react';
+import React ,{useEffect,useRef}from 'react';
 import {Row, Col,Button} from 'antd'
 import '../compteSettings.scss'
 import {ArrowLeftOutlined, CloseOutlined, CheckOutlined, VideoCameraOutlined,EditOutlined} from '@ant-design/icons';
@@ -17,26 +17,31 @@ export const BarHeader = () => {
     const {values} = Hooks()
     const dispatch = useDispatch()
     const {t} = useTranslation();
+    const refBar = useRef();
     const selectedMenu = useSelector((state)=> state.Reducer.accountMenu)
+    const stickyElm = document.querySelector('.title-col')
+    const observer = new IntersectionObserver(
+        ([e]) => e.target.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        {threshold: [1]}
+    );
 
+    useEffect(() => {
+        if(stickyElm) {
+            // debugger
+            observer.observe(stickyElm)
+        }
+    }, );
 
-    console.log("colorStickyBar",values.constraintData.colorStickyBar)
     return (
-        <Col span={24} className={"title-col"} style={{
-            backgroundColor: darkMode === false ? values.constraintData.colorStickyBar: "RGBA(255, 255, 255, 0.04)",
-            marginBottom: "25px",
-            padding: "1.8% 1.5%",
-            width:"100%", position:"sticky", top:0, zIndex:1
-        }}>
+        <Col ref={refBar} span={24} className={`title-col ${!darkMode?"light":"dark"}`} >
             <Row style={{width: "100%",position:"sticky", top: 0}} justify={"space-between"} >
-                <Col span={17}>
-                    <Row gutter={[15, 0]}>
-                        <Col style={{display: "flex", alignItems: "center"}}>
+                <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}} span={15}>
+                    <Row style={{display: "flex", alignItems: "center",justifyContent:"center" ,width:"100%"}}className={"account-Setting-Title"} gutter={[15, 0]}>
+                        <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}}>
                             <ArrowLeftOutlined
                                 style={{
                                     display: "flex",
                                     alignItems: "center",
-                                    fontSize: '20px',
                                     fontWeight: "500",
                                     fontFamily: "SF Pro Display",
                                     cursor: 'medium',
@@ -54,7 +59,7 @@ export const BarHeader = () => {
                             />
                         </Col>
                         <Col span={20} style={{display: "flex", alignItems: "center"}}>
-                            <span style={{
+                            <span className={"account-Setting-Title"} style={{
                                 fontSize: "20px",
                                 fontFamily: "SF Pro Display",
                                 fontWeight: "500",

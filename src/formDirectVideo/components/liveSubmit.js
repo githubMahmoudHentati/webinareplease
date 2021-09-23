@@ -83,6 +83,19 @@ export const LiveSubmit=(props)=>{
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:false}));
     }, [values.general]);
 
+    const stickyElm = document.querySelector('.title-col')
+    const observer = new IntersectionObserver(
+        ([e]) => e.target.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        {threshold: [1]}
+    );
+
+    useEffect(() => {
+        if(stickyElm) {
+            // debugger
+            observer.observe(stickyElm)
+        }
+    }, );
+
 
     return(
         <div>
@@ -103,9 +116,7 @@ export const LiveSubmit=(props)=>{
                                 <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{localStorage.getItem('idLive') ? values.general.liveTitle :isAddedForm ? t("formDirectVideo.AddLive"): '' } </Breadcrumb.Item>
                             </Breadcrumb>
                         </Col>
-                        <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D" , marginBottom:"25px"}}>
                             <BarHeader/>
-                        </Col>
                         {props.children}
                     </Row>
                 </Spin>

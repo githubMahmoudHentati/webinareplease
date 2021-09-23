@@ -25,37 +25,37 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
     const [initialRefHeight, setInitialRefHeight] = useState(null);
     console.log("initial",initialRefHeight)
 
-    useEffect(() => {
-        setInitialRefHeight(barRef.current.offsetTop)
-    }, []);
+    // useEffect(() => {
+    //     setInitialRefHeight(barRef.current.offsetTop)
+    // }, []);
 
-    useEffect(() => {
-        function setBarStickyColor(e) {
-            console.log("1",e,"2",barRef.current.offsetTop)
-            //console.log("eeeeeeeeeee",barRef.current.offsetTop)
-            if (barRef.current.offsetTop>e+5) {
-                // debugger
-                dispatch(setConstraintDataOnchange({
-                    constraintDataNameChange: "colorStickyBar",
-                    constraintDataValueChange: "#f0f0f0"
-                }))
-            }
-            else
-                dispatch(setConstraintDataOnchange({
-                    constraintDataNameChange: "colorStickyBar",
-                    constraintDataValueChange: "RGBA(0, 0, 0, 0.04)"
-                }))
-        }
-        function setBarInitialColor(e) {
-            dispatch(setConstraintDataOnchange({
-                constraintDataNameChange: "colorStickyBar",
-                constraintDataValueChange: "RGBA(0, 0, 0, 0.04)"
-            }))
-        }
-
-        window.addEventListener('scroll', setBarStickyColor, true);
-        return () => window.removeEventListener('scroll', ()=>setBarInitialColor(initialRefHeight), true);
-    }, []);
+    // useEffect(() => {
+    //     function setBarStickyColor(e,inti) {
+    //         console.log("1",inti,"2",barRef.current.offsetTop,"3",window.scrollY)
+    //         //console.log("eeeeeeeeeee",barRef.current.offsetTop)
+    //         if (barRef.current.offsetTop>inti+5) {
+    //             debugger
+    //             dispatch(setConstraintDataOnchange({
+    //                 constraintDataNameChange: "colorStickyBar",
+    //                 constraintDataValueChange: "#f0f0f0"
+    //             }))
+    //         }
+    //         else
+    //             dispatch(setConstraintDataOnchange({
+    //                 constraintDataNameChange: "colorStickyBar",
+    //                 constraintDataValueChange: "RGBA(0, 0, 0, 0.04)"
+    //             }))
+    //     }
+    //     function setBarInitialColor(e) {
+    //         dispatch(setConstraintDataOnchange({
+    //             constraintDataNameChange: "colorStickyBar",
+    //             constraintDataValueChange: "RGBA(0, 0, 0, 0.04)"
+    //         }))
+    //     }
+    //
+    //     window.addEventListener('scroll', setBarStickyColor, true);
+    //     return () => window.removeEventListener('scroll', (e)=>setBarInitialColor(e,initialRefHeight), true);
+    // }, []);
 
     return (
         <div className="scrollable-container" >
@@ -89,9 +89,9 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                         </Breadcrumb>
                     </Col>
                     {/*<Affix target={() => container} style={{width:"100%", position:"sticky", top:0, zIndex:1}} >*/}
-                    <div style={{width:"100%", position:"sticky", top:0, zIndex:1}}ref={barRef}>
+                    {/*<div style={{width:"100%", position:"sticky", top:0, zIndex:1}}ref={barRef}>*/}
                         <BarHeader />
-                    </div>
+                    {/*</div>*/}
                         {/*<Button type="primary">Fixed at the top of container</Button>*/}
                     {/*</Affix>*/}
                     <Col span={24}>

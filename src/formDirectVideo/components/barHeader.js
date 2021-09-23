@@ -42,6 +42,7 @@ export const BarHeader = () => {
 
     }
     return (
+        <Col span={24} className={`title-col ${!darkMode?"light":"dark"}`}>
         <Row style={{width: "100%"}} justify={"space-between"}>
             <Col className={"bar-header-container "+ (!isAddedForm && !x.matches && " bar-header-container--edit ")}>
                 <Row gutter={[15, 0]}>
@@ -123,5 +124,6 @@ export const BarHeader = () => {
                 </Row>
             </Col>
         </Row>
+        </Col>
     )
 }
