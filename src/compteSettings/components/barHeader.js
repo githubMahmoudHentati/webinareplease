@@ -34,7 +34,7 @@ export const BarHeader = () => {
         <Col ref={refBar} span={24} className={`title-col ${!darkMode?"light":"dark"}`} >
             <Row style={{width: "100%",position:"sticky", top: 0}} justify={"space-between"} >
                 <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}} span={15}>
-                    <Row style={{display: "flex", alignItems: "center",justifyContent:"center" ,width:"100%"}}className={"account-Setting-Title"} gutter={[15, 0]}>
+                    <Row style={{display: "flex", alignItems: "center" ,width:"100%"}}className={"account-Setting-Title"} gutter={[15, 0]}>
                         <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}}>
                             <ArrowLeftOutlined
                                 style={{
