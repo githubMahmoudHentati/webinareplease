@@ -928,6 +928,15 @@
         }
   }
 }
+.row_general .ant-radio-group-outline{
+  @media screen and (max-width: 767px){
+    display: flex !important;
+    flex-direction: column !important;
+    .ant-radio-wrapper:first-child{
+      margin-bottom: 15px;
+    }
+  }
+}
 
 .col_modePaiement{
   @media screen and (max-width:991px)  {
