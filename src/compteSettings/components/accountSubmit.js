@@ -26,7 +26,7 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                 name="product-form"
                 onFinish={handleSubmit}
             >
-                <Row gutter={[0, 10]} >
+                <Row  gutter={[0, 10]}>
                     <Col span={24} className={"header-col"}>
                         <Breadcrumb style={{fontSize: "14px", color: darkMode === false ? "" : "#ffffff"}}>
                             <Breadcrumb.Item href="" style={{color: darkMode === false ? "" : "#ffffff"}}
@@ -50,8 +50,8 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                         </Breadcrumb>
                     </Col>
                         <BarHeader />
-                    <Col span={24}>
-                        <Row gutter={[30, 20]}>
+                    <Col span={24} >
+                        <Row style={{margin:"10px 0"}}gutter={[30, 20]}>
                             <Col xs={{span: 24}} sm={{span: 24}} md={{span: 7}} lg={{span: 4}}>
                                 {/*<MenuForms />*/}
                                 {child2}

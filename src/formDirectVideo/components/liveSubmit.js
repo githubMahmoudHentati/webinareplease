@@ -85,10 +85,12 @@ export const LiveSubmit=(props)=>{
     }, [values.general]);
 
     const stickyElm = document.querySelector('.title-col')
+    const rootEl = document.querySelector('.App')
     const observer = new IntersectionObserver(
-        ([e]) => e.target.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
         {threshold: [1]}
     );
+
 
     useEffect(() => {
         if(stickyElm) {

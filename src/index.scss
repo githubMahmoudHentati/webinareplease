@@ -61,12 +61,38 @@ body{
     --card_color:#FFFFFF;
     --option-background:#FFFFFF;
 }
-#root{
+
+#root {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
     background-color: #f0f3f7;
+
+    .App {
+        &.is-pinned {
+            .card2 {
+                .ant-card-body {
+                    padding: 20px 0px !important;
+                }
+            }
+
+            .title-col {
+                &.light {
+                    background-color: #f0f0f0;
+                    position: sticky;
+                    margin: 0 !important;
+                    //width:  calc(100% + 40px) !important;
+                    //margin-left: -10px; // -1 * parent's padding
+                }
+
+                &.dark {
+                    background-color: #1D1D1D;
+                }
+            }
+        }
+    }
 }
+
 :root.light{
     --lang-help-color:rgba(0, 0, 0, 0.65);
     --white_color:rgba(0, 0, 0, 0.85);
@@ -1945,7 +1971,7 @@ input:checked + .slider:before {
     min-height: 93vh !important;
 }
 .showVideosDiv .card2 .ant-card-body{
-    padding: 24px 24px 45px 24px !important;
+    //padding: 24px 24px 45px 24px !important;
     min-height: 90.1vh !important;
 }
 

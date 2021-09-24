@@ -73,6 +73,9 @@
   justify-content: center;
   align-items: center;
 }
+.card2 .ant-card-body .ant-col-24:last-child{
+  padding: 7px !important;
+}
 .row_password{
   padding-bottom: 15px;
   border-bottom: 1px solid var(--border_color) !important;
@@ -80,6 +83,7 @@
 .col-selectMenu{
   padding-left: 25px !important;
   padding-right: 0 !important;
+  //padding: 0 20px !important;
 }
 .spn_CompteSettings{
   font-family: "SF Pro Display";
@@ -88,6 +92,9 @@
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
+}
+.content-col{
+  padding: 20px !important;
 }
 .spn1_securité{
   font-family: "SF Pro Display" !important;
@@ -186,7 +193,9 @@
   }
 }
 
-
+.padding-row  {
+  padding: 10px;
+}
 
 @media screen and (max-width: 767px) {
   .col_update_infos{
@@ -197,7 +206,10 @@
   .row_abonnement{
     padding-right: 0px;
   }
- .menuCompteSettings{
+
+
+
+  .menuCompteSettings{
    width: 100% !important;
   display: flex !important;
    flex-direction: row !important;
