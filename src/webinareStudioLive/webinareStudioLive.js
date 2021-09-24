@@ -1,7 +1,7 @@
 import React from 'react';
 import {PrincipalPage} from "../utils/components/principalPage";
 import './webinareStudioLive.scss'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 function IframeStudioLive(){
 
     // Diffusion Link

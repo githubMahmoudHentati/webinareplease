@@ -2,11 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-<<<<<<< HEAD
-      <sshConfig host="mhentati-cloud-sandbox.webtv-solution.dev" id="9d96dee8-991d-4483-be29-eb07fdb355d6" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="mhentati" />
-=======
-      <sshConfig host="tamaidi-cloud-server.sastec.dev" id="f692a4c4-b46a-4fec-9e3a-102a502463e6" keyPath="$PROJECT_DIR$/../.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="dev" />
->>>>>>> d6eec4691d8f10bf2f9f8b8d3296eacc8a3ab83d
+      <sshConfig host="mhenteti-cloud-server.sastec.dev" id="fd36c6d5-a13c-4c19-9218-b95876a68c67" keyPath="$USER_HOME$/.ssh/id_rsa" port="22" nameFormat="DESCRIPTIVE" username="dev" />
     </configs>
   </component>
 </project>
