@@ -1,4 +1,4 @@
-import {useMutation, useLazyQuery} from "@apollo/react-hooks";
+import {useMutation, useLazyQuery , useQuery} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch, useSelector} from "react-redux";
 import {Hooks} from "./hooks";
@@ -31,8 +31,8 @@ export const GraphQLFetchData=()=> {
     {console.log("POP§§§§§",paginationProps)}
     {console.log("POP§§§§§SSSSS>>>>>",values)}
     // use Query to fetch Data
-    const [dataLives]
-        = useLazyQuery(graphQL_shema().Get_Lives, {
+    const {data:dataLives}
+        = useQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
                 "limit": paginationProps.pageSize,
@@ -76,9 +76,10 @@ export const GraphQLFetchData=()=> {
     })
 
     useEffect(()=>{
-
-        dataLives()
-    },[])
+        if(dataLives){
+            dispatch(setshowVideosActions(dataLives.getLives));
+        }
+    },[dataLives])
 
 
     return({
