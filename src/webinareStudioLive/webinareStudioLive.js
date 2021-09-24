@@ -17,7 +17,7 @@ function IframeStudioLive(){
                         frameBorder="0"
                         title="Inline Frame Example"
                         // src={diffusionLink.diffLink}
-                         src={diffusionLink.diffLink}
+                         src={localStorage.getItem('diffLink') || diffusionLink.diffLink}
                 >
                 </iframe>
             </div>

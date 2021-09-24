@@ -73,7 +73,7 @@ export const Generals =()=>{
     // }, []);
 
     return(
-        <Row gutter={[0, 30]}>
+        <Row gutter={[0, 30]} className={"row_general"}>
             <Col span={24} className={"col-forms"}>
                 <span style={{textAlign:'left',fontSize:"20px", fontFamily: "SF Pro Display",fontWeight: "normal" , color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.GeneralSettings")}</span>
             </Col>

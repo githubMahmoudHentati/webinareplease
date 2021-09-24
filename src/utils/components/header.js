@@ -226,6 +226,7 @@ function GlobalHeader() {
                                 <span className="slider"></span>
                             </label>
                         </div>
+                        <span className={"hr-sideNav"}/>
                         <div className={"div2_side_nav"}>
                             <div className={"div1_div2_side_nav"}>
                                 <a href="#/" className="ant-dropdown-link link_drp" onClick={e => e.preventDefault()}
@@ -245,6 +246,7 @@ function GlobalHeader() {
                                     }
                                 </a>
                             </div>
+                            <span className={"hr1-sideNav"}/>
 
                             <div className={"div2_div2_side_nav"}>
                                 <a className="ant-dropdown-link link_drp" onClick={() => {
@@ -263,6 +265,7 @@ function GlobalHeader() {
                                     <PieChartOutlined className={"avtr"}/><span>{t("description.Subscription")}</span>
                                 </a>
                             </div>
+                            <span className={"hr1-sideNav"}/>
 
                             <div className={"div3_div2_side_nav"}>
 

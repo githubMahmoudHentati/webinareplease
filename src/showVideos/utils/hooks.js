@@ -205,9 +205,11 @@ export  const Hooks=()=> {
         onCompleted: (data)=>{
 
             dispatch(setDiffusionLink(data.getDiffusionLink));
+            localStorage.setItem('diffLink',data.getDiffusionLink.diffLink)
+            localStorage.setItem('visLink',data.getDiffusionLink.visLink)
             if (data.getDiffusionLink){
                 if(data.getDiffusionLink.code === 200){
-                    if(keyState.status === -1){
+                    if(keyState.status === -1 || keyState.status === 1){
                         history.push("/webinarStudioLive")
                     }else{
                         window.open(data.getDiffusionLink.visLink, '_blank');

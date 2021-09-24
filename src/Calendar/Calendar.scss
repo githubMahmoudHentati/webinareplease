@@ -244,12 +244,6 @@ white-space: nowrap;
   .DataTable{
     margin-top: 1%;
   }
-  .DataTable .ant-table-cell:nth-of-type(1){
-    display: none !important;
-  }
-  .DataTable .ant-table-cell:nth-of-type(2) {
-    display: none !important;
-  }
   .DataTable .ant-table-row{
     border: 1px solid var(--border_color) !important;
     min-height: 90px;
@@ -289,9 +283,6 @@ white-space: nowrap;
   }
   #Text_Calendar{
     display: none !important;
-  }
-  #spn_option{
-    z-index: 99999999999999999999999999999;
   }
   .div_delete_select{
     width: 100%;
