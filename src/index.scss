@@ -210,6 +210,9 @@ body{
 .showVideosDiv{
     background-color: var(--white1_color) !important;
 }
+.ant-empty-normal{
+ margin: 0 auto !important;
+}
 .ant-menu-vertical{
     @media screen and (max-width: 767px){
         border-right: 0 !important;
