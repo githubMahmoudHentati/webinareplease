@@ -58,6 +58,10 @@
     background-color:RGBA(0, 0, 0, 0.04) ;
     &.is-pinned{
       background-color: #f0f0f0;
+      position: sticky;
+      width:  calc(100% + 40px) !important;
+      margin-left: -10px; // -1 * parent's padding
+
     }
   }
   //&.light.is-pinned{
