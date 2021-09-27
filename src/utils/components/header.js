@@ -234,7 +234,7 @@ function GlobalHeader() {
                                     <Avatar style={{backgroundColor: '#419BF9'}}
                                             src={avatar}
                                             className={"avtr"}
-                                            icon={!avatar ? <UserOutlined/> : ""} />
+                                            icon={<UserOutlined style={{color:"white"}}/>} />
                                     {
                                         firstName || lastName ?
                                             <div className={"avatar-userName"}>
