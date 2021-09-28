@@ -17,16 +17,17 @@ export const BarHeader = () => {
     const {t} = useTranslation();
     const refBar = useRef();
     const selectedMenu = useSelector((state)=> state.Reducer.accountMenu)
-    const stickyElm = document.querySelector('.title-col')
+    const stickerElm = document.querySelector('.title-col')
+    const rootEl = document.querySelector('.App')
     const observer = new IntersectionObserver(
-        ([e]) => e.target.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
         {threshold: [1]}
     );
 
     useEffect(() => {
-        if(stickyElm) {
+        if(stickerElm) {
             // debugger
-            observer.observe(stickyElm)
+            observer.observe(stickerElm)
         }
     }, );
 

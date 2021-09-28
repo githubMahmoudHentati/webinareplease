@@ -95,6 +95,9 @@
   font-style: normal;
   letter-spacing: normal;
 }
+.content-col{
+  padding: 20px !important;
+}
 .spn1_securité{
   font-family: "SF Pro Display" !important;
   font-size: 20px !important;
@@ -192,7 +195,9 @@
   }
 }
 
-
+.padding-row  {
+  padding: 10px;
+}
 
 @media screen and (max-width: 767px) {
   .col_update_infos{
@@ -203,7 +208,10 @@
   .row_abonnement{
     padding-right: 0px;
   }
- .menuCompteSettings{
+
+
+
+  .menuCompteSettings{
    width: 100% !important;
   display: flex !important;
    flex-direction: row !important;

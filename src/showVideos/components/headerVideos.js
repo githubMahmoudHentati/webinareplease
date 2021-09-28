@@ -26,9 +26,24 @@ function HeaderVideos() {
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+
+    const stickyElm = document.querySelector('.MesDirects-sticky')
+    const rootEl = document.querySelector('.App')
+    const observer = new IntersectionObserver(
+        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        {threshold: [1]}
+    );
+
+    useEffect(() => {
+        if(stickyElm) {
+            // debugger
+            observer.observe(stickyElm)
+        }
+    }, );
+
     useEffect(() => {
         function goto(event) {
-            var noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
+            let noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
                 ', .ant-select-selector * , .ant-select-dropdown * ,' +
                 ' .ant-select-item-option-content , .ant-picker-cell-inner , .ant-picker-dropdown * , ' +
                 '.div_filter_avance * , .div_Filter_global , .div_Filter , .div1_div_Filter * , .div_button_filter , .btn_1'  ;
@@ -74,7 +89,7 @@ function HeaderVideos() {
         resetFilterVideos()
     }
     return(
-      <div className="HeaderVideo">
+      <>
 
           <div className="BreadcrumbDiv">
               <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
@@ -105,12 +120,17 @@ function HeaderVideos() {
               </Breadcrumb>
 
           </div>{/*./Breadcrumb*/}
-
-          <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
-              <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
-              <Tooltip getPopupContainer={() => document.querySelector(".btn_add_media")} title={t("ShowVideo.AddLive")}><Button  onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button></Tooltip>
-          </div>{/*./TousMedia*/}
-
+          <div className={"MesDirects-sticky"}>
+              <div className={`MesDirects ${!darkMode ? "light" : "dark"}`}>
+                  <h4 style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
+                  <Tooltip getPopupContainer={() => document.querySelector(".btn_add_media")}
+                           title={t("ShowVideo.AddLive")}><Button onClick={() => handleClickAddLive('add')}
+                                                                  className="btn_add_media" type="primary"
+                                                                  icon={<PlusSquareOutlined/>}><span
+                      id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button></Tooltip>
+              </div>
+              {/*./TousMedia*/}
+          </div>
           <div className="Filter">
 
               <div className="div_delete_select">
@@ -264,7 +284,7 @@ function HeaderVideos() {
           }
 
 
-      </div>
+      </>
     );
 }
 
