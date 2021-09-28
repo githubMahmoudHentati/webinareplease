@@ -40,7 +40,7 @@ export const Question = ({ listQuestion }) => {
   const [isEditing, setIsEditing] = useState(false);
   const darkMode = useSelector((state) => state.Reducer.DarkMode);
 
-  console.log("listQustionRedux",listQustionRedux)
+  console.log("listQustionRedux",isAddingNewQuestion)
 
   useEffect(() => {
     setFakeList(listQustionRedux);
@@ -117,7 +117,7 @@ export const Question = ({ listQuestion }) => {
     dispatch(setQuestionList({ nsp, question, choices: {response:[...choices.response.filter(ele => ele.length > 0)]}, questionId: localId }));
     setFakeList([...fakeList, { nsp, question, choices: {response:[...choices.response.filter(ele => ele.length > 0)]}, questionId: localId }]);
     setInputs({ nsp: 1, choices: { response: [""] }, question: "" });
-    setIsAddingNewQuestion(true);
+    setIsAddingNewQuestion(false);
   };
   const handleAddQuestionKey = (e) =>{
     if(e.key === "Enter"){

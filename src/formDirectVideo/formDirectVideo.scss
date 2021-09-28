@@ -42,7 +42,7 @@
 
 .title-col{
   marginBottom: "25px";
-  padding: 14px 30px;
+  padding: 14px 15px;
   width:100%;
   position:sticky;
   top:-1px;
@@ -918,8 +918,23 @@
 
     @media screen and (max-width: 768px){
       width: 100%;
-      height: 154px;
+      height: auto;
         }
+  }
+}
+.row_general .ant-radio-group-outline{
+  @media screen and (max-width: 767px){
+    display: flex !important;
+    flex-direction: column !important;
+    .ant-radio-wrapper:first-child{
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.col_modePaiement{
+  @media screen and (max-width:991px)  {
+    margin-left: 0 !important;
   }
 }
 

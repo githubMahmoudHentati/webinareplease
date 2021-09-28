@@ -16,6 +16,7 @@ const { RangePicker } = DatePicker;
 function HeaderVideos() {
     const {handleSearchRow , handleHeaderSelect , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive , paginationProps , values }=Hooks()
     const [filterIcon , setFilterIcon] = useState(false)
+    const [filterIconDate ,  setFilterIconDate] = useState("")
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const [rangeDate, setDateRange] = useState(null)
@@ -25,7 +26,6 @@ function HeaderVideos() {
     const dispatch = useDispatch()
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-
 
     const stickyElm = document.querySelector('.MesDirects-sticky')
     const rootEl = document.querySelector('.App')
@@ -43,7 +43,7 @@ function HeaderVideos() {
 
     useEffect(() => {
         function goto(event) {
-            var noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
+            let noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
                 ', .ant-select-selector * , .ant-select-dropdown * ,' +
                 ' .ant-select-item-option-content , .ant-picker-cell-inner , .ant-picker-dropdown * , ' +
                 '.div_filter_avance * , .div_Filter_global , .div_Filter , .div1_div_Filter * , .div_button_filter , .btn_1'  ;
@@ -189,7 +189,7 @@ function HeaderVideos() {
                               onClick={handlClickSuffix}
                               className="filter_icon"
                           >
-                                  <FilterOutlined  className={filterIcon === true ? "activeFilterIcon" : "notActiveFilterIcon"}/>
+                                  <FilterOutlined  className={filterIcon === true && filterIconDate ? "activeFilterIcon" : "notActiveFilterIcon"}/>
 
                           </div>
                           </Tooltip>
@@ -224,7 +224,7 @@ function HeaderVideos() {
                                   [t("ShowVideo.Today")]: [moment(), moment()],
                                   [t("ShowVideo.ThisMonth")]: [moment().startOf('month'), moment().endOf('month')],
                               }}
-                              onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
+                              onChange={(datesValue , dateStringsValue)=>{onChangeRange('date', datesValue ,dateStringsValue);setFilterIconDate(datesValue)}}
                               value={[rangeDate && moment(rangeDate[0], 'YYYY-MM-DD'), rangeDate && moment(rangeDate[1], 'YYYY-MM-DD')]}
                               getPopupContainer={() => document.getElementById("IDFilterDiv")}
                           />
