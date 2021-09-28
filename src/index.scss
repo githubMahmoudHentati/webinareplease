@@ -70,12 +70,19 @@ body{
 
     .App {
         .form-col{
-            @media (max-width: 400px) {
+            margin-top: 25px;
+            @media (max-width: 767px) {
                 padding: 10px !important;
+                margin-top: 10px;
             }
         }
         .ant-card-bordered{
             border: 0 !important;
+        }
+        .card2 {
+            .ant-card-body {
+                transition: padding 0.3s !important;
+            }
         }
         &.is-pinned {
 
@@ -2260,10 +2267,16 @@ body{
         top: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
+        @media screen and (max-width: 767px) {
+            width: 80%;
+        }
     }
 
     .icon404 {
         font-size: 280px;
+        @media screen and (max-width: 767px) {
+            font-size: 100px;
+        }
     }
 
     .Default_Page h2 {
@@ -2788,9 +2801,10 @@ body{
         }
         .div_Filter {
             z-index: 99999999999999999999999999999999999 !important;
-            width: 100%;
-            top: 40px;
+            width: 94%;
+            top: 6px;
             padding: 2% 2%;
+            margin-right: 10px;
         }
     }
 

@@ -38,6 +38,7 @@ export const BarHeader = () => {
                     <Row style={{display: "flex", alignItems: "center" ,width:"100%"}}className={"account-Setting-Title"} gutter={[15, 0]}>
                         <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}}>
                             <ArrowLeftOutlined
+                                className={"arrowCompteSettings"}
                                 style={{
                                     display: "flex",
                                     alignItems: "center",

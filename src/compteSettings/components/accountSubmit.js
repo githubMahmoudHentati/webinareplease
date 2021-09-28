@@ -51,7 +51,7 @@ export const AccountSubmit =({form,child1,child2,child3})=>{
                     </Col>
                         <BarHeader />
                     <Col span={24} >
-                        <Row style={{margin:"10px 0"}}gutter={[30, 20]}>
+                        <Row style={{margin:"25px 0"}} gutter={[30, 20]} className={"row-compte"}>
                             <Col xs={{span: 24}} sm={{span: 24}} md={{span: 7}} lg={{span: 4}}>
                                 {/*<MenuForms />*/}
                                 {child2}

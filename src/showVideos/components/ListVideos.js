@@ -168,7 +168,6 @@ console.log("render columns ", columns)
   const DataTable = () => (
     <div
       className="DataTable"
-      style={{ backgroundColor: darkMode === false ? "#ffffff" : "#011529" }}
     >
       <Table
           showSorterTooltip={false}
