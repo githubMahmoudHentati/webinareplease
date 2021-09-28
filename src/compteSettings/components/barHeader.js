@@ -98,7 +98,7 @@ export const BarHeader = () => {
                                 }))
                             }}
                                     loading={values.constraintData.loadingUpdateAccountSetting}
-                                    htmlType="submit" icon={<EditOutlined />} type={"primary"}><span
+                                    htmlType="submit" icon={<EditOutlined />} type={"primary"} className={"btn-update-user"}><span
                                 className={"spn_add_live"}>{t("CompteSettings.Update")}</span></Button>
                         </Col>
                     </Row>

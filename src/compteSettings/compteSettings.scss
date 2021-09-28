@@ -31,6 +31,13 @@
   font-style: normal;
   font-display: swap;
 }
+.btn_add_media , .btn-update-user{
+  @media screen and (max-width: 767px) {
+      width: 32px !important;
+      height: 32px !important;
+      padding: 0 !important;
+  }
+}
 .PhoneInputCountrySelect{
  background-color: var(--card_color) !important;
   color: var(--white_color) !important;
