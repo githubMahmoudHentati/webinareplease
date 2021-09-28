@@ -244,9 +244,9 @@ export const FormSignUp =({child1,child2})=>{
                                 <Col className={"col-politique"} style={{color: "RGB(185, 185, 185)"}} span={15}>
                                     <span
                                         className={"spn2"}>{t("CompteSettings.WebinarDataProcess")}</span>
-                                    <a href="#/"> {t("CompteSettings.PrivacyPolicy")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a href="#/" className={"pol"}> {t("CompteSettings.Service condition,")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.the")}</span><a href="#/" className={"pol"}> {t("CompteSettings.Politique de confidentialité")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a href="#/" className={"pol"}> {t("CompteSettings.l'Accord de traitement des donnèes")} </a>
+                                    <a onClick={()=>{window.open("https://webinarplease.com/legal")}}> {t("CompteSettings.PrivacyPolicy")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a onClick={()=>{window.open("https://webinarplease.com/conditions")}} className={"pol"}> {t("CompteSettings.Service condition,")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.the")}</span><a onClick={()=>{window.open("https://webinarplease.com/legal")}} className={"pol"}> {t("CompteSettings.PrivacyPolicy")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a href="#/" className={"pol"}> {t("CompteSettings.dataProcessing")} </a>
                                     <span className={"pol"}>{t("CompteSettings.ConfirmOrder")}</span>
                                 </Col>
                             </Row>
