@@ -39,8 +39,8 @@ export const BarHeader = () => {
             dispatch(setDirectSetting(0))
         }
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
-
     }
+
     return (
         <Col span={24} className={`title-col ${!darkMode?"light":"dark"}`}>
         <Row style={{width: "100%"}} justify={"space-between"}>

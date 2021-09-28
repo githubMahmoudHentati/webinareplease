@@ -167,9 +167,7 @@ function ShowVideos() {
         <Spin  size="middle"  spinning={loadingSpinner.loading}>
        <PrincipalPage>
            <div className={"showVideo"}>
-               <div className={"div1_showVideo"}>
            <HeaderVideos/>
-               </div>
                <div className={"div2_showVideo"}>
            <DataTable />
                </div>

@@ -23,7 +23,7 @@ export const GraphQLFetchData=(form)=> {
         loading: loading_UpdateAccountSetting,
     }] = useMutation(graphQL_shema().Update_AccountSetting, {
         variables: {input:
-                values.generalInformation
+                {...values.generalInformation,vignette: values.generalInformation.vignette.substring(values.generalInformation.vignette.lastIndexOf("/")+ 1, values.generalInformation.vignette.length)}
         },
         onCompleted: async (data) => {
             if ( data.updateUser.code === 200) {

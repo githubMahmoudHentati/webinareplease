@@ -31,6 +31,13 @@
   font-style: normal;
   font-display: swap;
 }
+.btn_add_media , .btn-update-user{
+  @media screen and (max-width: 767px) {
+      width: 32px !important;
+      height: 32px !important;
+      padding: 0 !important;
+  }
+}
 .PhoneInputCountrySelect{
  background-color: var(--card_color) !important;
   color: var(--white_color) !important;
@@ -94,6 +101,9 @@
   font-stretch: normal;
   font-style: normal;
   letter-spacing: normal;
+}
+.content-col{
+  padding: 20px !important;
 }
 .spn1_securité{
   font-family: "SF Pro Display" !important;
@@ -192,7 +202,9 @@
   }
 }
 
-
+.padding-row  {
+  padding: 10px;
+}
 
 @media screen and (max-width: 767px) {
   .col_update_infos{
@@ -203,7 +215,10 @@
   .row_abonnement{
     padding-right: 0px;
   }
- .menuCompteSettings{
+
+
+
+  .menuCompteSettings{
    width: 100% !important;
   display: flex !important;
    flex-direction: row !important;

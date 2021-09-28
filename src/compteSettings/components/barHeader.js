@@ -17,16 +17,17 @@ export const BarHeader = () => {
     const {t} = useTranslation();
     const refBar = useRef();
     const selectedMenu = useSelector((state)=> state.Reducer.accountMenu)
-    const stickyElm = document.querySelector('.title-col')
+    const stickerElm = document.querySelector('.title-col')
+    const rootEl = document.querySelector('.App')
     const observer = new IntersectionObserver(
-        ([e]) => e.target.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
         {threshold: [1]}
     );
 
     useEffect(() => {
-        if(stickyElm) {
+        if(stickerElm) {
             // debugger
-            observer.observe(stickyElm)
+            observer.observe(stickerElm)
         }
     }, );
 
@@ -37,6 +38,7 @@ export const BarHeader = () => {
                     <Row style={{display: "flex", alignItems: "center" ,width:"100%"}}className={"account-Setting-Title"} gutter={[15, 0]}>
                         <Col style={{display: "flex", alignItems: "center",justifyContent:"center"}}>
                             <ArrowLeftOutlined
+                                className={"arrowCompteSettings"}
                                 style={{
                                     display: "flex",
                                     alignItems: "center",
@@ -97,7 +99,7 @@ export const BarHeader = () => {
                                 }))
                             }}
                                     loading={values.constraintData.loadingUpdateAccountSetting}
-                                    htmlType="submit" icon={<EditOutlined />} type={"primary"}><span
+                                    htmlType="submit" icon={<EditOutlined />} type={"primary"} className={"btn-update-user"}><span
                                 className={"spn_add_live"}>{t("CompteSettings.Update")}</span></Button>
                         </Col>
                     </Row>

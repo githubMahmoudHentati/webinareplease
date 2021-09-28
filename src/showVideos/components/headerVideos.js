@@ -16,6 +16,7 @@ const { RangePicker } = DatePicker;
 function HeaderVideos() {
     const {handleSearchRow , handleHeaderSelect , handleFiltrerVideos ,resetFilterVideos,  conditions , handleClickDeleteIcon , handleClickAnnulerAlert , loadingDelete ,handleClickAddLive , paginationProps , values }=Hooks()
     const [filterIcon , setFilterIcon] = useState(false)
+    const [filterIconDate ,  setFilterIconDate] = useState("")
     const [activeIcon , SetActiveIcon]=useState(false) // state pour changer le couleur de l'icon de filtrage
     const [ShowFilter , SetShowFilter] = useState(false) // state pour afficher le div de fltrage si on clique sur l'icon de filtrage
     const [rangeDate, setDateRange] = useState(null)
@@ -26,9 +27,23 @@ function HeaderVideos() {
     // use Selector redux
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
 
+    const stickyElm = document.querySelector('.MesDirects-sticky')
+    const rootEl = document.querySelector('.App')
+    const observer = new IntersectionObserver(
+        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
+        {threshold: [1]}
+    );
+
+    useEffect(() => {
+        if(stickyElm) {
+            // debugger
+            observer.observe(stickyElm)
+        }
+    }, );
+
     useEffect(() => {
         function goto(event) {
-            var noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
+            let noRedirect = ' .filter_icon , .filter_icon *, .ant-input ' +
                 ', .ant-select-selector * , .ant-select-dropdown * ,' +
                 ' .ant-select-item-option-content , .ant-picker-cell-inner , .ant-picker-dropdown * , ' +
                 '.div_filter_avance * , .div_Filter_global , .div_Filter , .div1_div_Filter * , .div_button_filter , .btn_1'  ;
@@ -74,7 +89,7 @@ function HeaderVideos() {
         resetFilterVideos()
     }
     return(
-      <div className="HeaderVideo">
+      <>
 
           <div className="BreadcrumbDiv">
               <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
@@ -105,12 +120,17 @@ function HeaderVideos() {
               </Breadcrumb>
 
           </div>{/*./Breadcrumb*/}
-
-          <div className="MesDirects" style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
-              <h4 style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
-              <Tooltip getPopupContainer={() => document.querySelector(".btn_add_media")} title={t("ShowVideo.AddLive")}><Button  onClick={()=>handleClickAddLive('add')} className="btn_add_media" type="primary" icon={<PlusSquareOutlined />} ><span id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button></Tooltip>
-          </div>{/*./TousMedia*/}
-
+          <div className={"MesDirects-sticky"}>
+              <div className={`MesDirects ${!darkMode ? "light" : "dark"}`}>
+                  <h4 style={{color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)"}}>{t("ShowVideo.MyDirects")}</h4>
+                  <Tooltip getPopupContainer={() => document.querySelector(".btn_add_media")}
+                           title={t("ShowVideo.AddLive")}><Button onClick={() => handleClickAddLive('add')}
+                                                                  className="btn_add_media" type="primary"
+                                                                  icon={<PlusSquareOutlined/>}><span
+                      id={"spn_ajouter"}>{t("ShowVideo.Add")}</span></Button></Tooltip>
+              </div>
+              {/*./TousMedia*/}
+          </div>
           <div className="Filter">
 
               <div className="div_delete_select">
@@ -169,7 +189,7 @@ function HeaderVideos() {
                               onClick={handlClickSuffix}
                               className="filter_icon"
                           >
-                                  <FilterOutlined  className={filterIcon === true ? "activeFilterIcon" : "notActiveFilterIcon"}/>
+                                  <FilterOutlined  className={filterIcon === true && filterIconDate ? "activeFilterIcon" : "notActiveFilterIcon"}/>
 
                           </div>
                           </Tooltip>
@@ -204,7 +224,7 @@ function HeaderVideos() {
                                   [t("ShowVideo.Today")]: [moment(), moment()],
                                   [t("ShowVideo.ThisMonth")]: [moment().startOf('month'), moment().endOf('month')],
                               }}
-                              onChange={(datesValue , dateStringsValue)=>onChangeRange('date', datesValue ,dateStringsValue)}
+                              onChange={(datesValue , dateStringsValue)=>{onChangeRange('date', datesValue ,dateStringsValue);setFilterIconDate(datesValue)}}
                               value={[rangeDate && moment(rangeDate[0], 'YYYY-MM-DD'), rangeDate && moment(rangeDate[1], 'YYYY-MM-DD')]}
                               getPopupContainer={() => document.getElementById("IDFilterDiv")}
                           />
@@ -264,7 +284,7 @@ function HeaderVideos() {
           }
 
 
-      </div>
+      </>
     );
 }
 
