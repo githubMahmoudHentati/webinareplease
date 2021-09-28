@@ -69,13 +69,27 @@ body{
     background-color: #f0f3f7;
 
     .App {
+        .form-col{
+            @media (max-width: 400px) {
+                padding: 10px !important;
+            }
+        }
+        //.ant-card-bordered{
+        //    border: 0 !important;
+        //}
         &.is-pinned {
-            .card2 {
-                .ant-card-body {
-                    padding: 20px 0px !important;
+
+            .form-col{
+                @media (width: 768px) {
+                    padding: 20px !important;
                 }
             }
 
+            .card2 {
+                .ant-card-body {
+                    padding: 0px 0px !important;
+                }
+            }
             .title-col {
                 &.light {
                     background-color: #f0f0f0;
@@ -89,6 +103,26 @@ body{
                     background-color: #1D1D1D;
                 }
             }
+            .MesDirects {
+                &.light {
+                    background-color: #f0f0f0;
+                    //width:  calc(100% + 40px) !important;
+                    //margin-left: -10px; // -1 * parent's padding
+                }
+
+                &.dark {
+                    background-color: #1D1D1D;
+                }
+            }
+
+            //.Filter{
+            //    padding: 2%;
+            //}
+
+            .MesDirects-sticky{
+                padding: 0%;
+            }
+
         }
     }
 }
@@ -993,28 +1027,48 @@ body{
     font-family: 'SF Pro Display';
     font-size: 14px;
     font-weight: normal;
+    padding: 0% 2%;
 }
+
+.MesDirects-sticky{
+    position: sticky;
+    top: -1px;
+    z-index: 10 !important;
+    padding: 0% 1%;
+    @media (max-width: 767px) {
+        padding: 0%;
+    }
+}
+
 .MesDirects{
     width: 100%;
-    height: 58px;
+    //height: 58px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-top: 0.5%;
-    padding: 1.8% 1.5%;
+    padding: 4px 25px;
+    &.light{
+        background-color: RGBA(0, 0, 0, 0.04);
+    }
+    &.dark{
+        background-color: #1D1D1D;
+    }
+
+    h4{
+        font-family: 'SF Pro Display';
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 10px;
+    }
 }
 .h4{
     font-family: 'SF Pro Display';
     font-size: 20px;
     font-weight: 500;
 }
-.MesDirects h4{
-    font-family: 'SF Pro Display';
-    font-size: 20px;
-    font-weight: 500;
-    margin-top: 10px;
-}
+
 .btn_add_media{
     font-family: 'SF Pro Display';
     font-weight: normal;
@@ -1027,6 +1081,11 @@ body{
     justify-content: space-between;
     align-items: center;
     margin-top: 0.7%;
+    padding: 1%;
+    @media (max-width: 767px) {
+        margin-bottom: 40px;
+        padding: 1% 4%;
+    }
 }
 .div_delete_select{
     width: 40%;
@@ -1215,6 +1274,10 @@ body{
 /*Data Table*/
 .DataTable{
     margin-top: 2%;
+    padding: 0% 1%;
+    @media (max-width: 1021px) {
+        margin-top: 4%;
+    }
 }
 /* Data Table*/
 

@@ -243,6 +243,9 @@ white-space: nowrap;
   }
   .DataTable{
     margin-top: 1%;
+    @media (max-width: 768px) {
+      padding: 4%;
+    }
   }
   .DataTable .ant-table-cell:nth-of-type(1){
     display: none !important;

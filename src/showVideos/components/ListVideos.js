@@ -156,7 +156,7 @@ console.log("render columns ", columns)
         //         PaginationPropsValueChange:  sorter.column.key,
         //     }))
     }
-        await dispatch(
+         dispatch(
             setPaginationPropsValue((paginationProps)=>({...paginationProps,...valuePagination})));
 
           // setPaginationProps({

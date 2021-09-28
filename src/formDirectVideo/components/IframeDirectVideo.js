@@ -39,7 +39,7 @@ export const IframeDirectVideo =()=>{
 
     return(
         <LiveSubmit  setFormLiveAction={setFormLiveAction}>
-                    <Col span={24}>
+                    <Col className={"form-col"} span={24}>
                             {
                                matchesMedia.matches
                                    ?
