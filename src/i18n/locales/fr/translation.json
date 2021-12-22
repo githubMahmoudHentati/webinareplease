@@ -268,7 +268,10 @@
     },
     "slidesTab":{
       "title": "Diapositives"
-    }
+    },
+    "sendingOutInvit": "Limite des invitations",
+    "maxremote": "Max des invités à distance",
+    "maxguestpresent": "Max des invités présents"
   },
   "PackagePayment": {
     "Packages": "Forfaits",

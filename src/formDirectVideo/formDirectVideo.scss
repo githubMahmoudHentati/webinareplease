@@ -966,3 +966,66 @@
 //    width: auto;
 //  }
 //}
+
+.DivEnvoiDesInvitations{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3%;
+  color: var(--white_color);
+  h4{
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white_color);
+  }
+  .DivEnvoiDesInvitations1{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+    label{
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2%;
+    }
+    .ant-input-number{
+      width: 100%;
+      background-color: transparent !important;
+      border: 1px solid var(--border_color);
+      color: var(--white_color);
+    }
+    .ant-input-number-handler-wrap{
+      background-color: transparent !important;
+      border: 1px solid var(--border_color);
+    }
+    .ant-input-number-handler{
+     border-left: none !important;
+    }
+    .ant-input-number-handler-down{
+      border-top: 1px solid var(--border_color);
+    }
+  }
+  .DivEnvoiDesInvitations2{
+    display: flex;
+    flex-direction: column;
+    label{
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2%;
+    }
+    .ant-input-number{
+      width: 100%;
+      background-color: transparent !important;
+      border: 1px solid var(--border_color);
+      color: var(--white_color);
+    }
+    .ant-input-number-handler-wrap{
+      background-color: transparent !important;
+      border: 1px solid var(--border_color);
+    }
+    .ant-input-number-handler{
+      border-left: none !important;
+    }
+    .ant-input-number-handler-down{
+      border-top: 1px solid var(--border_color);
+    }
+  }
+}
