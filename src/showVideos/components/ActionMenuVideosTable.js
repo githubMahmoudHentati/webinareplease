@@ -8,7 +8,10 @@ import {
     VideoCameraOutlined,
     CopyFilled,
     EyeTwoTone,
-    EyeInvisibleOutlined
+    EyeInvisibleOutlined,
+    MailOutlined,
+    SearchOutlined,
+    DownloadOutlined
 } from '@ant-design/icons';
 import {useHistory} from 'react-router-dom';
 import {Tooltip, Dropdown, Menu, Button, Modal, Input, message} from 'antd';
@@ -28,6 +31,20 @@ function useActionMenu({record}) {
     const [statusSuccessMessages , setStatusSuccessMessages]=useState(true)
     const [statusErrorMessages , setStatusErrorMessages] = useState(true)
 
+    const menu = (
+        <Menu >
+            <Menu.Item key="1" >
+                Excel
+            </Menu.Item>
+            <Menu.Item key="2" >
+                CSV
+            </Menu.Item>
+            <Menu.Item key="3" >
+                PDF
+            </Menu.Item>
+        </Menu>
+    );
+
     const {
         handleClickStreamin,
         handleDeleteOneRow,
@@ -39,7 +56,10 @@ function useActionMenu({record}) {
         handleExport,
         handleCancelModalExport,
         exportLives,
-        paginationProps
+        paginationProps,
+        handleInfosGuests,
+        handleCancelModalInfosGuest,
+        infosGuests
     } = Hooks()
     const {t} = useTranslation();
     var x = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
@@ -54,9 +74,10 @@ function useActionMenu({record}) {
                 className={"dropdownIcon"}/>{t("ShowVideo.infos")}</Menu.Item>
             {record.owner ? <Menu.Item onClick={() => updateLive(record.id,record.status)}><EditOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.Modifier")}</Menu.Item> : null}
+            <Menu.Item onClick={()=>handleInfosGuests(record.id)}><MailOutlined className={"dropdownIcon"}/>{t("ShowVideo.guest")}</Menu.Item>
             <Menu.Item onClick={() => handleExport()}><LinkOutlined className={"dropdownIcon"}/>Export</Menu.Item>
-            {/*<Menu.Item onClick={() => history.push("/FormDirectVideo", dispatch(setDirectSetting(4)))}><span*/}
-            {/*    className="icon-Templates dropdownIconTemp"></span> {t("ShowVideo.Templates")}</Menu.Item>*/}
+            <Menu.Item onClick={() => history.push("/FormDirectVideo", dispatch(setDirectSetting(4)))}><span
+                className="icon-Templates dropdownIconTemp"></span> {t("ShowVideo.Templates")}</Menu.Item>
             {record.owner ? <Menu.Item onClick={() => handleDeleteOneRow(record.id)}><DeleteOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.Delete")}</Menu.Item> : null}
         </Menu>
@@ -366,6 +387,132 @@ function useActionMenu({record}) {
                 {/*./div_Url_diffusion*/}
 
             </Modal>{/*./ModalExporter*/}
+
+            {/*Modal Invités*/}
+            <Modal
+                visible={infosGuests.visibleInfosGuests}
+                title={t("ShowVideo.guestList")}
+                onCancel={handleCancelModalInfosGuest}
+                footer={[
+                    <Button key="back" onClick={handleCancelModalInfosGuest}>
+                        {t("ShowVideo.Close")}
+                    </Button>,
+                ]}
+                getContainer={() => document.querySelector(".showVideo")}
+            >
+                <div className={"ModalGuestGlobalDiv"}>
+
+                    <div className={"ModalGuestFilterDiv"}>
+                        <Input
+                            className="inputFilter"
+                            placeholder={t('ShowVideo.search')}
+                            prefix={<SearchOutlined style={{color: "rgba(0, 0, 0, 0.25)", marginLeft: "10px"}}/>}
+                            name={"search"}
+                        />
+                        <Dropdown overlay={menu} trigger={"click"}>
+                            <Button>
+                                <DownloadOutlined className={"iconDownload"}/> {t("ShowVideo.download")}
+                            </Button>
+                        </Dropdown>
+                    </div>{/*./ModalGuestFilterDiv*/}
+                    <div className={"ModalGuestListMail"}>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                           <div className={"ModalGuestListMailDivGlobal1"}>
+                               <span className={"iconMail"}><MailOutlined/></span>
+                               <span className={"Mail"}>bquitzon@yahoo.com</span>
+                           </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat"}>invitation envoyé</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat etatDP"}>Présentiel</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat"}>invitation envoyé</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat etatDP"}>à distance</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat"}>invitation envoyé</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat etatDP"}>à distance</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat"}>invitation envoyé</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat"}>invitation envoyé</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat"}>invitation envoyé</span>
+                            </div>
+                        </div>
+                        <div className={"ModalGuestListMailDivGlobal"}>
+                            <div className={"ModalGuestListMailDivGlobal1"}>
+                                <span className={"iconMail"}><MailOutlined/></span>
+                                <span className={"Mail"}>bquitzon@yahoo.com</span>
+                            </div>
+                            <div className={"ModalGuestListMailDivGlobal2"}>
+                                <span className={"etat etatDP"}>Présentiel</span>
+                            </div>
+                        </div>
+                    </div>{/*./ModalGuestListMail*/}
+
+                </div>
+
+            </Modal>
+            {/*Modal Invités*/}
+
 
 
         </div>

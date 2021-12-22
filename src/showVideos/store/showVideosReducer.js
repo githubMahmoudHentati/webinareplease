@@ -1,6 +1,6 @@
 import {ShowVideosList} from "../utils/ShowVideosConstraints"
 
-const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives}=ShowVideosList();
+const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives , valueInfosGuests}=ShowVideosList();
 
 const ShowVideosINITIALSTATE = {
     ListVideos : [],
@@ -11,6 +11,7 @@ const ShowVideosINITIALSTATE = {
     loadingDelete:loadingDeleteShowVideo(),
     valuesInfosLives:valuesInfosLives(),
     valueExportLives:valueExportLives(),
+    valueInfosGuests:valueInfosGuests(),
     DiffusionLink:[]
 }
 
@@ -82,7 +83,13 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
                 ...state,
                 valueExportLives:exportLivesObj
             }
-
+        case "SET_INFOSGUEST":
+            const {infosGuestName,infosGuestsValue}=action.payload
+            const infosGuestObj = {...state.valueInfosGuests,[infosGuestName]: infosGuestsValue}
+            return{
+                ...state,
+                valueInfosGuests:infosGuestObj
+            }
         case "SET_FILTER":
             const {deletedItems}=action.payload
             let indexes1 =

@@ -375,7 +375,11 @@
     "ErrorDelOne":"Oops!!! an error has occurred",
     "ErrorDelTwo": "Oops!!! this video does not exist",
     "SuccessPassMsg": "Your password has been successfully changed",
-    "AddLive": "Add live"
+    "AddLive": "Add live",
+    "guest": "Guests",
+    "guestList": "Guest list",
+    "search": "Search...",
+    "download": "Download"
   }
 
 }
