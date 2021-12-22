@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Input,Button,Select , Divider  , Tooltip , Popover , Checkbox , Form , message} from 'antd'
+import {Input,Button,Select , Divider  , Tooltip , Popover , Checkbox , Form , message , InputNumber} from 'antd'
 import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , PlusSquareOutlined  , LockOutlined} from '@ant-design/icons';
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
@@ -173,6 +173,18 @@ function Invitation(){
                            />
                        </Form.Item>
             </div>{/*./groupEmail*/}
+
+            <div className={"DivEnvoiDesInvitations"}>
+                <h4>{t("formDirectVideo.sendingOutInvit")}</h4>
+                <div className={"DivEnvoiDesInvitations1"}>
+                    <label htmlFor={"inputMaxInvitéDistance"}>{t("formDirectVideo.maxremote")}</label>
+                    <InputNumber id={"inputMaxInvitéDistance"} min={0}/>
+                </div>
+                <div className={"DivEnvoiDesInvitations2"}>
+                    <label htmlFor={"inputMaxInvitéPresentiel"}>{t("formDirectVideo.maxguestpresent")}</label>
+                    <InputNumber id={"inputMaxInvitéPresentiel"} min={0}/>
+                </div>
+            </div>
 
             <div className={"div_overley"}>
                 <div className={"div-border-blocked"}>

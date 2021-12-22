@@ -263,7 +263,10 @@
     },
     "slidesTab":{
       "title": "Slides"
-    }
+    },
+    "sendingOutInvit": "Limit of invitations",
+    "maxremote": "Max remote guests",
+    "maxguestpresent": "Max of guests present"
 
   },
   "PackagePayment": {
