@@ -22,7 +22,7 @@ import useWindowDimensions from "../../utils/components/getWindowDimensions";
 import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch} from 'react-redux'
 import {Row,Col} from 'antd'
-import {setPaginationProps} from "../store/showVideosAction";
+import {setInfosGuest, setPaginationProps} from "../store/showVideosAction";
 const {TextArea} = Input;
 
 function useActionMenu({record}) {
@@ -59,7 +59,8 @@ function useActionMenu({record}) {
         paginationProps,
         handleInfosGuests,
         handleCancelModalInfosGuest,
-        infosGuests
+        infosGuests,
+        handleChangeInputModal
     } = Hooks()
     const {t} = useTranslation();
     var x = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
@@ -68,6 +69,46 @@ function useActionMenu({record}) {
 
     // use Selector redux
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
+    // use Selector redux
+    const mailList = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests.mailList)
+
+    //ListEmailsModal
+    const listItem = mailList.map((item)=>
+
+        <div className={"ModalGuestListMailDivGlobal"} >
+            <div className={"ModalGuestListMailDivGlobal1"}>
+                <span className={"iconMail"}><MailOutlined/></span>
+                <span className={"Mail"}>{item.email}</span>
+            </div>
+            <div className={"ModalGuestListMailDivGlobal2"}>
+                {
+                    item.isOnline === 0
+                     ?
+                        <span className={"etat"}>{t("ShowVideo.sentInvitation")}</span>
+                        :
+                        null
+                }
+                {
+                    item.isOnline === 1
+                        ?
+                        <span className={"etat etatDP"}>{t("ShowVideo.remotly")}</span>
+                        :
+                        null
+                }
+                {
+                    item.isOnline === 2
+                        ?
+                        <span className={"etat etatDP"}>{t("ShowVideo.presentiel")}</span>
+                        :
+                        null
+                }
+            </div>
+        </div>
+
+    )
+
+
+
     const actionMenu = (
         <Menu className="menu">
             <Menu.Item onClick={() => handleInfos()}><InfoCircleOutlined
@@ -408,6 +449,7 @@ function useActionMenu({record}) {
                             placeholder={t('ShowVideo.search')}
                             prefix={<SearchOutlined style={{color: "rgba(0, 0, 0, 0.25)", marginLeft: "10px"}}/>}
                             name={"search"}
+                            onChange={(e)=>handleChangeInputModal(e)}
                         />
                         <Dropdown overlay={menu} trigger={"click"}>
                             <Button>
@@ -416,96 +458,7 @@ function useActionMenu({record}) {
                         </Dropdown>
                     </div>{/*./ModalGuestFilterDiv*/}
                     <div className={"ModalGuestListMail"}>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                           <div className={"ModalGuestListMailDivGlobal1"}>
-                               <span className={"iconMail"}><MailOutlined/></span>
-                               <span className={"Mail"}>bquitzon@yahoo.com</span>
-                           </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat"}>invitation envoyé</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat etatDP"}>Présentiel</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat"}>invitation envoyé</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat etatDP"}>à distance</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat"}>invitation envoyé</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat etatDP"}>à distance</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat"}>invitation envoyé</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat"}>invitation envoyé</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat"}>invitation envoyé</span>
-                            </div>
-                        </div>
-                        <div className={"ModalGuestListMailDivGlobal"}>
-                            <div className={"ModalGuestListMailDivGlobal1"}>
-                                <span className={"iconMail"}><MailOutlined/></span>
-                                <span className={"Mail"}>bquitzon@yahoo.com</span>
-                            </div>
-                            <div className={"ModalGuestListMailDivGlobal2"}>
-                                <span className={"etat etatDP"}>Présentiel</span>
-                            </div>
-                        </div>
+                        {listItem}
                     </div>{/*./ModalGuestListMail*/}
 
                 </div>
