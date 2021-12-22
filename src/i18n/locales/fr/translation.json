@@ -387,6 +387,9 @@
     "guest": "Invités",
     "guestList": "Liste des invités",
     "search": "Rechercher...",
-    "download": "Télécharger"
+    "download": "Télécharger",
+    "sentInvitation": "invitation envoyé",
+    "remotly": "à distance",
+    "presentiel":"Présentiel"
   }
 }

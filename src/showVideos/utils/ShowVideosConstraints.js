@@ -69,7 +69,8 @@ export const ShowVideosList = ()=>{
     const valueInfosGuests = () =>{
         return({
             visibleInfosGuests : false,
-            idLive:null
+            idLive:null,
+            mailList:[]
         })
     }
 

@@ -505,7 +505,19 @@
           color: RGB(82, 196, 26);
         }
       }
-
+      @media screen and (max-width: 767px){
+        display: flex;
+        flex-direction: column;
+        .ModalGuestListMailDivGlobal1{
+          width: 100%;
+        }
+        .ModalGuestListMailDivGlobal2{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+        }
+      }
     }
   }
 }

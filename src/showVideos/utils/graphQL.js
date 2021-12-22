@@ -55,12 +55,21 @@ export const graphQL_shema = ()=> {
      { code diffLink visLink }
 
       }
-    `
+    `;
+    const get_live_emails = gql `
+    mutation($id:Int!) {
+    getLiveEmails(id:$id){
+        email
+        isOnline
+       }
+     } 
+    `;
     return ({
         Get_Lives,
         Delete_Items,
         Get_Live_Info,
         Export_Live,
-        diffusion_link
+        diffusion_link,
+        get_live_emails
     })
 }

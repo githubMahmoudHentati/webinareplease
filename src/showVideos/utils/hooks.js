@@ -71,6 +71,9 @@ export  const Hooks=()=> {
     //Reducer export lives
     const DiffusionLinks = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
 
+    // use Selector redux
+    const mailList = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests.mailList)
+
 
 
     // Diffusion Link
@@ -108,6 +111,9 @@ export  const Hooks=()=> {
             }
 
     })
+
+
+
     // mutation delete lang from table of event
     const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items,{
         refetchQueries:() => [{ query: graphQL_shema().Get_Lives, variables: { input : {
@@ -199,6 +205,17 @@ export  const Hooks=()=> {
                 exportLivesName: "integrationUrl",
                 exportLivesValue: data.GetLinkExport.integrationUrl
             }));
+        }
+
+    })
+
+    //use Lazy Query
+    //query getVideosLinks for embed Code
+    const [GETLIVEEMAILS]
+        = useMutation(graphQL_shema().get_live_emails,{
+        context: { clientName: "second" },
+        onCompleted : async (data)=>{
+            await  dispatch(setInfosGuest({infosGuestName:"mailList",infosGuestsValue:data.getLiveEmails}));
         }
 
     })
@@ -514,15 +531,25 @@ export  const Hooks=()=> {
     }
 
     //*******infos Guests ****///
-    const handleInfosGuests = (val) => {
+    const handleInfosGuests = async (val) => {
+       await GETLIVEEMAILS({
+           variables : {id:val}
+       })
 
-        dispatch(setInfosGuest({infosGuestName:"idLive",infosGuestsValue:val}));
-        setTimeout(()=>{
+      await  dispatch(setInfosGuest({infosGuestName:"idLive",infosGuestsValue:val}));
+
+      await  setTimeout(()=>{
             dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:true}));
         },300)
     }
+
     const handleCancelModalInfosGuest = () => {
         dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:false}));
+    }
+
+    ///************** Filtrage Modal ***************//////
+    const handleChangeInputModal =async (e) => {
+
     }
 
     return({
@@ -556,6 +583,7 @@ export  const Hooks=()=> {
         handleClickStreamin,
         handleInfosGuests,
         handleCancelModalInfosGuest,
-        infosGuests
+        infosGuests,
+        handleChangeInputModal
     })
 }

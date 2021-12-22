@@ -382,7 +382,10 @@
     "guest": "Guests",
     "guestList": "Guest list",
     "search": "Search...",
-    "download": "Download"
+    "download": "Download",
+    "sentInvitation": "invitation sent",
+    "remotly": "remotely",
+    "presentiel":"Presential"
   }
 
 }
