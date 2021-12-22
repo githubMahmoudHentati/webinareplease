@@ -5,7 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink, setInfosGuest
+    setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink, setInfosGuest, setInfosGuestInput
 } from "../store/showVideosAction"
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
@@ -22,11 +22,11 @@ import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConst
 
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
-import {GraphQLFetchData} from "./graphQLFetchData";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 
 const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
-
-
 
 
 let itemsRunAPI
@@ -42,6 +42,7 @@ export  const Hooks=()=> {
         id:[],
         idLive:0
     })
+
     const history = useHistory();
     const dispatch = useDispatch()
 
@@ -533,14 +534,13 @@ export  const Hooks=()=> {
     //*******infos Guests ****///
     const handleInfosGuests = async (val) => {
        await GETLIVEEMAILS({
-           variables : {id:val}
+           variables : {id:val , searchEmail:""}
        })
 
       await  dispatch(setInfosGuest({infosGuestName:"idLive",infosGuestsValue:val}));
 
-      await  setTimeout(()=>{
-            dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:true}));
-        },300)
+       dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:true}));
+
     }
 
     const handleCancelModalInfosGuest = () => {
@@ -549,7 +549,27 @@ export  const Hooks=()=> {
 
     ///************** Filtrage Modal ***************//////
     const handleChangeInputModal =async (e) => {
+        if(e.key === 'Enter') {
+            await dispatch(setInfosGuestInput({infosGuestInputName:"valueInputModal",infosGuestsInputValue:e.target.value}));
+            await GETLIVEEMAILS({
+                variables: {id: infosGuests.idLive, searchEmail: e.target.value}
+            })
 
+        }
+    }
+    const handleChangeInputModalFake = async (e) =>{
+        await dispatch(setInfosGuestInput({infosGuestInputName:"valueInputModalFake",infosGuestsInputValue:e.target.value}));
+    }
+
+    ///Export Div//////
+    const saveDiv = () => {
+        html2canvas(document.querySelector("#DivExport")).then(canvas => {
+            document.body.appendChild(canvas);  // if you want see your screenshot in body.
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF();
+            pdf.addImage(imgData, 'PNG', 0, 0, 0, 0);
+            pdf.save("download.pdf");
+        });
     }
 
     return({
@@ -584,6 +604,8 @@ export  const Hooks=()=> {
         handleInfosGuests,
         handleCancelModalInfosGuest,
         infosGuests,
-        handleChangeInputModal
+        handleChangeInputModal,
+        saveDiv,
+        handleChangeInputModalFake
     })
 }

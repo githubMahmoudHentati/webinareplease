@@ -1,6 +1,6 @@
 import {ShowVideosList} from "../utils/ShowVideosConstraints"
 
-const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives , valueInfosGuests}=ShowVideosList();
+const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives , valueInfosGuests , valueInputInfosGuest}=ShowVideosList();
 
 const ShowVideosINITIALSTATE = {
     ListVideos : [],
@@ -12,7 +12,8 @@ const ShowVideosINITIALSTATE = {
     valuesInfosLives:valuesInfosLives(),
     valueExportLives:valueExportLives(),
     valueInfosGuests:valueInfosGuests(),
-    DiffusionLink:[]
+    DiffusionLink:[],
+    valueInputInfosGuest:valueInputInfosGuest()
 }
 
 export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=>{
@@ -89,6 +90,13 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
             return{
                 ...state,
                 valueInfosGuests:infosGuestObj
+            }
+        case "SET_INFOSGUESTINPUT":
+            const {infosGuestInputName,infosGuestsInputValue}=action.payload
+            const infosGuestInputObj = {...state.valueInputInfosGuest,[infosGuestInputName]: infosGuestsInputValue}
+            return{
+                ...state,
+                valueInputInfosGuest:infosGuestInputObj
             }
         case "SET_FILTER":
             const {deletedItems}=action.payload
