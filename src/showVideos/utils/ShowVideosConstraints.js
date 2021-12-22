@@ -70,7 +70,13 @@ export const ShowVideosList = ()=>{
         return({
             visibleInfosGuests : false,
             idLive:null,
-            mailList:[]
+            mailList:[],
+        })
+    }
+    const valueInputInfosGuest = () =>{
+        return({
+            valueInputModal:"",
+            valueInputModalFake:""
         })
     }
 
@@ -82,7 +88,8 @@ export const ShowVideosList = ()=>{
         loadingDeleteShowVideo,
         valuesInfosLives,
         valueExportLives,
-        valueInfosGuests
+        valueInfosGuests,
+        valueInputInfosGuest
     })
 
 }

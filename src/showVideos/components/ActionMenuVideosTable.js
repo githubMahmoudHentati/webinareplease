@@ -30,20 +30,7 @@ function useActionMenu({record}) {
 
     const [statusSuccessMessages , setStatusSuccessMessages]=useState(true)
     const [statusErrorMessages , setStatusErrorMessages] = useState(true)
-
-    const menu = (
-        <Menu >
-            <Menu.Item key="1" >
-                Excel
-            </Menu.Item>
-            <Menu.Item key="2" >
-                CSV
-            </Menu.Item>
-            <Menu.Item key="3" >
-                PDF
-            </Menu.Item>
-        </Menu>
-    );
+    const [visible , setVisible] = useState(false)
 
     const {
         handleClickStreamin,
@@ -60,8 +47,26 @@ function useActionMenu({record}) {
         handleInfosGuests,
         handleCancelModalInfosGuest,
         infosGuests,
-        handleChangeInputModal
+        handleChangeInputModal,
+        saveDiv,
+        handleChangeInputModalFake,
     } = Hooks()
+
+    const menu = (
+        <Menu >
+            <Menu.Item key="1" >
+                Excel
+            </Menu.Item>
+            <Menu.Item key="2" >
+                CSV
+            </Menu.Item>
+            <Menu.Item key="3" onClick={()=>saveDiv()}>
+                PDF
+            </Menu.Item>
+        </Menu>
+    );
+
+
     const {t} = useTranslation();
     var x = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
     const history = useHistory()
@@ -71,6 +76,8 @@ function useActionMenu({record}) {
     const darkMode = useSelector((state) => state.Reducer.DarkMode)
     // use Selector redux
     const mailList = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests.mailList)
+    // use Selector redux
+    const value = useSelector((state)=> state.ShowVideosReducerReducer.valueInputInfosGuest.valueInputModalFake)
 
     //ListEmailsModal
     const listItem = mailList.map((item)=>
@@ -449,7 +456,9 @@ function useActionMenu({record}) {
                             placeholder={t('ShowVideo.search')}
                             prefix={<SearchOutlined style={{color: "rgba(0, 0, 0, 0.25)", marginLeft: "10px"}}/>}
                             name={"search"}
-                            onChange={(e)=>handleChangeInputModal(e)}
+                            onKeyDown={(e)=>handleChangeInputModal(e)}
+                            onChange={(e)=>handleChangeInputModalFake(e)}
+                            value={value}
                         />
                         <Dropdown overlay={menu} trigger={"click"}>
                             <Button>
@@ -457,7 +466,7 @@ function useActionMenu({record}) {
                             </Button>
                         </Dropdown>
                     </div>{/*./ModalGuestFilterDiv*/}
-                    <div className={"ModalGuestListMail"}>
+                    <div className={"ModalGuestListMail"} id={"DivExport"}>
                         {listItem}
                     </div>{/*./ModalGuestListMail*/}
 

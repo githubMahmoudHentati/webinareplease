@@ -78,6 +78,12 @@ export function setInfosGuest(e){
         payload:e
     }
 }
+export function setInfosGuestInput(e){
+    return{
+        type:"SET_INFOSGUESTINPUT",
+        payload:e
+    }
+}
 export function setFilter(e){
     return{
         type :"SET_FILTER",

@@ -57,8 +57,8 @@ export const graphQL_shema = ()=> {
       }
     `;
     const get_live_emails = gql `
-    mutation($id:Int!) {
-    getLiveEmails(id:$id){
+    mutation($id:Int!, $searchEmail: String!) {
+    getLiveEmails(id:$id, searchEmail:$searchEmail){
         email
         isOnline
        }
