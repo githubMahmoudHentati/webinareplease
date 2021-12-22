@@ -72,6 +72,12 @@ export function setExportLive(e){
         payload:e
     }
 }
+export function setInfosGuest(e){
+    return{
+        type:"SET_INFOSGUEST",
+        payload:e
+    }
+}
 export function setFilter(e){
     return{
         type :"SET_FILTER",

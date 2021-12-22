@@ -5,7 +5,7 @@ import {
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink
+    setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink, setInfosGuest
 } from "../store/showVideosAction"
 import {useLazyQuery, useMutation} from "@apollo/react-hooks";
 import {graphQL_shema} from "./graphQL";
@@ -22,7 +22,11 @@ import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConst
 
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
+import {GraphQLFetchData} from "./graphQLFetchData";
+
 const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
+
+
 
 
 let itemsRunAPI
@@ -61,6 +65,8 @@ export  const Hooks=()=> {
     const infosLives = useSelector((state)=> state.ShowVideosReducerReducer.valuesInfosLives)
     //Reducer export lives
     const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
+    //Reducer infos Guests
+    const infosGuests = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests)
     //Reducer
     //Reducer export lives
     const DiffusionLinks = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
@@ -507,6 +513,18 @@ export  const Hooks=()=> {
         })
     }
 
+    //*******infos Guests ****///
+    const handleInfosGuests = (val) => {
+
+        dispatch(setInfosGuest({infosGuestName:"idLive",infosGuestsValue:val}));
+        setTimeout(()=>{
+            dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:true}));
+        },300)
+    }
+    const handleCancelModalInfosGuest = () => {
+        dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:false}));
+    }
+
     return({
         handleSearchRow,
         handleHeaderSelect,
@@ -536,5 +554,8 @@ export  const Hooks=()=> {
         exportLives,
         resetFilterVideos,
         handleClickStreamin,
+        handleInfosGuests,
+        handleCancelModalInfosGuest,
+        infosGuests
     })
 }

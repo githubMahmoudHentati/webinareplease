@@ -380,6 +380,10 @@
     "ErrorDelOne": "Oops!!! il y'a un erreur se produit",
     "ErrorDelTwo": "Oops!!! cet vidéo n'existe pas",
     "SuccessPassMsg": "Votre mot de passe a été modifié avec succès",
-    "AddLive": "Ajouter un direct"
+    "AddLive": "Ajouter un direct",
+    "guest": "Invités",
+    "guestList": "Liste des invités",
+    "search": "Rechercher...",
+    "download": "Télécharger"
   }
 }

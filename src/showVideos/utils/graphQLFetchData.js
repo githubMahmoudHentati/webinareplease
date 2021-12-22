@@ -13,6 +13,10 @@ import {setDirectSetting} from "../../utils/redux/actions";
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
 import moment from "moment";
 import {useEffect} from "react";
+import {v4 as uuidv4} from "uuid";
+import fbPost from "../../assets/facebookPost.svg";
+import youtubePost from "../../assets/youtubePost.svg";
+import linkedinPost from "../../assets/linkedinPost.svg";
 
 
 const dateFormat = 'YYYY-MM-DD';
@@ -24,6 +28,9 @@ export const GraphQLFetchData=()=> {
     const valuePagination = useSelector(
         (state) => state.ShowVideosReducerReducer.paginationProps
     );
+    //Reducer infos Guests
+    const infosGuests = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests)
+
     // Read Data from Hooks
     const {paginationProps ,  values }=Hooks()
     const {error_getLives}=StatusMessage()
@@ -74,6 +81,8 @@ export const GraphQLFetchData=()=> {
         onCompleted: (data)=>{
         }
     })
+
+
 
     useEffect(()=>{
         if(dataLives){

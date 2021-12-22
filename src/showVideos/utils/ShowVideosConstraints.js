@@ -66,6 +66,12 @@ export const ShowVideosList = ()=>{
             integrationUrl : "",
         })
     }
+    const valueInfosGuests = () =>{
+        return({
+            visibleInfosGuests : false,
+            idLive:null
+        })
+    }
 
     return({
         FilterVideos,
@@ -74,7 +80,8 @@ export const ShowVideosList = ()=>{
         showDivsConditions,
         loadingDeleteShowVideo,
         valuesInfosLives,
-        valueExportLives
+        valueExportLives,
+        valueInfosGuests
     })
 
 }
