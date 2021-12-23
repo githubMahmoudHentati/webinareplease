@@ -23,14 +23,29 @@ import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch} from 'react-redux'
 import {Row,Col} from 'antd'
 import {setInfosGuest, setPaginationProps} from "../store/showVideosAction";
+
+import { CSVLink } from "react-csv";
+
 const {TextArea} = Input;
 
 function useActionMenu({record}) {
     const dispatch = useDispatch()
 
+    // use Selector redux
+    const darkMode = useSelector((state) => state.Reducer.DarkMode)
+    // use Selector redux
+    const mailList = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests.mailList)
+    // use Selector redux
+    const value = useSelector((state)=> state.ShowVideosReducerReducer.valueInputInfosGuest.valueInputModalFake)
+
     const [statusSuccessMessages , setStatusSuccessMessages]=useState(true)
     const [statusErrorMessages , setStatusErrorMessages] = useState(true)
     const [visible , setVisible] = useState(false)
+
+    const headers = [
+        { label: "Email", key: "email" },
+        { label: "Is Online", key: "isOnline" },
+    ];
 
     const {
         handleClickStreamin,
@@ -50,15 +65,20 @@ function useActionMenu({record}) {
         handleChangeInputModal,
         saveDiv,
         handleChangeInputModalFake,
+        saveDivXLSX
     } = Hooks()
+
+
 
     const menu = (
         <Menu >
-            <Menu.Item key="1" >
+            <Menu.Item key="1" onClick={()=>saveDivXLSX()}>
                 Excel
             </Menu.Item>
             <Menu.Item key="2" >
-                CSV
+                <CSVLink data={mailList} headers={headers}>
+                    CSV
+                </CSVLink>
             </Menu.Item>
             <Menu.Item key="3" onClick={()=>saveDiv()}>
                 PDF
@@ -72,12 +92,7 @@ function useActionMenu({record}) {
     const history = useHistory()
     const textAreaRef = useRef(null);
 
-    // use Selector redux
-    const darkMode = useSelector((state) => state.Reducer.DarkMode)
-    // use Selector redux
-    const mailList = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests.mailList)
-    // use Selector redux
-    const value = useSelector((state)=> state.ShowVideosReducerReducer.valueInputInfosGuest.valueInputModalFake)
+
 
     //ListEmailsModal
     const listItem = mailList.map((item)=>
