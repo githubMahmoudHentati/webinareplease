@@ -24,6 +24,9 @@ import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
+
 
 
 const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
@@ -568,8 +571,19 @@ export  const Hooks=()=> {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF();
             pdf.addImage(imgData, 'PNG', 0, 0, 0, 0);
-            pdf.save("download.pdf");
+            pdf.save("listEmails.pdf");
         });
+    }
+    const saveDivXLSX = () => {
+        const fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+        const fileExtension = ".xlsx";
+
+        const ws = XLSX.utils.json_to_sheet(mailList);
+        const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+        const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+        const data = new Blob([excelBuffer], { type: fileType });
+        FileSaver.saveAs(data, "listEmails" + fileExtension);
+
     }
 
     return({
@@ -606,6 +620,7 @@ export  const Hooks=()=> {
         infosGuests,
         handleChangeInputModal,
         saveDiv,
-        handleChangeInputModalFake
+        handleChangeInputModalFake,
+        saveDivXLSX
     })
 }
