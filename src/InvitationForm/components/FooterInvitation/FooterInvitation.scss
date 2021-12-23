@@ -1,0 +1,38 @@
+.Footer{
+  &__copyright{
+    display: flex;
+    align-items: center;
+    .Footer__date{
+      font-size: 16px;
+      padding-right: 0.5em;
+    }
+    .Footer__admin{
+      font-size: 16px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+    }
+  }
+  &__action{
+    display: flex;
+    flex-direction: row;
+
+    .Footer__item{
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: normal;
+      color:#dcdcdc;;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+
+    .Footer__separator{
+      padding:0 0.5em;
+      color:var(--separator-color)
+
+    }
+  }
+}

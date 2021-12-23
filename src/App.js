@@ -22,6 +22,7 @@ import frFR from "antd/lib/locale/fr_FR";
 import { ConfigProvider } from "antd";
 import 'moment/locale/fr';
 import 'react-phone-number-input/style.css'
+import {Invitation} from "./InvitationForm/Invitation";
 
 let tabData = [
     "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"
@@ -81,6 +82,9 @@ function App() {
                         <Redirect exact to="/connexion"/> : <IframeStudioLive/>}</Route>
                     <Route exact path='/calendar'> {!credentialsValues.appState.loggedIn ?
                         <Redirect exact to="/connexion"/> : <Calendar/>}</Route>
+                    <Route exact path='/invitation'>
+                       <Invitation/>
+                    </Route>
                     <Route path={"*"} component={Error}/>
                 </Switch>
             </BrowserRouter>
