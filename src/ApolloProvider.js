@@ -1,15 +1,16 @@
 import React,{ Suspense }  from 'react';
 import App from './App';
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
+import { ApolloClient } from 'apollo-boost'
 //import { createHttpLink } from 'apollo-link-http';
-import {ApolloProvider} from '@apollo/react-hooks';
+import {ApolloProvider} from '@apollo/client';
 import { setContext } from 'apollo-link-context';
 import {store,persistor} from "./utils/redux/store";
 import {Provider, useSelector} from "react-redux";
 import { ApolloLink } from "apollo-link";
-import { createHttpLink } from 'apollo-link-http';
 import { Spin } from 'antd';
 import { PersistGate } from 'redux-persist/integration/react'
+import {InMemoryCache} from 'apollo-cache-inmemory';
+import {createHttpLink, HttpLink} from 'apollo-link-http';
 import './i18n'
 const firstLink = new createHttpLink({
     uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST

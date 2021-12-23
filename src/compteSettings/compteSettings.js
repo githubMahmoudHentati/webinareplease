@@ -10,7 +10,7 @@ import {AccountSubscription} from './components/accountSubscription'
 import {setAccountSetting, setConstraintDataOnchange} from "./store/accountSettingsAction";
 import { useTranslation } from 'react-i18next';
 import {graphQL_shema} from "./utils/graphQL";
-import {useQuery} from "@apollo/react-hooks";
+import {useQuery} from "@apollo/client";
 import {BarHeader} from "./components/barHeader"
 import {AccountSubmit} from "./components/accountSubmit";
 

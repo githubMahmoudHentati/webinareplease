@@ -89,7 +89,7 @@ function HeaderVideos() {
         resetFilterVideos()
     }
     return(
-      <>
+      <div>
 
           <div className="BreadcrumbDiv">
               <Breadcrumb style={{color:darkMode===false?"":"#ffffff" , fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal"}}>
@@ -284,7 +284,7 @@ function HeaderVideos() {
           }
 
 
-      </>
+      </div>
     );
 }
 

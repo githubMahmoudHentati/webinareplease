@@ -8,10 +8,10 @@ import {
     setCalendarInfoOnchange
 } from "../store/calendarAction";
 import {graphQL_shema} from "./graphql";
-import {useMutation} from "@apollo/react-hooks";
+import {useMutation} from "@apollo/client";
 import {StatusMessage} from "./StatusMessage";
 import {Hooks} from "../../showVideos/utils/hooks";
-import {useLazyQuery} from "@apollo/react-hooks";
+import {useLazyQuery} from "@apollo/client";
 import moment from 'moment';
 import {Badge, Tag} from 'antd';
 import {useHistory} from "react-router-dom";

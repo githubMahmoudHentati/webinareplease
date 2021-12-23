@@ -1,4 +1,4 @@
-import {useMutation, useLazyQuery , useQuery} from "@apollo/react-hooks";
+import {useMutation, useLazyQuery , useQuery} from "@apollo/client";
 import {graphQL_shema} from "./graphQL";
 import {useDispatch, useSelector} from "react-redux";
 import {Hooks} from "./hooks";

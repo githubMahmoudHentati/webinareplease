@@ -7,7 +7,7 @@ import {
     setshowVideosActions,
     setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink, setInfosGuest, setInfosGuestInput
 } from "../store/showVideosAction"
-import {useLazyQuery, useMutation} from "@apollo/react-hooks";
+import {useLazyQuery, useMutation} from "@apollo/client";
 import {graphQL_shema} from "./graphQL";
 import {StatusMessage} from "./StatusMessage";
 import {useHistory} from "react-router-dom";

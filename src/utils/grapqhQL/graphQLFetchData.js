@@ -1,4 +1,4 @@
-import {useLazyQuery, useQuery} from "@apollo/react-hooks";
+import {useLazyQuery, useQuery} from "@apollo/client";
 import {graphQL_shema} from "./shemaGraphQL";
 import {useDispatch} from "react-redux";
 import {setAppSetLogin, setAppSetLogout} from "../redux/actions";

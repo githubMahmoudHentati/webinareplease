@@ -1,4 +1,4 @@
-import {useMutation,useLazyQuery} from "@apollo/react-hooks";
+import {useMutation,useLazyQuery} from "@apollo/client";
 import {graphQL_shema} from "./graphQL";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
