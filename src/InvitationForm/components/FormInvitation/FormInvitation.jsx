@@ -135,7 +135,7 @@ export const FormInvitation =()=>{
                             name={"title"}
                             className={`${prefixCls}__inputForm`}
                             placeholder={FormDataSource.form.lastName}
-                            onChange={handleChangeLastName}
+                            // onChange={handleChangeLastName}
                             value={state.lastName}
                         />
                     </Form.Item>
@@ -145,7 +145,7 @@ export const FormInvitation =()=>{
                             name={"title"}
                             className={`${prefixCls}__inputForm`}
                             placeholder={FormDataSource.form.firstName}
-                            onChange={handleChangeFirstName}
+                            // onChange={handleChangeFirstName}
                             value={state.firstName}
                         />
                     </Form.Item>
@@ -180,15 +180,6 @@ export const FormInvitation =()=>{
                             disabled={ !captcha || !condition || !state.email || !validateEmail(state.email)}
                             onClick={(event) => submitForm(event)}>{FormDataSource.form.create}</Button>
                 </Form.Item>
-                {/*{*/}
-                {/*    show ?*/}
-                {/*        <GenerateModal isContactForm={false} isVisible={show} isSuccessWebinar={true}*/}
-                {/*                       dataSource={FormDataSource} videoUri={videoUri}*/}
-                {/*                       handleOk={handleOk}*/}
-                {/*                       handleCancel={handleCancel}*/}
-                {/*        ></GenerateModal>*/}
-                {/*        : null*/}
-                {/*}*/}
             </Form>
         </div>
 
