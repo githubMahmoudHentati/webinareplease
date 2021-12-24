@@ -392,28 +392,40 @@
 
     },
     "form": {
-      "webinar": "Créez votre Webinar",
-      "title": "Titre du webinar",
-      "date": "Date du webinar",
-      "time": "Heure du webinar",
-      "email": "Email organisateur",
-      "emails": "Email participants",
-      "checkbox": {
-        "accept": "j'ai lu et j'accepte ",
-        "conditions": "les conditions de service"
-      },
+      "organised": "Organised par ",
+      "date": "On ",
+      "time": "at  ",
+      "participation": "Participation",
+      "lastName": "LastName",
+      "firstName": "FirstName",
+      "email": "Email",
       "catcha": "",
-      "create": "Créer",
+      "signup": "SignUp",
+      "return": "Return",
+      "send": "Send",
+      "confirm": "You have already registered and cannot find your registration confirmation email",
+      "resend": "Write your email to resend a confirmation email",
+
       "info": {
-        "i1": "Créez votre réunion : entrez votre adresse mail et celles des participants.",
-        "i2": "Un mail d'invitation est envoyé à chaque intervenant.",
-        "i3": "Vos données resteront confidentielles.",
-        "i4": "Offre réservée aux usages personnels"
+        "text": "If you have already registered and cannot find your registration confirmation email, ",
+        "link": "Click here !"
+      },
+      "success": {
+        "title": "Congratulations !",
+        "subscribed": "You are now registered for the event",
+        "verif": "Please check your email inbox to access the event"
       }
     },
     "footer": {
       "legal": "Legal",
       "conditions": "Terms of service"
+    },
+    "validations": {
+      "required": "Field is required !",
+      "email": " is not a valid email!",
+      "number": " is not a valid number!",
+      "format": "Press enter to add an email",
+      "exist": "This email address is already in use"
     }
   }
 }

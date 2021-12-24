@@ -82,7 +82,7 @@ function App() {
                         <Redirect exact to="/connexion"/> : <IframeStudioLive/>}</Route>
                     <Route exact path='/calendar'> {!credentialsValues.appState.loggedIn ?
                         <Redirect exact to="/connexion"/> : <Calendar/>}</Route>
-                    <Route exact path='/invitation'>
+                    <Route exact path='/invitation/:cryptext'>
                        <Invitation/>
                     </Route>
                     <Route path={"*"} component={Error}/>

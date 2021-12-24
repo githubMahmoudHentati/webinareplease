@@ -19,7 +19,7 @@
         }
       }
       &__title{
-        font-family: SFProDisplay;
+        font-family:  "SF Pro Display";
         font-size: 24px;
         font-weight: bold;
         font-stretch: normal;
@@ -30,30 +30,122 @@
         color:var(--primary-color);
         padding-bottom: 1em;
       }
-
-      &__info{
-        width: 30px;
-        height: 30px;
-        border: 1px solid #a6a6a6;
-        margin-right: 5px;
-        border-radius: 100%;
+      &__layout{
+        &:not(:first-child){
+          margin-bottom: 24px;
+        }
+        header,main{
+          background-color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+        header{
+        color: #2C3242;
+        }
+        main{
+          background-color: var(--primary-color);
+          color: #fff;
+          padding: 1em;
+          border-radius: 5px;
+        }
+      }
+      &__form{
+        background-color: #fff;
         display: flex;
+
+      }
+
+      &__footer{
+        display: flex;
+        background-color: #fff;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
-        color: #a6a6a6;
-        font-size: 2em;
-        cursor: pointer;
-        z-index: 2;
-      }
-      &__block-name{
+        font-family:  "SF Pro Display";
+        font-size: 12px;
+        font-weight: 400;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: RGB(106, 106, 106);
         display: flex;
-        justify-content: space-between
+        &--link{
+          color: var(--primary-color);
+          cursor: pointer;
+        }
+      }
+      &__block{
+        display: flex;
+        justify-content: space-between;
+       .Form__labelForm {
+          width: 49%;
+        }
+      }
+      &__success{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+      }
+      &__confirm{
+        width: 100%;
+        &-title{
+          display: flex;
+          flex-direction: column;
+          &--text{
+            opacity: 0.8;
+            font-family:  "SF Pro Display";
+            font-size: 16px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color:RGB(44, 50, 66);
+            display: flex !important;
+            order: 1;
+            padding: 1em 0 0.5em 0;
+          }
+          &--resend{
+            opacity: 0.8;
+            font-family:  "SF Pro Display";
+            font-size: 15px;
+            font-weight: 400;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color:RGB(106, 106, 106);
+            display: flex !important;
+            order: 1;
+            padding: 0.5em 0 2em 0;
+          }
+        }
+        &-btns{
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+      &__return-btn {
+        background: RGB(235, 235, 235)!important;
+        color: RGB(117, 117, 117)!important;
+        border-color: RGB(235, 235, 235)!important;
+      }
+      &__send-btn{
+        background: var(--primary-color)!important;
+        color:#fff!important;
+        border-color: var(--primary-color)!important;
+        margin-left: 10px;
       }
       &__labelForm{
         label {
           opacity: 0.8;
-          font-family: SFProDisplay;
-          font-size: 18px;
+          font-family:  "SF Pro Display";
+          font-size: 14px;
           font-weight: 500;
           font-stretch: normal;
           font-style: normal;
@@ -62,7 +154,9 @@
           color: #2f2f2f;
           display: flex !important;
           order: 1;
-
+          [aria-placeholder]{
+            font-weight: 400;
+          }
           &:before {
             display: flex !important;
             order: 2;
@@ -96,11 +190,14 @@
         }
 
       }
+      &__selectInputForm{
+        background-color: #fff!important;
+      }
       &__inputForm {
         opacity: 0.8;
-        font-family: SFProDisplay;
-        font-size: 16px;
-        font-weight: normal;
+        font-family: "SF Pro Display";
+        font-size: 14px;
+        font-weight: 400;
         font-stretch: normal;
         font-style: normal;
         line-height: normal;
@@ -113,8 +210,8 @@
       }
       &__textError{
         opacity: 0.8;
-        font-family: SFProDisplay;
-        font-size: 16px;
+        font-family: "SF Pro Display";
+        font-size: 14px;
         font-weight: normal;
         font-stretch: normal;
         font-style: normal;
@@ -129,9 +226,9 @@
       }
       &__selectForm{
         opacity: 0.8;
-        font-family: SFProDisplay;
-        font-size: 16px;
-        font-weight: normal;
+        font-family: "SF Pro Display";
+        font-size: 14px;
+        font-weight: 400;
         font-stretch: normal;
         font-style: normal;
         line-height: normal;
@@ -154,10 +251,9 @@
           }
         }
         .ant-select-selection-search {
-          width: 100% !important;
           .ant-select-selection-search-input{
             opacity: 0.8;
-            font-family: SFProDisplay;
+            font-family: "SF Pro Display";
             font-size: 16px;
             font-weight: normal;
             font-stretch: normal;
@@ -203,7 +299,7 @@
           align-items: center;
         }
         .tagTextForm{
-          font-family: SFProDisplay;
+          font-family:  "SF Pro Display";
           font-size: 16px;
           font-weight: normal;
           font-stretch: normal;
@@ -221,65 +317,9 @@
           border-color: #ff4d4f!important;
         }
       }
-      &__date{
-        width: 400px;
-        height: 54px;
-        padding: 16px 14px 16px 18px;
-        opacity: 0.8;
-        border-radius: 5px;
-        border: solid 3px #d4d4d4;
-        .ant-picker-clear{
-          font-size: 2em!important;
-        }
-        &:focus, &:hover, &.active, &:active,
-        &.ant-picker:focus, &.ant-picker-active,  &.ant-picker:active ,&.ant-picker-focused,  &.ant-picker:hover
-        {
-          border-color: var(--primary-color) !important;
-          border-right-width: 3px !important;
-          box-shadow: none!important;
-        }
-        .ant-picker-today-btn{
-          color: var(--secondary-color)!important;
-        }
-      }
-      &__popup-date{
-        a{
-          color:var(--primary-color)!important; ;
-        }
-      }
-      &__checkbox{
-        border-radius: 3px!important;
-        background-color: #ffffff!important;;
-        display: flex;
-        width: 100%;
-        align-items: center;
-        .ant-checkbox-inner{
-          border: solid 1.5px rgba(0, 0, 0, 0.15)!important;;
-          width: 24px;
-          height: 24px;
-          &:after{
-            left: 30%!important;
-          }
-        }
-        &--accept, &--conditions{
-          font-family: SFProDisplay;
-          font-size: 16px;
-          font-weight: normal;
-          font-stretch: normal;
-          font-style: normal;
-          line-height: normal;
-          letter-spacing: normal;
-          text-align: justify;
-          color: #646464;
-        }
-        &--conditions{
-          color: var(--primary-color);
-          text-decoration: underline;
-        }
-      }
-      &__create-btn{
-        width: 136px;
-        font-family: SFProDisplay;
+      &__signup-btn, &__send-btn,&__return-btn{
+        width: 164px;
+        font-family:  "SF Pro Display";
         font-size: 16px;
         font-weight: normal;
         font-stretch: normal;
@@ -289,39 +329,29 @@
         text-align: center;
         color: #ffffff;
         border-radius: 5px;
-        background:var(--primary-color);
-        border-color: var(--primary-color);
+        //background:var(--primary-color);
+        //border-color: var(--primary-color);
         display: flex;
         align-items: center;
         justify-content: center;
         float: right;
-        padding: 1.5em 1em;
+        padding: 1.3em;
         &:not([disabled]){
           &:focus, &:hover, &.active, &:active {
-            background: var(--primary-color) !important;
-            border-color: var(--primary-color) !important;;
+            //background: var(--primary-color) !important;
+            //border-color: var(--primary-color) !important;;
           }
         }
       }
 
     }
-@media screen and(max-width: 1024px){
-   .Form{
-     &__date{
-       width: 325px;
-     }
-     &__popover{
-       width: 330px;
-     }
-   }
-}
 @media screen and(max-width: 767px){
       .Form{
         form{
           padding: 2em 1em!important;
         }
         &__title{
-          font-family: SFProDisplay;
+          font-family:  "SF Pro Display";
           font-size: 22px;
           font-weight: bold;
           font-stretch: normal;
@@ -330,21 +360,19 @@
           letter-spacing: normal;
           color: var(--primary-color);
         }
-
-        &__info{
-          width: 30px;
-          height: 30px;
-        }
-        &__block-dates{
+        &__block{
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
+          .Form__labelForm {
+            width: 100%;
+          }
         }
         &__labelForm{
           //margin-bottom: 10px;
           label{
             opacity: 0.8;
-            font-family: SFProDisplay;
+            font-family:  "SF Pro Display";
             font-size: 18px;
             font-weight: 500;
             font-stretch: normal;
@@ -367,18 +395,9 @@
           border: solid 3px #d4d4d4;
           width: 100%;
         }
-        &__date{
-          //width: 314px;
-          width:100%;
-          height: 54px;
-          padding: 16px;
-          opacity: 0.5;
-          border-radius: 5px;
-          border: solid 3px #d4d4d4;
-        }
-        &__create-btn{
-          width: 136px;
-          font-family: SFProDisplay;
+        &__signup-btn{
+          width: 164px;
+          font-family:  "SF Pro Display";
           font-size: 16px;
           font-weight: normal;
           font-stretch: normal;
@@ -394,28 +413,7 @@
           align-items: center;
           justify-content: center;
           float: right;
-          padding: 1.5em 1em;
-        }
-        &__popover{
-          width: 320px;
-          &--content{
-            font-size: 14px;
-          }
-        }
-      }
-    }
-@media screen and (max-width: 360px){
-      .Form{
-        &__info {
-          width: 25px;
-          height: 25px;
-          font-size: 1.5em;
-        }
-        &__popover{
-          width: 270px;
-          &--content{
-            font-size: 14px;
-          }
+          padding: 1.3em;
         }
       }
     }

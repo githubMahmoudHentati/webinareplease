@@ -2,17 +2,20 @@
   &__copyright{
     display: flex;
     align-items: center;
+    color :RGB(53, 58, 64);
     .Footer__date{
       font-size: 16px;
       padding-right: 0.5em;
     }
     .Footer__admin{
+      font-family: "SF Pro Display";
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 400;
       font-stretch: normal;
       font-style: normal;
       line-height: normal;
       letter-spacing: normal;
+      color :RGB(53, 58, 64);
     }
   }
   &__action{

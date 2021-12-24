@@ -16,7 +16,7 @@ export const FooterInvitation = () => {
     return (
         <div className={` invitation-footer ${prefixCls}__copyright`} >
             <div className={`${prefixCls}__date`}>{FooterDataSource.copyright} {date} </div>
-            <div className={`${prefixCls}__admin`}> {FooterDataSource.client} </div>
+            <a href={"https://www.empreinte.com/"} target={"_blank"}><div className={`${prefixCls}__admin`}> {FooterDataSource.client}</div> </a>
         </div>
     )
 }
