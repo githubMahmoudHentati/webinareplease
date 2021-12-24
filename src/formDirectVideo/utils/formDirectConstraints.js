@@ -111,7 +111,9 @@ export const FormDirectConstraints = ()=>{
                 },
                 emails:[],
                 emailsGroup:[],
-                listMailsGroup:[]
+                listMailsGroup:[],
+                maxOnlineGuests:0,
+                maxOnsiteGuests:0
             }
         )
     }

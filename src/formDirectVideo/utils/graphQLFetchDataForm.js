@@ -81,36 +81,38 @@ export const GraphQLFetchDataForm = (values) => {
                     mailsGroup:values.invitation.emailsGroup,
                     mails:values.invitation.emails,
                     mailRule:values.invitation.addRules,
+                    maxOnlineGuests: values.invitation.maxOnlineGuests,
+                    maxOnsiteGuests: values.invitation.maxOnsiteGuests
                 },
-                social: [
-                    {
-                        title: values.general.liveTitle,
-                        logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
-                        Type: "Facebook Post",
-                        link: values.general.liveLink,
-                        active: values.socialTools[0].switch,
-                        planifications: values.socialTools[0].plan
-                    },
-                    {
-                        title: values.general.liveTitle,
-                        logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : "",
-                        Type: "Youtube Post",
-                        link: values.general.liveLink,
-                        active: values.socialTools[1].switch,
-                        planifications: values.socialTools[1].plan
-                    },
-                    {
-                        title: values.general.liveTitle,
-                        logo: values.general.fileList && values.general.fileList.length ?
-                            values.general.fileList[0].thumbUrl : "",
-                        Type: "LinkedIn Post",
-                        link: values.general.liveLink,
-                        active: values.socialTools[2].switch,
-                        planifications: values.socialTools[2].plan
-                    }
-                ]
+                // social: [
+                //     {
+                //         title: values.general.liveTitle,
+                //         logo: values.general.fileList && values.general.fileList.length ?
+                //             values.general.fileList[0].thumbUrl.substring(values.general.fileList[0].thumbUrl.lastIndexOf("/")+ 1, values.general.fileList[0].thumbUrl.length)  : "",
+                //         Type: "Facebook Post",
+                //         link: values.general.liveLink,
+                //         active: values.socialTools[0].switch,
+                //         planifications: values.socialTools[0].plan
+                //     },
+                //     {
+                //         title: values.general.liveTitle,
+                //         logo: values.general.fileList && values.general.fileList.length ?
+                //             values.general.fileList[0].thumbUrl : "",
+                //         Type: "Youtube Post",
+                //         link: values.general.liveLink,
+                //         active: values.socialTools[1].switch,
+                //         planifications: values.socialTools[1].plan
+                //     },
+                //     {
+                //         title: values.general.liveTitle,
+                //         logo: values.general.fileList && values.general.fileList.length ?
+                //             values.general.fileList[0].thumbUrl : "",
+                //         Type: "LinkedIn Post",
+                //         link: values.general.liveLink,
+                //         active: values.socialTools[2].switch,
+                //         planifications: values.socialTools[2].plan
+                //     }
+                // ]
             }
         },
         onCompleted: async (data) => {
@@ -179,6 +181,8 @@ export const GraphQLFetchDataForm = (values) => {
                     mailsGroup:values.invitation.emailsGroup,
                     mails:values.invitation.emails,
                     mailRule:values.invitation.addRules,
+                    maxOnlineGuests: values.invitation.maxOnlineGuests,
+                    maxOnsiteGuests: values.invitation.maxOnsiteGuests
                 },
                 social: [
                     {
@@ -363,7 +367,9 @@ export const GraphQLFetchDataForm = (values) => {
                     emailsGroup:data.getlive.invitationOut.mailsGroup,
                     emails:data.getlive.invitationOut.mails,
                     listMailsGroup:[],
-                    addRules:data.getlive.invitationOut.mailRule
+                    addRules:data.getlive.invitationOut.mailRule,
+                    maxOnlineGuests: data.getlive.invitationOut.maxOnlineGuests,
+                    maxOnsiteGuests: data.getlive.invitationOut.maxOnsiteGuests
                 },
                 socialTools:[
                     {

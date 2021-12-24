@@ -104,6 +104,9 @@ export const graphQL_shema = ()=> {
                     mails
                     mailRule
                     { beforeDay beforeHour beforeWeek isParticiped afterSubscription afterPrograming notVisualized }
+                    maxOnlineGuests
+                    maxOnsiteGuests
+                    
                 }
                 socialOut{
                     id

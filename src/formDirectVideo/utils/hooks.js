@@ -287,6 +287,19 @@ const Hooks=()=>{
         }))
     };
 
+    const handleChangeGuestRemotly = (event) => {
+        dispatch(setInvitationOnchange({
+            invitationNameChange: "maxOnlineGuests",
+            invitationValueChange: event
+        }))
+    }
+    const handleChangeGuestPresentiel = (event) => {
+        dispatch(setInvitationOnchange({
+            invitationNameChange: "maxOnsiteGuests",
+            invitationValueChange: event
+        }))
+    }
+
     return({
         generalOnChangeByName,
         generalOnChange,
@@ -315,7 +328,9 @@ const Hooks=()=>{
         sendPostMessage,
         checkKeyDown,
         scrollToRef,
-        generalInformationOnChangeAvatar
+        generalInformationOnChangeAvatar,
+        handleChangeGuestRemotly,
+        handleChangeGuestPresentiel
     })
 }
 

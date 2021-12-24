@@ -1,6 +1,6 @@
 import {ShowVideosList} from "../utils/ShowVideosConstraints"
 
-const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives , valueInfosGuests , valueInputInfosGuest}=ShowVideosList();
+const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives , valueInfosGuests , valueInputInfosGuest , valueModalInfosGuest}=ShowVideosList();
 
 const ShowVideosINITIALSTATE = {
     ListVideos : [],
@@ -13,7 +13,8 @@ const ShowVideosINITIALSTATE = {
     valueExportLives:valueExportLives(),
     valueInfosGuests:valueInfosGuests(),
     DiffusionLink:[],
-    valueInputInfosGuest:valueInputInfosGuest()
+    valueInputInfosGuest:valueInputInfosGuest(),
+    valueModalInfosGuest:valueModalInfosGuest()
 }
 
 export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=>{
@@ -97,6 +98,13 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
             return{
                 ...state,
                 valueInputInfosGuest:infosGuestInputObj
+            }
+        case "SET_INFOSGUESTModal":
+            const {infosGuestModalName,infosGuestsModalValue}=action.payload
+            const infosGuestModalObj = {...state.valueModalInfosGuest,[infosGuestModalName]: infosGuestsModalValue}
+            return{
+                ...state,
+                valueModalInfosGuest:infosGuestModalObj
             }
         case "SET_FILTER":
             const {deletedItems}=action.payload

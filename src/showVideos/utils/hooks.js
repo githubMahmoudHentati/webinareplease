@@ -1,11 +1,18 @@
 import { useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    setFilterVideosActions, setInfosLive, setLoadingDeleteShowVideo,
+    setFilterVideosActions,
+    setInfosLive,
+    setLoadingDeleteShowVideo,
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink, setInfosGuest, setInfosGuestInput
+    setShowVideoConstraintDataOnchange,
+    setExportLive,
+    setDiffusionLink,
+    setInfosGuest,
+    setInfosGuestInput,
+    setInfosGuestModal
 } from "../store/showVideosAction"
 import {useLazyQuery, useMutation} from "@apollo/client";
 import {graphQL_shema} from "./graphQL";
@@ -71,6 +78,8 @@ export  const Hooks=()=> {
     const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
     //Reducer infos Guests
     const infosGuests = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests)
+    //Reducer infos Guests
+    const infosGuestsModal = useSelector((state)=> state.ShowVideosReducerReducer.valueModalInfosGuest)
     //Reducer
     //Reducer export lives
     const DiffusionLinks = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
@@ -542,12 +551,12 @@ export  const Hooks=()=> {
 
       await  dispatch(setInfosGuest({infosGuestName:"idLive",infosGuestsValue:val}));
 
-       dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:true}));
+       dispatch(setInfosGuestModal({infosGuestModalName:"visibleInfosGuests",infosGuestsModalValue:true}));
 
     }
 
     const handleCancelModalInfosGuest = () => {
-        dispatch(setInfosGuest({infosGuestName:"visibleInfosGuests",infosGuestsValue:false}));
+        dispatch(setInfosGuestModal({infosGuestModalName:"visibleInfosGuests",infosGuestsModalValue:false}));
     }
 
     ///************** Filtrage Modal ***************//////
@@ -621,6 +630,7 @@ export  const Hooks=()=> {
         handleChangeInputModal,
         saveDiv,
         handleChangeInputModalFake,
-        saveDivXLSX
+        saveDivXLSX,
+        infosGuestsModal
     })
 }

@@ -26,7 +26,7 @@ function Invitation(){
     const [hoursDiffCalls , SetHoursDiffCalls] = useState(null);
     const [daysDiffCalls, SetDaysDiffCalls] = useState(null);
 
-    const {values,InvitationOnChangeChecked,invitationOnChangeSelect ,handleClickDelete }=Hooks()
+    const {values,InvitationOnChangeChecked,invitationOnChangeSelect ,handleClickDelete , handleChangeGuestRemotly , handleChangeGuestPresentiel}=Hooks()
     const {getMailsGroupList}=GraphQLFetchDataForm(values)
     let ParisMoment = moment().tz("Europe/Paris")
     useEffect(() => {
@@ -178,11 +178,19 @@ function Invitation(){
                 <h4>{t("formDirectVideo.sendingOutInvit")}</h4>
                 <div className={"DivEnvoiDesInvitations1"}>
                     <label htmlFor={"inputMaxInvitéDistance"}>{t("formDirectVideo.maxremote")}</label>
-                    <InputNumber id={"inputMaxInvitéDistance"} min={0}/>
+                    <Form.Item
+                        style={{width:"100%"}}
+                        name="maxguestremotly">
+                    <InputNumber name={"maxguestremotly"} id={"inputMaxInvitéDistance"} min={0} onChange={handleChangeGuestRemotly}/>
+                    </Form.Item>
                 </div>
                 <div className={"DivEnvoiDesInvitations2"}>
                     <label htmlFor={"inputMaxInvitéPresentiel"}>{t("formDirectVideo.maxguestpresent")}</label>
-                    <InputNumber id={"inputMaxInvitéPresentiel"} min={0}/>
+                    <Form.Item
+                        style={{width:"100%"}}
+                        name="maxguestpresential">
+                    <InputNumber name={"maxguestpresential"} id={"inputMaxInvitéPresentiel"} min={0} onChange={handleChangeGuestPresentiel}/>
+                    </Form.Item>
                 </div>
             </div>
 
