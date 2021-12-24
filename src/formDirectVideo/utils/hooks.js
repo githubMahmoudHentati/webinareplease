@@ -288,16 +288,30 @@ const Hooks=()=>{
     };
 
     const handleChangeGuestRemotly = (event) => {
+        if(event === null){
+            dispatch(setInvitationOnchange({
+                invitationNameChange: "maxOnlineGuests",
+                invitationValueChange: 0
+            }))
+        }else{
         dispatch(setInvitationOnchange({
             invitationNameChange: "maxOnlineGuests",
             invitationValueChange: event
         }))
+        }
     }
     const handleChangeGuestPresentiel = (event) => {
+        if(event === null){
+            dispatch(setInvitationOnchange({
+                invitationNameChange: "maxOnsiteGuests",
+                invitationValueChange: 0
+            }))
+        }else {
         dispatch(setInvitationOnchange({
             invitationNameChange: "maxOnsiteGuests",
             invitationValueChange: event
         }))
+        }
     }
 
     return({

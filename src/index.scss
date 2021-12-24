@@ -202,7 +202,9 @@ body{
 
     --color-block-invitation : #444444;
 
-    --color-text-date: rgba(0, 0, 0, 0.35)
+    --color-text-date: rgba(0, 0, 0, 0.35);
+
+    --color-input-number: #F5F5F5
 
 }
 :root.dark{
@@ -271,7 +273,9 @@ body{
 
     --background-overley-invitation : rgba(255,255,255,0.07);
 
-    --color-block-invitation : rgba(255,255,255,0.50)
+    --color-block-invitation : rgba(255,255,255,0.50);
+
+    --color-input-number: #4F4F4F
 
 }
 .showVideosDiv{
