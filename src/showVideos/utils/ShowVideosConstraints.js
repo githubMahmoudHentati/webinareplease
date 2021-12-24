@@ -68,7 +68,6 @@ export const ShowVideosList = ()=>{
     }
     const valueInfosGuests = () =>{
         return({
-            visibleInfosGuests : false,
             idLive:null,
             mailList:[],
         })
@@ -77,6 +76,11 @@ export const ShowVideosList = ()=>{
         return({
             valueInputModal:"",
             valueInputModalFake:""
+        })
+    }
+    const valueModalInfosGuest = () =>{
+        return({
+            visibleInfosGuests : false,
         })
     }
 
@@ -89,7 +93,8 @@ export const ShowVideosList = ()=>{
         valuesInfosLives,
         valueExportLives,
         valueInfosGuests,
-        valueInputInfosGuest
+        valueInputInfosGuest,
+        valueModalInfosGuest
     })
 
 }

@@ -19,17 +19,17 @@ export const BarHeader = () => {
     const selectedMenu = useSelector((state)=> state.Reducer.accountMenu)
     const stickerElm = document.querySelector('.title-col')
     const rootEl = document.querySelector('.App')
-    const observer = new IntersectionObserver(
-        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
-        {threshold: [1]}
-    );
-
-    useEffect(() => {
-        if(stickerElm) {
-            // debugger
-            observer.observe(stickerElm)
-        }
-    }, );
+    // const observer = new IntersectionObserver(
+    //     ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
+    //     {threshold: [1]}
+    // );
+    //
+    // useEffect(() => {
+    //     if(stickerElm) {
+    //         // debugger
+    //         observer.observe(stickerElm)
+    //     }
+    // }, );
 
     return (
         <Col ref={refBar} span={24} className={`title-col ${!darkMode?"light":"dark"}`} >

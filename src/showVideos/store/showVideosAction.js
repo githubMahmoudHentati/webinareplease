@@ -84,6 +84,12 @@ export function setInfosGuestInput(e){
         payload:e
     }
 }
+export function setInfosGuestModal(e){
+    return{
+        type:"SET_INFOSGUESTModal",
+        payload:e
+    }
+}
 export function setFilter(e){
     return{
         type :"SET_FILTER",

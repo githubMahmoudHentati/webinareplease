@@ -50,8 +50,9 @@
 .title-col{
   marginBottom: "25px";
   padding: 14px 15px;
-  width:100%;
-  position:sticky;
+  width:100% !important;
+  position:-webkit-sticky;
+  position:relative;
   top:-1px;
   z-index:1;
   background: RGBA(0, 0, 0, 0.04);
@@ -68,6 +69,7 @@
   &.dark{
     background-color: RGBA(255, 255, 255, 0.04);
   }
+
 }
 //.title-col.is-pinned {
 //  background-color: #f0f0f0;
@@ -316,6 +318,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  height: auto;
+  margin-bottom: 2%;
 }
 .title_invitation{
   width: 100%;

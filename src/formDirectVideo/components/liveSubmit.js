@@ -67,6 +67,8 @@ export const LiveSubmit=(props)=>{
                     //**********configuration live info***********/////
                     emails:values.invitation.emails,
                     emailsGroup:values.invitation.emailsGroup,
+                    maxguestremotly:values.invitation.maxOnlineGuests,
+                    maxguestpresential:values.invitation.maxOnsiteGuests
                 }
             ))
             // dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
@@ -86,18 +88,18 @@ export const LiveSubmit=(props)=>{
 
     const stickyElm = document.querySelector('.title-col')
     const rootEl = document.querySelector('.App')
-    const observer = new IntersectionObserver(
-        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
-        {threshold: [1]}
-    );
-
-
-    useEffect(() => {
-        if(stickyElm) {
-            // debugger
-            observer.observe(stickyElm)
-        }
-    }, );
+    // const observer = new IntersectionObserver(
+    //     ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
+    //     {threshold: [1]}
+    // );
+    //
+    //
+    // useEffect(() => {
+    //     if(stickyElm) {
+    //         // debugger
+    //         observer.observe(stickyElm)
+    //     }
+    // }, );
 
 
     return(

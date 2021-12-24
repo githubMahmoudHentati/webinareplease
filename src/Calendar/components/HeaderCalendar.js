@@ -23,17 +23,17 @@ function HeaderCalendar() {
 
     const stickyElm = document.querySelector('.MesDirects-sticky')
     const rootEl = document.querySelector('.App')
-    const observer = new IntersectionObserver(
-        ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
-        {threshold: [1]}
-    );
-
-    useEffect(() => {
-        if(stickyElm) {
-            // debugger
-            observer.observe(stickyElm)
-        }
-    }, );
+    // const observer = new IntersectionObserver(
+    //     ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
+    //     {threshold: [1]}
+    // );
+    //
+    // useEffect(() => {
+    //     if(stickyElm) {
+    //         // debugger
+    //         observer.observe(stickyElm)
+    //     }
+    // }, );
 
     return (
         <div>

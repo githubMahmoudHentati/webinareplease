@@ -1057,7 +1057,7 @@ body{
 }
 
 .MesDirects-sticky{
-    position: sticky;
+    position: relative;
     top: -1px;
     z-index: 10 !important;
     padding: 0%;

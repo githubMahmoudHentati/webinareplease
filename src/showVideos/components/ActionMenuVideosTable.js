@@ -65,7 +65,8 @@ function useActionMenu({record}) {
         handleChangeInputModal,
         saveDiv,
         handleChangeInputModalFake,
-        saveDivXLSX
+        saveDivXLSX,
+        infosGuestsModal
     } = Hooks()
 
 
@@ -453,7 +454,7 @@ function useActionMenu({record}) {
 
             {/*Modal Invités*/}
             <Modal
-                visible={infosGuests.visibleInfosGuests}
+                visible={infosGuestsModal.visibleInfosGuests}
                 title={t("ShowVideo.guestList")}
                 onCancel={handleCancelModalInfosGuest}
                 footer={[
