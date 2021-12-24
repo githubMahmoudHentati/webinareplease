@@ -578,8 +578,10 @@ export  const Hooks=()=> {
         html2canvas(document.querySelector("#DivExport")).then(canvas => {
             document.body.appendChild(canvas);  // if you want see your screenshot in body.
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, 'PNG', 0, 0, 0, 0);
+            const pdf = new jsPDF("p", "mm", "a4");
+            let width = pdf.internal.pageSize.getWidth();
+            let height = pdf.internal.pageSize.getHeight();
+            pdf.addImage(imgData, 'PNG', 0, 0, width, height);
             pdf.save("listEmails.pdf");
         });
     }

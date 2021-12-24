@@ -181,7 +181,7 @@ function Invitation(){
                     <Form.Item
                         style={{width:"100%"}}
                         name="maxguestremotly">
-                    <InputNumber name={"maxguestremotly"} id={"inputMaxInvitéDistance"} min={0} onChange={handleChangeGuestRemotly}/>
+                    <InputNumber name={"maxguestremotly"} id={"inputMaxInvitéDistance"} defaultValue={values.invitation.maxOnlineGuests} min={0} max={1000000000} onChange={handleChangeGuestRemotly}/>
                     </Form.Item>
                 </div>
                 <div className={"DivEnvoiDesInvitations2"}>
@@ -189,7 +189,7 @@ function Invitation(){
                     <Form.Item
                         style={{width:"100%"}}
                         name="maxguestpresential">
-                    <InputNumber name={"maxguestpresential"} id={"inputMaxInvitéPresentiel"} min={0} onChange={handleChangeGuestPresentiel}/>
+                    <InputNumber name={"maxguestpresential"} id={"inputMaxInvitéPresentiel"} defaultValue={values.invitation.maxOnsiteGuests} min={0} max={1000000000} onChange={handleChangeGuestPresentiel}/>
                     </Form.Item>
                 </div>
             </div>
