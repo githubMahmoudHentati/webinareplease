@@ -173,6 +173,29 @@ function useActionMenu({record}) {
         }
     }
     // fonction pour copier url auditeur
+    const CopyUrlTraducteur = async () => {
+        if (document.getElementById("myUrlTraducteur").value === "") {
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
+        } else {
+            await setStatusSuccessMessages(false)
+            document.getElementById("myUrlTraducteur").select();
+            document.execCommand("Copy");
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
+        }
+    }
+
+    // fonction pour copier url auditeur
     const CopyUrlAuditeur = async () => {
         if (document.getElementById("myUrlAuditeur").value === "") {
             await setStatusErrorMessages(false)
@@ -431,6 +454,19 @@ function useActionMenu({record}) {
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyUrlAuditeur} className={"copy_icon"}/>
+                               </Tooltip>
+                           }
+                    />
+                </div>
+                {/*./div_Url_diffusion*/}
+
+                <div className="div_Url_diffusion">
+                    <span>{t("ShowVideo.translatorUrl")}</span>
+                    <Input id="myUrlTraducteur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"translatorUrl"}
+                           value={"https://demo.webtv-solution.com/fo/embed/267"}
+                           suffix={
+                               <Tooltip title={t("ShowVideo.Copier")}>
+                                   <CopyFilled onClick={CopyUrlTraducteur} className={"copy_icon"}/>
                                </Tooltip>
                            }
                     />

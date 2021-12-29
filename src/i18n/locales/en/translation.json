@@ -152,6 +152,7 @@
     "AddParticipant": "Add a participant",
     "UpdateParticipant": "Update participant",
     "InterActiveOption": "Live Interactive option",
+    "Interpreters": "Interpreters",
     "Chat": "Chat (moderated name)",
     "Comments": "Comments (moderated)",
     "Likes": "Likes",
@@ -266,8 +267,18 @@
     },
     "sendingOutInvit": "Limit of invitations",
     "maxremote": "Max remote guests",
-    "maxguestpresent": "Max of guests present"
-
+    "maxguestpresent": "Max of guests present",
+    "chooseLanguage": "choose language(s)",
+    "addLanguage": "Add language(s)",
+    "french": "French",
+    "englich": "English",
+    "deutsch": "Deutsch",
+    "italian": "Italian",
+    "spanish": "Spanish",
+    "portuguese": "Portuguese",
+    "russian": "Russian",
+    "japanese": "Japanese",
+    "korean": "Korean"
   },
   "PackagePayment": {
     "Packages": "Packages",
@@ -341,6 +352,7 @@
     "UrlParticipant": "Participant url",
     "Copier": "Copy",
     "AuditorUrl": "Auditor url",
+    "translatorUrl": "Url Translator",
     "IntegrationLink": "Integration link",
     "ExportLink": "Export links",
     "Home": "Home",
