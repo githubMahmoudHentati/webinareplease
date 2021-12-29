@@ -52,7 +52,9 @@ export const Configuration = () => {
         configurationOnChangeButton,
         ConfigurationOnChangeSelect,
         getFirstCharacter,
-        scrollToRef
+        scrollToRef,
+        handleChange,
+        configurationOnChangeByNameSwitch
     } = Hooks(form)
 
     // use Selector redux
@@ -215,6 +217,123 @@ export const Configuration = () => {
                                             <p>{t("formDirectVideo.Likes")}</p>
                                  </Checkbox>
                             </Col>
+                        </Row>
+                    </Col>
+                    <Col span={24}>
+                        <Row gutter={[0, 15]}>
+                            <Col className={"col-forms"} style={{marginRight:"10px"}}>
+                                <span style={{
+                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85"
+                                }}>{t("formDirectVideo.Interpreters")}</span>
+                            </Col>
+
+                            <Col>
+                                <Switch checked={values.configuration.switchLanguages}
+                                        name="switchSpeaker"
+                                        onChange={(value) => configurationOnChangeByNameSwitch(value, "switchLanguages")}
+                                />
+                            </Col>
+                            { values.configuration.switchLanguages &&
+                            <Col className={"col-forms"} span={24}>
+                                <span style={{
+                                    color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85",
+                                }}>{t("formDirectVideo.addLanguage")}</span>
+                            </Col>}
+                            { values.configuration.switchLanguages &&
+                            <Col span={24} className={"col-forms  interactive-options"}>
+
+                                <Select
+                                    mode="multiple"
+                                    style={{ width: '100%' }}
+                                    placeholder={t("formDirectVideo.chooseLanguage")}
+                                    defaultValue={values.configuration.languages}
+                                    onChange={handleChange}
+                                    optionLabelProp="label"
+                                    getPopupContainer={() => document.querySelector(".col-forms")}
+                                >
+                                    <Option value="fr" label={t("formDirectVideo.french")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="fr">
+          🇫🇷
+        </span>
+                                            {t("formDirectVideo.french")}
+                                        </div>
+                                    </Option>
+                                    <Option value="en" label={t("formDirectVideo.englich")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="en">
+          🇺🇸
+        </span>
+                                            {t("formDirectVideo.englich")}
+                                        </div>
+                                    </Option>
+                                    <Option value="ger" label={t("formDirectVideo.deutsch")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="ger">
+          🇩🇪
+        </span>
+                                            {t("formDirectVideo.deutsch")}
+                                        </div>
+                                    </Option>
+                                    <Option value="ita" label={t("formDirectVideo.italian")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="ita">
+          🇮🇹
+        </span>
+                                            {t("formDirectVideo.italian")}
+                                        </div>
+                                    </Option>
+                                    <Option value="esp" label={t("formDirectVideo.spanish")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="Korea">
+          🇪🇸
+        </span>
+                                            {t("formDirectVideo.spanish")}
+                                        </div>
+                                    </Option>
+                                    <Option value="por" label={t("formDirectVideo.portuguese")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="Korea">
+          🇵🇹
+        </span>
+                                            {t("formDirectVideo.portuguese")}
+                                        </div>
+                                    </Option>
+                                    <Option value="rus" label={t("formDirectVideo.russian")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="Russie">
+          🇷🇺
+        </span>
+                                            {t("formDirectVideo.russian")}
+                                        </div>
+                                    </Option>
+                                    <Option value="china" label="Mandarin">
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="China">
+          🇨🇳
+        </span>
+                                            Mandarin
+                                        </div>
+                                    </Option>
+                                    <Option value="japan" label={t("formDirectVideo.japanese")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="Japan">
+          🇯🇵
+        </span>
+                                            {t("formDirectVideo.japanese")}
+                                        </div>
+                                    </Option>
+                                    <Option value="korea" label={t("formDirectVideo.korean")}>
+                                        <div className="demo-option-label-item">
+        <span role="img" aria-label="Korea">
+          🇰🇷
+        </span>
+                                            {t("formDirectVideo.korean")}
+                                        </div>
+                                    </Option>
+                                </Select>
+
+                            </Col>}
                         </Row>
                     </Col>
                     <Col span={24}>

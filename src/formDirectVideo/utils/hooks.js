@@ -118,6 +118,9 @@ const Hooks=()=>{
         values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
         name==="liveAutomaticArchiving"&&dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
+    const configurationOnChangeByNameSwitch = (value , name) =>{
+        dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
+    }
 
     const configurationOnChangeButton = async (event) => {
 
@@ -313,6 +316,10 @@ const Hooks=()=>{
         }))
         }
     }
+    const handleChange =(value)=>{
+        console.log(`selected ${value}`);
+        dispatch(setConfigurationOnchange({configurationNameChange:"languages", configurationValueChange:value}));
+    }
 
     return({
         generalOnChangeByName,
@@ -344,7 +351,9 @@ const Hooks=()=>{
         scrollToRef,
         generalInformationOnChangeAvatar,
         handleChangeGuestRemotly,
-        handleChangeGuestPresentiel
+        handleChangeGuestPresentiel,
+        handleChange,
+        configurationOnChangeByNameSwitch
     })
 }
 
