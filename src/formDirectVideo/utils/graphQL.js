@@ -98,6 +98,7 @@ export const graphQL_shema = ()=> {
                      response 
                      }
                      }
+                     languages
                 }
                 invitationOut{
                     mailsGroup

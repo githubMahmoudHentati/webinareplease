@@ -20,6 +20,7 @@ import {
     setConstraintDataOnchange,
     setGeneralInformationOnchange
 } from "../../compteSettings/store/accountSettingsAction";
+import {useEffect} from "react";
 
 const Hooks=()=>{
     const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const Hooks=()=>{
     let matchesMedia   = useWindowDimensions()  // fonction js pour afficher interface seulement en 767px de width
 
     const scrollToRef = (ref) => ref.current.scrollIntoView({ behavior: "smooth" })
+
 
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
