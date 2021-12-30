@@ -218,6 +218,10 @@ export  const Hooks=()=> {
                 exportLivesName: "integrationUrl",
                 exportLivesValue: data.GetLinkExport.integrationUrl
             }));
+            dispatch(setExportLive({
+                exportLivesName: "translatorUrl",
+                exportLivesValue: data.GetLinkExport.translatorUrl
+            }));
         }
 
     })

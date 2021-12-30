@@ -330,6 +330,52 @@ function useActionMenu({record}) {
         }
     }
 
+    // copy Permalien
+    const CopyPermalien = async (e) => {
+        if (document.getElementById("myPermalink").value === "") {
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
+        } else {
+            await setStatusSuccessMessages(false)
+            document.getElementById("myPermalink").select();
+            document.execCommand("Copy");
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
+        }
+    }
+
+    // copy Password
+    const CopyPassword = async (e) => {
+        if (document.getElementById("myPassword").value === "") {
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
+        } else {
+            await setStatusSuccessMessages(false)
+            document.getElementById("myPassword").select();
+            document.execCommand("Copy");
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
+        }
+    }
+
 
     const actionColumnView = (
         <div className="action">
@@ -435,6 +481,33 @@ function useActionMenu({record}) {
                 ]}
             >
                 <div className="div_Url_diffusion">
+                    <span>{t("ShowVideo.permalink")} </span>
+                    <Input id="myPermalink" placeholder="//demo.webtv-solution.com/fo/embed/267"
+                           name={"participantUrl"} value={"https://demo.webtv-solution.com/fo/embed/267"}
+                           suffix={
+                               <Tooltip title={t("ShowVideo.Copier")}>
+                                   <CopyFilled onClick={CopyPermalien} className={"copy_icon"}/>
+                               </Tooltip>
+                           }
+                    />
+                </div>
+                {/*./Permalien*/}
+                <div className="div_Url_diffusion">
+                    <span>{t("ShowVideo.password")} </span>
+                    <Input id="myPassword" placeholder="//demo.webtv-solution.com/fo/embed/267"
+                           name={"participantUrl"} value={"YNZJH87-Y"}
+                           suffix={
+                               <Tooltip title={t("ShowVideo.Copier")}>
+                                   <CopyFilled onClick={CopyPassword} className={"copy_icon"}/>
+                               </Tooltip>
+                           }
+                    />
+                </div>
+                <div className={"div_save_password"}>
+                    <Button type="primary">{t("ShowVideo.save")}</Button>
+                </div>
+                {/*./Password*/}
+                <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.UrlParticipant")} </span>
                     <Input id="myUrlParticipant" placeholder="//demo.webtv-solution.com/fo/embed/267"
                            name={"participantUrl"} value={exportLives.participantUrl}
@@ -463,7 +536,7 @@ function useActionMenu({record}) {
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.translatorUrl")}</span>
                     <Input id="myUrlTraducteur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"translatorUrl"}
-                           value={"https://demo.webtv-solution.com/fo/embed/267"}
+                           value={exportLives.translatorUrl}
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyUrlTraducteur} className={"copy_icon"}/>

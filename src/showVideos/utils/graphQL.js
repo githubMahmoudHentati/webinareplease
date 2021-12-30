@@ -46,6 +46,7 @@ export const graphQL_shema = ()=> {
     participantUrl
     auditorUrl
     integrationUrl
+     translatorUrl
      }
     }
     `;

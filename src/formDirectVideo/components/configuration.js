@@ -219,6 +219,7 @@ export const Configuration = () => {
                             </Col>
                         </Row>
                     </Col>
+                    { window.process.env.HAS_TRANSLATOR &&
                     <Col span={24}>
                         <Row gutter={[0, 15]}>
                             <Col className={"col-forms"} style={{marginRight:"10px"}}>
@@ -335,7 +336,7 @@ export const Configuration = () => {
 
                             </Col>}
                         </Row>
-                    </Col>
+                    </Col>}
                     <Col span={24}>
                         <Row gutter={[0, 15]}>
                             <Col className={"col-forms"} span={24}>

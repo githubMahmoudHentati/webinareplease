@@ -64,6 +64,7 @@ export const ShowVideosList = ()=>{
             participantUrl : "",
             auditorUrl : "",
             integrationUrl : "",
+            translatorUrl : ""
         })
     }
     const valueInfosGuests = () =>{
