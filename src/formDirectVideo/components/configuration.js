@@ -242,9 +242,13 @@ export const Configuration = () => {
                             </Col>}
                             { values.configuration.switchLanguages &&
                             <Col span={24} className={"col-forms  interactive-options"}>
-
+                                <Form.Item
+                                    style={{width:"100%"}}
+                                    name="languages"
+                                >
                                 <Select
                                     mode="multiple"
+                                    name={"languages"}
                                     style={{ width: '100%' }}
                                     placeholder={t("formDirectVideo.chooseLanguage")}
                                     defaultValue={values.configuration.languages}
@@ -333,6 +337,7 @@ export const Configuration = () => {
                                         </div>
                                     </Option>
                                 </Select>
+                                </Form.Item>
 
                             </Col>}
                         </Row>

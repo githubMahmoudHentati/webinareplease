@@ -64,6 +64,7 @@ export const LiveSubmit=(props)=>{
                     videoMode: values.configuration.videoMode,
                     theme: values.configuration.theme,
                     tags: values.configuration.tags,
+                    languages:values.configuration.languages,
                     //**********configuration live info***********/////
                     emails:values.invitation.emails,
                     emailsGroup:values.invitation.emailsGroup,
