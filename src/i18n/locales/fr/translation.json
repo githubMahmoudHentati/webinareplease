@@ -418,7 +418,10 @@
         "title": "Félicitation !",
         "subscribed": "Vous étes maintenant inscrit à l'événement",
         "verif": "veuillez vérifier la boîte de réception de votre messagerie pour y accéder à l’évenement"
-      }
+      },
+      "places":" place(s) disponible(s)",
+      "successSend":" Nous vous avons envoyé un e-mail à l’adresse: ",
+      "verif":"Veuillez vérifier la boîte de réception de votre messagerie"
     },
     "footer": {
         "legal": "Légal",

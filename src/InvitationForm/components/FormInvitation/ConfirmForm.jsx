@@ -4,9 +4,10 @@ import {Form, Input, Button, Layout, Space, Select, TimePicker, Popover, ConfigP
 import {useHooksInvitationForm} from "../../utils/useHooksInvitationForm";
 const {  Header } = Layout;
 
-export const ConfirmForm = ({prefixCls, returnToInscription}) =>{
+export const ConfirmForm = ({prefixCls}) =>{
     const {
-        state,submitForm,handleChangeFields,validateMessages,FormDataSource,buttonItemLayout,sendConfirm
+        state,submitForm,handleChangeFields,validateMessages,FormDataSource,buttonItemLayout,
+        sendConfirm, returnToInscription
     } = useHooksInvitationForm()
     return (
         <div className={`${prefixCls}__confirm`}>
@@ -22,15 +23,15 @@ export const ConfirmForm = ({prefixCls, returnToInscription}) =>{
                 <Input
                     name={"email"}
                     type={"email"}
-                    className={`${prefixCls}__inputForm `+ (  state.errorEmail ? ` ${prefixCls}__error` : "")}
+                    className={`${prefixCls}__inputForm `+ (   state.errorEmail || state.errorExistEmail||   state.empty.includes("email") ? ` ${prefixCls}__error` : "")}
                     placeholder={FormDataSource.form.email}
                     onChange={handleChangeFields}
                     value={state.email}
 
                 />
                 {
-                    state.errorEmail ||   state.errorExistEmail ||   state.empty.includes("email")
-                        ?
+                    (state.errorEmail ||   state.errorExistEmail ||   state.empty.includes("email"))
+                        &&
                         <span className={`${prefixCls}__textError`}>
                                 {
                                     state.errorEmail
@@ -41,7 +42,6 @@ export const ConfirmForm = ({prefixCls, returnToInscription}) =>{
 
                                 }
                          </span>
-                        : null
 
                 }
             </Form.Item>
@@ -52,7 +52,7 @@ export const ConfirmForm = ({prefixCls, returnToInscription}) =>{
                 </Form.Item>
                 <Form.Item {...buttonItemLayout} className={`${prefixCls}__labelForm`}>
                     <Button type="primary" htmlType="submit" className={`${prefixCls}__send-btn`}
-                            onClick={(event) => sendConfirm(event)}>{FormDataSource.form.send}</Button>
+                            onClick={sendConfirm}>{FormDataSource.form.send}</Button>
                 </Form.Item>
             </div>
         </div>

@@ -12,6 +12,7 @@ import {ResetPasswordReducer} from "../../resetPassword/store/resetPasswordReduc
 import {PackagePayementReducer} from "../../PackagePayement/store/PackagePayementReducer";
 import {CalendarReducer} from "../../Calendar/store/calendarReducer";
 import {ConfirmAccountReducer} from "../../confirmAccount/store/forgetPasswordReducer";
+import {InvitationReducer} from "../../InvitationForm/store/InvitationFormReducer";
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -34,7 +35,8 @@ const rootReducer = combineReducers({
     ResetPasswordReducer,
     PackagePayementReducer,
     CalendarReducer,
-    ConfirmAccountReducer
+    ConfirmAccountReducer,
+    InvitationReducer
 })
 
 export default  persistReducer(persistConfig , rootReducer)

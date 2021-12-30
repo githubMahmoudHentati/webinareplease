@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import i18n from "../../../i18n/index";
 import moment from 'moment';
@@ -10,38 +10,37 @@ import {Form, Input, Button, Layout, Space, Select, TimePicker, Popover, ConfigP
 import {HeaderForm} from './HeaderForm'
 import {InscriptionForm} from './InscriptionForm'
 import {ConfirmForm} from "./ConfirmForm";
+import {ConfirmSuccessForm} from "./ConfirmSuccessForm";
 import {SuccessInscription} from "./SuccessInscription";
-const { Content, Header, Footer } = Layout;
+import {useGraphQLFetchDataForm} from '../../utils/graphQLFetchDataForm'
 
 import {useHooksInvitationForm} from "../../utils/useHooksInvitationForm";
+import {setVisibleInscriptionPage} from '../../store/InvitationFormAction'
 import './FormInvitation.scss'
+const { Content, Header, Footer } = Layout;
+
 const { Option } = Select;
 
 export const FormInvitation =()=>{
     const {
-        formLayout,validateMessages
+        formLayout,validateMessages, infoToRegister,
     } = useHooksInvitationForm()
+    const cryptext= useSelector((state)=>state.InvitationReducer.cryptext)
+    const visibleInscriptionPage= useSelector((state)=>state.InvitationReducer.visibleInscriptionPage)
+    console.log("cryptext----------",cryptext)
     const [form] = Form.useForm();
+    const dispatch=useDispatch()
     const format = 'HH:mm';
     const dateFormat = 'DD-MM-YYYY';
     const { t } = useTranslation();
     const prefixCls = "Form";
     const lang = useSelector(state => state.lang);
     const formItemLayout = null;
-    const [visibleInscriptionPage, setVisibleInscriptionPage] = useState({
-        inscription:true,
-        confirm:false,
-        success:false
+    const {getInfoToRegister} = useGraphQLFetchDataForm(cryptext)
+    useEffect(()=>{
+        getInfoToRegister()
 
-    });
-    const handleConfirmPage = () =>{
-        console.log("handleConfirmPage****click")
-        setVisibleInscriptionPage({success:false, inscription: false,confirm:true})
-    }
-    const returnToInscription = () =>{
-        console.log("returnToInscription****click")
-        setVisibleInscriptionPage({success:false, inscription: true,confirm:false})
-    }
+    },[])
     return (
 
         <div id={prefixCls} className={`${prefixCls}`}>
@@ -58,16 +57,17 @@ export const FormInvitation =()=>{
             >
                 <HeaderForm prefixCls={prefixCls} />
                 {
-                    visibleInscriptionPage.inscription &&   <InscriptionForm prefixCls={prefixCls} handleConfirmPage={handleConfirmPage} />
-                }
-
-                {
-                    visibleInscriptionPage.confirm &&     <ConfirmForm prefixCls={prefixCls} returnToInscription={returnToInscription}/>
+                    visibleInscriptionPage.inscription && <InscriptionForm prefixCls={prefixCls}  />
                 }
                 {
-                    visibleInscriptionPage.success && <SuccessInscription prefixCls={prefixCls}  />
+                    visibleInscriptionPage.confirm &&     <ConfirmForm prefixCls={prefixCls} />
                 }
-
+                {
+                    visibleInscriptionPage.confirmSuccess &&     <ConfirmSuccessForm prefixCls={prefixCls} />
+                }
+                {
+                    visibleInscriptionPage.inscriptionSuccess && <SuccessInscription prefixCls={prefixCls}  />
+                }
             </Form>
         </div>
 

@@ -414,7 +414,10 @@
         "title": "Congratulations !",
         "subscribed": "You are now registered for the event",
         "verif": "Please check your email inbox to access the event"
-      }
+      },
+      "places":" Available seats",
+      "successSend":"We have sent you an email to: ",
+      "verif":"Please check your email inbox"
     },
     "footer": {
       "legal": "Legal",

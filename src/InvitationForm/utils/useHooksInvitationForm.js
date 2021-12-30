@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {useHistory} from "react-router-dom";
 import moment from 'moment';
 import "moment/locale/zh-cn";
 import locale_fr from "antd/es/locale/fr_FR";
 import locale_en from "antd/es/locale/en_US";
 import {Link} from 'react-router-dom'
 import i18n from "../../i18n/index";
-// import {service} from "../../core/Service/service";
-// import GenerateModal from "../GenerateModal/GenerateModal";
-
+import {useSelector,useDispatch} from 'react-redux'
+import {setSelectedField, setSelectedParticipationField, setVisibleInscriptionPage} from '../store/InvitationFormAction'
+import {useGraphQLFetchDataForm} from "./graphQLFetchDataForm";
 export const useHooksInvitationForm = () => {
 
     const [visible, setVisible] = useState(true);
@@ -17,8 +16,11 @@ export const useHooksInvitationForm = () => {
     const [show, setShow] = useState(false);
     const [videoUri, setVideoUri] = useState("");
     const [formLayout, setFormLayout] = useState('vertical');
-    const [cryptext, setCryptext]=useState("")
-    // eventHub.on('changeLang', changeLang)
+    const infoToRegister= useSelector((state)=>state.InvitationReducer.infoToRegister)
+    const selectedParticipation= useSelector(state=>state.InvitationReducer.selectedParticipation)
+    const cryptext= useSelector((state)=>state.InvitationReducer.cryptext)
+    const {confirmRegistration} = useGraphQLFetchDataForm(cryptext)
+    const dispatch = useDispatch()
     const buttonItemLayout =
         formLayout === 'horizontal'
             ? {
@@ -29,50 +31,56 @@ export const useHooksInvitationForm = () => {
             }
             : null;
     moment.locale(localStorage.getItem("set-lang") || 'fr');
-    const history=useHistory()
+
     const format = 'HH:mm';
     const dateFormat = 'DD-MM-YYYY';
-    console.log("cryptext",cryptext)
     const getTime = (time) => {
         var d = new Date(time);
         var h = addZero(d.getHours());
         var m = addZero(d.getMinutes());
         return h + ":" + m
     }
-    const partipationOptions=[
-        {
-            id:1,
-            value:"A distance ",
-            name: 'A distance '
-        },
-        {
-            id:2,
-            value:"Présentiel ",
-            name: 'Présentiel '
-        }
-    ]
     const [state, setState] = useState({
-        lastName: "",
-        firstName: "",
+        lastNameInvitor: "",
+        firstNameInvitor: "",
         email: "",
-        participation:partipationOptions[0].value,
+        participation:[
+            {
+                id:1,
+                name:`A distance `,
+                value:0,
+            },
+            {
+                id:2,
+                name:`Présentiel `,
+                value:0,
+            }
+        ],
+        selectedParticipation:{
+            id:1,
+            name:`A distance `,
+            value:0,
+        },
         lang: locale_fr,
         showRobot: true,
         errorEmail:false,
         errorExistEmail:false,
-        empty:[]
+        empty:[],
+        date: "",
+        description: "",
+        title:"",
+        defaultParticipationValue : ""
     });
     const validateMessages = {
         required:  i18n.t("InvitationPage.validations.required"),
         exist : i18n.t('InvitationPage.validations.exist'),
         email:  i18n.t("InvitationPage.validations.email"),
         types: {
-            lastName: "${label} "+ i18n.t("InvitationPage.validations.lastName"),
-            firstName: "${label} "+ i18n.t("InvitationPage.validations.firstName"),
+            lastNameInvitor: "${label} "+ i18n.t("InvitationPage.validations.lastName"),
+            firstNameInvitor: "${label} "+ i18n.t("InvitationPage.validations.firstName"),
             email: "${label} "+ i18n.t("InvitationPage.validations.email"),
         },
     };
-
 
     const FormDataSource={
         form:{
@@ -86,6 +94,8 @@ export const useHooksInvitationForm = () => {
             send:i18n.t('InvitationPage.form.send'),
             confirm:i18n.t('InvitationPage.form.confirm') ,
             resend:i18n.t('InvitationPage.form.resend'),
+            date:i18n.t('InvitationPage.form.date'),
+            time:i18n.t('InvitationPage.form.time'),
             info:{
                 text:  i18n.t('InvitationPage.form.info.text'),
                 link:  i18n.t('InvitationPage.form.info.link'),
@@ -94,7 +104,10 @@ export const useHooksInvitationForm = () => {
                title:i18n.t('InvitationPage.form.success.title'),
                subscribed:i18n.t('InvitationPage.form.success.subscribed'),
                verif: i18n.t('InvitationPage.form.success.verif'),
-            }
+            },
+            places:i18n.t('InvitationPage.form.places'),
+            successSend:i18n.t('InvitationPage.form.successSend'),
+            verif:i18n.t('InvitationPage.form.verif')
         },
         successWebinar:{
             image:"../../../public/assets/images/success.png",
@@ -106,11 +119,20 @@ export const useHooksInvitationForm = () => {
             upload:i18n.t("modal.upload")
         }
     }
+    const getDefaultParticipation = ( ) =>{
+        return  state.selectedParticipation.name  +  ' — ' + state.selectedParticipation.value  +  FormDataSource.form.places
+    }
     useEffect(()=>{
-        history && history.pathname && setCryptext( history.pathname.replace('/invitation/',''))
+        console.log("use effect infoToRegister", infoToRegister)
+        if(infoToRegister && Object.keys(infoToRegister).length> 0)
+        setState({...state, ...infoToRegister, selectedParticipation: infoToRegister.selectedParticipation,})//, selectedParticipation: infoToRegister.selectedParticipation
 
-    },[])
-
+    },[infoToRegister])
+    // useEffect(()=>{
+    //     if(infoToRegister && Object.keys(infoToRegister).length)
+    //     setState({...state,...infoToRegister })
+    //
+    // },[ infoToRegister.errorExistEmail])
     async function changeLang(lang) {
         let locale=lang.code==="fr" ? locale_fr : locale_en
         await setState({...state, lang: locale})
@@ -129,15 +151,16 @@ export const useHooksInvitationForm = () => {
         setShow(false);
     }
     const handleChangeParticipation= (value) => {
+        console.log("handleChangeParticipation value************",value)
         pushEmptyField("participation",value)
-        setState({...state, participation:value, empty:state.empty})
+
+        dispatch(setSelectedParticipationField({payload: value}))
+        // setState({...state, selectedParticipation:value, empty:state.empty})
     }
     const handleChangeFields = (event) =>{
         pushEmptyField(event.target.name,event.target.value )
-        if(event.target.name==="email"){
-            setState({...state, errorEmail:  !validateEmail(event.target.value)})
-        }
         setState({...state,[event.target.name]: event.target.value, empty:state.empty})
+        dispatch(setSelectedField({payload:{name:event.target.name, value:event.target.value}}))
     }
     // const handleChangeEmail = (event) => {
     //     if(!validateEmail(event)){
@@ -147,9 +170,17 @@ export const useHooksInvitationForm = () => {
     //     }
     // }
 
-    function validateEmail(email) {
+    const  validateEmail = (email) => {
+        console.log("email", email)
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
+        const isValid=re.test(String(email).toLowerCase())
+        console.log("isValid", isValid)
+        if(email.length){
+            setState({...state,errorEmail: !isValid, errorExistEmail: false})
+            dispatch(setSelectedField({payload:{name:"errorEmail",value:!isValid }}))
+            dispatch(setSelectedField({payload:{name:"errorExistEmail",value:!isValid }}))
+        }
+        return isValid;
     }
 
     function makeid(length) {
@@ -170,7 +201,7 @@ export const useHooksInvitationForm = () => {
         }
         setState({...state, emails: emails})
         if(!state.emails.length){
-            addTagText( "")
+            // addTagText( "")
         }
     }
     const onFormLayoutChange = ({layout}) => {
@@ -179,111 +210,49 @@ export const useHooksInvitationForm = () => {
     const confirm = () => {
         setVisible(!visible)
     }
-    const addTagText = (placeholder) =>{
-        document.querySelector('.Form .ant-select-selection-search-input')
-            .setAttribute("placeholder",placeholder)
+
+    const checkFields = () =>{
+        let validEmail=validateEmail(state.email)
+        console.log("checkFields---------validEmail ",validEmail)
+        let notEmptyFields= !emptyFields()
+        console.log("checkFields---------notEmptyFields ",notEmptyFields)
+        console.log("infoToRegister.errorExistEmail",infoToRegister.errorExistEmail)
+        console.log("validEmail && !infoToRegister.errorExistEmail && notEmptyFields ",validEmail && !infoToRegister.errorExistEmail && notEmptyFields )
+        return validEmail && !infoToRegister.errorExistEmail && notEmptyFields
     }
-    const getTag = (props) => {
-        let findIndex = state.emails.map(x => x.email).indexOf(props.value)
-        return (findIndex > -1) ?
-            <div className={`tagForm`}>
-                                <span className={`tagTextForm`}>
-                                    {props.value}
-                                </span>
-                <i className={"icon-close"} onClick={() => props.onClose()}></i>
-                {
-                    addTagText( i18n.t("validations.format"))
-                }
-            </div>: null
+    const emptyFields = () =>{
+        let lengthFields= state.lastNameInvitor.length> 0 && state.firstNameInvitor.length> 0
+        console.log("emptyfields = ",lengthFields)
+        let emptyFields=!lengthFields &&  checkEmptyField();
+        // if(lengthFields){
+        //     return false;
+        // }else{
+        //      checkEmptyField();
+        // }
+        console.log("emptyFields----------------",emptyFields)
+        return emptyFields
     }
-    const submitForm = (event) => {
-        let validated = false
-        event.preventDefault()
-        event.stopPropagation()
-        if (state.email.length && state.lastName.length && state.firstName.length && state.participation.length) {
-            validated = true
-        } else if(validateEmail(state.email)) {
-            validated = true
-        } else {
-
-            checkEmptyField();
-            validated = false
-        }
-
-        // setState({...state,empty:validated})
-        if (validated) {
-            /** call api **/
-            // let startDate = getDate(state.date) + "T" + getTime(state.time)
-            // var dte = new Date(startDate);
-            // dte.setHours(dte.getHours() + 1);
-            // let endDate = getDate(dte) + "T" + getTime(dte)
-            let data = {
-                event: {
-                    id: makeid(5).toLowerCase(),
-                    summary: state.title,
-                    // start: {"dateTime": startDate},
-                    // end: {"dateTime": endDate},
-                    organizer: {
-                        email: state.email,
-                        self: true
-                    },
-                    attendees: state.emails
-                },
-                client: "webinarplease",
-                mode: "test"
-            }
-            // service.createWebinar(data).then(async (response) => {
-            //     if(response.data.code===200 || response.status ===200){
-            //         await setVideoUri(response.data.videoUri)
-            //         await setShow(true)
-            //         setTimeout(async function (e) {
-            //             try {
-            //                 form.resetFields();
-            //                 form.setFieldsValue({
-            //                     title: "",
-            //                     email: "",
-            //                     emails: [],
-            //                     time: moment(getTime, format),
-            //                     date: moment(new Date(), dateFormat),
-            //                     condition:false
-            //                 });
-            //             } catch (e) {
-            //                 console.log(e)
-            //             }
-            //             await setState({ showRobot: false})
-            //             setTimeout(async function () {
-            //                 await setState({ showRobot: true})
-            //             }, 1000)
-            //             await setState({title: "",
-            //                 date: moment(new Date(), dateFormat),
-            //                 time: moment(getTime, format),
-            //                 email: "", emails: []})
-            //             await setConditions(false)
-            //         }, 500)
-            //     }
-            //
-            // }).catch(error=>{
-            //     console.log("error", error)
-            //     setShow(false)
-            //     message.error('Echec de création de webinar!');
-            // })
-
-        }
-
-    }
-    const checkEmptyField =  () => {
+    const checkEmptyField =   () => {
         let empty=state.empty;
         console.log("state", state)
-        let requiresFields=["participation","lastName","firstName","email"]
+        let requiresFields=["participation","lastNameInvitor","firstNameInvitor","email"]
          requiresFields.forEach(async field=>{
-             await pushEmptyField(field, state[field])
+            await pushEmptyField(field, state[field])
         })
-        console.log("empty", empty)
+
+        console.log("checkEmptyField*****empty", empty)
+        if(!empty.length){
+            empty=[]
+        }
         setState({...state,empty:empty})
+        let isEmpty=empty.length>0;
+        console.log("isEmpty",isEmpty)
+        return isEmpty
+
     }
     const pushEmptyField = (field,value) =>{
         let findIndex=state.empty.findIndex(x=>x===field)
-        if(!value.length){
+        if(!value){
             if(findIndex===-1){
                 state.empty.push(field)
             }
@@ -294,12 +263,39 @@ export const useHooksInvitationForm = () => {
         }
     }
     const isEmptyField = () => {
-        if (!state.email.length || !state.participation.length || !state.lastName.length || !state.firstName.length) {
+        if (!state.email.length  || !state.lastNameInvitor.length || !state.firstNameInvitor.length) {
             return true
         } else {
             return false
         }
     }
+    const submitForm = (event) => {
+
+        event.preventDefault()
+        event.stopPropagation()
+        let validated =  checkFields()
+
+        // setState({...state,empty:validated})
+        console.log("validated",validated)
+        if (validated) {
+            console.log("state.selectedParticipation",state.selectedParticipation)
+            console.log("state.participation",state.participation)
+            let selectedParticipation=state.participation.find(x=>x.id === state.selectedParticipation.id)
+            console.log("findIdexSelectedParticipation",selectedParticipation)
+            let data= {
+                cryptext : cryptext,
+                email: state.email,
+                input:{
+                    isOnline:selectedParticipation.id,
+                    name:state.firstNameInvitor,
+                    surname:state.lastNameInvitor
+                }
+            }
+            confirmRegistration({variables: data})
+        }
+
+    }
+
 
     function handleChangeCondition(event) {
         setConditions(event.target.checked)
@@ -311,11 +307,27 @@ export const useHooksInvitationForm = () => {
     const sendConfirm = () =>{
         console.log("sendConfirm")
         /** todo add api send confirm inscription **/
+        dispatch(setVisibleInscriptionPage({payload:{InscriptionSuccess:false, inscription: false,confirm:false, confirmSuccess:true}}))
+
+    }
+
+    const handleConfirmPage = () =>{
+        console.log("handleConfirmPage****click")
+        dispatch(setVisibleInscriptionPage({payload:{InscriptionSuccess:false, inscription: false,confirm:true, confirmSuccess:false}}))
+    }
+    const handleConfirmSuccessPage = () =>{
+        console.log("handleConfirmPage****click")
+        dispatch(setVisibleInscriptionPage({payload:{InscriptionSuccess:false, inscription: false,confirm:false, confirmSuccess:true}}))
+    }
+    const returnToInscription = () =>{
+        console.log("returnToInscription****click")
+        dispatch(setVisibleInscriptionPage({payload:{InscriptionSuccess:false, inscription: true,confirm:false, confirmSuccess:false}}))
     }
     return {
         formLayout,state,visible,setVisible,captcha,condition,show,videoUri,handleChangeCaptcha,handleChangeCondition,
         isEmptyField,submitForm,confirm,onFormLayoutChange,validateEmail,
-        handleClear,handleChangeParticipation,partipationOptions,buttonItemLayout,
-        getTime,getTag, handleChangeFields,validateMessages,FormDataSource,sendConfirm
+        handleClear,handleChangeParticipation,buttonItemLayout,getDefaultParticipation,
+        getTime, handleChangeFields,validateMessages,FormDataSource,sendConfirm,infoToRegister,
+        handleConfirmPage,handleConfirmSuccessPage,returnToInscription
     }
 }
