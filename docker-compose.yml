@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: dockerfile.dev
     stdin_open: true
-#    image: tousMedia-dev-img
-#    container_name: tousmEDIA-dev-app
+    #    image: tousMedia-dev-img
+    #    container_name: tousmEDIA-dev-app
     ports:
       - "3000:3000"
     volumes:
