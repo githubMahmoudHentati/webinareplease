@@ -98,6 +98,7 @@ export const graphQL_shema = ()=> {
                      response 
                      }
                      }
+                     interpreters
                      languages
                 }
                 invitationOut{

@@ -15,6 +15,7 @@ import {GraphQLFetchData} from "./utils/grapqhQL/graphQLFetchData";
 import {ForgetPassword} from "./forgetPassword/forgetPassword";
 import {ResetPassword} from "./resetPassword/resetPassword";
 import Error from "./utils/components/Error";
+import Replay from "./ReplayModule/replay"
 import {ConfirmAccount} from "./confirmAccount/confirmAccount";
 import IframeStudioLive from "./webinareStudioLive/webinareStudioLive";
 import en_US from "antd/lib/locale/en_US";
@@ -81,6 +82,9 @@ function App() {
                         <Redirect exact to="/connexion"/> : <IframeStudioLive/>}</Route>
                     <Route exact path='/calendar'> {!credentialsValues.appState.loggedIn ?
                         <Redirect exact to="/connexion"/> : <Calendar/>}</Route>
+                    <Route exact path='/replay'>
+                        <Replay/>
+                    </Route>
                     <Route path={"*"} component={Error}/>
                 </Switch>
             </BrowserRouter>

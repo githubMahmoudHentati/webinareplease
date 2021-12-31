@@ -407,5 +407,12 @@
     "sentInvitation": "invitation envoyé",
     "remotly": "à distance",
     "presentiel":"Présentiel"
+  },
+  "replay" : {
+    "secureReplay" : "Replay sécurisé",
+    "enterAccess" : "Taper le mot de passe d’accès fourni par l’organisateur de l'événement pour accèder au replay",
+    "accessPassword" : "Mot de pasee d’accès",
+    "TypePassword" : "Tapez votre mot de passe",
+    "enter" : "Entrer"
   }
 }
