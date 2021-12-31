@@ -230,7 +230,7 @@ export const Configuration = () => {
 
                             <Col>
                                 <Switch checked={values.configuration.switchLanguages}
-                                        name="switchSpeaker"
+                                        name="switchLanguages"
                                         onChange={(value) => configurationOnChangeByNameSwitch(value, "switchLanguages")}
                                 />
                             </Col>

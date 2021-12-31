@@ -1,0 +1,135 @@
+.Replay{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+.div_Header_replay{
+  height: 79px;
+  box-shadow: 0px 2px 9px 0px RGBA(4, 16, 34, 0.05);
+  .div_home_logo{
+    .icon_webinaire{
+      .icon-logo-webinar{
+        font-size: 50px;
+      }
+    }
+  }
+}
+  .componentReplay{
+    margin:150px auto;
+    width: 50%;
+    @media screen and (max-width: 767px){
+      margin: 50px auto;
+      width: 90%;
+    }
+  }
+}
+
+.PasswordDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+.TitleWebinar{
+  text-align: center;
+  margin-bottom: 8%;
+  h1{
+    font-size: 32.5px;
+    font-weight: 500;
+  }
+  p{
+    font-size: 16.9px;
+    font-weight: 400;
+  }
+}
+  .CardEnterPassword{
+    width: 70%;
+    height: auto;
+    padding: 35px;
+    box-shadow: 0px 2px 11px 0px RGBA(0, 0, 0, 0.25);
+    border-radius: 5px;
+    .replaySecurise{
+      font-size: 13px;
+      color: RGB(156, 156, 156);
+      .spn1{
+        font-size: 19px;
+      }
+    }
+    p{
+      margin-top: 40px;
+      font-size: 19px;
+      font-weight: 500;
+    }
+    label{
+      margin-bottom: 10px;
+    }
+    Input{
+      margin-top: 10px;
+    }
+    .DivEnterPassword{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      Button{
+        margin-top: 20px;
+        height: 46px;
+        width: 128px;
+      }
+    }
+    @media screen and (max-width: 768px){
+      width: 100%;
+    }
+  }
+}
+.footerDiv{
+  text-align: center;
+  margin: 25px 0;
+  span{
+    font-size: 16px;
+    font-weight: 400;
+    color: RGB(53, 58, 64);
+  }
+}
+   .componentReplayIframe{
+     width: 100%;
+     padding: 1% 2%;
+     height: 90vh;
+     display: flex;
+     flex-direction: column;
+     overflow-y: scroll;
+     &::-webkit-scrollbar{
+       width: 4px !important;
+       height: 4px;
+     }
+     &::-webkit-scrollbar-track{
+       background-color: var(--card_color) !important;
+       z-index: 999;
+       border: none !important;
+       box-shadow: none !important;
+     }
+     &::-webkit-scrollbar-thumb{
+       background-color: var(--icon-color);    /* color of the scroll thumb */
+       border-radius: 20px;       /* roundness of the scroll thumb */
+     }
+
+     .container {
+       position: relative;
+       overflow: hidden;
+       width: 100%;
+       height: 75vh;
+     }
+
+     /* Then style the iframe to fit in the container div with full height and width */
+     .responsive-iframe {
+       position: absolute;
+       top: 0;
+       left: 0;
+       bottom: 0;
+       right: 0;
+       width: 100%;
+       height: 100%;
+     }
+
+   }
+

@@ -401,6 +401,13 @@
     "sentInvitation": "invitation sent",
     "remotly": "remotely",
     "presentiel":"Presential"
+  },
+  "replay" : {
+    "secureReplay" : "Secure replay",
+    "enterAccess" : "Enter the access password provided by the event organiser to access the replay",
+    "accessPassword" : "Access password",
+    "TypePassword" : "Type your password",
+    "enter" : "Enter"
   }
 
 }

@@ -76,7 +76,8 @@ export const GraphQLFetchDataForm = (values) => {
                     questions:Questions,
                     attachedFiles:ThumbUrlAttachementFile && ThumbUrlAttachementFile.length?ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)):[],
                     slides:DiapositivesFile&& DiapositivesFile.length?DiapositivesFile.map(item=>item.substring(item.lastIndexOf("/")+ 1, item.length))  : [] ,
-                    languages:values.configuration.languages
+                    interpreters:values.configuration.switchLanguages,
+                    languages: values.configuration.switchLanguages ? values.configuration.languages : []
                 },
                 invitation:{
                     mailsGroup:values.invitation.emailsGroup,
@@ -177,7 +178,8 @@ export const GraphQLFetchDataForm = (values) => {
                     questions:Questions,
                     attachedFiles:ThumbUrlAttachementFile && ThumbUrlAttachementFile.length?ThumbUrlAttachementFile.map(file => file.substring(file.lastIndexOf("/")+1,file.length)):[],
                     slides:DiapositivesFile&& DiapositivesFile.length?DiapositivesFile.map(item=>item.substring(item.lastIndexOf("/")+ 1, item.length))  : [] ,
-                    languages:values.configuration.languages
+                    interpreters:values.configuration.switchLanguages,
+                    languages: values.configuration.switchLanguages ? values.configuration.languages : []
                 },
                 invitationOutput:{
                     mailsGroup:values.invitation.emailsGroup,
@@ -364,7 +366,8 @@ export const GraphQLFetchDataForm = (values) => {
                             choices:{response : [...item.choices.response.map(item=>item)]}
                         })
                     }) : [] : {},
-                    languages:data.getlive.configurationOut.languages
+                    switchLanguages:data.getlive.configurationOut.interpreters,
+                    languages:data.getlive.configurationOut.languages,
                 },
                 invitation:{
                     emailsGroup:data.getlive.invitationOut.mailsGroup,
