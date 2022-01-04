@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Input,Button,Select , Divider  , Tooltip , Popover , Checkbox , Form , message , InputNumber} from 'antd'
-import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , PlusSquareOutlined  , LockOutlined} from '@ant-design/icons';
+import {Input,Button,Select , Divider  , Tooltip , Popover , Checkbox , Form , message , InputNumber , Upload} from 'antd'
+import {  InfoCircleFilled , PlusOutlined , MinusCircleOutlined , PlusSquareOutlined  , LockOutlined , UploadOutlined} from '@ant-design/icons';
 import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
@@ -10,7 +10,7 @@ import moment from "moment";
 import 'moment-timezone';
 import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import {ShowVideosReducerReducer} from "../../showVideos/store/showVideosReducer";
-
+import csvLogo from '../../assets/CSV.svg'
 
 
 
@@ -25,6 +25,9 @@ function Invitation(){
     const [visbleRegle , SetVisibleRegle] = useState(false);
     const [hoursDiffCalls , SetHoursDiffCalls] = useState(null);
     const [daysDiffCalls, SetDaysDiffCalls] = useState(null);
+
+    const [file , setFile] = useState("")
+    const [filename , setFileName] = useState(null)
 
     const {values,InvitationOnChangeChecked,invitationOnChangeSelect ,handleClickDelete , handleChangeGuestRemotly , handleChangeGuestPresentiel}=Hooks()
     const {getMailsGroupList}=GraphQLFetchDataForm(values)
@@ -100,6 +103,33 @@ function Invitation(){
 
     // Validation des emails
 
+    //Upload
+    const props = {
+        accept:".csv",
+        name: 'file',
+        action: '//jsonplaceholder.typicode.com/posts/',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    console.log("heeeeeeeeeeeeeeeeeeeeee",e.target.result);
+                    setFile(e.target.result)
+                }
+                reader.readAsText(info.file.originFileObj);
+                // console.log("heeeeeeeeeeeeeeeeeeeeee",info.file.originFileObj);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+                setFileName(info.file.name)
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
 
 
     return(
@@ -145,6 +175,7 @@ function Invitation(){
             {/*</div>/!*./groupEmail*!/*/}
 
             <div className={"groupEmail div2"}>
+                <div className={"divEmails"}>
                 <span style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85", marginBottom: 6}}>{t("formDirectVideo.Emails")}  <InfoCircleFilled style={{color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"}} className={"infosIcon"}/></span>
                        <Form.Item
                            style={{width:"100%"}}
@@ -172,6 +203,19 @@ function Invitation(){
                                {...selectProps}
                            />
                        </Form.Item>
+                </div>
+
+                <div className={"divUploadFileCSV"}>
+                    <span className={"spnImportFile"}>Importer un fichier</span>
+                    <div className={"DivUploadCSV_1"}>
+                        <img src={csvLogo}/>
+                        <Upload {...props} className={"uploadFile"}>
+                            <span className={"spnImportFile"}>Choisir un fichier</span>
+                        </Upload>
+                        <span className={"selectFile"}>Sélectionner un fichier .csv *</span>
+                        <span className={"uploadModal"}><a href='/modele.csv' download>Télécharger un modèle</a></span>
+                    </div>
+                </div>
             </div>{/*./groupEmail*/}
 
             <div className={"DivEnvoiDesInvitations"}>

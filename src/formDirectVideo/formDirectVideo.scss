@@ -383,11 +383,13 @@
   filter: blur(10px);
 }
 .groupEmail{
-  width: 100%;
+  width: 150%;
+  height: 240px;
+  margin-bottom: 30px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   font-family: 'SF Pro Display' !important;
   font-size: 14px;
   font-weight: 500 !important;
@@ -395,6 +397,112 @@
   font-style: normal;
   letter-spacing: normal;
   color: rgba(0, 0, 0, 0.85);
+  .divEmails{
+    width: 50%;
+    margin-right: 2%;
+    height: 270px;
+    margin-top: 70px;
+    .ant-select-selector{
+      height: 213px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar{
+        width: 4px !important;
+        height: 4px;
+      }
+      &::-webkit-scrollbar-track{
+        background-color: var(--card_color) !important;
+        z-index: 999;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      &::-webkit-scrollbar-thumb{
+        background-color: var(--icon-color);    /* color of the scroll thumb */
+        border-radius: 20px;       /* roundness of the scroll thumb */
+      }
+    }
+    .ant-select-multiple .ant-select-selector{
+      display: block !important;
+    }
+    .ant-select-selection-placeholder{
+      position: absolute !important;
+      top: 6% !important;
+    }
+  }
+  .divUploadFileCSV{
+    width: 50%;
+    margin-right: 2%;
+    height: 208px;
+    margin-top: -5px;
+  }
+  .spnImportFile{
+    color: var(--white_color);
+  }
+  .DivUploadCSV_1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 212px;
+    border-radius: 4px;
+    background-color: transparent !important;
+    border: 1px dashed var(--border_color);
+    margin-top: 1%;
+  }
+  .icon_upload{
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .uploadFile{
+    font-size: 14px;
+    color: RGBA(0, 0, 0, 0.85);
+    font-weight: 500;
+    margin-bottom: 6px;
+    cursor: pointer;
+    &:hover span{
+      color: RGB(24, 144, 255) !important;
+    }
+  }
+  .selectFile{
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--icon-color);
+    margin-bottom: 6px;
+  }
+  @media screen and (max-width: 768px){
+    width: 100%;
+    height: 240px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .divUploadFileCSV{
+      width: 50%;
+      margin-right: 2%;
+      height: 208px;
+      margin-top: 2px;
+    }
+  }
+  @media screen and (max-width: 767px){
+    width: 100%;
+    height: 600px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: -70px !important;
+    .divEmails{
+      width: 100%;
+      margin-right: 2%;
+      height: 200px;
+    }
+    .divUploadFileCSV{
+      width: 100%;
+      margin-right: 2%;
+    }
+  }
 }
 .infosIcon{
   font-size: 14px !important;
