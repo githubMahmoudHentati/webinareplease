@@ -275,7 +275,43 @@
         }
     }
 
+///////////////********************** set Template *******************//////
 
+export function setTemplate(e){
+    return{
+        type:"SET_TEMPLATE",
+        payload:e
+    }
+}
+
+// Add File list Configuration "Logo"
+export function setTemplatelogo(e){
+    return{
+        type:"SET_Templatelogo",
+        payload:e
+    }
+}
+// Add File list Configuration "Logo"
+export function setTemplatelogoDelete(e){
+    return{
+        type:"SET_TemplatelogoDelete",
+        payload:e
+    }
+}
+// Add File list Configuration "Logo"
+export function setTemplateImage(e){
+    return{
+        type:"SET_Templateimage",
+        payload:e
+    }
+}
+// Add File list Configuration "Logo"
+export function setTemplateImageDelete(e){
+    return{
+        type:"SET_TemplateimageDelete",
+        payload:e
+    }
+}
 
 
 

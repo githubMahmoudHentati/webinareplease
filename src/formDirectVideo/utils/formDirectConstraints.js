@@ -2,6 +2,8 @@ import React from 'react';
 import fbPost from "../../assets/facebookPost.svg";
 import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
+import {v4 as uuidv4} from "uuid";
+import logo from "../../assets/logo_webinarplease.svg"
 
 
 
@@ -120,6 +122,31 @@ export const FormDirectConstraints = ()=>{
         )
     }
 
+    const Templates = () => {
+
+        return (
+            {
+                primaireColor : "#333333",
+                background1 : "#333333",
+                background2 : "#FFFFFF",
+                background3 : "#1890ff",
+                background4 : "#FFFFFF",
+                background5 : "#333333",
+                LogoValueFileList:[
+                    {
+                        uid: uuidv4(),
+                        name: "logo.png",
+                        status: 'done',
+                        url: logo,
+                        thumbUrl: logo,
+                    }
+                ],
+                imageValueFileList:[]
+            }
+        )
+
+    }
+
     const constraintData =()=>{
         return({
             loadingLiveFetchData:false,
@@ -143,6 +170,7 @@ export const FormDirectConstraints = ()=>{
         socialTools,
         invitation,
         constraintData,
+        Templates
         // formLive
     })
 
