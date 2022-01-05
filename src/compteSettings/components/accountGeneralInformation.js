@@ -42,7 +42,7 @@ export const AccountGeneralInformation = ({form}) => {
 
     }
     const onSave =(file)=>{
-        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
         axios({
             url: url,

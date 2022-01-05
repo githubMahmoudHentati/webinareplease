@@ -126,12 +126,12 @@ export const FormDirectConstraints = ()=>{
 
         return (
             {
-                primaireColor : "#333333",
-                background1 : "#333333",
                 background2 : "#FFFFFF",
                 background3 : "#1890ff",
                 background4 : "#FFFFFF",
-                background5 : "#333333",
+                primaireColor : "#1890ff",
+                texteEmail :"#F2F2F2",
+                secondaireColor : "#FFA400",
                 LogoValueFileList:[
                     {
                         uid: uuidv4(),
