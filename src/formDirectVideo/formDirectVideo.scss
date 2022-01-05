@@ -1147,3 +1147,259 @@
     margin-right: 5px !important;
   }
 }
+.DIVtempletesGlobal{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 768px){
+    display: flex;
+    flex-direction: column;
+  }
+  .iconInfo{
+    color: var(--icon-color);
+    margin-left: 2%;
+  }
+  .divChangeColor{
+    width: 20%;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    .spnDivChangeColor{
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white_color);
+      margin-bottom: 5px;
+    }
+    .divUpdateColor{
+      height: 40px;
+      width: 100%;
+      border: 1px solid var(--border_color);
+      padding: 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      position: relative;
+      .divUpdateColor1{
+        width: 12%;
+        border: 1px solid var(--border_color);
+        margin-right: 2%;
+        border-radius: 1px;
+        cursor: pointer;
+      }
+      .ant-input:focus, .ant-input-focused{
+        box-shadow: none !important;
+      }
+      .inputUpdateColor1{
+        width: 87%;
+        border: none;
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--item-menu-color);
+        &:focus{
+          border: none;
+        }
+      }
+    }
+    @media screen and (max-width: 768px){
+      width: 100%;
+      height: 45vh;
+    }
+    @media screen and (max-width: 767px) {
+      height: 70vh;
+    }
+  }
+  .DivStudio{
+    height: 65vh;
+    width: 78%;
+    background-color: var(--dark_color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .DIVLOGO{
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      img{
+        width: 186px;
+        height: 96px;
+      }
+    }
+    .DIVSTUDIO1{
+      width: 50%;
+      height: 80%;
+      .TitleReunion{
+        font-size: 22px;
+        font-weight: 500;
+      }
+      .divStudioLive{
+        margin-top: 2%;
+        height: 100%;
+        width: 90%;
+        padding: 15px;
+        .UserDiv{
+         width: 100%;
+          height: 185px;
+          display: flex;
+          flex-direction: row;
+          .UserDiv1{
+            width: 80%;
+            height: 100%;
+            margin-bottom: 2%;
+            border-radius: 3px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: #272727;
+            margin-right: 1%;
+            position: relative;
+            .UserOutlined{
+              font-size: 60px;
+              color: RGB(103, 103, 103) !important;
+            }
+            .divCam{
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              height: 32px;
+              width: 32px;
+              background-color: #4D4D4D;
+              border-radius: 4px;
+              .cameraFilled{
+                font-size: 25px;
+                color: #D7D7D7 !important;
+              }
+            }
+          }
+        }
+        .divSetting{
+          width: 80%;
+          height: 73px;
+          background-color: #4E4E4E;
+          box-shadow: 0px 1px 3px 0px #000000;
+          border-radius: 5px;
+          margin: 3% auto;
+          padding: 2% 0;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            border-right: 1px solid #646464;
+            width: 33%;
+          }
+          .icon{
+            font-size: 20px;
+            color: #D6D6D6 !important;
+            margin-bottom: 6%;
+          }
+          @media screen and (max-width: 767px){
+            width: 100%;
+            div{
+             span:last-child{
+               display: none;
+             }
+            }
+          }
+        }
+        .DIVNameUser{
+          margin: 4% 0;
+          label{
+            color: #FFFFFF;
+            margin-bottom: 2%;
+            font-size: 13px;
+            font-weight: 400;
+            span{
+              color: #F90001;
+              margin-left: 1%;
+            }
+          }
+          Input{
+            margin-top: 1%;
+            background-color: transparent !important;
+            border: 2px solid #707070;
+          }
+        }
+        .DIVPassword{
+          margin-top: 4%;
+          margin-bottom: 6%;
+          label{
+            color: #FFFFFF;
+            margin-bottom: 2%;
+            font-size: 13px;
+            font-weight: 400;
+            span{
+              color: #F90001;
+              margin-left: 1%;
+            }
+          }
+          Input{
+            margin-top: 1%;
+            background-color: transparent !important;
+            border: 2px solid #707070;
+          }
+        }
+        .divButton{
+          width: 100%;
+          Button{
+            width: 100%;
+          }
+        }
+
+      }
+    }
+    @media screen and (max-width: 768px){
+      width: 100% !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: scroll;
+      .divStudioLive{
+        width: 100% !important;
+        height: 90% !important;
+        overflow-y: scroll;
+      }
+      .DIVLOGO{
+        width: 50%;
+        height: 30%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        img{
+          width: 186px;
+          height: 96px;
+        }
+      }
+      .DIVSTUDIO1{
+        width: 100% !important;
+      }
+    }
+    @media screen and (max-width: 767px) {
+      height: 75vh;
+    }
+  }
+.sketchPicker{
+  position: absolute !important;
+  z-index: 9999999 !important;
+  top: 40px;
+}
+}

@@ -12,6 +12,7 @@ import {SocialTools} from "./socialTools";
 import {Templetes} from "./Templetes";
 import {LiveSubmit} from "./liveSubmit.js";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+import TempletesStudioEmail from "./TempletesStudioEmail";
 
 export const IframeDirectVideo =()=>{
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
@@ -31,7 +32,7 @@ export const IframeDirectVideo =()=>{
             case 3:
                 return <SocialTools/>
             case 4:
-                return <Templetes/>
+                return <TempletesStudioEmail/>
             default:
                 return <Generals/>
         }
