@@ -13,7 +13,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 import {createHttpLink, HttpLink} from 'apollo-link-http';
 import './i18n'
 const firstLink = new createHttpLink({
-    uri: window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
+    uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST
 });
 
 const authLink = setContext(() => {
@@ -30,7 +30,7 @@ const authLink = setContext(() => {
 
 // Create Second Link
 const secondLink = new HttpLink({
-    uri: window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
+    uri: process.env.REACT_APP_API_WEBINARPLEASE_HOST
 });
 
 

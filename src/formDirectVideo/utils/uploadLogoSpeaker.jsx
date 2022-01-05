@@ -23,7 +23,7 @@ export const UploadLogoSpeaker = () => {
     }
 
     const onSave = async (file, fileInfos)=>{
-        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
         let token = localStorage.getItem('jwtToken')
 
         dispatch(setLoadingUpload(true))

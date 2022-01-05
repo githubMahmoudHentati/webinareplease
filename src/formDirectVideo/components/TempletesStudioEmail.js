@@ -1,6 +1,6 @@
 import React , {useEffect, useState} from 'react';
 import { SketchPicker } from 'react-color';
-import {Button , Tabs , Input , Upload} from "antd";
+import {Button , Tabs , Input , Upload , Skeleton} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {InboxOutlined, InfoCircleFilled , FileImageOutlined , AudioFilled , VideoCameraFilled , SettingFilled , UserOutlined , CameraFilled } from '@ant-design/icons';
 import {setTemplate} from "../store/formDirectVideoAction";
@@ -24,6 +24,9 @@ const TempletesStudioEmail = () => {
     const [textes , setTextes] = useState(false)
     const [secondaire , setSecondaire] = useState(false)
     const [texteButton , setTexteButton] = useState(false)
+    const [primaireEmail , setPrimaireEmail] = useState(false)
+    const [secondaireEmail , setSecondaireEmail] = useState(false)
+    const [textesEmail , setTextesEmail] = useState(false)
     const [click1 , setClick1] = useState(false)
     const color =useSelector((state)=>state.FormDirectVideoReducer.template)
     // use Selector redux
@@ -36,13 +39,6 @@ const TempletesStudioEmail = () => {
     function callback(key) {
         console.log(key);
     }
-    const handleChangeComplete1 = (color) => {
-        dispatch(setTemplate({
-            templateNameChange: "background1",
-            templateValueChange: color.hex
-        }))
-
-    };
     const handleChangeComplete2 = (color) => {
         dispatch(setTemplate({
             templateNameChange: "background2",
@@ -64,13 +60,25 @@ const TempletesStudioEmail = () => {
         }))
 
     };
-    const handleChangeComplete5 = (color) => {
+    const handleChangeCompletePrimaire = (color) => {
         dispatch(setTemplate({
-            templateNameChange: "background5",
+            templateNameChange: "primaireColor",
             templateValueChange: color.hex
         }))
+    }
+    const handleChangeCompleteTextes = ( color) => {
+        dispatch(setTemplate({
+            templateNameChange: "texteEmail",
+            templateValueChange: color.hex
+        }))
+    }
+    const handleChangeCompleteSecondaire = (color) => {
+        dispatch(setTemplate({
+            templateNameChange: "secondaireColor",
+            templateValueChange: color.hex
+        }))
+    }
 
-    };
     const handleClickPrimaire = (name) => {
         if(name==="primaire"){
             setPrimaire(!primaire)
@@ -94,6 +102,22 @@ const TempletesStudioEmail = () => {
             setPrimaire(false)
         }
     }
+    const handleClickPrimaireEmail = (name) => {
+       if(name === "primaireEmail"){
+           setPrimaireEmail(!primaireEmail)
+           setSecondaireEmail(false)
+           setTextesEmail(false)
+       }else if(name === "textex2Email"){
+           setPrimaireEmail(false)
+           setSecondaireEmail(false)
+           setTextesEmail(!textesEmail)
+       }else if(name === "secondaireEmail"){
+           setPrimaireEmail(false)
+           setSecondaireEmail(!secondaireEmail)
+           setTextesEmail(false)
+       }
+    }
+
 
 
 
@@ -230,19 +254,78 @@ const TempletesStudioEmail = () => {
                     </div>{/*./DIVtempletesGlobal*/}
                 </TabPane>
                 <TabPane tab="E-mail" key="2">
-                    <div>
-                        <Button onClick={()=>setClick1(!click1)}>Click</Button>
-                        {
-                            click1
-                                ?
-                                <SketchPicker
-                                    color={background }
-                                    onChangeComplete={ handleChangeComplete5 }
-                                    className={"sketchPicker"}
-                                />
-                                :null
-                        }
-                    </div>
+                    <div className={"DIVtempletesGlobal"}>
+                        <div className={"divChangeColor divTabchangeColor"}>
+                            <span className={"spnDivChangeColor"}>Couleur primaire</span>
+                            <div className={"divUpdateColor"}>
+                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("primaireEmail")} style={{backgroundColor : color.primaireColor}}></div>
+                                <Input className={"inputUpdateColor1"} value={color.primaireColor}/>
+                                {
+                                    primaireEmail
+                                        ?
+                                        <SketchPicker
+                                            color={color.primaireColor}
+                                            onChangeComplete={handleChangeCompletePrimaire}
+                                            className={"sketchPicker"}
+                                        />
+                                        : null
+                                }
+                            </div>
+                            <span className={"spnDivChangeColor"}>Textes</span>
+                            <div className={"divUpdateColor"}>
+                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("textex2Email")} style={{backgroundColor : color.texteEmail}}></div>
+                                <Input className={"inputUpdateColor1"} value={color.texteEmail}/>
+                                {
+                                    textesEmail
+                                        ?
+                                        <SketchPicker
+                                            color={color.texteEmail}
+                                            onChangeComplete={handleChangeCompleteTextes}
+                                            className={"sketchPicker"}
+                                        />
+                                        : null
+                                }
+                            </div>
+                            <span className={"spnDivChangeColor"}>Couleur secondaire</span>
+                            <div className={"divUpdateColor"}>
+                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("secondaireEmail")} style={{backgroundColor : color.secondaireColor}}></div>
+                                <Input className={"inputUpdateColor1"} value={color.secondaireColor}/>
+                                {
+                                    secondaireEmail
+                                        ?
+                                        <SketchPicker
+                                            color={color.secondaireColor}
+                                            onChangeComplete={handleChangeCompleteSecondaire}
+                                            className={"sketchPicker"}
+                                        />
+                                        : null
+                                }
+                            </div>
+                        </div>{/*./divChangeColor*/}
+                        <div className={"DivStudio"}>
+
+                          <div className={"DivTemplateEmailGlobal"}>
+                              <Skeleton  paragraph={{ rows: 1 }}/>
+                              <div className={"DIVPrimaire"} style={{backgroundColor:values.template.primaireColor , border:`1px solid ${values.template.primaireColor}`}}>
+                                  <Skeleton  paragraph={{ rows: 1 }}/>
+                                  <Skeleton  paragraph={{ rows: 1 }}/>
+                              </div>
+                              <Skeleton className={"skelton1"}  paragraph={{ rows: 1 }}/>
+                              <div className={"skelton2"}><Skeleton  paragraph={{ rows: 1 }}/></div>
+                              <div className={"DivSecondaire"}>
+                                  <Button style={{backgroundColor:values.template.secondaireColor , border:`1px solid ${values.template.secondaireColor}`}}><Skeleton active paragraph={{ rows: 1 }}/></Button>
+                              </div>
+                              <div className={"skelton2"}><Skeleton  paragraph={{ rows: 1 }}/></div>
+                              <div className={"skelton2"}><Skeleton  paragraph={{ rows: 1 }}/></div>
+                              <div className={"skelton3"}><Skeleton  paragraph={{ rows: 1 }}/></div>
+                              <div className={"DivFooter"} style={{backgroundColor:values.template.texteEmail , border:`1px solid ${values.template.texteEmail}`}}>
+                                  <Skeleton  paragraph={{ rows: 1 }}/>
+                                  <Skeleton  paragraph={{ rows: 1 }}/>
+                              </div>
+                          </div>{/*./DivTemplateEmailGlobal*/}
+
+                        </div>{/*./DivStudio*/}
+                        </div>
                 </TabPane>
             </Tabs>
 
