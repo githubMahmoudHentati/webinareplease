@@ -60,6 +60,13 @@ body{
 :root{
     --card_color:#FFFFFF;
     --option-background:#FFFFFF;
+    --form-desktop-width: 686px;
+    --form-desktop-height: 738px;
+    --form-tablet-width: 95%;
+    --form-tablet-height: auto;
+    --form-mobile-width: 95%;
+    --form-mobile-height: auto;
+    --primary-color:RGB(0, 127, 203);
 }
 
 #root {

@@ -1,0 +1,45 @@
+
+.invitation{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  &-header{
+
+  }
+  &-form{
+    display: flex;
+    //margin: auto;
+    font-size: 14px;
+    color: #fff;
+    background: #fff;
+    box-shadow:0 2px 11px  RGBA(0, 0, 0, 0.25);
+    border-radius: 5px;
+    width: var(--form-desktop-width);
+    min-height: var(--form-desktop-height);
+    z-index: 2;
+    @media screen and(max-width: 1024px) {
+      width: var(--form-tablet-width);
+    }
+    @media screen and(max-width: 767px) {
+      width: var(--form-mobile-width);
+      min-height: var(--form-mobile-height);
+    }
+  }
+  &-footer{
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      padding: 1em 0;
+      @media screen and (max-width: 767px){
+        flex-direction: column;
+      }
+  }
+}
+
+
+

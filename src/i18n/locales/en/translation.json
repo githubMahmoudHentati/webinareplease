@@ -408,6 +408,48 @@
     "accessPassword" : "Access password",
     "TypePassword" : "Type your password",
     "enter" : "Enter"
-  }
+  },
+  "formInvitation": {
+    "header": {
 
+    },
+    "form": {
+      "organised": "Organised par ",
+      "date": "On ",
+      "time": "at  ",
+      "participation": "Participation",
+      "lastName": "LastName",
+      "firstName": "FirstName",
+      "email": "Email",
+      "catcha": "",
+      "signup": "SignUp",
+      "return": "Return",
+      "send": "Send",
+      "confirm": "You have already registered and cannot find your registration confirmation email",
+      "resend": "Write your email to resend a confirmation email",
+      "info": {
+        "text": "If you have already registered and cannot find your registration confirmation email, ",
+        "link": "Click here !"
+      },
+      "success": {
+        "title": "Congratulations !",
+        "subscribed": "You are now registered for the event",
+        "verif": "Please check your email inbox to access the event"
+      },
+      "places":" Available seats",
+      "successSend":"We have sent you an email to: ",
+      "verif":"Please check your email inbox"
+    },
+    "footer": {
+      "legal": "Legal",
+      "conditions": "Terms of service"
+    },
+    "validations": {
+      "required": "Field is required !",
+      "email": " is not a valid email!",
+      "number": " is not a valid number!",
+      "format": "Press enter to add an email",
+      "exist": "This email address is already in use"
+    }
+  }
 }

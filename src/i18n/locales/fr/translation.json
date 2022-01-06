@@ -409,10 +409,52 @@
     "presentiel":"Présentiel"
   },
   "replay" : {
-    "secureReplay" : "Replay sécurisé",
-    "enterAccess" : "Taper le mot de passe d’accès fourni par l’organisateur de l'événement pour accèder au replay",
-    "accessPassword" : "Mot de pasee d’accès",
-    "TypePassword" : "Tapez votre mot de passe",
-    "enter" : "Entrer"
+    "secureReplay": "Replay sécurisé",
+    "enterAccess": "Taper le mot de passe d’accès fourni par l’organisateur de l'événement pour accèder au replay",
+    "accessPassword": "Mot de pasee d’accès",
+    "TypePassword": "Tapez votre mot de passe",
+    "enter": "Entrer"
+  },
+  "InvitationPage": {
+    "header": {
+
+    },
+    "form": {
+      "organised": "Organisé par ",
+      "date": "Le ",
+      "time": "à  ",
+      "participation": "Participation",
+      "lastName": "Nom",
+      "firstName": "Prénom",
+      "email": "Email",
+      "catcha": "",
+      "signup": "S'inscrire",
+      "return": "Retour",
+      "send": "Envoyer",
+      "confirm": "Vous êtes déjà inscrit et ne trouvez pas votre e-mail de confirmation d'inscription",
+      "resend": "Rédigez votre email pour réenvoyer un email de confirmation",
+      "info": {
+        "text": "Si vous êtes déjà inscrit et ne trouvez pas votre e-mail de confirmation d'inscription, ",
+        "link": "cliquez ici !"
+      },
+      "success": {
+        "title": "Félicitation !",
+        "subscribed": "Vous étes maintenant inscrit à l'événement",
+        "verif": "veuillez vérifier la boîte de réception de votre messagerie pour y accéder à l’évenement"
+      },
+      "places":" place(s) disponible(s)",
+      "successSend":" Nous vous avons envoyé un e-mail à l’adresse: ",
+      "verif":"Veuillez vérifier la boîte de réception de votre messagerie"
+    },
+    "footer": {
+        "legal": "Légal",
+        "conditions": "Conditions de service"
+    },
+    "validations": {
+      "required": "Ce champ est obligatoire !",
+      "email": "Cette adresse e-mail n'est pas valide!",
+      "exist": "Cette adresse e-mail est déjà utilisée"
+    }
+
   }
 }
