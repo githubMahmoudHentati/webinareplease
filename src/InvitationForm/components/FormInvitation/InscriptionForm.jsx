@@ -14,6 +14,7 @@ export const InscriptionForm= ({prefixCls}) =>{
     } = useHooksInvitationForm()
     const participation= useSelector(state=>state.InvitationReducer.participation)
     const cryptext= useSelector((state)=>state.InvitationReducer.cryptext)
+    const loading = useSelector(state=>state.InvitationReducer.loading.loadingSendMail)
 
     var siteKey = process.env.SITE_KEY ? process.env.SITE_KEY : "6LfvW1UaAAAAAMc2_g2x4lYXoSHag8V08Bdj8RiP"
 
@@ -87,7 +88,8 @@ export const InscriptionForm= ({prefixCls}) =>{
                     onChange={handleChangeFields}
                     onBlur={(event)=>state.email ? validateEmail(event.target.value) : ''}
                     value={state.email}
-
+                    defaultValue={state.email}
+                    disabled={true}
                 />
                 {
                     (state.errorEmail ||   state.errorExistEmail ||   state.empty.includes("email"))
@@ -120,7 +122,7 @@ export const InscriptionForm= ({prefixCls}) =>{
                 <Form.Item {...buttonItemLayout} className={`${prefixCls}__labelForm`}>
                     <Button type="primary" htmlType="submit" className={`${prefixCls}__signup-btn`}
                         // disabled={ !captcha || !condition || !state.email || !validateEmail(state.email)}
-                            onClick={(event) => submitForm(event)}>{FormDataSource.form.signup}</Button>
+                            onClick={(event) => submitForm(event)} loading={loading}>{FormDataSource.form.signup}</Button>
                 </Form.Item>
             </div>
             <Layout className={`${prefixCls}__footer`}>

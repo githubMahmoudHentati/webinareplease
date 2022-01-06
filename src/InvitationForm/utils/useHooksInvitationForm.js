@@ -6,8 +6,14 @@ import locale_en from "antd/es/locale/en_US";
 import {Link} from 'react-router-dom'
 import i18n from "../../i18n/index";
 import {useSelector,useDispatch} from 'react-redux'
-import {setSelectedField, setSelectedParticipationField, setVisibleInscriptionPage} from '../store/InvitationFormAction'
+import {
+    setLoading,
+    setSelectedField,
+    setSelectedParticipationField,
+    setVisibleInscriptionPage
+} from '../store/InvitationFormAction'
 import {useGraphQLFetchDataForm} from "./graphQLFetchDataForm";
+import {setConstraintDataOnchange} from "../../compteSettings/store/accountSettingsAction";
 export const useHooksInvitationForm = () => {
 
     const [visible, setVisible] = useState(true);
@@ -19,7 +25,7 @@ export const useHooksInvitationForm = () => {
     const infoToRegister= useSelector((state)=>state.InvitationReducer.infoToRegister)
     const selectedParticipation= useSelector(state=>state.InvitationReducer.selectedParticipation)
     const cryptext= useSelector((state)=>state.InvitationReducer.cryptext)
-    const {confirmRegistration} = useGraphQLFetchDataForm(cryptext)
+    const {confirmRegistration , resendInvitation} = useGraphQLFetchDataForm(cryptext)
     const dispatch = useDispatch()
     const buttonItemLayout =
         formLayout === 'horizontal'
@@ -293,6 +299,11 @@ export const useHooksInvitationForm = () => {
             }
             confirmRegistration({variables: data})
         }
+        dispatch(setLoading({
+            payload:{
+                loadingInscription:true
+            }
+        }))
 
     }
 
@@ -307,7 +318,13 @@ export const useHooksInvitationForm = () => {
     const sendConfirm = () =>{
         console.log("sendConfirm")
         /** todo add api send confirm inscription **/
-        dispatch(setVisibleInscriptionPage({payload:{InscriptionSuccess:false, inscription: false,confirm:false, confirmSuccess:true}}))
+        // dispatch(setVisibleInscriptionPage({payload:{InscriptionSuccess:false, inscription: false,confirm:false, confirmSuccess:true}}))
+        dispatch(setLoading({
+            payload:{
+                loadingSendMail:true
+            }
+        }))
+        resendInvitation()
 
     }
 

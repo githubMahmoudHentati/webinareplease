@@ -28,3 +28,9 @@ export const setVisibleInscriptionPage = ({payload}) =>{
         payload: payload
     }
 }
+export function setLoading({payload}){
+    return{
+        type :"SET_Loading",
+        payload:payload
+    }
+}

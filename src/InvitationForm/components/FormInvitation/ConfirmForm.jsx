@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import "moment/locale/zh-cn";
 import {Form, Input, Button, Layout, Space, Select, TimePicker, Popover, ConfigProvider, Checkbox} from 'antd';
 import {useHooksInvitationForm} from "../../utils/useHooksInvitationForm";
+import {useSelector} from "react-redux";
 const {  Header } = Layout;
 
 export const ConfirmForm = ({prefixCls}) =>{
@@ -9,6 +10,7 @@ export const ConfirmForm = ({prefixCls}) =>{
         state,submitForm,handleChangeFields,validateMessages,FormDataSource,buttonItemLayout,
         sendConfirm, returnToInscription
     } = useHooksInvitationForm()
+    const loading = useSelector(state=>state.InvitationReducer.loading.loadingSendMail)
     return (
         <div className={`${prefixCls}__confirm`}>
            <div className={`${prefixCls}__confirm-title`}>
@@ -27,7 +29,7 @@ export const ConfirmForm = ({prefixCls}) =>{
                     placeholder={FormDataSource.form.email}
                     onChange={handleChangeFields}
                     value={state.email}
-
+                    disabled={true}
                 />
                 {
                     (state.errorEmail ||   state.errorExistEmail ||   state.empty.includes("email"))
@@ -52,7 +54,7 @@ export const ConfirmForm = ({prefixCls}) =>{
                 </Form.Item>
                 <Form.Item {...buttonItemLayout} className={`${prefixCls}__labelForm`}>
                     <Button type="primary" htmlType="submit" className={`${prefixCls}__send-btn`}
-                            onClick={sendConfirm}>{FormDataSource.form.send}</Button>
+                            onClick={sendConfirm} loading={loading}>{FormDataSource.form.send}</Button>
                 </Form.Item>
             </div>
         </div>

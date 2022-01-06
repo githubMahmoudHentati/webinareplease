@@ -1,6 +1,10 @@
 import locale_fr from "antd/es/locale/fr_FR";
 
 const InvitationInitialState={
+    loading:{
+        loadingSendMail:false,
+        loadingInscription:false
+    },
     cryptext:"",
     infoToRegister:{
         lastName: "xxxxxx",
@@ -45,6 +49,11 @@ const InvitationInitialState={
 export const InvitationReducer = (state=InvitationInitialState, action) =>{
     console.log("state",state)
     switch(action.type){
+        case "SET_Loading" :
+            return{
+                ...state,
+                loading: action.payload,
+            }
         case 'SET_CRYPTEXT' :
             return{
                 ...state,
