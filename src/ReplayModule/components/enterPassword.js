@@ -9,8 +9,10 @@ const EnterPassword = () => {
 
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
+    const password = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives.password)
     const {t} = useTranslation();
     const {handleChangePassword , values , handleConfirmPassword} = Hooks()
+    console.log("kkljdfskjdfkjldfskjldfskjldfskjldfs",password)
 
     return(
         <div className={"PasswordDiv"}>

@@ -54,17 +54,22 @@ export const ShowVideosList = ()=>{
             inputUrlDiffusion:"",
             streamName:"",
             idLive:"",
-            pwdLive:""
+            pwdLive:"",
         })
     }
 
     const valueExportLives = () =>{
         return({
             visibleExport : false,
+            liveId:"",
             participantUrl : "",
             auditorUrl : "",
             integrationUrl : "",
-            translatorUrl : ""
+            translatorUrl : "",
+            permalink : "",
+            password : "",
+            participantUrlT: "",
+            auditorUrlT:"",
         })
     }
     const valueInfosGuests = () =>{

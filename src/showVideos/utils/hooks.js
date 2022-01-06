@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
     setFilterVideosActions,
@@ -44,6 +44,7 @@ const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
     let idLiveToDelete = []
     const [keyState , setKeyState]=useState(null)
+    const [pwd , setPwd] = useState("")
     const [liveObj , setLiveObj] = useState({
         order:'descend',
         pageSize:10,
@@ -54,7 +55,11 @@ export  const Hooks=()=> {
     })
 
     const history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    // useEffect(()=>{
+    //     EXPORTlIVE()
+    // },[])
 
     const {success_Delete , error_Delete ,  error_getLives}=StatusMessage()
 
@@ -202,7 +207,7 @@ export  const Hooks=()=> {
     //LazyQuery Export Live
     const [EXPORTlIVE]
         = useLazyQuery(graphQL_shema().Export_Live,{
-        fetchPolicy:  "cache-and-network",
+        fetchPolicy:  "network",
         variables : {id:(paginationProps.idLive ? paginationProps.idLive : liveObj.idLive)},
         context: { clientName: "second" },
         onCompleted :(data)=>{
@@ -222,9 +227,44 @@ export  const Hooks=()=> {
                 exportLivesName: "translatorUrl",
                 exportLivesValue: data.GetLinkExport.translatorUrl
             }));
+            dispatch(setExportLive({
+                exportLivesName: "permalink",
+                exportLivesValue: data.GetLinkExport.permaLink
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "password",
+                exportLivesValue: data.GetLinkExport.password
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "participantUrlT",
+                exportLivesValue: data.GetLinkExport.participantUrlT
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "auditorUrlT",
+                exportLivesValue: data.GetLinkExport.auditorUrlT
+            }));
         }
 
     })
+
+    const handleChangePassword = (e) =>{
+         setPwd(e.target.value)
+    }
+
+    const [CREATEPWD] = useMutation(graphQL_shema().create_pwd,{
+        refetchQueries:() => [{ query: graphQL_shema().Export_Live,
+            variables : {id: exportLives.liveId},
+        }],
+        variables:{pwd:pwd , liveId : exportLives.liveId.toString()},
+        context: { clientName: "second" },
+        onCompleted :(data)=>{
+
+        }
+    })
+
+    const handleClickCreatePwd = () =>{
+        CREATEPWD();
+    }
 
     //use Lazy Query
     //query getVideosLinks for embed Code
@@ -528,11 +568,13 @@ export  const Hooks=()=> {
     };
 
     // fonction export live
-    const handleExport = () =>{
-        EXPORTlIVE()
-        setTimeout(()=>{
+    const handleExport = async (e) =>{
+       await EXPORTlIVE()
+       await setTimeout(()=>{
             dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:true}));
+           dispatch(setExportLive({exportLivesName:"liveId",exportLivesValue:e}));
         },300)
+
     }
     //handleCancel Modal export
     const handleCancelModalExport = () =>{
@@ -642,6 +684,8 @@ export  const Hooks=()=> {
         saveDiv,
         handleChangeInputModalFake,
         saveDivXLSX,
-        infosGuestsModal
+        infosGuestsModal,
+        handleChangePassword,
+        handleClickCreatePwd
     })
 }

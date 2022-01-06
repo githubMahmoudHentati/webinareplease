@@ -66,7 +66,9 @@ function useActionMenu({record}) {
         saveDiv,
         handleChangeInputModalFake,
         saveDivXLSX,
-        infosGuestsModal
+        infosGuestsModal,
+        handleChangePassword,
+        handleClickCreatePwd
     } = Hooks()
 
 
@@ -139,7 +141,7 @@ function useActionMenu({record}) {
             {record.owner ? <Menu.Item onClick={() => updateLive(record.id,record.status)}><EditOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.Modifier")}</Menu.Item> : null}
             <Menu.Item onClick={()=>handleInfosGuests(record.id)}><MailOutlined className={"dropdownIcon"}/>{t("ShowVideo.guest")}</Menu.Item>
-            <Menu.Item onClick={() => handleExport()}><LinkOutlined className={"dropdownIcon"}/>Export</Menu.Item>
+            <Menu.Item onClick={() => handleExport(record.id)}><LinkOutlined className={"dropdownIcon"}/>Export</Menu.Item>
             <Menu.Item onClick={() => history.push("/FormDirectVideo", dispatch(setDirectSetting(4)))}><span
                 className="icon-Templates dropdownIconTemp"></span> {t("ShowVideo.Templates")}</Menu.Item>
             {record.owner ? <Menu.Item onClick={() => handleDeleteOneRow(record.id)}><DeleteOutlined
@@ -483,7 +485,7 @@ function useActionMenu({record}) {
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.permalink")} </span>
                     <Input id="myPermalink" placeholder="//demo.webtv-solution.com/fo/embed/267"
-                           name={"participantUrl"} value={"https://demo.webtv-solution.com/fo/embed/267"}
+                           name={"participantUrl"} value={exportLives.permalink}
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyPermalien} className={"copy_icon"}/>
@@ -494,17 +496,18 @@ function useActionMenu({record}) {
                 {/*./Permalien*/}
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.password")} </span>
-                    <Input id="myPassword" placeholder="//demo.webtv-solution.com/fo/embed/267"
-                           name={"participantUrl"} value={"YNZJH87-Y"}
+                    <Input id="myPassword" placeholder=""
+                           name={"participantUrl"} defaultValue={exportLives.password}
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyPassword} className={"copy_icon"}/>
                                </Tooltip>
                            }
+                           onChange={handleChangePassword}
                     />
                 </div>
                 <div className={"div_save_password"}>
-                    <Button type="primary">{t("ShowVideo.save")}</Button>
+                    <Button type="primary" onClick={()=>handleClickCreatePwd()}>{t("ShowVideo.save")}</Button>
                 </div>
                 {/*./Password*/}
                 <div className="div_Url_diffusion">

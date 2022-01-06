@@ -36,7 +36,7 @@ const Replay = () => {
             </div>
 
             {
-                values.Login.password  && values.Login.confirmPassword
+                values.Login.password   && values.Login.confirmPassword
                     ?
                     <div className={"componentReplayIframe"}>
                         <PlayerIframe/>
