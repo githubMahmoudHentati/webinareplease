@@ -11,6 +11,7 @@ export const useGraphqlSchema= () =>{
             availableOnlinePlaces
             availableOnsitePlaces
             email
+            idLive
         }
       }
 `
@@ -22,7 +23,15 @@ export const useGraphqlSchema= () =>{
             }
         }
      `
-        return  {INFO_TO_REGISTER, CONFIRM_REGISTRATION}
+    const RESEND_INVITATION = gql `
+    mutation($email: String!, $liveId: Int!) {
+   resendInvitation(email:$email, liveId:$liveId) {
+        code
+        message
+      }
+   }
+    `
+        return  {INFO_TO_REGISTER, CONFIRM_REGISTRATION,RESEND_INVITATION}
 }
 
 
