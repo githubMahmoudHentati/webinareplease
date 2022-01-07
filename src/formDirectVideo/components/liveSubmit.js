@@ -9,6 +9,7 @@ import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
 import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
 import {HomeOutlined} from "@ant-design/icons";
+import va from "simple-react-lightbox";
 
 
 export const LiveSubmit=(props)=>{
@@ -32,7 +33,7 @@ export const LiveSubmit=(props)=>{
 
 
     useEffect(async () => {
-        if (values.constraintData.loadingLiveFetchData&&localStorage.getItem('idLive'))
+        if (values.constraintData.loadingLiveFetchData&&localStorage.getItem('idLive') || values.invitation.loadingemailscsv )
         {
             await form.setFieldsValue(Object.assign(form.getFieldsValue(),
                 {
@@ -66,7 +67,7 @@ export const LiveSubmit=(props)=>{
                     tags: values.configuration.tags,
                     switchLanguages:values.configuration.switchLanguages,
                     languages:values.configuration.languages,
-                    //**********configuration live info***********/////
+                    //**********Invitation live info***********/////
                     emails:values.invitation.emails,
                     emailsGroup:values.invitation.emailsGroup,
                     maxguestremotly:values.invitation.maxOnlineGuests,
@@ -75,7 +76,10 @@ export const LiveSubmit=(props)=>{
             ))
             // dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
         }
-    }, [values.constraintData.loadingLiveFetchData]);
+    }, [values.constraintData.loadingLiveFetchData , values  ]);
+    useEffect(()=>{
+       console.log("lskjfsd13213ljfsdljk",values)
+    },[values])
 
     const values_data = useSelector((state)=> state.FormDirectVideoReducer)
     const {getLiveData} = GraphQLFetchDataForm(values_data)

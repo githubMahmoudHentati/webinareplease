@@ -33,6 +33,9 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
+import {message} from "antd";
+import i18n from "../../i18n";
+import {useTranslation} from "react-i18next";
 
 
 
@@ -42,6 +45,7 @@ const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 let itemsRunAPI
 const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
+    const {t} = useTranslation();
     let idLiveToDelete = []
     const [keyState , setKeyState]=useState(null)
     const [pwd , setPwd] = useState("")
@@ -56,6 +60,11 @@ export  const Hooks=()=> {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // config count message
+    message.config({
+        maxCount: 3,
+    });
 
     // useEffect(()=>{
     //     EXPORTlIVE()
@@ -258,7 +267,21 @@ export  const Hooks=()=> {
         variables:{pwd:pwd , liveId : exportLives.liveId.toString()},
         context: { clientName: "second" },
         onCompleted :(data)=>{
-
+           if(data.createPwd.code){
+               message.success({
+                   content:t("ShowVideo.changePasswordSuccess"),
+                   className: 'message-event',
+                   duration:1.5,
+                   style: {
+                       marginTop: '2vh',
+                   },
+               });
+           }else {
+               message.error({
+                   content: t("ShowVideo.erreurProduit"),
+                   duration:1.5,
+               });
+           }
         }
     })
 

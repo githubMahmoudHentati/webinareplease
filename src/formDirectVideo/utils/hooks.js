@@ -206,7 +206,7 @@ const Hooks=()=>{
     const invitationOnChangeSelect = (value,event,name) => {
         console.log("event",value,name)
         //let listTags= (...[],option)
-        dispatch(setInvitationOnchange({invitationNameChange:name, invitationValueChange:value}));
+        dispatch(setInvitationOnchange({invitationNameChange:"emails", invitationValueChange:value}));
     };
 
     //************************Common Function***********************//
