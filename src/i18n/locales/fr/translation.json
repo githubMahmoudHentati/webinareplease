@@ -406,7 +406,9 @@
     "download": "Télécharger",
     "sentInvitation": "invitation envoyé",
     "remotly": "à distance",
-    "presentiel":"Présentiel"
+    "presentiel":"Présentiel",
+    "changePasswordSuccess": "Votre mot de passe à été changé avec succès",
+    "erreurProduit": "Une erreur se produit"
   },
   "replay" : {
     "secureReplay": "Replay sécurisé",

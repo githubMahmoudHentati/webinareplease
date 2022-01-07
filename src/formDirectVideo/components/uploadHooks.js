@@ -1,4 +1,4 @@
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {
     setConfigurationFileList,
@@ -8,11 +8,17 @@ import {
     setDiapositivesDelete,
     setLoadingUpload,
     setTemplatelogo,
-    setTemplatelogoDelete, setTemplateImage, setTemplateImageDelete,
+    setTemplatelogoDelete,
+    setTemplateImage,
+    setTemplateImageDelete,
+    setInvitationFile,
+    seInvitationFileDelete,
+    setInvitationOnchange, setLiveInfo, setFormDirectLiveConstraintDataOnchange,
 } from "../store/formDirectVideoAction";
 import { v4 as uuidv4 } from 'uuid';
 import {setConstraintDataOnchange, setErrorVisibility} from "../../compteSettings/store/accountSettingsAction";
 import Hooks from "../../formDirectVideo/utils/hooks";
+import {FormDirectConstraints} from "../utils/formDirectConstraints";
 
 
 
@@ -20,6 +26,9 @@ import Hooks from "../../formDirectVideo/utils/hooks";
 export const UploadHooks = () =>{
     const dispatch = useDispatch()
     const {generalInformationOnChangeAvatar} = Hooks()
+    const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
+
+    const values = useSelector((state)=> state.FormDirectVideoReducer)
 
     //************************************** Start Upload General **************************************//////////////////////
 
@@ -351,7 +360,7 @@ console.log("FILE",fileList)
             "0": ["variables.slide"]
         };
         formData.append("map", JSON.stringify(map));
-        [...info.fileList].filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp" || file.type === "image/gif").map(async (e, index) => {
+        [...info.fileList].filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp" || file.type === "image/gif" || file.type === "image/svg+xml").map(async (e, index) => {
             const file = e.originFileObj;
             console.log("*******************", file);
             return formData.append("0", file);
@@ -362,6 +371,62 @@ console.log("FILE",fileList)
         }
         onSaveImage(formData, info)
     }
+
+
+    /////******************************* Upload CSV File ****************/////////////////
+    const onSaveCsvFile =(file, fileInfos)=>{
+        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        const token = localStorage.getItem('jwtToken');
+        axios({
+            url: url,
+            method: 'post',
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'multipart/form-data',
+            },
+            data: file
+        }).then((result) => {
+            console.log("resultData",result.data.data.parseCSV);
+            // dispatch(setInvitationFile({InvitationNameChange:"emails", InvitationValueChange:result.data.data.parseCSV
+            // }));
+            dispatch(setInvitationOnchange({invitationNameChange:"emails", invitationValueChange:[...result.data.data.parseCSV]}));
+            dispatch(setInvitationOnchange({invitationNameChange:"loadingemailscsv", invitationValueChange:true}));
+            //dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:{invitationNameChange:"emails", invitationValueChange:result.data.data.parseCSV},socialTools:socialTools()}))
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+
+
+    //******************** handle change CSV FILE *****************//
+    const handleChangeCsvFile = async info => {
+
+        let formData = new FormData();
+        const variables = {
+            file: null
+        }
+        const query = `
+          mutation ($file: Upload!) 
+          { parseCSV(file: $file) }
+       `;
+        const operations = JSON.stringify({query, variables: {variables}});
+        formData.append("operations", operations);
+        const map = {
+            "0": ["variables.file"]
+        };
+        formData.append("map", JSON.stringify(map));
+        [...info.fileList].filter(file => file.type === "application/csv" || file.type === "application/x-csv" || file.type === "application/vnd.ms-excel" || file.type === ".csv" || file.type === "text/csv" || file.type === "text/x-csv" || file.type === "text/comma-separated-values"|| file.type === "text/x-comma-separated-values"|| file.type === "text/tab-separated-values").map(async (e, index) => {
+            const file = e.originFileObj;
+            console.log("*******************", file);
+            return formData.append("0", file);
+        })
+
+        for (let p of formData) {
+            console.log("ppppppppppp",p);
+        }
+        onSaveCsvFile(formData, info)
+    }
+    /////******************************* Upload CSV File ****************/////////////////
 
 
 
@@ -379,6 +444,8 @@ console.log("FILE",fileList)
         removeThumbnailLogo,
         onSaveImage,
         removeThumbnailImage,
-        handleChangeImage
+        handleChangeImage,
+        onSaveCsvFile,
+        handleChangeCsvFile
     })
 }

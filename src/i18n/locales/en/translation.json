@@ -400,7 +400,9 @@
     "download": "Download",
     "sentInvitation": "invitation sent",
     "remotly": "remotely",
-    "presentiel":"Presential"
+    "presentiel":"Presential",
+    "changePasswordSuccess": "Your password has been successfully changed",
+    "erreurProduit": "An error occurs"
   },
   "replay" : {
     "secureReplay" : "Secure replay",

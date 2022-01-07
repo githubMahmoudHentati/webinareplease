@@ -114,10 +114,13 @@ export const FormDirectConstraints = ()=>{
                     replay: false
                 },
                 emails:[],
+                loadingemailscsv:false,
                 emailsGroup:[],
                 listMailsGroup:[],
                 maxOnlineGuests:0,
-                maxOnsiteGuests:0
+                maxOnsiteGuests:0,
+                listEmailsCSV:[],
+                listEmailsChange:[]
             }
         )
     }

@@ -5,7 +5,7 @@ import '../formDirectVideo.scss'
 import {useSelector} from "react-redux";
 import Hooks from "../utils/hooks";
 import { useTranslation } from 'react-i18next';
-
+import {UploadHooks} from "./uploadHooks";
 import moment from "moment";
 import 'moment-timezone';
 import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
@@ -30,6 +30,7 @@ function Invitation(){
     const [filename , setFileName] = useState(null)
 
     const {values,InvitationOnChangeChecked,invitationOnChangeSelect ,handleClickDelete , handleChangeGuestRemotly , handleChangeGuestPresentiel}=Hooks()
+    const {onSaveCsvFile  , handleChangeCsvFile}=UploadHooks()
     const {getMailsGroupList}=GraphQLFetchDataForm(values)
     let ParisMoment = moment().tz("Europe/Paris")
     useEffect(() => {
@@ -102,34 +103,6 @@ function Invitation(){
     }
 
     // Validation des emails
-
-    //Upload
-    const props = {
-        accept:".csv",
-        name: 'file',
-        action: '//jsonplaceholder.typicode.com/posts/',
-        headers: {
-            authorization: 'authorization-text',
-        },
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    console.log("heeeeeeeeeeeeeeeeeeeeee",e.target.result);
-                    setFile(e.target.result)
-                }
-                reader.readAsText(info.file.originFileObj);
-                // console.log("heeeeeeeeeeeeeeeeeeeeee",info.file.originFileObj);
-            }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-                setFileName(info.file.name)
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
-    };
-
 
 
     return(
@@ -209,7 +182,16 @@ function Invitation(){
                     <span className={"spnImportFile"}>Importer un fichier</span>
                     <div className={"DivUploadCSV_1"}>
                         <img src={csvLogo}/>
-                        <Upload {...props} className={"uploadFile"}>
+                        <Upload
+                            className={"uploadFile"}
+                            accept="application/csv,application/x-csv,text/csv,.csv"
+                            name="avatar"
+                            className="ant-upload-block"
+                            listType="text"
+                            showUploadList={false}
+                            // beforeUpload={beforeUpload}
+                            onChange={handleChangeCsvFile}
+                        >
                             <span className={"spnImportFile"}>Choisir un fichier</span>
                         </Upload>
                         <span className={"selectFile"}>Sélectionner un fichier .csv *</span>

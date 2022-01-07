@@ -513,7 +513,7 @@ function useActionMenu({record}) {
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.UrlParticipant")} </span>
                     <Input id="myUrlParticipant" placeholder="//demo.webtv-solution.com/fo/embed/267"
-                           name={"participantUrl"} value={exportLives.participantUrl}
+                           name={"participantUrl"} value={!window.process.env.HAS_TRANSLATOR ? exportLives.participantUrl : exportLives.participantUrlT}
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyUrlParticipant} className={"copy_icon"}/>
@@ -526,7 +526,7 @@ function useActionMenu({record}) {
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.AuditorUrl")}</span>
                     <Input id="myUrlAuditeur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"auditorUrl"}
-                           value={exportLives.auditorUrl}
+                           value={!window.process.env.HAS_TRANSLATOR ? exportLives.auditorUrl : exportLives.auditorUrlT}
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyUrlAuditeur} className={"copy_icon"}/>
@@ -536,18 +536,24 @@ function useActionMenu({record}) {
                 </div>
                 {/*./div_Url_diffusion*/}
 
-                <div className="div_Url_diffusion">
-                    <span>{t("ShowVideo.translatorUrl")}</span>
-                    <Input id="myUrlTraducteur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"translatorUrl"}
-                           value={exportLives.translatorUrl}
-                           suffix={
-                               <Tooltip title={t("ShowVideo.Copier")}>
-                                   <CopyFilled onClick={CopyUrlTraducteur} className={"copy_icon"}/>
-                               </Tooltip>
-                           }
-                    />
-                </div>
-                {/*./div_Url_diffusion*/}
+                {
+                    window.process.env.HAS_TRANSLATOR
+                     ?
+                        <div className="div_Url_diffusion">
+                            <span>{t("ShowVideo.translatorUrl")}</span>
+                            <Input id="myUrlTraducteur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"translatorUrl"}
+                                   value={exportLives.translatorUrl}
+                                   suffix={
+                                       <Tooltip title={t("ShowVideo.Copier")}>
+                                           <CopyFilled onClick={CopyUrlTraducteur} className={"copy_icon"}/>
+                                       </Tooltip>
+                                   }
+                            />
+                        </div>
+                    :
+                    null
+                }
+
 
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.IntegrationLink")}</span>
