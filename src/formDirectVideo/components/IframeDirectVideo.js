@@ -12,6 +12,7 @@ import {SocialTools} from "./socialTools";
 import {Templetes} from "./Templetes";
 import {LiveSubmit} from "./liveSubmit.js";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+import TempletesStudioEmail from "./TempletesStudioEmail";
 
 export const IframeDirectVideo =()=>{
     const directMenu = useSelector((state)=>state.Reducer.directMenu)
@@ -31,7 +32,7 @@ export const IframeDirectVideo =()=>{
             case 3:
                 return <SocialTools/>
             case 4:
-                return <Templetes/>
+                return <TempletesStudioEmail/>
             default:
                 return <Generals/>
         }
@@ -39,7 +40,7 @@ export const IframeDirectVideo =()=>{
 
     return(
         <LiveSubmit  setFormLiveAction={setFormLiveAction}>
-                    <Col span={24}>
+                    <Col className={"form-col"} span={24}>
                             {
                                matchesMedia.matches
                                    ?
@@ -53,15 +54,15 @@ export const IframeDirectVideo =()=>{
                                                 <SelectMenu formLive={formLive}/>
                                             </Col>
                                       : //matchesMedia.matches
-                                   <Row gutter={[30, 20]}>
-                                       <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:4}} >
+                                   <Row gutter={[50, 20]}>
+                                       <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 7}} lg={{span:5}} >
                                            <MenuForms />
                                        </Col>
                                        {directMenu===4?
-                                           <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 17}} lg={{span:20}}  >
+                                           <Col xs={{ span: 24}} sm={{ span: 24}} md={{ span: 17}} lg={{span:19}}  >
                                                <SelectMenu formLive={formLive}/>
                                            </Col>:
-                                           <Col  span={12} >
+                                           <Col  xs={{ span: 24}} sm={{ span: 24}} md={{ span: 17}} lg={{span:12}} >
                                            <SelectMenu formLive={formLive}/>
                                            </Col>
                                        }

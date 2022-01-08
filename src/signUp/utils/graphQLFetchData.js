@@ -1,4 +1,4 @@
-import {useMutation} from "@apollo/react-hooks";
+import {useMutation} from "@apollo/client";
 import {graphQL_shema} from "./graphQL";
 import {useHistory} from "react-router-dom";
 
@@ -29,7 +29,7 @@ export const GraphQLFetchData = (valuesSignUp , valuesCard) => {
                     constraintDataValueChange: true
                 }))
 
-                if (valuesSignUp.signUp.subscriptionId === 0) {
+                if (valuesSignUp.signUp.subscriptionId === 1) {
 
                     history.push("/ConfirmAccount")
 

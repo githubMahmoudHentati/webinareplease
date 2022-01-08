@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import history from './router/history';
 import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
@@ -10,11 +10,12 @@ import {SignUp} from "./signUp/signUp";
 import {ContactClient} from "./contactClient/contactClient";
 import {CompteSettings} from "./compteSettings/compteSettings";
 import Calendar from "./Calendar/Calendar";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {GraphQLFetchData} from "./utils/grapqhQL/graphQLFetchData";
 import {ForgetPassword} from "./forgetPassword/forgetPassword";
 import {ResetPassword} from "./resetPassword/resetPassword";
 import Error from "./utils/components/Error";
+import Replay from "./ReplayModule/replay"
 import {ConfirmAccount} from "./confirmAccount/confirmAccount";
 import IframeStudioLive from "./webinareStudioLive/webinareStudioLive";
 import en_US from "antd/lib/locale/en_US";
@@ -22,17 +23,23 @@ import frFR from "antd/lib/locale/fr_FR";
 import { ConfigProvider } from "antd";
 import 'moment/locale/fr';
 import 'react-phone-number-input/style.css'
-
+import {Invitation} from "./InvitationForm/Invitation";
 
 let tabData = [
     "connexion", "forgot-password", "ConfirmAccount", "PackagePayement", "signUp"
 ]
 function App() {
-    const {verificationToken} = GraphQLFetchData()
+    const dispatch = useDispatch()
     const credentialsValues = useSelector((state) => state.Reducer)
+    const {verificationToken,tokenAPI} = GraphQLFetchData(credentialsValues)
     const lang =useSelector((state)=>state.Reducer.lang)
     let pathName = window.location.pathname.replace('/', '')
-    
+
+
+    useEffect(() => {
+        tokenAPI()
+    }, []);
+
    
     React.useEffect(()=>{
         const root = document.querySelector(':root')
@@ -43,8 +50,8 @@ function App() {
                 root.classList.add('light')
                }
         }
-
     },[pathName])
+
     return (
         <ConfigProvider locale={lang==="fr"?frFR:en_US}>
 
@@ -76,6 +83,12 @@ function App() {
                         <Redirect exact to="/connexion"/> : <IframeStudioLive/>}</Route>
                     <Route exact path='/calendar'> {!credentialsValues.appState.loggedIn ?
                         <Redirect exact to="/connexion"/> : <Calendar/>}</Route>
+                    <Route exact path='/replay'>
+                        <Replay/>
+                    </Route>
+                    <Route exact path='/invitation/:cryptext'>
+                       <Invitation/>
+                    </Route>
                     <Route path={"*"} component={Error}/>
                 </Switch>
             </BrowserRouter>

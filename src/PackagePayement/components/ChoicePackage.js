@@ -46,11 +46,37 @@ function ChoicePackage(){
         root.classList.add('light')
     },[])
 
+
+    //useEffect to active first card Basic
+    useEffect(()=>{
+        // dispatch active card
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "activeCard",
+            PackagePayementValue: 1
+        }));
+        //dispatch 1ere button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonZero",
+            PackagePayementValue: true
+        }));
+        //dispatch 1ere button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonOne",
+            PackagePayementValue: false
+        }));
+        //dispatch 2eme button radio
+        dispatch(setPackagePayementAction({
+            PackagePayementName: "checkedRadioButtonTwo",
+            PackagePayementValue: false
+        }));
+    },[])
+
+
     // next step
     const nextToSignUp = () => {
         dispatch(setSignUpOnchange({
             SignUpNameChange: "subscriptionId",
-            SignUpValueChange: values.packagePayement.activeCard-1
+            SignUpValueChange: values.packagePayement.activeCard
         }));
         dispatch(setSignUpConstraintDataOnchange({constraintDataNameChange:"current",constraintDataValueChange:valuesSignUp.constraintData.current+1}))
         if(values.packagePayement.activeCard===1){
@@ -125,79 +151,79 @@ function ChoicePackage(){
             onFinish={handleSubmitSignUp}
         >
             <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "ChoicePackage-form" : "ChoicePackage"}>
-                <Steps className={"steps-choice"} current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>
-                    {steps.map(item => (
-                        <Step key={item.title} title={item.title}/>
-                    ))}
-                </Steps>
+                {/*<Steps className={"steps-choice"} current={valuesSignUp.constraintData.current} style={{height: "5%", display: "flex", alignItems: 'center'}}>*/}
+                {/*    {steps.map(item => (*/}
+                {/*        <Step key={item.title} title={item.title}/>*/}
+                {/*    ))}*/}
+                {/*</Steps>*/}
                 <div className="steps-content">
-                    {steps[valuesSignUp.constraintData.current].content === 'First-content'
-                        ?
-                        <div className="choix_Forfait">
-                            <div className="header_Forfait">
-                                {t("PackagePayment.ChoosePackage")}
-                            </div>
-                            {/*./header_Forfait*/}
+                    {/*{steps[valuesSignUp.constraintData.current].content === 'First-content'*/}
+                    {/*    ?*/}
+                    {/*    <div className="choix_Forfait">*/}
+                    {/*        <div className="header_Forfait">*/}
+                    {/*            {t("PackagePayment.ChoosePackage")}*/}
+                    {/*        </div>*/}
+                    {/*        /!*./header_Forfait*!/*/}
 
-                            <div className="card_Forfait">
-                                <div id={values.packagePayement.activeCard===1?"activeCard":""} className="Card0_Forfait" onClick={()=>handleClickCardZero()}>
-                                    <div>
-                                        <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonZero}></Radio>
-                                        <h3 >{t("PackagePayment.Basic")}</h3>
-                                        <p >{t("PackagePayment.IdealForTeams")}</p>
-                                    </div>
-                                    <div>
-                                        <h2 >{values.packagePayement.packFree}</h2>
-                                        <li >{t("PackagePayment.AccommodatesUpFive")}</li>
-                                        <li >{t("PackagePayment.Meetings")}</li>
-                                        <li >{t("PackagePayment.OneOneMeet")}</li>
-                                    </div>
-                                </div>{/*./Card1_Forfai*/}
+                    {/*        <div className="card_Forfait">*/}
+                    {/*            <div id={values.packagePayement.activeCard===1?"activeCard":""} className="Card0_Forfait" onClick={()=>handleClickCardZero()}>*/}
+                    {/*                <div>*/}
+                    {/*                    <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonZero}></Radio>*/}
+                    {/*                    <h3 >{t("PackagePayment.Basic")}</h3>*/}
+                    {/*                    <p >{t("PackagePayment.IdealForTeams")}</p>*/}
+                    {/*                </div>*/}
+                    {/*                <div>*/}
+                    {/*                    <h2 >{values.packagePayement.packFree}</h2>*/}
+                    {/*                    <li >{t("PackagePayment.AccommodatesUpFive")}</li>*/}
+                    {/*                    <li >{t("PackagePayment.Meetings")}</li>*/}
+                    {/*                    <li >{t("PackagePayment.OneOneMeet")}</li>*/}
+                    {/*                </div>*/}
+                    {/*            </div>/!*./Card1_Forfai*!/*/}
 
-                                <div id={values.packagePayement.activeCard===2?"activeCard":""} className="Card1_Forfait" onClick={()=>handleClickCardOne()}>
-                                    <div>
-                                        <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonOne}></Radio>
-                                        <h3 >Pro</h3>
-                                        <p >{t("PackagePayment.IdealForTeams")}</p>
-                                    </div>
-                                    <div>
-                                        <h2 >{values.packagePayement.packPro}€</h2>
-                                        <li >{t("PackagePayment.Accommodates100")}</li>
-                                        <li > {t("PackagePayment.UnlimitedGroupMeetings")}</li>
-                                        <li >{t("PackagePayment.CapacityOnCloud")}</li>
-                                    </div>
-                                </div>{/*./Card1_Forfai*/}
+                    {/*            <div id={values.packagePayement.activeCard===2?"activeCard":""} className="Card1_Forfait" onClick={()=>handleClickCardOne()}>*/}
+                    {/*                <div>*/}
+                    {/*                    <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonOne}></Radio>*/}
+                    {/*                    <h3 >Pro</h3>*/}
+                    {/*                    <p >{t("PackagePayment.IdealForTeams")}</p>*/}
+                    {/*                </div>*/}
+                    {/*                <div>*/}
+                    {/*                    <h2 >{values.packagePayement.packPro}€</h2>*/}
+                    {/*                    <li >{t("PackagePayment.Accommodates100")}</li>*/}
+                    {/*                    <li > {t("PackagePayment.UnlimitedGroupMeetings")}</li>*/}
+                    {/*                    <li >{t("PackagePayment.CapacityOnCloud")}</li>*/}
+                    {/*                </div>*/}
+                    {/*            </div>/!*./Card1_Forfai*!/*/}
 
-                                {/*./Card1_Forfai*/}
-                                <div id={values.packagePayement.activeCard===3?"activeCard":""} className="Card2_Forfait" onClick={()=>handleClickCardTwo()}>
-                                    <div className={"Card2_Forfait_div1"}>
-                                        <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonTwo}></Radio>
-                                        <h3 >Pay As You Go</h3>
-                                        <p >{t("PackagePayment.PayUse")}</p>
-                                    </div>
-                                    <div className={"Card2_Forfait_div2"}>
-                                        <h2 >{values.packagePayement.packASYouGo}€</h2>
-                                        <div>
-                                            <h5 >{t("PackagePayment.MeetingDuration")}</h5>
-                                            <Select defaultValue="1 Heure" getPopupContainer={() => document.querySelector(".slct-heure")} className={"slct-heure"}>
-                                                <Option value="1 Heure">1 {t("PackagePayment.Hour")}</Option>
-                                            </Select>
-                                        </div>
-                                        <div>
-                                            <h5 >{t("PackagePayment.PartiNumber")}</h5>
-                                            <Select defaultValue="20 Participants" getPopupContainer={() => document.querySelector(".slct-Intervenant")} className={"slct-Intervenant"}>
-                                                <Option value="20 Participants">20 {t("formDirectVideo.Participants")}</Option>
-                                            </Select>
-                                        </div>
-                                    </div>
+                    {/*            /!*./Card1_Forfai*!/*/}
+                    {/*            <div id={values.packagePayement.activeCard===3?"activeCard":""} className="Card2_Forfait" onClick={()=>handleClickCardTwo()}>*/}
+                    {/*                <div className={"Card2_Forfait_div1"}>*/}
+                    {/*                    <Radio className="btn_Radio" checked={values.packagePayement.checkedRadioButtonTwo}></Radio>*/}
+                    {/*                    <h3 >Pay As You Go</h3>*/}
+                    {/*                    <p >{t("PackagePayment.PayUse")}</p>*/}
+                    {/*                </div>*/}
+                    {/*                <div className={"Card2_Forfait_div2"}>*/}
+                    {/*                    <h2 >{values.packagePayement.packASYouGo}€</h2>*/}
+                    {/*                    <div>*/}
+                    {/*                        <h5 >{t("PackagePayment.MeetingDuration")}</h5>*/}
+                    {/*                        <Select defaultValue="1 Heure" getPopupContainer={() => document.querySelector(".slct-heure")} className={"slct-heure"}>*/}
+                    {/*                            <Option value="1 Heure">1 {t("PackagePayment.Hour")}</Option>*/}
+                    {/*                        </Select>*/}
+                    {/*                    </div>*/}
+                    {/*                    <div>*/}
+                    {/*                        <h5 >{t("PackagePayment.PartiNumber")}</h5>*/}
+                    {/*                        <Select defaultValue="20 Participants" getPopupContainer={() => document.querySelector(".slct-Intervenant")} className={"slct-Intervenant"}>*/}
+                    {/*                            <Option value="20 Participants">20 {t("formDirectVideo.Participants")}</Option>*/}
+                    {/*                        </Select>*/}
+                    {/*                    </div>*/}
+                    {/*                </div>*/}
 
-                                </div>{/*./Card2_Forfait*/}
-                            </div>
-                            {/*./card_Forfait*/}
-                        </div>
-                        :
-                        steps[valuesSignUp.constraintData.current].content === 'Second-content'
-                            ?
+                    {/*            </div>/!*./Card2_Forfait*!/*/}
+                    {/*        </div>*/}
+                    {/*        /!*./card_Forfait*!/*/}
+                    {/*    </div>*/}
+                    {/*    :*/}
+                    {/*    steps[valuesSignUp.constraintData.current].content === 'Second-content'*/}
+                    {/*        ?*/}
                             <div className="form_signup">
                                 <div className="header_Forfait">
                                     {t("FormConnexion.SignUp")}
@@ -207,113 +233,113 @@ function ChoicePackage(){
                                         <FormSignUp/>
                                 </div>
                             </div>
-                            :
-                            steps[valuesSignUp.constraintData.current].content === 'Last-content'
-                                ?
-                                <div className="PayementDiv">
+                    {/*        :*/}
+                    {/*        steps[valuesSignUp.constraintData.current].content === 'Last-content'*/}
+                    {/*            ?*/}
+                    {/*            <div className="PayementDiv">*/}
 
-                                    <div className="header_Forfait">
-                                        {t("PackagePayment.PayPackage")}
-                                    </div>
-                                    {/*./header_Forfait*/}
+                    {/*                <div className="header_Forfait">*/}
+                    {/*                    {t("PackagePayment.PayPackage")}*/}
+                    {/*                </div>*/}
+                    {/*                /!*./header_Forfait*!/*/}
 
-                                    <div className="champsPayement">
+                    {/*                <div className="champsPayement">*/}
 
-                                        <div className="div1_champsPayement">
-                                            <div className="texte_div1_champsPayement">
-                                                <span>{t("PackagePayment.PayWebinarPleasePro")}</span>
-                                                <h3>{values.packagePayement.packStripe}</h3>
-                                            </div>
-                                            <div className="icon_div1_champsPayement"><span
-                                                className="icon-logo-webinar"></span></div>
-                                        </div>
+                    {/*                    <div className="div1_champsPayement">*/}
+                    {/*                        <div className="texte_div1_champsPayement">*/}
+                    {/*                            <span>{t("PackagePayment.PayWebinarPleasePro")}</span>*/}
+                    {/*                            <h3>{values.packagePayement.packStripe}</h3>*/}
+                    {/*                        </div>*/}
+                    {/*                        <div className="icon_div1_champsPayement"><span*/}
+                    {/*                            className="icon-logo-webinar"></span></div>*/}
+                    {/*                    </div>*/}
 
-                                        <div className="div2_champsPayement">
-                                            <Button><AppleFilled/>{t("PackagePayment.Payer")}</Button>
-                                            <div className={"divpayerparcarte"}>{t("PackagePayment.CreditCardPay")}</div>
-                                            <div className={"form_Input"}>
-                                                <Form>
-                                                    <Form.Item
-                                                        className={"formItem"}
-                                                        label="Email"
-                                                        name="email"
-                                                        rules={[{required: true, message: t("PackagePayment.InputMail")}]}
-                                                    >
-                                                        <Input name="email" className={"input"}
-                                                               onChange={handlePackagePayementInput}/>
-                                                    </Form.Item>
+                    {/*                    <div className="div2_champsPayement">*/}
+                    {/*                        <Button><AppleFilled/>{t("PackagePayment.Payer")}</Button>*/}
+                    {/*                        <div className={"divpayerparcarte"}>{t("PackagePayment.CreditCardPay")}</div>*/}
+                    {/*                        <div className={"form_Input"}>*/}
+                    {/*                            <Form>*/}
+                    {/*                                <Form.Item*/}
+                    {/*                                    className={"formItem"}*/}
+                    {/*                                    label="Email"*/}
+                    {/*                                    name="email"*/}
+                    {/*                                    rules={[{required: true, message: t("PackagePayment.InputMail")}]}*/}
+                    {/*                                >*/}
+                    {/*                                    <Input name="email" className={"input"}*/}
+                    {/*                                           onChange={handlePackagePayementInput}/>*/}
+                    {/*                                </Form.Item>*/}
 
 
-                                                    <Form.Item
-                                                        className={"formItem"}
-                                                        label={t("PackagePayment.CardDetails")}
-                                                        name="carddetails"
-                                                        rules={[{required: true, message: t("PackagePayment.InputAddress")}]}
-                                                    >
-                                                        <CardElement
-                                                            id={"card-element"} name="carddetails" className={"input"}
+                    {/*                                <Form.Item*/}
+                    {/*                                    className={"formItem"}*/}
+                    {/*                                    label={t("PackagePayment.CardDetails")}*/}
+                    {/*                                    name="carddetails"*/}
+                    {/*                                    rules={[{required: true, message: t("PackagePayment.InputAddress")}]}*/}
+                    {/*                                >*/}
+                    {/*                                    <CardElement*/}
+                    {/*                                        id={"card-element"} name="carddetails" className={"input"}*/}
 
-                                                            options={{
-                                                                hidePostalCode:true
-                                                            }}
-                                                        />
-                                                    </Form.Item>
+                    {/*                                        options={{*/}
+                    {/*                                            hidePostalCode:true*/}
+                    {/*                                        }}*/}
+                    {/*                                    />*/}
+                    {/*                                </Form.Item>*/}
 
-                                                    <Form.Item
-                                                        className={"formItem"}
-                                                        label={t("PackagePayment.CardOwnerName")}
-                                                        name="nom"
-                                                        rules={[{
-                                                            required: true,
-                                                            message: t("PackagePayment.InputUserName")
-                                                        }]}
-                                                    >
-                                                        <Input name="nom" className={"input"}
-                                                               onChange={handlePackagePayementInput}/>
-                                                    </Form.Item>
+                    {/*                                <Form.Item*/}
+                    {/*                                    className={"formItem"}*/}
+                    {/*                                    label={t("PackagePayment.CardOwnerName")}*/}
+                    {/*                                    name="nom"*/}
+                    {/*                                    rules={[{*/}
+                    {/*                                        required: true,*/}
+                    {/*                                        message: t("PackagePayment.InputUserName")*/}
+                    {/*                                    }]}*/}
+                    {/*                                >*/}
+                    {/*                                    <Input name="nom" className={"input"}*/}
+                    {/*                                           onChange={handlePackagePayementInput}/>*/}
+                    {/*                                </Form.Item>*/}
 
-                                                    <Form.Item
-                                                        className={"formItem"}
-                                                        label={t("PackagePayment.pays")}
-                                                        name="pays"
-                                                        rules={[{
-                                                            required: true,
-                                                            message: t("PackagePayment.InputCountry")
-                                                        }]}
-                                                    >
-                                                        <Select defaultValue="France" name="pays"
-                                                                onChange={handlePackagePayementSelect}>
-                                                            <Option name="pays" value="France">France</Option>
-                                                            <Option name="pays" value="Tunis">Tunis</Option>
-                                                            <Option name="pays" value="Suisse">Suisse</Option>
-                                                        </Select>
-                                                    </Form.Item>
+                    {/*                                <Form.Item*/}
+                    {/*                                    className={"formItem"}*/}
+                    {/*                                    label={t("PackagePayment.pays")}*/}
+                    {/*                                    name="pays"*/}
+                    {/*                                    rules={[{*/}
+                    {/*                                        required: true,*/}
+                    {/*                                        message: t("PackagePayment.InputCountry")*/}
+                    {/*                                    }]}*/}
+                    {/*                                >*/}
+                    {/*                                    <Select defaultValue="France" name="pays"*/}
+                    {/*                                            onChange={handlePackagePayementSelect}>*/}
+                    {/*                                        <Option name="pays" value="France">France</Option>*/}
+                    {/*                                        <Option name="pays" value="Tunis">Tunis</Option>*/}
+                    {/*                                        <Option name="pays" value="Suisse">Suisse</Option>*/}
+                    {/*                                    </Select>*/}
+                    {/*                                </Form.Item>*/}
 
-                                                    <Form.Item
-                                                        className={"formItem"}
-                                                        name="postalCode"
-                                                        rules={[{
-                                                            required: true,
-                                                            message: t("PackagePayment.InputZipCode")
-                                                        }]}
-                                                    >
-                                                        <Input name="postalCode" placeholder={t("CompteSettings.ZipCode")}
-                                                               className={"input"}
-                                                               onChange={handlePackagePayementInput}/>
-                                                    </Form.Item>
+                    {/*                                <Form.Item*/}
+                    {/*                                    className={"formItem"}*/}
+                    {/*                                    name="postalCode"*/}
+                    {/*                                    rules={[{*/}
+                    {/*                                        required: true,*/}
+                    {/*                                        message: t("PackagePayment.InputZipCode")*/}
+                    {/*                                    }]}*/}
+                    {/*                                >*/}
+                    {/*                                    <Input name="postalCode" placeholder={t("CompteSettings.ZipCode")}*/}
+                    {/*                                           className={"input"}*/}
+                    {/*                                           onChange={handlePackagePayementInput}/>*/}
+                    {/*                                </Form.Item>*/}
 
-                                                </Form>
+                    {/*                            </Form>*/}
 
-                                            </div>
-                                        </div>
+                    {/*                        </div>*/}
+                    {/*                    </div>*/}
 
-                                    </div>
+                    {/*                </div>*/}
 
-                                </div>
-                                :
-                                null
+                    {/*            </div>*/}
+                    {/*            :*/}
+                    {/*            null*/}
 
-                    }
+                    {/*}*/}
 
                     <div className = {steps[valuesSignUp.constraintData.current].content === 'Second-content' ? "steps-action-form" : "steps-action"}>
                         {valuesSignUp.constraintData.current === 0 && (

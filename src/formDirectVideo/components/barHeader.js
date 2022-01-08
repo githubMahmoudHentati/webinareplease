@@ -20,7 +20,7 @@ export const BarHeader = () => {
     const {values, matchesMedia} = Hooks()
     const dispatch = useDispatch()
     const {t} = useTranslation();
-    var  x  = useWindowDimensions();
+    const  x  = useWindowDimensions();
     const cancelButton = async ()=>
     {
         history.push("/showVideos")
@@ -28,15 +28,28 @@ export const BarHeader = () => {
         dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
         dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
         dispatch(setDirectSetting(0))
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
     }
     const isAddedForm=values.constraintData.crudOption==='Ajouter' || localStorage.getItem('formPage')==='Ajouter' || !localStorage.getItem('idLive')
+
+    const click =()=>{
+        if (!values.general.liveTitle||values.general.liveAction&&!values.general.startDate||values.general.liveAction&&!values.general.startHour)
+        {
+            dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:true}));
+            dispatch(setDirectSetting(0))
+        }
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
+    }
+
     return (
+        <Col span={24} className={`title-col ${!darkMode?"light":"dark"}`}>
         <Row style={{width: "100%"}} justify={"space-between"}>
             <Col className={"bar-header-container "+ (!isAddedForm && !x.matches && " bar-header-container--edit ")}>
                 <Row gutter={[15, 0]}>
                     <Col style={{display: "flex", alignItems: "center"}}>
                         <ArrowLeftOutlined
                             onClick={() => {
+                                dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:false}))
                                 if (matchesMedia.matches) {
                                     dispatch(setDirectSetting(5))
                                     if (directMenu === 5) {
@@ -106,10 +119,11 @@ export const BarHeader = () => {
                         <Button  onClick={cancelButton} className={"btn_add_live"} style={{fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)" , background:darkMode===false?"":"rgba(255, 255, 255, 0.04)" , border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}} icon={<CloseOutlined className={"icon_add_live"}/>}> <span className={"spn_add_live"}>{t("formDirectVideo.Cancel")}</span></Button>
                     </Col>
                     <Col>
-                        <Button loading={values.constraintData.loadingCreateEditLive} className={"btn_add_live"} htmlType="submit"  icon={values.general.liveAction?<CheckOutlined />: isAddedForm ? <VideoCameraOutlined />: <EditOutlined />} type={"primary"}>{values.general.liveAction?<span className={"spn_add_live"}>{t("formDirectVideo.Validate")}</span>:<span className={"spn_add_live"}>{isAddedForm ? t("formDirectVideo.Diffuser"): t("formDirectVideo.Update")}</span>}</Button>
+                        <Button onClick={click} loading={values.constraintData.loadingCreateEditLive} className={"btn_add_live"} htmlType="submit"  icon={values.general.liveAction?<CheckOutlined />: isAddedForm ? <VideoCameraOutlined />: <EditOutlined />} type={"primary"}>{values.general.liveAction?<span className={"spn_add_live"}>{t("formDirectVideo.Validate")}</span>:<span className={"spn_add_live"}>{isAddedForm ? t("formDirectVideo.Diffuser"): t("formDirectVideo.Update")}</span>}</Button>
                     </Col>
                 </Row>
             </Col>
         </Row>
+        </Col>
     )
 }

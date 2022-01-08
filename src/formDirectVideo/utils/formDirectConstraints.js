@@ -2,6 +2,8 @@ import React from 'react';
 import fbPost from "../../assets/facebookPost.svg";
 import youtubePost from "../../assets/youtubePost.svg";
 import linkedinPost from "../../assets/linkedinPost.svg";
+import {v4 as uuidv4} from "uuid";
+import logo from "../../assets/logo_webinarplease.svg"
 
 
 
@@ -58,7 +60,9 @@ export const FormDirectConstraints = ()=>{
                 fileListConfiguration:[],
                 listChapter: [],
                 listQuestion: [],
-                diapositivesFileLists:[]
+                diapositivesFileLists:[],
+                switchLanguages: false,
+                languages:[]
             }
         )
     }
@@ -100,7 +104,7 @@ export const FormDirectConstraints = ()=>{
         return (
             {
                 addRules: {
-                    afterPrograming: false,
+                    afterPrograming: true,
                     beforeWeek: false,
                     beforeDay: false,
                     beforeHour: false,
@@ -110,10 +114,40 @@ export const FormDirectConstraints = ()=>{
                     replay: false
                 },
                 emails:[],
+                loadingemailscsv:false,
                 emailsGroup:[],
-                listMailsGroup:[]
+                listMailsGroup:[],
+                maxOnlineGuests:0,
+                maxOnsiteGuests:0,
+                listEmailsCSV:[],
+                listEmailsChange:[]
             }
         )
+    }
+
+    const Templates = () => {
+
+        return (
+            {
+                background2 : "#FFFFFF",
+                background3 : "#1890ff",
+                background4 : "#FFFFFF",
+                primaireColor : "#1890ff",
+                texteEmail :"#F2F2F2",
+                secondaireColor : "#FFA400",
+                LogoValueFileList:[
+                    {
+                        uid: uuidv4(),
+                        name: "logo.png",
+                        status: 'done',
+                        url: logo,
+                        thumbUrl: logo,
+                    }
+                ],
+                imageValueFileList:[]
+            }
+        )
+
     }
 
     const constraintData =()=>{
@@ -121,7 +155,9 @@ export const FormDirectConstraints = ()=>{
             loadingLiveFetchData:false,
             loadingCreateEditLive:false,
             crudOption:"",
-            leaveToast:true
+            leaveToast:true,
+            errorMenuFormStyle:false,
+            scrollIntoView: false,
         })
     }
 
@@ -137,6 +173,7 @@ export const FormDirectConstraints = ()=>{
         socialTools,
         invitation,
         constraintData,
+        Templates
         // formLive
     })
 

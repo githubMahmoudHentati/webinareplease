@@ -1,13 +1,20 @@
-import { useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    setFilterVideosActions, setInfosLive, setLoadingDeleteShowVideo,
+    setFilterVideosActions,
+    setInfosLive,
+    setLoadingDeleteShowVideo,
     setPaginationProps,
     setshowDivsConditions,
     setshowVideosActions,
-    setShowVideoConstraintDataOnchange, setExportLive, setDiffusionLink
+    setShowVideoConstraintDataOnchange,
+    setExportLive,
+    setDiffusionLink,
+    setInfosGuest,
+    setInfosGuestInput,
+    setInfosGuestModal
 } from "../store/showVideosAction"
-import {useLazyQuery, useMutation} from "@apollo/react-hooks";
+import {useLazyQuery, useMutation} from "@apollo/client";
 import {graphQL_shema} from "./graphQL";
 import {StatusMessage} from "./StatusMessage";
 import {useHistory} from "react-router-dom";
@@ -22,24 +29,46 @@ import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConst
 
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
+import {message} from "antd";
+import i18n from "../../i18n";
+import {useTranslation} from "react-i18next";
+
+
+
 const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
 
 
 let itemsRunAPI
 const dateFormat = 'YYYY-MM-DD';
 export  const Hooks=()=> {
+    const {t} = useTranslation();
     let idLiveToDelete = []
     const [keyState , setKeyState]=useState(null)
+    const [pwd , setPwd] = useState("")
     const [liveObj , setLiveObj] = useState({
-        order:'ascend',
+        order:'descend',
         pageSize:10,
         columnKey:0,
         current:1,
         id:[],
         idLive:0
     })
+
     const history = useHistory();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    // config count message
+    message.config({
+        maxCount: 3,
+    });
+
+    // useEffect(()=>{
+    //     EXPORTlIVE()
+    // },[])
 
     const {success_Delete , error_Delete ,  error_getLives}=StatusMessage()
 
@@ -61,11 +90,18 @@ export  const Hooks=()=> {
     const infosLives = useSelector((state)=> state.ShowVideosReducerReducer.valuesInfosLives)
     //Reducer export lives
     const exportLives = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives)
+    //Reducer infos Guests
+    const infosGuests = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests)
+    //Reducer infos Guests
+    const infosGuestsModal = useSelector((state)=> state.ShowVideosReducerReducer.valueModalInfosGuest)
     //Reducer
     //Reducer export lives
     const DiffusionLinks = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
 
-    console.log("exportLives",DiffusionLinks)
+    // use Selector redux
+    const mailList = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests.mailList)
+
+
 
     // Diffusion Link
     //const diffusionLink = useSelector((state)=> state.ShowVideosReducerReducer.DiffusionLink)
@@ -102,6 +138,9 @@ export  const Hooks=()=> {
             }
 
     })
+
+
+
     // mutation delete lang from table of event
     const [DeleteItemMutation] = useMutation(graphQL_shema().Delete_Items,{
         refetchQueries:() => [{ query: graphQL_shema().Get_Lives, variables: { input : {
@@ -177,7 +216,7 @@ export  const Hooks=()=> {
     //LazyQuery Export Live
     const [EXPORTlIVE]
         = useLazyQuery(graphQL_shema().Export_Live,{
-        fetchPolicy:  "cache-and-network",
+        fetchPolicy:  "network",
         variables : {id:(paginationProps.idLive ? paginationProps.idLive : liveObj.idLive)},
         context: { clientName: "second" },
         onCompleted :(data)=>{
@@ -193,6 +232,70 @@ export  const Hooks=()=> {
                 exportLivesName: "integrationUrl",
                 exportLivesValue: data.GetLinkExport.integrationUrl
             }));
+            dispatch(setExportLive({
+                exportLivesName: "translatorUrl",
+                exportLivesValue: data.GetLinkExport.translatorUrl
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "permalink",
+                exportLivesValue: data.GetLinkExport.permaLink
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "password",
+                exportLivesValue: data.GetLinkExport.password
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "participantUrlT",
+                exportLivesValue: data.GetLinkExport.participantUrlT
+            }));
+            dispatch(setExportLive({
+                exportLivesName: "auditorUrlT",
+                exportLivesValue: data.GetLinkExport.auditorUrlT
+            }));
+        }
+
+    })
+
+    const handleChangePassword = (e) =>{
+         setPwd(e.target.value)
+    }
+
+    const [CREATEPWD] = useMutation(graphQL_shema().create_pwd,{
+        refetchQueries:() => [{ query: graphQL_shema().Export_Live,
+            variables : {id: exportLives.liveId},
+        }],
+        variables:{pwd:pwd , liveId : exportLives.liveId.toString()},
+        context: { clientName: "second" },
+        onCompleted :(data)=>{
+           if(data.createPwd.code){
+               message.success({
+                   content:t("ShowVideo.changePasswordSuccess"),
+                   className: 'message-event',
+                   duration:1.5,
+                   style: {
+                       marginTop: '2vh',
+                   },
+               });
+           }else {
+               message.error({
+                   content: t("ShowVideo.erreurProduit"),
+                   duration:1.5,
+               });
+           }
+        }
+    })
+
+    const handleClickCreatePwd = () =>{
+        CREATEPWD();
+    }
+
+    //use Lazy Query
+    //query getVideosLinks for embed Code
+    const [GETLIVEEMAILS]
+        = useMutation(graphQL_shema().get_live_emails,{
+        context: { clientName: "second" },
+        onCompleted : async (data)=>{
+            await  dispatch(setInfosGuest({infosGuestName:"mailList",infosGuestsValue:data.getLiveEmails}));
         }
 
     })
@@ -205,9 +308,11 @@ export  const Hooks=()=> {
         onCompleted: (data)=>{
 
             dispatch(setDiffusionLink(data.getDiffusionLink));
+            localStorage.setItem('diffLink',data.getDiffusionLink.diffLink)
+            localStorage.setItem('visLink',data.getDiffusionLink.visLink)
             if (data.getDiffusionLink){
                 if(data.getDiffusionLink.code === 200){
-                    if(keyState.status === -1){
+                    if(keyState.status === -1 || keyState.status === 1){
                         history.push("/webinarStudioLive")
                     }else{
                         window.open(data.getDiffusionLink.visLink, '_blank');
@@ -297,7 +402,6 @@ export  const Hooks=()=> {
     }
     /*Filtrer Videos*/
     const handleFiltrerVideos = async(dates, contributor) =>{
-
             await dispatch(
                 setPaginationProps({
                   PaginationPropsNameChange: "current",
@@ -463,12 +567,13 @@ export  const Hooks=()=> {
     }
 
     /*Click Update live */
-    const updateLive= async (id)=>{
+    const updateLive= async (id , status)=>{
+        console.log("status120",status)
         localStorage.setItem('idLive', id);
         history.push("/FormDirectVideo")
         localStorage.setItem('formPage', 'Modifier')
-        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}))
-
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"crudOption",constraintDataValueChange:"Modifier"}));
+        dispatch(setPaginationProps({PaginationPropsNameChange:"statusLive",PaginationPropsValueChange:status}))
     }
 
     // fonction handleInfos
@@ -486,24 +591,84 @@ export  const Hooks=()=> {
     };
 
     // fonction export live
-    const handleExport = () =>{
-        EXPORTlIVE()
-        setTimeout(()=>{
+    const handleExport = async (e) =>{
+       await EXPORTlIVE()
+       await setTimeout(()=>{
             dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:true}));
+           dispatch(setExportLive({exportLivesName:"liveId",exportLivesValue:e}));
         },300)
+
     }
     //handleCancel Modal export
     const handleCancelModalExport = () =>{
         dispatch(setExportLive({exportLivesName:"visibleExport",exportLivesValue:false}));
     }
-console.log("hehehehehhehehkjhksjdhkfsjdfhksdjfh",keyState)
     // Handle Click Visualiser/Diffuser
     const handleClickStreamin = async (e) =>{
+        if(e.status === 0){
+            const win = window.open("/replay", "_blank");
+            win.focus();
+        }else {
         //await dispatch(setPaginationProps({PaginationPropsNameChange:"idDiffusion",PaginationPropsValueChange:e.id}));
         await setKeyState(e)
         await getDiffusionLink({
                  variables : {id:e.id},
         })
+        }
+    }
+
+    //*******infos Guests ****///
+    const handleInfosGuests = async (val) => {
+       await GETLIVEEMAILS({
+           variables : {id:val , searchEmail:""}
+       })
+
+      await  dispatch(setInfosGuest({infosGuestName:"idLive",infosGuestsValue:val}));
+
+       dispatch(setInfosGuestModal({infosGuestModalName:"visibleInfosGuests",infosGuestsModalValue:true}));
+
+    }
+
+    const handleCancelModalInfosGuest = () => {
+        dispatch(setInfosGuestModal({infosGuestModalName:"visibleInfosGuests",infosGuestsModalValue:false}));
+    }
+
+    ///************** Filtrage Modal ***************//////
+    const handleChangeInputModal =async (e) => {
+        if(e.key === 'Enter') {
+            await dispatch(setInfosGuestInput({infosGuestInputName:"valueInputModal",infosGuestsInputValue:e.target.value}));
+            await GETLIVEEMAILS({
+                variables: {id: infosGuests.idLive, searchEmail: e.target.value}
+            })
+
+        }
+    }
+    const handleChangeInputModalFake = async (e) =>{
+        await dispatch(setInfosGuestInput({infosGuestInputName:"valueInputModalFake",infosGuestsInputValue:e.target.value}));
+    }
+
+    ///Export Div//////
+    const saveDiv = () => {
+        html2canvas(document.querySelector("#DivExport")).then(canvas => {
+            document.body.appendChild(canvas);  // if you want see your screenshot in body.
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF("p", "mm", "a4");
+            let width = pdf.internal.pageSize.getWidth();
+            let height = pdf.internal.pageSize.getHeight();
+            pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+            pdf.save("listEmails.pdf");
+        });
+    }
+    const saveDivXLSX = () => {
+        const fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+        const fileExtension = ".xlsx";
+
+        const ws = XLSX.utils.json_to_sheet(mailList);
+        const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+        const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+        const data = new Blob([excelBuffer], { type: fileType });
+        FileSaver.saveAs(data, "listEmails" + fileExtension);
+
     }
 
     return({
@@ -535,5 +700,15 @@ console.log("hehehehehhehehkjhksjdhkfsjdfhksdjfh",keyState)
         exportLives,
         resetFilterVideos,
         handleClickStreamin,
+        handleInfosGuests,
+        handleCancelModalInfosGuest,
+        infosGuests,
+        handleChangeInputModal,
+        saveDiv,
+        handleChangeInputModalFake,
+        saveDivXLSX,
+        infosGuestsModal,
+        handleChangePassword,
+        handleClickCreatePwd
     })
 }

@@ -85,9 +85,9 @@ export const SocialTools=()=>{
                                                 {values.socialTools[index].plan.map((element, indexPlan) => {
                                                         return (
                                                             <Col className={"col-planification"} span={24} style={{border:darkMode===false?"":"1px solid rgba(255, 255, 255, 0.15)"}}>
-                                                                <Row gutter={[0, 20]}>
+                                                                <Row gutter={[0, 2]}>
                                                                     <Col span={24}>
-                                                                        <Row justify={"space-between"}>
+                                                                        <Row justify={"space-between"} className={"row_plannification_social"}>
                                                                             <Col span={12}>
                                                                                 <Row>
                                                                                     <Col>
@@ -99,12 +99,12 @@ export const SocialTools=()=>{
                                                                                 </Row>
                                                                             </Col>
                                                                             <Col>
-                                                                                <CloseOutlined onClick={()=>closePlan(index,indexPlan)}/>
+                                                                                <CloseOutlined onClick={()=>closePlan(index,indexPlan)} className={"close_icon_planification"}/>
                                                                             </Col>
                                                                         </Row>
                                                                     </Col>
                                                                     {element.active &&
-                                                                    <Col span={24}>
+                                                                    <Col span={24} className={"colDatePickerSocial"}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.StartingDate")}</span>
@@ -119,7 +119,7 @@ export const SocialTools=()=>{
                                                                     </Col>
                                                                     }
                                                                     {element.active &&
-                                                                    <Col span={24}>
+                                                                    <Col span={24} className={"colDatePickerSocial"}>
                                                                         <Row gutter={[0, 10]}>
                                                                             <Col span={24}>
                                                                                 <span className={"spn-planification"} style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{t("formDirectVideo.EndingDate")}</span>
@@ -162,8 +162,8 @@ export const SocialTools=()=>{
                                                                 <Col offset={1} className={"col_Empreinte"}>
                                                                     <span className={"spn1"} style={{
                                                                         color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"
-                                                                    }}>Empreinte</span><br/><span className={"spn2"} style={{
-                                                                    color:darkMode===false?"RGBA(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.85)"
+                                                                    }}>Empreinte.com</span><br/><span className={"spn2"} style={{
+                                                                    color:darkMode===false?"rgba(0, 0, 0, 0.25)":"rgba(255, 255, 255, 0.25)"
                                                                 }}>{t("formDirectVideo.AboutOneMn")}</span>
                                                                 </Col>
                                                             </Row>
@@ -186,7 +186,7 @@ export const SocialTools=()=>{
                                                     <span className={"FundamentalsofWebinar social-description-text"} >{values.general.liveTitle ? values.general.liveTitle : t("formDirectVideo.BaseWebinaire")}</span><br/>
                                                     <span className={"social-description-text"} style={{
                                                         color:"var(--white_color)"
-                                                    }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empriente.com'}</span>
+                                                    }}>{values.general.liveTitle ? values.general.liveLink+"/"+values.general.liveTitle : 'Empreinte.com'}</span>
                                                 </Col>
                                             </Row>
                                         </Col>

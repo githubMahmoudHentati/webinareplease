@@ -75,7 +75,7 @@ export const SubscriptionTable=()=>{
         {
             return(
                 record.status === false ?
-                 <Button  className={"button-payment"}> {t("CompteSettings.Payer")}</Button>
+                 <Button style={{border:"none"}}  className={"button-payment"}> {t("CompteSettings.Payer")}</Button>
                     :
                     null
               )

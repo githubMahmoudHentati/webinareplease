@@ -34,6 +34,10 @@
   &__row{
     justify-content: center;
   }
+  .ant-form-item-label{
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 .text-form{
@@ -59,10 +63,7 @@
   color: #ff4d4f;
   margin-right: 2px;
 }
-.ant-form-item-label{
-  display: flex;
-  justify-content: flex-end;
-}
+
 
 .col-signUp .ant-checkbox-inner{
   border-color: var(--box-signup) !important;

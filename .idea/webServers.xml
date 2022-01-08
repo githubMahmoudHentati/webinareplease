@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="78f1d22b-06c3-4c37-8dac-3b8fbe8b84e5" name="webinarplease" url="">
-        <fileTransfer accessType="SFTP" host="tamaidi-cloud-server.sastec.dev" port="22" sshConfigId="9d96dee8-991d-4483-be29-eb07fdb355d6" sshConfig="dev@tamaidi-cloud-server.sastec.dev:22 key" keyPair="true">
+      <webServer id="ecf09d37-9f22-4de3-a550-e2678a4c3074" name="web">
+        <fileTransfer accessType="SFTP" host="taha-cloud-server.empreinte.dev" port="22" sshConfigId="f692a4c4-b46a-4fec-9e3a-102a502463e6" sshConfig="taha@taha-cloud-server.empreinte.dev:22 key" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

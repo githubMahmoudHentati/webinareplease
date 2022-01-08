@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="webinarplease" remoteFilesAllowedToDisappearOnAutoupload="false" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="web">
     <serverData>
-      <paths name="webinarplease">
+      <paths name="web">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/dev/projects/webinare" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/taha/webinare" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

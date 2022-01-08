@@ -16,12 +16,13 @@ export const ShowVideosList = ()=>{
     const paginationProps=()=>{
         return(
             {
-                order:'ascend',
+                order:'descend',
                 pageSize:10,
                 columnKey:0,
                 current:1,
                 id:[],
                 idLive:0,
+                statusLive:-1,
                 idDiffusion:null,
                 statusMessages:true
             }
@@ -53,16 +54,39 @@ export const ShowVideosList = ()=>{
             inputUrlDiffusion:"",
             streamName:"",
             idLive:"",
-            pwdLive:""
+            pwdLive:"",
         })
     }
 
     const valueExportLives = () =>{
         return({
             visibleExport : false,
+            liveId:"",
             participantUrl : "",
             auditorUrl : "",
             integrationUrl : "",
+            translatorUrl : "",
+            permalink : "",
+            password : "",
+            participantUrlT: "",
+            auditorUrlT:"",
+        })
+    }
+    const valueInfosGuests = () =>{
+        return({
+            idLive:null,
+            mailList:[],
+        })
+    }
+    const valueInputInfosGuest = () =>{
+        return({
+            valueInputModal:"",
+            valueInputModalFake:""
+        })
+    }
+    const valueModalInfosGuest = () =>{
+        return({
+            visibleInfosGuests : false,
         })
     }
 
@@ -73,7 +97,10 @@ export const ShowVideosList = ()=>{
         showDivsConditions,
         loadingDeleteShowVideo,
         valuesInfosLives,
-        valueExportLives
+        valueExportLives,
+        valueInfosGuests,
+        valueInputInfosGuest,
+        valueModalInfosGuest
     })
 
 }

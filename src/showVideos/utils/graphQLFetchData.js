@@ -1,11 +1,11 @@
-import {useMutation, useQuery} from "@apollo/react-hooks";
+import {useMutation, useLazyQuery , useQuery} from "@apollo/client";
 import {graphQL_shema} from "./graphQL";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Hooks} from "./hooks";
 import {
     setshowVideosActions,
     setShowVideoConstraintDataOnchange,
-    setFilterVideosActions
+    setFilterVideosActions, setPaginationProps
 } from "../store/showVideosAction";
 import {StatusMessage} from "./StatusMessage";
 import {setLiveInfo,setFormDirectLiveConstraintDataOnchange} from "../../formDirectVideo/store/formDirectVideoAction"
@@ -13,34 +13,48 @@ import {setDirectSetting} from "../../utils/redux/actions";
 import {FormDirectConstraints} from "../../formDirectVideo/utils/formDirectConstraints";
 import moment from "moment";
 import {useEffect} from "react";
+import {v4 as uuidv4} from "uuid";
+import fbPost from "../../assets/facebookPost.svg";
+import youtubePost from "../../assets/youtubePost.svg";
+import linkedinPost from "../../assets/linkedinPost.svg";
 
 
 const dateFormat = 'YYYY-MM-DD';
 
 export const GraphQLFetchData=()=> {
     const dispatch = useDispatch()
-
+    const credentialsValues = useSelector((state) => state.Reducer)
     const {generals,configuration,invitation,socialTools} = FormDirectConstraints()
+    const valuePagination = useSelector(
+        (state) => state.ShowVideosReducerReducer.paginationProps
+    );
+    //Reducer infos Guests
+    const infosGuests = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests)
 
     // Read Data from Hooks
     const {paginationProps ,  values }=Hooks()
     const {error_getLives}=StatusMessage()
 
-
+    {console.log("POP§§§§§",paginationProps)}
+    {console.log("POP§§§§§SSSSS>>>>>",values)}
     // use Query to fetch Data
     const {data:dataLives}
         = useQuery(graphQL_shema().Get_Lives, {
         fetchPolicy:  "cache-and-network",
         variables: { input : {
                 "limit": paginationProps.pageSize,
-                "offset": (paginationProps.current-1)* (paginationProps.pageSize),
-                "order_dir": paginationProps.order,
+                "offset": (paginationProps.current-1) * (paginationProps.pageSize),
+                "order_dir": paginationProps.order ,//? 'descend' : paginationProps.order ,
                 "order_column": parseInt(paginationProps.columnKey),
                 "search_word":values.search,
                 "date":["", ""],
                 "status":values.type
             } },
-        context: { clientName: "second" },
+        context: {
+            headers: {
+                Authorization: `Bearer ${credentialsValues.authToken}`
+            }
+        },
         onCompleted :(data)=>{
             if(data.getLives.code === 200){
                 dispatch(setshowVideosActions(data.getLives));
@@ -48,6 +62,7 @@ export const GraphQLFetchData=()=> {
                     constraintDataNameChange: "loading",
                     constraintDataValueChange: false
                 }))
+
             }else if(data.getLives.code === 400){
                 error_getLives()
             }
@@ -55,6 +70,7 @@ export const GraphQLFetchData=()=> {
             dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:invitation(),socialTools:socialTools()}))
             dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
             dispatch(setDirectSetting(0))
+            dispatch(setshowVideosActions(data.getLives));
         }
     })
 

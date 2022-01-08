@@ -32,7 +32,7 @@
     "Avatar": "Avatar",
     "ErrorMsg":"la taille de l'image est trop grande",
     "Home": "Accueil",
-    "Upload": "Télécharger",
+    "Upload": "Importer",
     "GenInfo": "Informations générales",
     "Nom": "Nom",
     "LastName": "Nom",
@@ -42,12 +42,13 @@
     "Service condition,": "Condition de service,",
     "ConfirmOrder": "et je confirme que je passe commande pour des services pour mon entreprise ou pour d'autre objectifs professionnels",
     "PrivacyPolicy": "Politique de confidentialité.",
+    "DataProcessing": "l'Accord de traitement des donnèes",
     "en": "en",
     "the": "la",
     "CFreeAccount": "Créez votre compte gratuitement",
     "RegisterNow": "Inscrivez-vous maintenant",
     "City": "Ville",
-    "Address": "Addresse",
+    "Address": "Adresse",
     "NumberOfEmployees": "Nombre d'employées",
     "choiceOne": "5-10 employé(e)s",
     "choiceTwo": "10-20 employé(e)s",
@@ -75,7 +76,7 @@
     "StrengthPass": "Fiabilité du mot de passe actuel",
     "Medium": "Moyen",
     "Modifier": "Modifier",
-    "EditPass": "modifier votre mot de passe",
+    "EditPass": "Modifier votre mot de passe",
     "Ancien mot de passe": "Ancien mot de passe",
     "NewPassword": "Nouveau mot de passe",
     "Save": "Enregistrer",
@@ -88,10 +89,11 @@
     "Payer": "Payer",
     "direct": "Direct",
     "Company": "Société",
-    "MyAccount": "Mon Compte",
+    "AccountSettings": "Paramètres du compte",
     "InvalidPhone": "Numéro telephone est invalide",
     "EnterPhone": "Saisir un numéro télephone",
-    "ModalTitle": "Éditer l'image"
+    "ModalTitle": "Éditer l'image",
+    "Society": "Societé"
   },
   "ConfirmAccount": {
     "ConfirmationSend": "E-mail de confirmation envoyé !",
@@ -143,6 +145,8 @@
     "General": "Général",
     "Configuration": "Configuration",
     "Invitations": "Invitations",
+    "PlanificationInvitation": "Planification d'invitation",
+    "DisponibleProchainement": "Disponible prochainement",
     "Emails": "E-mails",
     "SuccessCopyMsg": "lien partagé est copié",
     "SocialTools": "Outils sociaux",
@@ -154,6 +158,7 @@
     "AddParticipant": "Ajouter un intervenant",
     "UpdateParticipant": "Modifier l'intervenant",
     "InterActiveOption": "Options Interactives du direct",
+    "Interpreters": "Interprétes",
     "Chat": "Conversation (nom modéré)",
     "Comments": "Commentaires (modérés)",
     "Likes": "Mention j'aime",
@@ -251,7 +256,7 @@
     "questionsTab":{
       "title": "Questions",
       "emptyList": "Pas de questions",
-      "inputQuestionLabel": "Nouveau Question",
+      "inputQuestionLabel": "Nouveau question",
       "addQuestion": "Ajouter une question",
       "inputQuestionPlaceholder": "Question",
       "inputResponsePlaceholder": "Réponse",
@@ -264,7 +269,21 @@
     },
     "slidesTab":{
       "title": "Diapositives"
-    }
+    },
+    "sendingOutInvit": "Limite des invitations",
+    "maxremote": "Max des invités à distance",
+    "maxguestpresent": "Max des invités présents",
+    "chooseLanguage": "choisir une ou des langue(s)",
+    "addLanguage": "Ajouter une ou des langue(s)",
+    "french": "Français",
+    "englich": "Anglais",
+    "deutsch": "Allemand",
+    "italian": "Italien",
+    "spanish": "Espagnol",
+    "portuguese": "Portugais",
+    "russian": "Russe",
+    "japanese": "japonais",
+    "korean": "Coréen"
   },
   "PackagePayment": {
     "Packages": "Forfaits",
@@ -336,8 +355,12 @@
     "DirectID": "Identifiant du direct",
     "DirectPassword": "Mot de passe du direct",
     "UrlParticipant": "Url participant",
+    "permalink": "Permalien",
+    "password": "Mot de passe",
+    "save": "Enregistrer",
     "Copier": "Copier",
     "AuditorUrl": "Url auditeur",
+    "translatorUrl": "Traducteur Url",
     "IntegrationLink": "Lien d'intégration",
     "ExportLink": "Liens d'export",
     "Home": "Accueil",
@@ -376,6 +399,64 @@
     "ErrorDelOne": "Oops!!! il y'a un erreur se produit",
     "ErrorDelTwo": "Oops!!! cet vidéo n'existe pas",
     "SuccessPassMsg": "Votre mot de passe a été modifié avec succès",
-    "AddLive": "Ajouter un direct"
+    "AddLive": "Ajouter un direct",
+    "guest": "Invités",
+    "guestList": "Liste des invités",
+    "search": "Rechercher...",
+    "download": "Télécharger",
+    "sentInvitation": "invitation envoyé",
+    "remotly": "à distance",
+    "presentiel":"Présentiel",
+    "changePasswordSuccess": "Votre mot de passe à été changé avec succès",
+    "erreurProduit": "Une erreur se produit"
+  },
+  "replay" : {
+    "secureReplay": "Replay sécurisé",
+    "enterAccess": "Taper le mot de passe d’accès fourni par l’organisateur de l'événement pour accèder au replay",
+    "accessPassword": "Mot de pasee d’accès",
+    "TypePassword": "Tapez votre mot de passe",
+    "enter": "Entrer"
+  },
+  "InvitationPage": {
+    "header": {
+
+    },
+    "form": {
+      "organised": "Organisé par ",
+      "date": "Le ",
+      "time": "à  ",
+      "participation": "Participation",
+      "lastName": "Nom",
+      "firstName": "Prénom",
+      "email": "Email",
+      "catcha": "",
+      "signup": "S'inscrire",
+      "return": "Retour",
+      "send": "Envoyer",
+      "confirm": "Vous êtes déjà inscrit et ne trouvez pas votre e-mail de confirmation d'inscription",
+      "resend": "Rédigez votre email pour réenvoyer un email de confirmation",
+      "info": {
+        "text": "Si vous êtes déjà inscrit et ne trouvez pas votre e-mail de confirmation d'inscription, ",
+        "link": "cliquez ici !"
+      },
+      "success": {
+        "title": "Félicitation !",
+        "subscribed": "Vous étes maintenant inscrit à l'événement",
+        "verif": "veuillez vérifier la boîte de réception de votre messagerie pour y accéder à l’évenement"
+      },
+      "places":" place(s) disponible(s)",
+      "successSend":" Nous vous avons envoyé un e-mail à l’adresse: ",
+      "verif":"Veuillez vérifier la boîte de réception de votre messagerie"
+    },
+    "footer": {
+        "legal": "Légal",
+        "conditions": "Conditions de service"
+    },
+    "validations": {
+      "required": "Ce champ est obligatoire !",
+      "email": "Cette adresse e-mail n'est pas valide!",
+      "exist": "Cette adresse e-mail est déjà utilisée"
+    }
+
   }
 }

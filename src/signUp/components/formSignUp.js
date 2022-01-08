@@ -207,7 +207,7 @@ export const FormSignUp =({child1,child2})=>{
                                                 getPopupContainer={() => document.querySelector(".slect-nbr-empl")}
                                                 className={"spn2 slect-nbr-empl"}
                                                 name="numberPerson" onChange={signUpOnChangeSelect}
-                                                defaultValue={t("CompteSettings.choiceOne")}
+                                                defaultValue= {1}
                                                 showSearch
                                                 style={{width: "100%"}}
                                                 placeholder={t("CompteSettings.choiceOne")}
@@ -216,9 +216,15 @@ export const FormSignUp =({child1,child2})=>{
                                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                                 }
                                             >
-                                                <Option name="numberPerson" key={1} value="1">{t("CompteSettings.choiceOne")}</Option>
-                                                <Option name="numberPerson" key={2} value="2">{t("CompteSettings.choiceTwo")}</Option>
-                                                <Option name="numberPerson" key={3} value="3">{t("CompteSettings.choiceThree")}</Option>
+                                                <Option name="numberPerson" key={1} value="1">1</Option>
+                                                <Option name="numberPerson" key={2} value="2">2 <span style={{fontSize:"16px"}}>to</span> 5</Option>
+                                                <Option name="numberPerson" key={3} value="3">6 <span style={{fontSize:"16px"}}>to</span> 10</Option>
+                                                <Option name="numberPerson" key={4} value="4">11 <span style={{fontSize:"16px"}}>to</span> 25</Option>
+                                                <Option name="numberPerson" key={5} value="5">26 <span style={{fontSize:"16px"}}>to</span> 50</Option>
+                                                <Option name="numberPerson" key={6} value="6">51 <span style={{fontSize:"16px"}}>to</span> 200</Option>
+                                                <Option name="numberPerson" key={7} value="7">201 <span style={{fontSize:"16px"}}>to</span> 1,000</Option>
+                                                <Option name="numberPerson" key={8} value="8">1,001 <span style={{fontSize:"16px"}}>to</span> 10,000</Option>
+                                                <Option name="numberPerson" key={9} value="9">10,0001 <span style={{fontSize:"16px"}}>or more</span></Option>
                                             </Select>
                                     </Form.Item>
                                 </Col>
@@ -238,9 +244,9 @@ export const FormSignUp =({child1,child2})=>{
                                 <Col className={"col-politique"} style={{color: "RGB(185, 185, 185)"}} span={15}>
                                     <span
                                         className={"spn2"}>{t("CompteSettings.WebinarDataProcess")}</span>
-                                    <a href="#/"> {t("CompteSettings.PrivacyPolicy")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a href="#/" className={"pol"}> {t("CompteSettings.Service condition,")} </a>
-                                    <span className={"pol"}>{t("CompteSettings.the")}</span><a href="#/" className={"pol"}> {t("CompteSettings.Politique de confidentialité")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a href="#/" className={"pol"}> {t("CompteSettings.l'Accord de traitement des donnèes")} </a>
+                                    <a onClick={()=>{window.open("https://webinarplease.com/legal")}}> {t("CompteSettings.PrivacyPolicy")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.ClickAgree")}</span><a onClick={()=>{window.open("https://webinarplease.com/conditions")}} className={"pol"}> {t("CompteSettings.Service condition,")} </a>
+                                    <span className={"pol"}>{t("CompteSettings.the")}</span><a onClick={()=>{window.open("https://webinarplease.com/legal")}} className={"pol"}> {t("CompteSettings.PrivacyPolicy")}" </a><span className={"pol"}>{t("CompteSettings.en")}</span><a href="#/" className={"pol"}> {t("CompteSettings.dataProcessing")} </a>
                                     <span className={"pol"}>{t("CompteSettings.ConfirmOrder")}</span>
                                 </Col>
                             </Row>

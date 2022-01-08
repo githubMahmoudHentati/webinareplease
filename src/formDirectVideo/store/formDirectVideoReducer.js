@@ -2,9 +2,11 @@ import {FormDirectConstraints} from "../utils/formDirectConstraints";
 import moment from "moment";
 import {arrayMoveImmutable} from "array-move";
 
-const {generals,configuration,invitation,socialTools,constraintData} = FormDirectConstraints()
+const {generals,configuration,invitation,socialTools,constraintData , Templates} = FormDirectConstraints()
 
 const formDirectInitialState = {
+
+    template:Templates(),
 
     general: generals(),
 
@@ -26,6 +28,56 @@ const formDirectInitialState = {
 
 export const  FormDirectVideoReducer=(state=formDirectInitialState , action)=>{
     switch (action.type){
+
+        //******** Template ************//
+
+        case "SET_TEMPLATE":
+            const {templateNameChange,templateValueChange}=action.payload
+            const templateOnOnchangeObj = {...state.template,[templateNameChange]: templateValueChange}
+            return{
+                ...state,
+                template:templateOnOnchangeObj
+            }
+        //************* Add File List Configuration ********//
+        case "SET_Templatelogo":
+            const {LogoValueFileList}=action.payload
+            const newArrayUploadLogoList =  [...state.template.LogoValueFileList,LogoValueFileList]
+            console.log("fileeeeeeeeeeeeeeList",newArrayUploadLogoList)
+            const LogoFileListObj = {...state.template,LogoValueFileList:newArrayUploadLogoList}
+            return{
+                ...state,
+                template:LogoFileListObj
+            }
+        //***************** Delete File Lists ************//
+        case "SET_TemplatelogoDelete":
+            const {LogoDeleteValue}=action.payload
+            const newArrDeleteLogo = state.template.LogoValueFileList
+            const deleteFileListArrLogo = newArrDeleteLogo.filter(item => item.uid !== LogoDeleteValue.uid)
+            const deleteLogoFileListOBJ = {...state.template,LogoValueFileList: deleteFileListArrLogo}
+            return{
+                ...state,
+                template:deleteLogoFileListOBJ
+            }
+        //************* Add File List Configuration ********//
+        case "SET_Templateimage":
+            const {imageValueFileList}=action.payload
+            const newArrayUploadImageList =  [...state.template.imageValueFileList,imageValueFileList]
+            console.log("fileeeeeeeeeeeeeeList",newArrayUploadImageList)
+            const ImageFileListObj = {...state.template,imageValueFileList:newArrayUploadImageList}
+            return{
+                ...state,
+                template:ImageFileListObj
+            }
+        //***************** Delete File Lists ************//
+        case "SET_TemplateimageDelete":
+            const {imageDeleteValue}=action.payload
+            const newArrDeleteImage = state.template.LogoValueFileList
+            const deleteFileListArrImage = newArrDeleteImage.filter(item => item.uid !== imageDeleteValue.uid)
+            const deleteImageFileListOBJ = {...state.template,imageValueFileList: deleteFileListArrImage}
+            return{
+                ...state,
+                template:deleteImageFileListOBJ
+            }
 
         //******** general reducer case************//
 

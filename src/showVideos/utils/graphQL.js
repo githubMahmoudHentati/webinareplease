@@ -43,9 +43,15 @@ export const graphQL_shema = ()=> {
     const Export_Live = gql `
     query($id:Int!) {
     GetLinkExport(id:$id) {
-    participantUrl
-    auditorUrl
-    integrationUrl
+        permaLink
+        password
+        participantUrl
+        participantUrlT
+        auditorUrl
+        auditorUrlT
+        translatorUrl
+        integrationUrl
+        code
      }
     }
     `;
@@ -55,12 +61,30 @@ export const graphQL_shema = ()=> {
      { code diffLink visLink }
 
       }
-    `
+    `;
+    const get_live_emails = gql `
+    mutation($id:Int!, $searchEmail: String!) {
+    getLiveEmails(id:$id, searchEmail:$searchEmail){
+        email
+        isOnline
+       }
+     } 
+    `;
+    const create_pwd = gql `
+    mutation($pwd:String!, $liveId:String!) {
+     createPwd(pwd:$pwd, liveId:$liveId) {
+        code
+        message
+      }
+    }
+    `;
     return ({
         Get_Lives,
         Delete_Items,
         Get_Live_Info,
         Export_Live,
-        diffusion_link
+        diffusion_link,
+        get_live_emails,
+        create_pwd
     })
 }

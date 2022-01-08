@@ -4,12 +4,16 @@ import {GraphQLFetchDataForm} from "../utils/graphQLFetchDataForm";
 import Hooks from "../utils/hooks";
 import moment from "moment";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {BarHeader} from "./barHeader";
 import {useTranslation} from 'react-i18next';
+import {setFormDirectLiveConstraintDataOnchange} from "../store/formDirectVideoAction";
+import {HomeOutlined} from "@ant-design/icons";
+import va from "simple-react-lightbox";
 
 
 export const LiveSubmit=(props)=>{
+    const dispatch = useDispatch()
     const history = useHistory()
     const [form] = Form.useForm();
     const {handleSubmit,checkKeyDown,values}=Hooks()
@@ -29,7 +33,7 @@ export const LiveSubmit=(props)=>{
 
 
     useEffect(async () => {
-        if (values.constraintData.loadingLiveFetchData&&localStorage.getItem('idLive'))
+        if (values.constraintData.loadingLiveFetchData&&localStorage.getItem('idLive') || values.invitation.loadingemailscsv )
         {
             await form.setFieldsValue(Object.assign(form.getFieldsValue(),
                 {
@@ -61,21 +65,48 @@ export const LiveSubmit=(props)=>{
                     videoMode: values.configuration.videoMode,
                     theme: values.configuration.theme,
                     tags: values.configuration.tags,
-                    //**********configuration live info***********/////
+                    switchLanguages:values.configuration.switchLanguages,
+                    languages:values.configuration.languages,
+                    //**********Invitation live info***********/////
                     emails:values.invitation.emails,
                     emailsGroup:values.invitation.emailsGroup,
+                    maxguestremotly:values.invitation.maxOnlineGuests,
+                    maxguestpresential:values.invitation.maxOnsiteGuests
                 }
             ))
             // dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"loadingLiveFetchData",constraintDataValueChange:false}));
         }
-    }, [values.constraintData.loadingLiveFetchData]);
+    }, [values.constraintData.loadingLiveFetchData , values  ]);
+    useEffect(()=>{
+       console.log("lskjfsd13213ljfsdljk",values)
+    },[values])
 
     const values_data = useSelector((state)=> state.FormDirectVideoReducer)
     const {getLiveData} = GraphQLFetchDataForm(values_data)
 
     useEffect(async () => {
         getLiveData()
-    }, []);
+    },[] );
+
+    useEffect(async () => {
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"errorMenuFormStyle",constraintDataValueChange:false}));
+    }, [values.general]);
+
+    const stickyElm = document.querySelector('.title-col')
+    const rootEl = document.querySelector('.App')
+    // const observer = new IntersectionObserver(
+    //     ([e]) => rootEl.classList.toggle('is-pinned', e.intersectionRatio < 1),
+    //     {threshold: [1]}
+    // );
+    //
+    //
+    // useEffect(() => {
+    //     if(stickyElm) {
+    //         // debugger
+    //         observer.observe(stickyElm)
+    //     }
+    // }, );
+
 
     return(
         <div>
@@ -91,17 +122,12 @@ export const LiveSubmit=(props)=>{
                         <Col span={24} className={"header-col"}>
                             <Breadcrumb className={"header-col-breadcrumb"} style={{fontSize:"14px" , fontFamily: "SF Pro Display",fontWeight: "normal",color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>
                                 <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                    <span >Accueil</span>
-                                </Breadcrumb.Item>
-                                <Breadcrumb.Item href="" style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}} onClick={()=>{history.push("/")}}>
-                                    <span>Direct</span>
+                                    <HomeOutlined className={"home_icon"} />
                                 </Breadcrumb.Item>
                                 <Breadcrumb.Item style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}>{localStorage.getItem('idLive') ? values.general.liveTitle :isAddedForm ? t("formDirectVideo.AddLive"): '' } </Breadcrumb.Item>
                             </Breadcrumb>
                         </Col>
-                        <Col span={24} className={"title-col"} style={{backgroundColor:darkMode===false?"RGBA(0, 0, 0, 0.04)":"#1D1D1D"}}>
                             <BarHeader/>
-                        </Col>
                         {props.children}
                     </Row>
                 </Spin>

@@ -35,13 +35,14 @@
     "Email": "Email",
     "UsedAddress": "Oops, This email address is already used by another user",
     "City": "City",
-    "adresse": "adresse",
+    "Address": "Address",
     "NumberOfEmployees": "Number of employees",
     "choiceOne": "5-10 employees",
     "choiceTwo": "10-20 employees",
     "choiceThree": "20-30 employees",
     "WebinarDataProcess": "Webinar please must process your data in accordance with the",
     "PrivacyPolicy": "Privacy Policy.",
+    "dataProcessing": "Data processing agreement",
     "RegisterNow": "Register now",
     "en": "at",
     "the": "the",
@@ -83,10 +84,11 @@
     "Payer": "Pay",
     "direct": "Live",
     "Company": "Company",
-    "MyAccount": "My Account",
+    "AccountSettings": "Account settings",
     "InvalidPhone": "Phone number is invalid",
     "EnterPhone": "Enter a phone number",
-    "ModalTitle": "Edit image"
+    "ModalTitle": "Edit image",
+    "Society": "Society"
   },
   "ConfirmAccount": {
     "ConfirmationSend": " Confirmation e-mail sent!",
@@ -138,6 +140,8 @@
     "General": "General",
     "Configuration": "Setup",
     "Invitations": "Invitations",
+    "PlanificationInvitation": "Invitation planning",
+    "DisponibleProchainement": "Available soon",
     "SuccessCopyMsg":"shared link is copied",
     "SocialTools": "Social tools",
     "Templates": "Templates",
@@ -148,6 +152,7 @@
     "AddParticipant": "Add a participant",
     "UpdateParticipant": "Update participant",
     "InterActiveOption": "Live Interactive option",
+    "Interpreters": "Interpreters",
     "Chat": "Chat (moderated name)",
     "Comments": "Comments (moderated)",
     "Likes": "Likes",
@@ -246,7 +251,7 @@
     "questionsTab":{
       "title": "Questions",
       "emptyList": "No questions",
-      "inputQuestionLabel": "New Question",
+      "inputQuestionLabel": "New question",
       "addQuestion": "Add a question",
       "inputQuestionPlaceholder": "Question",
       "inputResponsePlaceholder": "Answer",
@@ -259,8 +264,21 @@
     },
     "slidesTab":{
       "title": "Slides"
-    }
-
+    },
+    "sendingOutInvit": "Limit of invitations",
+    "maxremote": "Max remote guests",
+    "maxguestpresent": "Max of guests present",
+    "chooseLanguage": "choose language(s)",
+    "addLanguage": "Add language(s)",
+    "french": "French",
+    "englich": "English",
+    "deutsch": "Deutsch",
+    "italian": "Italian",
+    "spanish": "Spanish",
+    "portuguese": "Portuguese",
+    "russian": "Russian",
+    "japanese": "Japanese",
+    "korean": "Korean"
   },
   "PackagePayment": {
     "Packages": "Packages",
@@ -332,8 +350,12 @@
     "DirectID": "Direct ID",
     "DirectPassword": "Direct password",
     "UrlParticipant": "Participant url",
+    "permalink": "Permalink",
+    "password": "Password",
+    "save": "Save",
     "Copier": "Copy",
     "AuditorUrl": "Auditor url",
+    "translatorUrl": "Url Translator",
     "IntegrationLink": "Integration link",
     "ExportLink": "Export links",
     "Home": "Home",
@@ -371,7 +393,65 @@
     "ErrorDelOne":"Oops!!! an error has occurred",
     "ErrorDelTwo": "Oops!!! this video does not exist",
     "SuccessPassMsg": "Your password has been successfully changed",
-    "AddLive": "Add live"
-  }
+    "AddLive": "Add live",
+    "guest": "Guests",
+    "guestList": "Guest list",
+    "search": "Search...",
+    "download": "Download",
+    "sentInvitation": "invitation sent",
+    "remotly": "remotely",
+    "presentiel":"Presential",
+    "changePasswordSuccess": "Your password has been successfully changed",
+    "erreurProduit": "An error occurs"
+  },
+  "replay" : {
+    "secureReplay" : "Secure replay",
+    "enterAccess" : "Enter the access password provided by the event organiser to access the replay",
+    "accessPassword" : "Access password",
+    "TypePassword" : "Type your password",
+    "enter" : "Enter"
+  },
+  "formInvitation": {
+    "header": {
 
+    },
+    "form": {
+      "organised": "Organised par ",
+      "date": "On ",
+      "time": "at  ",
+      "participation": "Participation",
+      "lastName": "LastName",
+      "firstName": "FirstName",
+      "email": "Email",
+      "catcha": "",
+      "signup": "SignUp",
+      "return": "Return",
+      "send": "Send",
+      "confirm": "You have already registered and cannot find your registration confirmation email",
+      "resend": "Write your email to resend a confirmation email",
+      "info": {
+        "text": "If you have already registered and cannot find your registration confirmation email, ",
+        "link": "Click here !"
+      },
+      "success": {
+        "title": "Congratulations !",
+        "subscribed": "You are now registered for the event",
+        "verif": "Please check your email inbox to access the event"
+      },
+      "places":" Available seats",
+      "successSend":"We have sent you an email to: ",
+      "verif":"Please check your email inbox"
+    },
+    "footer": {
+      "legal": "Legal",
+      "conditions": "Terms of service"
+    },
+    "validations": {
+      "required": "Field is required !",
+      "email": " is not a valid email!",
+      "number": " is not a valid number!",
+      "format": "Press enter to add an email",
+      "exist": "This email address is already in use"
+    }
+  }
 }

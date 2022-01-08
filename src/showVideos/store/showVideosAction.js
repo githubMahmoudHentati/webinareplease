@@ -30,6 +30,12 @@ export function setPaginationProps(e){
         payload:e,
     }
 }
+export function setPaginationPropsValue(e){
+    return{
+        type:"SET_PaginationPropsValue",
+        payload:e,
+    }
+}
 
 export function setShowVideoConstraintDataOnchange(e){
     return{
@@ -63,6 +69,24 @@ export function setInfosLive(e){
 export function setExportLive(e){
     return{
         type :"SET_EXPORTLIVES",
+        payload:e
+    }
+}
+export function setInfosGuest(e){
+    return{
+        type:"SET_INFOSGUEST",
+        payload:e
+    }
+}
+export function setInfosGuestInput(e){
+    return{
+        type:"SET_INFOSGUESTINPUT",
+        payload:e
+    }
+}
+export function setInfosGuestModal(e){
+    return{
+        type:"SET_INFOSGUESTModal",
         payload:e
     }
 }

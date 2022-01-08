@@ -1,6 +1,6 @@
 import {ShowVideosList} from "../utils/ShowVideosConstraints"
 
-const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives}=ShowVideosList();
+const {paginationProps,FilterVideos,showVideoConstraintData ,showDivsConditions , loadingDeleteShowVideo , valuesInfosLives , valueExportLives , valueInfosGuests , valueInputInfosGuest , valueModalInfosGuest}=ShowVideosList();
 
 const ShowVideosINITIALSTATE = {
     ListVideos : [],
@@ -11,7 +11,10 @@ const ShowVideosINITIALSTATE = {
     loadingDelete:loadingDeleteShowVideo(),
     valuesInfosLives:valuesInfosLives(),
     valueExportLives:valueExportLives(),
-    DiffusionLink:[]
+    valueInfosGuests:valueInfosGuests(),
+    DiffusionLink:[],
+    valueInputInfosGuest:valueInputInfosGuest(),
+    valueModalInfosGuest:valueModalInfosGuest()
 }
 
 export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=>{
@@ -41,6 +44,12 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
                 ...state,
                 paginationProps:{...state.paginationProps, [PaginationPropsNameChange]:PaginationPropsValueChange}
             }
+        case "SET_PaginationPropsValue" :
+            return {
+                ...state,
+                paginationProps:{...state.paginationProps, ...action.payload}
+            }
+
         case "SET_ShowVideoConstraintDataOnchange":
             const {constraintDataNameChange,constraintDataValueChange}=action.payload
             const constraintDataOnOnchangeObj = {...state.constraintDataShowVideo,[constraintDataNameChange]: constraintDataValueChange}
@@ -76,7 +85,27 @@ export const ShowVideosReducerReducer = (state=ShowVideosINITIALSTATE , action)=
                 ...state,
                 valueExportLives:exportLivesObj
             }
-
+        case "SET_INFOSGUEST":
+            const {infosGuestName,infosGuestsValue}=action.payload
+            const infosGuestObj = {...state.valueInfosGuests,[infosGuestName]: infosGuestsValue}
+            return{
+                ...state,
+                valueInfosGuests:infosGuestObj
+            }
+        case "SET_INFOSGUESTINPUT":
+            const {infosGuestInputName,infosGuestsInputValue}=action.payload
+            const infosGuestInputObj = {...state.valueInputInfosGuest,[infosGuestInputName]: infosGuestsInputValue}
+            return{
+                ...state,
+                valueInputInfosGuest:infosGuestInputObj
+            }
+        case "SET_INFOSGUESTModal":
+            const {infosGuestModalName,infosGuestsModalValue}=action.payload
+            const infosGuestModalObj = {...state.valueModalInfosGuest,[infosGuestModalName]: infosGuestsModalValue}
+            return{
+                ...state,
+                valueModalInfosGuest:infosGuestModalObj
+            }
         case "SET_FILTER":
             const {deletedItems}=action.payload
             let indexes1 =

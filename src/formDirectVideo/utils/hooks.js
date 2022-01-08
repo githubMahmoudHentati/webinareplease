@@ -15,8 +15,14 @@ import {
 } from "../store/formDirectVideoAction";
 import {GraphQLFetchDataForm} from "./graphQLFetchDataForm";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
+import {setDirectSetting} from "../../utils/redux/actions";
+import {
+    setConstraintDataOnchange,
+    setGeneralInformationOnchange
+} from "../../compteSettings/store/accountSettingsAction";
+import {useEffect} from "react";
 
-const Hooks=(attachedFilesRef)=>{
+const Hooks=()=>{
     const dispatch = useDispatch()
     const values = useSelector((state)=> state.FormDirectVideoReducer)
     const {CreateLive,UpdateLive,generateSecuredPassword,themesDisplayQueryAction,idLive} = GraphQLFetchDataForm(values)
@@ -24,9 +30,11 @@ const Hooks=(attachedFilesRef)=>{
 
     const scrollToRef = (ref) => ref.current.scrollIntoView({ behavior: "smooth" })
 
+
     //******************General************************//
     const generalOnChangeByName =(value,event,name)=>{
         dispatch(setGeneralOnchange({generalNameChange:name, generalValueChange:event}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const generalOnChange = (event) => {
@@ -38,6 +46,7 @@ const Hooks=(attachedFilesRef)=>{
             dispatch(setGeneralOnchange({generalNameChange:"pwd", generalValueChange:""}))
             dispatch(setGeneralOnchange({generalNameChange:"securedPasswordOption", generalValueChange:false}))
         }
+        event.target.value==="liveAccess"&&dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
     }
 
     const generalOnChangeButton = async (event) => {
@@ -109,11 +118,17 @@ const Hooks=(attachedFilesRef)=>{
 
         dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
         values.configuration.SpeakerList.length < 1 &&name==="switchSpeaker" &&dispatch(setConfigurationOnchange({configurationNameChange:"modalSpeaker", configurationValueChange:value}));
+        name==="liveAutomaticArchiving"&&dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
+    }
+    const configurationOnChangeByNameSwitch = (value , name) =>{
+        dispatch(setConfigurationOnchange({configurationNameChange:name, configurationValueChange:value}));
     }
 
     const configurationOnChangeButton = async (event) => {
 
         await dispatch(setConfigurationOnchange({configurationNameChange:event.target.value, configurationValueChange:event.target.checked}));
+        dispatch(setFormDirectLiveConstraintDataOnchange({constraintDataNameChange:"scrollIntoView",constraintDataValueChange:true}))
+
 
     };
 
@@ -191,7 +206,7 @@ const Hooks=(attachedFilesRef)=>{
     const invitationOnChangeSelect = (value,event,name) => {
         console.log("event",value,name)
         //let listTags= (...[],option)
-        dispatch(setInvitationOnchange({invitationNameChange:name, invitationValueChange:value}));
+        dispatch(setInvitationOnchange({invitationNameChange:"emails", invitationValueChange:value}));
     };
 
     //************************Common Function***********************//
@@ -209,9 +224,10 @@ const Hooks=(attachedFilesRef)=>{
                         name: el.name,
                         lastName: el.lastName,
                         function: el.title,
-                        avatar: el.logoSpeaker && el.logoSpeaker.length ? el.logoSpeaker[0].thumbUrl : '',
+                        avatar: el.logoSpeaker && el.logoSpeaker.length ? el.logoSpeaker[0].thumbUrl.substring(el.logoSpeaker[0].thumbUrl.lastIndexOf("/")+ 1,el.logoSpeaker[0].thumbUrl.length) : '',
                         mail: el.email,
-                    }
+
+            }
                 ))
         }));
         let newStartDate= !values.general.liveAction?"":typeof values.general.startDate!="string"?(values.general.startDate).format('YYYY-MM-DD'):values.general.startDate
@@ -228,7 +244,9 @@ const Hooks=(attachedFilesRef)=>{
     }
 
     const checkKeyDown =(e)=>{
-        if (e.code === 'NumpadEnter') e.preventDefault();
+        console.log("e.code-----",e)
+        console.log("e.code-----",e.code)
+        if (e.keyCode === 13) e.preventDefault();
     }
 
     // Suppression des régles invitations
@@ -263,6 +281,47 @@ const Hooks=(attachedFilesRef)=>{
         }
 
     }
+    const generalInformationOnChangeAvatar= (avatar) => {
+        dispatch(setGeneralInformationOnchange({
+            generalInformationNameChange: "vignette",
+            generalInformationValueChange: avatar
+        }))
+        dispatch(setConstraintDataOnchange({
+            constraintDataNameChange: "avatarLoading",
+            constraintDataValueChange: false
+        }))
+    };
+
+    const handleChangeGuestRemotly = (event) => {
+        if(event === null){
+            dispatch(setInvitationOnchange({
+                invitationNameChange: "maxOnlineGuests",
+                invitationValueChange: 0
+            }))
+        }else{
+        dispatch(setInvitationOnchange({
+            invitationNameChange: "maxOnlineGuests",
+            invitationValueChange: event
+        }))
+        }
+    }
+    const handleChangeGuestPresentiel = (event) => {
+        if(event === null){
+            dispatch(setInvitationOnchange({
+                invitationNameChange: "maxOnsiteGuests",
+                invitationValueChange: 0
+            }))
+        }else {
+        dispatch(setInvitationOnchange({
+            invitationNameChange: "maxOnsiteGuests",
+            invitationValueChange: event
+        }))
+        }
+    }
+    const handleChange =(value)=>{
+        console.log(`selected ${value}`);
+        dispatch(setConfigurationOnchange({configurationNameChange:"languages", configurationValueChange:value}));
+    }
 
     return({
         generalOnChangeByName,
@@ -291,7 +350,12 @@ const Hooks=(attachedFilesRef)=>{
         getFirstCharacter,
         sendPostMessage,
         checkKeyDown,
-        scrollToRef
+        scrollToRef,
+        generalInformationOnChangeAvatar,
+        handleChangeGuestRemotly,
+        handleChangeGuestPresentiel,
+        handleChange,
+        configurationOnChangeByNameSwitch
     })
 }
 

@@ -8,7 +8,10 @@ import {
     VideoCameraOutlined,
     CopyFilled,
     EyeTwoTone,
-    EyeInvisibleOutlined
+    EyeInvisibleOutlined,
+    MailOutlined,
+    SearchOutlined,
+    DownloadOutlined
 } from '@ant-design/icons';
 import {useHistory} from 'react-router-dom';
 import {Tooltip, Dropdown, Menu, Button, Modal, Input, message} from 'antd';
@@ -18,13 +21,30 @@ import {useTranslation} from "react-i18next";
 import useWindowDimensions from "../../utils/components/getWindowDimensions";
 import {setDirectSetting} from "../../utils/redux/actions";
 import {useDispatch} from 'react-redux'
+import {Row,Col} from 'antd'
+import {setInfosGuest, setPaginationProps} from "../store/showVideosAction";
+
+import { CSVLink } from "react-csv";
 const {TextArea} = Input;
 
 function useActionMenu({record}) {
     const dispatch = useDispatch()
 
+    // use Selector redux
+    const darkMode = useSelector((state) => state.Reducer.DarkMode)
+    // use Selector redux
+    const mailList = useSelector((state)=> state.ShowVideosReducerReducer.valueInfosGuests.mailList)
+    // use Selector redux
+    const value = useSelector((state)=> state.ShowVideosReducerReducer.valueInputInfosGuest.valueInputModalFake)
+
     const [statusSuccessMessages , setStatusSuccessMessages]=useState(true)
     const [statusErrorMessages , setStatusErrorMessages] = useState(true)
+    const [visible , setVisible] = useState(false)
+
+    const headers = [
+        { label: "Email", key: "email" },
+        { label: "Is Online", key: "isOnline" },
+    ];
 
     const {
         handleClickStreamin,
@@ -37,22 +57,90 @@ function useActionMenu({record}) {
         handleExport,
         handleCancelModalExport,
         exportLives,
-        paginationProps
+        paginationProps,
+        handleInfosGuests,
+        handleCancelModalInfosGuest,
+        infosGuests,
+        handleChangeInputModal,
+        saveDiv,
+        handleChangeInputModalFake,
+        saveDivXLSX,
+        infosGuestsModal,
+        handleChangePassword,
+        handleClickCreatePwd
     } = Hooks()
+
+
+
+    const menu = (
+        <Menu >
+            <Menu.Item key="1" onClick={()=>saveDivXLSX()}>
+                Excel
+            </Menu.Item>
+            <Menu.Item key="2" >
+                <CSVLink data={mailList} headers={headers}>
+                    CSV
+                </CSVLink>
+            </Menu.Item>
+            <Menu.Item key="3" onClick={()=>saveDiv()}>
+                PDF
+            </Menu.Item>
+        </Menu>
+    );
+
+
     const {t} = useTranslation();
     var x = useWindowDimensions() // fonction js pour afficher interface seulement en 767px de width
     const history = useHistory()
     const textAreaRef = useRef(null);
 
-    // use Selector redux
-    const darkMode = useSelector((state) => state.Reducer.DarkMode)
+
+
+    //ListEmailsModal
+    const listItem = mailList.map((item)=>
+
+        <div className={"ModalGuestListMailDivGlobal"} >
+            <div className={"ModalGuestListMailDivGlobal1"}>
+                <span className={"iconMail"}><MailOutlined/></span>
+                <span className={"Mail"}>{item.email}</span>
+            </div>
+            <div className={"ModalGuestListMailDivGlobal2"}>
+                {
+                    item.isOnline === 0
+                     ?
+                        <span className={"etat"}>{t("ShowVideo.sentInvitation")}</span>
+                        :
+                        null
+                }
+                {
+                    item.isOnline === 1
+                        ?
+                        <span className={"etat etatDP"}>{t("ShowVideo.remotly")}</span>
+                        :
+                        null
+                }
+                {
+                    item.isOnline === 2
+                        ?
+                        <span className={"etat etatDP"}>{t("ShowVideo.presentiel")}</span>
+                        :
+                        null
+                }
+            </div>
+        </div>
+
+    )
+
+
+
     const actionMenu = (
         <Menu className="menu">
             <Menu.Item onClick={() => handleInfos()}><InfoCircleOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.infos")}</Menu.Item>
-            {record.owner ? <Menu.Item onClick={() => updateLive(record.id)}><EditOutlined
+            {record.owner ? <Menu.Item onClick={() => updateLive(record.id,record.status)}><EditOutlined
                 className={"dropdownIcon"}/>{t("ShowVideo.Modifier")}</Menu.Item> : null}
-            <Menu.Item onClick={() => handleExport()}><LinkOutlined className={"dropdownIcon"}/>Export</Menu.Item>
+            <Menu.Item onClick={()=>handleInfosGuests(record.id)}><MailOutlined className={"dropdownIcon"}/>{t("ShowVideo.guest")}</Menu.Item>
+            <Menu.Item onClick={() => handleExport(record.id)}><LinkOutlined className={"dropdownIcon"}/>Export</Menu.Item>
             <Menu.Item onClick={() => history.push("/FormDirectVideo", dispatch(setDirectSetting(4)))}><span
                 className="icon-Templates dropdownIconTemp"></span> {t("ShowVideo.Templates")}</Menu.Item>
             {record.owner ? <Menu.Item onClick={() => handleDeleteOneRow(record.id)}><DeleteOutlined
@@ -85,6 +173,29 @@ function useActionMenu({record}) {
             );
         }
     }
+    // fonction pour copier url auditeur
+    const CopyUrlTraducteur = async () => {
+        if (document.getElementById("myUrlTraducteur").value === "") {
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
+        } else {
+            await setStatusSuccessMessages(false)
+            document.getElementById("myUrlTraducteur").select();
+            document.execCommand("Copy");
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
+        }
+    }
+
     // fonction pour copier url auditeur
     const CopyUrlAuditeur = async () => {
         if (document.getElementById("myUrlAuditeur").value === "") {
@@ -220,14 +331,60 @@ function useActionMenu({record}) {
         }
     }
 
+    // copy Permalien
+    const CopyPermalien = async (e) => {
+        if (document.getElementById("myPermalink").value === "") {
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
+        } else {
+            await setStatusSuccessMessages(false)
+            document.getElementById("myPermalink").select();
+            document.execCommand("Copy");
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
+        }
+    }
+
+    // copy Password
+    const CopyPassword = async (e) => {
+        if (document.getElementById("myPassword").value === "") {
+            await setStatusErrorMessages(false)
+            return (
+                statusErrorMessages && message.error({content: t("ShowVideo.EmptyField"), duration: 2}).then(
+                    async () => {
+                        setStatusErrorMessages(true)
+                    }
+                )
+            )
+        } else {
+            await setStatusSuccessMessages(false)
+            document.getElementById("myPassword").select();
+            document.execCommand("Copy");
+            statusSuccessMessages && message.success({content: t("ShowVideo.SuccessCopy"), duration: 2}).then(
+                async () => {
+                    setStatusSuccessMessages(true)
+                }
+            );
+        }
+    }
+
     const actionColumnView = (
         <div className="action">
             {
                 !x.matches && <Tooltip getPopupContainer={() => document.querySelector(".btn_Visualiser_diffuser")}
                                        title={t("ShowVideo" + (record.status === -1 ? ".Diffuser" : ".Visualiser"))}>
                     <Button className={"btn_Visualiser_diffuser "} style={{
-                        backgroundColor: darkMode === false ? "" : "#1D1D1D",
-                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.25)",
+                        backgroundColor: darkMode === false ? "" : "#141414",
+                        color: darkMode === false ? "" : "rgba(255, 255, 255, 0.85)",
                         border: darkMode === false ? "" : "1px solid rgba(255, 255, 255, 0.15)"
                     }} onClick={() => handleClickStreamin(record)}>
                         {
@@ -324,9 +481,37 @@ function useActionMenu({record}) {
                 ]}
             >
                 <div className="div_Url_diffusion">
+                    <span>{t("ShowVideo.permalink")} </span>
+                    <Input id="myPermalink" placeholder="//demo.webtv-solution.com/fo/embed/267"
+                           name={"participantUrl"} value={exportLives.permalink}
+                           suffix={
+                               <Tooltip title={t("ShowVideo.Copier")}>
+                                   <CopyFilled onClick={CopyPermalien} className={"copy_icon"}/>
+                               </Tooltip>
+                           }
+                    />
+                </div>
+                {/*./Permalien*/}
+                <div className="div_Url_diffusion">
+                    <span>{t("ShowVideo.password")} </span>
+                    <Input id="myPassword" placeholder=""
+                           name={"participantUrl"} defaultValue={exportLives.password}
+                           suffix={
+                               <Tooltip title={t("ShowVideo.Copier")}>
+                                   <CopyFilled onClick={CopyPassword} className={"copy_icon"}/>
+                               </Tooltip>
+                           }
+                           onChange={handleChangePassword}
+                    />
+                </div>
+                <div className={"div_save_password"}>
+                    <Button type="primary" onClick={()=>handleClickCreatePwd()}>{t("ShowVideo.save")}</Button>
+                </div>
+                {/*./Password*/}
+                <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.UrlParticipant")} </span>
                     <Input id="myUrlParticipant" placeholder="//demo.webtv-solution.com/fo/embed/267"
-                           name={"participantUrl"} value={exportLives.participantUrl}
+                           name={"participantUrl"} value={!window.process.env.HAS_TRANSLATOR ? exportLives.participantUrl : exportLives.participantUrlT}
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyUrlParticipant} className={"copy_icon"}/>
@@ -339,7 +524,7 @@ function useActionMenu({record}) {
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.AuditorUrl")}</span>
                     <Input id="myUrlAuditeur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"auditorUrl"}
-                           value={exportLives.auditorUrl}
+                           value={!window.process.env.HAS_TRANSLATOR ? exportLives.auditorUrl : exportLives.auditorUrlT}
                            suffix={
                                <Tooltip title={t("ShowVideo.Copier")}>
                                    <CopyFilled onClick={CopyUrlAuditeur} className={"copy_icon"}/>
@@ -348,6 +533,25 @@ function useActionMenu({record}) {
                     />
                 </div>
                 {/*./div_Url_diffusion*/}
+
+                {
+                    window.process.env.HAS_TRANSLATOR
+                     ?
+                        <div className="div_Url_diffusion">
+                            <span>{t("ShowVideo.translatorUrl")}</span>
+                            <Input id="myUrlTraducteur" placeholder="//demo.webtv-solution.com/fo/embed/267" name={"translatorUrl"}
+                                   value={exportLives.translatorUrl}
+                                   suffix={
+                                       <Tooltip title={t("ShowVideo.Copier")}>
+                                           <CopyFilled onClick={CopyUrlTraducteur} className={"copy_icon"}/>
+                                       </Tooltip>
+                                   }
+                            />
+                        </div>
+                    :
+                    null
+                }
+
 
                 <div className="div_Url_diffusion">
                     <span>{t("ShowVideo.IntegrationLink")}</span>
@@ -363,6 +567,46 @@ function useActionMenu({record}) {
                 {/*./div_Url_diffusion*/}
 
             </Modal>{/*./ModalExporter*/}
+
+            {/*Modal Invités*/}
+            <Modal
+                visible={infosGuestsModal.visibleInfosGuests}
+                title={t("ShowVideo.guestList")}
+                onCancel={handleCancelModalInfosGuest}
+                footer={[
+                    <Button key="back" onClick={handleCancelModalInfosGuest}>
+                        {t("ShowVideo.Close")}
+                    </Button>,
+                ]}
+                getContainer={() => document.querySelector(".showVideo")}
+            >
+                <div className={"ModalGuestGlobalDiv"}>
+
+                    <div className={"ModalGuestFilterDiv"}>
+                        <Input
+                            className="inputFilter"
+                            placeholder={t('ShowVideo.search')}
+                            prefix={<SearchOutlined style={{color: "rgba(0, 0, 0, 0.25)", marginLeft: "10px"}}/>}
+                            name={"search"}
+                            onKeyDown={(e)=>handleChangeInputModal(e)}
+                            onChange={(e)=>handleChangeInputModalFake(e)}
+                            value={value}
+                        />
+                        <Dropdown overlay={menu} trigger={"click"}>
+                            <Button>
+                                <DownloadOutlined className={"iconDownload"}/> {t("ShowVideo.download")}
+                            </Button>
+                        </Dropdown>
+                    </div>{/*./ModalGuestFilterDiv*/}
+                    <div className={"ModalGuestListMail"} id={"DivExport"}>
+                        {listItem}
+                    </div>{/*./ModalGuestListMail*/}
+
+                </div>
+
+            </Modal>
+            {/*Modal Invités*/}
+
 
 
         </div>
