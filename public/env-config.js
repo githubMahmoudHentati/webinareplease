@@ -1,4 +1,4 @@
 window.process={};
 window.process.env  = {
-   HAS_TRANSLATOR : true,
+   HAS_TRANSLATOR : false,
 }
