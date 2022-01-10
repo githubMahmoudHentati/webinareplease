@@ -351,8 +351,8 @@ console.log("FILE",fileList)
             slide: null
         }
         const query = `
-          mutation ($avatar:Upload!)
-        {uploadLogo(avatar:$avatar)}
+         mutation ($slide:Upload!)
+        {AddSlides(slide:$slide)}
 `;
         const operations = JSON.stringify({query, variables: {variables}});
         formData.append("operations", operations);
@@ -360,7 +360,7 @@ console.log("FILE",fileList)
             "0": ["variables.slide"]
         };
         formData.append("map", JSON.stringify(map));
-        [...info.fileList].filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp" || file.type === "image/gif" || file.type === "image/svg+xml").map(async (e, index) => {
+        [...info.fileList].slice(-1).filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp" || file.type === "image/gif" || file.type === "image/svg+xml").map(async (e, index) => {
             const file = e.originFileObj;
             console.log("*******************", file);
             return formData.append("0", file);

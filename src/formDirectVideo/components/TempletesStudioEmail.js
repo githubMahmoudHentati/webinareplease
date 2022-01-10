@@ -206,26 +206,32 @@ const TempletesStudioEmail = () => {
                                     </p>
                                 </Dragger>
                             </div>
-                            {/*<span className={"spnDivChangeColor"}>Image de couverture <InfoCircleFilled className={"iconInfo"}/></span>*/}
-                            {/*<div className={"divUpdateBackground"}>*/}
-                            {/*    <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}*/}
-                            {/*             name="fileList" listType="text"*/}
-                            {/*          fileList={[...values.template.imageValueFileList]}*/}
-                            {/*        //beforeUpload={beforeUpload}*/}
-                            {/*               onChange={handleChangeImage}*/}
-                            {/*              onRemove={removeThumbnailImage}*/}
-                            {/*    >*/}
+                            <span className={"spnDivChangeColor"}>Image de couverture <InfoCircleFilled className={"iconInfo"}/></span>
+                            <div className={"divUpdateBackground"}>
+                                <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
+                                         name="fileList" listType="text"
+                                      fileList={[...values.template.imageValueFileList].slice(-1)}
+                                         accept="image/jpeg,image/png,image/gif,image/bmp,image/webp,image/svg+xml"
+                                    //beforeUpload={beforeUpload}
+                                           onChange={handleChangeImage}
+                                          onRemove={removeThumbnailImage}
+                                >
 
-                            {/*        <p className="ant-upload-drag-icon">*/}
-                            {/*            <FileImageOutlined  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>*/}
-                            {/*        </p>*/}
-                            {/*        <p className="ant-upload-hint" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.25)"}}>*/}
-                            {/*            Importer*/}
-                            {/*        </p>*/}
-                            {/*    </Dragger>*/}
-                            {/*</div>*/}
+                                    <p className="ant-upload-drag-icon">
+                                        <FileImageOutlined  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
+                                    </p>
+                                    <p className="ant-upload-hint" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.25)"}}>
+                                        Importer
+                                    </p>
+                                </Dragger>
+                            </div>
                         </div>{/*./divChangeColor*/}
-                        <div className={"DivStudio"} style={{backgroundColor:"#414141"}}>
+                        <div className={"DivStudio"}
+                             style={{
+                                 backgroundImage: !values.template.imageValueFileList  ?  "" : `url(${values.template.imageValueFileList.slice(-1).map(item=>item.thumbUrl)})`,
+                                 backgroundBlendMode: !values.template.imageValueFileList ? "" : "exclusion"
+                             }}
+                        >
                             <div className={"DIVLOGO"} >
                                <img src={values.template.LogoValueFileList && values.template.LogoValueFileList.slice(-1).map(item=>item.thumbUrl)}/>
                             </div>
