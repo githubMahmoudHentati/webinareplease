@@ -306,9 +306,9 @@ export  const Hooks=()=> {
     const [getDiffusionLink , { data}] = useMutation(graphQL_shema().diffusion_link,{
         context: { clientName: "second" },
         onCompleted: (data)=>{
-
             dispatch(setDiffusionLink(data.getDiffusionLink));
             localStorage.setItem('diffLink',data.getDiffusionLink.diffLink)
+            localStorage.setItem('diffLinkTr',data.getDiffusionLink.diffLinkTr)
             localStorage.setItem('visLink',data.getDiffusionLink.visLink)
             if (data.getDiffusionLink){
                 if(data.getDiffusionLink.code === 200){

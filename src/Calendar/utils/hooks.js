@@ -102,11 +102,12 @@ const HooksCalendar = (callback) => {
             let diffusionData = data.getDiffusionLink
             if (diffusionData) {
                 if (diffusionData.code === 200) {
-                    if (statusLive === 0) {
-                        history.push('/webinarStudioLive')
-                    } else {
-                        window.open(diffusionData.visLink, '_blank')
-                    }
+                    history.push('/webinarStudioLive')
+                    // if (statusLive === 1) {
+                    //     history.push('/webinarStudioLive')
+                    // } else {
+                    //     window.open(diffusionData.visLink, '_blank')
+                    // }
                 }
             }
         }
@@ -294,7 +295,10 @@ const HooksCalendar = (callback) => {
         GetDiffusionLive({variables: {id: id}})
     }
     const handleStatusEvents = async (live) => {
-        if (live.status === -1) {
+        if (live.status === 0){
+            const win = window.open("/replay", "_blank");
+            win.focus();
+        }else if (live.status === -1) {
             await updateLive(live.id)
         } else {
             await diffusionLive({id: live.id, status: live.status})
