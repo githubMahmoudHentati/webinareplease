@@ -1215,7 +1215,6 @@
   .DivStudio{
     height: 75vh;
     width: 78%;
-    background-color: #414141 !important;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: scroll;
@@ -1506,4 +1505,10 @@
 }
 .spnDivChangeColor{
   margin-top: 10px;
+}
+.DivEmailTab{
+  background-color: var(--dark_color) !important;
+}
+.DIVStudioLiveSkin{
+  background-color: #414141 !important;
 }

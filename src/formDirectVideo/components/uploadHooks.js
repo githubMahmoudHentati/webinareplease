@@ -389,7 +389,7 @@ console.log("FILE",fileList)
             console.log("resultData",result.data.data.parseCSV);
             // dispatch(setInvitationFile({InvitationNameChange:"emails", InvitationValueChange:result.data.data.parseCSV
             // }));
-            dispatch(setInvitationOnchange({invitationNameChange:"emails", invitationValueChange:[...result.data.data.parseCSV]}));
+            dispatch(setInvitationOnchange({invitationNameChange:"emails", invitationValueChange:[...result.data.data.parseCSV , ...values.invitation.emails]}));
             dispatch(setInvitationOnchange({invitationNameChange:"loadingemailscsv", invitationValueChange:true}));
             //dispatch(setLiveInfo({general:generals(),configuration:configuration(),invitation:{invitationNameChange:"emails", invitationValueChange:result.data.data.parseCSV},socialTools:socialTools()}))
         }).catch(error => {
