@@ -226,7 +226,7 @@ const TempletesStudioEmail = () => {
                                 </Dragger>
                             </div>
                         </div>{/*./divChangeColor*/}
-                        <div className={"DivStudio"}
+                        <div className={"DivStudio DIVStudioLiveSkin"}
                              style={{
                                  backgroundImage: !values.template.imageValueFileList  ?  "" : `url(${values.template.imageValueFileList.slice(-1).map(item=>item.thumbUrl)})`,
                                  backgroundBlendMode: !values.template.imageValueFileList ? "" : "exclusion"
@@ -308,7 +308,7 @@ const TempletesStudioEmail = () => {
                                 }
                             </div>
                         </div>{/*./divChangeColor*/}
-                        <div className={"DivStudio"}>
+                        <div className={"DivStudio DivEmailTab"}>
 
                           <div className={"DivTemplateEmailGlobal"}>
                               <Skeleton  paragraph={{ rows: 1 }}/>
