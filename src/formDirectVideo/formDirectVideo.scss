@@ -1154,7 +1154,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 1024px){
     display: flex;
     flex-direction: column;
   }
@@ -1164,7 +1164,7 @@
   }
   .divChangeColor{
     width: 20%;
-    height: 65vh;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     .spnDivChangeColor{
@@ -1204,7 +1204,7 @@
         }
       }
     }
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1024px){
       width: 100%;
       height: 65vh;
     }
@@ -1383,7 +1383,7 @@
 
       }
     }
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1024px){
       width: 100% !important;
       display: flex;
       flex-direction: column;
@@ -1414,6 +1414,7 @@
     }
     @media screen and (max-width: 767px) {
       height: 75vh;
+      margin-top: 100px;
     }
 
   }

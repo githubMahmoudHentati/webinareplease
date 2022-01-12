@@ -298,7 +298,7 @@ console.log("FILE",fileList)
         };
         formData.append("map", JSON.stringify(map));
         let fileList = [...info.fileList];
-        [...info.fileList].slice(-1).filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp" || file.type === "image/gif").map(async (e, index) => {
+        [...info.fileList].slice(-1).filter(file => file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp" || file.type === "image/gif" || file.type === "image/svg+xml").map(async (e, index) => {
             const file = e.originFileObj;
             console.log("*******************", file);
             return formData.append("0", file);
