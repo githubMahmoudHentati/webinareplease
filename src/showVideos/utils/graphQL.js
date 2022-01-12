@@ -85,6 +85,6 @@ export const graphQL_shema = ()=> {
         Export_Live,
         diffusion_link,
         get_live_emails,
-        create_pwd
+        create_pwd,
     })
 }
