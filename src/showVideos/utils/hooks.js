@@ -606,7 +606,7 @@ export  const Hooks=()=> {
     // Handle Click Visualiser/Diffuser
     const handleClickStreamin = async (e) =>{
         if(e.status === 0){
-            const win = window.open("/replay", "_blank");
+            const win = window.open("/replay/" + e.id, "_blank");
             win.focus();
         }else {
         //await dispatch(setPaginationProps({PaginationPropsNameChange:"idDiffusion",PaginationPropsValueChange:e.id}));

@@ -314,8 +314,8 @@ const TempletesStudioEmail = () => {
                             </div>
                             <span className={"spnDivChangeColor"}>Textes</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("textex2Email")} style={{backgroundColor : color.texteEmail}}></div>
-                                <Input className={"inputUpdateColor1 noRedirect5"} value={color.texteEmail}/>
+                                <div className={"divUpdateColor1 noRedirect5"} onClick={()=>handleClickPrimaireEmail("textex2Email")} style={{backgroundColor : color.texteEmail}}></div>
+                                <Input className={"inputUpdateColor1"} value={color.texteEmail}/>
                                 {
                                     textesEmail
                                         ?
@@ -329,8 +329,8 @@ const TempletesStudioEmail = () => {
                             </div>
                             <span className={"spnDivChangeColor"}>Couleur secondaire</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("secondaireEmail")} style={{backgroundColor : color.secondaireColor}}></div>
-                                <Input className={"inputUpdateColor1 noRedirect6"} value={color.secondaireColor}/>
+                                <div className={"divUpdateColor1 noRedirect6"} onClick={()=>handleClickPrimaireEmail("secondaireEmail")} style={{backgroundColor : color.secondaireColor}}></div>
+                                <Input className={"inputUpdateColor1"} value={color.secondaireColor}/>
                                 {
                                     secondaireEmail
                                         ?
