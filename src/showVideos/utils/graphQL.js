@@ -58,7 +58,7 @@ export const graphQL_shema = ()=> {
     const diffusion_link = gql `
     mutation($id:Int!) {
      getDiffusionLink(id:$id)
-     { code diffLink visLink }
+     { code diffLink visLink diffLinkTr}
 
       }
     `;
@@ -85,6 +85,6 @@ export const graphQL_shema = ()=> {
         Export_Live,
         diffusion_link,
         get_live_emails,
-        create_pwd
+        create_pwd,
     })
 }

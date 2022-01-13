@@ -1,18 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Input , Button} from 'antd';
 import {useHistory} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {LockOutlined } from '@ant-design/icons';
 import {useTranslation} from "react-i18next";
 import Hooks from "../utils/hooks";
-const EnterPassword = () => {
+import {Form} from "antd";
+
+const EnterPassword = (props) => {
 
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const password = useSelector((state)=> state.ShowVideosReducerReducer.valueExportLives.password)
+    const passworddRedux = useSelector((state)=> state.ReplayReducer.Login.password)
+    const password = useSelector((state)=> state.ReplayReducer.Login.passwordAPI)
+    const enter = useSelector((state)=> state.ReplayReducer.Login.confirmPassword)
     const {t} = useTranslation();
     const {handleChangePassword , values , handleConfirmPassword} = Hooks()
-    console.log("kkljdfskjdfkjldfskjldfskjldfskjldfs",password)
 
     return(
         <div className={"PasswordDiv"}>
@@ -75,7 +78,16 @@ const EnterPassword = () => {
                     }
                     value={values.Login.password}
                     onChange={handleChangePassword}
+                    required
                 />
+                {
+                    ( enter===false && password !== passworddRedux)
+                        ?
+                        <span className={"ErrorRequired"}>{t("replay.incorectPwd")}</span>
+                        :
+                        null
+                }
+
                 <div className={"DivEnterPassword"}>
                     <Button type="primary" onClick={handleConfirmPassword}>{t("replay.enter")}</Button>
                 </div>

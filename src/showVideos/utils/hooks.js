@@ -306,9 +306,9 @@ export  const Hooks=()=> {
     const [getDiffusionLink , { data}] = useMutation(graphQL_shema().diffusion_link,{
         context: { clientName: "second" },
         onCompleted: (data)=>{
-
             dispatch(setDiffusionLink(data.getDiffusionLink));
             localStorage.setItem('diffLink',data.getDiffusionLink.diffLink)
+            localStorage.setItem('diffLinkTr',data.getDiffusionLink.diffLinkTr)
             localStorage.setItem('visLink',data.getDiffusionLink.visLink)
             if (data.getDiffusionLink){
                 if(data.getDiffusionLink.code === 200){
@@ -606,7 +606,7 @@ export  const Hooks=()=> {
     // Handle Click Visualiser/Diffuser
     const handleClickStreamin = async (e) =>{
         if(e.status === 0){
-            const win = window.open("/replay", "_blank");
+            const win = window.open("/replay/" + e.id, "_blank");
             win.focus();
         }else {
         //await dispatch(setPaginationProps({PaginationPropsNameChange:"idDiffusion",PaginationPropsValueChange:e.id}));

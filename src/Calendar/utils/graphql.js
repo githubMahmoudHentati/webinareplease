@@ -29,6 +29,7 @@ export const graphQL_shema = () => {
         mutation($id:Int!) {
             getDiffusionLink(id:$id){
                 code
+                diffLinkTr
                 diffLink
                 visLink
             }

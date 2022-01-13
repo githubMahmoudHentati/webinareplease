@@ -1154,7 +1154,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 1024px){
     display: flex;
     flex-direction: column;
   }
@@ -1164,7 +1164,7 @@
   }
   .divChangeColor{
     width: 20%;
-    height: 65vh;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     .spnDivChangeColor{
@@ -1204,18 +1204,20 @@
         }
       }
     }
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1024px){
       width: 100%;
-      height: 45vh;
+      height: 65vh;
     }
     @media screen and (max-width: 767px) {
-      height: 70vh;
+      height: 103vh;
     }
   }
   .DivStudio{
     height: 75vh;
     width: 78%;
-    background-color: var(--dark_color);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -1381,7 +1383,7 @@
 
       }
     }
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 1024px){
       width: 100% !important;
       display: flex;
       flex-direction: column;
@@ -1412,7 +1414,9 @@
     }
     @media screen and (max-width: 767px) {
       height: 75vh;
+      margin-top: 100px;
     }
+
   }
 .sketchPicker{
   position: absolute !important;
@@ -1499,4 +1503,13 @@
 }
 .ant-tabs-top > .ant-tabs-nav::before{
   border-bottom: 1px solid var(--border_color) !important;
+}
+.spnDivChangeColor{
+  margin-top: 10px;
+}
+.DivEmailTab{
+  background-color: var(--dark_color) !important;
+}
+.DIVStudioLiveSkin{
+  background-color: #414141 !important;
 }

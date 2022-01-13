@@ -36,6 +36,40 @@ const TempletesStudioEmail = () => {
     const {values}=Hooks()
 
 
+    // Clic outside palette Color
+    useEffect(() => {
+        function ColorGOTO(event) {
+
+            let noRedirect1 = '.noRedirect1 , .sketchPicker1 *'
+            let noRedirect2 = '.noRedirect2 , .sketchPicker2 *'
+            let noRedirect3 = '.noRedirect3 , .sketchPicker3 *'
+            let noRedirect4 = '.noRedirect4 , .sketchPicker4 *'
+            let noRedirect5 = '.noRedirect5 , .sketchPicker5 *'
+            let noRedirect6 = '.noRedirect6 , .sketchPicker6 *'
+
+            if (!event.target.matches(noRedirect1)) {
+                setTextes(false)
+            }
+            if(!event.target.matches(noRedirect2)){
+                setSecondaire(false)
+            }
+            if(!event.target.matches(noRedirect3)){
+                setTexteButton(false)
+            }
+            if(!event.target.matches(noRedirect4)){
+                setPrimaireEmail(false)
+            }
+            if(!event.target.matches(noRedirect5)){
+                setTextesEmail(false)
+            }
+            if(!event.target.matches(noRedirect6)){
+                setSecondaireEmail(false)
+            }
+        };
+        document.body.addEventListener('click', ColorGOTO);
+    }, [textes , secondaire , texteButton , primaireEmail , textesEmail , secondaireEmail]);
+
+
     function callback(key) {
         console.log(key);
     }
@@ -145,7 +179,7 @@ const TempletesStudioEmail = () => {
                             {/*</div>*/}
                             <span className={"spnDivChangeColor"}>Textes</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaire("Textes")} style={{backgroundColor : color.background2}}></div>
+                                <div className={"divUpdateColor1 noRedirect1"} onClick={()=>handleClickPrimaire("Textes")} style={{backgroundColor : color.background2}}></div>
                                 <Input className={"inputUpdateColor1"} value={color.background2}/>
                                 {
                                     textes
@@ -153,14 +187,14 @@ const TempletesStudioEmail = () => {
                                         <SketchPicker
                                             color={color.background2}
                                             onChangeComplete={handleChangeComplete2}
-                                            className={"sketchPicker"}
+                                            className={"sketchPicker sketchPicker1"}
                                         />
                                         : null
                                 }
                             </div>
                             <span className={"spnDivChangeColor"}>Couleur des boutons</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaire("secondaire")} style={{backgroundColor : color.background3}}></div>
+                                <div className={"divUpdateColor1 noRedirect2"} onClick={()=>handleClickPrimaire("secondaire")} style={{backgroundColor : color.background3}}></div>
                                 <Input className={"inputUpdateColor1"} value={color.background3}/>
                                 {
                                     secondaire
@@ -168,14 +202,14 @@ const TempletesStudioEmail = () => {
                                         <SketchPicker
                                             color={color.background3}
                                             onChangeComplete={handleChangeComplete3}
-                                            className={"sketchPicker"}
+                                            className={"sketchPicker sketchPicker2"}
                                         />
                                         : null
                                 }
                             </div>
                             <span className={"spnDivChangeColor"}>Texte des boutons</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaire("texteButton")} style={{backgroundColor : color.background4}}></div>
+                                <div className={"divUpdateColor1 noRedirect3"} onClick={()=>handleClickPrimaire("texteButton")} style={{backgroundColor : color.background4}}></div>
                                 <Input className={"inputUpdateColor1"} value={color.background4}/>
                                 {
                                     texteButton
@@ -183,7 +217,7 @@ const TempletesStudioEmail = () => {
                                         <SketchPicker
                                             color={color.background4}
                                             onChangeComplete={handleChangeComplete4}
-                                            className={"sketchPicker"}
+                                            className={"sketchPicker sketchPicker3"}
                                         />
                                         : null
                                 }
@@ -193,6 +227,7 @@ const TempletesStudioEmail = () => {
                                 <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
                                          name="fileList" listType="text"
                                           fileList={[...values.template.LogoValueFileList].slice(-1)}
+                                         accept="image/jpeg,image/png,image/gif,image/bmp,image/webp,image/svg+xml"
                                     //beforeUpload={beforeUpload}
                                          onChange={handleChangeLogo}
                                          onRemove={removeThumbnailLogo}
@@ -206,26 +241,32 @@ const TempletesStudioEmail = () => {
                                     </p>
                                 </Dragger>
                             </div>
-                            {/*<span className={"spnDivChangeColor"}>Image de couverture <InfoCircleFilled className={"iconInfo"}/></span>*/}
-                            {/*<div className={"divUpdateBackground"}>*/}
-                            {/*    <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}*/}
-                            {/*             name="fileList" listType="text"*/}
-                            {/*          fileList={[...values.template.imageValueFileList]}*/}
-                            {/*        //beforeUpload={beforeUpload}*/}
-                            {/*               onChange={handleChangeImage}*/}
-                            {/*              onRemove={removeThumbnailImage}*/}
-                            {/*    >*/}
+                            <span className={"spnDivChangeColor"}>Image de couverture <InfoCircleFilled className={"iconInfo"}/></span>
+                            <div className={"divUpdateBackground"}>
+                                <Dragger className={"parent"} style={{backgroundColor:darkMode===false?"":"rgba(255, 255, 255, 0.04)" ,width:"100%",display:"flex",justifyContent:"center", border:darkMode===false?"":"1px dashed rgba(255, 255, 255, 0.15)"}}
+                                         name="fileList" listType="text"
+                                      fileList={[...values.template.imageValueFileList].slice(-1)}
+                                         accept="image/jpeg,image/png,image/gif,image/bmp,image/webp,image/svg+xml"
+                                    //beforeUpload={beforeUpload}
+                                           onChange={handleChangeImage}
+                                          onRemove={removeThumbnailImage}
+                                >
 
-                            {/*        <p className="ant-upload-drag-icon">*/}
-                            {/*            <FileImageOutlined  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>*/}
-                            {/*        </p>*/}
-                            {/*        <p className="ant-upload-hint" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.25)"}}>*/}
-                            {/*            Importer*/}
-                            {/*        </p>*/}
-                            {/*    </Dragger>*/}
-                            {/*</div>*/}
+                                    <p className="ant-upload-drag-icon">
+                                        <FileImageOutlined  style={{color:darkMode===false?"":"rgba(255, 255, 255, 0.85)"}}/>
+                                    </p>
+                                    <p className="ant-upload-hint" style={{color:darkMode===false?"":"RGBA(255, 255, 255, 0.25)"}}>
+                                        Importer
+                                    </p>
+                                </Dragger>
+                            </div>
                         </div>{/*./divChangeColor*/}
-                        <div className={"DivStudio"} style={{backgroundColor:"#414141"}}>
+                        <div className={"DivStudio DIVStudioLiveSkin"}
+                             style={{
+                                 backgroundImage: !values.template.imageValueFileList  ?  "" : `url(${values.template.imageValueFileList.slice(-1).map(item=>item.thumbUrl)})`,
+                                 backgroundBlendMode: !values.template.imageValueFileList ? "" : "exclusion"
+                             }}
+                        >
                             <div className={"DIVLOGO"} >
                                <img src={values.template.LogoValueFileList && values.template.LogoValueFileList.slice(-1).map(item=>item.thumbUrl)}/>
                             </div>
@@ -258,7 +299,7 @@ const TempletesStudioEmail = () => {
                         <div className={"divChangeColor divTabchangeColor"}>
                             <span className={"spnDivChangeColor"}>Couleur primaire</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("primaireEmail")} style={{backgroundColor : color.primaireColor}}></div>
+                                <div className={"divUpdateColor1 noRedirect4"} onClick={()=>handleClickPrimaireEmail("primaireEmail")} style={{backgroundColor : color.primaireColor}}></div>
                                 <Input className={"inputUpdateColor1"} value={color.primaireColor}/>
                                 {
                                     primaireEmail
@@ -266,14 +307,14 @@ const TempletesStudioEmail = () => {
                                         <SketchPicker
                                             color={color.primaireColor}
                                             onChangeComplete={handleChangeCompletePrimaire}
-                                            className={"sketchPicker"}
+                                            className={"sketchPicker sketchPicker4"}
                                         />
                                         : null
                                 }
                             </div>
                             <span className={"spnDivChangeColor"}>Textes</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("textex2Email")} style={{backgroundColor : color.texteEmail}}></div>
+                                <div className={"divUpdateColor1 noRedirect5"} onClick={()=>handleClickPrimaireEmail("textex2Email")} style={{backgroundColor : color.texteEmail}}></div>
                                 <Input className={"inputUpdateColor1"} value={color.texteEmail}/>
                                 {
                                     textesEmail
@@ -281,14 +322,14 @@ const TempletesStudioEmail = () => {
                                         <SketchPicker
                                             color={color.texteEmail}
                                             onChangeComplete={handleChangeCompleteTextes}
-                                            className={"sketchPicker"}
+                                            className={"sketchPicker sketchPicker5"}
                                         />
                                         : null
                                 }
                             </div>
                             <span className={"spnDivChangeColor"}>Couleur secondaire</span>
                             <div className={"divUpdateColor"}>
-                                <div className={"divUpdateColor1"} onClick={()=>handleClickPrimaireEmail("secondaireEmail")} style={{backgroundColor : color.secondaireColor}}></div>
+                                <div className={"divUpdateColor1 noRedirect6"} onClick={()=>handleClickPrimaireEmail("secondaireEmail")} style={{backgroundColor : color.secondaireColor}}></div>
                                 <Input className={"inputUpdateColor1"} value={color.secondaireColor}/>
                                 {
                                     secondaireEmail
@@ -296,13 +337,13 @@ const TempletesStudioEmail = () => {
                                         <SketchPicker
                                             color={color.secondaireColor}
                                             onChangeComplete={handleChangeCompleteSecondaire}
-                                            className={"sketchPicker"}
+                                            className={"sketchPicker sketchPicker6"}
                                         />
                                         : null
                                 }
                             </div>
                         </div>{/*./divChangeColor*/}
-                        <div className={"DivStudio"}>
+                        <div className={"DivStudio DivEmailTab"}>
 
                           <div className={"DivTemplateEmailGlobal"}>
                               <Skeleton  paragraph={{ rows: 1 }}/>

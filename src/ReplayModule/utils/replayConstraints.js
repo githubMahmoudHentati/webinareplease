@@ -5,7 +5,8 @@ export const ReplayConstraints = () =>{
         return(
             {
                 password : "",
-                confirmPassword:false
+                passwordAPI:"",
+                confirmPassword:null
             }
         )
     }
