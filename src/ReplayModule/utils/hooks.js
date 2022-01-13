@@ -6,12 +6,20 @@ const Hooks = () => {
     const dispatch = useDispatch()
     //Filter Data
     const values = useSelector((state) => state.ReplayReducer)
+    const passworddRedux = useSelector((state)=> state.ReplayReducer.Login.password)
+    const password = useSelector((state)=> state.ReplayReducer.Login.passwordAPI)
+
 
     const handleChangePassword = (e) => {
         dispatch(setReplayInputs({ReplayInputNameChange:"password",RepalyInputValueChange:e.target.value}));
     }
-    const handleConfirmPassword = () => {
-        dispatch(setReplayInputs({ReplayInputNameChange:"confirmPassword",RepalyInputValueChange:true}));
+    const handleConfirmPassword = (e) => {
+        if(passworddRedux === password){
+            dispatch(setReplayInputs({ReplayInputNameChange:"confirmPassword",RepalyInputValueChange:true}));
+        }else {
+            dispatch(setReplayInputs({ReplayInputNameChange:"confirmPassword",RepalyInputValueChange:false}));
+        }
+
     }
     return({
         handleChangePassword,

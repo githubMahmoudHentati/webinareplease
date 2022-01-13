@@ -3,30 +3,31 @@ import './replay.scss'
 import PlayerIframe from "./components/playerIframe";
 import EnterPassword from "./components/enterPassword";
 import {useHistory} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ReplayReducer} from "./store/replayReducer";
 import Hooks from "./utils/hooks";
 import {useLazyQuery} from "@apollo/client";
 import {graphQL_shema} from "./utils/graphQL";
 import moment from "moment";
 import {setCalendarOnchange} from "../Calendar/store/calendarAction";
+import {setReplayInputs} from "./store/replayAction";
 
 const Replay = () => {
 
     const history = useHistory()
+    const dispatch = useDispatch()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
-    const {values} = Hooks()
     const passworddRedux = useSelector((state)=> state.ReplayReducer.Login.password)
-    const [password , setPassword] = useState("")
+    const password = useSelector((state)=> state.ReplayReducer.Login.passwordAPI)
 
-
+    const {values} = Hooks()
 
     const [QueryPwd, {data: dataPwd}]
         = useLazyQuery(graphQL_shema().GET_PWD, {
         fetchPolicy: "cache-and-network",
         context: {clientName: "second"},
         onCompleted: async (data) => {
-            setPassword(data.getPWD)
+            dispatch(setReplayInputs({ReplayInputNameChange:"passwordAPI",RepalyInputValueChange:data.getPWD}));
         }
     })
     useEffect(()=>{
@@ -59,14 +60,14 @@ const Replay = () => {
             </div>
 
             {
-                (passworddRedux === password)   && values.Login.confirmPassword
+                (values.Login.confirmPassword) || (password === "")
                     ?
                     <div className={"componentReplayIframe"}>
                         <PlayerIframe/>
                     </div>
                     :
                     <div className={"componentReplay"}>
-                        <EnterPassword password={password}/>
+                        <EnterPassword />
                     </div>
             }
             <div className={"footerDiv"}>
