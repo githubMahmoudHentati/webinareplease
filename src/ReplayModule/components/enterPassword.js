@@ -12,13 +12,10 @@ const EnterPassword = (props) => {
     const history = useHistory()
     const darkMode = useSelector((state)=> state.Reducer.DarkMode)
     const passworddRedux = useSelector((state)=> state.ReplayReducer.Login.password)
+    const password = useSelector((state)=> state.ReplayReducer.Login.passwordAPI)
     const enter = useSelector((state)=> state.ReplayReducer.Login.confirmPassword)
     const {t} = useTranslation();
     const {handleChangePassword , values , handleConfirmPassword} = Hooks()
-    const requiredFieldRule = [{required: (props.password !== passworddRedux && enter === true) ? true : false, message: "mot de passe incorrect"}];
-    useEffect(()=>{
-        console.log("helooeee",props)
-    },[])
 
     return(
         <div className={"PasswordDiv"}>
@@ -84,7 +81,7 @@ const EnterPassword = (props) => {
                     required
                 />
                 {
-                    (props.password !== passworddRedux && enter === true)
+                    ( enter===false && password !== passworddRedux)
                         ?
                         <span className={"ErrorRequired"}>{t("replay.incorectPwd")}</span>
                         :
