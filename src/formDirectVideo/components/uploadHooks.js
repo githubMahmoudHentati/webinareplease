@@ -35,7 +35,7 @@ export const UploadHooks = () =>{
     //******************** On Save General *****************//
     const onSaveGeneral =(file, fileInfos)=>{
        console.log("onSaveGeneral************")
-        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
             url: url,
@@ -118,7 +118,7 @@ console.log("FILE",fileList)
 
     //******************** On Save Configuration *****************//
     const onSaveConfiguration =(file, fileInfos)=>{
-        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
             url: url,
@@ -185,7 +185,7 @@ console.log("FILE",fileList)
 
     //******************** On Save Diapositives Rich Media *****************//
     const onSaveDiapositives =(file, fileInfos)=>{
-        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
             url: url,
@@ -249,7 +249,7 @@ console.log("FILE",fileList)
 
     ///////////////////****** logo Organisateur Template ****************////////////
     const onSaveLogo =(file, fileInfos)=>{
-        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
             url: url,
@@ -312,7 +312,7 @@ console.log("FILE",fileList)
 
     ///////////////////****** Image Organisateur Template ****************////////////
     const onSaveImage =(file, fileInfos)=>{
-        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
             url: url,
@@ -375,7 +375,7 @@ console.log("FILE",fileList)
 
     /////******************************* Upload CSV File ****************/////////////////
     const onSaveCsvFile =(file, fileInfos)=>{
-        let url = process.env.REACT_APP_API_WEBINARPLEASE_HOST
+        let url = window.process.env.REACT_APP_API_WEBINARPLEASE_HOST
         const token = localStorage.getItem('jwtToken');
         axios({
             url: url,
