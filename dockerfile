@@ -28,14 +28,5 @@ RUN ls /usr/share/nginx/html
 COPY  ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 
-WORKDIR /usr/share/nginx/html
-
-COPY ./env.sh .
-COPY .env .
-
-
-RUN chmod +x env.sh
-
-
 # Start Nginx server
-CMD ["/bin/sh", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""]
+CMD ["nginx", "-g", "daemon off;"]
